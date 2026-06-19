@@ -58,7 +58,8 @@ class AdminAuthRepository {
       return user;
     } on ApiException catch (error) {
       await _tokenStorage.clear();
-      if (error.kind == ApiExceptionKind.forbidden) {
+      if (error.kind == ApiExceptionKind.forbidden ||
+          error.kind == ApiExceptionKind.unauthorized) {
         rethrow;
       }
       return null;

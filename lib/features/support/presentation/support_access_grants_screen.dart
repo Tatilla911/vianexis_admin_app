@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/localization/localization_resolver.dart';
+import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
@@ -40,14 +41,8 @@ class _SupportAccessGrantsScreenState extends ConsumerState<SupportAccessGrantsS
         title: Text(l10n.supportGrantsTitle),
         actions: [
           if (usesMock)
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: Center(
-                child: Text(
-                  resolveSupportKey(context, 'supportMockDataBadge'),
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
+            MockDataBadge(
+              label: resolveSupportKey(context, 'supportMockDataBadge'),
             ),
         ],
       ),

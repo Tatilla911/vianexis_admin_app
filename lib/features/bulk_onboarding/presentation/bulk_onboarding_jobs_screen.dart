@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/auth/admin_auth_state.dart';
 import '../../../app/app_router.dart';
 import '../../../core/localization/localization_resolver.dart';
+import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
@@ -50,14 +51,8 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
               icon: const Icon(Icons.upload_file),
             ),
           if (usesMock)
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: Center(
-                child: Text(
-                  resolveBulkOnboardingKey(context, 'bulkOnboardingMockDataBadge'),
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
+            MockDataBadge(
+              label: resolveBulkOnboardingKey(context, 'bulkOnboardingMockDataBadge'),
             ),
         ],
       ),

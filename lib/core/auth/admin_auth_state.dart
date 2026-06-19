@@ -103,6 +103,13 @@ class AdminAuthNotifier extends Notifier<AdminAuthState> {
     state = const AdminAuthState.unauthenticated();
   }
 
+  Future<void> handleSessionExpired() async {
+    await _repository.signOut();
+    state = AdminAuthState(
+      errorMessageKey: LocalizationKeys.authSessionExpired,
+    );
+  }
+
   void setAuthenticatedUser(AdminUser user) {
     state = AdminAuthState(user: user);
   }

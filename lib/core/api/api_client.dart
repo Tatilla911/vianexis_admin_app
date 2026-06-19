@@ -4,8 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../localization/localization_keys.dart';
 import 'api_config.dart';
+import 'api_error_resolver.dart';
 import 'api_exception.dart';
 import 'auth_token_storage.dart';
+
+typedef UnauthorizedCallback = Future<void> Function();
 
 /// Configured Dio client with auth header injection and error mapping.
 class ApiClient {
@@ -32,8 +35,14 @@ class ApiClient {
           }
           handler.next(options);
         },
-        onError: (error, handler) {
-          handler.reject(error);
+        onError: (error, handler) async {
+          final statusCode = error.response?.statusCode;
+          if (statusCode == 401 &&
+              !_isLoginPath(error.requestOptions.path) &&
+              _onUnauthorized != null) {
+            await _onUnauthorized!();
+          }
+          handler.next(error);
         },
       ),
     );
@@ -52,7 +61,12 @@ class ApiClient {
   }
 
   final AuthTokenStorage _tokenStorage;
+  UnauthorizedCallback? _onUnauthorized;
   final Dio dio;
+
+  void bindUnauthorizedHandler(UnauthorizedCallback? handler) {
+    _onUnauthorized = handler;
+  }
 
   bool get isConfigured =>
       ApiConfig.isConfigured || dio.options.baseUrl.trim().isNotEmpty;
@@ -182,6 +196,12 @@ ApiException mapDioException(DioException error) {
   }
 
   final statusCode = error.response?.statusCode;
+  final path = error.requestOptions.path;
+  final messageKey = apiExceptionMessageKeyForStatus(
+    statusCode: statusCode,
+    path: path,
+  );
+
   return switch (statusCode) {
     400 => ApiException(
       messageKey: LocalizationKeys.authRequiredField,
@@ -190,19 +210,19 @@ ApiException mapDioException(DioException error) {
       cause: error,
     ),
     401 => ApiException(
-      messageKey: LocalizationKeys.authInvalidCredentials,
+      messageKey: messageKey,
       kind: ApiExceptionKind.unauthorized,
       statusCode: statusCode,
       cause: error,
     ),
     403 => ApiException(
-      messageKey: LocalizationKeys.authForbiddenRole,
+      messageKey: messageKey,
       kind: ApiExceptionKind.forbidden,
       statusCode: statusCode,
       cause: error,
     ),
     404 => ApiException(
-      messageKey: LocalizationKeys.errorGenericBody,
+      messageKey: messageKey,
       kind: ApiExceptionKind.notFound,
       statusCode: statusCode,
       cause: error,
@@ -220,12 +240,17 @@ ApiException mapDioException(DioException error) {
       cause: error,
     ),
     _ => ApiException(
-      messageKey: LocalizationKeys.errorGenericBody,
+      messageKey: messageKey,
       kind: ApiExceptionKind.unknown,
       statusCode: statusCode,
       cause: error,
     ),
   };
+}
+
+bool _isLoginPath(String path) {
+  final normalized = path.trim().toLowerCase();
+  return normalized.endsWith('/auth/login') || normalized == '/auth/login';
 }
 
 String _redactSecrets(Object object) {

@@ -422,6 +422,150 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get errorRetryButton;
 
+  /// No description provided for @errorSessionExpiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Session expired'**
+  String get errorSessionExpiredTitle;
+
+  /// No description provided for @authSessionExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session expired. Sign in again to continue.'**
+  String get authSessionExpired;
+
+  /// No description provided for @errorPermissionDeniedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied'**
+  String get errorPermissionDeniedTitle;
+
+  /// No description provided for @errorPermissionDeniedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account does not have access to this module.'**
+  String get errorPermissionDeniedBody;
+
+  /// No description provided for @errorActionUnavailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Action unavailable'**
+  String get errorActionUnavailableTitle;
+
+  /// No description provided for @errorActionUnavailableBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This action or resource is not available right now.'**
+  String get errorActionUnavailableBody;
+
+  /// No description provided for @errorActionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This action or resource is not available right now.'**
+  String get errorActionUnavailable;
+
+  /// No description provided for @errorBackendNotConfiguredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend not configured'**
+  String get errorBackendNotConfiguredTitle;
+
+  /// No description provided for @errorNetworkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection problem'**
+  String get errorNetworkTitle;
+
+  /// No description provided for @offlineBannerMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You appear to be offline. Some actions may fail until connectivity returns.'**
+  String get offlineBannerMessage;
+
+  /// No description provided for @backendNotConfiguredBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Live backend is not configured. Modules may use mock data.'**
+  String get backendNotConfiguredBanner;
+
+  /// No description provided for @confirmDialogCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get confirmDialogCancel;
+
+  /// No description provided for @confirmDialogProceed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirmDialogProceed;
+
+  /// No description provided for @logoutConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out?'**
+  String get logoutConfirmTitle;
+
+  /// No description provided for @logoutConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to sign in again to access the admin app.'**
+  String get logoutConfirmBody;
+
+  /// No description provided for @accessDeniedBackToDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to dashboard'**
+  String get accessDeniedBackToDashboard;
+
+  /// No description provided for @navAiReviews.
+  ///
+  /// In en, this message translates to:
+  /// **'AI reviews'**
+  String get navAiReviews;
+
+  /// No description provided for @settingsAccountSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed-in account'**
+  String get settingsAccountSection;
+
+  /// No description provided for @settingsEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get settingsEmailLabel;
+
+  /// No description provided for @settingsRoleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get settingsRoleLabel;
+
+  /// No description provided for @settingsApiBaseUrlLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'API base URL'**
+  String get settingsApiBaseUrlLabel;
+
+  /// No description provided for @settingsEnvironmentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get settingsEnvironmentLabel;
+
+  /// No description provided for @settingsBackendNotConfiguredValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Not configured'**
+  String get settingsBackendNotConfiguredValue;
+
+  /// No description provided for @settingsSignOutSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Session'**
+  String get settingsSignOutSection;
+
   /// No description provided for @loadingLabel.
   ///
   /// In en, this message translates to:
@@ -457,6 +601,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Version {version}'**
   String settingsAppVersion(String version);
+
+  /// No description provided for @settingsVersionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get settingsVersionLabel;
 
   /// No description provided for @validationEmailRequired.
   ///

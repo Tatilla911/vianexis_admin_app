@@ -185,6 +185,85 @@ class AppLocalizationsHu extends AppLocalizations {
   String get errorRetryButton => 'Újra';
 
   @override
+  String get errorSessionExpiredTitle => 'A munkamenet lejárt';
+
+  @override
+  String get authSessionExpired =>
+      'A munkamenete lejárt. Jelentkezzen be újra a folytatáshoz.';
+
+  @override
+  String get errorPermissionDeniedTitle => 'Hozzáférés megtagadva';
+
+  @override
+  String get errorPermissionDeniedBody =>
+      'Fiókja nem fér hozzá ehhez a modulhoz.';
+
+  @override
+  String get errorActionUnavailableTitle => 'A művelet nem érhető el';
+
+  @override
+  String get errorActionUnavailableBody =>
+      'Ez a művelet vagy erőforrás jelenleg nem érhető el.';
+
+  @override
+  String get errorActionUnavailable =>
+      'Ez a művelet vagy erőforrás jelenleg nem érhető el.';
+
+  @override
+  String get errorBackendNotConfiguredTitle => 'A backend nincs beállítva';
+
+  @override
+  String get errorNetworkTitle => 'Kapcsolati hiba';
+
+  @override
+  String get offlineBannerMessage =>
+      'Úgy tűnik, offline állapotban van. Egyes műveletek addig sikertelenek lehetnek, amíg vissza nem tér a kapcsolat.';
+
+  @override
+  String get backendNotConfiguredBanner =>
+      'Az éles backend nincs beállítva. A modulok mintaadatot használhatnak.';
+
+  @override
+  String get confirmDialogCancel => 'Mégse';
+
+  @override
+  String get confirmDialogProceed => 'Megerősítés';
+
+  @override
+  String get logoutConfirmTitle => 'Kijelentkezik?';
+
+  @override
+  String get logoutConfirmBody =>
+      'Az admin alkalmazás eléréséhez újra be kell jelentkeznie.';
+
+  @override
+  String get accessDeniedBackToDashboard => 'Vissza az irányítópulthoz';
+
+  @override
+  String get navAiReviews => 'AI áttekintések';
+
+  @override
+  String get settingsAccountSection => 'Bejelentkezett fiók';
+
+  @override
+  String get settingsEmailLabel => 'E-mail';
+
+  @override
+  String get settingsRoleLabel => 'Szerepkör';
+
+  @override
+  String get settingsApiBaseUrlLabel => 'API alap URL';
+
+  @override
+  String get settingsEnvironmentLabel => 'Környezet';
+
+  @override
+  String get settingsBackendNotConfiguredValue => 'Nincs beállítva';
+
+  @override
+  String get settingsSignOutSection => 'Munkamenet';
+
+  @override
   String get loadingLabel => 'Betöltés';
 
   @override
@@ -203,6 +282,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String settingsAppVersion(String version) {
     return 'Verzió: $version';
   }
+
+  @override
+  String get settingsVersionLabel => 'Verzió';
 
   @override
   String get validationEmailRequired => 'Az e-mail megadása kötelező.';

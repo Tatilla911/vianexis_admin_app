@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/auth/admin_auth_state.dart';
 import '../core/auth/admin_user.dart';
+import '../core/widgets/permission_denied_screen.dart';
 import '../core/widgets/vianexis_admin_scaffold.dart';
 import '../features/ai_reviews/ai_review_summary_screen.dart';
 import '../features/audit_logs/presentation/audit_log_detail_screen.dart';
@@ -67,7 +68,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       if (user != null) {
         final destination = AdminRoutes.destinationForLocation(state.matchedLocation);
         if (destination != null && !user.canAccess(destination)) {
-          return AdminRoutes.dashboard;
+          return AdminRoutes.accessDenied;
         }
       }
 
@@ -220,6 +221,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               child: AdminSettingsScreen(),
             ),
           ),
+          GoRoute(
+            path: AdminRoutes.accessDenied,
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: PermissionDeniedScreen(
+                attemptedRoute: state.uri.queryParameters['attempted'],
+              ),
+            ),
+          ),
         ],
       ),
     ],
@@ -239,6 +248,7 @@ abstract final class AdminRoutes {
   static const systemHealth = '/system-health';
   static const auditLogs = '/audit-logs';
   static const settings = '/settings';
+  static const accessDenied = '/access-denied';
 
   static String systemHealthEventDetail(String id) => '$systemHealth/events/$id';
 

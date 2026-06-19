@@ -54,7 +54,8 @@ class BulkOnboardingUploadCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<BulkOnboardingJobType>(
-              value: selectedType,
+              key: ValueKey(selectedType),
+              initialValue: selectedType,
               decoration: InputDecoration(
                 labelText: resolveBulkOnboardingKey(context, 'bulkOnboardingUploadTypeLabel'),
               ),

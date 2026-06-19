@@ -6,10 +6,12 @@ abstract final class LocalizationKeys {
   static const authSigningIn = 'authSigningIn';
   static const authLogout = 'authLogout';
   static const authInvalidCredentials = 'authInvalidCredentials';
+  static const authSessionExpired = 'authSessionExpired';
   static const authNetworkError = 'authNetworkError';
   static const authServerError = 'authServerError';
   static const authForbiddenRole = 'authForbiddenRole';
   static const authBackendNotConfigured = 'authBackendNotConfigured';
+  static const errorActionUnavailable = 'errorActionUnavailable';
   static const authRequiredField = 'authRequiredField';
   static const authShowPassword = 'authShowPassword';
   static const authHidePassword = 'authHidePassword';

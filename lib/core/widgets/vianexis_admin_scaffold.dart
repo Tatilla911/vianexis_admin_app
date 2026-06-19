@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/app_router.dart';
-import '../../app/app_theme.dart';
+import '../../app/app_router.dart';import '../../app/app_theme.dart';
 import '../../l10n/app_localizations.dart';
+import '../api/api_unauthorized_binding.dart';
 import '../auth/admin_auth_state.dart';
 import '../auth/admin_user.dart';
+import '../connectivity/connectivity_status_provider.dart';
+import 'backend_mode_banner.dart';
+import 'offline_banner.dart';
 import 'vianexis_status_badge.dart';
 
 class VianexisAdminScaffold extends ConsumerWidget {
@@ -16,17 +19,27 @@ class VianexisAdminScaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(apiUnauthorizedBindingProvider);
     final user = ref.watch(adminAuthProvider).user;
     if (user == null) {
       return child;
     }
 
+    final isOnline = ref.watch(connectivityOnlineProvider);
     final destinations = _visibleDestinations(user);
     final location = GoRouterState.of(context).matchedLocation;
     final selectedIndex = _indexForLocation(location, destinations);
 
     final isTablet =
         MediaQuery.sizeOf(context).width >= AppTheme.tabletBreakpoint;
+
+    final content = Column(
+      children: [
+        OfflineBanner(isOnline: isOnline),
+        const BackendModeBanner(),
+        Expanded(child: child),
+      ],
+    );
 
     if (isTablet) {
       return Scaffold(
@@ -48,14 +61,14 @@ class VianexisAdminScaffold extends ConsumerWidget {
               ],
             ),
             const VerticalDivider(width: 1),
-            Expanded(child: child),
+            Expanded(child: content),
           ],
         ),
       );
     }
 
     return Scaffold(
-      body: child,
+      body: content,
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
         onDestinationSelected: (index) =>
@@ -96,7 +109,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
       AdminDestination.registrations => l10n.navRegistrations,
       AdminDestination.companies => l10n.navCompanies,
       AdminDestination.bulkOnboarding => l10n.navBulkOnboarding,
-      AdminDestination.aiReviews => l10n.aiReviewsTitle,
+      AdminDestination.aiReviews => l10n.navAiReviews,
       AdminDestination.supportTickets => l10n.supportTicketsTitle,
       AdminDestination.supportGrants => l10n.supportGrantsTitle,
       AdminDestination.systemHealth => l10n.navSystemHealth,

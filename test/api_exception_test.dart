@@ -32,7 +32,7 @@ void main() {
       expect(exception.messageKey, LocalizationKeys.authNetworkError);
     });
 
-    test('maps 401 to invalid credentials', () {
+    test('maps login 401 to invalid credentials', () {
       final exception = mapDioException(
         DioException(
           requestOptions: RequestOptions(path: '/auth/login'),
@@ -46,6 +46,22 @@ void main() {
 
       expect(exception.kind, ApiExceptionKind.unauthorized);
       expect(exception.messageKey, LocalizationKeys.authInvalidCredentials);
+    });
+
+    test('maps authenticated 401 to session expired', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/me'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/auth/me'),
+            statusCode: 401,
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.unauthorized);
+      expect(exception.messageKey, LocalizationKeys.authSessionExpired);
     });
 
     test('maps 403 to forbidden role', () {
@@ -64,7 +80,7 @@ void main() {
       expect(exception.messageKey, LocalizationKeys.authForbiddenRole);
     });
 
-    test('maps 404 to not found', () {
+    test('maps 404 to action unavailable', () {
       final exception = mapDioException(
         DioException(
           requestOptions: RequestOptions(path: '/missing'),
@@ -77,6 +93,7 @@ void main() {
       );
 
       expect(exception.kind, ApiExceptionKind.notFound);
+      expect(exception.messageKey, LocalizationKeys.errorActionUnavailable);
     });
 
     test('maps 409 to conflict', () {

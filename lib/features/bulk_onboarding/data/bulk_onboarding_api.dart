@@ -97,7 +97,7 @@ class BulkOnboardingApi {
     final formData = FormData.fromMap({
       'file': MultipartFile.fromBytes(bytes, filename: fileName),
       'type': type.backendValue,
-      if (companyId != null) 'companyId': companyId,
+      'companyId': ?companyId,
       if (companyName?.trim().isNotEmpty ?? false) 'companyName': companyName!.trim(),
       if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
     });

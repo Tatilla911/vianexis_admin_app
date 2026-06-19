@@ -70,7 +70,7 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
               const SizedBox(height: 12),
               usersAsync.when(
                 loading: () => const LinearProgressIndicator(),
-                error: (_, __) => Text(
+                error: (error, stackTrace) => Text(
                   resolvePlatformCompanyKey(context, 'platformCompanySummaryError'),
                 ),
                 data: (summary) => _summaryCard(
@@ -98,7 +98,7 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
               const SizedBox(height: 12),
               systemAsync.when(
                 loading: () => const LinearProgressIndicator(),
-                error: (_, __) => Text(
+                error: (error, stackTrace) => Text(
                   resolvePlatformCompanyKey(context, 'platformCompanySummaryError'),
                 ),
                 data: (summary) => _summaryCard(
@@ -131,7 +131,7 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
               const SizedBox(height: 12),
               onboardingAsync.when(
                 loading: () => const LinearProgressIndicator(),
-                error: (_, __) => Text(
+                error: (error, stackTrace) => Text(
                   resolvePlatformCompanyKey(context, 'platformCompanySummaryError'),
                 ),
                 data: (summary) => _summaryCard(

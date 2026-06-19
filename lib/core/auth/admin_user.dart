@@ -1,6 +1,5 @@
 import '../api/api_exception.dart';
 import '../localization/localization_keys.dart';
-import 'admin_user.dart';
 
 /// Roles that must never access the platform admin app.
 abstract final class ForbiddenPlatformRoles {

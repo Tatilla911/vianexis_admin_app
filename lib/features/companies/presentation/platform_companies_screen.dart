@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/app_router.dart';
 import '../../../core/localization/localization_resolver.dart';
+import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
@@ -41,14 +42,8 @@ class _PlatformCompaniesScreenState extends ConsumerState<PlatformCompaniesScree
         title: Text(l10n.platformCompaniesTitle),
         actions: [
           if (usesMock)
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: Center(
-                child: Text(
-                  resolvePlatformCompanyKey(context, 'platformCompanyMockDataBadge'),
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
+            MockDataBadge(
+              label: resolvePlatformCompanyKey(context, 'platformCompanyMockDataBadge'),
             ),
           Padding(
             padding: const EdgeInsets.only(right: 8),

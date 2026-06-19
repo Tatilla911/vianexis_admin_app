@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/app_router.dart';
 import '../../../core/auth/admin_auth_state.dart';
+import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/bulk_onboarding_repository.dart';
@@ -196,14 +197,8 @@ class _BulkOnboardingUploadScreenState extends ConsumerState<BulkOnboardingUploa
         title: Text(l10n.bulkOnboardingUploadCsv),
         actions: [
           if (usesMock)
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: Center(
-                child: Text(
-                  resolveBulkOnboardingKey(context, 'bulkOnboardingMockUploadBadge'),
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
+            MockDataBadge(
+              label: resolveBulkOnboardingKey(context, 'bulkOnboardingMockUploadBadge'),
             ),
         ],
       ),

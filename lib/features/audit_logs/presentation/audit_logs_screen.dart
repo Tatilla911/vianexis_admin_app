@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/localization/localization_resolver.dart';
+import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
@@ -38,14 +39,8 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
         title: Text(l10n.auditLogsTitle),
         actions: [
           if (usesMock)
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: Center(
-                child: Text(
-                  resolveAuditLogKey(context, 'auditLogMockDataBadge'),
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
+            MockDataBadge(
+              label: resolveAuditLogKey(context, 'auditLogMockDataBadge'),
             ),
         ],
       ),

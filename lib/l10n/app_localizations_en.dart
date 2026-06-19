@@ -185,6 +185,85 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorRetryButton => 'Retry';
 
   @override
+  String get errorSessionExpiredTitle => 'Session expired';
+
+  @override
+  String get authSessionExpired =>
+      'Your session expired. Sign in again to continue.';
+
+  @override
+  String get errorPermissionDeniedTitle => 'Permission denied';
+
+  @override
+  String get errorPermissionDeniedBody =>
+      'Your account does not have access to this module.';
+
+  @override
+  String get errorActionUnavailableTitle => 'Action unavailable';
+
+  @override
+  String get errorActionUnavailableBody =>
+      'This action or resource is not available right now.';
+
+  @override
+  String get errorActionUnavailable =>
+      'This action or resource is not available right now.';
+
+  @override
+  String get errorBackendNotConfiguredTitle => 'Backend not configured';
+
+  @override
+  String get errorNetworkTitle => 'Connection problem';
+
+  @override
+  String get offlineBannerMessage =>
+      'You appear to be offline. Some actions may fail until connectivity returns.';
+
+  @override
+  String get backendNotConfiguredBanner =>
+      'Live backend is not configured. Modules may use mock data.';
+
+  @override
+  String get confirmDialogCancel => 'Cancel';
+
+  @override
+  String get confirmDialogProceed => 'Confirm';
+
+  @override
+  String get logoutConfirmTitle => 'Log out?';
+
+  @override
+  String get logoutConfirmBody =>
+      'You will need to sign in again to access the admin app.';
+
+  @override
+  String get accessDeniedBackToDashboard => 'Back to dashboard';
+
+  @override
+  String get navAiReviews => 'AI reviews';
+
+  @override
+  String get settingsAccountSection => 'Signed-in account';
+
+  @override
+  String get settingsEmailLabel => 'Email';
+
+  @override
+  String get settingsRoleLabel => 'Role';
+
+  @override
+  String get settingsApiBaseUrlLabel => 'API base URL';
+
+  @override
+  String get settingsEnvironmentLabel => 'Environment';
+
+  @override
+  String get settingsBackendNotConfiguredValue => 'Not configured';
+
+  @override
+  String get settingsSignOutSection => 'Session';
+
+  @override
   String get loadingLabel => 'Loading';
 
   @override
@@ -203,6 +282,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String settingsAppVersion(String version) {
     return 'Version $version';
   }
+
+  @override
+  String get settingsVersionLabel => 'Version';
 
   @override
   String get validationEmailRequired => 'Email is required.';
