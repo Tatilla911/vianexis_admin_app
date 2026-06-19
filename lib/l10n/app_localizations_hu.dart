@@ -1298,4 +1298,28 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get auditLogFieldSystemHealthEventId =>
       'Rendszerállapot esemény azonosító';
+
+  @override
+  String get auditLogDetailLoaded => 'Audit napló részlete betöltve.';
+
+  @override
+  String get supportTicketAcknowledgedSuccess => 'Jegy nyugtázva.';
+
+  @override
+  String get supportTicketClosedSuccess => 'Jegy lezárva.';
+
+  @override
+  String get supportGrantRevokedSuccess => 'Jogosultság visszavonva.';
+
+  @override
+  String get systemHealthEventAcknowledgedSuccess =>
+      'Rendszerállapot esemény nyugtázva.';
+
+  @override
+  String get systemHealthEventEscalatedSuccess =>
+      'Rendszerállapot esemény eszkalálva.';
+
+  @override
+  String get backendActionUnavailable =>
+      'Ez a művelet még nem érhető el ezen a backenden.';
 }

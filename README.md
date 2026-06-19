@@ -35,7 +35,18 @@ flutter run
 
 ## Build configuration
 
-API connection will use `--dart-define` values (see `lib/app/app_environment.dart`). Backend integration is not wired in the current foundation phase.
+API connection uses `--dart-define=API_BASE_URL=...` (see `lib/core/api/api_config.dart`). When no base URL is configured, repositories fall back to mock data for local UI development.
+
+## Phase 9 status (platform admin parity)
+
+Live integration is wired for:
+
+- Support ticket detail / acknowledge / close
+- Support access grant detail / revoke
+- System health events list / detail / acknowledge / escalate / create support ticket
+- Audit log detail (list + detail; cached fallback on older backends for 404 detail only)
+
+Capability detection: missing action endpoints return localized **“Action not available on this backend yet.”** without breaking screens.
 
 ## Documentation
 

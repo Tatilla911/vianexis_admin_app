@@ -54,7 +54,12 @@ Role groups are defined in backend `src/access/role-groups.ts`.
 | Method | Path | Screen |
 |--------|------|--------|
 | GET | `/platform-admin/support-tickets` | `support_tickets_screen.dart` |
+| GET | `/platform-admin/support-tickets/:id` | `support_ticket_detail_screen.dart` |
+| PATCH | `/platform-admin/support-tickets/:id/acknowledge` | detail actions |
+| PATCH | `/platform-admin/support-tickets/:id/close` | detail actions |
 | GET | `/platform-admin/support-access-grants` | `support_access_grants_screen.dart` |
+| GET | `/platform-admin/support-access-grants/:id` | `support_access_grant_detail_screen.dart` |
+| PATCH | `/platform-admin/support-access-grants/:id/revoke` | grant detail |
 | POST | `/platform-admin/support-access-grants` | grant creation (support admin) |
 
 ### System health and audit
@@ -62,8 +67,14 @@ Role groups are defined in backend `src/access/role-groups.ts`.
 | Method | Path | Screen |
 |--------|------|--------|
 | GET | `/platform-admin/system-health` | `system_health_screen.dart` |
+| GET | `/platform-admin/system-health/events` | event list enrichment |
+| GET | `/platform-admin/system-health/events/:id` | `system_health_event_detail_screen.dart` |
+| PATCH | `/platform-admin/system-health/events/:id/acknowledge` | detail actions |
+| POST | `/platform-admin/system-health/events/:id/escalate` | detail actions |
+| POST | `/platform-admin/system-health/events/:id/create-support-ticket` | detail actions (when backend supports) |
 | GET | `/platform-admin/audit-logs` | `audit_logs_screen.dart` |
-| GET | `/platform-admin/system-audit` | audit alias |
+| GET | `/platform-admin/audit-logs/:id` | `audit_log_detail_screen.dart` |
+| GET | `/platform-admin/system-audit` | audit alias (list) |
 
 ### Companies and billing (later phases)
 

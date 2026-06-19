@@ -2485,6 +2485,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'System health event ID'**
   String get auditLogFieldSystemHealthEventId;
+
+  /// No description provided for @auditLogDetailLoaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit log detail loaded.'**
+  String get auditLogDetailLoaded;
+
+  /// No description provided for @supportTicketAcknowledgedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket acknowledged.'**
+  String get supportTicketAcknowledgedSuccess;
+
+  /// No description provided for @supportTicketClosedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket closed.'**
+  String get supportTicketClosedSuccess;
+
+  /// No description provided for @supportGrantRevokedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant revoked.'**
+  String get supportGrantRevokedSuccess;
+
+  /// No description provided for @systemHealthEventAcknowledgedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'System health event acknowledged.'**
+  String get systemHealthEventAcknowledgedSuccess;
+
+  /// No description provided for @systemHealthEventEscalatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'System health event escalated.'**
+  String get systemHealthEventEscalatedSuccess;
+
+  /// No description provided for @backendActionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Action not available on this backend yet.'**
+  String get backendActionUnavailable;
 }
 
 class _AppLocalizationsDelegate

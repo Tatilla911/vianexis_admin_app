@@ -397,5 +397,12 @@
   "auditLogFieldCorrelationId": "Korrelációs azonosító",
   "auditLogFieldRegistrationApplicationId": "Regisztrációs kérelem azonosító",
   "auditLogFieldSupportAccessGrantId": "Támogatási hozzáférési engedély azonosító",
-  "auditLogFieldSystemHealthEventId": "Rendszerállapot esemény azonosító"
+  "auditLogFieldSystemHealthEventId": "Rendszerállapot esemény azonosító",
+  "auditLogDetailLoaded": "Audit napló részlete betöltve.",
+  "supportTicketAcknowledgedSuccess": "Jegy nyugtázva.",
+  "supportTicketClosedSuccess": "Jegy lezárva.",
+  "supportGrantRevokedSuccess": "Jogosultság visszavonva.",
+  "systemHealthEventAcknowledgedSuccess": "Rendszerállapot esemény nyugtázva.",
+  "systemHealthEventEscalatedSuccess": "Rendszerállapot esemény eszkalálva.",
+  "backendActionUnavailable": "Ez a művelet még nem érhető el ezen a backenden."
 }

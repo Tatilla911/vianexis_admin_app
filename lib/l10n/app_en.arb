@@ -421,5 +421,12 @@
   "auditLogFieldCorrelationId": "Correlation ID",
   "auditLogFieldRegistrationApplicationId": "Registration application ID",
   "auditLogFieldSupportAccessGrantId": "Support access grant ID",
-  "auditLogFieldSystemHealthEventId": "System health event ID"
+  "auditLogFieldSystemHealthEventId": "System health event ID",
+  "auditLogDetailLoaded": "Audit log detail loaded.",
+  "supportTicketAcknowledgedSuccess": "Ticket acknowledged.",
+  "supportTicketClosedSuccess": "Ticket closed.",
+  "supportGrantRevokedSuccess": "Grant revoked.",
+  "systemHealthEventAcknowledgedSuccess": "System health event acknowledged.",
+  "systemHealthEventEscalatedSuccess": "System health event escalated.",
+  "backendActionUnavailable": "Action not available on this backend yet."
 }

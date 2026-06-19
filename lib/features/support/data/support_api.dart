@@ -140,6 +140,29 @@ class SupportApi {
       data: request.toJson(),
     );
   }
+
+  Future<SupportTicket> createTicketFromHealthEvent({
+    required String eventId,
+    required String note,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/system-health/events/$eventId/create-support-ticket',
+      data: {'note': note.trim()},
+    );
+    final data = response.data;
+    if (data == null) {
+      throw const ApiException(messageKey: LocalizationKeys.supportActionError);
+    }
+
+    final ticketJson = data['ticket'] ?? data;
+    if (ticketJson is Map<String, dynamic>) {
+      return SupportTicket.fromJson(ticketJson);
+    }
+    if (ticketJson is Map) {
+      return SupportTicket.fromJson(Map<String, dynamic>.from(ticketJson));
+    }
+    throw const ApiException(messageKey: LocalizationKeys.supportActionError);
+  }
 }
 
 final supportApiProvider = Provider<SupportApi>((ref) {

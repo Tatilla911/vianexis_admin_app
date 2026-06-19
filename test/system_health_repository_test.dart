@@ -2,9 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:vianexis_admin_app/core/api/api_client.dart';
-import 'package:vianexis_admin_app/core/api/api_exception.dart';
 import 'package:vianexis_admin_app/core/api/auth_token_storage.dart';
-import 'package:vianexis_admin_app/core/localization/localization_keys.dart';
 import 'package:vianexis_admin_app/features/system_health/data/system_health_api.dart';
 import 'package:vianexis_admin_app/features/system_health/data/system_health_repository.dart';
 import 'package:vianexis_admin_app/features/system_health/domain/system_health_action_request.dart';
@@ -81,14 +79,24 @@ void main() {
             }
 
             if (options.path == '/platform-admin/system-health/events') {
-              handler.reject(
-                DioException(
+              handler.resolve(
+                Response<Map<String, dynamic>>(
                   requestOptions: options,
-                  type: DioExceptionType.badResponse,
-                  response: Response(
-                    requestOptions: options,
-                    statusCode: 404,
-                  ),
+                  statusCode: 200,
+                  data: {
+                    'items': [
+                      {
+                        'id': '701',
+                        'severity': 'critical',
+                        'component': 'worker',
+                        'status': 'open',
+                        'title': 'Worker backlog',
+                        'summary': 'Jobs delayed',
+                        'tenantImpactLevel': 'none',
+                        'metadataOnly': true,
+                      },
+                    ],
+                  },
                 ),
               );
               return;
@@ -121,6 +129,26 @@ void main() {
                   requestOptions: options,
                   statusCode: 200,
                   data: {'success': true},
+                ),
+              );
+              return;
+            }
+
+            if (options.path.endsWith('/escalate')) {
+              handler.resolve(
+                Response<Map<String, dynamic>>(
+                  requestOptions: options,
+                  statusCode: 200,
+                  data: {
+                    'event': {
+                      'id': '701',
+                      'severity': 'critical',
+                      'component': 'worker',
+                      'status': 'escalated',
+                      'title': 'Worker backlog',
+                      'summary': 'Jobs delayed',
+                    },
+                  },
                 ),
               );
               return;
@@ -172,25 +200,22 @@ void main() {
       expect(updated.status, SystemHealthEventStatus.acknowledged);
     });
 
-    test('submitAction escalate throws when endpoint missing', () async {
+    test('submitAction escalate updates status when endpoint exists', () async {
       await repository.fetchSnapshot();
-
-      await expectLater(
-        repository.submitAction(
-          eventId: '701',
-          request: const SystemHealthActionRequest(
-            type: SystemHealthActionType.escalate,
-            note: 'Need on-call',
-          ),
-        ),
-        throwsA(
-          isA<ApiException>().having(
-            (error) => error.messageKey,
-            'messageKey',
-            LocalizationKeys.systemHealthActionUnavailable,
-          ),
+      final updated = await repository.submitAction(
+        eventId: '701',
+        request: const SystemHealthActionRequest(
+          type: SystemHealthActionType.escalate,
+          note: 'Need on-call',
         ),
       );
+
+      expect(updated.status, SystemHealthEventStatus.investigating);
+    });
+
+    test('events endpoint availability is tracked', () async {
+      await repository.fetchSnapshot();
+      expect(api.eventsEndpointAvailable, isTrue);
     });
   });
 

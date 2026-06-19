@@ -61,6 +61,20 @@ Never store tokens in plain `SharedPreferences`.
 
 Platform admin actions on the backend are audited. When write actions are added (approve registration, create support grant), the client should display confirmation dialogs and surface audit-friendly action labels.
 
+## Phase 9 — support access grant lifecycle
+
+1. **List / detail** — grants show scope, reason, expiry, and status only (`metadataOnly: true`).
+2. **Revoke** — requires a reason; creates platform audit event `support_access_revoked`.
+3. **Operational access** — still requires separate grant session header on tenant routes; admin app does not expose trip/document/message bodies.
+
+## AI diagnostics
+
+System health AI summaries are **advisory only**. The app must not offer automatic repair, job retry, or destructive remediation actions.
+
+## Audit log reads
+
+`GET /platform-admin/audit-logs/:id` is read-only. Viewing audit entries is not re-audited (avoids noisy recursive audit trails).
+
 ## Release checklist
 
 - [ ] API base URL set via dart-define (no hardcoded production secrets)

@@ -8,6 +8,7 @@ import '../domain/support_ticket_action_request.dart';
 import '../domain/support_ticket_priority.dart';
 import '../domain/support_ticket_status.dart';
 import 'support_api.dart';
+import '../../system_health/data/system_health_api.dart';
 
 abstract class SupportTicketsRepository {
   Future<List<SupportTicket>> fetchTickets();
@@ -33,16 +34,19 @@ abstract class SupportTicketsRepository {
 }
 
 class LiveSupportTicketsRepository implements SupportTicketsRepository {
-  LiveSupportTicketsRepository(this._api);
+  LiveSupportTicketsRepository(this._api, {SystemHealthApi? systemHealthApi})
+    : _systemHealthApi = systemHealthApi;
 
   final SupportApi _api;
+  final SystemHealthApi? _systemHealthApi;
   List<SupportTicket>? _cachedTickets;
 
   @override
   bool get usesMockData => false;
 
   @override
-  bool get canCreateTicketFromSystemHealth => false;
+  bool get canCreateTicketFromSystemHealth =>
+      _systemHealthApi?.eventsEndpointAvailable ?? false;
 
   @override
   Future<List<SupportTicket>> fetchTickets() async {
@@ -108,7 +112,22 @@ class LiveSupportTicketsRepository implements SupportTicketsRepository {
     String? companyId,
     String? companyName,
   }) async {
-    return null;
+    if (!canCreateTicketFromSystemHealth) return null;
+
+    try {
+      return await _api.createTicketFromHealthEvent(
+        eventId: eventId,
+        note: summary.trim().isNotEmpty ? summary : title,
+      );
+    } on ApiException catch (error) {
+      if (error.kind == ApiExceptionKind.notFound) {
+        throw const ApiException(
+          messageKey: LocalizationKeys.supportActionUnavailable,
+          kind: ApiExceptionKind.notFound,
+        );
+      }
+      rethrow;
+    }
   }
 }
 
@@ -265,7 +284,10 @@ class MockSupportTicketsRepository implements SupportTicketsRepository {
 final supportTicketsRepositoryProvider = Provider<SupportTicketsRepository>((ref) {
   final apiClient = ref.watch(apiClientProvider);
   if (apiClient.isConfigured) {
-    return LiveSupportTicketsRepository(ref.watch(supportApiProvider));
+    return LiveSupportTicketsRepository(
+      ref.watch(supportApiProvider),
+      systemHealthApi: ref.watch(systemHealthApiProvider),
+    );
   }
   return MockSupportTicketsRepository();
 });

@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
-import '../../../core/api/api_exception.dart';import '../../../core/localization/localization_keys.dart';
+import '../../../core/api/api_exception.dart';
+import '../../../core/localization/localization_keys.dart';
 import '../domain/system_health_action_request.dart';
 import '../domain/system_health_event.dart';
 import '../domain/system_health_overview.dart';
@@ -11,6 +12,7 @@ class SystemHealthApi {
   SystemHealthApi(this._apiClient);
 
   final ApiClient _apiClient;
+  bool eventsEndpointAvailable = false;
 
   Future<SystemHealthSnapshot> fetchSnapshot() async {
     final response = await _apiClient.get<Map<String, dynamic>>(
@@ -30,9 +32,13 @@ class SystemHealthApi {
       );
       final data = response.data;
       if (data == null) return base;
+      eventsEndpointAvailable = true;
       return SystemHealthMapper.fromEventsResponse(data, base);
     } on ApiException catch (error) {
-      if (error.kind == ApiExceptionKind.notFound) return base;
+      if (error.kind == ApiExceptionKind.notFound) {
+        eventsEndpointAvailable = false;
+        return base;
+      }
       rethrow;
     }
   }
