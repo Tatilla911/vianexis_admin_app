@@ -3529,6 +3529,360 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Validation warnings'**
   String get bulkOnboardingValidationWarnings;
+
+  /// No description provided for @navCompanies.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies'**
+  String get navCompanies;
+
+  /// No description provided for @platformCompaniesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies'**
+  String get platformCompaniesTitle;
+
+  /// No description provided for @platformCompanyDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Company detail'**
+  String get platformCompanyDetailTitle;
+
+  /// No description provided for @platformCompanySearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name, VAT, or country'**
+  String get platformCompanySearchHint;
+
+  /// No description provided for @platformCompanyListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No companies match your filters.'**
+  String get platformCompanyListEmpty;
+
+  /// No description provided for @platformCompanyListError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load companies.'**
+  String get platformCompanyListError;
+
+  /// No description provided for @platformCompanyDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load company detail.'**
+  String get platformCompanyDetailError;
+
+  /// No description provided for @platformCompanySummaryError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load company summary.'**
+  String get platformCompanySummaryError;
+
+  /// No description provided for @platformCompanyMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock company data'**
+  String get platformCompanyMockDataBadge;
+
+  /// No description provided for @platformCompanyMetadataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only'**
+  String get platformCompanyMetadataBadge;
+
+  /// No description provided for @platformCompanyOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open companies'**
+  String get platformCompanyOpenModule;
+
+  /// No description provided for @platformCompanyPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata-only tenant view. No trips, documents, or messages are shown.'**
+  String get platformCompanyPrivacyNotice;
+
+  /// No description provided for @platformCompanyDashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Company overview'**
+  String get platformCompanyDashboardTitle;
+
+  /// No description provided for @platformCompanyDashboardActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active: {count}'**
+  String platformCompanyDashboardActive(String count);
+
+  /// No description provided for @platformCompanyDashboardPendingReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending review: {count}'**
+  String platformCompanyDashboardPendingReview(String count);
+
+  /// No description provided for @platformCompanyDashboardSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended: {count}'**
+  String platformCompanyDashboardSuspended(String count);
+
+  /// No description provided for @platformCompanyDashboardOpenSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Open support issues: {count}'**
+  String platformCompanyDashboardOpenSupport(String count);
+
+  /// No description provided for @platformCompanyDashboardPendingOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending onboarding: {count}'**
+  String platformCompanyDashboardPendingOnboarding(String count);
+
+  /// No description provided for @platformCompanyFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get platformCompanyFilterAll;
+
+  /// No description provided for @platformCompanyFilterActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get platformCompanyFilterActive;
+
+  /// No description provided for @platformCompanyFilterPendingReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending review'**
+  String get platformCompanyFilterPendingReview;
+
+  /// No description provided for @platformCompanyFilterSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended'**
+  String get platformCompanyFilterSuspended;
+
+  /// No description provided for @platformCompanyFilterDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get platformCompanyFilterDisabled;
+
+  /// No description provided for @platformCompanyStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get platformCompanyStatusActive;
+
+  /// No description provided for @platformCompanyStatusPendingReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending review'**
+  String get platformCompanyStatusPendingReview;
+
+  /// No description provided for @platformCompanyStatusSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended'**
+  String get platformCompanyStatusSuspended;
+
+  /// No description provided for @platformCompanyStatusDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get platformCompanyStatusDisabled;
+
+  /// No description provided for @platformCompanyStatusArchived.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get platformCompanyStatusArchived;
+
+  /// No description provided for @platformCompanyStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get platformCompanyStatusUnknown;
+
+  /// No description provided for @platformCompanyMetricActiveUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Active users: {count}'**
+  String platformCompanyMetricActiveUsers(String count);
+
+  /// No description provided for @platformCompanyMetricDrivers.
+  ///
+  /// In en, this message translates to:
+  /// **'Drivers: {count}'**
+  String platformCompanyMetricDrivers(String count);
+
+  /// No description provided for @platformCompanyMetricVehicles.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicles: {count}'**
+  String platformCompanyMetricVehicles(String count);
+
+  /// No description provided for @platformCompanyMetricTrailers.
+  ///
+  /// In en, this message translates to:
+  /// **'Trailers: {count}'**
+  String platformCompanyMetricTrailers(String count);
+
+  /// No description provided for @platformCompanyMetricOpenSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Open support: {count}'**
+  String platformCompanyMetricOpenSupport(String count);
+
+  /// No description provided for @platformCompanyMetricActiveGrants.
+  ///
+  /// In en, this message translates to:
+  /// **'Active grants: {count}'**
+  String platformCompanyMetricActiveGrants(String count);
+
+  /// No description provided for @platformCompanyMetricTotalUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Total users: {count}'**
+  String platformCompanyMetricTotalUsers(String count);
+
+  /// No description provided for @platformCompanyMetricPendingRegistrations.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending registrations: {count}'**
+  String platformCompanyMetricPendingRegistrations(String count);
+
+  /// No description provided for @platformCompanyMetricPendingBulkJobs.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending bulk jobs: {count}'**
+  String platformCompanyMetricPendingBulkJobs(String count);
+
+  /// No description provided for @platformCompanySectionMetadata.
+  ///
+  /// In en, this message translates to:
+  /// **'Company metadata'**
+  String get platformCompanySectionMetadata;
+
+  /// No description provided for @platformCompanySectionUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Users summary'**
+  String get platformCompanySectionUsers;
+
+  /// No description provided for @platformCompanySectionSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support & fleet summary'**
+  String get platformCompanySectionSupport;
+
+  /// No description provided for @platformCompanySectionOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Onboarding summary'**
+  String get platformCompanySectionOnboarding;
+
+  /// No description provided for @platformCompanyFieldCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get platformCompanyFieldCountry;
+
+  /// No description provided for @platformCompanyFieldVat.
+  ///
+  /// In en, this message translates to:
+  /// **'VAT number'**
+  String get platformCompanyFieldVat;
+
+  /// No description provided for @platformCompanyFieldRegistrationNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration number'**
+  String get platformCompanyFieldRegistrationNumber;
+
+  /// No description provided for @platformCompanyFieldPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan'**
+  String get platformCompanyFieldPlan;
+
+  /// No description provided for @platformCompanyFieldSubscriptionStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription status'**
+  String get platformCompanyFieldSubscriptionStatus;
+
+  /// No description provided for @platformCompanyFieldLastAdminActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Last admin activity'**
+  String get platformCompanyFieldLastAdminActivity;
+
+  /// No description provided for @platformCompanyChangeStatusAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Change status'**
+  String get platformCompanyChangeStatusAction;
+
+  /// No description provided for @platformCompanyStatusDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change company status'**
+  String get platformCompanyStatusDialogTitle;
+
+  /// No description provided for @platformCompanyStatusDialogNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Restrictive statuses require a reason. This action is audit logged.'**
+  String get platformCompanyStatusDialogNotice;
+
+  /// No description provided for @platformCompanyStatusFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New status'**
+  String get platformCompanyStatusFieldLabel;
+
+  /// No description provided for @platformCompanyStatusReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get platformCompanyStatusReasonLabel;
+
+  /// No description provided for @platformCompanyStatusReasonRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'A reason is required for this status.'**
+  String get platformCompanyStatusReasonRequired;
+
+  /// No description provided for @platformCompanyStatusAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Status changes are audit logged. No billing or provisioning occurs here.'**
+  String get platformCompanyStatusAuditNotice;
+
+  /// No description provided for @platformCompanyStatusDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get platformCompanyStatusDismiss;
+
+  /// No description provided for @platformCompanyStatusConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Update status'**
+  String get platformCompanyStatusConfirm;
+
+  /// No description provided for @platformCompanyStatusSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Company status updated.'**
+  String get platformCompanyStatusSuccess;
+
+  /// No description provided for @platformCompanyStatusUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Company status change is unavailable.'**
+  String get platformCompanyStatusUnavailable;
 }
 
 class _AppLocalizationsDelegate

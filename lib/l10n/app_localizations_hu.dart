@@ -1877,4 +1877,216 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get bulkOnboardingValidationWarnings => 'Ellenőrzési figyelmeztetések';
+
+  @override
+  String get navCompanies => 'Cégek';
+
+  @override
+  String get platformCompaniesTitle => 'Cégek';
+
+  @override
+  String get platformCompanyDetailTitle => 'Cég részletei';
+
+  @override
+  String get platformCompanySearchHint =>
+      'Keresés név, adószám vagy ország szerint';
+
+  @override
+  String get platformCompanyListEmpty => 'Nincs a szűrőknek megfelelő cég.';
+
+  @override
+  String get platformCompanyListError => 'A cégek betöltése sikertelen.';
+
+  @override
+  String get platformCompanyDetailError => 'A cég részletei nem tölthetők be.';
+
+  @override
+  String get platformCompanySummaryError =>
+      'Az összegző adatok betöltése sikertelen.';
+
+  @override
+  String get platformCompanyMockDataBadge => 'Mock cégadatok';
+
+  @override
+  String get platformCompanyMetadataBadge => 'Csak metaadat';
+
+  @override
+  String get platformCompanyOpenModule => 'Cégek megnyitása';
+
+  @override
+  String get platformCompanyPrivacyNotice =>
+      'Csak metaadatok. Utazások, dokumentumok és üzenetek nem jelennek meg.';
+
+  @override
+  String get platformCompanyDashboardTitle => 'Cég áttekintés';
+
+  @override
+  String platformCompanyDashboardActive(String count) {
+    return 'Aktív: $count';
+  }
+
+  @override
+  String platformCompanyDashboardPendingReview(String count) {
+    return 'Ellenőrzésre vár: $count';
+  }
+
+  @override
+  String platformCompanyDashboardSuspended(String count) {
+    return 'Felfüggesztett: $count';
+  }
+
+  @override
+  String platformCompanyDashboardOpenSupport(String count) {
+    return 'Nyitott support: $count';
+  }
+
+  @override
+  String platformCompanyDashboardPendingOnboarding(String count) {
+    return 'Függő onboarding: $count';
+  }
+
+  @override
+  String get platformCompanyFilterAll => 'Összes';
+
+  @override
+  String get platformCompanyFilterActive => 'Aktív';
+
+  @override
+  String get platformCompanyFilterPendingReview => 'Ellenőrzésre vár';
+
+  @override
+  String get platformCompanyFilterSuspended => 'Felfüggesztett';
+
+  @override
+  String get platformCompanyFilterDisabled => 'Letiltott';
+
+  @override
+  String get platformCompanyStatusActive => 'Aktív';
+
+  @override
+  String get platformCompanyStatusPendingReview => 'Ellenőrzésre vár';
+
+  @override
+  String get platformCompanyStatusSuspended => 'Felfüggesztett';
+
+  @override
+  String get platformCompanyStatusDisabled => 'Letiltott';
+
+  @override
+  String get platformCompanyStatusArchived => 'Archivált';
+
+  @override
+  String get platformCompanyStatusUnknown => 'Ismeretlen';
+
+  @override
+  String platformCompanyMetricActiveUsers(String count) {
+    return 'Aktív felhasználók: $count';
+  }
+
+  @override
+  String platformCompanyMetricDrivers(String count) {
+    return 'Sofőrök: $count';
+  }
+
+  @override
+  String platformCompanyMetricVehicles(String count) {
+    return 'Járművek: $count';
+  }
+
+  @override
+  String platformCompanyMetricTrailers(String count) {
+    return 'Pótkocsik: $count';
+  }
+
+  @override
+  String platformCompanyMetricOpenSupport(String count) {
+    return 'Nyitott support: $count';
+  }
+
+  @override
+  String platformCompanyMetricActiveGrants(String count) {
+    return 'Aktív grantek: $count';
+  }
+
+  @override
+  String platformCompanyMetricTotalUsers(String count) {
+    return 'Összes felhasználó: $count';
+  }
+
+  @override
+  String platformCompanyMetricPendingRegistrations(String count) {
+    return 'Függő regisztrációk: $count';
+  }
+
+  @override
+  String platformCompanyMetricPendingBulkJobs(String count) {
+    return 'Függő bulk munkák: $count';
+  }
+
+  @override
+  String get platformCompanySectionMetadata => 'Cég metaadatok';
+
+  @override
+  String get platformCompanySectionUsers => 'Felhasználó összegzés';
+
+  @override
+  String get platformCompanySectionSupport => 'Support és flotta összegzés';
+
+  @override
+  String get platformCompanySectionOnboarding => 'Onboarding összegzés';
+
+  @override
+  String get platformCompanyFieldCountry => 'Ország';
+
+  @override
+  String get platformCompanyFieldVat => 'Adószám';
+
+  @override
+  String get platformCompanyFieldRegistrationNumber => 'Cégjegyzékszám';
+
+  @override
+  String get platformCompanyFieldPlan => 'Csomag';
+
+  @override
+  String get platformCompanyFieldSubscriptionStatus => 'Előfizetés státusza';
+
+  @override
+  String get platformCompanyFieldLastAdminActivity => 'Utolsó admin aktivitás';
+
+  @override
+  String get platformCompanyChangeStatusAction => 'Státusz módosítása';
+
+  @override
+  String get platformCompanyStatusDialogTitle => 'Cég státusz módosítása';
+
+  @override
+  String get platformCompanyStatusDialogNotice =>
+      'Korlátozó státuszokhoz indoklás szükséges. A művelet audit naplózásra kerül.';
+
+  @override
+  String get platformCompanyStatusFieldLabel => 'Új státusz';
+
+  @override
+  String get platformCompanyStatusReasonLabel => 'Indoklás';
+
+  @override
+  String get platformCompanyStatusReasonRequired =>
+      'Ehhez a státuszhoz indoklás kötelező.';
+
+  @override
+  String get platformCompanyStatusAuditNotice =>
+      'A státuszváltozások audit naplózásra kerülnek. Itt nem történik számlázás vagy provisioning.';
+
+  @override
+  String get platformCompanyStatusDismiss => 'Mégse';
+
+  @override
+  String get platformCompanyStatusConfirm => 'Státusz frissítése';
+
+  @override
+  String get platformCompanyStatusSuccess => 'A cég státusza frissült.';
+
+  @override
+  String get platformCompanyStatusUnavailable =>
+      'A státuszváltoztatás nem érhető el.';
 }

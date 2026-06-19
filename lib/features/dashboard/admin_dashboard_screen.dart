@@ -8,6 +8,8 @@ import '../../core/auth/admin_user.dart';
 import '../../core/localization/localization_resolver.dart';
 import '../../features/audit_logs/presentation/audit_log_providers.dart';
 import '../../features/audit_logs/presentation/widgets/audit_log_card.dart';
+import '../../features/companies/presentation/platform_companies_providers.dart';
+import '../../features/companies/presentation/widgets/platform_company_summary_card.dart';
 import '../../features/bulk_onboarding/presentation/bulk_onboarding_providers.dart';
 import '../../features/bulk_onboarding/presentation/widgets/bulk_onboarding_summary_card.dart';
 import '../../features/support/presentation/support_providers.dart';
@@ -26,9 +28,11 @@ class AdminDashboardScreen extends ConsumerWidget {
     final supportAsync = ref.watch(supportSummaryProvider);
     final auditAsync = ref.watch(platformAuditLogSummaryProvider);
     final bulkAsync = ref.watch(bulkOnboardingSummaryProvider);
+    final companiesAsync = ref.watch(platformCompanyDashboardSummaryProvider);
     final user = ref.watch(adminAuthProvider).user;
     final showBulkOnboarding =
         user?.canAccess(AdminDestination.bulkOnboarding) ?? false;
+    final showCompanies = user?.canAccess(AdminDestination.companies) ?? false;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.dashboardTitle)),
@@ -93,6 +97,37 @@ class AdminDashboardScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 16),
+          if (showCompanies)
+            companiesAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => Card(
+                child: ListTile(
+                  title: Text(
+                    resolvePlatformCompanyKey(context, 'platformCompanyListError'),
+                  ),
+                  trailing: TextButton(
+                    onPressed: () => ref
+                        .read(platformCompanyDashboardSummaryProvider.notifier)
+                        .refresh(),
+                    child: Text(l10n.errorRetryButton),
+                  ),
+                ),
+              ),
+              data: (summary) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  PlatformCompanySummaryCard(summary: summary, compact: true),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: () => context.go(AdminRoutes.companies),
+                    child: Text(
+                      resolvePlatformCompanyKey(context, 'platformCompanyOpenModule'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          if (showCompanies) const SizedBox(height: 16),
           if (showBulkOnboarding)
             bulkAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),

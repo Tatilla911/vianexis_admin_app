@@ -13,6 +13,8 @@ import '../features/bulk_onboarding/presentation/bulk_onboarding_jobs_screen.dar
 import '../features/bulk_onboarding/presentation/bulk_onboarding_row_detail_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_rows_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_upload_screen.dart';
+import '../features/companies/presentation/platform_companies_screen.dart';
+import '../features/companies/presentation/platform_company_detail_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/registrations/presentation/registration_application_detail_screen.dart';
@@ -95,6 +97,20 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 path: ':id',
                 builder: (context, state) => RegistrationApplicationDetailScreen(
                   applicationId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AdminRoutes.companies,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: PlatformCompaniesScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => PlatformCompanyDetailScreen(
+                  companyId: state.pathParameters['id'] ?? '',
                 ),
               ),
             ],
@@ -214,6 +230,7 @@ abstract final class AdminRoutes {
   static const login = '/login';
   static const dashboard = '/dashboard';
   static const registrations = '/registrations';
+  static const companies = '/companies';
   static const bulkOnboarding = '/bulk-onboarding';
   static const bulkOnboardingUpload = '/bulk-onboarding/upload';
   static const aiReviews = '/ai-reviews';
@@ -226,6 +243,8 @@ abstract final class AdminRoutes {
   static String systemHealthEventDetail(String id) => '$systemHealth/events/$id';
 
   static String registrationDetail(String id) => '$registrations/$id';
+
+  static String platformCompanyDetail(String id) => '$companies/$id';
 
   static String bulkOnboardingJobDetail(String id) => '$bulkOnboarding/$id';
 
@@ -243,6 +262,9 @@ abstract final class AdminRoutes {
   static AdminDestination? destinationForLocation(String location) {
     if (location.startsWith(registrations)) {
       return AdminDestination.registrations;
+    }
+    if (location.startsWith(companies)) {
+      return AdminDestination.companies;
     }
     if (location.startsWith(bulkOnboarding)) {
       return AdminDestination.bulkOnboarding;

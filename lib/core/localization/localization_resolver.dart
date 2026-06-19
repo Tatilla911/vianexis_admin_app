@@ -608,3 +608,87 @@ String resolveBulkOnboardingKey(
     _ => l10n.errorGenericBody,
   };
 }
+
+String resolvePlatformCompanyKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'platformCompanySearchHint' => l10n.platformCompanySearchHint,
+    'platformCompanyListEmpty' => l10n.platformCompanyListEmpty,
+    'platformCompanyListError' => l10n.platformCompanyListError,
+    'platformCompanyDetailError' => l10n.platformCompanyDetailError,
+    'platformCompanySummaryError' => l10n.platformCompanySummaryError,
+    'platformCompanyMockDataBadge' => l10n.platformCompanyMockDataBadge,
+    'platformCompanyMetadataBadge' => l10n.platformCompanyMetadataBadge,
+    'platformCompanyOpenModule' => l10n.platformCompanyOpenModule,
+    'platformCompanyPrivacyNotice' => l10n.platformCompanyPrivacyNotice,
+    'platformCompanyDashboardTitle' => l10n.platformCompanyDashboardTitle,
+    'platformCompanyDashboardActive' =>
+      l10n.platformCompanyDashboardActive(params['count'] ?? '0'),
+    'platformCompanyDashboardPendingReview' =>
+      l10n.platformCompanyDashboardPendingReview(params['count'] ?? '0'),
+    'platformCompanyDashboardSuspended' =>
+      l10n.platformCompanyDashboardSuspended(params['count'] ?? '0'),
+    'platformCompanyDashboardOpenSupport' =>
+      l10n.platformCompanyDashboardOpenSupport(params['count'] ?? '0'),
+    'platformCompanyDashboardPendingOnboarding' =>
+      l10n.platformCompanyDashboardPendingOnboarding(params['count'] ?? '0'),
+    'platformCompanyFilterAll' => l10n.platformCompanyFilterAll,
+    'platformCompanyFilterActive' => l10n.platformCompanyFilterActive,
+    'platformCompanyFilterPendingReview' => l10n.platformCompanyFilterPendingReview,
+    'platformCompanyFilterSuspended' => l10n.platformCompanyFilterSuspended,
+    'platformCompanyFilterDisabled' => l10n.platformCompanyFilterDisabled,
+    'platformCompanyStatusActive' => l10n.platformCompanyStatusActive,
+    'platformCompanyStatusPendingReview' => l10n.platformCompanyStatusPendingReview,
+    'platformCompanyStatusSuspended' => l10n.platformCompanyStatusSuspended,
+    'platformCompanyStatusDisabled' => l10n.platformCompanyStatusDisabled,
+    'platformCompanyStatusArchived' => l10n.platformCompanyStatusArchived,
+    'platformCompanyStatusUnknown' => l10n.platformCompanyStatusUnknown,
+    'platformCompanyMetricActiveUsers' =>
+      l10n.platformCompanyMetricActiveUsers(params['count'] ?? '0'),
+    'platformCompanyMetricDrivers' =>
+      l10n.platformCompanyMetricDrivers(params['count'] ?? '0'),
+    'platformCompanyMetricVehicles' =>
+      l10n.platformCompanyMetricVehicles(params['count'] ?? '0'),
+    'platformCompanyMetricTrailers' =>
+      l10n.platformCompanyMetricTrailers(params['count'] ?? '0'),
+    'platformCompanyMetricOpenSupport' =>
+      l10n.platformCompanyMetricOpenSupport(params['count'] ?? '0'),
+    'platformCompanyMetricActiveGrants' =>
+      l10n.platformCompanyMetricActiveGrants(params['count'] ?? '0'),
+    'platformCompanyMetricTotalUsers' =>
+      l10n.platformCompanyMetricTotalUsers(params['count'] ?? '0'),
+    'platformCompanyMetricPendingRegistrations' =>
+      l10n.platformCompanyMetricPendingRegistrations(params['count'] ?? '0'),
+    'platformCompanyMetricPendingBulkJobs' =>
+      l10n.platformCompanyMetricPendingBulkJobs(params['count'] ?? '0'),
+    'platformCompanySectionMetadata' => l10n.platformCompanySectionMetadata,
+    'platformCompanySectionUsers' => l10n.platformCompanySectionUsers,
+    'platformCompanySectionSupport' => l10n.platformCompanySectionSupport,
+    'platformCompanySectionOnboarding' => l10n.platformCompanySectionOnboarding,
+    'platformCompanyFieldCountry' => l10n.platformCompanyFieldCountry,
+    'platformCompanyFieldVat' => l10n.platformCompanyFieldVat,
+    'platformCompanyFieldRegistrationNumber' =>
+      l10n.platformCompanyFieldRegistrationNumber,
+    'platformCompanyFieldPlan' => l10n.platformCompanyFieldPlan,
+    'platformCompanyFieldSubscriptionStatus' =>
+      l10n.platformCompanyFieldSubscriptionStatus,
+    'platformCompanyFieldLastAdminActivity' =>
+      l10n.platformCompanyFieldLastAdminActivity,
+    'platformCompanyChangeStatusAction' => l10n.platformCompanyChangeStatusAction,
+    'platformCompanyStatusDialogTitle' => l10n.platformCompanyStatusDialogTitle,
+    'platformCompanyStatusDialogNotice' => l10n.platformCompanyStatusDialogNotice,
+    'platformCompanyStatusFieldLabel' => l10n.platformCompanyStatusFieldLabel,
+    'platformCompanyStatusReasonLabel' => l10n.platformCompanyStatusReasonLabel,
+    'platformCompanyStatusReasonRequired' => l10n.platformCompanyStatusReasonRequired,
+    'platformCompanyStatusAuditNotice' => l10n.platformCompanyStatusAuditNotice,
+    'platformCompanyStatusDismiss' => l10n.platformCompanyStatusDismiss,
+    'platformCompanyStatusConfirm' => l10n.platformCompanyStatusConfirm,
+    'platformCompanyStatusSuccess' => l10n.platformCompanyStatusSuccess,
+    'platformCompanyStatusUnavailable' => l10n.platformCompanyStatusUnavailable,
+    _ => l10n.errorGenericBody,
+  };
+}

@@ -1847,4 +1847,214 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bulkOnboardingValidationWarnings => 'Validation warnings';
+
+  @override
+  String get navCompanies => 'Companies';
+
+  @override
+  String get platformCompaniesTitle => 'Companies';
+
+  @override
+  String get platformCompanyDetailTitle => 'Company detail';
+
+  @override
+  String get platformCompanySearchHint => 'Search by name, VAT, or country';
+
+  @override
+  String get platformCompanyListEmpty => 'No companies match your filters.';
+
+  @override
+  String get platformCompanyListError => 'Could not load companies.';
+
+  @override
+  String get platformCompanyDetailError => 'Could not load company detail.';
+
+  @override
+  String get platformCompanySummaryError => 'Could not load company summary.';
+
+  @override
+  String get platformCompanyMockDataBadge => 'Mock company data';
+
+  @override
+  String get platformCompanyMetadataBadge => 'Metadata only';
+
+  @override
+  String get platformCompanyOpenModule => 'Open companies';
+
+  @override
+  String get platformCompanyPrivacyNotice =>
+      'Metadata-only tenant view. No trips, documents, or messages are shown.';
+
+  @override
+  String get platformCompanyDashboardTitle => 'Company overview';
+
+  @override
+  String platformCompanyDashboardActive(String count) {
+    return 'Active: $count';
+  }
+
+  @override
+  String platformCompanyDashboardPendingReview(String count) {
+    return 'Pending review: $count';
+  }
+
+  @override
+  String platformCompanyDashboardSuspended(String count) {
+    return 'Suspended: $count';
+  }
+
+  @override
+  String platformCompanyDashboardOpenSupport(String count) {
+    return 'Open support issues: $count';
+  }
+
+  @override
+  String platformCompanyDashboardPendingOnboarding(String count) {
+    return 'Pending onboarding: $count';
+  }
+
+  @override
+  String get platformCompanyFilterAll => 'All';
+
+  @override
+  String get platformCompanyFilterActive => 'Active';
+
+  @override
+  String get platformCompanyFilterPendingReview => 'Pending review';
+
+  @override
+  String get platformCompanyFilterSuspended => 'Suspended';
+
+  @override
+  String get platformCompanyFilterDisabled => 'Disabled';
+
+  @override
+  String get platformCompanyStatusActive => 'Active';
+
+  @override
+  String get platformCompanyStatusPendingReview => 'Pending review';
+
+  @override
+  String get platformCompanyStatusSuspended => 'Suspended';
+
+  @override
+  String get platformCompanyStatusDisabled => 'Disabled';
+
+  @override
+  String get platformCompanyStatusArchived => 'Archived';
+
+  @override
+  String get platformCompanyStatusUnknown => 'Unknown';
+
+  @override
+  String platformCompanyMetricActiveUsers(String count) {
+    return 'Active users: $count';
+  }
+
+  @override
+  String platformCompanyMetricDrivers(String count) {
+    return 'Drivers: $count';
+  }
+
+  @override
+  String platformCompanyMetricVehicles(String count) {
+    return 'Vehicles: $count';
+  }
+
+  @override
+  String platformCompanyMetricTrailers(String count) {
+    return 'Trailers: $count';
+  }
+
+  @override
+  String platformCompanyMetricOpenSupport(String count) {
+    return 'Open support: $count';
+  }
+
+  @override
+  String platformCompanyMetricActiveGrants(String count) {
+    return 'Active grants: $count';
+  }
+
+  @override
+  String platformCompanyMetricTotalUsers(String count) {
+    return 'Total users: $count';
+  }
+
+  @override
+  String platformCompanyMetricPendingRegistrations(String count) {
+    return 'Pending registrations: $count';
+  }
+
+  @override
+  String platformCompanyMetricPendingBulkJobs(String count) {
+    return 'Pending bulk jobs: $count';
+  }
+
+  @override
+  String get platformCompanySectionMetadata => 'Company metadata';
+
+  @override
+  String get platformCompanySectionUsers => 'Users summary';
+
+  @override
+  String get platformCompanySectionSupport => 'Support & fleet summary';
+
+  @override
+  String get platformCompanySectionOnboarding => 'Onboarding summary';
+
+  @override
+  String get platformCompanyFieldCountry => 'Country';
+
+  @override
+  String get platformCompanyFieldVat => 'VAT number';
+
+  @override
+  String get platformCompanyFieldRegistrationNumber => 'Registration number';
+
+  @override
+  String get platformCompanyFieldPlan => 'Plan';
+
+  @override
+  String get platformCompanyFieldSubscriptionStatus => 'Subscription status';
+
+  @override
+  String get platformCompanyFieldLastAdminActivity => 'Last admin activity';
+
+  @override
+  String get platformCompanyChangeStatusAction => 'Change status';
+
+  @override
+  String get platformCompanyStatusDialogTitle => 'Change company status';
+
+  @override
+  String get platformCompanyStatusDialogNotice =>
+      'Restrictive statuses require a reason. This action is audit logged.';
+
+  @override
+  String get platformCompanyStatusFieldLabel => 'New status';
+
+  @override
+  String get platformCompanyStatusReasonLabel => 'Reason';
+
+  @override
+  String get platformCompanyStatusReasonRequired =>
+      'A reason is required for this status.';
+
+  @override
+  String get platformCompanyStatusAuditNotice =>
+      'Status changes are audit logged. No billing or provisioning occurs here.';
+
+  @override
+  String get platformCompanyStatusDismiss => 'Cancel';
+
+  @override
+  String get platformCompanyStatusConfirm => 'Update status';
+
+  @override
+  String get platformCompanyStatusSuccess => 'Company status updated.';
+
+  @override
+  String get platformCompanyStatusUnavailable =>
+      'Company status change is unavailable.';
 }

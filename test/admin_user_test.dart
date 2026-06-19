@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vianexis_admin_app/core/api/api_exception.dart';
 import 'package:vianexis_admin_app/core/auth/admin_user.dart';
+import 'package:vianexis_admin_app/features/companies/presentation/platform_companies_providers.dart';
 import 'package:vianexis_admin_app/core/localization/localization_keys.dart';
 
 void main() {
@@ -100,6 +101,27 @@ void main() {
       );
       expect(
         AdminRole.billingAdmin.canAccess(AdminDestination.bulkOnboarding),
+        isFalse,
+      );
+    });
+  });
+
+  group('AdminRole companies access', () {
+    test('platform roles can read companies module', () {
+      expect(AdminRole.superAdmin.canAccess(AdminDestination.companies), isTrue);
+      expect(AdminRole.supportAdmin.canAccess(AdminDestination.companies), isTrue);
+      expect(
+        AdminRole.onboardingReviewer.canAccess(AdminDestination.companies),
+        isTrue,
+      );
+      expect(AdminRole.billingAdmin.canAccess(AdminDestination.companies), isTrue);
+    });
+
+    test('only super_admin can change company status', () {
+      expect(AdminRole.superAdmin.canChangePlatformCompanyStatus, isTrue);
+      expect(AdminRole.supportAdmin.canChangePlatformCompanyStatus, isFalse);
+      expect(
+        AdminRole.onboardingReviewer.canChangePlatformCompanyStatus,
         isFalse,
       );
     });
