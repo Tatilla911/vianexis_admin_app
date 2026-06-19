@@ -42,7 +42,7 @@ class AdminSettingsScreen extends ConsumerWidget {
           const SizedBox(height: 16),
           FilledButton.tonal(
             onPressed: () => ref.read(adminAuthProvider.notifier).signOut(),
-            child: Text(l10n.settingsSignOut),
+            child: Text(l10n.authLogout),
           ),
         ],
       ),

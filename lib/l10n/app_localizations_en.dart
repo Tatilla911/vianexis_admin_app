@@ -36,6 +36,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginSubtitle => 'Sign in with your ViaNexis platform account.';
 
   @override
+  String get authEmail => 'Email';
+
+  @override
+  String get authPassword => 'Password';
+
+  @override
+  String get authSignIn => 'Sign in';
+
+  @override
+  String get authSigningIn => 'Signing in…';
+
+  @override
+  String get authLogout => 'Log out';
+
+  @override
+  String get authInvalidCredentials => 'Invalid email or password.';
+
+  @override
+  String get authNetworkError =>
+      'Network error. Check your connection and try again.';
+
+  @override
+  String get authServerError => 'Server error. Try again later.';
+
+  @override
+  String get authForbiddenRole =>
+      'This account is not authorized for the platform admin app.';
+
+  @override
+  String get authBackendNotConfigured =>
+      'Backend connection is not configured yet.';
+
+  @override
+  String get authRequiredField => 'This field is required.';
+
+  @override
+  String get authShowPassword => 'Show password';
+
+  @override
+  String get authHidePassword => 'Hide password';
+
+  @override
   String get loginEmailLabel => 'Email';
 
   @override

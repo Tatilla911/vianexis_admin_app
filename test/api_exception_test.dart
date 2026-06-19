@@ -1,0 +1,134 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:vianexis_admin_app/core/api/api_client.dart';
+import 'package:vianexis_admin_app/core/api/api_exception.dart';
+import 'package:vianexis_admin_app/core/api/auth_token_storage.dart';
+import 'package:vianexis_admin_app/core/localization/localization_keys.dart';
+
+void main() {
+  group('mapDioException', () {
+    test('maps timeout errors', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/login'),
+          type: DioExceptionType.connectionTimeout,
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.timeout);
+      expect(exception.messageKey, LocalizationKeys.authNetworkError);
+    });
+
+    test('maps network connection errors', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/login'),
+          type: DioExceptionType.connectionError,
+          error: Exception('offline'),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.network);
+      expect(exception.messageKey, LocalizationKeys.authNetworkError);
+    });
+
+    test('maps 401 to invalid credentials', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/login'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/auth/login'),
+            statusCode: 401,
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.unauthorized);
+      expect(exception.messageKey, LocalizationKeys.authInvalidCredentials);
+    });
+
+    test('maps 403 to forbidden role', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/me'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/auth/me'),
+            statusCode: 403,
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.forbidden);
+      expect(exception.messageKey, LocalizationKeys.authForbiddenRole);
+    });
+
+    test('maps 404 to not found', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/missing'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/missing'),
+            statusCode: 404,
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.notFound);
+    });
+
+    test('maps 409 to conflict', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/resource'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/resource'),
+            statusCode: 409,
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.conflict);
+    });
+
+    test('maps 500 to server error', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/login'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/auth/login'),
+            statusCode: 500,
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.server);
+      expect(exception.messageKey, LocalizationKeys.authServerError);
+    });
+  });
+
+  group('ApiClient', () {
+    test('throws not configured when API_BASE_URL is empty', () async {
+      final client = ApiClient(
+        tokenStorage: AuthTokenStorage(),
+        enableDebugLogging: false,
+      );
+
+      expect(client.isConfigured, isFalse);
+      expect(
+        () => client.post('/auth/login'),
+        throwsA(
+          isA<ApiException>().having(
+            (error) => error.kind,
+            'kind',
+            ApiExceptionKind.notConfigured,
+          ),
+        ),
+      );
+    });
+  });
+}

@@ -1,9 +1,12 @@
 enum ApiExceptionKind {
   notConfigured,
   network,
+  timeout,
+  validation,
   unauthorized,
   forbidden,
-  validation,
+  notFound,
+  conflict,
   server,
   unknown,
 }

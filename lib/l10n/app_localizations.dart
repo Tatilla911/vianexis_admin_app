@@ -152,6 +152,84 @@ abstract class AppLocalizations {
   /// **'Sign in with your ViaNexis platform account.'**
   String get loginSubtitle;
 
+  /// No description provided for @authEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get authEmail;
+
+  /// No description provided for @authPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get authPassword;
+
+  /// No description provided for @authSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get authSignIn;
+
+  /// No description provided for @authSigningIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in…'**
+  String get authSigningIn;
+
+  /// No description provided for @authLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get authLogout;
+
+  /// No description provided for @authInvalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email or password.'**
+  String get authInvalidCredentials;
+
+  /// No description provided for @authNetworkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Check your connection and try again.'**
+  String get authNetworkError;
+
+  /// No description provided for @authServerError.
+  ///
+  /// In en, this message translates to:
+  /// **'Server error. Try again later.'**
+  String get authServerError;
+
+  /// No description provided for @authForbiddenRole.
+  ///
+  /// In en, this message translates to:
+  /// **'This account is not authorized for the platform admin app.'**
+  String get authForbiddenRole;
+
+  /// No description provided for @authBackendNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend connection is not configured yet.'**
+  String get authBackendNotConfigured;
+
+  /// No description provided for @authRequiredField.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required.'**
+  String get authRequiredField;
+
+  /// No description provided for @authShowPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get authShowPassword;
+
+  /// No description provided for @authHidePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get authHidePassword;
+
   /// No description provided for @loginEmailLabel.
   ///
   /// In en, this message translates to:

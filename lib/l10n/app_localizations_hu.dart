@@ -36,6 +36,48 @@ class AppLocalizationsHu extends AppLocalizations {
   String get loginSubtitle => 'Jelentkezzen be ViaNexis platform fiókjával.';
 
   @override
+  String get authEmail => 'E-mail';
+
+  @override
+  String get authPassword => 'Jelszó';
+
+  @override
+  String get authSignIn => 'Belépés';
+
+  @override
+  String get authSigningIn => 'Belépés…';
+
+  @override
+  String get authLogout => 'Kijelentkezés';
+
+  @override
+  String get authInvalidCredentials => 'Érvénytelen e-mail vagy jelszó.';
+
+  @override
+  String get authNetworkError =>
+      'Hálózati hiba. Ellenőrizze a kapcsolatot, majd próbálja újra.';
+
+  @override
+  String get authServerError => 'Szerverhiba. Próbálja újra később.';
+
+  @override
+  String get authForbiddenRole =>
+      'Ez a fiók nem jogosult a platform admin alkalmazás használatára.';
+
+  @override
+  String get authBackendNotConfigured =>
+      'A backend kapcsolat még nincs beállítva.';
+
+  @override
+  String get authRequiredField => 'A mező kitöltése kötelező.';
+
+  @override
+  String get authShowPassword => 'Jelszó megjelenítése';
+
+  @override
+  String get authHidePassword => 'Jelszó elrejtése';
+
+  @override
   String get loginEmailLabel => 'E-mail';
 
   @override

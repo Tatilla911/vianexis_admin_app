@@ -1,47 +1,19 @@
-import 'package:dio/dio.dart';
-
 import '../../app/app_environment.dart';
-import 'api_exception.dart';
-import 'auth_token_storage.dart';
 
-/// HTTP client configuration. Backend wiring is added in a later phase.
-class ApiConfig {
-  ApiConfig({
-    required this.environment,
-    required AuthTokenStorage tokenStorage,
-    Dio? dio,
-  }) : _tokenStorage = tokenStorage,
-       dio = dio ?? Dio() {
-    final baseUrl = const String.fromEnvironment(AppEnvironmentConfig.apiBaseUrlDefine);
-    if (baseUrl.trim().isNotEmpty) {
-      this.dio.options.baseUrl = baseUrl;
-    }
-    this.dio.options.connectTimeout = const Duration(seconds: 20);
-    this.dio.options.receiveTimeout = const Duration(seconds: 30);
-    this.dio.options.headers['Accept'] = 'application/json';
-  }
+/// HTTP client configuration constants.
+abstract final class ApiConfig {
+  static const apiBaseUrlDefine = AppEnvironmentConfig.apiBaseUrlDefine;
 
-  final AppEnvironment environment;
-  final AuthTokenStorage _tokenStorage;
-  final Dio dio;
+  static const connectTimeout = Duration(seconds: 20);
+  static const receiveTimeout = Duration(seconds: 30);
 
-  bool get isConfigured => AppEnvironmentConfig.isBackendConfigured;
+  static const jsonHeaders = <String, String>{
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  };
 
-  Future<String?> readAccessToken() => _tokenStorage.readAccessToken();
-}
+  static String get baseUrl =>
+      const String.fromEnvironment(apiBaseUrlDefine).trim();
 
-/// Factory for creating configured API clients.
-class ApiClient {
-  ApiClient(this.config);
-
-  final ApiConfig config;
-
-  Dio get dio => config.dio;
-
-  Never throwNotConfigured() {
-    throw const ApiException(
-      messageKey: 'loginBackendNotConfigured',
-      kind: ApiExceptionKind.notConfigured,
-    );
-  }
+  static bool get isConfigured => baseUrl.isNotEmpty;
 }

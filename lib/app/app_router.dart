@@ -34,14 +34,17 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   final refresh = ref.watch(routerRefreshNotifierProvider);
 
   return GoRouter(
-    initialLocation: AdminRoutes.dashboard,
+    initialLocation: AdminRoutes.login,
     refreshListenable: refresh,
     redirect: (context, state) {
       final auth = ref.read(adminAuthProvider);
-      final isAuthenticated = auth.isAuthenticated;
       final isLoggingIn = state.matchedLocation == AdminRoutes.login;
 
-      if (!isAuthenticated) {
+      if (auth.isRestoringSession) {
+        return isLoggingIn ? null : AdminRoutes.login;
+      }
+
+      if (!auth.isAuthenticated) {
         return isLoggingIn ? null : AdminRoutes.login;
       }
 
