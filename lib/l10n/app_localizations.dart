@@ -463,6 +463,390 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password is required.'**
   String get validationPasswordRequired;
+
+  /// No description provided for @registrationFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get registrationFilterAll;
+
+  /// No description provided for @registrationFilterPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get registrationFilterPending;
+
+  /// No description provided for @registrationFilterNeedsInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs info'**
+  String get registrationFilterNeedsInfo;
+
+  /// No description provided for @registrationFilterAiReviewed.
+  ///
+  /// In en, this message translates to:
+  /// **'AI reviewed'**
+  String get registrationFilterAiReviewed;
+
+  /// No description provided for @registrationFilterApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get registrationFilterApproved;
+
+  /// No description provided for @registrationFilterRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get registrationFilterRejected;
+
+  /// No description provided for @registrationFilterHighRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'High risk'**
+  String get registrationFilterHighRisk;
+
+  /// No description provided for @registrationStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get registrationStatusPending;
+
+  /// No description provided for @registrationStatusNeedsInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs info'**
+  String get registrationStatusNeedsInfo;
+
+  /// No description provided for @registrationStatusApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get registrationStatusApproved;
+
+  /// No description provided for @registrationStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get registrationStatusRejected;
+
+  /// No description provided for @registrationStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get registrationStatusCancelled;
+
+  /// No description provided for @registrationStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get registrationStatusUnknown;
+
+  /// No description provided for @registrationRiskLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low risk'**
+  String get registrationRiskLow;
+
+  /// No description provided for @registrationRiskMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium risk'**
+  String get registrationRiskMedium;
+
+  /// No description provided for @registrationRiskHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High risk'**
+  String get registrationRiskHigh;
+
+  /// No description provided for @registrationRiskUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown risk'**
+  String get registrationRiskUnknown;
+
+  /// No description provided for @registrationTypeCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get registrationTypeCompany;
+
+  /// No description provided for @registrationTypeUser.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get registrationTypeUser;
+
+  /// No description provided for @registrationTypeBulkOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding'**
+  String get registrationTypeBulkOnboarding;
+
+  /// No description provided for @registrationSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search company, VAT, country, or email'**
+  String get registrationSearchHint;
+
+  /// No description provided for @registrationListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No registration applications match your filters.'**
+  String get registrationListEmpty;
+
+  /// No description provided for @registrationListError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load registration applications.'**
+  String get registrationListError;
+
+  /// No description provided for @registrationDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load registration application details.'**
+  String get registrationDetailError;
+
+  /// No description provided for @registrationMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get registrationMockDataBadge;
+
+  /// No description provided for @registrationSubmittedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted {date}'**
+  String registrationSubmittedAt(String date);
+
+  /// No description provided for @registrationSectionCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get registrationSectionCompany;
+
+  /// No description provided for @registrationSectionContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get registrationSectionContact;
+
+  /// No description provided for @registrationSectionStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get registrationSectionStatus;
+
+  /// No description provided for @registrationSectionAiReview.
+  ///
+  /// In en, this message translates to:
+  /// **'AI review'**
+  String get registrationSectionAiReview;
+
+  /// No description provided for @registrationSectionDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents'**
+  String get registrationSectionDocuments;
+
+  /// No description provided for @registrationFieldCompanyName.
+  ///
+  /// In en, this message translates to:
+  /// **'Company name'**
+  String get registrationFieldCompanyName;
+
+  /// No description provided for @registrationFieldCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get registrationFieldCountry;
+
+  /// No description provided for @registrationFieldVatNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'VAT / tax number'**
+  String get registrationFieldVatNumber;
+
+  /// No description provided for @registrationFieldRegistrationNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration number'**
+  String get registrationFieldRegistrationNumber;
+
+  /// No description provided for @registrationFieldContactName.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact name'**
+  String get registrationFieldContactName;
+
+  /// No description provided for @registrationFieldContactEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact email'**
+  String get registrationFieldContactEmail;
+
+  /// No description provided for @registrationFieldSubmittedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get registrationFieldSubmittedAt;
+
+  /// No description provided for @registrationFieldReviewedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewed'**
+  String get registrationFieldReviewedAt;
+
+  /// No description provided for @registrationFieldReviewedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewed by'**
+  String get registrationFieldReviewedBy;
+
+  /// No description provided for @registrationFieldAiRecommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'AI recommendation'**
+  String get registrationFieldAiRecommendation;
+
+  /// No description provided for @registrationFieldAiSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'AI summary'**
+  String get registrationFieldAiSummary;
+
+  /// No description provided for @registrationFieldMissingInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing information'**
+  String get registrationFieldMissingInformation;
+
+  /// No description provided for @registrationFieldDuplicateWarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate warnings'**
+  String get registrationFieldDuplicateWarnings;
+
+  /// No description provided for @registrationFieldRiskFlags.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk flags'**
+  String get registrationFieldRiskFlags;
+
+  /// No description provided for @registrationNoneReported.
+  ///
+  /// In en, this message translates to:
+  /// **'None reported'**
+  String get registrationNoneReported;
+
+  /// No description provided for @registrationDocumentsMetadataOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Document metadata only — file contents are not shown.'**
+  String get registrationDocumentsMetadataOnly;
+
+  /// No description provided for @registrationDocumentsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No uploaded document metadata reported.'**
+  String get registrationDocumentsEmpty;
+
+  /// No description provided for @registrationActionApprove.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get registrationActionApprove;
+
+  /// No description provided for @registrationActionReject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get registrationActionReject;
+
+  /// No description provided for @registrationActionRequestInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Request information'**
+  String get registrationActionRequestInfo;
+
+  /// No description provided for @registrationDecisionApproveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve registration'**
+  String get registrationDecisionApproveTitle;
+
+  /// No description provided for @registrationDecisionRejectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject registration'**
+  String get registrationDecisionRejectTitle;
+
+  /// No description provided for @registrationDecisionRequestInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Request more information'**
+  String get registrationDecisionRequestInfoTitle;
+
+  /// No description provided for @registrationDecisionApproveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm approval of this onboarding application.'**
+  String get registrationDecisionApproveBody;
+
+  /// No description provided for @registrationDecisionAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action will be recorded in the platform audit log.'**
+  String get registrationDecisionAuditNotice;
+
+  /// No description provided for @registrationDecisionNotesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Review notes'**
+  String get registrationDecisionNotesLabel;
+
+  /// No description provided for @registrationDecisionNotesRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least 3 characters.'**
+  String get registrationDecisionNotesRequired;
+
+  /// No description provided for @registrationDecisionCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get registrationDecisionCancel;
+
+  /// No description provided for @registrationDecisionApproveConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get registrationDecisionApproveConfirm;
+
+  /// No description provided for @registrationDecisionRejectConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get registrationDecisionRejectConfirm;
+
+  /// No description provided for @registrationDecisionRequestInfoConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Send request'**
+  String get registrationDecisionRequestInfoConfirm;
+
+  /// No description provided for @registrationDecisionSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration decision saved.'**
+  String get registrationDecisionSuccess;
+
+  /// No description provided for @registrationDecisionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save registration decision.'**
+  String get registrationDecisionError;
 }
 
 class _AppLocalizationsDelegate

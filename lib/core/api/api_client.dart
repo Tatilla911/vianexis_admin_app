@@ -93,6 +93,25 @@ class ApiClient {
     }
   }
 
+  Future<Response<T>> patch<T>(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    _assertConfigured();
+    try {
+      return await dio.patch<T>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
+    } on DioException catch (error) {
+      throw mapDioException(error);
+    }
+  }
+
   void _assertConfigured() {
     if (!isConfigured) {
       throw const ApiException(

@@ -206,4 +206,210 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get validationPasswordRequired => 'A jelszó megadása kötelező.';
+
+  @override
+  String get registrationFilterAll => 'Összes';
+
+  @override
+  String get registrationFilterPending => 'Függőben';
+
+  @override
+  String get registrationFilterNeedsInfo => 'További adat kell';
+
+  @override
+  String get registrationFilterAiReviewed => 'AI felülvizsgált';
+
+  @override
+  String get registrationFilterApproved => 'Jóváhagyva';
+
+  @override
+  String get registrationFilterRejected => 'Elutasítva';
+
+  @override
+  String get registrationFilterHighRisk => 'Magas kockázat';
+
+  @override
+  String get registrationStatusPending => 'Függőben';
+
+  @override
+  String get registrationStatusNeedsInfo => 'További adat kell';
+
+  @override
+  String get registrationStatusApproved => 'Jóváhagyva';
+
+  @override
+  String get registrationStatusRejected => 'Elutasítva';
+
+  @override
+  String get registrationStatusCancelled => 'Visszavonva';
+
+  @override
+  String get registrationStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get registrationRiskLow => 'Alacsony kockázat';
+
+  @override
+  String get registrationRiskMedium => 'Közepes kockázat';
+
+  @override
+  String get registrationRiskHigh => 'Magas kockázat';
+
+  @override
+  String get registrationRiskUnknown => 'Ismeretlen kockázat';
+
+  @override
+  String get registrationTypeCompany => 'Cég';
+
+  @override
+  String get registrationTypeUser => 'Felhasználó';
+
+  @override
+  String get registrationTypeBulkOnboarding => 'Tömeges onboarding';
+
+  @override
+  String get registrationSearchHint =>
+      'Keresés cég, adószám, ország vagy e-mail alapján';
+
+  @override
+  String get registrationListEmpty =>
+      'Nincs a szűrőknek megfelelő regisztrációs kérelem.';
+
+  @override
+  String get registrationListError =>
+      'A regisztrációs kérelmek betöltése sikertelen.';
+
+  @override
+  String get registrationDetailError =>
+      'A regisztrációs kérelem részleteinek betöltése sikertelen.';
+
+  @override
+  String get registrationMockDataBadge => 'Minta adat';
+
+  @override
+  String registrationSubmittedAt(String date) {
+    return 'Beküldve: $date';
+  }
+
+  @override
+  String get registrationSectionCompany => 'Cég';
+
+  @override
+  String get registrationSectionContact => 'Kapcsolat';
+
+  @override
+  String get registrationSectionStatus => 'Státusz';
+
+  @override
+  String get registrationSectionAiReview => 'AI felülvizsgálat';
+
+  @override
+  String get registrationSectionDocuments => 'Dokumentumok';
+
+  @override
+  String get registrationFieldCompanyName => 'Cégnév';
+
+  @override
+  String get registrationFieldCountry => 'Ország';
+
+  @override
+  String get registrationFieldVatNumber => 'Adószám';
+
+  @override
+  String get registrationFieldRegistrationNumber => 'Cégjegyzékszám';
+
+  @override
+  String get registrationFieldContactName => 'Kapcsolattartó neve';
+
+  @override
+  String get registrationFieldContactEmail => 'Kapcsolattartó e-mail';
+
+  @override
+  String get registrationFieldSubmittedAt => 'Beküldve';
+
+  @override
+  String get registrationFieldReviewedAt => 'Felülvizsgálva';
+
+  @override
+  String get registrationFieldReviewedBy => 'Felülvizsgáló';
+
+  @override
+  String get registrationFieldAiRecommendation => 'AI ajánlás';
+
+  @override
+  String get registrationFieldAiSummary => 'AI összefoglaló';
+
+  @override
+  String get registrationFieldMissingInformation => 'Hiányzó információk';
+
+  @override
+  String get registrationFieldDuplicateWarnings =>
+      'Duplikációs figyelmeztetések';
+
+  @override
+  String get registrationFieldRiskFlags => 'Kockázati jelzők';
+
+  @override
+  String get registrationNoneReported => 'Nincs jelentve';
+
+  @override
+  String get registrationDocumentsMetadataOnly =>
+      'Csak dokumentum metaadat — a fájltartalom nem jelenik meg.';
+
+  @override
+  String get registrationDocumentsEmpty =>
+      'Nincs feltöltött dokumentum metaadat.';
+
+  @override
+  String get registrationActionApprove => 'Jóváhagyás';
+
+  @override
+  String get registrationActionReject => 'Elutasítás';
+
+  @override
+  String get registrationActionRequestInfo => 'További információ kérése';
+
+  @override
+  String get registrationDecisionApproveTitle => 'Regisztráció jóváhagyása';
+
+  @override
+  String get registrationDecisionRejectTitle => 'Regisztráció elutasítása';
+
+  @override
+  String get registrationDecisionRequestInfoTitle =>
+      'További információ kérése';
+
+  @override
+  String get registrationDecisionApproveBody =>
+      'Erősítse meg az onboarding kérelem jóváhagyását.';
+
+  @override
+  String get registrationDecisionAuditNotice =>
+      'A művelet a platform audit naplóban rögzítésre kerül.';
+
+  @override
+  String get registrationDecisionNotesLabel => 'Felülvizsgálati megjegyzés';
+
+  @override
+  String get registrationDecisionNotesRequired =>
+      'Legalább 3 karakter szükséges.';
+
+  @override
+  String get registrationDecisionCancel => 'Mégse';
+
+  @override
+  String get registrationDecisionApproveConfirm => 'Jóváhagyás';
+
+  @override
+  String get registrationDecisionRejectConfirm => 'Elutasítás';
+
+  @override
+  String get registrationDecisionRequestInfoConfirm => 'Kérelem küldése';
+
+  @override
+  String get registrationDecisionSuccess => 'A regisztrációs döntés mentve.';
+
+  @override
+  String get registrationDecisionError =>
+      'A regisztrációs döntés mentése sikertelen.';
 }

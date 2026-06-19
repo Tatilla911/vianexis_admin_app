@@ -206,4 +206,207 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get validationPasswordRequired => 'Password is required.';
+
+  @override
+  String get registrationFilterAll => 'All';
+
+  @override
+  String get registrationFilterPending => 'Pending';
+
+  @override
+  String get registrationFilterNeedsInfo => 'Needs info';
+
+  @override
+  String get registrationFilterAiReviewed => 'AI reviewed';
+
+  @override
+  String get registrationFilterApproved => 'Approved';
+
+  @override
+  String get registrationFilterRejected => 'Rejected';
+
+  @override
+  String get registrationFilterHighRisk => 'High risk';
+
+  @override
+  String get registrationStatusPending => 'Pending';
+
+  @override
+  String get registrationStatusNeedsInfo => 'Needs info';
+
+  @override
+  String get registrationStatusApproved => 'Approved';
+
+  @override
+  String get registrationStatusRejected => 'Rejected';
+
+  @override
+  String get registrationStatusCancelled => 'Cancelled';
+
+  @override
+  String get registrationStatusUnknown => 'Unknown';
+
+  @override
+  String get registrationRiskLow => 'Low risk';
+
+  @override
+  String get registrationRiskMedium => 'Medium risk';
+
+  @override
+  String get registrationRiskHigh => 'High risk';
+
+  @override
+  String get registrationRiskUnknown => 'Unknown risk';
+
+  @override
+  String get registrationTypeCompany => 'Company';
+
+  @override
+  String get registrationTypeUser => 'User';
+
+  @override
+  String get registrationTypeBulkOnboarding => 'Bulk onboarding';
+
+  @override
+  String get registrationSearchHint => 'Search company, VAT, country, or email';
+
+  @override
+  String get registrationListEmpty =>
+      'No registration applications match your filters.';
+
+  @override
+  String get registrationListError =>
+      'Could not load registration applications.';
+
+  @override
+  String get registrationDetailError =>
+      'Could not load registration application details.';
+
+  @override
+  String get registrationMockDataBadge => 'Mock data';
+
+  @override
+  String registrationSubmittedAt(String date) {
+    return 'Submitted $date';
+  }
+
+  @override
+  String get registrationSectionCompany => 'Company';
+
+  @override
+  String get registrationSectionContact => 'Contact';
+
+  @override
+  String get registrationSectionStatus => 'Status';
+
+  @override
+  String get registrationSectionAiReview => 'AI review';
+
+  @override
+  String get registrationSectionDocuments => 'Documents';
+
+  @override
+  String get registrationFieldCompanyName => 'Company name';
+
+  @override
+  String get registrationFieldCountry => 'Country';
+
+  @override
+  String get registrationFieldVatNumber => 'VAT / tax number';
+
+  @override
+  String get registrationFieldRegistrationNumber => 'Registration number';
+
+  @override
+  String get registrationFieldContactName => 'Contact name';
+
+  @override
+  String get registrationFieldContactEmail => 'Contact email';
+
+  @override
+  String get registrationFieldSubmittedAt => 'Submitted';
+
+  @override
+  String get registrationFieldReviewedAt => 'Reviewed';
+
+  @override
+  String get registrationFieldReviewedBy => 'Reviewed by';
+
+  @override
+  String get registrationFieldAiRecommendation => 'AI recommendation';
+
+  @override
+  String get registrationFieldAiSummary => 'AI summary';
+
+  @override
+  String get registrationFieldMissingInformation => 'Missing information';
+
+  @override
+  String get registrationFieldDuplicateWarnings => 'Duplicate warnings';
+
+  @override
+  String get registrationFieldRiskFlags => 'Risk flags';
+
+  @override
+  String get registrationNoneReported => 'None reported';
+
+  @override
+  String get registrationDocumentsMetadataOnly =>
+      'Document metadata only — file contents are not shown.';
+
+  @override
+  String get registrationDocumentsEmpty =>
+      'No uploaded document metadata reported.';
+
+  @override
+  String get registrationActionApprove => 'Approve';
+
+  @override
+  String get registrationActionReject => 'Reject';
+
+  @override
+  String get registrationActionRequestInfo => 'Request information';
+
+  @override
+  String get registrationDecisionApproveTitle => 'Approve registration';
+
+  @override
+  String get registrationDecisionRejectTitle => 'Reject registration';
+
+  @override
+  String get registrationDecisionRequestInfoTitle => 'Request more information';
+
+  @override
+  String get registrationDecisionApproveBody =>
+      'Confirm approval of this onboarding application.';
+
+  @override
+  String get registrationDecisionAuditNotice =>
+      'This action will be recorded in the platform audit log.';
+
+  @override
+  String get registrationDecisionNotesLabel => 'Review notes';
+
+  @override
+  String get registrationDecisionNotesRequired =>
+      'Enter at least 3 characters.';
+
+  @override
+  String get registrationDecisionCancel => 'Cancel';
+
+  @override
+  String get registrationDecisionApproveConfirm => 'Approve';
+
+  @override
+  String get registrationDecisionRejectConfirm => 'Reject';
+
+  @override
+  String get registrationDecisionRequestInfoConfirm => 'Send request';
+
+  @override
+  String get registrationDecisionSuccess => 'Registration decision saved.';
+
+  @override
+  String get registrationDecisionError =>
+      'Could not save registration decision.';
 }
