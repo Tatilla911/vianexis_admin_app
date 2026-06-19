@@ -94,6 +94,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
     return switch (destination) {
       AdminDestination.dashboard => l10n.navDashboard,
       AdminDestination.registrations => l10n.navRegistrations,
+      AdminDestination.bulkOnboarding => l10n.navBulkOnboarding,
       AdminDestination.aiReviews => l10n.aiReviewsTitle,
       AdminDestination.supportTickets => l10n.supportTicketsTitle,
       AdminDestination.supportGrants => l10n.supportGrantsTitle,
@@ -130,6 +131,12 @@ const _allNavItems = <_NavItem>[
     route: AdminRoutes.registrations,
     icon: Icons.apartment_outlined,
     selectedIcon: Icons.apartment,
+  ),
+  _NavItem(
+    destination: AdminDestination.bulkOnboarding,
+    route: AdminRoutes.bulkOnboarding,
+    icon: Icons.upload_file_outlined,
+    selectedIcon: Icons.upload_file,
   ),
   _NavItem(
     destination: AdminDestination.aiReviews,

@@ -48,6 +48,17 @@ Live integration is wired for:
 
 Capability detection: missing action endpoints return localized **“Action not available on this backend yet.”** without breaking screens.
 
+## Phase 10 status (bulk onboarding control center)
+
+Live integration is wired for:
+
+- Bulk onboarding jobs list / detail / rows (`GET /platform-admin/bulk-onboarding/jobs...`)
+- Validate / approve / reject / cancel / process actions (decision roles only)
+- Dashboard summary card (waiting review, high risk, invalid rows, processing)
+- Mock fallback module when `API_BASE_URL` is not configured
+
+Navigation visibility: `super_admin`, `onboarding_reviewer` only.
+
 ## Documentation
 
 - [Architecture](docs/architecture.md)

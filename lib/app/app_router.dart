@@ -8,6 +8,9 @@ import '../core/widgets/vianexis_admin_scaffold.dart';
 import '../features/ai_reviews/ai_review_summary_screen.dart';
 import '../features/audit_logs/presentation/audit_log_detail_screen.dart';
 import '../features/audit_logs/presentation/audit_logs_screen.dart';
+import '../features/bulk_onboarding/presentation/bulk_onboarding_job_detail_screen.dart';
+import '../features/bulk_onboarding/presentation/bulk_onboarding_jobs_screen.dart';
+import '../features/bulk_onboarding/presentation/bulk_onboarding_rows_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/registrations/presentation/registration_application_detail_screen.dart';
@@ -95,6 +98,28 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
           GoRoute(
+            path: AdminRoutes.bulkOnboarding,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: BulkOnboardingJobsScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => BulkOnboardingJobDetailScreen(
+                  jobId: state.pathParameters['id'] ?? '',
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'rows',
+                    builder: (context, state) => BulkOnboardingRowsScreen(
+                      jobId: state.pathParameters['id'] ?? '',
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          GoRoute(
             path: AdminRoutes.aiReviews,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: AiReviewSummaryScreen(),
@@ -172,6 +197,7 @@ abstract final class AdminRoutes {
   static const login = '/login';
   static const dashboard = '/dashboard';
   static const registrations = '/registrations';
+  static const bulkOnboarding = '/bulk-onboarding';
   static const aiReviews = '/ai-reviews';
   static const supportTickets = '/support/tickets';
   static const supportGrants = '/support/grants';
@@ -183,6 +209,10 @@ abstract final class AdminRoutes {
 
   static String registrationDetail(String id) => '$registrations/$id';
 
+  static String bulkOnboardingJobDetail(String id) => '$bulkOnboarding/$id';
+
+  static String bulkOnboardingJobRows(String id) => '$bulkOnboarding/$id/rows';
+
   static String supportTicketDetail(String id) => '$supportTickets/$id';
 
   static String supportGrantDetail(String id) => '$supportGrants/$id';
@@ -192,6 +222,9 @@ abstract final class AdminRoutes {
   static AdminDestination? destinationForLocation(String location) {
     if (location.startsWith(registrations)) {
       return AdminDestination.registrations;
+    }
+    if (location.startsWith(bulkOnboarding)) {
+      return AdminDestination.bulkOnboarding;
     }
     if (location.startsWith(supportTickets)) {
       return AdminDestination.supportTickets;

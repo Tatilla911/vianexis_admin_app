@@ -18,6 +18,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navRegistrations => 'Registrations';
 
   @override
+  String get navBulkOnboarding => 'Bulk onboarding';
+
+  @override
   String get navSupport => 'Support';
 
   @override
@@ -1299,4 +1302,327 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get backendActionUnavailable =>
       'Action not available on this backend yet.';
+
+  @override
+  String get bulkOnboardingTitle => 'Bulk onboarding';
+
+  @override
+  String get bulkOnboardingDetailTitle => 'Bulk onboarding job';
+
+  @override
+  String get bulkOnboardingRowsTitle => 'Import rows';
+
+  @override
+  String get bulkOnboardingMockDataBadge => 'Mock data';
+
+  @override
+  String get bulkOnboardingSearchHint => 'Search by company, file, or job ID';
+
+  @override
+  String get bulkOnboardingListEmpty =>
+      'No bulk onboarding jobs match your filters.';
+
+  @override
+  String get bulkOnboardingListError => 'Could not load bulk onboarding jobs.';
+
+  @override
+  String get bulkOnboardingDetailError => 'Could not load bulk onboarding job.';
+
+  @override
+  String get bulkOnboardingRowsError => 'Could not load import rows.';
+
+  @override
+  String get bulkOnboardingRowsEmpty => 'No rows match this filter.';
+
+  @override
+  String get bulkOnboardingPrivacyNotice =>
+      'Metadata only. Tenant operational trip, document, and message content is never shown here.';
+
+  @override
+  String get bulkOnboardingOpenModule => 'Open bulk onboarding';
+
+  @override
+  String get bulkOnboardingOpenRows => 'View rows';
+
+  @override
+  String get bulkOnboardingNoSourceFile => 'No source file name';
+
+  @override
+  String get bulkOnboardingFieldSourceFile => 'Source file';
+
+  @override
+  String get bulkOnboardingDashboardTitle => 'Bulk onboarding';
+
+  @override
+  String get bulkOnboardingDashboardWaitingReview => 'Waiting for review';
+
+  @override
+  String get bulkOnboardingDashboardHighRisk => 'High-risk jobs';
+
+  @override
+  String get bulkOnboardingDashboardInvalidRows => 'Invalid rows';
+
+  @override
+  String get bulkOnboardingDashboardProcessing => 'Processing jobs';
+
+  @override
+  String get bulkOnboardingFilterAll => 'All';
+
+  @override
+  String get bulkOnboardingFilterReadyForReview => 'Ready for review';
+
+  @override
+  String get bulkOnboardingFilterValidationFailed => 'Validation failed';
+
+  @override
+  String get bulkOnboardingFilterProcessing => 'Processing';
+
+  @override
+  String get bulkOnboardingFilterCompleted => 'Completed';
+
+  @override
+  String get bulkOnboardingFilterRejected => 'Rejected';
+
+  @override
+  String get bulkOnboardingFilterHighRisk => 'High risk';
+
+  @override
+  String get bulkOnboardingStatusDraft => 'Draft';
+
+  @override
+  String get bulkOnboardingStatusUploaded => 'Uploaded';
+
+  @override
+  String get bulkOnboardingStatusValidating => 'Validating';
+
+  @override
+  String get bulkOnboardingStatusValidationFailed => 'Validation failed';
+
+  @override
+  String get bulkOnboardingStatusReadyForReview => 'Ready for review';
+
+  @override
+  String get bulkOnboardingStatusApprovedForProcessing =>
+      'Approved for processing';
+
+  @override
+  String get bulkOnboardingStatusProcessing => 'Processing';
+
+  @override
+  String get bulkOnboardingStatusPartiallyCompleted => 'Partially completed';
+
+  @override
+  String get bulkOnboardingStatusCompleted => 'Completed';
+
+  @override
+  String get bulkOnboardingStatusRejected => 'Rejected';
+
+  @override
+  String get bulkOnboardingStatusCancelled => 'Cancelled';
+
+  @override
+  String get bulkOnboardingStatusUnknown => 'Unknown';
+
+  @override
+  String get bulkOnboardingRowStatusPending => 'Pending';
+
+  @override
+  String get bulkOnboardingRowStatusValid => 'Valid';
+
+  @override
+  String get bulkOnboardingRowStatusWarning => 'Warning';
+
+  @override
+  String get bulkOnboardingRowStatusInvalid => 'Invalid';
+
+  @override
+  String get bulkOnboardingRowStatusDuplicate => 'Duplicate';
+
+  @override
+  String get bulkOnboardingRowStatusApproved => 'Approved';
+
+  @override
+  String get bulkOnboardingRowStatusSkipped => 'Skipped';
+
+  @override
+  String get bulkOnboardingRowStatusProcessed => 'Processed';
+
+  @override
+  String get bulkOnboardingRowStatusFailed => 'Failed';
+
+  @override
+  String get bulkOnboardingRowStatusUnknown => 'Unknown';
+
+  @override
+  String get bulkOnboardingTypeCompanyUsers => 'Company users';
+
+  @override
+  String get bulkOnboardingTypeDrivers => 'Drivers';
+
+  @override
+  String get bulkOnboardingTypeVehicles => 'Vehicles';
+
+  @override
+  String get bulkOnboardingTypeTrailers => 'Trailers';
+
+  @override
+  String get bulkOnboardingTypeMixedCompanyImport => 'Mixed company import';
+
+  @override
+  String get bulkOnboardingTypeUnknown => 'Unknown type';
+
+  @override
+  String get bulkOnboardingRiskLow => 'Low risk';
+
+  @override
+  String get bulkOnboardingRiskMedium => 'Medium risk';
+
+  @override
+  String get bulkOnboardingRiskHigh => 'High risk';
+
+  @override
+  String get bulkOnboardingRiskUnknown => 'Unknown risk';
+
+  @override
+  String bulkOnboardingMetricTotalRows(String count) {
+    return 'Total rows: $count';
+  }
+
+  @override
+  String bulkOnboardingMetricValidRows(String count) {
+    return 'Valid: $count';
+  }
+
+  @override
+  String bulkOnboardingMetricWarningRows(String count) {
+    return 'Warnings: $count';
+  }
+
+  @override
+  String bulkOnboardingMetricInvalidRows(String count) {
+    return 'Invalid: $count';
+  }
+
+  @override
+  String bulkOnboardingMetricDuplicateRows(String count) {
+    return 'Duplicates: $count';
+  }
+
+  @override
+  String get bulkOnboardingValidationSummaryTitle => 'Validation summary';
+
+  @override
+  String get bulkOnboardingValidationErrors => 'Validation errors';
+
+  @override
+  String bulkOnboardingDuplicateReason(String reason) {
+    return 'Duplicate: $reason';
+  }
+
+  @override
+  String get bulkOnboardingAiReviewTitle => 'AI review (advisory)';
+
+  @override
+  String get bulkOnboardingAiAdvisoryNotice =>
+      'Recommendations are advisory only. Human approval is required.';
+
+  @override
+  String bulkOnboardingRecommendedAction(String action) {
+    return 'Recommended action: $action';
+  }
+
+  @override
+  String get bulkOnboardingRowFilterAll => 'All rows';
+
+  @override
+  String get bulkOnboardingRowFilterInvalid => 'Invalid';
+
+  @override
+  String get bulkOnboardingRowFilterWarning => 'Warnings';
+
+  @override
+  String get bulkOnboardingRowFilterDuplicate => 'Duplicates';
+
+  @override
+  String get bulkOnboardingActionValidate => 'Validate';
+
+  @override
+  String get bulkOnboardingActionApprove => 'Approve';
+
+  @override
+  String get bulkOnboardingActionReject => 'Reject';
+
+  @override
+  String get bulkOnboardingActionCancel => 'Cancel';
+
+  @override
+  String get bulkOnboardingActionProcess => 'Process';
+
+  @override
+  String get bulkOnboardingProcessDisabled => 'Processing unavailable';
+
+  @override
+  String get bulkOnboardingProcessUnavailable =>
+      'Processing is not available for this job.';
+
+  @override
+  String get bulkOnboardingActionUnavailable =>
+      'This action is unavailable right now.';
+
+  @override
+  String get bulkOnboardingActionSuccess => 'Action recorded and audit logged.';
+
+  @override
+  String get bulkOnboardingActionAuditNotice =>
+      'This action is audit logged and may affect tenant onboarding.';
+
+  @override
+  String get bulkOnboardingActionNoteLabel => 'Reason / note';
+
+  @override
+  String get bulkOnboardingActionOptionalNoteLabel => 'Optional note';
+
+  @override
+  String get bulkOnboardingActionNoteRequired => 'A reason is required.';
+
+  @override
+  String get bulkOnboardingActionConfirmRequired =>
+      'Explicit confirmation is required.';
+
+  @override
+  String get bulkOnboardingActionExplicitConfirm =>
+      'I confirm this sensitive processing action.';
+
+  @override
+  String get bulkOnboardingActionDismiss => 'Dismiss';
+
+  @override
+  String get bulkOnboardingActionValidateTitle => 'Validate import';
+
+  @override
+  String get bulkOnboardingActionApproveTitle => 'Approve for processing';
+
+  @override
+  String get bulkOnboardingActionRejectTitle => 'Reject import job';
+
+  @override
+  String get bulkOnboardingActionCancelTitle => 'Cancel import job';
+
+  @override
+  String get bulkOnboardingActionProcessTitle => 'Process approved import';
+
+  @override
+  String get bulkOnboardingActionValidateConfirm => 'Run validation';
+
+  @override
+  String get bulkOnboardingActionApproveConfirm => 'Approve';
+
+  @override
+  String get bulkOnboardingActionRejectConfirm => 'Reject';
+
+  @override
+  String get bulkOnboardingActionCancelConfirm => 'Cancel job';
+
+  @override
+  String get bulkOnboardingActionProcessConfirm => 'Start processing';
 }

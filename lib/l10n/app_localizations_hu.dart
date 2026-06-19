@@ -18,6 +18,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get navRegistrations => 'Regisztrációk';
 
   @override
+  String get navBulkOnboarding => 'Tömeges onboarding';
+
+  @override
   String get navSupport => 'Támogatás';
 
   @override
@@ -1322,4 +1325,332 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get backendActionUnavailable =>
       'Ez a művelet még nem érhető el ezen a backenden.';
+
+  @override
+  String get bulkOnboardingTitle => 'Tömeges onboarding';
+
+  @override
+  String get bulkOnboardingDetailTitle => 'Tömeges onboarding feladat';
+
+  @override
+  String get bulkOnboardingRowsTitle => 'Import sorok';
+
+  @override
+  String get bulkOnboardingMockDataBadge => 'Mintaadat';
+
+  @override
+  String get bulkOnboardingSearchHint =>
+      'Keresés cég, fájl vagy feladat azonosító alapján';
+
+  @override
+  String get bulkOnboardingListEmpty =>
+      'Nincs a szűrőknek megfelelő tömeges onboarding feladat.';
+
+  @override
+  String get bulkOnboardingListError =>
+      'Nem sikerült betölteni a tömeges onboarding feladatokat.';
+
+  @override
+  String get bulkOnboardingDetailError => 'Nem sikerült betölteni a feladatot.';
+
+  @override
+  String get bulkOnboardingRowsError =>
+      'Nem sikerült betölteni az import sorokat.';
+
+  @override
+  String get bulkOnboardingRowsEmpty => 'Nincs sor ezzel a szűrővel.';
+
+  @override
+  String get bulkOnboardingPrivacyNotice =>
+      'Csak metaadat. Bérlői üzemeltetési út, dokumentum és üzenet tartalom soha nem jelenik meg itt.';
+
+  @override
+  String get bulkOnboardingOpenModule => 'Tömeges onboarding megnyitása';
+
+  @override
+  String get bulkOnboardingOpenRows => 'Sorok megtekintése';
+
+  @override
+  String get bulkOnboardingNoSourceFile => 'Nincs forrásfájl név';
+
+  @override
+  String get bulkOnboardingFieldSourceFile => 'Forrásfájl';
+
+  @override
+  String get bulkOnboardingDashboardTitle => 'Tömeges onboarding';
+
+  @override
+  String get bulkOnboardingDashboardWaitingReview => 'Felülvizsgálatra vár';
+
+  @override
+  String get bulkOnboardingDashboardHighRisk => 'Magas kockázatú feladatok';
+
+  @override
+  String get bulkOnboardingDashboardInvalidRows => 'Érvénytelen sorok';
+
+  @override
+  String get bulkOnboardingDashboardProcessing => 'Feldolgozás alatt';
+
+  @override
+  String get bulkOnboardingFilterAll => 'Összes';
+
+  @override
+  String get bulkOnboardingFilterReadyForReview => 'Felülvizsgálatra kész';
+
+  @override
+  String get bulkOnboardingFilterValidationFailed => 'Validáció sikertelen';
+
+  @override
+  String get bulkOnboardingFilterProcessing => 'Feldolgozás alatt';
+
+  @override
+  String get bulkOnboardingFilterCompleted => 'Befejezett';
+
+  @override
+  String get bulkOnboardingFilterRejected => 'Elutasított';
+
+  @override
+  String get bulkOnboardingFilterHighRisk => 'Magas kockázat';
+
+  @override
+  String get bulkOnboardingStatusDraft => 'Piszkozat';
+
+  @override
+  String get bulkOnboardingStatusUploaded => 'Feltöltve';
+
+  @override
+  String get bulkOnboardingStatusValidating => 'Validálás';
+
+  @override
+  String get bulkOnboardingStatusValidationFailed => 'Validáció sikertelen';
+
+  @override
+  String get bulkOnboardingStatusReadyForReview => 'Felülvizsgálatra kész';
+
+  @override
+  String get bulkOnboardingStatusApprovedForProcessing =>
+      'Feldolgozásra jóváhagyva';
+
+  @override
+  String get bulkOnboardingStatusProcessing => 'Feldolgozás alatt';
+
+  @override
+  String get bulkOnboardingStatusPartiallyCompleted => 'Részben kész';
+
+  @override
+  String get bulkOnboardingStatusCompleted => 'Befejezve';
+
+  @override
+  String get bulkOnboardingStatusRejected => 'Elutasítva';
+
+  @override
+  String get bulkOnboardingStatusCancelled => 'Törölve';
+
+  @override
+  String get bulkOnboardingStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get bulkOnboardingRowStatusPending => 'Függőben';
+
+  @override
+  String get bulkOnboardingRowStatusValid => 'Érvényes';
+
+  @override
+  String get bulkOnboardingRowStatusWarning => 'Figyelmeztetés';
+
+  @override
+  String get bulkOnboardingRowStatusInvalid => 'Érvénytelen';
+
+  @override
+  String get bulkOnboardingRowStatusDuplicate => 'Duplikált';
+
+  @override
+  String get bulkOnboardingRowStatusApproved => 'Jóváhagyva';
+
+  @override
+  String get bulkOnboardingRowStatusSkipped => 'Kihagyva';
+
+  @override
+  String get bulkOnboardingRowStatusProcessed => 'Feldolgozva';
+
+  @override
+  String get bulkOnboardingRowStatusFailed => 'Sikertelen';
+
+  @override
+  String get bulkOnboardingRowStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get bulkOnboardingTypeCompanyUsers => 'Céges felhasználók';
+
+  @override
+  String get bulkOnboardingTypeDrivers => 'Sofőrök';
+
+  @override
+  String get bulkOnboardingTypeVehicles => 'Járművek';
+
+  @override
+  String get bulkOnboardingTypeTrailers => 'Pótkocsik';
+
+  @override
+  String get bulkOnboardingTypeMixedCompanyImport => 'Vegyes cég import';
+
+  @override
+  String get bulkOnboardingTypeUnknown => 'Ismeretlen típus';
+
+  @override
+  String get bulkOnboardingRiskLow => 'Alacsony kockázat';
+
+  @override
+  String get bulkOnboardingRiskMedium => 'Közepes kockázat';
+
+  @override
+  String get bulkOnboardingRiskHigh => 'Magas kockázat';
+
+  @override
+  String get bulkOnboardingRiskUnknown => 'Ismeretlen kockázat';
+
+  @override
+  String bulkOnboardingMetricTotalRows(String count) {
+    return 'Összes sor: $count';
+  }
+
+  @override
+  String bulkOnboardingMetricValidRows(String count) {
+    return 'Érvényes: $count';
+  }
+
+  @override
+  String bulkOnboardingMetricWarningRows(String count) {
+    return 'Figyelmeztetés: $count';
+  }
+
+  @override
+  String bulkOnboardingMetricInvalidRows(String count) {
+    return 'Érvénytelen: $count';
+  }
+
+  @override
+  String bulkOnboardingMetricDuplicateRows(String count) {
+    return 'Duplikált: $count';
+  }
+
+  @override
+  String get bulkOnboardingValidationSummaryTitle => 'Validációs összegzés';
+
+  @override
+  String get bulkOnboardingValidationErrors => 'Validációs hibák';
+
+  @override
+  String bulkOnboardingDuplicateReason(String reason) {
+    return 'Duplikált: $reason';
+  }
+
+  @override
+  String get bulkOnboardingAiReviewTitle => 'AI értékelés (tanácsadó)';
+
+  @override
+  String get bulkOnboardingAiAdvisoryNotice =>
+      'Az ajánlások csak tanácsadó jellegűek. Emberi jóváhagyás szükséges.';
+
+  @override
+  String bulkOnboardingRecommendedAction(String action) {
+    return 'Ajánlott művelet: $action';
+  }
+
+  @override
+  String get bulkOnboardingRowFilterAll => 'Összes sor';
+
+  @override
+  String get bulkOnboardingRowFilterInvalid => 'Érvénytelen';
+
+  @override
+  String get bulkOnboardingRowFilterWarning => 'Figyelmeztetések';
+
+  @override
+  String get bulkOnboardingRowFilterDuplicate => 'Duplikált';
+
+  @override
+  String get bulkOnboardingActionValidate => 'Validálás';
+
+  @override
+  String get bulkOnboardingActionApprove => 'Jóváhagyás';
+
+  @override
+  String get bulkOnboardingActionReject => 'Elutasítás';
+
+  @override
+  String get bulkOnboardingActionCancel => 'Mégse';
+
+  @override
+  String get bulkOnboardingActionProcess => 'Feldolgozás';
+
+  @override
+  String get bulkOnboardingProcessDisabled => 'Feldolgozás nem elérhető';
+
+  @override
+  String get bulkOnboardingProcessUnavailable =>
+      'A feldolgozás nem elérhető ehhez a feladathoz.';
+
+  @override
+  String get bulkOnboardingActionUnavailable =>
+      'Ez a művelet jelenleg nem elérhető.';
+
+  @override
+  String get bulkOnboardingActionSuccess =>
+      'Művelet rögzítve és audit naplózva.';
+
+  @override
+  String get bulkOnboardingActionAuditNotice =>
+      'Ez a művelet audit naplózásra kerül és befolyásolhatja a bérlő onboarding folyamatot.';
+
+  @override
+  String get bulkOnboardingActionNoteLabel => 'Indoklás / megjegyzés';
+
+  @override
+  String get bulkOnboardingActionOptionalNoteLabel => 'Opcionális megjegyzés';
+
+  @override
+  String get bulkOnboardingActionNoteRequired => 'Indoklás megadása kötelező.';
+
+  @override
+  String get bulkOnboardingActionConfirmRequired =>
+      'Kifejezett megerősítés szükséges.';
+
+  @override
+  String get bulkOnboardingActionExplicitConfirm =>
+      'Megerősítem ezt az érzékeny feldolgozási műveletet.';
+
+  @override
+  String get bulkOnboardingActionDismiss => 'Mégse';
+
+  @override
+  String get bulkOnboardingActionValidateTitle => 'Import validálása';
+
+  @override
+  String get bulkOnboardingActionApproveTitle => 'Jóváhagyás feldolgozásra';
+
+  @override
+  String get bulkOnboardingActionRejectTitle => 'Import feladat elutasítása';
+
+  @override
+  String get bulkOnboardingActionCancelTitle => 'Import feladat törlése';
+
+  @override
+  String get bulkOnboardingActionProcessTitle =>
+      'Jóváhagyott import feldolgozása';
+
+  @override
+  String get bulkOnboardingActionValidateConfirm => 'Validálás futtatása';
+
+  @override
+  String get bulkOnboardingActionApproveConfirm => 'Jóváhagyás';
+
+  @override
+  String get bulkOnboardingActionRejectConfirm => 'Elutasítás';
+
+  @override
+  String get bulkOnboardingActionCancelConfirm => 'Feladat törlése';
+
+  @override
+  String get bulkOnboardingActionProcessConfirm => 'Feldolgozás indítása';
 }

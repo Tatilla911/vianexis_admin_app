@@ -75,6 +75,13 @@ System health AI summaries are **advisory only**. The app must not offer automat
 
 `GET /platform-admin/audit-logs/:id` is read-only. Viewing audit entries is not re-audited (avoids noisy recursive audit trails).
 
+## Phase 10 — bulk onboarding control center
+
+1. **Metadata only** — job/row responses include onboarding fields only; no trip/document/message bodies.
+2. **Human approval** — process action disabled unless backend sets `processingAvailable=true` after approve.
+3. **AI advisory** — deterministic AI summary is advisory; UI shows explicit notice.
+4. **Audit** — validate/approve/reject/cancel/process actions require confirmation and are audit logged on backend.
+
 ## Release checklist
 
 - [ ] API base URL set via dart-define (no hardcoded production secrets)

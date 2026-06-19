@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'Registrations'**
   String get navRegistrations;
 
+  /// No description provided for @navBulkOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding'**
+  String get navBulkOnboarding;
+
   /// No description provided for @navSupport.
   ///
   /// In en, this message translates to:
@@ -2527,6 +2533,606 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Action not available on this backend yet.'**
   String get backendActionUnavailable;
+
+  /// No description provided for @bulkOnboardingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding'**
+  String get bulkOnboardingTitle;
+
+  /// No description provided for @bulkOnboardingDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding job'**
+  String get bulkOnboardingDetailTitle;
+
+  /// No description provided for @bulkOnboardingRowsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Import rows'**
+  String get bulkOnboardingRowsTitle;
+
+  /// No description provided for @bulkOnboardingMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get bulkOnboardingMockDataBadge;
+
+  /// No description provided for @bulkOnboardingSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by company, file, or job ID'**
+  String get bulkOnboardingSearchHint;
+
+  /// No description provided for @bulkOnboardingListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No bulk onboarding jobs match your filters.'**
+  String get bulkOnboardingListEmpty;
+
+  /// No description provided for @bulkOnboardingListError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load bulk onboarding jobs.'**
+  String get bulkOnboardingListError;
+
+  /// No description provided for @bulkOnboardingDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load bulk onboarding job.'**
+  String get bulkOnboardingDetailError;
+
+  /// No description provided for @bulkOnboardingRowsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load import rows.'**
+  String get bulkOnboardingRowsError;
+
+  /// No description provided for @bulkOnboardingRowsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No rows match this filter.'**
+  String get bulkOnboardingRowsEmpty;
+
+  /// No description provided for @bulkOnboardingPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only. Tenant operational trip, document, and message content is never shown here.'**
+  String get bulkOnboardingPrivacyNotice;
+
+  /// No description provided for @bulkOnboardingOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open bulk onboarding'**
+  String get bulkOnboardingOpenModule;
+
+  /// No description provided for @bulkOnboardingOpenRows.
+  ///
+  /// In en, this message translates to:
+  /// **'View rows'**
+  String get bulkOnboardingOpenRows;
+
+  /// No description provided for @bulkOnboardingNoSourceFile.
+  ///
+  /// In en, this message translates to:
+  /// **'No source file name'**
+  String get bulkOnboardingNoSourceFile;
+
+  /// No description provided for @bulkOnboardingFieldSourceFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Source file'**
+  String get bulkOnboardingFieldSourceFile;
+
+  /// No description provided for @bulkOnboardingDashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding'**
+  String get bulkOnboardingDashboardTitle;
+
+  /// No description provided for @bulkOnboardingDashboardWaitingReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for review'**
+  String get bulkOnboardingDashboardWaitingReview;
+
+  /// No description provided for @bulkOnboardingDashboardHighRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'High-risk jobs'**
+  String get bulkOnboardingDashboardHighRisk;
+
+  /// No description provided for @bulkOnboardingDashboardInvalidRows.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid rows'**
+  String get bulkOnboardingDashboardInvalidRows;
+
+  /// No description provided for @bulkOnboardingDashboardProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing jobs'**
+  String get bulkOnboardingDashboardProcessing;
+
+  /// No description provided for @bulkOnboardingFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get bulkOnboardingFilterAll;
+
+  /// No description provided for @bulkOnboardingFilterReadyForReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready for review'**
+  String get bulkOnboardingFilterReadyForReview;
+
+  /// No description provided for @bulkOnboardingFilterValidationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Validation failed'**
+  String get bulkOnboardingFilterValidationFailed;
+
+  /// No description provided for @bulkOnboardingFilterProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing'**
+  String get bulkOnboardingFilterProcessing;
+
+  /// No description provided for @bulkOnboardingFilterCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get bulkOnboardingFilterCompleted;
+
+  /// No description provided for @bulkOnboardingFilterRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get bulkOnboardingFilterRejected;
+
+  /// No description provided for @bulkOnboardingFilterHighRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'High risk'**
+  String get bulkOnboardingFilterHighRisk;
+
+  /// No description provided for @bulkOnboardingStatusDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get bulkOnboardingStatusDraft;
+
+  /// No description provided for @bulkOnboardingStatusUploaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploaded'**
+  String get bulkOnboardingStatusUploaded;
+
+  /// No description provided for @bulkOnboardingStatusValidating.
+  ///
+  /// In en, this message translates to:
+  /// **'Validating'**
+  String get bulkOnboardingStatusValidating;
+
+  /// No description provided for @bulkOnboardingStatusValidationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Validation failed'**
+  String get bulkOnboardingStatusValidationFailed;
+
+  /// No description provided for @bulkOnboardingStatusReadyForReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready for review'**
+  String get bulkOnboardingStatusReadyForReview;
+
+  /// No description provided for @bulkOnboardingStatusApprovedForProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved for processing'**
+  String get bulkOnboardingStatusApprovedForProcessing;
+
+  /// No description provided for @bulkOnboardingStatusProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing'**
+  String get bulkOnboardingStatusProcessing;
+
+  /// No description provided for @bulkOnboardingStatusPartiallyCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Partially completed'**
+  String get bulkOnboardingStatusPartiallyCompleted;
+
+  /// No description provided for @bulkOnboardingStatusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get bulkOnboardingStatusCompleted;
+
+  /// No description provided for @bulkOnboardingStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get bulkOnboardingStatusRejected;
+
+  /// No description provided for @bulkOnboardingStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get bulkOnboardingStatusCancelled;
+
+  /// No description provided for @bulkOnboardingStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get bulkOnboardingStatusUnknown;
+
+  /// No description provided for @bulkOnboardingRowStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get bulkOnboardingRowStatusPending;
+
+  /// No description provided for @bulkOnboardingRowStatusValid.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid'**
+  String get bulkOnboardingRowStatusValid;
+
+  /// No description provided for @bulkOnboardingRowStatusWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get bulkOnboardingRowStatusWarning;
+
+  /// No description provided for @bulkOnboardingRowStatusInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid'**
+  String get bulkOnboardingRowStatusInvalid;
+
+  /// No description provided for @bulkOnboardingRowStatusDuplicate.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get bulkOnboardingRowStatusDuplicate;
+
+  /// No description provided for @bulkOnboardingRowStatusApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get bulkOnboardingRowStatusApproved;
+
+  /// No description provided for @bulkOnboardingRowStatusSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped'**
+  String get bulkOnboardingRowStatusSkipped;
+
+  /// No description provided for @bulkOnboardingRowStatusProcessed.
+  ///
+  /// In en, this message translates to:
+  /// **'Processed'**
+  String get bulkOnboardingRowStatusProcessed;
+
+  /// No description provided for @bulkOnboardingRowStatusFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get bulkOnboardingRowStatusFailed;
+
+  /// No description provided for @bulkOnboardingRowStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get bulkOnboardingRowStatusUnknown;
+
+  /// No description provided for @bulkOnboardingTypeCompanyUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Company users'**
+  String get bulkOnboardingTypeCompanyUsers;
+
+  /// No description provided for @bulkOnboardingTypeDrivers.
+  ///
+  /// In en, this message translates to:
+  /// **'Drivers'**
+  String get bulkOnboardingTypeDrivers;
+
+  /// No description provided for @bulkOnboardingTypeVehicles.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicles'**
+  String get bulkOnboardingTypeVehicles;
+
+  /// No description provided for @bulkOnboardingTypeTrailers.
+  ///
+  /// In en, this message translates to:
+  /// **'Trailers'**
+  String get bulkOnboardingTypeTrailers;
+
+  /// No description provided for @bulkOnboardingTypeMixedCompanyImport.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixed company import'**
+  String get bulkOnboardingTypeMixedCompanyImport;
+
+  /// No description provided for @bulkOnboardingTypeUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown type'**
+  String get bulkOnboardingTypeUnknown;
+
+  /// No description provided for @bulkOnboardingRiskLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low risk'**
+  String get bulkOnboardingRiskLow;
+
+  /// No description provided for @bulkOnboardingRiskMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium risk'**
+  String get bulkOnboardingRiskMedium;
+
+  /// No description provided for @bulkOnboardingRiskHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High risk'**
+  String get bulkOnboardingRiskHigh;
+
+  /// No description provided for @bulkOnboardingRiskUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown risk'**
+  String get bulkOnboardingRiskUnknown;
+
+  /// No description provided for @bulkOnboardingMetricTotalRows.
+  ///
+  /// In en, this message translates to:
+  /// **'Total rows: {count}'**
+  String bulkOnboardingMetricTotalRows(String count);
+
+  /// No description provided for @bulkOnboardingMetricValidRows.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid: {count}'**
+  String bulkOnboardingMetricValidRows(String count);
+
+  /// No description provided for @bulkOnboardingMetricWarningRows.
+  ///
+  /// In en, this message translates to:
+  /// **'Warnings: {count}'**
+  String bulkOnboardingMetricWarningRows(String count);
+
+  /// No description provided for @bulkOnboardingMetricInvalidRows.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid: {count}'**
+  String bulkOnboardingMetricInvalidRows(String count);
+
+  /// No description provided for @bulkOnboardingMetricDuplicateRows.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicates: {count}'**
+  String bulkOnboardingMetricDuplicateRows(String count);
+
+  /// No description provided for @bulkOnboardingValidationSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Validation summary'**
+  String get bulkOnboardingValidationSummaryTitle;
+
+  /// No description provided for @bulkOnboardingValidationErrors.
+  ///
+  /// In en, this message translates to:
+  /// **'Validation errors'**
+  String get bulkOnboardingValidationErrors;
+
+  /// No description provided for @bulkOnboardingDuplicateReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate: {reason}'**
+  String bulkOnboardingDuplicateReason(String reason);
+
+  /// No description provided for @bulkOnboardingAiReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI review (advisory)'**
+  String get bulkOnboardingAiReviewTitle;
+
+  /// No description provided for @bulkOnboardingAiAdvisoryNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendations are advisory only. Human approval is required.'**
+  String get bulkOnboardingAiAdvisoryNotice;
+
+  /// No description provided for @bulkOnboardingRecommendedAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended action: {action}'**
+  String bulkOnboardingRecommendedAction(String action);
+
+  /// No description provided for @bulkOnboardingRowFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All rows'**
+  String get bulkOnboardingRowFilterAll;
+
+  /// No description provided for @bulkOnboardingRowFilterInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid'**
+  String get bulkOnboardingRowFilterInvalid;
+
+  /// No description provided for @bulkOnboardingRowFilterWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warnings'**
+  String get bulkOnboardingRowFilterWarning;
+
+  /// No description provided for @bulkOnboardingRowFilterDuplicate.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicates'**
+  String get bulkOnboardingRowFilterDuplicate;
+
+  /// No description provided for @bulkOnboardingActionValidate.
+  ///
+  /// In en, this message translates to:
+  /// **'Validate'**
+  String get bulkOnboardingActionValidate;
+
+  /// No description provided for @bulkOnboardingActionApprove.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get bulkOnboardingActionApprove;
+
+  /// No description provided for @bulkOnboardingActionReject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get bulkOnboardingActionReject;
+
+  /// No description provided for @bulkOnboardingActionCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get bulkOnboardingActionCancel;
+
+  /// No description provided for @bulkOnboardingActionProcess.
+  ///
+  /// In en, this message translates to:
+  /// **'Process'**
+  String get bulkOnboardingActionProcess;
+
+  /// No description provided for @bulkOnboardingProcessDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing unavailable'**
+  String get bulkOnboardingProcessDisabled;
+
+  /// No description provided for @bulkOnboardingProcessUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing is not available for this job.'**
+  String get bulkOnboardingProcessUnavailable;
+
+  /// No description provided for @bulkOnboardingActionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This action is unavailable right now.'**
+  String get bulkOnboardingActionUnavailable;
+
+  /// No description provided for @bulkOnboardingActionSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Action recorded and audit logged.'**
+  String get bulkOnboardingActionSuccess;
+
+  /// No description provided for @bulkOnboardingActionAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action is audit logged and may affect tenant onboarding.'**
+  String get bulkOnboardingActionAuditNotice;
+
+  /// No description provided for @bulkOnboardingActionNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason / note'**
+  String get bulkOnboardingActionNoteLabel;
+
+  /// No description provided for @bulkOnboardingActionOptionalNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional note'**
+  String get bulkOnboardingActionOptionalNoteLabel;
+
+  /// No description provided for @bulkOnboardingActionNoteRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'A reason is required.'**
+  String get bulkOnboardingActionNoteRequired;
+
+  /// No description provided for @bulkOnboardingActionConfirmRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Explicit confirmation is required.'**
+  String get bulkOnboardingActionConfirmRequired;
+
+  /// No description provided for @bulkOnboardingActionExplicitConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'I confirm this sensitive processing action.'**
+  String get bulkOnboardingActionExplicitConfirm;
+
+  /// No description provided for @bulkOnboardingActionDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get bulkOnboardingActionDismiss;
+
+  /// No description provided for @bulkOnboardingActionValidateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Validate import'**
+  String get bulkOnboardingActionValidateTitle;
+
+  /// No description provided for @bulkOnboardingActionApproveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve for processing'**
+  String get bulkOnboardingActionApproveTitle;
+
+  /// No description provided for @bulkOnboardingActionRejectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject import job'**
+  String get bulkOnboardingActionRejectTitle;
+
+  /// No description provided for @bulkOnboardingActionCancelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel import job'**
+  String get bulkOnboardingActionCancelTitle;
+
+  /// No description provided for @bulkOnboardingActionProcessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Process approved import'**
+  String get bulkOnboardingActionProcessTitle;
+
+  /// No description provided for @bulkOnboardingActionValidateConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Run validation'**
+  String get bulkOnboardingActionValidateConfirm;
+
+  /// No description provided for @bulkOnboardingActionApproveConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get bulkOnboardingActionApproveConfirm;
+
+  /// No description provided for @bulkOnboardingActionRejectConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get bulkOnboardingActionRejectConfirm;
+
+  /// No description provided for @bulkOnboardingActionCancelConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel job'**
+  String get bulkOnboardingActionCancelConfirm;
+
+  /// No description provided for @bulkOnboardingActionProcessConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Start processing'**
+  String get bulkOnboardingActionProcessConfirm;
 }
 
 class _AppLocalizationsDelegate

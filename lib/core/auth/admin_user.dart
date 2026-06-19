@@ -48,6 +48,7 @@ enum AdminRole {
 enum AdminDestination {
   dashboard,
   registrations,
+  bulkOnboarding,
   aiReviews,
   supportTickets,
   supportGrants,
@@ -72,6 +73,7 @@ extension AdminRoleCapabilities on AdminRole {
       AdminRole.onboardingReviewer => switch (destination) {
         AdminDestination.dashboard ||
         AdminDestination.registrations ||
+        AdminDestination.bulkOnboarding ||
         AdminDestination.aiReviews ||
         AdminDestination.settings => true,
         _ => false,

@@ -49,6 +49,21 @@ Role groups are defined in backend `src/access/role-groups.ts`.
 | PATCH | `/platform-admin/registration-applications/:id/reject` | detail actions |
 | PATCH | `/platform-admin/registration-applications/:id/request-info` | detail actions |
 
+### Bulk onboarding (Phase 10)
+
+| Method | Path | Screen |
+|--------|------|--------|
+| GET | `/platform-admin/bulk-onboarding/jobs` | `bulk_onboarding_jobs_screen.dart` |
+| GET | `/platform-admin/bulk-onboarding/jobs/:id` | `bulk_onboarding_job_detail_screen.dart` |
+| GET | `/platform-admin/bulk-onboarding/jobs/:id/rows` | `bulk_onboarding_rows_screen.dart` |
+| POST | `/platform-admin/bulk-onboarding/jobs/:id/validate` | detail actions |
+| PATCH | `/platform-admin/bulk-onboarding/jobs/:id/approve` | detail actions |
+| PATCH | `/platform-admin/bulk-onboarding/jobs/:id/reject` | detail actions |
+| PATCH | `/platform-admin/bulk-onboarding/jobs/:id/cancel` | detail actions |
+| POST | `/platform-admin/bulk-onboarding/jobs/:id/process` | detail actions (requires `confirm=true`) |
+
+Roles: list/detail read for `super_admin`, `onboarding_reviewer`, `support_admin`; write actions for `super_admin` + `onboarding_reviewer` only.
+
 ### Support
 
 | Method | Path | Screen |
@@ -99,6 +114,7 @@ Role groups are defined in backend `src/access/role-groups.ts`.
 | **Next** | `dio` client + auth API + secure token restore |
 | **Then** | Dashboard + registration queue |
 | **Then** | Support, health, audit |
+| **Phase 10** | Bulk onboarding jobs list/detail/rows, validation workflow, dashboard summary |
 | **Then** | Search, billing, company detail |
 
 ## Error handling

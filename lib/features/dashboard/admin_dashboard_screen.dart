@@ -3,9 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/app_router.dart';
+import '../../core/auth/admin_auth_state.dart';
+import '../../core/auth/admin_user.dart';
 import '../../core/localization/localization_resolver.dart';
 import '../../features/audit_logs/presentation/audit_log_providers.dart';
 import '../../features/audit_logs/presentation/widgets/audit_log_card.dart';
+import '../../features/bulk_onboarding/presentation/bulk_onboarding_providers.dart';
+import '../../features/bulk_onboarding/presentation/widgets/bulk_onboarding_summary_card.dart';
 import '../../features/support/presentation/support_providers.dart';
 import '../../features/support/presentation/widgets/support_summary_card.dart';
 import '../../features/system_health/presentation/system_health_providers.dart';
@@ -21,6 +25,10 @@ class AdminDashboardScreen extends ConsumerWidget {
     final healthAsync = ref.watch(systemHealthSnapshotProvider);
     final supportAsync = ref.watch(supportSummaryProvider);
     final auditAsync = ref.watch(platformAuditLogSummaryProvider);
+    final bulkAsync = ref.watch(bulkOnboardingSummaryProvider);
+    final user = ref.watch(adminAuthProvider).user;
+    final showBulkOnboarding =
+        user?.canAccess(AdminDestination.bulkOnboarding) ?? false;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.dashboardTitle)),
@@ -85,6 +93,36 @@ class AdminDashboardScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 16),
+          if (showBulkOnboarding)
+            bulkAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => Card(
+                child: ListTile(
+                  title: Text(
+                    resolveBulkOnboardingKey(context, 'bulkOnboardingListError'),
+                  ),
+                  trailing: TextButton(
+                    onPressed: () =>
+                        ref.read(bulkOnboardingSummaryProvider.notifier).refresh(),
+                    child: Text(l10n.errorRetryButton),
+                  ),
+                ),
+              ),
+              data: (summary) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  BulkOnboardingSummaryCard(summary: summary, compact: true),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: () => context.go(AdminRoutes.bulkOnboarding),
+                    child: Text(
+                      resolveBulkOnboardingKey(context, 'bulkOnboardingOpenModule'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          if (showBulkOnboarding) const SizedBox(height: 16),
           auditAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, _) => Card(

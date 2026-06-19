@@ -80,4 +80,28 @@ void main() {
       );
     });
   });
+
+  group('AdminRole bulk onboarding access', () {
+    test('super_admin and onboarding_reviewer can access bulk onboarding', () {
+      expect(
+        AdminRole.superAdmin.canAccess(AdminDestination.bulkOnboarding),
+        isTrue,
+      );
+      expect(
+        AdminRole.onboardingReviewer.canAccess(AdminDestination.bulkOnboarding),
+        isTrue,
+      );
+    });
+
+    test('support_admin and billing_admin cannot access bulk onboarding', () {
+      expect(
+        AdminRole.supportAdmin.canAccess(AdminDestination.bulkOnboarding),
+        isFalse,
+      );
+      expect(
+        AdminRole.billingAdmin.canAccess(AdminDestination.bulkOnboarding),
+        isFalse,
+      );
+    });
+  });
 }
