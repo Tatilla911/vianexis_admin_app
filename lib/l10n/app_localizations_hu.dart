@@ -1078,4 +1078,224 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get supportTicketActionCloseConfirm => 'Lezárás';
+
+  @override
+  String get auditLogLoadError => 'Az audit naplók betöltése sikertelen.';
+
+  @override
+  String get auditLogMockDataBadge => 'Mintaadat';
+
+  @override
+  String get auditLogOpenModule => 'Audit naplók megnyitása';
+
+  @override
+  String get auditLogSearchHint =>
+      'Keresés színész e-mail, cég, cél azonosító vagy korreláció alapján';
+
+  @override
+  String get auditLogListEmpty =>
+      'Nincs a szűrőnek megfelelő audit napló bejegyzés.';
+
+  @override
+  String get auditLogDateRangeComingSoon => 'Dátumtartomány szűrő (hamarosan)';
+
+  @override
+  String auditLogTimestampLabel(String date) {
+    return '$date';
+  }
+
+  @override
+  String get auditLogDetailTitle => 'Audit napló bejegyzés';
+
+  @override
+  String get auditLogPrivacyNotice =>
+      'Csak metaadat — bérlői fuvar-, dokumentum- vagy üzenettartalom nem jelenik meg.';
+
+  @override
+  String get auditLogExportDisabled => 'Audit napló exportálása (hamarosan)';
+
+  @override
+  String get auditLogSummaryTitle => 'Legutóbbi audit tevékenység';
+
+  @override
+  String get auditLogSummaryLastCritical => 'Utolsó kritikus esemény';
+
+  @override
+  String get auditLogSummaryNoCritical => 'Nincs kritikus esemény';
+
+  @override
+  String get auditLogSummaryFailedDenied => 'Sikertelen / megtagadott';
+
+  @override
+  String get auditLogSummaryRecentActions => 'Legutóbbi platform műveletek';
+
+  @override
+  String auditLogSummaryLastUpdated(String date) {
+    return 'Utolsó frissítés: $date';
+  }
+
+  @override
+  String get auditLogFilterAll => 'Összes';
+
+  @override
+  String get auditLogFilterCritical => 'Kritikus';
+
+  @override
+  String get auditLogFilterWarning => 'Figyelmeztetés';
+
+  @override
+  String get auditLogFilterFailures => 'Sikertelen';
+
+  @override
+  String get auditLogFilterDenied => 'Megtagadott';
+
+  @override
+  String get auditLogFilterRegistration => 'Regisztráció';
+
+  @override
+  String get auditLogFilterSupportAccess => 'Támogatási hozzáférés';
+
+  @override
+  String get auditLogFilterSystemHealth => 'Rendszerállapot';
+
+  @override
+  String get auditLogFilterSecurity => 'Biztonság';
+
+  @override
+  String get auditLogResultSuccess => 'Sikeres';
+
+  @override
+  String get auditLogResultFailure => 'Sikertelen';
+
+  @override
+  String get auditLogResultDenied => 'Megtagadva';
+
+  @override
+  String get auditLogResultPartial => 'Részleges';
+
+  @override
+  String get auditLogResultUnknown => 'Ismeretlen';
+
+  @override
+  String get auditLogSeverityInfo => 'Információ';
+
+  @override
+  String get auditLogSeverityWarning => 'Figyelmeztetés';
+
+  @override
+  String get auditLogSeverityCritical => 'Kritikus';
+
+  @override
+  String get auditLogSeverityUnknown => 'Ismeretlen';
+
+  @override
+  String get auditLogActionLogin => 'Bejelentkezés';
+
+  @override
+  String get auditLogActionLogout => 'Kijelentkezés';
+
+  @override
+  String get auditLogActionLoginFailed => 'Sikertelen bejelentkezés';
+
+  @override
+  String get auditLogActionRegistrationApproved => 'Regisztráció jóváhagyva';
+
+  @override
+  String get auditLogActionRegistrationRejected => 'Regisztráció elutasítva';
+
+  @override
+  String get auditLogActionRegistrationInfoRequested =>
+      'Regisztrációs info kérve';
+
+  @override
+  String get auditLogActionSupportTicketAcknowledged =>
+      'Támogatási jegy nyugtázva';
+
+  @override
+  String get auditLogActionSupportTicketClosed => 'Támogatási jegy lezárva';
+
+  @override
+  String get auditLogActionSupportAccessGranted =>
+      'Támogatási hozzáférés engedélyezve';
+
+  @override
+  String get auditLogActionSupportAccessRevoked =>
+      'Támogatási hozzáférés visszavonva';
+
+  @override
+  String get auditLogActionSystemHealthAcknowledged =>
+      'Rendszerállapot nyugtázva';
+
+  @override
+  String get auditLogActionSystemHealthEscalated =>
+      'Rendszerállapot eszkalálva';
+
+  @override
+  String get auditLogActionBillingUpdated => 'Számlázás frissítve';
+
+  @override
+  String get auditLogActionRoleChanged => 'Szerepkör módosítva';
+
+  @override
+  String get auditLogActionPermissionDenied => 'Engedély megtagadva';
+
+  @override
+  String get auditLogActionExportRequested => 'Export kérve';
+
+  @override
+  String get auditLogActionApiKeyCreated => 'API kulcs létrehozva';
+
+  @override
+  String get auditLogActionApiKeyRevoked => 'API kulcs visszavonva';
+
+  @override
+  String get auditLogActionUnknown => 'Ismeretlen művelet';
+
+  @override
+  String get auditLogFieldTimestamp => 'Időbélyeg';
+
+  @override
+  String get auditLogFieldActor => 'Színész';
+
+  @override
+  String get auditLogFieldActorRole => 'Színész szerepkör';
+
+  @override
+  String get auditLogFieldTargetType => 'Cél típusa';
+
+  @override
+  String get auditLogFieldTargetId => 'Cél azonosító';
+
+  @override
+  String get auditLogFieldCompany => 'Cég';
+
+  @override
+  String get auditLogFieldTenantId => 'Bérlő azonosító';
+
+  @override
+  String get auditLogFieldReason => 'Indoklás';
+
+  @override
+  String get auditLogFieldNote => 'Megjegyzés';
+
+  @override
+  String get auditLogFieldIpAddress => 'IP cím';
+
+  @override
+  String get auditLogFieldDeviceLabel => 'Eszköz';
+
+  @override
+  String get auditLogFieldCorrelationId => 'Korrelációs azonosító';
+
+  @override
+  String get auditLogFieldRegistrationApplicationId =>
+      'Regisztrációs kérelem azonosító';
+
+  @override
+  String get auditLogFieldSupportAccessGrantId =>
+      'Támogatási hozzáférési engedély azonosító';
+
+  @override
+  String get auditLogFieldSystemHealthEventId =>
+      'Rendszerállapot esemény azonosító';
 }

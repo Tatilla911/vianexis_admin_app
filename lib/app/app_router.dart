@@ -6,7 +6,8 @@ import '../core/auth/admin_auth_state.dart';
 import '../core/auth/admin_user.dart';
 import '../core/widgets/vianexis_admin_scaffold.dart';
 import '../features/ai_reviews/ai_review_summary_screen.dart';
-import '../features/audit_logs/audit_logs_screen.dart';
+import '../features/audit_logs/presentation/audit_log_detail_screen.dart';
+import '../features/audit_logs/presentation/audit_logs_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/registrations/presentation/registration_application_detail_screen.dart';
@@ -146,6 +147,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: AuditLogsScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => AuditLogDetailScreen(
+                  logId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: AdminRoutes.settings,
@@ -178,6 +187,8 @@ abstract final class AdminRoutes {
 
   static String supportGrantDetail(String id) => '$supportGrants/$id';
 
+  static String auditLogDetail(String id) => '$auditLogs/$id';
+
   static AdminDestination? destinationForLocation(String location) {
     if (location.startsWith(registrations)) {
       return AdminDestination.registrations;
@@ -187,6 +198,9 @@ abstract final class AdminRoutes {
     }
     if (location.startsWith(supportGrants)) {
       return AdminDestination.supportGrants;
+    }
+    if (location.startsWith(auditLogs)) {
+      return AdminDestination.auditLogs;
     }
     return switch (location) {
       dashboard => AdminDestination.dashboard,

@@ -1061,4 +1061,218 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get supportTicketActionCloseConfirm => 'Close';
+
+  @override
+  String get auditLogLoadError => 'Could not load audit logs.';
+
+  @override
+  String get auditLogMockDataBadge => 'Mock data';
+
+  @override
+  String get auditLogOpenModule => 'Open audit logs';
+
+  @override
+  String get auditLogSearchHint =>
+      'Search actor email, company, target id, or correlation id';
+
+  @override
+  String get auditLogListEmpty => 'No audit logs match your filters.';
+
+  @override
+  String get auditLogDateRangeComingSoon => 'Date range filter (coming soon)';
+
+  @override
+  String auditLogTimestampLabel(String date) {
+    return '$date';
+  }
+
+  @override
+  String get auditLogDetailTitle => 'Audit log entry';
+
+  @override
+  String get auditLogPrivacyNotice =>
+      'Metadata only — no tenant operational trip, document, or message content is shown.';
+
+  @override
+  String get auditLogExportDisabled => 'Export audit log (coming soon)';
+
+  @override
+  String get auditLogSummaryTitle => 'Recent audit activity';
+
+  @override
+  String get auditLogSummaryLastCritical => 'Last critical event';
+
+  @override
+  String get auditLogSummaryNoCritical => 'No critical events';
+
+  @override
+  String get auditLogSummaryFailedDenied => 'Failed / denied';
+
+  @override
+  String get auditLogSummaryRecentActions => 'Recent platform actions';
+
+  @override
+  String auditLogSummaryLastUpdated(String date) {
+    return 'Last updated $date';
+  }
+
+  @override
+  String get auditLogFilterAll => 'All';
+
+  @override
+  String get auditLogFilterCritical => 'Critical';
+
+  @override
+  String get auditLogFilterWarning => 'Warning';
+
+  @override
+  String get auditLogFilterFailures => 'Failures';
+
+  @override
+  String get auditLogFilterDenied => 'Denied';
+
+  @override
+  String get auditLogFilterRegistration => 'Registration';
+
+  @override
+  String get auditLogFilterSupportAccess => 'Support access';
+
+  @override
+  String get auditLogFilterSystemHealth => 'System health';
+
+  @override
+  String get auditLogFilterSecurity => 'Security';
+
+  @override
+  String get auditLogResultSuccess => 'Success';
+
+  @override
+  String get auditLogResultFailure => 'Failure';
+
+  @override
+  String get auditLogResultDenied => 'Denied';
+
+  @override
+  String get auditLogResultPartial => 'Partial';
+
+  @override
+  String get auditLogResultUnknown => 'Unknown';
+
+  @override
+  String get auditLogSeverityInfo => 'Info';
+
+  @override
+  String get auditLogSeverityWarning => 'Warning';
+
+  @override
+  String get auditLogSeverityCritical => 'Critical';
+
+  @override
+  String get auditLogSeverityUnknown => 'Unknown';
+
+  @override
+  String get auditLogActionLogin => 'Login';
+
+  @override
+  String get auditLogActionLogout => 'Logout';
+
+  @override
+  String get auditLogActionLoginFailed => 'Login failed';
+
+  @override
+  String get auditLogActionRegistrationApproved => 'Registration approved';
+
+  @override
+  String get auditLogActionRegistrationRejected => 'Registration rejected';
+
+  @override
+  String get auditLogActionRegistrationInfoRequested =>
+      'Registration info requested';
+
+  @override
+  String get auditLogActionSupportTicketAcknowledged =>
+      'Support ticket acknowledged';
+
+  @override
+  String get auditLogActionSupportTicketClosed => 'Support ticket closed';
+
+  @override
+  String get auditLogActionSupportAccessGranted => 'Support access granted';
+
+  @override
+  String get auditLogActionSupportAccessRevoked => 'Support access revoked';
+
+  @override
+  String get auditLogActionSystemHealthAcknowledged =>
+      'System health acknowledged';
+
+  @override
+  String get auditLogActionSystemHealthEscalated => 'System health escalated';
+
+  @override
+  String get auditLogActionBillingUpdated => 'Billing updated';
+
+  @override
+  String get auditLogActionRoleChanged => 'Role changed';
+
+  @override
+  String get auditLogActionPermissionDenied => 'Permission denied';
+
+  @override
+  String get auditLogActionExportRequested => 'Export requested';
+
+  @override
+  String get auditLogActionApiKeyCreated => 'API key created';
+
+  @override
+  String get auditLogActionApiKeyRevoked => 'API key revoked';
+
+  @override
+  String get auditLogActionUnknown => 'Unknown action';
+
+  @override
+  String get auditLogFieldTimestamp => 'Timestamp';
+
+  @override
+  String get auditLogFieldActor => 'Actor';
+
+  @override
+  String get auditLogFieldActorRole => 'Actor role';
+
+  @override
+  String get auditLogFieldTargetType => 'Target type';
+
+  @override
+  String get auditLogFieldTargetId => 'Target ID';
+
+  @override
+  String get auditLogFieldCompany => 'Company';
+
+  @override
+  String get auditLogFieldTenantId => 'Tenant ID';
+
+  @override
+  String get auditLogFieldReason => 'Reason';
+
+  @override
+  String get auditLogFieldNote => 'Note';
+
+  @override
+  String get auditLogFieldIpAddress => 'IP address';
+
+  @override
+  String get auditLogFieldDeviceLabel => 'Device';
+
+  @override
+  String get auditLogFieldCorrelationId => 'Correlation ID';
+
+  @override
+  String get auditLogFieldRegistrationApplicationId =>
+      'Registration application ID';
+
+  @override
+  String get auditLogFieldSupportAccessGrantId => 'Support access grant ID';
+
+  @override
+  String get auditLogFieldSystemHealthEventId => 'System health event ID';
 }

@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/app_router.dart';
 import '../../core/localization/localization_resolver.dart';
+import '../../features/audit_logs/presentation/audit_log_providers.dart';
+import '../../features/audit_logs/presentation/widgets/audit_log_card.dart';
 import '../../features/support/presentation/support_providers.dart';
 import '../../features/support/presentation/widgets/support_summary_card.dart';
 import '../../features/system_health/presentation/system_health_providers.dart';
@@ -18,6 +20,7 @@ class AdminDashboardScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final healthAsync = ref.watch(systemHealthSnapshotProvider);
     final supportAsync = ref.watch(supportSummaryProvider);
+    final auditAsync = ref.watch(platformAuditLogSummaryProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.dashboardTitle)),
@@ -77,6 +80,31 @@ class AdminDashboardScreen extends ConsumerWidget {
                 OutlinedButton(
                   onPressed: () => context.go(AdminRoutes.supportTickets),
                   child: Text(resolveSupportKey(context, 'supportOpenModule')),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          auditAsync.when(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, _) => Card(
+              child: ListTile(
+                title: Text(resolveAuditLogKey(context, 'auditLogLoadError')),
+                trailing: TextButton(
+                  onPressed: () =>
+                      ref.read(platformAuditLogSummaryProvider.notifier).refresh(),
+                  child: Text(l10n.errorRetryButton),
+                ),
+              ),
+            ),
+            data: (summary) => Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AuditLogSummaryCard(summary: summary, compact: true),
+                const SizedBox(height: 12),
+                OutlinedButton(
+                  onPressed: () => context.go(AdminRoutes.auditLogs),
+                  child: Text(resolveAuditLogKey(context, 'auditLogOpenModule')),
                 ),
               ],
             ),

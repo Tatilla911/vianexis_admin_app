@@ -27,4 +27,6 @@ abstract final class LocalizationKeys {
   static const supportLoadError = 'supportLoadError';
   static const supportActionUnavailable = 'supportActionUnavailable';
   static const supportActionError = 'supportActionError';
+
+  static const auditLogLoadError = 'auditLogLoadError';
 }

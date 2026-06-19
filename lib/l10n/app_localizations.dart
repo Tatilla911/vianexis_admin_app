@@ -2077,6 +2077,414 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get supportTicketActionCloseConfirm;
+
+  /// No description provided for @auditLogLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load audit logs.'**
+  String get auditLogLoadError;
+
+  /// No description provided for @auditLogMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get auditLogMockDataBadge;
+
+  /// No description provided for @auditLogOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open audit logs'**
+  String get auditLogOpenModule;
+
+  /// No description provided for @auditLogSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search actor email, company, target id, or correlation id'**
+  String get auditLogSearchHint;
+
+  /// No description provided for @auditLogListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No audit logs match your filters.'**
+  String get auditLogListEmpty;
+
+  /// No description provided for @auditLogDateRangeComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Date range filter (coming soon)'**
+  String get auditLogDateRangeComingSoon;
+
+  /// No description provided for @auditLogTimestampLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}'**
+  String auditLogTimestampLabel(String date);
+
+  /// No description provided for @auditLogDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit log entry'**
+  String get auditLogDetailTitle;
+
+  /// No description provided for @auditLogPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only — no tenant operational trip, document, or message content is shown.'**
+  String get auditLogPrivacyNotice;
+
+  /// No description provided for @auditLogExportDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Export audit log (coming soon)'**
+  String get auditLogExportDisabled;
+
+  /// No description provided for @auditLogSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent audit activity'**
+  String get auditLogSummaryTitle;
+
+  /// No description provided for @auditLogSummaryLastCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Last critical event'**
+  String get auditLogSummaryLastCritical;
+
+  /// No description provided for @auditLogSummaryNoCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'No critical events'**
+  String get auditLogSummaryNoCritical;
+
+  /// No description provided for @auditLogSummaryFailedDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed / denied'**
+  String get auditLogSummaryFailedDenied;
+
+  /// No description provided for @auditLogSummaryRecentActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent platform actions'**
+  String get auditLogSummaryRecentActions;
+
+  /// No description provided for @auditLogSummaryLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated {date}'**
+  String auditLogSummaryLastUpdated(String date);
+
+  /// No description provided for @auditLogFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get auditLogFilterAll;
+
+  /// No description provided for @auditLogFilterCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get auditLogFilterCritical;
+
+  /// No description provided for @auditLogFilterWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get auditLogFilterWarning;
+
+  /// No description provided for @auditLogFilterFailures.
+  ///
+  /// In en, this message translates to:
+  /// **'Failures'**
+  String get auditLogFilterFailures;
+
+  /// No description provided for @auditLogFilterDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Denied'**
+  String get auditLogFilterDenied;
+
+  /// No description provided for @auditLogFilterRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration'**
+  String get auditLogFilterRegistration;
+
+  /// No description provided for @auditLogFilterSupportAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access'**
+  String get auditLogFilterSupportAccess;
+
+  /// No description provided for @auditLogFilterSystemHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'System health'**
+  String get auditLogFilterSystemHealth;
+
+  /// No description provided for @auditLogFilterSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get auditLogFilterSecurity;
+
+  /// No description provided for @auditLogResultSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get auditLogResultSuccess;
+
+  /// No description provided for @auditLogResultFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Failure'**
+  String get auditLogResultFailure;
+
+  /// No description provided for @auditLogResultDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Denied'**
+  String get auditLogResultDenied;
+
+  /// No description provided for @auditLogResultPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partial'**
+  String get auditLogResultPartial;
+
+  /// No description provided for @auditLogResultUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get auditLogResultUnknown;
+
+  /// No description provided for @auditLogSeverityInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Info'**
+  String get auditLogSeverityInfo;
+
+  /// No description provided for @auditLogSeverityWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get auditLogSeverityWarning;
+
+  /// No description provided for @auditLogSeverityCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get auditLogSeverityCritical;
+
+  /// No description provided for @auditLogSeverityUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get auditLogSeverityUnknown;
+
+  /// No description provided for @auditLogActionLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get auditLogActionLogin;
+
+  /// No description provided for @auditLogActionLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get auditLogActionLogout;
+
+  /// No description provided for @auditLogActionLoginFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed'**
+  String get auditLogActionLoginFailed;
+
+  /// No description provided for @auditLogActionRegistrationApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration approved'**
+  String get auditLogActionRegistrationApproved;
+
+  /// No description provided for @auditLogActionRegistrationRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration rejected'**
+  String get auditLogActionRegistrationRejected;
+
+  /// No description provided for @auditLogActionRegistrationInfoRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration info requested'**
+  String get auditLogActionRegistrationInfoRequested;
+
+  /// No description provided for @auditLogActionSupportTicketAcknowledged.
+  ///
+  /// In en, this message translates to:
+  /// **'Support ticket acknowledged'**
+  String get auditLogActionSupportTicketAcknowledged;
+
+  /// No description provided for @auditLogActionSupportTicketClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Support ticket closed'**
+  String get auditLogActionSupportTicketClosed;
+
+  /// No description provided for @auditLogActionSupportAccessGranted.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access granted'**
+  String get auditLogActionSupportAccessGranted;
+
+  /// No description provided for @auditLogActionSupportAccessRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access revoked'**
+  String get auditLogActionSupportAccessRevoked;
+
+  /// No description provided for @auditLogActionSystemHealthAcknowledged.
+  ///
+  /// In en, this message translates to:
+  /// **'System health acknowledged'**
+  String get auditLogActionSystemHealthAcknowledged;
+
+  /// No description provided for @auditLogActionSystemHealthEscalated.
+  ///
+  /// In en, this message translates to:
+  /// **'System health escalated'**
+  String get auditLogActionSystemHealthEscalated;
+
+  /// No description provided for @auditLogActionBillingUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing updated'**
+  String get auditLogActionBillingUpdated;
+
+  /// No description provided for @auditLogActionRoleChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Role changed'**
+  String get auditLogActionRoleChanged;
+
+  /// No description provided for @auditLogActionPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied'**
+  String get auditLogActionPermissionDenied;
+
+  /// No description provided for @auditLogActionExportRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Export requested'**
+  String get auditLogActionExportRequested;
+
+  /// No description provided for @auditLogActionApiKeyCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'API key created'**
+  String get auditLogActionApiKeyCreated;
+
+  /// No description provided for @auditLogActionApiKeyRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'API key revoked'**
+  String get auditLogActionApiKeyRevoked;
+
+  /// No description provided for @auditLogActionUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown action'**
+  String get auditLogActionUnknown;
+
+  /// No description provided for @auditLogFieldTimestamp.
+  ///
+  /// In en, this message translates to:
+  /// **'Timestamp'**
+  String get auditLogFieldTimestamp;
+
+  /// No description provided for @auditLogFieldActor.
+  ///
+  /// In en, this message translates to:
+  /// **'Actor'**
+  String get auditLogFieldActor;
+
+  /// No description provided for @auditLogFieldActorRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Actor role'**
+  String get auditLogFieldActorRole;
+
+  /// No description provided for @auditLogFieldTargetType.
+  ///
+  /// In en, this message translates to:
+  /// **'Target type'**
+  String get auditLogFieldTargetType;
+
+  /// No description provided for @auditLogFieldTargetId.
+  ///
+  /// In en, this message translates to:
+  /// **'Target ID'**
+  String get auditLogFieldTargetId;
+
+  /// No description provided for @auditLogFieldCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get auditLogFieldCompany;
+
+  /// No description provided for @auditLogFieldTenantId.
+  ///
+  /// In en, this message translates to:
+  /// **'Tenant ID'**
+  String get auditLogFieldTenantId;
+
+  /// No description provided for @auditLogFieldReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get auditLogFieldReason;
+
+  /// No description provided for @auditLogFieldNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get auditLogFieldNote;
+
+  /// No description provided for @auditLogFieldIpAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'IP address'**
+  String get auditLogFieldIpAddress;
+
+  /// No description provided for @auditLogFieldDeviceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Device'**
+  String get auditLogFieldDeviceLabel;
+
+  /// No description provided for @auditLogFieldCorrelationId.
+  ///
+  /// In en, this message translates to:
+  /// **'Correlation ID'**
+  String get auditLogFieldCorrelationId;
+
+  /// No description provided for @auditLogFieldRegistrationApplicationId.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration application ID'**
+  String get auditLogFieldRegistrationApplicationId;
+
+  /// No description provided for @auditLogFieldSupportAccessGrantId.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access grant ID'**
+  String get auditLogFieldSupportAccessGrantId;
+
+  /// No description provided for @auditLogFieldSystemHealthEventId.
+  ///
+  /// In en, this message translates to:
+  /// **'System health event ID'**
+  String get auditLogFieldSystemHealthEventId;
 }
 
 class _AppLocalizationsDelegate
