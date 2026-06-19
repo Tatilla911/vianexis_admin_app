@@ -667,4 +667,415 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get systemHealthFieldCorrelationId => 'Korrelációs azonosító';
+
+  @override
+  String get systemHealthCreateTicket => 'Támogatási jegy létrehozása';
+
+  @override
+  String get supportLoadError => 'A támogatási adatok betöltése sikertelen.';
+
+  @override
+  String get supportActionUnavailable =>
+      'Ez a támogatási művelet még nem érhető el a csatlakoztatott backenden.';
+
+  @override
+  String get supportActionError => 'A támogatási művelet mentése sikertelen.';
+
+  @override
+  String get supportActionSuccess => 'A támogatási művelet mentve.';
+
+  @override
+  String get supportMockDataBadge => 'Mintaadat';
+
+  @override
+  String get supportOpenModule => 'Támogatás modul megnyitása';
+
+  @override
+  String get supportPrivacyNotice =>
+      'Csak metaadat — bérlői fuvar-, dokumentum- vagy üzenettartalom alapértelmezetten nem jelenik meg.';
+
+  @override
+  String get supportActionAuditNotice =>
+      'A művelet a platform audit naplóban rögzítésre kerül.';
+
+  @override
+  String get supportActionNoteLabel => 'Megjegyzés';
+
+  @override
+  String get supportActionNoteRequired => 'Legalább 3 karakter szükséges.';
+
+  @override
+  String get supportActionCancel => 'Mégse';
+
+  @override
+  String get supportTicketSearchHint =>
+      'Keresés cég, cím vagy kérelmező e-mail alapján';
+
+  @override
+  String get supportTicketListEmpty =>
+      'Nincs a szűrőnek megfelelő támogatási jegy.';
+
+  @override
+  String supportTicketLastActivity(String date) {
+    return 'Utolsó aktivitás: $date';
+  }
+
+  @override
+  String get supportTicketDetailTitle => 'Támogatási jegy';
+
+  @override
+  String get supportGrantDetailTitle => 'Támogatási hozzáférési engedély';
+
+  @override
+  String get supportGrantSearchHint =>
+      'Keresés cég, hatókör azonosító vagy kérelmező alapján';
+
+  @override
+  String get supportGrantListEmpty =>
+      'Nincs a szűrőnek megfelelő támogatási hozzáférési engedély.';
+
+  @override
+  String supportGrantScopeIdLabel(String id) {
+    return 'Hatókör azonosító: $id';
+  }
+
+  @override
+  String supportGrantExpiresAt(String date) {
+    return 'Lejár: $date';
+  }
+
+  @override
+  String get supportSummaryTitle => 'Támogatás áttekintés';
+
+  @override
+  String get supportSummaryOpenTickets => 'Nyitott jegyek';
+
+  @override
+  String get supportSummaryUrgentCritical => 'Sürgős / kritikus';
+
+  @override
+  String get supportSummaryActiveGrants => 'Aktív engedélyek';
+
+  @override
+  String supportSummaryLastUpdated(String date) {
+    return 'Utolsó frissítés: $date';
+  }
+
+  @override
+  String get supportTicketCreateSuccess => 'Támogatási jegy létrehozva.';
+
+  @override
+  String get supportTicketFilterAll => 'Összes';
+
+  @override
+  String get supportTicketFilterOpen => 'Nyitott';
+
+  @override
+  String get supportTicketFilterUrgent => 'Sürgős';
+
+  @override
+  String get supportTicketFilterCritical => 'Kritikus';
+
+  @override
+  String get supportTicketFilterSystemHealth => 'Rendszerállapot';
+
+  @override
+  String get supportTicketFilterWaitingForCustomer => 'Ügyfélre vár';
+
+  @override
+  String get supportTicketFilterResolved => 'Megoldott';
+
+  @override
+  String get supportGrantFilterAll => 'Összes';
+
+  @override
+  String get supportGrantFilterPending => 'Függőben';
+
+  @override
+  String get supportGrantFilterActive => 'Aktív';
+
+  @override
+  String get supportGrantFilterExpired => 'Lejárt';
+
+  @override
+  String get supportGrantFilterRevoked => 'Visszavonva';
+
+  @override
+  String get supportTicketStatusOpen => 'Nyitott';
+
+  @override
+  String get supportTicketStatusAcknowledged => 'Nyugtázott';
+
+  @override
+  String get supportTicketStatusInvestigating => 'Vizsgálat alatt';
+
+  @override
+  String get supportTicketStatusWaitingForCustomer => 'Ügyfélre vár';
+
+  @override
+  String get supportTicketStatusResolved => 'Megoldott';
+
+  @override
+  String get supportTicketStatusClosed => 'Lezárva';
+
+  @override
+  String get supportTicketStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get supportTicketPriorityLow => 'Alacsony';
+
+  @override
+  String get supportTicketPriorityNormal => 'Normál';
+
+  @override
+  String get supportTicketPriorityHigh => 'Magas';
+
+  @override
+  String get supportTicketPriorityUrgent => 'Sürgős';
+
+  @override
+  String get supportTicketPriorityCritical => 'Kritikus';
+
+  @override
+  String get supportTicketPriorityUnknown => 'Ismeretlen';
+
+  @override
+  String get supportTicketCategoryRegistration => 'Regisztráció';
+
+  @override
+  String get supportTicketCategorySystemHealth => 'Rendszerállapot';
+
+  @override
+  String get supportTicketCategoryUploadIssue => 'Feltöltési probléma';
+
+  @override
+  String get supportTicketCategoryBilling => 'Számlázás';
+
+  @override
+  String get supportTicketCategoryAccess => 'Hozzáférés';
+
+  @override
+  String get supportTicketCategoryIntegration => 'Integráció';
+
+  @override
+  String get supportTicketCategoryOther => 'Egyéb';
+
+  @override
+  String get supportTicketCategoryUnknown => 'Ismeretlen';
+
+  @override
+  String get supportGrantStatusPending => 'Függőben';
+
+  @override
+  String get supportGrantStatusActive => 'Aktív';
+
+  @override
+  String get supportGrantStatusExpired => 'Lejárt';
+
+  @override
+  String get supportGrantStatusRevoked => 'Visszavonva';
+
+  @override
+  String get supportGrantStatusDenied => 'Elutasítva';
+
+  @override
+  String get supportGrantStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get supportScopeCompanyMetadata => 'Cég metaadat';
+
+  @override
+  String get supportScopeSpecificTrip => 'Konkrét fuvar';
+
+  @override
+  String get supportScopeSpecificDocumentIssue => 'Konkrét dokumentum probléma';
+
+  @override
+  String get supportScopeUploadQueueIssue => 'Feltöltési várólista probléma';
+
+  @override
+  String get supportScopeSystemHealthIssue => 'Rendszerállapot probléma';
+
+  @override
+  String get supportScopeIntegrationIssue => 'Integrációs probléma';
+
+  @override
+  String get supportScopeBillingIssue => 'Számlázási probléma';
+
+  @override
+  String get supportScopeUnknown => 'Ismeretlen hatókör';
+
+  @override
+  String get supportGrantWarningTitle =>
+      'Hatókör szerinti támogatási hozzáférés';
+
+  @override
+  String get supportGrantWarningBody =>
+      'Az engedélyek ideiglenesek, hatókör szerintiek és auditáltak. Nincs széles körű korlátlan bérlői hozzáférés.';
+
+  @override
+  String get supportGrantAuditNotice =>
+      'Ez ideiglenes, hatókör szerinti támogatási hozzáférést ad és audit naplózásra kerül.';
+
+  @override
+  String get supportGrantCreateTitle =>
+      'Támogatási hozzáférési engedély létrehozása';
+
+  @override
+  String get supportGrantCreateWarning =>
+      'Ez ideiglenes, hatókör szerinti támogatási hozzáférést ad és audit naplózásra kerül.';
+
+  @override
+  String get supportGrantCreateConfirm => 'Engedély létrehozása';
+
+  @override
+  String get supportGrantCreateSuccess =>
+      'Támogatási hozzáférési engedély létrehozva.';
+
+  @override
+  String supportGrantCompanyLabel(String name) {
+    return 'Cég: $name';
+  }
+
+  @override
+  String get supportGrantScopeTypeLabel => 'Hatókör típusa';
+
+  @override
+  String get supportGrantScopeIdFieldLabel => 'Hatókör azonosító';
+
+  @override
+  String get supportGrantScopeIdRequired =>
+      'Ehhez a hatókör típushoz azonosító szükséges.';
+
+  @override
+  String get supportGrantReasonLabel => 'Indoklás';
+
+  @override
+  String get supportGrantReasonRequired => 'Legalább 3 karakter szükséges.';
+
+  @override
+  String get supportGrantExpiryRequired =>
+      'Válasszon érvényes lejáratot legfeljebb 24 órán belül.';
+
+  @override
+  String get supportGrantBroadAccessRejected =>
+      'Széles körű vagy dokumentum hozzáférés nem engedélyezett.';
+
+  @override
+  String get supportGrantExpiryLabel => 'Lejárat';
+
+  @override
+  String get supportGrantExpiryTwoHours => '2 óra';
+
+  @override
+  String get supportGrantExpiryTwentyFourHours => '24 óra';
+
+  @override
+  String get supportGrantRevokeTitle =>
+      'Támogatási hozzáférési engedély visszavonása';
+
+  @override
+  String get supportGrantRevokeNoteLabel => 'Visszavonás indoklása';
+
+  @override
+  String get supportGrantRevokeConfirm => 'Engedély visszavonása';
+
+  @override
+  String get supportGrantRevokeSuccess =>
+      'Támogatási hozzáférési engedély visszavonva.';
+
+  @override
+  String get supportGrantActionRevoke => 'Engedély visszavonása';
+
+  @override
+  String get supportGrantFieldCompany => 'Cég';
+
+  @override
+  String get supportGrantFieldScopeId => 'Hatókör azonosító';
+
+  @override
+  String get supportGrantFieldReason => 'Indoklás';
+
+  @override
+  String get supportGrantFieldAllowedCategories =>
+      'Engedélyezett adatkategóriák';
+
+  @override
+  String get supportGrantFieldExcludesDocuments =>
+      'Kizár érzékeny dokumentumokat';
+
+  @override
+  String get supportGrantFieldCreatedAt => 'Létrehozva';
+
+  @override
+  String get supportGrantFieldExpiresAt => 'Lejár';
+
+  @override
+  String get supportGrantFieldRevokedAt => 'Visszavonva';
+
+  @override
+  String get supportGrantFieldApprovedBy => 'Jóváhagyó';
+
+  @override
+  String get supportGrantFieldAuditLogId => 'Audit napló azonosító';
+
+  @override
+  String get supportGrantYes => 'Igen';
+
+  @override
+  String get supportGrantNo => 'Nem';
+
+  @override
+  String get supportTicketFieldCompany => 'Cég';
+
+  @override
+  String get supportTicketFieldRequester => 'Kérelmező';
+
+  @override
+  String get supportTicketFieldCategory => 'Kategória';
+
+  @override
+  String get supportTicketFieldSummary => 'Összefoglaló';
+
+  @override
+  String get supportTicketFieldCreatedAt => 'Létrehozva';
+
+  @override
+  String get supportTicketFieldUpdatedAt => 'Frissítve';
+
+  @override
+  String get supportTicketFieldLastActivity => 'Utolsó aktivitás';
+
+  @override
+  String get supportTicketFieldLinkedHealthEvent => 'Kapcsolt állapot esemény';
+
+  @override
+  String get supportTicketFieldSupportGrant =>
+      'Támogatási hozzáférési engedély';
+
+  @override
+  String get supportTicketActionAcknowledge => 'Nyugtázás';
+
+  @override
+  String get supportTicketActionClose => 'Jegy lezárása';
+
+  @override
+  String get supportTicketActionCreateGrant =>
+      'Támogatási hozzáférési engedély létrehozása';
+
+  @override
+  String get supportTicketActionAcknowledgeTitle => 'Jegy nyugtázása';
+
+  @override
+  String get supportTicketActionCloseTitle => 'Jegy lezárása';
+
+  @override
+  String get supportTicketActionAcknowledgeBody =>
+      'Erősítse meg a támogatási jegy nyugtázását.';
+
+  @override
+  String get supportTicketActionAcknowledgeConfirm => 'Nyugtázás';
+
+  @override
+  String get supportTicketActionCloseConfirm => 'Lezárás';
 }

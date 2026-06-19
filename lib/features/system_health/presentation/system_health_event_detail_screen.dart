@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../app/app_router.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../support/data/support_tickets_repository.dart';
+import '../../support/presentation/support_providers.dart';
 import '../domain/system_health_action_request.dart';
 import '../domain/system_health_event.dart';
 import 'system_health_providers.dart';
@@ -39,7 +43,10 @@ class SystemHealthEventDetailScreen extends ConsumerWidget {
         ),
         data: (event) => _DetailBody(
           event: event,
+          eventId: eventId,
           onAction: (type) => _handleAction(context, ref, type),
+          onCreateTicket: () => _handleCreateTicket(context, ref, event),
+          canCreateTicket: ref.watch(supportTicketsRepositoryProvider).canCreateTicketFromSystemHealth,
         ),
       ),
     );
@@ -81,16 +88,50 @@ class SystemHealthEventDetailScreen extends ConsumerWidget {
       );
     }
   }
+
+  Future<void> _handleCreateTicket(
+    BuildContext context,
+    WidgetRef ref,
+    SystemHealthEvent event,
+  ) async {
+    final ticket = await createSupportTicketFromSystemHealth(
+      ref: ref,
+      eventId: eventId,
+      title: event.title,
+      summary: event.summary,
+      companyId: event.affectedCompanyId,
+      companyName: event.affectedCompanyName,
+    );
+    if (!context.mounted) return;
+    if (ticket == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(resolveSystemHealthKey(context, 'systemHealthCreateTicketDisabled')),
+        ),
+      );
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(resolveSupportKey(context, 'supportTicketCreateSuccess'))),
+    );
+    context.push(AdminRoutes.supportTicketDetail(ticket.id));
+  }
 }
 
 class _DetailBody extends StatelessWidget {
   const _DetailBody({
     required this.event,
+    required this.eventId,
     required this.onAction,
+    required this.onCreateTicket,
+    required this.canCreateTicket,
   });
 
   final SystemHealthEvent event;
+  final String eventId;
   final ValueChanged<SystemHealthActionType> onAction;
+  final VoidCallback onCreateTicket;
+  final bool canCreateTicket;
 
   @override
   Widget build(BuildContext context) {
@@ -190,8 +231,15 @@ class _DetailBody extends StatelessWidget {
         ],
         const SizedBox(height: 8),
         OutlinedButton(
-          onPressed: null,
-          child: Text(resolveSystemHealthKey(context, 'systemHealthCreateTicketDisabled')),
+          onPressed: canCreateTicket ? onCreateTicket : null,
+          child: Text(
+            resolveSystemHealthKey(
+              context,
+              canCreateTicket
+                  ? 'systemHealthCreateTicket'
+                  : 'systemHealthCreateTicketDisabled',
+            ),
+          ),
         ),
       ],
     );

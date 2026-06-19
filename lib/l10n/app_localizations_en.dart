@@ -660,4 +660,405 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get systemHealthFieldCorrelationId => 'Correlation ID';
+
+  @override
+  String get systemHealthCreateTicket => 'Create support ticket';
+
+  @override
+  String get supportLoadError => 'Could not load support data.';
+
+  @override
+  String get supportActionUnavailable =>
+      'This support action is not available on the connected backend yet.';
+
+  @override
+  String get supportActionError => 'Could not save support action.';
+
+  @override
+  String get supportActionSuccess => 'Support action saved.';
+
+  @override
+  String get supportMockDataBadge => 'Mock data';
+
+  @override
+  String get supportOpenModule => 'Open support module';
+
+  @override
+  String get supportPrivacyNotice =>
+      'Metadata only — no tenant operational trip, document, or message content is shown by default.';
+
+  @override
+  String get supportActionAuditNotice =>
+      'This action will be recorded in the platform audit log.';
+
+  @override
+  String get supportActionNoteLabel => 'Note';
+
+  @override
+  String get supportActionNoteRequired => 'Enter at least 3 characters.';
+
+  @override
+  String get supportActionCancel => 'Cancel';
+
+  @override
+  String get supportTicketSearchHint =>
+      'Search company, title, or requester email';
+
+  @override
+  String get supportTicketListEmpty => 'No support tickets match your filters.';
+
+  @override
+  String supportTicketLastActivity(String date) {
+    return 'Last activity $date';
+  }
+
+  @override
+  String get supportTicketDetailTitle => 'Support ticket';
+
+  @override
+  String get supportGrantDetailTitle => 'Support access grant';
+
+  @override
+  String get supportGrantSearchHint => 'Search company, scope id, or requester';
+
+  @override
+  String get supportGrantListEmpty =>
+      'No support access grants match your filters.';
+
+  @override
+  String supportGrantScopeIdLabel(String id) {
+    return 'Scope ID: $id';
+  }
+
+  @override
+  String supportGrantExpiresAt(String date) {
+    return 'Expires $date';
+  }
+
+  @override
+  String get supportSummaryTitle => 'Support overview';
+
+  @override
+  String get supportSummaryOpenTickets => 'Open tickets';
+
+  @override
+  String get supportSummaryUrgentCritical => 'Urgent / critical';
+
+  @override
+  String get supportSummaryActiveGrants => 'Active grants';
+
+  @override
+  String supportSummaryLastUpdated(String date) {
+    return 'Last updated $date';
+  }
+
+  @override
+  String get supportTicketCreateSuccess => 'Support ticket created.';
+
+  @override
+  String get supportTicketFilterAll => 'All';
+
+  @override
+  String get supportTicketFilterOpen => 'Open';
+
+  @override
+  String get supportTicketFilterUrgent => 'Urgent';
+
+  @override
+  String get supportTicketFilterCritical => 'Critical';
+
+  @override
+  String get supportTicketFilterSystemHealth => 'System health';
+
+  @override
+  String get supportTicketFilterWaitingForCustomer => 'Waiting for customer';
+
+  @override
+  String get supportTicketFilterResolved => 'Resolved';
+
+  @override
+  String get supportGrantFilterAll => 'All';
+
+  @override
+  String get supportGrantFilterPending => 'Pending';
+
+  @override
+  String get supportGrantFilterActive => 'Active';
+
+  @override
+  String get supportGrantFilterExpired => 'Expired';
+
+  @override
+  String get supportGrantFilterRevoked => 'Revoked';
+
+  @override
+  String get supportTicketStatusOpen => 'Open';
+
+  @override
+  String get supportTicketStatusAcknowledged => 'Acknowledged';
+
+  @override
+  String get supportTicketStatusInvestigating => 'Investigating';
+
+  @override
+  String get supportTicketStatusWaitingForCustomer => 'Waiting for customer';
+
+  @override
+  String get supportTicketStatusResolved => 'Resolved';
+
+  @override
+  String get supportTicketStatusClosed => 'Closed';
+
+  @override
+  String get supportTicketStatusUnknown => 'Unknown';
+
+  @override
+  String get supportTicketPriorityLow => 'Low';
+
+  @override
+  String get supportTicketPriorityNormal => 'Normal';
+
+  @override
+  String get supportTicketPriorityHigh => 'High';
+
+  @override
+  String get supportTicketPriorityUrgent => 'Urgent';
+
+  @override
+  String get supportTicketPriorityCritical => 'Critical';
+
+  @override
+  String get supportTicketPriorityUnknown => 'Unknown';
+
+  @override
+  String get supportTicketCategoryRegistration => 'Registration';
+
+  @override
+  String get supportTicketCategorySystemHealth => 'System health';
+
+  @override
+  String get supportTicketCategoryUploadIssue => 'Upload issue';
+
+  @override
+  String get supportTicketCategoryBilling => 'Billing';
+
+  @override
+  String get supportTicketCategoryAccess => 'Access';
+
+  @override
+  String get supportTicketCategoryIntegration => 'Integration';
+
+  @override
+  String get supportTicketCategoryOther => 'Other';
+
+  @override
+  String get supportTicketCategoryUnknown => 'Unknown';
+
+  @override
+  String get supportGrantStatusPending => 'Pending';
+
+  @override
+  String get supportGrantStatusActive => 'Active';
+
+  @override
+  String get supportGrantStatusExpired => 'Expired';
+
+  @override
+  String get supportGrantStatusRevoked => 'Revoked';
+
+  @override
+  String get supportGrantStatusDenied => 'Denied';
+
+  @override
+  String get supportGrantStatusUnknown => 'Unknown';
+
+  @override
+  String get supportScopeCompanyMetadata => 'Company metadata';
+
+  @override
+  String get supportScopeSpecificTrip => 'Specific trip';
+
+  @override
+  String get supportScopeSpecificDocumentIssue => 'Specific document issue';
+
+  @override
+  String get supportScopeUploadQueueIssue => 'Upload queue issue';
+
+  @override
+  String get supportScopeSystemHealthIssue => 'System health issue';
+
+  @override
+  String get supportScopeIntegrationIssue => 'Integration issue';
+
+  @override
+  String get supportScopeBillingIssue => 'Billing issue';
+
+  @override
+  String get supportScopeUnknown => 'Unknown scope';
+
+  @override
+  String get supportGrantWarningTitle => 'Scoped support access';
+
+  @override
+  String get supportGrantWarningBody =>
+      'Grants are temporary, scoped, and audit logged. No broad unlimited tenant access.';
+
+  @override
+  String get supportGrantAuditNotice =>
+      'This grants temporary scoped support access and will be audit logged.';
+
+  @override
+  String get supportGrantCreateTitle => 'Create support access grant';
+
+  @override
+  String get supportGrantCreateWarning =>
+      'This grants temporary scoped support access and will be audit logged.';
+
+  @override
+  String get supportGrantCreateConfirm => 'Create grant';
+
+  @override
+  String get supportGrantCreateSuccess => 'Support access grant created.';
+
+  @override
+  String supportGrantCompanyLabel(String name) {
+    return 'Company: $name';
+  }
+
+  @override
+  String get supportGrantScopeTypeLabel => 'Scope type';
+
+  @override
+  String get supportGrantScopeIdFieldLabel => 'Scope ID';
+
+  @override
+  String get supportGrantScopeIdRequired =>
+      'Scope ID is required for this scope type.';
+
+  @override
+  String get supportGrantReasonLabel => 'Reason';
+
+  @override
+  String get supportGrantReasonRequired => 'Enter at least 3 characters.';
+
+  @override
+  String get supportGrantExpiryRequired =>
+      'Choose a valid expiry within 24 hours.';
+
+  @override
+  String get supportGrantBroadAccessRejected =>
+      'Broad or document access is not allowed.';
+
+  @override
+  String get supportGrantExpiryLabel => 'Expiry';
+
+  @override
+  String get supportGrantExpiryTwoHours => '2 hours';
+
+  @override
+  String get supportGrantExpiryTwentyFourHours => '24 hours';
+
+  @override
+  String get supportGrantRevokeTitle => 'Revoke support access grant';
+
+  @override
+  String get supportGrantRevokeNoteLabel => 'Revocation reason';
+
+  @override
+  String get supportGrantRevokeConfirm => 'Revoke grant';
+
+  @override
+  String get supportGrantRevokeSuccess => 'Support access grant revoked.';
+
+  @override
+  String get supportGrantActionRevoke => 'Revoke grant';
+
+  @override
+  String get supportGrantFieldCompany => 'Company';
+
+  @override
+  String get supportGrantFieldScopeId => 'Scope ID';
+
+  @override
+  String get supportGrantFieldReason => 'Reason';
+
+  @override
+  String get supportGrantFieldAllowedCategories => 'Allowed data categories';
+
+  @override
+  String get supportGrantFieldExcludesDocuments =>
+      'Excludes sensitive documents';
+
+  @override
+  String get supportGrantFieldCreatedAt => 'Created';
+
+  @override
+  String get supportGrantFieldExpiresAt => 'Expires';
+
+  @override
+  String get supportGrantFieldRevokedAt => 'Revoked';
+
+  @override
+  String get supportGrantFieldApprovedBy => 'Approved by';
+
+  @override
+  String get supportGrantFieldAuditLogId => 'Audit log ID';
+
+  @override
+  String get supportGrantYes => 'Yes';
+
+  @override
+  String get supportGrantNo => 'No';
+
+  @override
+  String get supportTicketFieldCompany => 'Company';
+
+  @override
+  String get supportTicketFieldRequester => 'Requester';
+
+  @override
+  String get supportTicketFieldCategory => 'Category';
+
+  @override
+  String get supportTicketFieldSummary => 'Summary';
+
+  @override
+  String get supportTicketFieldCreatedAt => 'Created';
+
+  @override
+  String get supportTicketFieldUpdatedAt => 'Updated';
+
+  @override
+  String get supportTicketFieldLastActivity => 'Last activity';
+
+  @override
+  String get supportTicketFieldLinkedHealthEvent => 'Linked health event';
+
+  @override
+  String get supportTicketFieldSupportGrant => 'Support access grant';
+
+  @override
+  String get supportTicketActionAcknowledge => 'Acknowledge';
+
+  @override
+  String get supportTicketActionClose => 'Close ticket';
+
+  @override
+  String get supportTicketActionCreateGrant => 'Create support access grant';
+
+  @override
+  String get supportTicketActionAcknowledgeTitle => 'Acknowledge ticket';
+
+  @override
+  String get supportTicketActionCloseTitle => 'Close ticket';
+
+  @override
+  String get supportTicketActionAcknowledgeBody =>
+      'Confirm acknowledgement of this support ticket.';
+
+  @override
+  String get supportTicketActionAcknowledgeConfirm => 'Acknowledge';
+
+  @override
+  String get supportTicketActionCloseConfirm => 'Close';
 }

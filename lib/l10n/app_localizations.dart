@@ -1321,6 +1321,762 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Correlation ID'**
   String get systemHealthFieldCorrelationId;
+
+  /// No description provided for @systemHealthCreateTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Create support ticket'**
+  String get systemHealthCreateTicket;
+
+  /// No description provided for @supportLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load support data.'**
+  String get supportLoadError;
+
+  /// No description provided for @supportActionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This support action is not available on the connected backend yet.'**
+  String get supportActionUnavailable;
+
+  /// No description provided for @supportActionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save support action.'**
+  String get supportActionError;
+
+  /// No description provided for @supportActionSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Support action saved.'**
+  String get supportActionSuccess;
+
+  /// No description provided for @supportMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get supportMockDataBadge;
+
+  /// No description provided for @supportOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open support module'**
+  String get supportOpenModule;
+
+  /// No description provided for @supportPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only — no tenant operational trip, document, or message content is shown by default.'**
+  String get supportPrivacyNotice;
+
+  /// No description provided for @supportActionAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action will be recorded in the platform audit log.'**
+  String get supportActionAuditNotice;
+
+  /// No description provided for @supportActionNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get supportActionNoteLabel;
+
+  /// No description provided for @supportActionNoteRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least 3 characters.'**
+  String get supportActionNoteRequired;
+
+  /// No description provided for @supportActionCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get supportActionCancel;
+
+  /// No description provided for @supportTicketSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search company, title, or requester email'**
+  String get supportTicketSearchHint;
+
+  /// No description provided for @supportTicketListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No support tickets match your filters.'**
+  String get supportTicketListEmpty;
+
+  /// No description provided for @supportTicketLastActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Last activity {date}'**
+  String supportTicketLastActivity(String date);
+
+  /// No description provided for @supportTicketDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Support ticket'**
+  String get supportTicketDetailTitle;
+
+  /// No description provided for @supportGrantDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access grant'**
+  String get supportGrantDetailTitle;
+
+  /// No description provided for @supportGrantSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search company, scope id, or requester'**
+  String get supportGrantSearchHint;
+
+  /// No description provided for @supportGrantListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No support access grants match your filters.'**
+  String get supportGrantListEmpty;
+
+  /// No description provided for @supportGrantScopeIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Scope ID: {id}'**
+  String supportGrantScopeIdLabel(String id);
+
+  /// No description provided for @supportGrantExpiresAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires {date}'**
+  String supportGrantExpiresAt(String date);
+
+  /// No description provided for @supportSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Support overview'**
+  String get supportSummaryTitle;
+
+  /// No description provided for @supportSummaryOpenTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'Open tickets'**
+  String get supportSummaryOpenTickets;
+
+  /// No description provided for @supportSummaryUrgentCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent / critical'**
+  String get supportSummaryUrgentCritical;
+
+  /// No description provided for @supportSummaryActiveGrants.
+  ///
+  /// In en, this message translates to:
+  /// **'Active grants'**
+  String get supportSummaryActiveGrants;
+
+  /// No description provided for @supportSummaryLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated {date}'**
+  String supportSummaryLastUpdated(String date);
+
+  /// No description provided for @supportTicketCreateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Support ticket created.'**
+  String get supportTicketCreateSuccess;
+
+  /// No description provided for @supportTicketFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get supportTicketFilterAll;
+
+  /// No description provided for @supportTicketFilterOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get supportTicketFilterOpen;
+
+  /// No description provided for @supportTicketFilterUrgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get supportTicketFilterUrgent;
+
+  /// No description provided for @supportTicketFilterCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get supportTicketFilterCritical;
+
+  /// No description provided for @supportTicketFilterSystemHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'System health'**
+  String get supportTicketFilterSystemHealth;
+
+  /// No description provided for @supportTicketFilterWaitingForCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for customer'**
+  String get supportTicketFilterWaitingForCustomer;
+
+  /// No description provided for @supportTicketFilterResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get supportTicketFilterResolved;
+
+  /// No description provided for @supportGrantFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get supportGrantFilterAll;
+
+  /// No description provided for @supportGrantFilterPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get supportGrantFilterPending;
+
+  /// No description provided for @supportGrantFilterActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get supportGrantFilterActive;
+
+  /// No description provided for @supportGrantFilterExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get supportGrantFilterExpired;
+
+  /// No description provided for @supportGrantFilterRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoked'**
+  String get supportGrantFilterRevoked;
+
+  /// No description provided for @supportTicketStatusOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get supportTicketStatusOpen;
+
+  /// No description provided for @supportTicketStatusAcknowledged.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged'**
+  String get supportTicketStatusAcknowledged;
+
+  /// No description provided for @supportTicketStatusInvestigating.
+  ///
+  /// In en, this message translates to:
+  /// **'Investigating'**
+  String get supportTicketStatusInvestigating;
+
+  /// No description provided for @supportTicketStatusWaitingForCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for customer'**
+  String get supportTicketStatusWaitingForCustomer;
+
+  /// No description provided for @supportTicketStatusResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get supportTicketStatusResolved;
+
+  /// No description provided for @supportTicketStatusClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get supportTicketStatusClosed;
+
+  /// No description provided for @supportTicketStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get supportTicketStatusUnknown;
+
+  /// No description provided for @supportTicketPriorityLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get supportTicketPriorityLow;
+
+  /// No description provided for @supportTicketPriorityNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get supportTicketPriorityNormal;
+
+  /// No description provided for @supportTicketPriorityHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get supportTicketPriorityHigh;
+
+  /// No description provided for @supportTicketPriorityUrgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get supportTicketPriorityUrgent;
+
+  /// No description provided for @supportTicketPriorityCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get supportTicketPriorityCritical;
+
+  /// No description provided for @supportTicketPriorityUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get supportTicketPriorityUnknown;
+
+  /// No description provided for @supportTicketCategoryRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration'**
+  String get supportTicketCategoryRegistration;
+
+  /// No description provided for @supportTicketCategorySystemHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'System health'**
+  String get supportTicketCategorySystemHealth;
+
+  /// No description provided for @supportTicketCategoryUploadIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload issue'**
+  String get supportTicketCategoryUploadIssue;
+
+  /// No description provided for @supportTicketCategoryBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing'**
+  String get supportTicketCategoryBilling;
+
+  /// No description provided for @supportTicketCategoryAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Access'**
+  String get supportTicketCategoryAccess;
+
+  /// No description provided for @supportTicketCategoryIntegration.
+  ///
+  /// In en, this message translates to:
+  /// **'Integration'**
+  String get supportTicketCategoryIntegration;
+
+  /// No description provided for @supportTicketCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get supportTicketCategoryOther;
+
+  /// No description provided for @supportTicketCategoryUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get supportTicketCategoryUnknown;
+
+  /// No description provided for @supportGrantStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get supportGrantStatusPending;
+
+  /// No description provided for @supportGrantStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get supportGrantStatusActive;
+
+  /// No description provided for @supportGrantStatusExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get supportGrantStatusExpired;
+
+  /// No description provided for @supportGrantStatusRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoked'**
+  String get supportGrantStatusRevoked;
+
+  /// No description provided for @supportGrantStatusDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Denied'**
+  String get supportGrantStatusDenied;
+
+  /// No description provided for @supportGrantStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get supportGrantStatusUnknown;
+
+  /// No description provided for @supportScopeCompanyMetadata.
+  ///
+  /// In en, this message translates to:
+  /// **'Company metadata'**
+  String get supportScopeCompanyMetadata;
+
+  /// No description provided for @supportScopeSpecificTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Specific trip'**
+  String get supportScopeSpecificTrip;
+
+  /// No description provided for @supportScopeSpecificDocumentIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Specific document issue'**
+  String get supportScopeSpecificDocumentIssue;
+
+  /// No description provided for @supportScopeUploadQueueIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload queue issue'**
+  String get supportScopeUploadQueueIssue;
+
+  /// No description provided for @supportScopeSystemHealthIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'System health issue'**
+  String get supportScopeSystemHealthIssue;
+
+  /// No description provided for @supportScopeIntegrationIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Integration issue'**
+  String get supportScopeIntegrationIssue;
+
+  /// No description provided for @supportScopeBillingIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing issue'**
+  String get supportScopeBillingIssue;
+
+  /// No description provided for @supportScopeUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown scope'**
+  String get supportScopeUnknown;
+
+  /// No description provided for @supportGrantWarningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scoped support access'**
+  String get supportGrantWarningTitle;
+
+  /// No description provided for @supportGrantWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Grants are temporary, scoped, and audit logged. No broad unlimited tenant access.'**
+  String get supportGrantWarningBody;
+
+  /// No description provided for @supportGrantAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This grants temporary scoped support access and will be audit logged.'**
+  String get supportGrantAuditNotice;
+
+  /// No description provided for @supportGrantCreateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create support access grant'**
+  String get supportGrantCreateTitle;
+
+  /// No description provided for @supportGrantCreateWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This grants temporary scoped support access and will be audit logged.'**
+  String get supportGrantCreateWarning;
+
+  /// No description provided for @supportGrantCreateConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Create grant'**
+  String get supportGrantCreateConfirm;
+
+  /// No description provided for @supportGrantCreateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access grant created.'**
+  String get supportGrantCreateSuccess;
+
+  /// No description provided for @supportGrantCompanyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Company: {name}'**
+  String supportGrantCompanyLabel(String name);
+
+  /// No description provided for @supportGrantScopeTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Scope type'**
+  String get supportGrantScopeTypeLabel;
+
+  /// No description provided for @supportGrantScopeIdFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Scope ID'**
+  String get supportGrantScopeIdFieldLabel;
+
+  /// No description provided for @supportGrantScopeIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Scope ID is required for this scope type.'**
+  String get supportGrantScopeIdRequired;
+
+  /// No description provided for @supportGrantReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get supportGrantReasonLabel;
+
+  /// No description provided for @supportGrantReasonRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least 3 characters.'**
+  String get supportGrantReasonRequired;
+
+  /// No description provided for @supportGrantExpiryRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a valid expiry within 24 hours.'**
+  String get supportGrantExpiryRequired;
+
+  /// No description provided for @supportGrantBroadAccessRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Broad or document access is not allowed.'**
+  String get supportGrantBroadAccessRejected;
+
+  /// No description provided for @supportGrantExpiryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry'**
+  String get supportGrantExpiryLabel;
+
+  /// No description provided for @supportGrantExpiryTwoHours.
+  ///
+  /// In en, this message translates to:
+  /// **'2 hours'**
+  String get supportGrantExpiryTwoHours;
+
+  /// No description provided for @supportGrantExpiryTwentyFourHours.
+  ///
+  /// In en, this message translates to:
+  /// **'24 hours'**
+  String get supportGrantExpiryTwentyFourHours;
+
+  /// No description provided for @supportGrantRevokeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke support access grant'**
+  String get supportGrantRevokeTitle;
+
+  /// No description provided for @supportGrantRevokeNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Revocation reason'**
+  String get supportGrantRevokeNoteLabel;
+
+  /// No description provided for @supportGrantRevokeConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke grant'**
+  String get supportGrantRevokeConfirm;
+
+  /// No description provided for @supportGrantRevokeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access grant revoked.'**
+  String get supportGrantRevokeSuccess;
+
+  /// No description provided for @supportGrantActionRevoke.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke grant'**
+  String get supportGrantActionRevoke;
+
+  /// No description provided for @supportGrantFieldCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get supportGrantFieldCompany;
+
+  /// No description provided for @supportGrantFieldScopeId.
+  ///
+  /// In en, this message translates to:
+  /// **'Scope ID'**
+  String get supportGrantFieldScopeId;
+
+  /// No description provided for @supportGrantFieldReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get supportGrantFieldReason;
+
+  /// No description provided for @supportGrantFieldAllowedCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowed data categories'**
+  String get supportGrantFieldAllowedCategories;
+
+  /// No description provided for @supportGrantFieldExcludesDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Excludes sensitive documents'**
+  String get supportGrantFieldExcludesDocuments;
+
+  /// No description provided for @supportGrantFieldCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get supportGrantFieldCreatedAt;
+
+  /// No description provided for @supportGrantFieldExpiresAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires'**
+  String get supportGrantFieldExpiresAt;
+
+  /// No description provided for @supportGrantFieldRevokedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoked'**
+  String get supportGrantFieldRevokedAt;
+
+  /// No description provided for @supportGrantFieldApprovedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved by'**
+  String get supportGrantFieldApprovedBy;
+
+  /// No description provided for @supportGrantFieldAuditLogId.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit log ID'**
+  String get supportGrantFieldAuditLogId;
+
+  /// No description provided for @supportGrantYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get supportGrantYes;
+
+  /// No description provided for @supportGrantNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get supportGrantNo;
+
+  /// No description provided for @supportTicketFieldCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get supportTicketFieldCompany;
+
+  /// No description provided for @supportTicketFieldRequester.
+  ///
+  /// In en, this message translates to:
+  /// **'Requester'**
+  String get supportTicketFieldRequester;
+
+  /// No description provided for @supportTicketFieldCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get supportTicketFieldCategory;
+
+  /// No description provided for @supportTicketFieldSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get supportTicketFieldSummary;
+
+  /// No description provided for @supportTicketFieldCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get supportTicketFieldCreatedAt;
+
+  /// No description provided for @supportTicketFieldUpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated'**
+  String get supportTicketFieldUpdatedAt;
+
+  /// No description provided for @supportTicketFieldLastActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Last activity'**
+  String get supportTicketFieldLastActivity;
+
+  /// No description provided for @supportTicketFieldLinkedHealthEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked health event'**
+  String get supportTicketFieldLinkedHealthEvent;
+
+  /// No description provided for @supportTicketFieldSupportGrant.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access grant'**
+  String get supportTicketFieldSupportGrant;
+
+  /// No description provided for @supportTicketActionAcknowledge.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledge'**
+  String get supportTicketActionAcknowledge;
+
+  /// No description provided for @supportTicketActionClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close ticket'**
+  String get supportTicketActionClose;
+
+  /// No description provided for @supportTicketActionCreateGrant.
+  ///
+  /// In en, this message translates to:
+  /// **'Create support access grant'**
+  String get supportTicketActionCreateGrant;
+
+  /// No description provided for @supportTicketActionAcknowledgeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledge ticket'**
+  String get supportTicketActionAcknowledgeTitle;
+
+  /// No description provided for @supportTicketActionCloseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Close ticket'**
+  String get supportTicketActionCloseTitle;
+
+  /// No description provided for @supportTicketActionAcknowledgeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm acknowledgement of this support ticket.'**
+  String get supportTicketActionAcknowledgeBody;
+
+  /// No description provided for @supportTicketActionAcknowledgeConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledge'**
+  String get supportTicketActionAcknowledgeConfirm;
+
+  /// No description provided for @supportTicketActionCloseConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get supportTicketActionCloseConfirm;
 }
 
 class _AppLocalizationsDelegate

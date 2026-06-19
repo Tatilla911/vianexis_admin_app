@@ -12,8 +12,10 @@ import '../features/login/login_screen.dart';
 import '../features/registrations/presentation/registration_application_detail_screen.dart';
 import '../features/registrations/presentation/registration_applications_screen.dart';
 import '../features/settings/admin_settings_screen.dart';
-import '../features/support/support_access_grants_screen.dart';
-import '../features/support/support_tickets_screen.dart';
+import '../features/support/presentation/support_access_grant_detail_screen.dart';
+import '../features/support/presentation/support_access_grants_screen.dart';
+import '../features/support/presentation/support_ticket_detail_screen.dart';
+import '../features/support/presentation/support_tickets_screen.dart';
 import '../features/system_health/presentation/system_health_event_detail_screen.dart';
 import '../features/system_health/presentation/system_health_screen.dart';
 
@@ -102,12 +104,28 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: SupportTicketsScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => SupportTicketDetailScreen(
+                  ticketId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: AdminRoutes.supportGrants,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: SupportAccessGrantsScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => SupportAccessGrantDetailScreen(
+                  grantId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: AdminRoutes.systemHealth,
@@ -156,9 +174,19 @@ abstract final class AdminRoutes {
 
   static String registrationDetail(String id) => '$registrations/$id';
 
+  static String supportTicketDetail(String id) => '$supportTickets/$id';
+
+  static String supportGrantDetail(String id) => '$supportGrants/$id';
+
   static AdminDestination? destinationForLocation(String location) {
     if (location.startsWith(registrations)) {
       return AdminDestination.registrations;
+    }
+    if (location.startsWith(supportTickets)) {
+      return AdminDestination.supportTickets;
+    }
+    if (location.startsWith(supportGrants)) {
+      return AdminDestination.supportGrants;
     }
     return switch (location) {
       dashboard => AdminDestination.dashboard,

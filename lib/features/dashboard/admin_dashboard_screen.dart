@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/app_router.dart';
 import '../../core/localization/localization_resolver.dart';
+import '../../features/support/presentation/support_providers.dart';
+import '../../features/support/presentation/widgets/support_summary_card.dart';
 import '../../features/system_health/presentation/system_health_providers.dart';
 import '../../features/system_health/presentation/widgets/system_health_overview_card.dart';
 import '../../l10n/app_localizations.dart';
@@ -15,6 +17,7 @@ class AdminDashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final healthAsync = ref.watch(systemHealthSnapshotProvider);
+    final supportAsync = ref.watch(supportSummaryProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.dashboardTitle)),
@@ -49,6 +52,31 @@ class AdminDashboardScreen extends ConsumerWidget {
                 OutlinedButton(
                   onPressed: () => context.go(AdminRoutes.systemHealth),
                   child: Text(resolveSystemHealthKey(context, 'systemHealthOpenModule')),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          supportAsync.when(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, _) => Card(
+              child: ListTile(
+                title: Text(resolveSupportKey(context, 'supportLoadError')),
+                trailing: TextButton(
+                  onPressed: () =>
+                      ref.read(supportSummaryProvider.notifier).refresh(),
+                  child: Text(l10n.errorRetryButton),
+                ),
+              ),
+            ),
+            data: (summary) => Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SupportSummaryCard(summary: summary, compact: true),
+                const SizedBox(height: 12),
+                OutlinedButton(
+                  onPressed: () => context.go(AdminRoutes.supportTickets),
+                  child: Text(resolveSupportKey(context, 'supportOpenModule')),
                 ),
               ],
             ),
