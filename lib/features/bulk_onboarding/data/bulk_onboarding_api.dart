@@ -8,6 +8,7 @@ import '../domain/bulk_onboarding_row.dart';
 import '../domain/bulk_onboarding_row_status.dart';
 import '../domain/bulk_onboarding_status.dart';
 import '../domain/bulk_onboarding_type.dart';
+import '../domain/bulk_onboarding_row_action.dart';
 import '../domain/bulk_onboarding_upload_result.dart';
 
 class BulkOnboardingApi {
@@ -131,6 +132,77 @@ class BulkOnboardingApi {
       throw StateError('Empty bulk onboarding action response');
     }
     return BulkOnboardingJob.fromDetailResponseJson(body);
+  }
+
+  Future<BulkOnboardingRow> getRow({
+    required String jobId,
+    required String rowId,
+  }) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/bulk-onboarding/jobs/$jobId/rows/$rowId',
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty bulk onboarding row response');
+    }
+    return BulkOnboardingRow.fromDetailResponseJson(data);
+  }
+
+  Future<BulkOnboardingRowActionResult> correctRow({
+    required String jobId,
+    required String rowId,
+    required BulkOnboardingRowCorrectionRequest request,
+  }) async {
+    final response = await _apiClient.patch<Map<String, dynamic>>(
+      '/platform-admin/bulk-onboarding/jobs/$jobId/rows/$rowId/correct',
+      data: request.toJson(),
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty bulk onboarding row correction response');
+    }
+    return BulkOnboardingRowActionResult.fromJson(data);
+  }
+
+  Future<BulkOnboardingRowActionResult> skipRow({
+    required String jobId,
+    required String rowId,
+    required BulkOnboardingRowSkipRequest request,
+  }) async {
+    final response = await _apiClient.patch<Map<String, dynamic>>(
+      '/platform-admin/bulk-onboarding/jobs/$jobId/rows/$rowId/skip',
+      data: request.toJson(),
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty bulk onboarding row skip response');
+    }
+    return BulkOnboardingRowActionResult.fromJson(data);
+  }
+
+  Future<BulkOnboardingRowActionResult> revalidateRow({
+    required String jobId,
+    required String rowId,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/bulk-onboarding/jobs/$jobId/rows/$rowId/revalidate',
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty bulk onboarding row revalidate response');
+    }
+    return BulkOnboardingRowActionResult.fromJson(data);
+  }
+
+  Future<BulkOnboardingJob> revalidateJob({required String jobId}) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/bulk-onboarding/jobs/$jobId/revalidate',
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty bulk onboarding job revalidate response');
+    }
+    return BulkOnboardingJob.fromDetailResponseJson(data);
   }
 }
 

@@ -7,6 +7,7 @@ import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboardi
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_row_status.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_status.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_type.dart';
+import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_row_action.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_upload_result.dart';
 
 void main() {
@@ -107,6 +108,106 @@ void main() {
       expect(row.status, BulkOnboardingRowStatus.duplicate);
       expect(row.validationErrors, ['email_required']);
       expect(row.aiFlags, ['duplicate_email_in_import']);
+    });
+
+    test('parses correction and skip metadata', () {
+      final row = BulkOnboardingRow.fromJson({
+        'id': 10,
+        'jobId': 42,
+        'rowIndex': 1,
+        'type': 'driver',
+        'status': 'valid',
+        'email': 'fixed@example.com',
+        'originalValues': {'email': 'bad-email'},
+        'correctedValues': {'email': 'fixed@example.com'},
+        'correctionNote': 'Fixed typo',
+        'correctedByUserId': 7,
+        'correctedAt': '2026-06-19T10:00:00.000Z',
+        'skippedByUserId': null,
+        'skipReason': null,
+        'lastValidatedAt': '2026-06-19T10:05:00.000Z',
+        'metadataOnly': true,
+      });
+
+      expect(row.originalValues?['email'], 'bad-email');
+      expect(row.correctedValues?['email'], 'fixed@example.com');
+      expect(row.correctionNote, 'Fixed typo');
+      expect(row.correctedByUserId, 7);
+      expect(row.lastValidatedAt, isNotNull);
+    });
+
+    test('parses skipped row detail wrapper', () {
+      final row = BulkOnboardingRow.fromDetailResponseJson({
+        'row': {
+          'id': 11,
+          'jobId': 42,
+          'rowIndex': 2,
+          'type': 'driver',
+          'status': 'skipped',
+          'skipReason': 'Duplicate in HR system',
+          'skippedByUserId': 3,
+          'skippedAt': '2026-06-19T11:00:00.000Z',
+        },
+      });
+
+      expect(row.status, BulkOnboardingRowStatus.skipped);
+      expect(row.skipReason, 'Duplicate in HR system');
+    });
+  });
+
+  group('BulkOnboardingRow action validation', () {
+    test('correction requires at least one field', () {
+      expect(
+        const BulkOnboardingRowCorrectionRequest().validate(),
+        'bulkOnboardingRowCorrectionFieldRequired',
+      );
+      expect(
+        const BulkOnboardingRowCorrectionRequest(email: 'fixed@example.com').validate(),
+        isNull,
+      );
+    });
+
+    test('skip requires reason', () {
+      expect(
+        const BulkOnboardingRowSkipRequest(reason: ' ').validate(),
+        'bulkOnboardingRowSkipReasonRequired',
+      );
+      expect(
+        const BulkOnboardingRowSkipRequest(reason: 'Out of scope').validate(),
+        isNull,
+      );
+    });
+
+    test('row action result parses row and job wrapper', () {
+      final result = BulkOnboardingRowActionResult.fromJson({
+        'row': {
+          'id': 1,
+          'jobId': 9,
+          'rowIndex': 1,
+          'type': 'driver',
+          'status': 'valid',
+        },
+        'job': {
+          'id': 9,
+          'companyName': 'Co',
+          'submittedByUserId': 1,
+          'type': 'drivers',
+          'status': 'ready_for_review',
+          'totalRows': 1,
+          'validRows': 1,
+          'warningRows': 0,
+          'invalidRows': 0,
+          'duplicateRows': 0,
+          'processedRows': 0,
+          'failedRows': 0,
+          'skippedRows': 0,
+          'riskLevel': 'low',
+          'processingAvailable': false,
+        },
+      });
+
+      expect(result.row.status, BulkOnboardingRowStatus.valid);
+      expect(result.job.skippedRows, 0);
     });
   });
 
@@ -276,6 +377,44 @@ void main() {
       expect(row.matchesSearch('abc123'), isTrue);
       expect(row.matchesFilter(BulkOnboardingRowListFilter.valid), isTrue);
       expect(row.matchesFilter(BulkOnboardingRowListFilter.processed), isFalse);
+    });
+
+    test('skipped filter matches skipped status', () {
+      const row = BulkOnboardingRow(
+        id: '2',
+        jobId: '9',
+        rowIndex: 2,
+        type: 'driver',
+        status: BulkOnboardingRowStatus.skipped,
+        skipReason: 'Manual skip',
+      );
+
+      expect(row.matchesFilter(BulkOnboardingRowListFilter.skipped), isTrue);
+      expect(row.matchesFilter(BulkOnboardingRowListFilter.valid), isFalse);
+    });
+
+    test('job parses skippedRows and lastValidatedAt', () {
+      final job = BulkOnboardingJob.fromJson({
+        'id': 3,
+        'companyName': 'Skipped Co',
+        'submittedByUserId': 1,
+        'type': 'drivers',
+        'status': 'ready_for_review',
+        'totalRows': 5,
+        'validRows': 3,
+        'warningRows': 0,
+        'invalidRows': 1,
+        'duplicateRows': 0,
+        'processedRows': 0,
+        'failedRows': 0,
+        'skippedRows': 1,
+        'riskLevel': 'medium',
+        'processingAvailable': false,
+        'lastValidatedAt': '2026-06-19T09:30:00.000Z',
+      });
+
+      expect(job.skippedRows, 1);
+      expect(job.lastValidatedAt, isNotNull);
     });
   });
 }

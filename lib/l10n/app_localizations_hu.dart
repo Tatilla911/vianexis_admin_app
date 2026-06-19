@@ -1760,4 +1760,121 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get bulkOnboardingRowFilterFailed => 'Sikertelen';
+
+  @override
+  String get bulkOnboardingRowFilterSkipped => 'Kihagyott';
+
+  @override
+  String get bulkOnboardingRowDetailTitle => 'Import sor';
+
+  @override
+  String get bulkOnboardingRowDetailError =>
+      'Az import sor részletei nem tölthetők be.';
+
+  @override
+  String get bulkOnboardingRowOriginalValuesTitle =>
+      'Eredeti importált értékek';
+
+  @override
+  String get bulkOnboardingRowCorrectedValuesTitle => 'Javított értékek';
+
+  @override
+  String bulkOnboardingRowLastValidatedAt(String date) {
+    return 'Utolsó ellenőrzés: $date';
+  }
+
+  @override
+  String bulkOnboardingJobLastValidatedAt(String date) {
+    return 'Munka utolsó ellenőrzése: $date';
+  }
+
+  @override
+  String get bulkOnboardingRowCorrectionTitle => 'Import sor javítása';
+
+  @override
+  String get bulkOnboardingRowCorrectionNotice =>
+      'Érvénytelen mezők frissítése. Az eredeti importált értékek audit céljából megmaradnak.';
+
+  @override
+  String get bulkOnboardingRowCorrectionNoteLabel =>
+      'Javítási megjegyzés (opcionális)';
+
+  @override
+  String get bulkOnboardingRowCorrectionConfirm => 'Javítás mentése';
+
+  @override
+  String get bulkOnboardingRowCorrectionAction => 'Sor javítása';
+
+  @override
+  String get bulkOnboardingRowCorrectionFieldRequired =>
+      'Legalább egy javítandó mező megadása kötelező.';
+
+  @override
+  String get bulkOnboardingRowFieldName => 'Név';
+
+  @override
+  String get bulkOnboardingRowFieldEmail => 'E-mail';
+
+  @override
+  String get bulkOnboardingRowFieldPhone => 'Telefon';
+
+  @override
+  String get bulkOnboardingRowFieldCountry => 'Ország';
+
+  @override
+  String get bulkOnboardingRowFieldRole => 'Szerep';
+
+  @override
+  String get bulkOnboardingRowFieldVehiclePlate => 'Jármű rendszám';
+
+  @override
+  String get bulkOnboardingRowFieldTrailerPlate => 'Pótkocsi rendszám';
+
+  @override
+  String get bulkOnboardingRowSkipTitle => 'Import sor kihagyása';
+
+  @override
+  String get bulkOnboardingRowSkipNotice =>
+      'A kihagyott sorok kimaradnak az ellenőrzési számításokból és feldolgozásból.';
+
+  @override
+  String get bulkOnboardingRowSkipReasonLabel => 'Kihagyás oka';
+
+  @override
+  String get bulkOnboardingRowSkipReasonRequired => 'A kihagyás oka kötelező.';
+
+  @override
+  String get bulkOnboardingRowSkipConfirm => 'Sor kihagyása';
+
+  @override
+  String get bulkOnboardingRowSkipAction => 'Sor kihagyása';
+
+  @override
+  String get bulkOnboardingRowRevalidateAction => 'Sor újraellenőrzése';
+
+  @override
+  String get bulkOnboardingJobRevalidateAction => 'Munka újraellenőrzése';
+
+  @override
+  String get bulkOnboardingJobRevalidateSuccess =>
+      'A munka újraellenőrzése kész.';
+
+  @override
+  String get bulkOnboardingRowActionAuditNotice =>
+      'A művelet audit naplózásra kerül. Nem jön létre fiók vagy eszköz.';
+
+  @override
+  String get bulkOnboardingRowActionSuccess => 'A sor sikeresen frissült.';
+
+  @override
+  String get bulkOnboardingRowActionUnavailable =>
+      'A sor művelet nem érhető el.';
+
+  @override
+  String bulkOnboardingMetricSkippedRows(String count) {
+    return 'Kihagyott: $count';
+  }
+
+  @override
+  String get bulkOnboardingValidationWarnings => 'Ellenőrzési figyelmeztetések';
 }

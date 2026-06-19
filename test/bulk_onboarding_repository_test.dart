@@ -7,6 +7,8 @@ import 'package:vianexis_admin_app/features/bulk_onboarding/data/bulk_onboarding
 import 'package:vianexis_admin_app/features/bulk_onboarding/data/bulk_onboarding_repository.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_action_request.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_status.dart';
+import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_row_action.dart';
+import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_row_status.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_type.dart';
 
 void main() {
@@ -168,6 +170,77 @@ void main() {
               );
               return;
             }
+            if (options.path ==
+                '/platform-admin/bulk-onboarding/jobs/11/rows/100/correct') {
+              expect(options.method, 'PATCH');
+              handler.resolve(
+                Response<Map<String, dynamic>>(
+                  requestOptions: options,
+                  statusCode: 200,
+                  data: {
+                    'row': {
+                      'id': 100,
+                      'jobId': 11,
+                      'rowIndex': 1,
+                      'type': 'company_user',
+                      'status': 'valid',
+                      'email': 'fixed@example.com',
+                      'originalValues': {'email': 'bad'},
+                      'correctedValues': {'email': 'fixed@example.com'},
+                    },
+                    'job': {
+                      'id': 11,
+                      'companyName': 'Live Co',
+                      'submittedByUserId': 1,
+                      'type': 'company_users',
+                      'status': 'ready_for_review',
+                      'totalRows': 2,
+                      'validRows': 2,
+                      'warningRows': 0,
+                      'invalidRows': 0,
+                      'duplicateRows': 0,
+                      'processedRows': 0,
+                      'failedRows': 0,
+                      'skippedRows': 0,
+                      'riskLevel': 'low',
+                      'processingAvailable': false,
+                    },
+                  },
+                ),
+              );
+              return;
+            }
+            if (options.path ==
+                '/platform-admin/bulk-onboarding/jobs/11/revalidate') {
+              expect(options.method, 'POST');
+              handler.resolve(
+                Response<Map<String, dynamic>>(
+                  requestOptions: options,
+                  statusCode: 200,
+                  data: {
+                    'job': {
+                      'id': 11,
+                      'companyName': 'Live Co',
+                      'submittedByUserId': 1,
+                      'type': 'company_users',
+                      'status': 'ready_for_review',
+                      'totalRows': 2,
+                      'validRows': 2,
+                      'warningRows': 0,
+                      'invalidRows': 0,
+                      'duplicateRows': 0,
+                      'processedRows': 0,
+                      'failedRows': 0,
+                      'skippedRows': 0,
+                      'riskLevel': 'low',
+                      'processingAvailable': false,
+                      'lastValidatedAt': '2026-06-19T12:00:00.000Z',
+                    },
+                  },
+                ),
+              );
+              return;
+            }
             handler.reject(
               DioException(requestOptions: options, message: 'Unexpected path'),
             );
@@ -221,6 +294,23 @@ void main() {
       final template = await repo.downloadTemplate(BulkOnboardingJobType.drivers);
       expect(template, contains('name,email'));
     });
+
+    test('correctRow hits correction endpoint', () async {
+      final result = await repo.correctRow(
+        jobId: '11',
+        rowId: '100',
+        request: const BulkOnboardingRowCorrectionRequest(
+          email: 'fixed@example.com',
+        ),
+      );
+      expect(result.row.status, BulkOnboardingRowStatus.valid);
+      expect(result.row.originalValues?['email'], 'bad');
+    });
+
+    test('revalidateJob hits job revalidate endpoint', () async {
+      final job = await repo.revalidateJob('11');
+      expect(job.lastValidatedAt, isNotNull);
+    });
   });
 
   group('MockBulkOnboardingRepository', () {
@@ -256,6 +346,44 @@ void main() {
       );
       expect(result.processingAvailable, isFalse);
       expect(result.metadataOnly, isTrue);
+    });
+
+    test('mock correct invalid row to valid and preserves original values', () async {
+      final repo = MockBulkOnboardingRepository();
+      final result = await repo.correctRow(
+        jobId: '502',
+        rowId: '9102',
+        request: const BulkOnboardingRowCorrectionRequest(
+          email: 'fixed@alpine.example',
+        ),
+      );
+      expect(result.row.status, BulkOnboardingRowStatus.valid);
+      expect(result.row.originalValues?['email'], 'bad-email');
+      expect(result.job.invalidRows, 0);
+    });
+
+    test('mock skip row requires summary update', () async {
+      final repo = MockBulkOnboardingRepository();
+      final result = await repo.skipRow(
+        jobId: '502',
+        rowId: '9103',
+        request: const BulkOnboardingRowSkipRequest(reason: 'Already onboarded'),
+      );
+      expect(result.row.status, BulkOnboardingRowStatus.skipped);
+      expect(result.job.skippedRows, 1);
+    });
+
+    test('mock revalidate row refreshes status', () async {
+      final repo = MockBulkOnboardingRepository();
+      await repo.correctRow(
+        jobId: '502',
+        rowId: '9102',
+        request: const BulkOnboardingRowCorrectionRequest(
+          email: 'still-bad',
+        ),
+      );
+      final result = await repo.revalidateRow(jobId: '502', rowId: '9102');
+      expect(result.row.status, BulkOnboardingRowStatus.invalid);
     });
   });
 }

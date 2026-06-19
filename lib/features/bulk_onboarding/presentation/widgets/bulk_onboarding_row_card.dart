@@ -4,14 +4,22 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/bulk_onboarding_row.dart';
 
 class BulkOnboardingRowCard extends StatelessWidget {
-  const BulkOnboardingRowCard({super.key, required this.row});
+  const BulkOnboardingRowCard({
+    super.key,
+    required this.row,
+    this.onTap,
+  });
 
   final BulkOnboardingRow row;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +60,7 @@ class BulkOnboardingRowCard extends StatelessWidget {
             ],
           ],
         ),
+      ),
       ),
     );
   }

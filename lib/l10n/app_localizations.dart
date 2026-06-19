@@ -3325,6 +3325,210 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed'**
   String get bulkOnboardingRowFilterFailed;
+
+  /// No description provided for @bulkOnboardingRowFilterSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped'**
+  String get bulkOnboardingRowFilterSkipped;
+
+  /// No description provided for @bulkOnboardingRowDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Import row'**
+  String get bulkOnboardingRowDetailTitle;
+
+  /// No description provided for @bulkOnboardingRowDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load import row details.'**
+  String get bulkOnboardingRowDetailError;
+
+  /// No description provided for @bulkOnboardingRowOriginalValuesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Original imported values'**
+  String get bulkOnboardingRowOriginalValuesTitle;
+
+  /// No description provided for @bulkOnboardingRowCorrectedValuesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Corrected values'**
+  String get bulkOnboardingRowCorrectedValuesTitle;
+
+  /// No description provided for @bulkOnboardingRowLastValidatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Last validated: {date}'**
+  String bulkOnboardingRowLastValidatedAt(String date);
+
+  /// No description provided for @bulkOnboardingJobLastValidatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Job last validated: {date}'**
+  String bulkOnboardingJobLastValidatedAt(String date);
+
+  /// No description provided for @bulkOnboardingRowCorrectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct import row'**
+  String get bulkOnboardingRowCorrectionTitle;
+
+  /// No description provided for @bulkOnboardingRowCorrectionNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Update invalid fields. Original imported values are preserved for audit.'**
+  String get bulkOnboardingRowCorrectionNotice;
+
+  /// No description provided for @bulkOnboardingRowCorrectionNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Correction note (optional)'**
+  String get bulkOnboardingRowCorrectionNoteLabel;
+
+  /// No description provided for @bulkOnboardingRowCorrectionConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Save correction'**
+  String get bulkOnboardingRowCorrectionConfirm;
+
+  /// No description provided for @bulkOnboardingRowCorrectionAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct row'**
+  String get bulkOnboardingRowCorrectionAction;
+
+  /// No description provided for @bulkOnboardingRowCorrectionFieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Provide at least one corrected field.'**
+  String get bulkOnboardingRowCorrectionFieldRequired;
+
+  /// No description provided for @bulkOnboardingRowFieldName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get bulkOnboardingRowFieldName;
+
+  /// No description provided for @bulkOnboardingRowFieldEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get bulkOnboardingRowFieldEmail;
+
+  /// No description provided for @bulkOnboardingRowFieldPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get bulkOnboardingRowFieldPhone;
+
+  /// No description provided for @bulkOnboardingRowFieldCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get bulkOnboardingRowFieldCountry;
+
+  /// No description provided for @bulkOnboardingRowFieldRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get bulkOnboardingRowFieldRole;
+
+  /// No description provided for @bulkOnboardingRowFieldVehiclePlate.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle plate'**
+  String get bulkOnboardingRowFieldVehiclePlate;
+
+  /// No description provided for @bulkOnboardingRowFieldTrailerPlate.
+  ///
+  /// In en, this message translates to:
+  /// **'Trailer plate'**
+  String get bulkOnboardingRowFieldTrailerPlate;
+
+  /// No description provided for @bulkOnboardingRowSkipTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip import row'**
+  String get bulkOnboardingRowSkipTitle;
+
+  /// No description provided for @bulkOnboardingRowSkipNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped rows are excluded from validation counts and processing.'**
+  String get bulkOnboardingRowSkipNotice;
+
+  /// No description provided for @bulkOnboardingRowSkipReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip reason'**
+  String get bulkOnboardingRowSkipReasonLabel;
+
+  /// No description provided for @bulkOnboardingRowSkipReasonRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'A skip reason is required.'**
+  String get bulkOnboardingRowSkipReasonRequired;
+
+  /// No description provided for @bulkOnboardingRowSkipConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip row'**
+  String get bulkOnboardingRowSkipConfirm;
+
+  /// No description provided for @bulkOnboardingRowSkipAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip row'**
+  String get bulkOnboardingRowSkipAction;
+
+  /// No description provided for @bulkOnboardingRowRevalidateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Revalidate row'**
+  String get bulkOnboardingRowRevalidateAction;
+
+  /// No description provided for @bulkOnboardingJobRevalidateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Revalidate job'**
+  String get bulkOnboardingJobRevalidateAction;
+
+  /// No description provided for @bulkOnboardingJobRevalidateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Job revalidation completed.'**
+  String get bulkOnboardingJobRevalidateSuccess;
+
+  /// No description provided for @bulkOnboardingRowActionAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action is audit logged. No accounts or assets are created.'**
+  String get bulkOnboardingRowActionAuditNotice;
+
+  /// No description provided for @bulkOnboardingRowActionSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Row updated successfully.'**
+  String get bulkOnboardingRowActionSuccess;
+
+  /// No description provided for @bulkOnboardingRowActionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Row action is unavailable.'**
+  String get bulkOnboardingRowActionUnavailable;
+
+  /// No description provided for @bulkOnboardingMetricSkippedRows.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped: {count}'**
+  String bulkOnboardingMetricSkippedRows(String count);
+
+  /// No description provided for @bulkOnboardingValidationWarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Validation warnings'**
+  String get bulkOnboardingValidationWarnings;
 }
 
 class _AppLocalizationsDelegate

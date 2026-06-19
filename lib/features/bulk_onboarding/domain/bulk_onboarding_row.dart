@@ -1,3 +1,4 @@
+import 'bulk_onboarding_job.dart';
 import 'bulk_onboarding_row_status.dart';
 
 class BulkOnboardingRowsPage {
@@ -48,6 +49,15 @@ class BulkOnboardingRow {
     this.aiFlags = const [],
     this.processedEntityType,
     this.processedEntityId,
+    this.originalValues,
+    this.correctedValues,
+    this.correctionNote,
+    this.correctedByUserId,
+    this.correctedAt,
+    this.skippedByUserId,
+    this.skippedAt,
+    this.skipReason,
+    this.lastValidatedAt,
     this.metadataOnly = true,
   });
 
@@ -70,7 +80,24 @@ class BulkOnboardingRow {
   final List<String> aiFlags;
   final String? processedEntityType;
   final int? processedEntityId;
+  final Map<String, dynamic>? originalValues;
+  final Map<String, dynamic>? correctedValues;
+  final String? correctionNote;
+  final int? correctedByUserId;
+  final DateTime? correctedAt;
+  final int? skippedByUserId;
+  final DateTime? skippedAt;
+  final String? skipReason;
+  final DateTime? lastValidatedAt;
   final bool metadataOnly;
+
+  factory BulkOnboardingRow.fromDetailResponseJson(Map<String, dynamic> json) {
+    final row = json['row'];
+    if (row is Map<String, dynamic>) {
+      return BulkOnboardingRow.fromJson(row);
+    }
+    return BulkOnboardingRow.fromJson(json);
+  }
 
   factory BulkOnboardingRow.fromJson(Map<String, dynamic> json) {
     return BulkOnboardingRow(
@@ -93,6 +120,15 @@ class BulkOnboardingRow {
       aiFlags: _parseStringList(json['aiFlags']),
       processedEntityType: json['processedEntityType']?.toString(),
       processedEntityId: _parseNullableInt(json['processedEntityId']),
+      originalValues: _parseMap(json['originalValues']),
+      correctedValues: _parseMap(json['correctedValues']),
+      correctionNote: json['correctionNote']?.toString(),
+      correctedByUserId: _parseNullableInt(json['correctedByUserId']),
+      correctedAt: BulkOnboardingJob.parseDate(json['correctedAt']),
+      skippedByUserId: _parseNullableInt(json['skippedByUserId']),
+      skippedAt: BulkOnboardingJob.parseDate(json['skippedAt']),
+      skipReason: json['skipReason']?.toString(),
+      lastValidatedAt: BulkOnboardingJob.parseDate(json['lastValidatedAt']),
       metadataOnly: json['metadataOnly'] != false,
     );
   }
@@ -112,6 +148,8 @@ class BulkOnboardingRow {
         status == BulkOnboardingRowStatus.processed,
       BulkOnboardingRowListFilter.failed =>
         status == BulkOnboardingRowStatus.failed,
+      BulkOnboardingRowListFilter.skipped =>
+        status == BulkOnboardingRowStatus.skipped,
     };
   }
 
@@ -139,6 +177,7 @@ enum BulkOnboardingRowListFilter {
   duplicate,
   processed,
   failed,
+  skipped,
 }
 
 List<String> _parseStringList(Object? raw) {
@@ -157,4 +196,10 @@ int? _parseNullableInt(Object? raw) {
   if (raw == null) return null;
   if (raw is int) return raw;
   return int.tryParse(raw.toString());
+}
+
+Map<String, dynamic>? _parseMap(Object? raw) {
+  if (raw is Map<String, dynamic>) return raw;
+  if (raw is Map) return Map<String, dynamic>.from(raw);
+  return null;
 }

@@ -1731,4 +1731,120 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bulkOnboardingRowFilterFailed => 'Failed';
+
+  @override
+  String get bulkOnboardingRowFilterSkipped => 'Skipped';
+
+  @override
+  String get bulkOnboardingRowDetailTitle => 'Import row';
+
+  @override
+  String get bulkOnboardingRowDetailError =>
+      'Could not load import row details.';
+
+  @override
+  String get bulkOnboardingRowOriginalValuesTitle => 'Original imported values';
+
+  @override
+  String get bulkOnboardingRowCorrectedValuesTitle => 'Corrected values';
+
+  @override
+  String bulkOnboardingRowLastValidatedAt(String date) {
+    return 'Last validated: $date';
+  }
+
+  @override
+  String bulkOnboardingJobLastValidatedAt(String date) {
+    return 'Job last validated: $date';
+  }
+
+  @override
+  String get bulkOnboardingRowCorrectionTitle => 'Correct import row';
+
+  @override
+  String get bulkOnboardingRowCorrectionNotice =>
+      'Update invalid fields. Original imported values are preserved for audit.';
+
+  @override
+  String get bulkOnboardingRowCorrectionNoteLabel =>
+      'Correction note (optional)';
+
+  @override
+  String get bulkOnboardingRowCorrectionConfirm => 'Save correction';
+
+  @override
+  String get bulkOnboardingRowCorrectionAction => 'Correct row';
+
+  @override
+  String get bulkOnboardingRowCorrectionFieldRequired =>
+      'Provide at least one corrected field.';
+
+  @override
+  String get bulkOnboardingRowFieldName => 'Name';
+
+  @override
+  String get bulkOnboardingRowFieldEmail => 'Email';
+
+  @override
+  String get bulkOnboardingRowFieldPhone => 'Phone';
+
+  @override
+  String get bulkOnboardingRowFieldCountry => 'Country';
+
+  @override
+  String get bulkOnboardingRowFieldRole => 'Role';
+
+  @override
+  String get bulkOnboardingRowFieldVehiclePlate => 'Vehicle plate';
+
+  @override
+  String get bulkOnboardingRowFieldTrailerPlate => 'Trailer plate';
+
+  @override
+  String get bulkOnboardingRowSkipTitle => 'Skip import row';
+
+  @override
+  String get bulkOnboardingRowSkipNotice =>
+      'Skipped rows are excluded from validation counts and processing.';
+
+  @override
+  String get bulkOnboardingRowSkipReasonLabel => 'Skip reason';
+
+  @override
+  String get bulkOnboardingRowSkipReasonRequired =>
+      'A skip reason is required.';
+
+  @override
+  String get bulkOnboardingRowSkipConfirm => 'Skip row';
+
+  @override
+  String get bulkOnboardingRowSkipAction => 'Skip row';
+
+  @override
+  String get bulkOnboardingRowRevalidateAction => 'Revalidate row';
+
+  @override
+  String get bulkOnboardingJobRevalidateAction => 'Revalidate job';
+
+  @override
+  String get bulkOnboardingJobRevalidateSuccess =>
+      'Job revalidation completed.';
+
+  @override
+  String get bulkOnboardingRowActionAuditNotice =>
+      'This action is audit logged. No accounts or assets are created.';
+
+  @override
+  String get bulkOnboardingRowActionSuccess => 'Row updated successfully.';
+
+  @override
+  String get bulkOnboardingRowActionUnavailable => 'Row action is unavailable.';
+
+  @override
+  String bulkOnboardingMetricSkippedRows(String count) {
+    return 'Skipped: $count';
+  }
+
+  @override
+  String get bulkOnboardingValidationWarnings => 'Validation warnings';
 }

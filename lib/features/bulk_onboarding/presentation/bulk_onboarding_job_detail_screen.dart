@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../../../app/app_router.dart';
 import '../../../core/auth/admin_auth_state.dart';
@@ -56,6 +57,21 @@ class BulkOnboardingJobDetailScreen extends ConsumerWidget {
               BulkOnboardingStatusBadge(status: job.status),
               const SizedBox(height: 16),
               BulkOnboardingValidationSummary(job: job),
+              if (job.lastValidatedAt != null) ...[
+                const SizedBox(height: 8),
+                Text(
+                  resolveBulkOnboardingKey(
+                    context,
+                    'bulkOnboardingJobLastValidatedAt',
+                    params: {
+                      'date': DateFormat.yMMMd(
+                        Localizations.localeOf(context).toString(),
+                      ).add_Hm().format(job.lastValidatedAt!.toLocal()),
+                    },
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
               const SizedBox(height: 12),
               BulkOnboardingAiReviewCard(job: job),
               const SizedBox(height: 12),
@@ -85,6 +101,12 @@ class BulkOnboardingJobDetailScreen extends ConsumerWidget {
                       ),
                       child: Text(
                         resolveBulkOnboardingKey(context, 'bulkOnboardingActionValidate'),
+                      ),
+                    ),
+                    OutlinedButton(
+                      onPressed: () => _revalidateJob(context, ref),
+                      child: Text(
+                        resolveBulkOnboardingKey(context, 'bulkOnboardingJobRevalidateAction'),
                       ),
                     ),
                     OutlinedButton(
@@ -183,6 +205,29 @@ class BulkOnboardingJobDetailScreen extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingActionUnavailable')),
+        ),
+      );
+    }
+  }
+
+  Future<void> _revalidateJob(BuildContext context, WidgetRef ref) async {
+    try {
+      await submitBulkOnboardingJobRevalidate(ref, jobId: jobId);
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingJobRevalidateSuccess'),
+          ),
+        ),
+      );
+    } catch (_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingRowActionUnavailable'),
+          ),
         ),
       );
     }

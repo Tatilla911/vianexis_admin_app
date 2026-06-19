@@ -53,10 +53,12 @@ class BulkOnboardingJob {
     required this.duplicateRows,
     required this.processedRows,
     required this.failedRows,
+    this.skippedRows = 0,
     this.aiSummary,
     required this.riskLevel,
     this.validationSummary,
     required this.processingAvailable,
+    this.lastValidatedAt,
     this.createdAt,
     this.updatedAt,
     this.approvedAt,
@@ -84,10 +86,12 @@ class BulkOnboardingJob {
   final int duplicateRows;
   final int processedRows;
   final int failedRows;
+  final int skippedRows;
   final String? aiSummary;
   final BulkOnboardingRiskLevel riskLevel;
   final String? validationSummary;
   final bool processingAvailable;
+  final DateTime? lastValidatedAt;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? approvedAt;
@@ -130,10 +134,12 @@ class BulkOnboardingJob {
       duplicateRows: _parseInt(json['duplicateRows']),
       processedRows: _parseInt(json['processedRows']),
       failedRows: _parseInt(json['failedRows']),
+      skippedRows: _parseInt(json['skippedRows']),
       aiSummary: json['aiSummary']?.toString(),
       riskLevel: BulkOnboardingRiskLevel.fromBackendValue(json['riskLevel']?.toString()),
       validationSummary: json['validationSummary']?.toString(),
       processingAvailable: json['processingAvailable'] == true,
+      lastValidatedAt: parseDate(json['lastValidatedAt']),
       createdAt: parseDate(json['createdAt']),
       updatedAt: parseDate(json['updatedAt']),
       approvedAt: parseDate(json['approvedAt']),

@@ -11,6 +11,7 @@ import '../domain/bulk_onboarding_row.dart';
 import '../domain/bulk_onboarding_row_status.dart';
 import '../domain/bulk_onboarding_status.dart';
 import '../domain/bulk_onboarding_type.dart';
+import '../domain/bulk_onboarding_row_action.dart';
 import '../domain/bulk_onboarding_upload_result.dart';
 import 'bulk_onboarding_api.dart';
 
@@ -43,6 +44,27 @@ abstract class BulkOnboardingRepository {
   });
 
   Future<BulkOnboardingDashboardSummary> fetchDashboardSummary();
+
+  Future<BulkOnboardingRow> fetchRow(String jobId, String rowId);
+
+  Future<BulkOnboardingRowActionResult> correctRow({
+    required String jobId,
+    required String rowId,
+    required BulkOnboardingRowCorrectionRequest request,
+  });
+
+  Future<BulkOnboardingRowActionResult> skipRow({
+    required String jobId,
+    required String rowId,
+    required BulkOnboardingRowSkipRequest request,
+  });
+
+  Future<BulkOnboardingRowActionResult> revalidateRow({
+    required String jobId,
+    required String rowId,
+  });
+
+  Future<BulkOnboardingJob> revalidateJob(String jobId);
 
   bool get usesMockData;
 }
@@ -119,6 +141,42 @@ class LiveBulkOnboardingRepository implements BulkOnboardingRepository {
   Future<BulkOnboardingDashboardSummary> fetchDashboardSummary() async {
     final jobs = await fetchJobs();
     return BulkOnboardingDashboardSummary.fromJobs(jobs);
+  }
+
+  @override
+  Future<BulkOnboardingRow> fetchRow(String jobId, String rowId) {
+    return _api.getRow(jobId: jobId, rowId: rowId);
+  }
+
+  @override
+  Future<BulkOnboardingRowActionResult> correctRow({
+    required String jobId,
+    required String rowId,
+    required BulkOnboardingRowCorrectionRequest request,
+  }) {
+    return _api.correctRow(jobId: jobId, rowId: rowId, request: request);
+  }
+
+  @override
+  Future<BulkOnboardingRowActionResult> skipRow({
+    required String jobId,
+    required String rowId,
+    required BulkOnboardingRowSkipRequest request,
+  }) {
+    return _api.skipRow(jobId: jobId, rowId: rowId, request: request);
+  }
+
+  @override
+  Future<BulkOnboardingRowActionResult> revalidateRow({
+    required String jobId,
+    required String rowId,
+  }) {
+    return _api.revalidateRow(jobId: jobId, rowId: rowId);
+  }
+
+  @override
+  Future<BulkOnboardingJob> revalidateJob(String jobId) {
+    return _api.revalidateJob(jobId: jobId);
   }
 }
 
@@ -226,6 +284,30 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
         email: 'dup@nordtrans.example',
         duplicateReason: 'duplicate_email_in_import',
         aiFlags: const ['duplicate_email_in_import'],
+      ),
+    ],
+    '502': [
+      BulkOnboardingRow(
+        id: '9102',
+        jobId: '502',
+        rowIndex: 1,
+        type: 'driver',
+        status: BulkOnboardingRowStatus.invalid,
+        displayLabel: 'Invalid Driver',
+        name: 'Invalid Driver',
+        email: 'bad-email',
+        validationErrors: const ['email_invalid'],
+      ),
+      BulkOnboardingRow(
+        id: '9103',
+        jobId: '502',
+        rowIndex: 2,
+        type: 'driver',
+        status: BulkOnboardingRowStatus.valid,
+        displayLabel: 'Valid Driver',
+        name: 'Valid Driver',
+        email: 'valid@alpine.example',
+        country: 'DE',
       ),
     ],
   };
@@ -402,6 +484,289 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
     final jobs = await fetchJobs();
     return BulkOnboardingDashboardSummary.fromJobs(jobs);
   }
+
+  @override
+  Future<BulkOnboardingRow> fetchRow(String jobId, String rowId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    return _findRow(jobId, rowId);
+  }
+
+  @override
+  Future<BulkOnboardingRowActionResult> correctRow({
+    required String jobId,
+    required String rowId,
+    required BulkOnboardingRowCorrectionRequest request,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 150));
+    final row = _findRow(jobId, rowId);
+    if (row.status == BulkOnboardingRowStatus.skipped) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.errorGenericBody,
+        kind: ApiExceptionKind.validation,
+      );
+    }
+
+    final originalValues = row.originalValues ??
+        {
+          if (row.name != null) 'name': row.name,
+          if (row.email != null) 'email': row.email,
+          if (row.phone != null) 'phone': row.phone,
+          if (row.country != null) 'country': row.country,
+          if (row.role != null) 'role': row.role,
+          if (row.vehiclePlate != null) 'vehiclePlate': row.vehiclePlate,
+          if (row.trailerPlate != null) 'trailerPlate': row.trailerPlate,
+        };
+
+    final updated = row.copyWithFields(
+      name: request.name ?? row.name,
+      email: request.email ?? row.email,
+      phone: request.phone ?? row.phone,
+      country: request.country ?? row.country,
+      role: request.role ?? row.role,
+      vehiclePlate: request.vehiclePlate ?? row.vehiclePlate,
+      trailerPlate: request.trailerPlate ?? row.trailerPlate,
+      originalValues: originalValues,
+      correctedValues: request.toJson()
+        ..remove('note'),
+      correctionNote: request.note?.trim().isEmpty ?? true ? row.correctionNote : request.note!.trim(),
+      correctedByUserId: 1,
+      correctedAt: DateTime.now().toUtc(),
+      lastValidatedAt: DateTime.now().toUtc(),
+    );
+    final validated = _mockValidateRow(updated);
+    _replaceRow(jobId, validated);
+    final job = _syncMockJobSummary(jobId);
+    return BulkOnboardingRowActionResult(row: validated, job: job);
+  }
+
+  @override
+  Future<BulkOnboardingRowActionResult> skipRow({
+    required String jobId,
+    required String rowId,
+    required BulkOnboardingRowSkipRequest request,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 150));
+    final row = _findRow(jobId, rowId);
+    final skipped = row.copyWithFields(
+      status: BulkOnboardingRowStatus.skipped,
+      skipReason: request.reason.trim(),
+      skippedByUserId: 1,
+      skippedAt: DateTime.now().toUtc(),
+      validationErrors: const [],
+      validationWarnings: const [],
+      duplicateReason: null,
+    );
+    _replaceRow(jobId, skipped);
+    final job = _syncMockJobSummary(jobId);
+    return BulkOnboardingRowActionResult(row: skipped, job: job);
+  }
+
+  @override
+  Future<BulkOnboardingRowActionResult> revalidateRow({
+    required String jobId,
+    required String rowId,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 120));
+    final row = _findRow(jobId, rowId);
+    if (row.status == BulkOnboardingRowStatus.skipped) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.errorGenericBody,
+        kind: ApiExceptionKind.validation,
+      );
+    }
+    final validated = _mockValidateRow(
+      row.copyWithFields(lastValidatedAt: DateTime.now().toUtc()),
+    );
+    _replaceRow(jobId, validated);
+    final job = _syncMockJobSummary(jobId);
+    return BulkOnboardingRowActionResult(row: validated, job: job);
+  }
+
+  @override
+  Future<BulkOnboardingJob> revalidateJob(String jobId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 180));
+    final rows = List<BulkOnboardingRow>.from(_rowsByJob[jobId] ?? const []);
+    final updatedRows = rows.map((row) {
+      if (row.status == BulkOnboardingRowStatus.skipped) return row;
+      return _mockValidateRow(
+        row.copyWithFields(lastValidatedAt: DateTime.now().toUtc()),
+      );
+    }).toList(growable: false);
+    _rowsByJob[jobId] = updatedRows;
+    return _syncMockJobSummary(
+      jobId,
+      lastValidatedAt: DateTime.now().toUtc(),
+    );
+  }
+
+  BulkOnboardingRow _findRow(String jobId, String rowId) {
+    final rows = _rowsByJob[jobId] ?? const [];
+    return rows.firstWhere(
+      (row) => row.id == rowId,
+      orElse: () => throw const ApiException(
+        messageKey: LocalizationKeys.errorGenericBody,
+        kind: ApiExceptionKind.notFound,
+      ),
+    );
+  }
+
+  void _replaceRow(String jobId, BulkOnboardingRow row) {
+    final rows = List<BulkOnboardingRow>.from(_rowsByJob[jobId] ?? const []);
+    final index = rows.indexWhere((item) => item.id == row.id);
+    if (index < 0) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.errorGenericBody,
+        kind: ApiExceptionKind.notFound,
+      );
+    }
+    rows[index] = row;
+    _rowsByJob[jobId] = rows;
+  }
+
+  BulkOnboardingRow _mockValidateRow(BulkOnboardingRow row) {
+    final email = row.email?.trim() ?? '';
+    final hasValidEmail = email.contains('@') && email.contains('.');
+    if (hasValidEmail) {
+      return row.copyWithFields(
+        status: BulkOnboardingRowStatus.valid,
+        validationErrors: const [],
+      );
+    }
+    return row.copyWithFields(
+      status: BulkOnboardingRowStatus.invalid,
+      validationErrors: const ['email_invalid'],
+    );
+  }
+
+  BulkOnboardingJob _syncMockJobSummary(
+    String jobId, {
+    DateTime? lastValidatedAt,
+  }) {
+    final index = _jobs.indexWhere((job) => job.id == jobId);
+    if (index < 0) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.errorGenericBody,
+        kind: ApiExceptionKind.notFound,
+      );
+    }
+    final rows = _rowsByJob[jobId] ?? const [];
+    var validRows = 0;
+    var warningRows = 0;
+    var invalidRows = 0;
+    var duplicateRows = 0;
+    var skippedRows = 0;
+    for (final row in rows) {
+      switch (row.status) {
+        case BulkOnboardingRowStatus.valid:
+          validRows++;
+        case BulkOnboardingRowStatus.warning:
+          warningRows++;
+        case BulkOnboardingRowStatus.invalid:
+          invalidRows++;
+        case BulkOnboardingRowStatus.duplicate:
+          duplicateRows++;
+        case BulkOnboardingRowStatus.skipped:
+          skippedRows++;
+        default:
+          break;
+      }
+    }
+    final current = _jobs[index];
+    final updated = BulkOnboardingJob(
+      id: current.id,
+      companyId: current.companyId,
+      companyName: current.companyName,
+      submittedByUserId: current.submittedByUserId,
+      submittedByName: current.submittedByName,
+      sourceFileName: current.sourceFileName,
+      sourceFileMimeType: current.sourceFileMimeType,
+      sourceFileSizeBytes: current.sourceFileSizeBytes,
+      type: current.type,
+      status: current.status,
+      totalRows: rows.length,
+      validRows: validRows,
+      warningRows: warningRows,
+      invalidRows: invalidRows,
+      duplicateRows: duplicateRows,
+      processedRows: current.processedRows,
+      failedRows: current.failedRows,
+      skippedRows: skippedRows,
+      aiSummary: current.aiSummary,
+      riskLevel: invalidRows > 0
+          ? BulkOnboardingRiskLevel.high
+          : BulkOnboardingRiskLevel.low,
+      validationSummary: current.validationSummary,
+      processingAvailable: current.processingAvailable,
+      lastValidatedAt: lastValidatedAt ?? DateTime.now().toUtc(),
+      createdAt: current.createdAt,
+      updatedAt: DateTime.now().toUtc(),
+      approvedAt: current.approvedAt,
+      approvedByUserId: current.approvedByUserId,
+      processedAt: current.processedAt,
+      lastErrorSummary: current.lastErrorSummary,
+      messageKey: current.messageKey,
+      metadataOnly: current.metadataOnly,
+    );
+    _jobs[index] = updated;
+    return updated;
+  }
+}
+
+extension _BulkOnboardingRowMockCopy on BulkOnboardingRow {
+  BulkOnboardingRow copyWithFields({
+    BulkOnboardingRowStatus? status,
+    String? name,
+    String? email,
+    String? phone,
+    String? country,
+    String? role,
+    String? vehiclePlate,
+    String? trailerPlate,
+    String? duplicateReason,
+    List<String>? validationErrors,
+    List<String>? validationWarnings,
+    Map<String, dynamic>? originalValues,
+    Map<String, dynamic>? correctedValues,
+    String? correctionNote,
+    int? correctedByUserId,
+    DateTime? correctedAt,
+    int? skippedByUserId,
+    DateTime? skippedAt,
+    String? skipReason,
+    DateTime? lastValidatedAt,
+  }) {
+    return BulkOnboardingRow(
+      id: id,
+      jobId: jobId,
+      rowIndex: rowIndex,
+      type: type,
+      status: status ?? this.status,
+      displayLabel: displayLabel,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      country: country ?? this.country,
+      role: role ?? this.role,
+      vehiclePlate: vehiclePlate ?? this.vehiclePlate,
+      trailerPlate: trailerPlate ?? this.trailerPlate,
+      duplicateReason: duplicateReason ?? this.duplicateReason,
+      validationErrors: validationErrors ?? this.validationErrors,
+      validationWarnings: validationWarnings ?? this.validationWarnings,
+      aiFlags: aiFlags,
+      processedEntityType: processedEntityType,
+      processedEntityId: processedEntityId,
+      originalValues: originalValues ?? this.originalValues,
+      correctedValues: correctedValues ?? this.correctedValues,
+      correctionNote: correctionNote ?? this.correctionNote,
+      correctedByUserId: correctedByUserId ?? this.correctedByUserId,
+      correctedAt: correctedAt ?? this.correctedAt,
+      skippedByUserId: skippedByUserId ?? this.skippedByUserId,
+      skippedAt: skippedAt ?? this.skippedAt,
+      skipReason: skipReason ?? this.skipReason,
+      lastValidatedAt: lastValidatedAt ?? this.lastValidatedAt,
+      metadataOnly: metadataOnly,
+    );
+  }
 }
 
 extension _BulkOnboardingJobMockCopy on BulkOnboardingJob {
@@ -428,10 +793,12 @@ extension _BulkOnboardingJobMockCopy on BulkOnboardingJob {
       duplicateRows: duplicateRows,
       processedRows: processedRows ?? this.processedRows,
       failedRows: failedRows,
+      skippedRows: skippedRows,
       aiSummary: aiSummary,
       riskLevel: riskLevel,
       validationSummary: validationSummary,
       processingAvailable: processingAvailable ?? this.processingAvailable,
+      lastValidatedAt: lastValidatedAt,
       createdAt: createdAt,
       updatedAt: DateTime.now().toUtc(),
       approvedAt: approvedAt,

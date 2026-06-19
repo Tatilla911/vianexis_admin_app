@@ -29,6 +29,8 @@ class BulkOnboardingValidationSummary extends StatelessWidget {
                 _countChip(context, 'bulkOnboardingMetricWarningRows', job.warningRows),
                 _countChip(context, 'bulkOnboardingMetricInvalidRows', job.invalidRows),
                 _countChip(context, 'bulkOnboardingMetricDuplicateRows', job.duplicateRows),
+                if (job.skippedRows > 0)
+                  _countChip(context, 'bulkOnboardingMetricSkippedRows', job.skippedRows),
               ],
             ),
           ],

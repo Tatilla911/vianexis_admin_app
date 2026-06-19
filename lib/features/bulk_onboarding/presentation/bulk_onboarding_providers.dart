@@ -6,6 +6,7 @@ import '../domain/bulk_onboarding_action_request.dart';
 import '../domain/bulk_onboarding_dashboard_summary.dart';
 import '../domain/bulk_onboarding_job.dart';
 import '../domain/bulk_onboarding_row.dart';
+import '../domain/bulk_onboarding_row_action.dart';
 import '../domain/bulk_onboarding_row_status.dart';
 
 extension AdminRoleBulkOnboardingDecisions on AdminRole {
@@ -108,6 +109,94 @@ final bulkOnboardingRowsProvider = FutureProvider.autoDispose
         );
       },
     );
+
+typedef BulkOnboardingRowQuery = ({String jobId, String rowId});
+
+final bulkOnboardingRowDetailProvider = FutureProvider.autoDispose
+    .family<BulkOnboardingRow, BulkOnboardingRowQuery>((ref, query) {
+      return ref
+          .watch(bulkOnboardingRepositoryProvider)
+          .fetchRow(query.jobId, query.rowId);
+    });
+
+void invalidateBulkOnboardingRowContext(
+  WidgetRef ref, {
+  required String jobId,
+  String? rowId,
+}) {
+  ref.invalidate(bulkOnboardingJobDetailProvider(jobId));
+  ref.invalidate(
+    bulkOnboardingRowsProvider((
+      jobId: jobId,
+      status: null,
+      search: '',
+    )),
+  );
+  if (rowId != null) {
+    ref.invalidate(
+      bulkOnboardingRowDetailProvider((jobId: jobId, rowId: rowId)),
+    );
+  }
+}
+
+Future<BulkOnboardingRowActionResult> submitBulkOnboardingRowCorrection(
+  WidgetRef ref, {
+  required String jobId,
+  required String rowId,
+  required BulkOnboardingRowCorrectionRequest request,
+}) async {
+  final result = await ref.read(bulkOnboardingRepositoryProvider).correctRow(
+    jobId: jobId,
+    rowId: rowId,
+    request: request,
+  );
+  invalidateBulkOnboardingRowContext(ref, jobId: jobId, rowId: rowId);
+  await ref.read(bulkOnboardingJobsProvider.notifier).refresh();
+  await ref.read(bulkOnboardingSummaryProvider.notifier).refresh();
+  return result;
+}
+
+Future<BulkOnboardingRowActionResult> submitBulkOnboardingRowSkip(
+  WidgetRef ref, {
+  required String jobId,
+  required String rowId,
+  required BulkOnboardingRowSkipRequest request,
+}) async {
+  final result = await ref.read(bulkOnboardingRepositoryProvider).skipRow(
+    jobId: jobId,
+    rowId: rowId,
+    request: request,
+  );
+  invalidateBulkOnboardingRowContext(ref, jobId: jobId, rowId: rowId);
+  await ref.read(bulkOnboardingJobsProvider.notifier).refresh();
+  await ref.read(bulkOnboardingSummaryProvider.notifier).refresh();
+  return result;
+}
+
+Future<BulkOnboardingRowActionResult> submitBulkOnboardingRowRevalidate(
+  WidgetRef ref, {
+  required String jobId,
+  required String rowId,
+}) async {
+  final result = await ref.read(bulkOnboardingRepositoryProvider).revalidateRow(
+    jobId: jobId,
+    rowId: rowId,
+  );
+  invalidateBulkOnboardingRowContext(ref, jobId: jobId, rowId: rowId);
+  await ref.read(bulkOnboardingJobsProvider.notifier).refresh();
+  await ref.read(bulkOnboardingSummaryProvider.notifier).refresh();
+  return result;
+}
+
+Future<void> submitBulkOnboardingJobRevalidate(
+  WidgetRef ref, {
+  required String jobId,
+}) async {
+  await ref.read(bulkOnboardingRepositoryProvider).revalidateJob(jobId);
+  invalidateBulkOnboardingRowContext(ref, jobId: jobId);
+  await ref.read(bulkOnboardingJobsProvider.notifier).refresh();
+  await ref.read(bulkOnboardingSummaryProvider.notifier).refresh();
+}
 
 final bulkOnboardingSummaryProvider =
     AsyncNotifierProvider<BulkOnboardingSummaryNotifier, BulkOnboardingDashboardSummary>(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/app_router.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
@@ -40,6 +42,7 @@ class _BulkOnboardingRowsScreenState extends ConsumerState<BulkOnboardingRowsScr
       BulkOnboardingRowListFilter.duplicate => BulkOnboardingRowStatus.duplicate,
       BulkOnboardingRowListFilter.processed => BulkOnboardingRowStatus.processed,
       BulkOnboardingRowListFilter.failed => BulkOnboardingRowStatus.failed,
+      BulkOnboardingRowListFilter.skipped => BulkOnboardingRowStatus.skipped,
     };
   }
 
@@ -116,7 +119,15 @@ class _BulkOnboardingRowsScreenState extends ConsumerState<BulkOnboardingRowsScr
                   itemCount: rows.length,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.only(bottom: 12),
-                    child: BulkOnboardingRowCard(row: rows[index]),
+                    child: BulkOnboardingRowCard(
+                      row: rows[index],
+                      onTap: () => context.push(
+                        AdminRoutes.bulkOnboardingJobRowDetail(
+                          widget.jobId,
+                          rows[index].id,
+                        ),
+                      ),
+                    ),
                   ),
                 );
               },
@@ -143,6 +154,8 @@ class _BulkOnboardingRowsScreenState extends ConsumerState<BulkOnboardingRowsScr
         resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterProcessed'),
       BulkOnboardingRowListFilter.failed =>
         resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterFailed'),
+      BulkOnboardingRowListFilter.skipped =>
+        resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterSkipped'),
     };
   }
 }

@@ -10,6 +10,7 @@ import '../features/audit_logs/presentation/audit_log_detail_screen.dart';
 import '../features/audit_logs/presentation/audit_logs_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_job_detail_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_jobs_screen.dart';
+import '../features/bulk_onboarding/presentation/bulk_onboarding_row_detail_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_rows_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_upload_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
@@ -121,6 +122,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                     builder: (context, state) => BulkOnboardingRowsScreen(
                       jobId: state.pathParameters['id'] ?? '',
                     ),
+                    routes: [
+                      GoRoute(
+                        path: ':rowId',
+                        builder: (context, state) => BulkOnboardingRowDetailScreen(
+                          jobId: state.pathParameters['id'] ?? '',
+                          rowId: state.pathParameters['rowId'] ?? '',
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -220,6 +230,9 @@ abstract final class AdminRoutes {
   static String bulkOnboardingJobDetail(String id) => '$bulkOnboarding/$id';
 
   static String bulkOnboardingJobRows(String id) => '$bulkOnboarding/$id/rows';
+
+  static String bulkOnboardingJobRowDetail(String jobId, String rowId) =>
+      '$bulkOnboarding/$jobId/rows/$rowId';
 
   static String supportTicketDetail(String id) => '$supportTickets/$id';
 
