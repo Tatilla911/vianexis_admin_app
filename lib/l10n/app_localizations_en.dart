@@ -1625,4 +1625,110 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bulkOnboardingActionProcessConfirm => 'Start processing';
+
+  @override
+  String get bulkOnboardingUploadCsv => 'Upload CSV';
+
+  @override
+  String get bulkOnboardingChooseFile => 'Choose file';
+
+  @override
+  String bulkOnboardingSelectedFile(String name) {
+    return 'Selected file: $name';
+  }
+
+  @override
+  String bulkOnboardingFileSize(String size) {
+    return 'File size: $size';
+  }
+
+  @override
+  String get bulkOnboardingUploadPreviewTitle => 'Upload preview';
+
+  @override
+  String get bulkOnboardingImportTemplate => 'Import template';
+
+  @override
+  String get bulkOnboardingDownloadTemplate => 'Download template';
+
+  @override
+  String get bulkOnboardingTemplateCopied => 'Template copied to clipboard.';
+
+  @override
+  String get bulkOnboardingCsvOnlyNotice =>
+      'CSV only in this phase. Excel import coming later.';
+
+  @override
+  String get bulkOnboardingExcelComingLater =>
+      'Excel import coming later. Please upload CSV for now.';
+
+  @override
+  String get bulkOnboardingNoRealProvisioningNotice =>
+      'No users, vehicles, trailers, or invitations are created by this upload.';
+
+  @override
+  String get bulkOnboardingHumanApprovalNotice =>
+      'Human approval is required before future processing.';
+
+  @override
+  String get bulkOnboardingValidationCompleted => 'Validation completed.';
+
+  @override
+  String get bulkOnboardingRowsParsed => 'Rows parsed.';
+
+  @override
+  String get bulkOnboardingUploadSuccessful => 'Upload successful.';
+
+  @override
+  String get bulkOnboardingUploadFailed => 'Upload failed.';
+
+  @override
+  String get bulkOnboardingUnsupportedFileType => 'Unsupported file type.';
+
+  @override
+  String get bulkOnboardingTooManyRows => 'Too many rows in file.';
+
+  @override
+  String get bulkOnboardingEmptyFile => 'The selected file is empty.';
+
+  @override
+  String get bulkOnboardingFileRequired => 'A CSV file is required.';
+
+  @override
+  String get bulkOnboardingUploadTypeRequired => 'Import type is required.';
+
+  @override
+  String get bulkOnboardingUploadTypeLabel => 'Import type';
+
+  @override
+  String get bulkOnboardingUploadCompanyIdLabel =>
+      'Company ID (optional until approval)';
+
+  @override
+  String get bulkOnboardingUploadCompanyNameLabel => 'Company name';
+
+  @override
+  String get bulkOnboardingUploadNoteLabel => 'Admin note (optional)';
+
+  @override
+  String get bulkOnboardingUploadProgress => 'Uploading…';
+
+  @override
+  String get bulkOnboardingUploadForbidden =>
+      'You do not have permission to upload imports.';
+
+  @override
+  String get bulkOnboardingMockUploadBadge => 'Mock upload preview';
+
+  @override
+  String get bulkOnboardingRowsSearchHint => 'Search rows';
+
+  @override
+  String get bulkOnboardingRowFilterValid => 'Valid';
+
+  @override
+  String get bulkOnboardingRowFilterProcessed => 'Processed';
+
+  @override
+  String get bulkOnboardingRowFilterFailed => 'Failed';
 }

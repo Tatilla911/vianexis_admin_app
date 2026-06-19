@@ -11,6 +11,7 @@ import '../features/audit_logs/presentation/audit_logs_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_job_detail_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_jobs_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_rows_screen.dart';
+import '../features/bulk_onboarding/presentation/bulk_onboarding_upload_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/registrations/presentation/registration_application_detail_screen.dart';
@@ -103,6 +104,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               child: BulkOnboardingJobsScreen(),
             ),
             routes: [
+              GoRoute(
+                path: 'upload',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: BulkOnboardingUploadScreen(),
+                ),
+              ),
               GoRoute(
                 path: ':id',
                 builder: (context, state) => BulkOnboardingJobDetailScreen(
@@ -198,6 +205,7 @@ abstract final class AdminRoutes {
   static const dashboard = '/dashboard';
   static const registrations = '/registrations';
   static const bulkOnboarding = '/bulk-onboarding';
+  static const bulkOnboardingUpload = '/bulk-onboarding/upload';
   static const aiReviews = '/ai-reviews';
   static const supportTickets = '/support/tickets';
   static const supportGrants = '/support/grants';

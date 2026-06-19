@@ -7,6 +7,7 @@ import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboardi
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_row_status.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_status.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_type.dart';
+import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_upload_result.dart';
 
 void main() {
   group('BulkOnboardingJob JSON parsing', () {
@@ -224,6 +225,57 @@ void main() {
       expect(summary.highRiskJobs, 1);
       expect(summary.invalidRows, 2);
       expect(summary.processingJobs, 1);
+    });
+
+    test('parses upload response summary', () {
+      final result = BulkOnboardingUploadResult.fromJson({
+        'job': {
+          'id': 77,
+          'companyName': 'Upload Co',
+          'submittedByUserId': 1,
+          'type': 'drivers',
+          'status': 'ready_for_review',
+          'totalRows': 3,
+          'validRows': 2,
+          'warningRows': 0,
+          'invalidRows': 0,
+          'duplicateRows': 1,
+          'processedRows': 0,
+          'failedRows': 0,
+          'riskLevel': 'medium',
+          'processingAvailable': false,
+        },
+        'summary': {
+          'totalRows': 3,
+          'validRows': 2,
+          'warningRows': 0,
+          'invalidRows': 0,
+          'duplicateRows': 1,
+        },
+        'processingAvailable': false,
+        'metadataOnly': true,
+      });
+
+      expect(result.job.id, '77');
+      expect(result.summary.duplicateRows, 1);
+      expect(result.processingAvailable, isFalse);
+    });
+
+    test('row search and extended filters', () {
+      const row = BulkOnboardingRow(
+        id: '1',
+        jobId: '9',
+        rowIndex: 1,
+        type: 'driver',
+        status: BulkOnboardingRowStatus.valid,
+        displayLabel: 'Driver One',
+        email: 'driver@test.com',
+        vehiclePlate: 'ABC123',
+      );
+
+      expect(row.matchesSearch('abc123'), isTrue);
+      expect(row.matchesFilter(BulkOnboardingRowListFilter.valid), isTrue);
+      expect(row.matchesFilter(BulkOnboardingRowListFilter.processed), isFalse);
     });
   });
 }

@@ -100,21 +100,45 @@ class BulkOnboardingRow {
   bool matchesFilter(BulkOnboardingRowListFilter filter) {
     return switch (filter) {
       BulkOnboardingRowListFilter.all => true,
+      BulkOnboardingRowListFilter.valid =>
+        status == BulkOnboardingRowStatus.valid,
       BulkOnboardingRowListFilter.invalid =>
         status == BulkOnboardingRowStatus.invalid,
       BulkOnboardingRowListFilter.warning =>
         status == BulkOnboardingRowStatus.warning,
       BulkOnboardingRowListFilter.duplicate =>
         status == BulkOnboardingRowStatus.duplicate,
+      BulkOnboardingRowListFilter.processed =>
+        status == BulkOnboardingRowStatus.processed,
+      BulkOnboardingRowListFilter.failed =>
+        status == BulkOnboardingRowStatus.failed,
     };
+  }
+
+  bool matchesSearch(String query) {
+    final term = query.trim().toLowerCase();
+    if (term.isEmpty) return true;
+    final haystack = [
+      displayLabel,
+      name,
+      email,
+      phone,
+      vehiclePlate,
+      trailerPlate,
+      duplicateReason,
+    ].whereType<String>().join(' ').toLowerCase();
+    return haystack.contains(term);
   }
 }
 
 enum BulkOnboardingRowListFilter {
   all,
+  valid,
   invalid,
   warning,
   duplicate,
+  processed,
+  failed,
 }
 
 List<String> _parseStringList(Object? raw) {

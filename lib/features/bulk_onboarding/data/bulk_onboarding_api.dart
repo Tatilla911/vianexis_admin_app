@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
@@ -6,6 +7,8 @@ import '../domain/bulk_onboarding_job.dart';
 import '../domain/bulk_onboarding_row.dart';
 import '../domain/bulk_onboarding_row_status.dart';
 import '../domain/bulk_onboarding_status.dart';
+import '../domain/bulk_onboarding_type.dart';
+import '../domain/bulk_onboarding_upload_result.dart';
 
 class BulkOnboardingApi {
   BulkOnboardingApi(this._apiClient);
@@ -52,6 +55,7 @@ class BulkOnboardingApi {
   Future<BulkOnboardingRowsPage> listRows({
     required String jobId,
     BulkOnboardingRowStatus? status,
+    String? search,
     int limit = 200,
     int offset = 0,
   }) async {
@@ -60,6 +64,7 @@ class BulkOnboardingApi {
       queryParameters: {
         if (status != null && status != BulkOnboardingRowStatus.unknown)
           'status': status.backendValue,
+        if (search != null && search.trim().isNotEmpty) 'search': search.trim(),
         'limit': limit,
         'offset': offset,
       },
@@ -69,6 +74,43 @@ class BulkOnboardingApi {
       return const BulkOnboardingRowsPage(items: [], total: 0);
     }
     return BulkOnboardingRowsPage.fromJson(data);
+  }
+
+  Future<String> downloadTemplate(BulkOnboardingJobType type) async {
+    final response = await _apiClient.get<String>(
+      '/platform-admin/bulk-onboarding/templates/${type.backendValue}.csv',
+      options: Options(responseType: ResponseType.plain),
+    );
+    return response.data ?? '';
+  }
+
+  Future<BulkOnboardingUploadResult> uploadCsv({
+    required List<int> bytes,
+    required String fileName,
+    required BulkOnboardingJobType type,
+    int? companyId,
+    String? companyName,
+    String? note,
+    ProgressCallback? onSendProgress,
+  }) async {
+    final formData = FormData.fromMap({
+      'file': MultipartFile.fromBytes(bytes, filename: fileName),
+      'type': type.backendValue,
+      if (companyId != null) 'companyId': companyId,
+      if (companyName?.trim().isNotEmpty ?? false) 'companyName': companyName!.trim(),
+      if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
+    });
+
+    final response = await _apiClient.postMultipart<Map<String, dynamic>>(
+      '/platform-admin/bulk-onboarding/jobs/upload',
+      data: formData,
+      onSendProgress: onSendProgress,
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty bulk onboarding upload response');
+    }
+    return BulkOnboardingUploadResult.fromJson(data);
   }
 
   Future<BulkOnboardingJob> submitAction({

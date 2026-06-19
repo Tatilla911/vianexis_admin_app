@@ -82,6 +82,13 @@ System health AI summaries are **advisory only**. The app must not offer automat
 3. **AI advisory** — deterministic AI summary is advisory; UI shows explicit notice.
 4. **Audit** — validate/approve/reject/cancel/process actions require confirmation and are audit logged on backend.
 
+## Phase 11 — CSV upload preview
+
+1. **CSV only** — Excel/XLSX rejected; UI shows localized fallback message.
+2. **No provisioning** — upload creates metadata rows only; `processingAvailable` stays false until human approve.
+3. **No raw file retention** — backend stores file name/size/mime + parsed row metadata only.
+4. **Upload audit** — CSV uploaded/parsed/validation events are platform audit logged.
+
 ## Release checklist
 
 - [ ] API base URL set via dart-define (no hardcoded production secrets)

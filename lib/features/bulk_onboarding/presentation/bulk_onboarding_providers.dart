@@ -6,12 +6,15 @@ import '../domain/bulk_onboarding_action_request.dart';
 import '../domain/bulk_onboarding_dashboard_summary.dart';
 import '../domain/bulk_onboarding_job.dart';
 import '../domain/bulk_onboarding_row.dart';
+import '../domain/bulk_onboarding_row_status.dart';
 
 extension AdminRoleBulkOnboardingDecisions on AdminRole {
   bool get canDecideBulkOnboarding {
     return this == AdminRole.superAdmin ||
         this == AdminRole.onboardingReviewer;
   }
+
+  bool get canUploadBulkOnboarding => canDecideBulkOnboarding;
 }
 
 class BulkOnboardingListQuery {
@@ -96,9 +99,15 @@ final bulkOnboardingJobDetailProvider =
     });
 
 final bulkOnboardingRowsProvider = FutureProvider.autoDispose
-    .family<List<BulkOnboardingRow>, String>((ref, jobId) {
-      return ref.watch(bulkOnboardingRepositoryProvider).fetchRows(jobId);
-    });
+    .family<List<BulkOnboardingRow>, ({String jobId, BulkOnboardingRowStatus? status, String search})>(
+      (ref, query) {
+        return ref.watch(bulkOnboardingRepositoryProvider).fetchRows(
+          query.jobId,
+          status: query.status,
+          search: query.search.trim().isEmpty ? null : query.search.trim(),
+        );
+      },
+    );
 
 final bulkOnboardingSummaryProvider =
     AsyncNotifierProvider<BulkOnboardingSummaryNotifier, BulkOnboardingDashboardSummary>(
@@ -130,7 +139,13 @@ Future<void> submitBulkOnboardingAction(
     request: request,
   );
   ref.invalidate(bulkOnboardingJobDetailProvider(jobId));
-  ref.invalidate(bulkOnboardingRowsProvider(jobId));
+  ref.invalidate(
+    bulkOnboardingRowsProvider((
+      jobId: jobId,
+      status: null,
+      search: '',
+    )),
+  );
   await ref.read(bulkOnboardingJobsProvider.notifier).refresh();
   await ref.read(bulkOnboardingSummaryProvider.notifier).refresh();
 }

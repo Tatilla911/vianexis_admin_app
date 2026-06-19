@@ -79,6 +79,7 @@ class ApiClient {
     Object? data,
     Map<String, dynamic>? queryParameters,
     Options? options,
+    ProgressCallback? onSendProgress,
   }) async {
     _assertConfigured();
     try {
@@ -87,6 +88,28 @@ class ApiClient {
         data: data,
         queryParameters: queryParameters,
         options: options,
+        onSendProgress: onSendProgress,
+      );
+    } on DioException catch (error) {
+      throw mapDioException(error);
+    }
+  }
+
+  Future<Response<T>> postMultipart<T>(
+    String path, {
+    required FormData data,
+    ProgressCallback? onSendProgress,
+  }) async {
+    _assertConfigured();
+    try {
+      return await dio.post<T>(
+        path,
+        data: data,
+        options: Options(
+          headers: const {'Accept': 'application/json'},
+          contentType: 'multipart/form-data',
+        ),
+        onSendProgress: onSendProgress,
       );
     } on DioException catch (error) {
       throw mapDioException(error);

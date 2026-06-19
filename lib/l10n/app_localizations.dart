@@ -3133,6 +3133,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start processing'**
   String get bulkOnboardingActionProcessConfirm;
+
+  /// No description provided for @bulkOnboardingUploadCsv.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload CSV'**
+  String get bulkOnboardingUploadCsv;
+
+  /// No description provided for @bulkOnboardingChooseFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose file'**
+  String get bulkOnboardingChooseFile;
+
+  /// No description provided for @bulkOnboardingSelectedFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected file: {name}'**
+  String bulkOnboardingSelectedFile(String name);
+
+  /// No description provided for @bulkOnboardingFileSize.
+  ///
+  /// In en, this message translates to:
+  /// **'File size: {size}'**
+  String bulkOnboardingFileSize(String size);
+
+  /// No description provided for @bulkOnboardingUploadPreviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload preview'**
+  String get bulkOnboardingUploadPreviewTitle;
+
+  /// No description provided for @bulkOnboardingImportTemplate.
+  ///
+  /// In en, this message translates to:
+  /// **'Import template'**
+  String get bulkOnboardingImportTemplate;
+
+  /// No description provided for @bulkOnboardingDownloadTemplate.
+  ///
+  /// In en, this message translates to:
+  /// **'Download template'**
+  String get bulkOnboardingDownloadTemplate;
+
+  /// No description provided for @bulkOnboardingTemplateCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Template copied to clipboard.'**
+  String get bulkOnboardingTemplateCopied;
+
+  /// No description provided for @bulkOnboardingCsvOnlyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'CSV only in this phase. Excel import coming later.'**
+  String get bulkOnboardingCsvOnlyNotice;
+
+  /// No description provided for @bulkOnboardingExcelComingLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Excel import coming later. Please upload CSV for now.'**
+  String get bulkOnboardingExcelComingLater;
+
+  /// No description provided for @bulkOnboardingNoRealProvisioningNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'No users, vehicles, trailers, or invitations are created by this upload.'**
+  String get bulkOnboardingNoRealProvisioningNotice;
+
+  /// No description provided for @bulkOnboardingHumanApprovalNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Human approval is required before future processing.'**
+  String get bulkOnboardingHumanApprovalNotice;
+
+  /// No description provided for @bulkOnboardingValidationCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Validation completed.'**
+  String get bulkOnboardingValidationCompleted;
+
+  /// No description provided for @bulkOnboardingRowsParsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Rows parsed.'**
+  String get bulkOnboardingRowsParsed;
+
+  /// No description provided for @bulkOnboardingUploadSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload successful.'**
+  String get bulkOnboardingUploadSuccessful;
+
+  /// No description provided for @bulkOnboardingUploadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload failed.'**
+  String get bulkOnboardingUploadFailed;
+
+  /// No description provided for @bulkOnboardingUnsupportedFileType.
+  ///
+  /// In en, this message translates to:
+  /// **'Unsupported file type.'**
+  String get bulkOnboardingUnsupportedFileType;
+
+  /// No description provided for @bulkOnboardingTooManyRows.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many rows in file.'**
+  String get bulkOnboardingTooManyRows;
+
+  /// No description provided for @bulkOnboardingEmptyFile.
+  ///
+  /// In en, this message translates to:
+  /// **'The selected file is empty.'**
+  String get bulkOnboardingEmptyFile;
+
+  /// No description provided for @bulkOnboardingFileRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'A CSV file is required.'**
+  String get bulkOnboardingFileRequired;
+
+  /// No description provided for @bulkOnboardingUploadTypeRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Import type is required.'**
+  String get bulkOnboardingUploadTypeRequired;
+
+  /// No description provided for @bulkOnboardingUploadTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Import type'**
+  String get bulkOnboardingUploadTypeLabel;
+
+  /// No description provided for @bulkOnboardingUploadCompanyIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Company ID (optional until approval)'**
+  String get bulkOnboardingUploadCompanyIdLabel;
+
+  /// No description provided for @bulkOnboardingUploadCompanyNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Company name'**
+  String get bulkOnboardingUploadCompanyNameLabel;
+
+  /// No description provided for @bulkOnboardingUploadNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin note (optional)'**
+  String get bulkOnboardingUploadNoteLabel;
+
+  /// No description provided for @bulkOnboardingUploadProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading…'**
+  String get bulkOnboardingUploadProgress;
+
+  /// No description provided for @bulkOnboardingUploadForbidden.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to upload imports.'**
+  String get bulkOnboardingUploadForbidden;
+
+  /// No description provided for @bulkOnboardingMockUploadBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock upload preview'**
+  String get bulkOnboardingMockUploadBadge;
+
+  /// No description provided for @bulkOnboardingRowsSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search rows'**
+  String get bulkOnboardingRowsSearchHint;
+
+  /// No description provided for @bulkOnboardingRowFilterValid.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid'**
+  String get bulkOnboardingRowFilterValid;
+
+  /// No description provided for @bulkOnboardingRowFilterProcessed.
+  ///
+  /// In en, this message translates to:
+  /// **'Processed'**
+  String get bulkOnboardingRowFilterProcessed;
+
+  /// No description provided for @bulkOnboardingRowFilterFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get bulkOnboardingRowFilterFailed;
 }
 
 class _AppLocalizationsDelegate

@@ -11,6 +11,7 @@ import '../domain/bulk_onboarding_row.dart';
 import '../domain/bulk_onboarding_row_status.dart';
 import '../domain/bulk_onboarding_status.dart';
 import '../domain/bulk_onboarding_type.dart';
+import '../domain/bulk_onboarding_upload_result.dart';
 import 'bulk_onboarding_api.dart';
 
 abstract class BulkOnboardingRepository {
@@ -18,7 +19,23 @@ abstract class BulkOnboardingRepository {
 
   Future<BulkOnboardingJob> fetchJob(String id);
 
-  Future<List<BulkOnboardingRow>> fetchRows(String jobId);
+  Future<List<BulkOnboardingRow>> fetchRows(
+    String jobId, {
+    BulkOnboardingRowStatus? status,
+    String? search,
+  });
+
+  Future<BulkOnboardingUploadResult> uploadCsv({
+    required List<int> bytes,
+    required String fileName,
+    required BulkOnboardingJobType type,
+    int? companyId,
+    String? companyName,
+    String? note,
+    void Function(int sent, int total)? onProgress,
+  });
+
+  Future<String> downloadTemplate(BulkOnboardingJobType type);
 
   Future<BulkOnboardingJob> submitAction({
     required String jobId,
@@ -48,9 +65,46 @@ class LiveBulkOnboardingRepository implements BulkOnboardingRepository {
   Future<BulkOnboardingJob> fetchJob(String id) => _api.getJob(id);
 
   @override
-  Future<List<BulkOnboardingRow>> fetchRows(String jobId) async {
-    final page = await _api.listRows(jobId: jobId, limit: 500);
+  Future<List<BulkOnboardingRow>> fetchRows(
+    String jobId, {
+    BulkOnboardingRowStatus? status,
+    String? search,
+  }) async {
+    final page = await _api.listRows(
+      jobId: jobId,
+      status: status,
+      search: search,
+      limit: 500,
+    );
     return page.items;
+  }
+
+  @override
+  Future<BulkOnboardingUploadResult> uploadCsv({
+    required List<int> bytes,
+    required String fileName,
+    required BulkOnboardingJobType type,
+    int? companyId,
+    String? companyName,
+    String? note,
+    void Function(int sent, int total)? onProgress,
+  }) {
+    return _api.uploadCsv(
+      bytes: bytes,
+      fileName: fileName,
+      type: type,
+      companyId: companyId,
+      companyName: companyName,
+      note: note,
+      onSendProgress: onProgress == null
+          ? null
+          : (sent, total) => onProgress(sent, total),
+    );
+  }
+
+  @override
+  Future<String> downloadTemplate(BulkOnboardingJobType type) {
+    return _api.downloadTemplate(type);
   }
 
   @override
@@ -198,9 +252,109 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
   }
 
   @override
-  Future<List<BulkOnboardingRow>> fetchRows(String jobId) async {
+  Future<List<BulkOnboardingRow>> fetchRows(
+    String jobId, {
+    BulkOnboardingRowStatus? status,
+    String? search,
+  }) async {
     await Future<void>.delayed(const Duration(milliseconds: 150));
-    return List<BulkOnboardingRow>.from(_rowsByJob[jobId] ?? const []);
+    final rows = List<BulkOnboardingRow>.from(_rowsByJob[jobId] ?? const []);
+    return rows
+        .where((row) => status == null || row.status == status)
+        .where((row) => search == null || row.matchesSearch(search))
+        .toList(growable: false);
+  }
+
+  @override
+  Future<BulkOnboardingUploadResult> uploadCsv({
+    required List<int> bytes,
+    required String fileName,
+    required BulkOnboardingJobType type,
+    int? companyId,
+    String? companyName,
+    String? note,
+    void Function(int sent, int total)? onProgress,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 400));
+    if (onProgress != null) {
+      onProgress(bytes.length, bytes.length);
+    }
+    final mockJob = BulkOnboardingJob(
+      id: '599',
+      companyId: companyId,
+      companyName: companyName ?? 'Mock CSV Upload Co',
+      submittedByUserId: 1,
+      submittedByName: 'Mock Upload',
+      sourceFileName: fileName,
+      sourceFileMimeType: 'text/csv',
+      sourceFileSizeBytes: bytes.length,
+      type: type,
+      status: BulkOnboardingJobStatus.readyForReview,
+      totalRows: 2,
+      validRows: 1,
+      warningRows: 0,
+      invalidRows: 0,
+      duplicateRows: 1,
+      processedRows: 0,
+      failedRows: 0,
+      aiSummary:
+          'Advisory AI review (mock upload preview). Human approval required.',
+      riskLevel: BulkOnboardingRiskLevel.medium,
+      validationSummary:
+          '{"recommendedAction":"review","advisoryOnly":true}',
+      processingAvailable: false,
+      createdAt: DateTime.now().toUtc(),
+    );
+    _jobs.insert(0, mockJob);
+    _rowsByJob[mockJob.id] = [
+      BulkOnboardingRow(
+        id: '9100',
+        jobId: mockJob.id,
+        rowIndex: 1,
+        type: 'driver',
+        status: BulkOnboardingRowStatus.valid,
+        displayLabel: 'Mock Valid Row',
+        name: 'Mock Valid Row',
+        email: 'mock-valid@example.com',
+      ),
+      BulkOnboardingRow(
+        id: '9101',
+        jobId: mockJob.id,
+        rowIndex: 2,
+        type: 'driver',
+        status: BulkOnboardingRowStatus.duplicate,
+        displayLabel: 'Mock Duplicate Row',
+        name: 'Mock Duplicate Row',
+        email: 'mock-dup@example.com',
+        duplicateReason: 'duplicate_email_in_import',
+      ),
+    ];
+    return BulkOnboardingUploadResult(
+      job: mockJob,
+      summary: const BulkOnboardingValidationCounts(
+        totalRows: 2,
+        validRows: 1,
+        duplicateRows: 1,
+      ),
+      processingAvailable: false,
+      metadataOnly: true,
+    );
+  }
+
+  @override
+  Future<String> downloadTemplate(BulkOnboardingJobType type) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    return switch (type) {
+      BulkOnboardingJobType.drivers =>
+        'name,email,phone,country,role,preferredLanguage,driverIdentifier\n',
+      BulkOnboardingJobType.vehicles => 'vehiclePlate,country,vehicleType\n',
+      BulkOnboardingJobType.trailers => 'trailerPlate,country,trailerType\n',
+      BulkOnboardingJobType.mixedCompanyImport =>
+        'type,name,email,phone,country,role,vehiclePlate,trailerPlate\n',
+      BulkOnboardingJobType.companyUsers =>
+        'name,email,phone,country,role,preferredLanguage,employeeId\n',
+      BulkOnboardingJobType.unknown => 'name,email\n',
+    };
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/auth/admin_auth_state.dart';
 import '../../../app/app_router.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
@@ -35,11 +36,19 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
     final query = ref.watch(bulkOnboardingListQueryProvider);
     final jobsAsync = ref.watch(filteredBulkOnboardingJobsProvider);
     final usesMock = ref.watch(bulkOnboardingRepositoryProvider).usesMockData;
+    final canUpload =
+        ref.watch(adminAuthProvider).user?.role.canUploadBulkOnboarding ?? false;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.bulkOnboardingTitle),
         actions: [
+          if (canUpload)
+            IconButton(
+              tooltip: resolveBulkOnboardingKey(context, 'bulkOnboardingUploadCsv'),
+              onPressed: () => context.push(AdminRoutes.bulkOnboardingUpload),
+              icon: const Icon(Icons.upload_file),
+            ),
           if (usesMock)
             Padding(
               padding: const EdgeInsets.only(right: 16),

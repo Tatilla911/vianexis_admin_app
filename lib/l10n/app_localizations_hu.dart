@@ -1653,4 +1653,111 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get bulkOnboardingActionProcessConfirm => 'Feldolgozás indítása';
+
+  @override
+  String get bulkOnboardingUploadCsv => 'CSV feltöltés';
+
+  @override
+  String get bulkOnboardingChooseFile => 'Fájl kiválasztása';
+
+  @override
+  String bulkOnboardingSelectedFile(String name) {
+    return 'Kiválasztott fájl: $name';
+  }
+
+  @override
+  String bulkOnboardingFileSize(String size) {
+    return 'Fájlméret: $size';
+  }
+
+  @override
+  String get bulkOnboardingUploadPreviewTitle => 'Feltöltési előnézet';
+
+  @override
+  String get bulkOnboardingImportTemplate => 'Import sablon';
+
+  @override
+  String get bulkOnboardingDownloadTemplate => 'Sablon letöltése';
+
+  @override
+  String get bulkOnboardingTemplateCopied => 'Sablon a vágólapra másolva.';
+
+  @override
+  String get bulkOnboardingCsvOnlyNotice =>
+      'Ebben a fázisban csak CSV. Excel import később érkezik.';
+
+  @override
+  String get bulkOnboardingExcelComingLater =>
+      'Excel import később érkezik. Most CSV-t töltsön fel.';
+
+  @override
+  String get bulkOnboardingNoRealProvisioningNotice =>
+      'A feltöltés nem hoz létre felhasználót, járművet, pótkocsit vagy meghívót.';
+
+  @override
+  String get bulkOnboardingHumanApprovalNotice =>
+      'Emberi jóváhagyás szükséges a jövőbeli feldolgozáshoz.';
+
+  @override
+  String get bulkOnboardingValidationCompleted => 'Validálás kész.';
+
+  @override
+  String get bulkOnboardingRowsParsed => 'Sorok feldolgozva.';
+
+  @override
+  String get bulkOnboardingUploadSuccessful => 'Feltöltés sikeres.';
+
+  @override
+  String get bulkOnboardingUploadFailed => 'Feltöltés sikertelen.';
+
+  @override
+  String get bulkOnboardingUnsupportedFileType => 'Nem támogatott fájltípus.';
+
+  @override
+  String get bulkOnboardingTooManyRows => 'Túl sok sor a fájlban.';
+
+  @override
+  String get bulkOnboardingEmptyFile => 'A kiválasztott fájl üres.';
+
+  @override
+  String get bulkOnboardingFileRequired => 'CSV fájl szükséges.';
+
+  @override
+  String get bulkOnboardingUploadTypeRequired =>
+      'Import típus megadása kötelező.';
+
+  @override
+  String get bulkOnboardingUploadTypeLabel => 'Import típus';
+
+  @override
+  String get bulkOnboardingUploadCompanyIdLabel =>
+      'Cég azonosító (opcionális jóváhagyásig)';
+
+  @override
+  String get bulkOnboardingUploadCompanyNameLabel => 'Cégnév';
+
+  @override
+  String get bulkOnboardingUploadNoteLabel => 'Admin megjegyzés (opcionális)';
+
+  @override
+  String get bulkOnboardingUploadProgress => 'Feltöltés…';
+
+  @override
+  String get bulkOnboardingUploadForbidden =>
+      'Nincs jogosultsága import feltöltéshez.';
+
+  @override
+  String get bulkOnboardingMockUploadBadge => 'Mock feltöltési előnézet';
+
+  @override
+  String get bulkOnboardingRowsSearchHint => 'Sorok keresése';
+
+  @override
+  String get bulkOnboardingRowFilterValid => 'Érvényes';
+
+  @override
+  String get bulkOnboardingRowFilterProcessed => 'Feldolgozott';
+
+  @override
+  String get bulkOnboardingRowFilterFailed => 'Sikertelen';
 }

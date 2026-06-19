@@ -59,6 +59,25 @@ Live integration is wired for:
 
 Navigation visibility: `super_admin`, `onboarding_reviewer` only.
 
+## Phase 11 status (CSV upload + import preview)
+
+- `POST /platform-admin/bulk-onboarding/jobs/upload` (multipart CSV, auto-validation)
+- `GET /platform-admin/bulk-onboarding/templates/:type.csv`
+- Row list supports `status` + `search` query params
+- Admin route: `/bulk-onboarding/upload` (upload screen with file picker, template copy, safety notices)
+- Mock upload preview when API is unconfigured (badge shown)
+- Excel/XLSX rejected with localized “coming later” message
+
+Run locally:
+
+```bash
+flutter pub get
+flutter gen-l10n
+flutter run --dart-define=API_BASE_URL=http://localhost:3000
+```
+
+Upload is visible only for `super_admin` and `onboarding_reviewer`.
+
 ## Documentation
 
 - [Architecture](docs/architecture.md)
