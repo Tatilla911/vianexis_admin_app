@@ -412,4 +412,259 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get registrationDecisionError =>
       'A regisztrációs döntés mentése sikertelen.';
+
+  @override
+  String get systemHealthLoadError =>
+      'A rendszerállapot adatok betöltése sikertelen.';
+
+  @override
+  String get systemHealthActionUnavailable =>
+      'Ez a művelet még nem érhető el a csatlakoztatott backenden.';
+
+  @override
+  String get systemHealthMockDataBadge => 'Mintaadat';
+
+  @override
+  String get systemHealthServicesTitle => 'Szolgáltatás állapota';
+
+  @override
+  String get systemHealthEventsTitle => 'Állapot események';
+
+  @override
+  String get systemHealthEventsEmpty =>
+      'Nincs a szűrőnek megfelelő állapot esemény.';
+
+  @override
+  String get systemHealthEventDetailTitle => 'Állapot esemény';
+
+  @override
+  String systemHealthEventStartedAt(String date) {
+    return 'Kezdés: $date';
+  }
+
+  @override
+  String get systemHealthOpenModule => 'Rendszerállapot megnyitása';
+
+  @override
+  String systemHealthOverallStatusLabel(String status) {
+    return 'Összesített állapot: $status';
+  }
+
+  @override
+  String systemHealthLastUpdated(String date) {
+    return 'Utolsó frissítés: $date';
+  }
+
+  @override
+  String get systemHealthMetricHealthyServices => 'Egészséges szolgáltatások';
+
+  @override
+  String get systemHealthMetricWarningServices =>
+      'Figyelmeztető szolgáltatások';
+
+  @override
+  String get systemHealthMetricCriticalServices => 'Kritikus szolgáltatások';
+
+  @override
+  String get systemHealthMetricCriticalEvents => 'Kritikus események';
+
+  @override
+  String get systemHealthMetricWarningEvents => 'Figyelmeztető események';
+
+  @override
+  String get systemHealthMetricFailedJobs => 'Sikertelen feladatok';
+
+  @override
+  String get systemHealthSeverityInfo => 'Információ';
+
+  @override
+  String get systemHealthSeverityWarning => 'Figyelmeztetés';
+
+  @override
+  String get systemHealthSeverityCritical => 'Kritikus';
+
+  @override
+  String get systemHealthSeverityUnknown => 'Ismeretlen';
+
+  @override
+  String get systemHealthOverallHealthy => 'Egészséges';
+
+  @override
+  String get systemHealthOverallDegraded => 'Romlott';
+
+  @override
+  String get systemHealthOverallCritical => 'Kritikus';
+
+  @override
+  String get systemHealthOverallUnknown => 'Ismeretlen';
+
+  @override
+  String get systemHealthFilterAll => 'Összes';
+
+  @override
+  String get systemHealthFilterCritical => 'Kritikus';
+
+  @override
+  String get systemHealthFilterWarning => 'Figyelmeztetés';
+
+  @override
+  String get systemHealthFilterOpen => 'Nyitott';
+
+  @override
+  String get systemHealthFilterAcknowledged => 'Nyugtázott';
+
+  @override
+  String get systemHealthFilterResolved => 'Megoldott';
+
+  @override
+  String get systemHealthFilterTenantImpacting => 'Bérlőt érintő';
+
+  @override
+  String get systemHealthEventStatusOpen => 'Nyitott';
+
+  @override
+  String get systemHealthEventStatusAcknowledged => 'Nyugtázott';
+
+  @override
+  String get systemHealthEventStatusInvestigating => 'Vizsgálat alatt';
+
+  @override
+  String get systemHealthEventStatusResolved => 'Megoldott';
+
+  @override
+  String get systemHealthEventStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get systemHealthImpactNone => 'Nincs bérlőhatás';
+
+  @override
+  String get systemHealthImpactSingleTenant => 'Egy bérlő';
+
+  @override
+  String get systemHealthImpactMultipleTenants => 'Több bérlő';
+
+  @override
+  String get systemHealthImpactPlatformWide => 'Platform szintű';
+
+  @override
+  String get systemHealthImpactUnknown => 'Ismeretlen hatás';
+
+  @override
+  String get systemHealthServiceBackendApi => 'Backend API';
+
+  @override
+  String get systemHealthServiceDatabase => 'Adatbázis';
+
+  @override
+  String get systemHealthServiceDocumentStorage => 'Dokumentumtár';
+
+  @override
+  String get systemHealthServiceBackgroundWorkers => 'Háttérfolyamatok';
+
+  @override
+  String get systemHealthServiceAiOcrWorkers => 'AI / OCR feldolgozók';
+
+  @override
+  String get systemHealthServiceTranslationService => 'Fordítási szolgáltatás';
+
+  @override
+  String get systemHealthServiceEmailService => 'E-mail szolgáltatás';
+
+  @override
+  String get systemHealthServicePushNotificationService =>
+      'Push értesítési szolgáltatás';
+
+  @override
+  String get systemHealthServiceQueueSystem => 'Várólista rendszer';
+
+  @override
+  String get systemHealthServiceAuthService => 'Hitelesítési szolgáltatás';
+
+  @override
+  String get systemHealthAiDiagnosticTitle => 'AI diagnosztikai összefoglaló';
+
+  @override
+  String get systemHealthAiAdvisoryOnly =>
+      'Csak tanácsadó jellegű — nem automatikus javítási utasítás.';
+
+  @override
+  String get systemHealthRecommendedAction => 'Ajánlott teendő';
+
+  @override
+  String get systemHealthActionAcknowledgeTitle => 'Esemény nyugtázása';
+
+  @override
+  String get systemHealthActionEscalateTitle => 'Esemény eszkalálása';
+
+  @override
+  String get systemHealthActionAuditNotice =>
+      'A művelet a platform audit naplóban rögzítésre kerül.';
+
+  @override
+  String get systemHealthActionNoAutoRepair =>
+      'Nem történik automatikus éles környezeti javítás.';
+
+  @override
+  String get systemHealthActionNoteLabel => 'Eszkalációs megjegyzés';
+
+  @override
+  String get systemHealthActionNoteRequired => 'Legalább 3 karakter szükséges.';
+
+  @override
+  String get systemHealthActionAcknowledgeBody =>
+      'Erősítse meg az állapot esemény nyugtázását.';
+
+  @override
+  String get systemHealthActionCancel => 'Mégse';
+
+  @override
+  String get systemHealthActionAcknowledgeConfirm => 'Nyugtázás';
+
+  @override
+  String get systemHealthActionEscalateConfirm => 'Eszkalálás';
+
+  @override
+  String get systemHealthActionAcknowledge => 'Nyugtázás';
+
+  @override
+  String get systemHealthActionEscalate => 'Eszkalálás támogatásnak';
+
+  @override
+  String get systemHealthActionSuccess => 'Az állapot művelet mentve.';
+
+  @override
+  String get systemHealthActionError =>
+      'Az állapot művelet mentése sikertelen.';
+
+  @override
+  String get systemHealthCreateTicketDisabled =>
+      'Támogatási jegy létrehozása (hamarosan)';
+
+  @override
+  String get systemHealthPrivacyNotice =>
+      'Csak metaadat — bérlői fuvar-, dokumentum- vagy üzenettartalom nem jelenik meg.';
+
+  @override
+  String get systemHealthFieldServiceName => 'Szolgáltatás';
+
+  @override
+  String get systemHealthFieldTenantImpact => 'Bérlőhatás';
+
+  @override
+  String get systemHealthFieldAffectedCompany => 'Érintett cég';
+
+  @override
+  String get systemHealthFieldStartedAt => 'Kezdés';
+
+  @override
+  String get systemHealthFieldLastSeenAt => 'Utoljára látva';
+
+  @override
+  String get systemHealthFieldResolvedAt => 'Megoldva';
+
+  @override
+  String get systemHealthFieldFailedJobs => 'Sikertelen feladatok';
+
+  @override
+  String get systemHealthFieldCorrelationId => 'Korrelációs azonosító';
 }

@@ -20,4 +20,7 @@ abstract final class LocalizationKeys {
   static const roleSupportAdmin = 'roleSupportAdmin';
   static const roleOnboardingReviewer = 'roleOnboardingReviewer';
   static const roleBillingAdmin = 'roleBillingAdmin';
+
+  static const systemHealthLoadError = 'systemHealthLoadError';
+  static const systemHealthActionUnavailable = 'systemHealthActionUnavailable';
 }

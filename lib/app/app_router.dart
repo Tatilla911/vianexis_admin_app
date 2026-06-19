@@ -14,7 +14,8 @@ import '../features/registrations/presentation/registration_applications_screen.
 import '../features/settings/admin_settings_screen.dart';
 import '../features/support/support_access_grants_screen.dart';
 import '../features/support/support_tickets_screen.dart';
-import '../features/system_health/system_health_screen.dart';
+import '../features/system_health/presentation/system_health_event_detail_screen.dart';
+import '../features/system_health/presentation/system_health_screen.dart';
 
 class RouterRefreshNotifier extends ChangeNotifier {
   RouterRefreshNotifier(this._ref) {
@@ -113,6 +114,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: SystemHealthScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: 'events/:id',
+                builder: (context, state) => SystemHealthEventDetailScreen(
+                  eventId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: AdminRoutes.auditLogs,
@@ -142,6 +151,8 @@ abstract final class AdminRoutes {
   static const systemHealth = '/system-health';
   static const auditLogs = '/audit-logs';
   static const settings = '/settings';
+
+  static String systemHealthEventDetail(String id) => '$systemHealth/events/$id';
 
   static String registrationDetail(String id) => '$registrations/$id';
 

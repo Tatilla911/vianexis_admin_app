@@ -409,4 +409,255 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get registrationDecisionError =>
       'Could not save registration decision.';
+
+  @override
+  String get systemHealthLoadError => 'Could not load system health data.';
+
+  @override
+  String get systemHealthActionUnavailable =>
+      'This action is not available on the connected backend yet.';
+
+  @override
+  String get systemHealthMockDataBadge => 'Mock data';
+
+  @override
+  String get systemHealthServicesTitle => 'Service status';
+
+  @override
+  String get systemHealthEventsTitle => 'Health events';
+
+  @override
+  String get systemHealthEventsEmpty => 'No health events match your filters.';
+
+  @override
+  String get systemHealthEventDetailTitle => 'Health event';
+
+  @override
+  String systemHealthEventStartedAt(String date) {
+    return 'Started $date';
+  }
+
+  @override
+  String get systemHealthOpenModule => 'Open system health';
+
+  @override
+  String systemHealthOverallStatusLabel(String status) {
+    return 'Overall status: $status';
+  }
+
+  @override
+  String systemHealthLastUpdated(String date) {
+    return 'Last updated $date';
+  }
+
+  @override
+  String get systemHealthMetricHealthyServices => 'Healthy services';
+
+  @override
+  String get systemHealthMetricWarningServices => 'Warning services';
+
+  @override
+  String get systemHealthMetricCriticalServices => 'Critical services';
+
+  @override
+  String get systemHealthMetricCriticalEvents => 'Critical events';
+
+  @override
+  String get systemHealthMetricWarningEvents => 'Warning events';
+
+  @override
+  String get systemHealthMetricFailedJobs => 'Failed jobs';
+
+  @override
+  String get systemHealthSeverityInfo => 'Info';
+
+  @override
+  String get systemHealthSeverityWarning => 'Warning';
+
+  @override
+  String get systemHealthSeverityCritical => 'Critical';
+
+  @override
+  String get systemHealthSeverityUnknown => 'Unknown';
+
+  @override
+  String get systemHealthOverallHealthy => 'Healthy';
+
+  @override
+  String get systemHealthOverallDegraded => 'Degraded';
+
+  @override
+  String get systemHealthOverallCritical => 'Critical';
+
+  @override
+  String get systemHealthOverallUnknown => 'Unknown';
+
+  @override
+  String get systemHealthFilterAll => 'All';
+
+  @override
+  String get systemHealthFilterCritical => 'Critical';
+
+  @override
+  String get systemHealthFilterWarning => 'Warning';
+
+  @override
+  String get systemHealthFilterOpen => 'Open';
+
+  @override
+  String get systemHealthFilterAcknowledged => 'Acknowledged';
+
+  @override
+  String get systemHealthFilterResolved => 'Resolved';
+
+  @override
+  String get systemHealthFilterTenantImpacting => 'Tenant impacting';
+
+  @override
+  String get systemHealthEventStatusOpen => 'Open';
+
+  @override
+  String get systemHealthEventStatusAcknowledged => 'Acknowledged';
+
+  @override
+  String get systemHealthEventStatusInvestigating => 'Investigating';
+
+  @override
+  String get systemHealthEventStatusResolved => 'Resolved';
+
+  @override
+  String get systemHealthEventStatusUnknown => 'Unknown';
+
+  @override
+  String get systemHealthImpactNone => 'No tenant impact';
+
+  @override
+  String get systemHealthImpactSingleTenant => 'Single tenant';
+
+  @override
+  String get systemHealthImpactMultipleTenants => 'Multiple tenants';
+
+  @override
+  String get systemHealthImpactPlatformWide => 'Platform wide';
+
+  @override
+  String get systemHealthImpactUnknown => 'Unknown impact';
+
+  @override
+  String get systemHealthServiceBackendApi => 'Backend API';
+
+  @override
+  String get systemHealthServiceDatabase => 'Database';
+
+  @override
+  String get systemHealthServiceDocumentStorage => 'Document storage';
+
+  @override
+  String get systemHealthServiceBackgroundWorkers => 'Background workers';
+
+  @override
+  String get systemHealthServiceAiOcrWorkers => 'AI / OCR workers';
+
+  @override
+  String get systemHealthServiceTranslationService => 'Translation service';
+
+  @override
+  String get systemHealthServiceEmailService => 'Email service';
+
+  @override
+  String get systemHealthServicePushNotificationService =>
+      'Push notification service';
+
+  @override
+  String get systemHealthServiceQueueSystem => 'Queue system';
+
+  @override
+  String get systemHealthServiceAuthService => 'Auth service';
+
+  @override
+  String get systemHealthAiDiagnosticTitle => 'AI diagnostic summary';
+
+  @override
+  String get systemHealthAiAdvisoryOnly =>
+      'Advisory only — not an automatic repair instruction.';
+
+  @override
+  String get systemHealthRecommendedAction => 'Recommended action';
+
+  @override
+  String get systemHealthActionAcknowledgeTitle => 'Acknowledge event';
+
+  @override
+  String get systemHealthActionEscalateTitle => 'Escalate event';
+
+  @override
+  String get systemHealthActionAuditNotice =>
+      'This action will be recorded in the platform audit log.';
+
+  @override
+  String get systemHealthActionNoAutoRepair =>
+      'No automatic production repair will be performed.';
+
+  @override
+  String get systemHealthActionNoteLabel => 'Escalation note';
+
+  @override
+  String get systemHealthActionNoteRequired => 'Enter at least 3 characters.';
+
+  @override
+  String get systemHealthActionAcknowledgeBody =>
+      'Confirm acknowledgement of this health event.';
+
+  @override
+  String get systemHealthActionCancel => 'Cancel';
+
+  @override
+  String get systemHealthActionAcknowledgeConfirm => 'Acknowledge';
+
+  @override
+  String get systemHealthActionEscalateConfirm => 'Escalate';
+
+  @override
+  String get systemHealthActionAcknowledge => 'Acknowledge';
+
+  @override
+  String get systemHealthActionEscalate => 'Escalate to support';
+
+  @override
+  String get systemHealthActionSuccess => 'Health action saved.';
+
+  @override
+  String get systemHealthActionError => 'Could not save health action.';
+
+  @override
+  String get systemHealthCreateTicketDisabled =>
+      'Create support ticket (coming soon)';
+
+  @override
+  String get systemHealthPrivacyNotice =>
+      'Metadata only — no tenant operational trip, document, or message content is shown.';
+
+  @override
+  String get systemHealthFieldServiceName => 'Service';
+
+  @override
+  String get systemHealthFieldTenantImpact => 'Tenant impact';
+
+  @override
+  String get systemHealthFieldAffectedCompany => 'Affected company';
+
+  @override
+  String get systemHealthFieldStartedAt => 'Started';
+
+  @override
+  String get systemHealthFieldLastSeenAt => 'Last seen';
+
+  @override
+  String get systemHealthFieldResolvedAt => 'Resolved';
+
+  @override
+  String get systemHealthFieldFailedJobs => 'Failed jobs';
+
+  @override
+  String get systemHealthFieldCorrelationId => 'Correlation ID';
 }

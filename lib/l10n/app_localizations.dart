@@ -847,6 +847,480 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not save registration decision.'**
   String get registrationDecisionError;
+
+  /// No description provided for @systemHealthLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load system health data.'**
+  String get systemHealthLoadError;
+
+  /// No description provided for @systemHealthActionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This action is not available on the connected backend yet.'**
+  String get systemHealthActionUnavailable;
+
+  /// No description provided for @systemHealthMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get systemHealthMockDataBadge;
+
+  /// No description provided for @systemHealthServicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Service status'**
+  String get systemHealthServicesTitle;
+
+  /// No description provided for @systemHealthEventsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Health events'**
+  String get systemHealthEventsTitle;
+
+  /// No description provided for @systemHealthEventsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No health events match your filters.'**
+  String get systemHealthEventsEmpty;
+
+  /// No description provided for @systemHealthEventDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Health event'**
+  String get systemHealthEventDetailTitle;
+
+  /// No description provided for @systemHealthEventStartedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Started {date}'**
+  String systemHealthEventStartedAt(String date);
+
+  /// No description provided for @systemHealthOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open system health'**
+  String get systemHealthOpenModule;
+
+  /// No description provided for @systemHealthOverallStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Overall status: {status}'**
+  String systemHealthOverallStatusLabel(String status);
+
+  /// No description provided for @systemHealthLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated {date}'**
+  String systemHealthLastUpdated(String date);
+
+  /// No description provided for @systemHealthMetricHealthyServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy services'**
+  String get systemHealthMetricHealthyServices;
+
+  /// No description provided for @systemHealthMetricWarningServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning services'**
+  String get systemHealthMetricWarningServices;
+
+  /// No description provided for @systemHealthMetricCriticalServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical services'**
+  String get systemHealthMetricCriticalServices;
+
+  /// No description provided for @systemHealthMetricCriticalEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical events'**
+  String get systemHealthMetricCriticalEvents;
+
+  /// No description provided for @systemHealthMetricWarningEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning events'**
+  String get systemHealthMetricWarningEvents;
+
+  /// No description provided for @systemHealthMetricFailedJobs.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed jobs'**
+  String get systemHealthMetricFailedJobs;
+
+  /// No description provided for @systemHealthSeverityInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Info'**
+  String get systemHealthSeverityInfo;
+
+  /// No description provided for @systemHealthSeverityWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get systemHealthSeverityWarning;
+
+  /// No description provided for @systemHealthSeverityCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get systemHealthSeverityCritical;
+
+  /// No description provided for @systemHealthSeverityUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get systemHealthSeverityUnknown;
+
+  /// No description provided for @systemHealthOverallHealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy'**
+  String get systemHealthOverallHealthy;
+
+  /// No description provided for @systemHealthOverallDegraded.
+  ///
+  /// In en, this message translates to:
+  /// **'Degraded'**
+  String get systemHealthOverallDegraded;
+
+  /// No description provided for @systemHealthOverallCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get systemHealthOverallCritical;
+
+  /// No description provided for @systemHealthOverallUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get systemHealthOverallUnknown;
+
+  /// No description provided for @systemHealthFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get systemHealthFilterAll;
+
+  /// No description provided for @systemHealthFilterCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get systemHealthFilterCritical;
+
+  /// No description provided for @systemHealthFilterWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get systemHealthFilterWarning;
+
+  /// No description provided for @systemHealthFilterOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get systemHealthFilterOpen;
+
+  /// No description provided for @systemHealthFilterAcknowledged.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged'**
+  String get systemHealthFilterAcknowledged;
+
+  /// No description provided for @systemHealthFilterResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get systemHealthFilterResolved;
+
+  /// No description provided for @systemHealthFilterTenantImpacting.
+  ///
+  /// In en, this message translates to:
+  /// **'Tenant impacting'**
+  String get systemHealthFilterTenantImpacting;
+
+  /// No description provided for @systemHealthEventStatusOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get systemHealthEventStatusOpen;
+
+  /// No description provided for @systemHealthEventStatusAcknowledged.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged'**
+  String get systemHealthEventStatusAcknowledged;
+
+  /// No description provided for @systemHealthEventStatusInvestigating.
+  ///
+  /// In en, this message translates to:
+  /// **'Investigating'**
+  String get systemHealthEventStatusInvestigating;
+
+  /// No description provided for @systemHealthEventStatusResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get systemHealthEventStatusResolved;
+
+  /// No description provided for @systemHealthEventStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get systemHealthEventStatusUnknown;
+
+  /// No description provided for @systemHealthImpactNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No tenant impact'**
+  String get systemHealthImpactNone;
+
+  /// No description provided for @systemHealthImpactSingleTenant.
+  ///
+  /// In en, this message translates to:
+  /// **'Single tenant'**
+  String get systemHealthImpactSingleTenant;
+
+  /// No description provided for @systemHealthImpactMultipleTenants.
+  ///
+  /// In en, this message translates to:
+  /// **'Multiple tenants'**
+  String get systemHealthImpactMultipleTenants;
+
+  /// No description provided for @systemHealthImpactPlatformWide.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform wide'**
+  String get systemHealthImpactPlatformWide;
+
+  /// No description provided for @systemHealthImpactUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown impact'**
+  String get systemHealthImpactUnknown;
+
+  /// No description provided for @systemHealthServiceBackendApi.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend API'**
+  String get systemHealthServiceBackendApi;
+
+  /// No description provided for @systemHealthServiceDatabase.
+  ///
+  /// In en, this message translates to:
+  /// **'Database'**
+  String get systemHealthServiceDatabase;
+
+  /// No description provided for @systemHealthServiceDocumentStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Document storage'**
+  String get systemHealthServiceDocumentStorage;
+
+  /// No description provided for @systemHealthServiceBackgroundWorkers.
+  ///
+  /// In en, this message translates to:
+  /// **'Background workers'**
+  String get systemHealthServiceBackgroundWorkers;
+
+  /// No description provided for @systemHealthServiceAiOcrWorkers.
+  ///
+  /// In en, this message translates to:
+  /// **'AI / OCR workers'**
+  String get systemHealthServiceAiOcrWorkers;
+
+  /// No description provided for @systemHealthServiceTranslationService.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation service'**
+  String get systemHealthServiceTranslationService;
+
+  /// No description provided for @systemHealthServiceEmailService.
+  ///
+  /// In en, this message translates to:
+  /// **'Email service'**
+  String get systemHealthServiceEmailService;
+
+  /// No description provided for @systemHealthServicePushNotificationService.
+  ///
+  /// In en, this message translates to:
+  /// **'Push notification service'**
+  String get systemHealthServicePushNotificationService;
+
+  /// No description provided for @systemHealthServiceQueueSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Queue system'**
+  String get systemHealthServiceQueueSystem;
+
+  /// No description provided for @systemHealthServiceAuthService.
+  ///
+  /// In en, this message translates to:
+  /// **'Auth service'**
+  String get systemHealthServiceAuthService;
+
+  /// No description provided for @systemHealthAiDiagnosticTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI diagnostic summary'**
+  String get systemHealthAiDiagnosticTitle;
+
+  /// No description provided for @systemHealthAiAdvisoryOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Advisory only — not an automatic repair instruction.'**
+  String get systemHealthAiAdvisoryOnly;
+
+  /// No description provided for @systemHealthRecommendedAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended action'**
+  String get systemHealthRecommendedAction;
+
+  /// No description provided for @systemHealthActionAcknowledgeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledge event'**
+  String get systemHealthActionAcknowledgeTitle;
+
+  /// No description provided for @systemHealthActionEscalateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalate event'**
+  String get systemHealthActionEscalateTitle;
+
+  /// No description provided for @systemHealthActionAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action will be recorded in the platform audit log.'**
+  String get systemHealthActionAuditNotice;
+
+  /// No description provided for @systemHealthActionNoAutoRepair.
+  ///
+  /// In en, this message translates to:
+  /// **'No automatic production repair will be performed.'**
+  String get systemHealthActionNoAutoRepair;
+
+  /// No description provided for @systemHealthActionNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalation note'**
+  String get systemHealthActionNoteLabel;
+
+  /// No description provided for @systemHealthActionNoteRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least 3 characters.'**
+  String get systemHealthActionNoteRequired;
+
+  /// No description provided for @systemHealthActionAcknowledgeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm acknowledgement of this health event.'**
+  String get systemHealthActionAcknowledgeBody;
+
+  /// No description provided for @systemHealthActionCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get systemHealthActionCancel;
+
+  /// No description provided for @systemHealthActionAcknowledgeConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledge'**
+  String get systemHealthActionAcknowledgeConfirm;
+
+  /// No description provided for @systemHealthActionEscalateConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalate'**
+  String get systemHealthActionEscalateConfirm;
+
+  /// No description provided for @systemHealthActionAcknowledge.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledge'**
+  String get systemHealthActionAcknowledge;
+
+  /// No description provided for @systemHealthActionEscalate.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalate to support'**
+  String get systemHealthActionEscalate;
+
+  /// No description provided for @systemHealthActionSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Health action saved.'**
+  String get systemHealthActionSuccess;
+
+  /// No description provided for @systemHealthActionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save health action.'**
+  String get systemHealthActionError;
+
+  /// No description provided for @systemHealthCreateTicketDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Create support ticket (coming soon)'**
+  String get systemHealthCreateTicketDisabled;
+
+  /// No description provided for @systemHealthPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only — no tenant operational trip, document, or message content is shown.'**
+  String get systemHealthPrivacyNotice;
+
+  /// No description provided for @systemHealthFieldServiceName.
+  ///
+  /// In en, this message translates to:
+  /// **'Service'**
+  String get systemHealthFieldServiceName;
+
+  /// No description provided for @systemHealthFieldTenantImpact.
+  ///
+  /// In en, this message translates to:
+  /// **'Tenant impact'**
+  String get systemHealthFieldTenantImpact;
+
+  /// No description provided for @systemHealthFieldAffectedCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Affected company'**
+  String get systemHealthFieldAffectedCompany;
+
+  /// No description provided for @systemHealthFieldStartedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Started'**
+  String get systemHealthFieldStartedAt;
+
+  /// No description provided for @systemHealthFieldLastSeenAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Last seen'**
+  String get systemHealthFieldLastSeenAt;
+
+  /// No description provided for @systemHealthFieldResolvedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get systemHealthFieldResolvedAt;
+
+  /// No description provided for @systemHealthFieldFailedJobs.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed jobs'**
+  String get systemHealthFieldFailedJobs;
+
+  /// No description provided for @systemHealthFieldCorrelationId.
+  ///
+  /// In en, this message translates to:
+  /// **'Correlation ID'**
+  String get systemHealthFieldCorrelationId;
 }
 
 class _AppLocalizationsDelegate
