@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
+import '../domain/email_delivery_status.dart';
+import '../domain/observability_status.dart';
 import '../domain/release_overview.dart';
 
 class ReleaseCenterApi {
@@ -51,6 +53,27 @@ class ReleaseCenterApi {
       );
     }
     return ReleaseEnvironment.fromJson(data);
+  }
+
+  Future<EmailDeliveryStatus> getEmailDeliveryStatus() async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/email-delivery/status',
+    );
+    return EmailDeliveryStatus.fromJson(response.data ?? const {});
+  }
+
+  Future<EmailDeliveryLogsPage> getEmailDeliveryLogs() async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/email-delivery/logs',
+    );
+    return EmailDeliveryLogsPage.fromJson(response.data ?? const {});
+  }
+
+  Future<ObservabilityStatus> getObservabilityStatus() async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/observability/status',
+    );
+    return ObservabilityStatus.fromJson(response.data ?? const {});
   }
 }
 

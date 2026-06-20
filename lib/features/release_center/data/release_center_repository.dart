@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
+import '../domain/email_delivery_status.dart';
+import '../domain/observability_status.dart';
 import '../domain/release_overview.dart';
 import 'release_center_api.dart';
 
@@ -10,6 +12,12 @@ abstract class ReleaseCenterRepository {
   Future<ReleaseAppVersions> fetchAppVersions();
 
   Future<ReleaseEnvironment> fetchEnvironment();
+
+  Future<EmailDeliveryStatus> fetchEmailDeliveryStatus();
+
+  Future<EmailDeliveryLogsPage> fetchEmailDeliveryLogs();
+
+  Future<ObservabilityStatus> fetchObservabilityStatus();
 
   bool get usesMockData;
 }
@@ -30,6 +38,18 @@ class LiveReleaseCenterRepository implements ReleaseCenterRepository {
 
   @override
   Future<ReleaseEnvironment> fetchEnvironment() => _api.getEnvironment();
+
+  @override
+  Future<EmailDeliveryStatus> fetchEmailDeliveryStatus() =>
+      _api.getEmailDeliveryStatus();
+
+  @override
+  Future<EmailDeliveryLogsPage> fetchEmailDeliveryLogs() =>
+      _api.getEmailDeliveryLogs();
+
+  @override
+  Future<ObservabilityStatus> fetchObservabilityStatus() =>
+      _api.getObservabilityStatus();
 }
 
 class MockReleaseCenterRepository implements ReleaseCenterRepository {
@@ -86,6 +106,48 @@ class MockReleaseCenterRepository implements ReleaseCenterRepository {
       apiBaseUrlPublicName: 'api-dev.vianexis.test',
       deploymentReady: true,
       deploymentWarnings: const ['mock_data_mode'],
+    );
+  }
+
+  @override
+  Future<EmailDeliveryStatus> fetchEmailDeliveryStatus() async {
+    await Future<void>.delayed(const Duration(milliseconds: 80));
+    return const EmailDeliveryStatus(
+      provider: 'noop',
+      deliveryEnabled: false,
+      lastDeliveryStatus: 'skipped',
+      lastDeliveryAt: null,
+    );
+  }
+
+  @override
+  Future<EmailDeliveryLogsPage> fetchEmailDeliveryLogs() async {
+    await Future<void>.delayed(const Duration(milliseconds: 80));
+    return EmailDeliveryLogsPage(
+      total: 1,
+      items: [
+        EmailDeliveryLog(
+          id: 1,
+          type: 'admin_invite',
+          recipientEmailHash: 'a1b2c3d4',
+          recipientEmailDomain: 'vianexis.test',
+          status: 'skipped',
+          provider: 'noop',
+          createdAt: DateTime.utc(2026, 6, 20, 10, 0),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Future<ObservabilityStatus> fetchObservabilityStatus() async {
+    await Future<void>.delayed(const Duration(milliseconds: 80));
+    return const ObservabilityStatus(
+      logLevel: 'info',
+      metricsEnabled: false,
+      sentryConfigured: false,
+      otelConfigured: false,
+      correlationIdEnabled: true,
     );
   }
 }

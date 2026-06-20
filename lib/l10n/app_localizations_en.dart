@@ -3418,6 +3418,53 @@ class AppLocalizationsEn extends AppLocalizations {
   String get releaseNo => 'No';
 
   @override
+  String get releaseEmailDeliveryTitle => 'Email delivery';
+
+  @override
+  String get releaseEmailDeliveryProvider => 'Provider';
+
+  @override
+  String get releaseEmailDeliveryEnabled => 'Delivery enabled';
+
+  @override
+  String get releaseEmailDeliveryLastStatus => 'Last delivery status';
+
+  @override
+  String get releaseEmailDeliveryNotice =>
+      'Email delivery status shows provider and metadata only. No SMTP passwords or message bodies are exposed.';
+
+  @override
+  String get releaseEmailProviderNoop => 'No-op (disabled)';
+
+  @override
+  String get releaseEmailProviderSmtp => 'SMTP';
+
+  @override
+  String get releaseEmailProviderPlaceholder => 'Provider placeholder';
+
+  @override
+  String get releaseObservabilityTitle => 'Observability';
+
+  @override
+  String get releaseObservabilityLogLevel => 'Log level';
+
+  @override
+  String get releaseObservabilityMetricsEnabled => 'Metrics enabled';
+
+  @override
+  String get releaseObservabilitySentryConfigured => 'Sentry configured';
+
+  @override
+  String get releaseObservabilityOtelConfigured => 'OpenTelemetry configured';
+
+  @override
+  String get releaseObservabilityCorrelationId => 'Correlation ID enabled';
+
+  @override
+  String get releaseObservabilityNotice =>
+      'Observability status shows configuration flags only. No DSN, endpoint URLs, or secrets are displayed.';
+
+  @override
   String get settingsReleaseSection => 'Release & deployment';
 
   @override
@@ -3535,6 +3582,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationsInAppChip => 'In-app only';
+
+  @override
+  String get notificationsYes => 'Yes';
+
+  @override
+  String get notificationsNo => 'No';
+
+  @override
+  String get notificationsPushProviderTitle => 'Push provider status';
+
+  @override
+  String get notificationsPushStateInAppOnly => 'In-app only';
+
+  @override
+  String get notificationsPushStateExternalNotConfigured =>
+      'External push not configured';
+
+  @override
+  String get notificationsPushStateConfigured => 'Push provider configured';
+
+  @override
+  String get notificationsPushProviderField => 'Provider';
+
+  @override
+  String get notificationsPushDeliveryEnabled => 'Delivery enabled';
+
+  @override
+  String get notificationsPushTokenStorage => 'Token storage mode';
+
+  @override
+  String get notificationsPushLastFailureCode => 'Last failure code';
+
+  @override
+  String get notificationsPushProviderNotice =>
+      'Push provider status shows metadata only. No FCM, APNS, or credential values are displayed.';
+
+  @override
+  String get notificationsPushProviderNone => 'None (in-app only)';
+
+  @override
+  String get notificationsPushProviderFcm => 'FCM';
+
+  @override
+  String get notificationsPushProviderApns => 'APNS';
 
   @override
   String get settingsNotificationsSection => 'Notifications';

@@ -10,6 +10,8 @@ import '../../../core/widgets/vianexis_metadata_notice.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/release_center_repository.dart';
 import 'release_center_providers.dart';
+import 'widgets/email_delivery_status_card.dart';
+import 'widgets/observability_status_card.dart';
 import 'widgets/release_overview_card.dart';
 
 class ReleaseCenterScreen extends ConsumerStatefulWidget {
@@ -40,6 +42,8 @@ class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
     final l10n = AppLocalizations.of(context);
     final usesMock = ref.watch(releaseCenterRepositoryProvider).usesMockData;
     final overviewAsync = ref.watch(releaseOverviewProvider);
+    final emailDeliveryAsync = ref.watch(emailDeliveryStatusProvider);
+    final observabilityAsync = ref.watch(observabilityStatusProvider);
     final versionsAsync = ref.watch(releaseAppVersionsProvider);
     final environmentAsync = ref.watch(releaseEnvironmentProvider);
 
@@ -86,7 +90,21 @@ class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
                     onRefresh: () => refreshReleaseCenter(ref),
                     child: ListView(
                       padding: const EdgeInsets.all(16),
-                      children: [ReleaseOverviewCard(overview: overview)],
+                      children: [
+                        ReleaseOverviewCard(overview: overview),
+                        const SizedBox(height: 16),
+                        emailDeliveryAsync.when(
+                          loading: () => const LinearProgressIndicator(),
+                          error: (error, stackTrace) => const SizedBox.shrink(),
+                          data: (status) => EmailDeliveryStatusCard(status: status),
+                        ),
+                        const SizedBox(height: 16),
+                        observabilityAsync.when(
+                          loading: () => const LinearProgressIndicator(),
+                          error: (error, stackTrace) => const SizedBox.shrink(),
+                          data: (status) => ObservabilityStatusCard(status: status),
+                        ),
+                      ],
                     ),
                   ),
                 ),

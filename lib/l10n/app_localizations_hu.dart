@@ -3467,6 +3467,54 @@ class AppLocalizationsHu extends AppLocalizations {
   String get releaseNo => 'Nem';
 
   @override
+  String get releaseEmailDeliveryTitle => 'E-mail kézbesítés';
+
+  @override
+  String get releaseEmailDeliveryProvider => 'Szolgáltató';
+
+  @override
+  String get releaseEmailDeliveryEnabled => 'Kézbesítés engedélyezve';
+
+  @override
+  String get releaseEmailDeliveryLastStatus => 'Utolsó kézbesítési státusz';
+
+  @override
+  String get releaseEmailDeliveryNotice =>
+      'Az e-mail kézbesítési státusz csak szolgáltatót és metaadatot mutat. SMTP jelszavak és üzenettörzs nem jelenik meg.';
+
+  @override
+  String get releaseEmailProviderNoop => 'No-op (kikapcsolva)';
+
+  @override
+  String get releaseEmailProviderSmtp => 'SMTP';
+
+  @override
+  String get releaseEmailProviderPlaceholder => 'Szolgáltató helyőrző';
+
+  @override
+  String get releaseObservabilityTitle => 'Megfigyelhetőség';
+
+  @override
+  String get releaseObservabilityLogLevel => 'Naplózási szint';
+
+  @override
+  String get releaseObservabilityMetricsEnabled => 'Metrikák engedélyezve';
+
+  @override
+  String get releaseObservabilitySentryConfigured => 'Sentry beállítva';
+
+  @override
+  String get releaseObservabilityOtelConfigured => 'OpenTelemetry beállítva';
+
+  @override
+  String get releaseObservabilityCorrelationId =>
+      'Korrelációs azonosító engedélyezve';
+
+  @override
+  String get releaseObservabilityNotice =>
+      'A megfigyelhetőségi státusz csak konfigurációs jelzőket mutat. DSN, végpont URL-ek és titkok nem jelennek meg.';
+
+  @override
   String get settingsReleaseSection => 'Kihelyezés és környezet';
 
   @override
@@ -3585,6 +3633,50 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get notificationsInAppChip => 'Csak alkalmazason belul';
+
+  @override
+  String get notificationsYes => 'Igen';
+
+  @override
+  String get notificationsNo => 'Nem';
+
+  @override
+  String get notificationsPushProviderTitle => 'Push szolgaltato allapot';
+
+  @override
+  String get notificationsPushStateInAppOnly => 'Csak alkalmazason belul';
+
+  @override
+  String get notificationsPushStateExternalNotConfigured =>
+      'Kulso push nincs beallitva';
+
+  @override
+  String get notificationsPushStateConfigured => 'Push szolgaltato beallitva';
+
+  @override
+  String get notificationsPushProviderField => 'Szolgaltato';
+
+  @override
+  String get notificationsPushDeliveryEnabled => 'Kezbesites engedelyezve';
+
+  @override
+  String get notificationsPushTokenStorage => 'Token tarolasi mod';
+
+  @override
+  String get notificationsPushLastFailureCode => 'Utolso hibakod';
+
+  @override
+  String get notificationsPushProviderNotice =>
+      'A push szolgaltato allapota csak metaadatot mutat. FCM, APNS vagy hitelesito adatok nem jelennek meg.';
+
+  @override
+  String get notificationsPushProviderNone => 'Nincs (csak alkalmazason belul)';
+
+  @override
+  String get notificationsPushProviderFcm => 'FCM';
+
+  @override
+  String get notificationsPushProviderApns => 'APNS';
 
   @override
   String get settingsNotificationsSection => 'Ertesitesek';

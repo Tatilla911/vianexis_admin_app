@@ -6344,6 +6344,96 @@ abstract class AppLocalizations {
   /// **'No'**
   String get releaseNo;
 
+  /// No description provided for @releaseEmailDeliveryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Email delivery'**
+  String get releaseEmailDeliveryTitle;
+
+  /// No description provided for @releaseEmailDeliveryProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider'**
+  String get releaseEmailDeliveryProvider;
+
+  /// No description provided for @releaseEmailDeliveryEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery enabled'**
+  String get releaseEmailDeliveryEnabled;
+
+  /// No description provided for @releaseEmailDeliveryLastStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Last delivery status'**
+  String get releaseEmailDeliveryLastStatus;
+
+  /// No description provided for @releaseEmailDeliveryNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Email delivery status shows provider and metadata only. No SMTP passwords or message bodies are exposed.'**
+  String get releaseEmailDeliveryNotice;
+
+  /// No description provided for @releaseEmailProviderNoop.
+  ///
+  /// In en, this message translates to:
+  /// **'No-op (disabled)'**
+  String get releaseEmailProviderNoop;
+
+  /// No description provided for @releaseEmailProviderSmtp.
+  ///
+  /// In en, this message translates to:
+  /// **'SMTP'**
+  String get releaseEmailProviderSmtp;
+
+  /// No description provided for @releaseEmailProviderPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider placeholder'**
+  String get releaseEmailProviderPlaceholder;
+
+  /// No description provided for @releaseObservabilityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Observability'**
+  String get releaseObservabilityTitle;
+
+  /// No description provided for @releaseObservabilityLogLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Log level'**
+  String get releaseObservabilityLogLevel;
+
+  /// No description provided for @releaseObservabilityMetricsEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Metrics enabled'**
+  String get releaseObservabilityMetricsEnabled;
+
+  /// No description provided for @releaseObservabilitySentryConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentry configured'**
+  String get releaseObservabilitySentryConfigured;
+
+  /// No description provided for @releaseObservabilityOtelConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'OpenTelemetry configured'**
+  String get releaseObservabilityOtelConfigured;
+
+  /// No description provided for @releaseObservabilityCorrelationId.
+  ///
+  /// In en, this message translates to:
+  /// **'Correlation ID enabled'**
+  String get releaseObservabilityCorrelationId;
+
+  /// No description provided for @releaseObservabilityNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Observability status shows configuration flags only. No DSN, endpoint URLs, or secrets are displayed.'**
+  String get releaseObservabilityNotice;
+
   /// No description provided for @settingsReleaseSection.
   ///
   /// In en, this message translates to:
@@ -6565,6 +6655,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'In-app only'**
   String get notificationsInAppChip;
+
+  /// No description provided for @notificationsYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get notificationsYes;
+
+  /// No description provided for @notificationsNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get notificationsNo;
+
+  /// No description provided for @notificationsPushProviderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Push provider status'**
+  String get notificationsPushProviderTitle;
+
+  /// No description provided for @notificationsPushStateInAppOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'In-app only'**
+  String get notificationsPushStateInAppOnly;
+
+  /// No description provided for @notificationsPushStateExternalNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'External push not configured'**
+  String get notificationsPushStateExternalNotConfigured;
+
+  /// No description provided for @notificationsPushStateConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Push provider configured'**
+  String get notificationsPushStateConfigured;
+
+  /// No description provided for @notificationsPushProviderField.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider'**
+  String get notificationsPushProviderField;
+
+  /// No description provided for @notificationsPushDeliveryEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery enabled'**
+  String get notificationsPushDeliveryEnabled;
+
+  /// No description provided for @notificationsPushTokenStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Token storage mode'**
+  String get notificationsPushTokenStorage;
+
+  /// No description provided for @notificationsPushLastFailureCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Last failure code'**
+  String get notificationsPushLastFailureCode;
+
+  /// No description provided for @notificationsPushProviderNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Push provider status shows metadata only. No FCM, APNS, or credential values are displayed.'**
+  String get notificationsPushProviderNotice;
+
+  /// No description provided for @notificationsPushProviderNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None (in-app only)'**
+  String get notificationsPushProviderNone;
+
+  /// No description provided for @notificationsPushProviderFcm.
+  ///
+  /// In en, this message translates to:
+  /// **'FCM'**
+  String get notificationsPushProviderFcm;
+
+  /// No description provided for @notificationsPushProviderApns.
+  ///
+  /// In en, this message translates to:
+  /// **'APNS'**
+  String get notificationsPushProviderApns;
 
   /// No description provided for @settingsNotificationsSection.
   ///

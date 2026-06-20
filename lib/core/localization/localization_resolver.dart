@@ -1382,6 +1382,47 @@ String resolveReleaseCenterKey(
     'releaseDeploymentWarnings' => l10n.releaseDeploymentWarnings,
     'releaseYes' => l10n.releaseYes,
     'releaseNo' => l10n.releaseNo,
+    'releaseEmailDeliveryTitle' => l10n.releaseEmailDeliveryTitle,
+    'releaseEmailDeliveryProvider' => l10n.releaseEmailDeliveryProvider,
+    'releaseEmailDeliveryEnabled' => l10n.releaseEmailDeliveryEnabled,
+    'releaseEmailDeliveryLastStatus' => l10n.releaseEmailDeliveryLastStatus,
+    'releaseEmailDeliveryNotice' => l10n.releaseEmailDeliveryNotice,
+    'releaseEmailProviderNoop' => l10n.releaseEmailProviderNoop,
+    'releaseEmailProviderSmtp' => l10n.releaseEmailProviderSmtp,
+    'releaseEmailProviderPlaceholder' => l10n.releaseEmailProviderPlaceholder,
+    'releaseObservabilityTitle' => l10n.releaseObservabilityTitle,
+    'releaseObservabilityLogLevel' => l10n.releaseObservabilityLogLevel,
+    'releaseObservabilityMetricsEnabled' => l10n.releaseObservabilityMetricsEnabled,
+    'releaseObservabilitySentryConfigured' => l10n.releaseObservabilitySentryConfigured,
+    'releaseObservabilityOtelConfigured' => l10n.releaseObservabilityOtelConfigured,
+    'releaseObservabilityCorrelationId' => l10n.releaseObservabilityCorrelationId,
+    'releaseObservabilityNotice' => l10n.releaseObservabilityNotice,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveNotificationsKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'notificationsPushProviderTitle' => l10n.notificationsPushProviderTitle,
+    'notificationsPushStateInAppOnly' => l10n.notificationsPushStateInAppOnly,
+    'notificationsPushStateExternalNotConfigured' =>
+      l10n.notificationsPushStateExternalNotConfigured,
+    'notificationsPushStateConfigured' => l10n.notificationsPushStateConfigured,
+    'notificationsPushProviderField' => l10n.notificationsPushProviderField,
+    'notificationsPushDeliveryEnabled' => l10n.notificationsPushDeliveryEnabled,
+    'notificationsPushTokenStorage' => l10n.notificationsPushTokenStorage,
+    'notificationsPushLastFailureCode' => l10n.notificationsPushLastFailureCode,
+    'notificationsPushProviderNotice' => l10n.notificationsPushProviderNotice,
+    'notificationsPushProviderNone' => l10n.notificationsPushProviderNone,
+    'notificationsPushProviderFcm' => l10n.notificationsPushProviderFcm,
+    'notificationsPushProviderApns' => l10n.notificationsPushProviderApns,
+    'notificationsYes' => l10n.notificationsYes,
+    'notificationsNo' => l10n.notificationsNo,
     _ => l10n.errorGenericBody,
   };
 }
