@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../app/app_environment.dart';
+import '../../app/app_config.dart';
 import '../../app/vianexis_brand.dart';
-import '../../core/api/api_config.dart';
+import '../../core/localization/localization_resolver.dart';
 import '../../l10n/app_localizations.dart';
 import 'vianexis_admin_card.dart';
 import 'vianexis_logo_mark.dart';
@@ -19,11 +19,11 @@ class VianexisBrandHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final environment = AppEnvironment.fromDefine(
-      const String.fromEnvironment(AppEnvironment.dartDefineKey),
-    ).value;
-    final apiStatus = ApiConfig.isConfigured
-        ? l10n.brandApiConnected
+    final config = AppConfig.instance;
+    final envLabel = resolveAppConfigKey(context, config.displayLabelKey);
+    final apiLabel = config.isApiConfigured
+        ? (config.safeApiHostDisplay ??
+            resolveAppConfigKey(context, 'appConfigApiConfigured'))
         : l10n.brandApiNotConfigured;
 
     return VianexisAdminCard(
@@ -50,17 +50,30 @@ class VianexisBrandHeader extends StatelessWidget {
               children: [
                 _EnvChip(
                   icon: Icons.hub_outlined,
-                  label: '${l10n.brandEnvironmentLabel}: $environment',
+                  label:
+                      '${resolveAppConfigKey(context, 'appConfigEnvironmentLabel')}: $envLabel',
+                  tone: config.isProduction
+                      ? VianexisBrand.warning
+                      : VianexisBrand.accentMuted,
                 ),
                 _EnvChip(
-                  icon: ApiConfig.isConfigured
+                  icon: config.isApiConfigured
                       ? Icons.link_outlined
                       : Icons.link_off_outlined,
-                  label: apiStatus,
-                  tone: ApiConfig.isConfigured
+                  label: apiLabel,
+                  tone: config.isApiConfigured
                       ? VianexisBrand.success
                       : VianexisBrand.warning,
                 ),
+                if (config.isMockFallbackActive)
+                  _EnvChip(
+                    icon: Icons.science_outlined,
+                    label: resolveAppConfigKey(
+                      context,
+                      'appConfigMockFallbackActive',
+                    ),
+                    tone: VianexisBrand.accentMuted,
+                  ),
               ],
             ),
           ],

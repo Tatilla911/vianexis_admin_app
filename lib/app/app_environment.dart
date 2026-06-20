@@ -1,6 +1,7 @@
-/// Build-time environment profile for the admin app.
+/// Build-time environment profile for the ViaNexis Admin app.
 enum AppEnvironment {
-  devLocal('dev'),
+  local('local'),
+  dev('dev'),
   staging('staging'),
   production('production');
 
@@ -10,23 +11,30 @@ enum AppEnvironment {
 
   static const dartDefineKey = 'APP_ENV';
 
+  /// Parses `--dart-define=APP_ENV=...` (defaults to [local]).
   static AppEnvironment fromDefine([String? raw]) {
-    final normalized = (raw ?? devLocal.value).trim().toLowerCase();
+    final normalized = (raw ?? local.value).trim().toLowerCase();
+    if (normalized == 'devlocal') {
+      return dev;
+    }
     return AppEnvironment.values.firstWhere(
       (profile) => profile.value == normalized,
-      orElse: () => devLocal,
+      orElse: () => local,
     );
   }
+
+  bool get isProduction => this == AppEnvironment.production;
+
+  bool get isStaging => this == AppEnvironment.staging;
+
+  bool get allowsMockFallbackByDefault =>
+      this == AppEnvironment.local || this == AppEnvironment.dev;
 }
 
-/// Documented dart-define keys for API configuration.
-class AppEnvironmentConfig {
-  AppEnvironmentConfig._();
-
+/// Documented dart-define keys for build configuration.
+abstract final class AppEnvironmentConfig {
   static const apiBaseUrlDefine = 'API_BASE_URL';
 
-  static bool get isBackendConfigured {
-    const raw = String.fromEnvironment(apiBaseUrlDefine);
-    return raw.trim().isNotEmpty;
-  }
+  /// Optional override: `--dart-define=ALLOW_MOCK_FALLBACK=true`
+  static const allowMockFallbackDefine = 'ALLOW_MOCK_FALLBACK';
 }

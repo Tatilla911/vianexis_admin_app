@@ -3332,4 +3332,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsOpenReleaseCenter => 'Open release center';
+
+  @override
+  String get appEnvLocal => 'Local';
+
+  @override
+  String get appEnvDev => 'Development';
+
+  @override
+  String get appEnvStaging => 'Staging';
+
+  @override
+  String get appEnvProduction => 'Production';
+
+  @override
+  String get appConfigEnvironmentLabel => 'Environment';
+
+  @override
+  String get appConfigApiStatusLabel => 'API';
+
+  @override
+  String get appConfigApiConfigured => 'Configured';
+
+  @override
+  String get appConfigApiNotConfigured => 'Not configured';
+
+  @override
+  String get appConfigMockFallbackActive => 'Mock fallback active';
+
+  @override
+  String get appConfigProductionMisconfigured =>
+      'Production build requires API_BASE_URL. Mock fallback is disabled.';
+
+  @override
+  String get appConfigProductionLoginBlocked =>
+      'Sign-in is disabled until API_BASE_URL is configured for production.';
+
+  @override
+  String get backendMockFallbackBanner =>
+      'Live backend is not configured. Modules use mock data for local UI development.';
+
+  @override
+  String get settingsApiHostLabel => 'API host';
 }

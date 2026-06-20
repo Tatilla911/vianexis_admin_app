@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/support_access_grant.dart';
@@ -237,8 +237,7 @@ class MockSupportAccessGrantsRepository implements SupportAccessGrantsRepository
 
 final supportAccessGrantsRepositoryProvider =
     Provider<SupportAccessGrantsRepository>((ref) {
-      final apiClient = ref.watch(apiClientProvider);
-      if (apiClient.isConfigured) {
+      if (AppConfig.instance.shouldUseLiveRepositories) {
         return LiveSupportAccessGrantsRepository(ref.watch(supportApiProvider));
       }
       return MockSupportAccessGrantsRepository();

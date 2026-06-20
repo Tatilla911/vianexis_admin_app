@@ -261,7 +261,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.text('Live backend is not configured. Modules may use mock data.'),
+      find.text(
+        'Live backend is not configured. Modules use mock data for local UI development.',
+      ),
       findsOneWidget,
     );
   });
@@ -340,7 +342,7 @@ void main() {
     expect(find.text('admin@vianexis.hu'), findsOneWidget);
     expect(find.text('Super admin'), findsOneWidget);
     expect(find.text('Not configured'), findsOneWidget);
-    expect(find.text('dev'), findsOneWidget);
+    expect(find.text('Local'), findsOneWidget);
   });
 
   testWidgets('resolveApiException maps forbidden to permission denied title', (tester) async {

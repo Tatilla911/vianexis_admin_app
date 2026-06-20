@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../domain/security_event.dart';
 import '../domain/security_event_severity.dart';
 import '../domain/security_event_type.dart';
@@ -163,8 +163,8 @@ class MockSecurityCenterRepository implements SecurityCenterRepository {
 }
 
 final securityCenterRepositoryProvider = Provider<SecurityCenterRepository>((ref) {
-  final apiClient = ref.watch(apiClientProvider);
-  if (apiClient.isConfigured) {
+
+  if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveSecurityCenterRepository(ref.watch(securityCenterApiProvider));
   }
   return MockSecurityCenterRepository();

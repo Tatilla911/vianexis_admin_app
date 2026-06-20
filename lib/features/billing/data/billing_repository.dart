@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/billing_action_request.dart';
@@ -516,8 +516,8 @@ class MockBillingRepository implements BillingRepository {
 }
 
 final billingRepositoryProvider = Provider<BillingRepository>((ref) {
-  final apiClient = ref.watch(apiClientProvider);
-  if (apiClient.isConfigured) {
+
+  if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveBillingRepository(ref.watch(billingApiProvider));
   }
   return MockBillingRepository();

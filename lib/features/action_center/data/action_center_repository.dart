@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../../../core/auth/admin_user.dart';
 import '../domain/action_center_item.dart';
 import '../domain/action_center_item_type.dart';
@@ -148,8 +148,7 @@ class MockActionCenterRepository implements ActionCenterRepository {
 }
 
 final actionCenterRepositoryProvider = Provider<ActionCenterRepository>((ref) {
-  final apiClient = ref.watch(apiClientProvider);
-  if (apiClient.isConfigured) {
+  if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveActionCenterRepository(ref.watch(actionCenterApiProvider));
   }
   return MockActionCenterRepository();

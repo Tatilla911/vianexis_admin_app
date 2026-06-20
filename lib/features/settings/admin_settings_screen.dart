@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../app/app_environment.dart';
+import '../../app/app_config.dart';
 import '../../app/app_router.dart';
-import '../../core/api/api_config.dart';
 import '../../core/auth/admin_auth_state.dart';
 import '../../core/auth/admin_user.dart';
 import '../../core/localization/localization_resolver.dart';
+import '../../core/widgets/app_environment_badge.dart';
 import '../../core/widgets/vianexis_admin_card.dart';
 import '../../core/widgets/vianexis_brand_header.dart';
 import '../../core/widgets/vianexis_confirm_dialog.dart';
@@ -24,11 +24,11 @@ class AdminSettingsScreen extends ConsumerWidget {
     final user = ref.watch(adminAuthProvider).user;
     final showReleaseCenter =
         user?.canAccess(AdminDestination.releaseCenter) ?? false;
-    final environment = AppEnvironment.fromDefine(
-      const String.fromEnvironment(AppEnvironment.dartDefineKey),
-    ).value;
-    final apiBaseUrl = ApiConfig.isConfigured
-        ? ApiConfig.baseUrl
+    final config = AppConfig.instance;
+    final envLabel = resolveAppConfigKey(context, config.displayLabelKey);
+    final apiHost = config.isApiConfigured
+        ? (config.safeApiHostDisplay ??
+            resolveAppConfigKey(context, 'appConfigApiConfigured'))
         : l10n.settingsBackendNotConfiguredValue;
 
     return Scaffold(
@@ -63,9 +63,15 @@ class AdminSettingsScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _infoRow(context, l10n.settingsApiBaseUrlLabel, apiBaseUrl),
+                const AppEnvironmentBadge(),
                 const SizedBox(height: 12),
-                _infoRow(context, l10n.settingsEnvironmentLabel, environment),
+                _infoRow(context, l10n.settingsEnvironmentLabel, envLabel),
+                const SizedBox(height: 12),
+                _infoRow(
+                  context,
+                  resolveAppConfigKey(context, 'settingsApiHostLabel'),
+                  apiHost,
+                ),
                 const SizedBox(height: 12),
                 FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
@@ -74,6 +80,18 @@ class AdminSettingsScreen extends ConsumerWidget {
                     return _infoRow(context, l10n.settingsVersionLabel, version);
                   },
                 ),
+                if (config.isProductionMisconfigured) ...[
+                  const SizedBox(height: 12),
+                  Text(
+                    resolveAppConfigKey(
+                      context,
+                      'appConfigProductionMisconfigured',
+                    ),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

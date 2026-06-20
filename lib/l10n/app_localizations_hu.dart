@@ -3381,4 +3381,46 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get settingsOpenReleaseCenter => 'Kihelyezési központ megnyitása';
+
+  @override
+  String get appEnvLocal => 'Helyi';
+
+  @override
+  String get appEnvDev => 'Fejlesztői';
+
+  @override
+  String get appEnvStaging => 'Staging';
+
+  @override
+  String get appEnvProduction => 'Éles';
+
+  @override
+  String get appConfigEnvironmentLabel => 'Környezet';
+
+  @override
+  String get appConfigApiStatusLabel => 'API';
+
+  @override
+  String get appConfigApiConfigured => 'Beállítva';
+
+  @override
+  String get appConfigApiNotConfigured => 'Nincs beállítva';
+
+  @override
+  String get appConfigMockFallbackActive => 'Mintavisszaesés aktív';
+
+  @override
+  String get appConfigProductionMisconfigured =>
+      'Az éles buildhez API_BASE_URL szükséges. A mintavisszaesés le van tiltva.';
+
+  @override
+  String get appConfigProductionLoginBlocked =>
+      'A bejelentkezés az éles API_BASE_URL beállításáig tiltott.';
+
+  @override
+  String get backendMockFallbackBanner =>
+      'Az éles backend nincs beállítva. A modulok helyi fejlesztéshez mintaadatot használnak.';
+
+  @override
+  String get settingsApiHostLabel => 'API host';
 }

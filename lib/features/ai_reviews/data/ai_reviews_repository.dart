@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../../../core/api/api_exception.dart';
 import '../domain/ai_review_item.dart';
 import '../domain/ai_review_recommendation.dart';
@@ -136,8 +136,8 @@ class MockAiReviewsRepository implements AiReviewsRepository {
 }
 
 final aiReviewsRepositoryProvider = Provider<AiReviewsRepository>((ref) {
-  final apiClient = ref.watch(apiClientProvider);
-  if (apiClient.isConfigured) {
+
+  if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveAiReviewsRepository(ref.watch(aiReviewsApiProvider));
   }
   return MockAiReviewsRepository();

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/platform_company.dart';
@@ -284,8 +284,7 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
 
 final platformCompaniesRepositoryProvider = Provider<PlatformCompaniesRepository>(
   (ref) {
-    final apiClient = ref.watch(apiClientProvider);
-    if (apiClient.isConfigured) {
+    if (AppConfig.instance.shouldUseLiveRepositories) {
       return LivePlatformCompaniesRepository(
         ref.watch(platformCompaniesApiProvider),
       );

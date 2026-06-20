@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../l10n/app_localizations.dart';
+import '../../app/app_config.dart';
+import '../localization/localization_resolver.dart';
 import '../api/api_config.dart';
 
 class BackendModeBanner extends StatelessWidget {
@@ -12,21 +13,36 @@ class BackendModeBanner extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final l10n = AppLocalizations.of(context);
+    final config = AppConfig.instance;
     final colors = Theme.of(context).colorScheme;
+    final message = config.isProductionMisconfigured
+        ? resolveAppConfigKey(context, 'appConfigProductionMisconfigured')
+        : resolveAppConfigKey(context, 'backendMockFallbackBanner');
+
     return Container(
       width: double.infinity,
-      color: colors.errorContainer,
+      color: config.isProductionMisconfigured
+          ? colors.errorContainer
+          : colors.tertiaryContainer,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         children: [
-          Icon(Icons.cloud_off_outlined, color: colors.onErrorContainer),
+          Icon(
+            config.isProductionMisconfigured
+                ? Icons.error_outline
+                : Icons.cloud_off_outlined,
+            color: config.isProductionMisconfigured
+                ? colors.onErrorContainer
+                : colors.onTertiaryContainer,
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              l10n.backendNotConfiguredBanner,
+              message,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: colors.onErrorContainer,
+                color: config.isProductionMisconfigured
+                    ? colors.onErrorContainer
+                    : colors.onTertiaryContainer,
               ),
             ),
           ),

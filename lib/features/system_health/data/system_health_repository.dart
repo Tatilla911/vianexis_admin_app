@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/system_health_action_request.dart';
@@ -260,8 +260,8 @@ class MockSystemHealthRepository implements SystemHealthRepository {
 }
 
 final systemHealthRepositoryProvider = Provider<SystemHealthRepository>((ref) {
-  final apiClient = ref.watch(apiClientProvider);
-  if (apiClient.isConfigured) {
+
+  if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveSystemHealthRepository(ref.watch(systemHealthApiProvider));
   }
   return MockSystemHealthRepository();

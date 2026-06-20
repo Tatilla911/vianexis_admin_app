@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../domain/release_overview.dart';
 import 'release_center_api.dart';
 
@@ -91,8 +91,8 @@ class MockReleaseCenterRepository implements ReleaseCenterRepository {
 }
 
 final releaseCenterRepositoryProvider = Provider<ReleaseCenterRepository>((ref) {
-  final apiClient = ref.watch(apiClientProvider);
-  if (apiClient.isConfigured) {
+
+  if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveReleaseCenterRepository(ref.watch(releaseCenterApiProvider));
   }
   return MockReleaseCenterRepository();

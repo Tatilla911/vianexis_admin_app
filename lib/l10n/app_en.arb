@@ -1119,5 +1119,19 @@
 
   "settingsReleaseSection": "Release & deployment",
   "settingsReleaseCenterBody": "View read-only release metadata, app versions, and environment status.",
-  "settingsOpenReleaseCenter": "Open release center"
+  "settingsOpenReleaseCenter": "Open release center",
+
+  "appEnvLocal": "Local",
+  "appEnvDev": "Development",
+  "appEnvStaging": "Staging",
+  "appEnvProduction": "Production",
+  "appConfigEnvironmentLabel": "Environment",
+  "appConfigApiStatusLabel": "API",
+  "appConfigApiConfigured": "Configured",
+  "appConfigApiNotConfigured": "Not configured",
+  "appConfigMockFallbackActive": "Mock fallback active",
+  "appConfigProductionMisconfigured": "Production build requires API_BASE_URL. Mock fallback is disabled.",
+  "appConfigProductionLoginBlocked": "Sign-in is disabled until API_BASE_URL is configured for production.",
+  "backendMockFallbackBanner": "Live backend is not configured. Modules use mock data for local UI development.",
+  "settingsApiHostLabel": "API host"
 }

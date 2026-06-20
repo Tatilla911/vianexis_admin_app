@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/app_config.dart';
 import '../../core/api/api_config.dart';
 import '../../core/auth/admin_auth_state.dart';
 import '../../core/localization/localization_resolver.dart';
@@ -44,6 +45,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final l10n = AppLocalizations.of(context);
     final auth = ref.watch(adminAuthProvider);
     final errorKey = auth.errorMessageKey;
+    final config = AppConfig.instance;
     final backendConfigured = ApiConfig.isConfigured;
 
     if (auth.isRestoringSession) {
@@ -87,7 +89,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             if (!backendConfigured) ...[
                               const SizedBox(height: 16),
                               Text(
-                                l10n.authBackendNotConfigured,
+                                config.isProductionMisconfigured
+                                    ? resolveAppConfigKey(
+                                        context,
+                                        'appConfigProductionLoginBlocked',
+                                      )
+                                    : l10n.authBackendNotConfigured,
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.error,
                                 ),

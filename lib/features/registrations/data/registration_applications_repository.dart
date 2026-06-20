@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/registration_application.dart';
@@ -172,8 +172,7 @@ class MockRegistrationApplicationsRepository
 
 final registrationApplicationsRepositoryProvider =
     Provider<RegistrationApplicationsRepository>((ref) {
-      final apiClient = ref.watch(apiClientProvider);
-      if (apiClient.isConfigured) {
+      if (AppConfig.instance.shouldUseLiveRepositories) {
         return LiveRegistrationApplicationsRepository(
           ref.watch(registrationApplicationsApiProvider),
         );

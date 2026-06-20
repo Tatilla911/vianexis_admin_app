@@ -1,3 +1,4 @@
+import '../../app/app_config.dart';
 import '../../app/app_environment.dart';
 
 /// HTTP client configuration constants.
@@ -12,8 +13,7 @@ abstract final class ApiConfig {
     'Content-Type': 'application/json',
   };
 
-  static String get baseUrl =>
-      const String.fromEnvironment(apiBaseUrlDefine).trim();
+  static String get baseUrl => AppConfig.instance.apiBaseUrl;
 
-  static bool get isConfigured => baseUrl.isNotEmpty;
+  static bool get isConfigured => AppConfig.instance.isApiConfigured;
 }

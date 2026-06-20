@@ -1031,5 +1031,19 @@
 
   "settingsReleaseSection": "Kihelyezés és környezet",
   "settingsReleaseCenterBody": "Olvasható kihelyezési metaadatok, app verziók és környezeti státusz megtekintése.",
-  "settingsOpenReleaseCenter": "Kihelyezési központ megnyitása"
+  "settingsOpenReleaseCenter": "Kihelyezési központ megnyitása",
+
+  "appEnvLocal": "Helyi",
+  "appEnvDev": "Fejlesztői",
+  "appEnvStaging": "Staging",
+  "appEnvProduction": "Éles",
+  "appConfigEnvironmentLabel": "Környezet",
+  "appConfigApiStatusLabel": "API",
+  "appConfigApiConfigured": "Beállítva",
+  "appConfigApiNotConfigured": "Nincs beállítva",
+  "appConfigMockFallbackActive": "Mintavisszaesés aktív",
+  "appConfigProductionMisconfigured": "Az éles buildhez API_BASE_URL szükséges. A mintavisszaesés le van tiltva.",
+  "appConfigProductionLoginBlocked": "A bejelentkezés az éles API_BASE_URL beállításáig tiltott.",
+  "backendMockFallbackBanner": "Az éles backend nincs beállítva. A modulok helyi fejlesztéshez mintaadatot használnak.",
+  "settingsApiHostLabel": "API host"
 }

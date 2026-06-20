@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/localization/localization_resolver.dart';
+import '../../../core/widgets/app_environment_badge.dart';
 import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
@@ -112,7 +113,11 @@ class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
                   ),
                   data: (environment) => ListView(
                     padding: const EdgeInsets.all(16),
-                    children: [ReleaseEnvironmentCard(environment: environment)],
+                    children: [
+                      const AppEnvironmentBadge(),
+                      const SizedBox(height: 16),
+                      ReleaseEnvironmentCard(environment: environment),
+                    ],
                   ),
                 ),
               ],

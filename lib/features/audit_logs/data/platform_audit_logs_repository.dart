@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/api/api_client.dart';
+import '../../../app/app_config.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/platform_audit_action_type.dart';
@@ -246,8 +246,8 @@ class MockPlatformAuditLogsRepository implements PlatformAuditLogsRepository {
 }
 
 final platformAuditLogsRepositoryProvider = Provider<PlatformAuditLogsRepository>((ref) {
-  final apiClient = ref.watch(apiClientProvider);
-  if (apiClient.isConfigured) {
+
+  if (AppConfig.instance.shouldUseLiveRepositories) {
     return LivePlatformAuditLogsRepository(ref.watch(platformAuditLogsApiProvider));
   }
   return MockPlatformAuditLogsRepository();

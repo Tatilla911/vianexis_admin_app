@@ -6205,6 +6205,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open release center'**
   String get settingsOpenReleaseCenter;
+
+  /// No description provided for @appEnvLocal.
+  ///
+  /// In en, this message translates to:
+  /// **'Local'**
+  String get appEnvLocal;
+
+  /// No description provided for @appEnvDev.
+  ///
+  /// In en, this message translates to:
+  /// **'Development'**
+  String get appEnvDev;
+
+  /// No description provided for @appEnvStaging.
+  ///
+  /// In en, this message translates to:
+  /// **'Staging'**
+  String get appEnvStaging;
+
+  /// No description provided for @appEnvProduction.
+  ///
+  /// In en, this message translates to:
+  /// **'Production'**
+  String get appEnvProduction;
+
+  /// No description provided for @appConfigEnvironmentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get appConfigEnvironmentLabel;
+
+  /// No description provided for @appConfigApiStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'API'**
+  String get appConfigApiStatusLabel;
+
+  /// No description provided for @appConfigApiConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Configured'**
+  String get appConfigApiConfigured;
+
+  /// No description provided for @appConfigApiNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Not configured'**
+  String get appConfigApiNotConfigured;
+
+  /// No description provided for @appConfigMockFallbackActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock fallback active'**
+  String get appConfigMockFallbackActive;
+
+  /// No description provided for @appConfigProductionMisconfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Production build requires API_BASE_URL. Mock fallback is disabled.'**
+  String get appConfigProductionMisconfigured;
+
+  /// No description provided for @appConfigProductionLoginBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in is disabled until API_BASE_URL is configured for production.'**
+  String get appConfigProductionLoginBlocked;
+
+  /// No description provided for @backendMockFallbackBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Live backend is not configured. Modules use mock data for local UI development.'**
+  String get backendMockFallbackBanner;
+
+  /// No description provided for @settingsApiHostLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'API host'**
+  String get settingsApiHostLabel;
 }
 
 class _AppLocalizationsDelegate

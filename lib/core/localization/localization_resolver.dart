@@ -1144,3 +1144,22 @@ String resolveReleaseCenterKey(
     _ => l10n.errorGenericBody,
   };
 }
+
+String resolveAppConfigKey(BuildContext context, String key) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'appEnvLocal' => l10n.appEnvLocal,
+    'appEnvDev' => l10n.appEnvDev,
+    'appEnvStaging' => l10n.appEnvStaging,
+    'appEnvProduction' => l10n.appEnvProduction,
+    'appConfigEnvironmentLabel' => l10n.appConfigEnvironmentLabel,
+    'appConfigApiStatusLabel' => l10n.appConfigApiStatusLabel,
+    'appConfigApiConfigured' => l10n.appConfigApiConfigured,
+    'appConfigApiNotConfigured' => l10n.appConfigApiNotConfigured,
+    'appConfigMockFallbackActive' => l10n.appConfigMockFallbackActive,
+    'appConfigProductionMisconfigured' => l10n.appConfigProductionMisconfigured,
+    'appConfigProductionLoginBlocked' => l10n.appConfigProductionLoginBlocked,
+    'backendMockFallbackBanner' => l10n.backendMockFallbackBanner,
+    _ => l10n.errorGenericBody,
+  };
+}
