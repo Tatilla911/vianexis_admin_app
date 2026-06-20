@@ -46,6 +46,8 @@ abstract final class VianexisBrand {
   static const String logoAsset = 'assets/branding/vianexis_logo.png';
   static const String markAsset = 'assets/branding/vianexis_mark.png';
   static const String watermarkAsset = 'assets/branding/vianexis_watermark.png';
+  static const String backgroundAsset = 'assets/backgrounds/admin_background.png';
+  static const String appIconAsset = 'assets/icons/app_icon.png';
 
   static BoxShadow cardShadow(Brightness brightness) {
     return BoxShadow(

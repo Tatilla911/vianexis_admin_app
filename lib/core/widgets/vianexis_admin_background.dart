@@ -34,6 +34,13 @@ class VianexisAdminBackground extends StatelessWidget {
                   VianexisBrand.backgroundNavy.withValues(alpha: 0.96),
                 ],
               ),
+              image: showWatermark
+                  ? const DecorationImage(
+                      image: AssetImage(VianexisBrand.backgroundAsset),
+                      fit: BoxFit.cover,
+                      opacity: 0.18,
+                    )
+                  : null,
             ),
           ),
         if (showWatermark) const VianexisWatermarkBackground(),

@@ -25,11 +25,15 @@ assets/branding/
   vianexis_logo.png
   vianexis_mark.png
   vianexis_watermark.png
+assets/backgrounds/
+  admin_background.png
+assets/icons/
+  app_icon.png
 ```
 
 Regenerate:
 
-```bash
+```powershell
 python tool/generate_admin_branding.py
 flutter pub get
 ```
@@ -60,8 +64,8 @@ Background watermark is enabled on login; authenticated module chrome uses a lig
 | Android app label | **ViaNexis Admin** |
 | iOS display name | **ViaNexis Admin** |
 | Android launch background | Navy `#0D1B2A` |
-| Launcher icon tooling | **Pending** — no `flutter_launcher_icons` config yet |
-| Native splash tooling | **Pending** — branded splash generation deferred |
+| Launcher icon tooling | **Pending** — source asset at `assets/icons/app_icon.png`; run `flutter_launcher_icons` when ready |
+| Native splash tooling | **Pending** — use `assets/backgrounds/admin_background.png` with `flutter_native_splash` when ready |
 
 ## Adding future logo variants
 

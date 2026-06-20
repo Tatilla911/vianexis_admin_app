@@ -18,6 +18,11 @@ List<String> runReleaseReadinessChecks(Directory root) {
   for (final relative in _requiredAssetDeclarations) {
     if (!pubspecText.contains(relative)) {
       issues.add('pubspec.yaml should declare asset: $relative');
+      continue;
+    }
+    final assetFile = File('${root.path}${Platform.pathSeparator}$relative');
+    if (!assetFile.existsSync()) {
+      issues.add('Missing asset file: $relative');
     }
   }
 
@@ -77,4 +82,7 @@ const _requiredDocs = [
 const _requiredAssetDeclarations = [
   'assets/branding/vianexis_logo.png',
   'assets/branding/vianexis_mark.png',
+  'assets/branding/vianexis_watermark.png',
+  'assets/backgrounds/admin_background.png',
+  'assets/icons/app_icon.png',
 ];

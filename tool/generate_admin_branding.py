@@ -8,7 +8,9 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "assets" / "branding"
+BRANDING = ROOT / "assets" / "branding"
+BACKGROUNDS = ROOT / "assets" / "backgrounds"
+ICONS = ROOT / "assets" / "icons"
 NAVY = (13, 27, 42)
 BLUE = (79, 163, 227)
 GOLD = (212, 175, 55)
@@ -48,12 +50,14 @@ def draw_vn(draw: ImageDraw.ImageDraw, box: tuple[int, int, int, int], *, gold: 
 
 
 def main() -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
+    BRANDING.mkdir(parents=True, exist_ok=True)
+    BACKGROUNDS.mkdir(parents=True, exist_ok=True)
+    ICONS.mkdir(parents=True, exist_ok=True)
 
     mark = gradient((256, 256), NAVY, (30, 96, 145))
     d = ImageDraw.Draw(mark)
     draw_vn(d, (64, 64, 192, 192))
-    mark.save(OUT / "vianexis_mark.png")
+    mark.save(BRANDING / "vianexis_mark.png")
 
     logo = gradient((512, 160), NAVY, (30, 96, 145))
     d = ImageDraw.Draw(logo)
@@ -61,15 +65,29 @@ def main() -> None:
     font = _font(44)
     d.text((140, 52), "ViaNexis", fill=(244, 247, 251, 255), font=font)
     d.text((140, 98), "Admin", fill=GOLD + (255,), font=font)
-    logo.save(OUT / "vianexis_logo.png")
+    logo.save(BRANDING / "vianexis_logo.png")
 
     watermark = Image.new("RGBA", (640, 640), (0, 0, 0, 0))
     d = ImageDraw.Draw(watermark)
     d.rounded_rectangle((170, 170, 470, 470), radius=54, fill=BLUE + (28,))
     d.text((250, 250), "VN", fill=(255, 255, 255, 22), font=_font(160))
-    watermark.save(OUT / "vianexis_watermark.png")
+    watermark.save(BRANDING / "vianexis_watermark.png")
 
-    print("Generated branding assets in", OUT)
+    background = gradient((1080, 1920), NAVY, (21, 42, 66))
+    d = ImageDraw.Draw(background)
+    d.ellipse((-120, 200, 420, 740), fill=BLUE + (18,))
+    d.ellipse((680, 1200, 1180, 1920), fill=GOLD + (12,))
+    background.save(BACKGROUNDS / "admin_background.png")
+
+    icon = gradient((512, 512), NAVY, (30, 96, 145))
+    d = ImageDraw.Draw(icon)
+    draw_vn(d, (96, 96, 416, 416), gold=True)
+    icon.save(ICONS / "app_icon.png")
+
+    print("Generated branding assets:")
+    print(" ", BRANDING)
+    print(" ", BACKGROUNDS)
+    print(" ", ICONS)
 
 
 if __name__ == "__main__":
