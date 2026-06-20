@@ -38,6 +38,8 @@ abstract class BulkOnboardingRepository {
 
   Future<String> downloadTemplate(BulkOnboardingJobType type);
 
+  Future<String> downloadValidationReport(String jobId);
+
   Future<BulkOnboardingJob> submitAction({
     required String jobId,
     required BulkOnboardingActionRequest request,
@@ -127,6 +129,11 @@ class LiveBulkOnboardingRepository implements BulkOnboardingRepository {
   @override
   Future<String> downloadTemplate(BulkOnboardingJobType type) {
     return _api.downloadTemplate(type);
+  }
+
+  @override
+  Future<String> downloadValidationReport(String jobId) {
+    return _api.downloadValidationReport(jobId);
   }
 
   @override
@@ -437,6 +444,64 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
         'name,email,phone,country,role,preferredLanguage,employeeId\n',
       BulkOnboardingJobType.unknown => 'name,email\n',
     };
+  }
+
+  @override
+  Future<String> downloadValidationReport(String jobId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    if (!_rowsByJob.containsKey(jobId) && _jobs.every((job) => job.id != jobId)) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.errorActionUnavailable,
+        kind: ApiExceptionKind.notFound,
+      );
+    }
+    final rows = _rowsByJob[jobId] ?? const [];
+    return _buildValidationReportCsv(rows);
+  }
+
+  String _buildValidationReportCsv(List<BulkOnboardingRow> rows) {
+    const headers = [
+      'rowIndex',
+      'status',
+      'displayLabel',
+      'name',
+      'email',
+      'phone',
+      'role',
+      'vehiclePlate',
+      'trailerPlate',
+      'validationErrors',
+      'validationWarnings',
+      'duplicateReason',
+    ];
+    final buffer = StringBuffer('${headers.join(',')}\n');
+    for (final row in rows) {
+      buffer.writeln([
+        row.rowIndex,
+        row.status.backendValue,
+        _csvCell(row.displayLabel),
+        _csvCell(row.name),
+        _csvCell(row.email),
+        _csvCell(row.phone),
+        _csvCell(row.role),
+        _csvCell(row.vehiclePlate),
+        _csvCell(row.trailerPlate),
+        _csvCell(row.validationErrors.join('; ')),
+        _csvCell(row.validationWarnings.join('; ')),
+        _csvCell(row.duplicateReason),
+      ].join(','));
+    }
+    return buffer.toString();
+  }
+
+  String _csvCell(String? value) {
+    if (value == null || value.isEmpty) {
+      return '';
+    }
+    if (value.contains(',') || value.contains('"') || value.contains('\n')) {
+      return '"${value.replaceAll('"', '""')}"';
+    }
+    return value;
   }
 
   @override

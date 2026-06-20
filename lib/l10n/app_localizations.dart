@@ -3572,6 +3572,24 @@ abstract class AppLocalizations {
   /// **'Template copied to clipboard.'**
   String get bulkOnboardingTemplateCopied;
 
+  /// No description provided for @bulkOnboardingDownloadValidationReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Download validation report CSV'**
+  String get bulkOnboardingDownloadValidationReport;
+
+  /// No description provided for @bulkOnboardingValidationReportCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Validation report copied to clipboard.'**
+  String get bulkOnboardingValidationReportCopied;
+
+  /// No description provided for @bulkOnboardingValidationReportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not download the validation report.'**
+  String get bulkOnboardingValidationReportFailed;
+
   /// No description provided for @bulkOnboardingCsvOnlyNotice.
   ///
   /// In en, this message translates to:

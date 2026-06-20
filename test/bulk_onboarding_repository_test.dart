@@ -142,6 +142,18 @@ void main() {
               );
               return;
             }
+            if (options.path ==
+                '/platform-admin/bulk-onboarding/jobs/11/export-validation-report.csv') {
+              handler.resolve(
+                Response<String>(
+                  requestOptions: options,
+                  statusCode: 200,
+                  data:
+                      'rowIndex,status,displayLabel,name,email,phone,role,vehiclePlate,trailerPlate,validationErrors,validationWarnings,duplicateReason\n1,valid,Row 1,Test,test@example.com,,driver,,,,\n',
+                ),
+              );
+              return;
+            }
             if (options.path == '/platform-admin/bulk-onboarding/jobs/11/cancel') {
               expect(options.method, 'PATCH');
               handler.resolve(
@@ -295,6 +307,12 @@ void main() {
       expect(template, contains('name,email'));
     });
 
+    test('downloadValidationReport hits export endpoint', () async {
+      final report = await repo.downloadValidationReport('11');
+      expect(report, contains('rowIndex,status,displayLabel'));
+      expect(report, contains('validationErrors'));
+    });
+
     test('correctRow hits correction endpoint', () async {
       final result = await repo.correctRow(
         jobId: '11',
@@ -346,6 +364,13 @@ void main() {
       );
       expect(result.processingAvailable, isFalse);
       expect(result.metadataOnly, isTrue);
+    });
+
+    test('mock validation report csv contains metadata headers', () async {
+      final repo = MockBulkOnboardingRepository();
+      final report = await repo.downloadValidationReport('502');
+      expect(report, contains('rowIndex,status,displayLabel'));
+      expect(report, contains('validationErrors'));
     });
 
     test('mock correct invalid row to valid and preserves original values', () async {

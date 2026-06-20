@@ -1868,6 +1868,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bulkOnboardingTemplateCopied => 'Template copied to clipboard.';
 
   @override
+  String get bulkOnboardingDownloadValidationReport =>
+      'Download validation report CSV';
+
+  @override
+  String get bulkOnboardingValidationReportCopied =>
+      'Validation report copied to clipboard.';
+
+  @override
+  String get bulkOnboardingValidationReportFailed =>
+      'Could not download the validation report.';
+
+  @override
   String get bulkOnboardingCsvOnlyNotice =>
       'CSV only in this phase. Excel import coming later.';
 

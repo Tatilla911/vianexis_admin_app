@@ -85,6 +85,14 @@ class BulkOnboardingApi {
     return response.data ?? '';
   }
 
+  Future<String> downloadValidationReport(String jobId) async {
+    final response = await _apiClient.get<String>(
+      '/platform-admin/bulk-onboarding/jobs/$jobId/export-validation-report.csv',
+      options: Options(responseType: ResponseType.plain),
+    );
+    return response.data ?? '';
+  }
+
   Future<BulkOnboardingUploadResult> uploadCsv({
     required List<int> bytes,
     required String fileName,

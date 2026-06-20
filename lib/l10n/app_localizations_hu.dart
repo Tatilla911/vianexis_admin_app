@@ -1899,6 +1899,18 @@ class AppLocalizationsHu extends AppLocalizations {
   String get bulkOnboardingTemplateCopied => 'Sablon a vágólapra másolva.';
 
   @override
+  String get bulkOnboardingDownloadValidationReport =>
+      'Validációs jelentés CSV letöltése';
+
+  @override
+  String get bulkOnboardingValidationReportCopied =>
+      'Validációs jelentés a vágólapra másolva.';
+
+  @override
+  String get bulkOnboardingValidationReportFailed =>
+      'A validációs jelentés letöltése nem sikerült.';
+
+  @override
   String get bulkOnboardingCsvOnlyNotice =>
       'Ebben a fázisban csak CSV. Excel import később érkezik.';
 
