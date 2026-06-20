@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'admin_app_smoke_check.dart';
 
+const stagingAllowLocalhostEnv = 'STAGING_ALLOW_LOCALHOST';
+
 /// Staging APK build readiness checks (no live API login).
 List<String> runAdminStagingBuildChecks(
   Directory root, {
@@ -20,20 +22,56 @@ List<String> runAdminStagingBuildChecks(
   if (apiBaseUrl.trim().isEmpty) {
     issues.add('API_BASE_URL is required for staging builds');
   } else {
-    final uri = Uri.tryParse(apiBaseUrl.trim());
-    if (uri == null || !uri.hasScheme || uri.host.isEmpty) {
-      issues.add('API_BASE_URL must be a valid absolute URL');
-    }
-    if (apiBaseUrl.contains('localhost') || apiBaseUrl.contains('127.0.0.1')) {
-      issues.add('Staging API_BASE_URL should not use localhost');
-    }
+    issues.addAll(validateStagingApiBaseUrl(apiBaseUrl));
   }
 
   _validateStagingMockFallbackPolicy(root, issues);
   _validateAppVersion(root, issues);
   _validateStagingBuildDocs(root, issues);
+  _validateNoHardcodedRenderStagingUrl(root, issues);
+  _validateDartDefineBasedApiConfig(root, issues);
 
   return issues;
+}
+
+/// Validates staging [apiBaseUrl] — HTTPS host required; Render onrender.com allowed.
+List<String> validateStagingApiBaseUrl(String apiBaseUrl) {
+  final issues = <String>[];
+  final trimmed = apiBaseUrl.trim();
+
+  final uri = Uri.tryParse(trimmed);
+  if (uri == null || !uri.hasScheme || uri.host.isEmpty) {
+    issues.add('API_BASE_URL must be a valid absolute URL');
+    return issues;
+  }
+
+  if (uri.scheme != 'https') {
+    issues.add('Staging API_BASE_URL should use HTTPS');
+  }
+
+  final allowLocalhost =
+      Platform.environment[stagingAllowLocalhostEnv]?.trim().toLowerCase() ==
+      'true';
+
+  if (!allowLocalhost &&
+      (trimmed.contains('localhost') || trimmed.contains('127.0.0.1'))) {
+    issues.add(
+      'Staging API_BASE_URL should not use localhost — set $stagingAllowLocalhostEnv=true only for local override',
+    );
+  }
+
+  return issues;
+}
+
+bool isAllowedStagingApiHost(String host) {
+  final normalized = host.trim().toLowerCase();
+  if (normalized.endsWith('.onrender.com')) {
+    return true;
+  }
+  if (normalized.contains('staging') || normalized.contains('example.com')) {
+    return true;
+  }
+  return false;
 }
 
 void _validateStagingMockFallbackPolicy(Directory root, List<String> issues) {
@@ -93,5 +131,45 @@ void _validateStagingBuildDocs(Directory root, List<String> issues) {
     issues.add(
       'ADMIN_APP_STAGING_BUILD.md should not recommend localhost for staging builds',
     );
+  }
+}
+
+void _validateNoHardcodedRenderStagingUrl(Directory root, List<String> issues) {
+  final libDir = Directory('${root.path}${Platform.pathSeparator}lib');
+  if (!libDir.existsSync()) {
+    return;
+  }
+
+  final onRenderUrl = RegExp(
+    r'https://[a-zA-Z0-9.-]+\.onrender\.com',
+    caseSensitive: false,
+  );
+
+  for (final entity in libDir.listSync(recursive: true)) {
+    if (entity is! File || !entity.path.endsWith('.dart')) {
+      continue;
+    }
+    final text = entity.readAsStringSync();
+    if (onRenderUrl.hasMatch(text)) {
+      issues.add(
+        'Hardcoded Render staging URL in source — use dart-define API_BASE_URL instead: ${entity.path}',
+      );
+    }
+  }
+}
+
+void _validateDartDefineBasedApiConfig(Directory root, List<String> issues) {
+  final configFile = File(
+    '${root.path}${Platform.pathSeparator}lib${Platform.pathSeparator}app${Platform.pathSeparator}app_config.dart',
+  );
+  if (!configFile.existsSync()) {
+    return;
+  }
+  final text = configFile.readAsStringSync();
+  if (!text.contains('String.fromEnvironment')) {
+    issues.add('app_config.dart should read API_BASE_URL from dart-define');
+  }
+  if (text.contains('.onrender.com')) {
+    issues.add('app_config.dart must not hardcode onrender.com staging URL');
   }
 }

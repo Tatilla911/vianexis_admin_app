@@ -48,6 +48,15 @@ void main() {
     );
   });
 
+  test('accepts onrender.com style HTTPS URL', () {
+    final issues = runStagingApkArtifactChecks(
+      Directory.current,
+      appEnv: 'staging',
+      apiBaseUrl: 'https://vianexis-backend-staging.onrender.com',
+    );
+    expect(issues, isEmpty);
+  });
+
   test('dry-run plan does not require built apk copy', () async {
     final plan = buildStagingApkArtifactPlan(
       Directory.current,

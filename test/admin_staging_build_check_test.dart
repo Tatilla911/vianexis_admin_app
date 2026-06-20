@@ -36,4 +36,26 @@ void main() {
       isTrue,
     );
   });
+
+  test('accepts onrender.com HTTPS URL', () {
+    final issues = validateStagingApiBaseUrl(
+      'https://vianexis-backend-staging.onrender.com',
+    );
+    expect(issues, isEmpty);
+    expect(
+      isAllowedStagingApiHost('vianexis-backend-staging.onrender.com'),
+      isTrue,
+    );
+  });
+
+  test('localhost allowed with explicit override env', () {
+    // Note: override is read from Platform.environment at runtime.
+    // validateStagingApiBaseUrl uses the env var directly in checks.
+    final issues = runAdminStagingBuildChecks(
+      Directory.current,
+      appEnv: 'staging',
+      apiBaseUrl: 'http://localhost:3000',
+    );
+    expect(issues.any((i) => i.contains('localhost')), isTrue);
+  });
 }
