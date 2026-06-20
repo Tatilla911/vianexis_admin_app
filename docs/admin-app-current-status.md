@@ -1,6 +1,6 @@
 # ViaNexis Admin App — current status
 
-Last updated: production readiness pack (Phases 25–28).
+Last updated: production advancement pack (Phases 29–32 + smoke docs).
 
 ## Repository
 
@@ -10,7 +10,7 @@ Last updated: production readiness pack (Phases 25–28).
 | Latest commit | see `git log -1` |
 | Remote | configure with `git remote add origin <URL>` if not set |
 | Analyzer | `flutter analyze` — target: no issues |
-| Tests | `flutter test` — 216+ |
+| Tests | `flutter test` — 224+ |
 
 ## App identity
 
@@ -31,12 +31,22 @@ Last updated: production readiness pack (Phases 25–28).
 
 - `.github/workflows/admin_app_ci.yml` — analyze + test on push/PR
 
+## Added in latest advancement
+
+- Brand asset set generated and tracked:
+  - `assets/branding/*`
+  - `assets/backgrounds/admin_background.png`
+  - `assets/icons/app_icon.png`
+- Notification center foundation (in-app metadata-only)
+- Bulk onboarding dry-run/execute control UX with policy-aware safety dialogs
+- Smoke test runbook: `docs/ADMIN_APP_SMOKE_TESTS.md`
+
 ## Next recommended phases
 
 1. Production/staging backend deployment with stable API URLs
 2. GitHub remote + push admin app repository
-3. Real notification/push foundation
-4. Controlled bulk provisioning behind feature flag (backend)
+3. Native icon/splash generation tooling (`flutter_launcher_icons`, `flutter_native_splash`)
+4. Push provider integration (FCM/APNS) with secure token storage strategy
 5. CI hardening (integration tests against staging API)
 6. App Store / internal distribution (TestFlight, Play internal track)
 7. Native app icon and splash generation

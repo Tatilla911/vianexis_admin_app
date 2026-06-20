@@ -43,12 +43,19 @@ Tenant roles (driver, dispatcher, company_admin, etc.) cannot sign in.
 
 - Symptom: redirected to login or permission denied after idle period.
 - Fix: sign in again; confirm role still valid on backend.
+- Security note: never share session tokens/screenshots containing auth headers.
 
 ### Permission denied
 
 - Symptom: **Permission denied** screen when opening a module.
 - Expected: role does not include that destination (e.g. support_admin → Admin Users).
 - Fix: use correct role or request access from super_admin.
+
+### Production security posture
+
+- Production profile requires configured API (`API_BASE_URL`); mock fallback is disabled by default.
+- Notifications remain metadata-only and in-app unless push provider is explicitly configured later.
+- Admin app does not display raw push tokens or secret environment values.
 
 ### Localization missing
 

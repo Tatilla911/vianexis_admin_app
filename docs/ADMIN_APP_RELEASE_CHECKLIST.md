@@ -8,6 +8,8 @@
 - [ ] Correct `APP_ENV` and `API_BASE_URL` for target environment
 - [ ] Version/build in `pubspec.yaml` reviewed
 - [ ] EN + HU strings reviewed for new UI
+- [ ] Notification center smoke-tested (in-app mode)
+- [ ] Bulk onboarding dry-run/execute safety dialog verified
 
 ## Build
 
@@ -37,10 +39,10 @@ flutter build ipa --release --dart-define=APP_ENV=production --dart-define=API_B
 ## Not in scope for this release
 
 - [ ] App Store / Play Store publishing pipeline
-- [ ] Push notifications
+- [ ] External push provider live delivery (FCM/APNS)
 - [ ] Forced app update enforcement
 - [ ] Real payment processing
 
 ## App icon / splash
 
-Status: **pending** — brand PNG assets exist under `assets/branding/`. Native launcher icon and splash generation (e.g. `flutter_launcher_icons`, `flutter_native_splash`) not yet configured. See `docs/brand-and-visual-system.md`.
+Status: **assets ready** — source assets available at `assets/icons/app_icon.png` and `assets/backgrounds/admin_background.png`. Native launcher icon and splash generation tooling (e.g. `flutter_launcher_icons`, `flutter_native_splash`) is still pending. See `docs/brand-and-visual-system.md`.
