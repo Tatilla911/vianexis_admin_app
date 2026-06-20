@@ -136,7 +136,20 @@ flutter analyze
 flutter test
 dart run tool/admin_release_readiness_check.dart
 dart run tool/admin_app_smoke_check.dart
+dart run tool/admin_staging_build_check.dart
 ```
+
+## Staging APK build
+
+First internal staging build — see [ADMIN_APP_STAGING_BUILD.md](docs/ADMIN_APP_STAGING_BUILD.md):
+
+```powershell
+flutter build apk --release `
+  --dart-define=APP_ENV=staging `
+  --dart-define=API_BASE_URL=https://api-staging.example.com
+```
+
+Replace the URL with your staging API hostname. Do not commit real URLs or signing files.
 
 ## Release readiness
 
