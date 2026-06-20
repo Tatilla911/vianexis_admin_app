@@ -37,3 +37,12 @@ Run against a non-production environment first.
 - [ ] API unavailable shows safe error messaging
 - [ ] Production without `API_BASE_URL` shows configuration warning
 - [ ] No raw token/API secrets are shown in UI
+
+## Automated local smoke tool
+
+```powershell
+cd vianexis_admin_app
+dart run tool/admin_app_smoke_check.dart
+```
+
+Validates assets, docs, l10n, release readiness, and app config parsing without requiring live API login.

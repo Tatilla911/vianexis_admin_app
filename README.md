@@ -135,6 +135,7 @@ flutter gen-l10n
 flutter analyze
 flutter test
 dart run tool/admin_release_readiness_check.dart
+dart run tool/admin_app_smoke_check.dart
 ```
 
 ## Release readiness
