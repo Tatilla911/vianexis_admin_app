@@ -3688,4 +3688,87 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get settingsOpenNotificationPreferences =>
       'Ertesitesi beallitasok megnyitasa';
+
+  @override
+  String get translationPanelTitle => 'Forditas';
+
+  @override
+  String get translationProviderDisabled =>
+      'A fordito szolgaltato nincs beallitva';
+
+  @override
+  String get translationTargetLanguageLabel => 'Celnyelv';
+
+  @override
+  String get translationRecipientLanguageLabel => 'Cimzett nyelve';
+
+  @override
+  String get translationTranslateAction => 'Forditas';
+
+  @override
+  String get translationTranslating => 'Forditas…';
+
+  @override
+  String get translationActionError => 'A forditas sikertelen';
+
+  @override
+  String get translationOriginalTitle => 'Eredeti szoveg';
+
+  @override
+  String get translationTranslatedTitle => 'Leforditott szoveg';
+
+  @override
+  String translationLanguageLabel(String code) {
+    return 'Nyelv: $code';
+  }
+
+  @override
+  String get translationMetadataOnlyNotice =>
+      'A leforditott szoveg metaadat-only nezetben rejtve';
+
+  @override
+  String get translationBadgeMachine => 'Gepi forditas';
+
+  @override
+  String get translationBadgeNeedsReview => 'Felulvizsgalat szukseges';
+
+  @override
+  String get translationBadgeStale => 'Elavult forditas';
+
+  @override
+  String get translationBadgeApproved => 'Jovahagyva';
+
+  @override
+  String get translationHumanConfirmationRequired =>
+      'Emberi jovahagyas szukseges a leforditott szoveg kuldese elott';
+
+  @override
+  String get translationReplyPreviewTitle => 'Valasz forditas elonezet';
+
+  @override
+  String get translationReplyPreviewNotice =>
+      'Csak elonezet. Az eredeti piszkozat megmarad, automatikus kuldes nincs.';
+
+  @override
+  String get translationGeneratePreviewAction => 'Elonezet generalasa';
+
+  @override
+  String get translationNoAutoSendNotice =>
+      'A jovahagyas keszre jeloli a forditas. A kuldes kulon explicit lepes marad.';
+
+  @override
+  String get translationDismissAction => 'Megse';
+
+  @override
+  String get translationApproveForSendAction => 'Forditas jovahagyasa';
+
+  @override
+  String get translationApproving => 'Jovahagyas…';
+
+  @override
+  String get translationDraftReplyAction => 'Valasz forditas piszkozata';
+
+  @override
+  String get translationReplyApprovedNotice =>
+      'A forditas jovahagyva. Masolja vagy kuldje a normal tamogatasi folyamaton keresztul.';
 }

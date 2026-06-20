@@ -17,6 +17,8 @@ import 'widgets/support_access_grant_dialog.dart';
 import 'widgets/support_action_dialog.dart';
 import 'widgets/support_ticket_priority_badge.dart';
 import 'widgets/support_ticket_status_badge.dart';
+import '../../translation/presentation/widgets/reply_translation_dialog.dart';
+import '../../translation/presentation/widgets/translation_panel.dart';
 
 class SupportTicketDetailScreen extends ConsumerWidget {
   const SupportTicketDetailScreen({
@@ -43,6 +45,7 @@ class SupportTicketDetailScreen extends ConsumerWidget {
         ),
         data: (ticket) => _DetailBody(
           ticket: ticket,
+          ticketId: ticketId,
           onAction: (type) => _handleAction(context, ref, type),
           onCreateGrant: () => _handleCreateGrant(context, ref, ticket),
         ),
@@ -116,14 +119,16 @@ class SupportTicketDetailScreen extends ConsumerWidget {
   }
 }
 
-class _DetailBody extends StatelessWidget {
+class _DetailBody extends ConsumerWidget {
   const _DetailBody({
     required this.ticket,
+    required this.ticketId,
     required this.onAction,
     required this.onCreateGrant,
   });
 
   final SupportTicket ticket;
+  final String ticketId;
   final ValueChanged<SupportTicketActionType> onAction;
   final VoidCallback onCreateGrant;
 
@@ -135,8 +140,10 @@ class _DetailBody extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final canAct = ticket.status.isOpenLike;
+    final l10n = AppLocalizations.of(context);
+    final adminLocale = Localizations.localeOf(context).languageCode;
 
     return ListView(
       padding: const EdgeInsets.all(20),
@@ -193,6 +200,34 @@ class _DetailBody extends StatelessWidget {
             label: resolveSupportKey(context, 'supportTicketFieldSupportGrant'),
             value: ticket.supportAccessGrantId ?? '—',
           ),
+        const SizedBox(height: 16),
+        TranslationPanel(
+          sourceType: 'support_ticket',
+          sourceId: ticketId,
+          sourceField: 'descriptionSummary',
+          originalText: ticket.summary,
+          companyId: ticket.companyId,
+        ),
+        const SizedBox(height: 12),
+        OutlinedButton(
+          onPressed: () async {
+            final result = await showReplyTranslationDialog(
+              context: context,
+              ref: ref,
+              sourceType: 'support_ticket',
+              sourceId: ticketId,
+              draftText: ticket.summary,
+              draftLanguage: adminLocale,
+              companyId: ticket.companyId,
+            );
+            if (result?.approved == true && context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(l10n.translationReplyApprovedNotice)),
+              );
+            }
+          },
+          child: Text(l10n.translationDraftReplyAction),
+        ),
         const SizedBox(height: 16),
         Card(
           child: Padding(

@@ -6757,6 +6757,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open notification preferences'**
   String get settingsOpenNotificationPreferences;
+
+  /// No description provided for @translationPanelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation'**
+  String get translationPanelTitle;
+
+  /// No description provided for @translationProviderDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation provider not configured'**
+  String get translationProviderDisabled;
+
+  /// No description provided for @translationTargetLanguageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Target language'**
+  String get translationTargetLanguageLabel;
+
+  /// No description provided for @translationRecipientLanguageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient language'**
+  String get translationRecipientLanguageLabel;
+
+  /// No description provided for @translationTranslateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Translate'**
+  String get translationTranslateAction;
+
+  /// No description provided for @translationTranslating.
+  ///
+  /// In en, this message translates to:
+  /// **'Translating…'**
+  String get translationTranslating;
+
+  /// No description provided for @translationActionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation failed'**
+  String get translationActionError;
+
+  /// No description provided for @translationOriginalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Original text'**
+  String get translationOriginalTitle;
+
+  /// No description provided for @translationTranslatedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Translated text'**
+  String get translationTranslatedTitle;
+
+  /// No description provided for @translationLanguageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Language: {code}'**
+  String translationLanguageLabel(String code);
+
+  /// No description provided for @translationMetadataOnlyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Translated text is hidden in metadata-only view'**
+  String get translationMetadataOnlyNotice;
+
+  /// No description provided for @translationBadgeMachine.
+  ///
+  /// In en, this message translates to:
+  /// **'Machine translation'**
+  String get translationBadgeMachine;
+
+  /// No description provided for @translationBadgeNeedsReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs review'**
+  String get translationBadgeNeedsReview;
+
+  /// No description provided for @translationBadgeStale.
+  ///
+  /// In en, this message translates to:
+  /// **'Stale translation'**
+  String get translationBadgeStale;
+
+  /// No description provided for @translationBadgeApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get translationBadgeApproved;
+
+  /// No description provided for @translationHumanConfirmationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Human approval is required before sending translated text'**
+  String get translationHumanConfirmationRequired;
+
+  /// No description provided for @translationReplyPreviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply translation preview'**
+  String get translationReplyPreviewTitle;
+
+  /// No description provided for @translationReplyPreviewNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview only. Original draft is preserved and nothing is sent automatically.'**
+  String get translationReplyPreviewNotice;
+
+  /// No description provided for @translationGeneratePreviewAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate preview'**
+  String get translationGeneratePreviewAction;
+
+  /// No description provided for @translationNoAutoSendNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Approving marks the translation ready. Sending remains a separate explicit action.'**
+  String get translationNoAutoSendNotice;
+
+  /// No description provided for @translationDismissAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get translationDismissAction;
+
+  /// No description provided for @translationApproveForSendAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve translation'**
+  String get translationApproveForSendAction;
+
+  /// No description provided for @translationApproving.
+  ///
+  /// In en, this message translates to:
+  /// **'Approving…'**
+  String get translationApproving;
+
+  /// No description provided for @translationDraftReplyAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft reply translation'**
+  String get translationDraftReplyAction;
+
+  /// No description provided for @translationReplyApprovedNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation approved. Copy or send through your normal support workflow.'**
+  String get translationReplyApprovedNotice;
 }
 
 class _AppLocalizationsDelegate

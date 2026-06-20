@@ -12,6 +12,7 @@ import 'widgets/ai_review_checks_card.dart';
 import 'widgets/ai_review_recommendation_badge.dart';
 import 'widgets/ai_review_risk_badge.dart';
 import 'widgets/ai_review_source_badge.dart';
+import '../../translation/presentation/widgets/translation_panel.dart';
 
 class AiReviewDetailScreen extends ConsumerWidget {
   const AiReviewDetailScreen({super.key, required this.reviewId});
@@ -122,6 +123,14 @@ class AiReviewDetailScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(height: 16),
+              TranslationPanel(
+                sourceType: 'ai_review',
+                sourceId: reviewId,
+                sourceField: 'summary',
+                originalText: review.summary,
+                companyId: review.companyId,
               ),
               const SizedBox(height: 16),
               AiReviewChecksCard(review: review),

@@ -15,6 +15,7 @@ import '../domain/registration_decision_request.dart';
 import 'registration_providers.dart';
 import 'widgets/ai_risk_badge.dart';
 import 'widgets/registration_decision_dialog.dart';
+import '../../translation/presentation/widgets/translation_panel.dart';
 
 class RegistrationApplicationDetailScreen extends ConsumerWidget {
   const RegistrationApplicationDetailScreen({
@@ -46,6 +47,7 @@ class RegistrationApplicationDetailScreen extends ConsumerWidget {
         ),
         data: (application) => _DetailBody(
           application: application,
+          applicationId: applicationId,
           canDecide: canDecide,
           onDecision: (type) => _handleDecision(context, ref, type),
         ),
@@ -98,11 +100,13 @@ class RegistrationApplicationDetailScreen extends ConsumerWidget {
 class _DetailBody extends StatelessWidget {
   const _DetailBody({
     required this.application,
+    required this.applicationId,
     required this.canDecide,
     required this.onDecision,
   });
 
   final RegistrationApplication application;
+  final String applicationId;
   final bool canDecide;
   final ValueChanged<RegistrationDecisionType> onDecision;
 
@@ -196,6 +200,15 @@ class _DetailBody extends StatelessWidget {
               label: resolveRegistrationKey(context, 'registrationFieldAiSummary'),
               value: application.aiSummary ?? '—',
             ),
+            if ((application.aiSummary ?? '').trim().isNotEmpty) ...[
+              const SizedBox(height: 12),
+              TranslationPanel(
+                sourceType: 'registration_application',
+                sourceId: applicationId,
+                sourceField: 'aiSummary',
+                originalText: application.aiSummary!.trim(),
+              ),
+            ],
             _BulletList(
               title: resolveRegistrationKey(context, 'registrationFieldMissingInformation'),
               items: application.missingInformation,

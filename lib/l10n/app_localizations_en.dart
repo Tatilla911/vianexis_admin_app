@@ -3637,4 +3637,87 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsOpenNotificationPreferences =>
       'Open notification preferences';
+
+  @override
+  String get translationPanelTitle => 'Translation';
+
+  @override
+  String get translationProviderDisabled =>
+      'Translation provider not configured';
+
+  @override
+  String get translationTargetLanguageLabel => 'Target language';
+
+  @override
+  String get translationRecipientLanguageLabel => 'Recipient language';
+
+  @override
+  String get translationTranslateAction => 'Translate';
+
+  @override
+  String get translationTranslating => 'Translating…';
+
+  @override
+  String get translationActionError => 'Translation failed';
+
+  @override
+  String get translationOriginalTitle => 'Original text';
+
+  @override
+  String get translationTranslatedTitle => 'Translated text';
+
+  @override
+  String translationLanguageLabel(String code) {
+    return 'Language: $code';
+  }
+
+  @override
+  String get translationMetadataOnlyNotice =>
+      'Translated text is hidden in metadata-only view';
+
+  @override
+  String get translationBadgeMachine => 'Machine translation';
+
+  @override
+  String get translationBadgeNeedsReview => 'Needs review';
+
+  @override
+  String get translationBadgeStale => 'Stale translation';
+
+  @override
+  String get translationBadgeApproved => 'Approved';
+
+  @override
+  String get translationHumanConfirmationRequired =>
+      'Human approval is required before sending translated text';
+
+  @override
+  String get translationReplyPreviewTitle => 'Reply translation preview';
+
+  @override
+  String get translationReplyPreviewNotice =>
+      'Preview only. Original draft is preserved and nothing is sent automatically.';
+
+  @override
+  String get translationGeneratePreviewAction => 'Generate preview';
+
+  @override
+  String get translationNoAutoSendNotice =>
+      'Approving marks the translation ready. Sending remains a separate explicit action.';
+
+  @override
+  String get translationDismissAction => 'Cancel';
+
+  @override
+  String get translationApproveForSendAction => 'Approve translation';
+
+  @override
+  String get translationApproving => 'Approving…';
+
+  @override
+  String get translationDraftReplyAction => 'Draft reply translation';
+
+  @override
+  String get translationReplyApprovedNotice =>
+      'Translation approved. Copy or send through your normal support workflow.';
 }
