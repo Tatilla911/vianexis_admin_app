@@ -4,7 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/api/api_config.dart';
 import '../../core/auth/admin_auth_state.dart';
 import '../../core/localization/localization_resolver.dart';
+import '../../core/widgets/vianexis_admin_background.dart';
+import '../../core/widgets/vianexis_admin_card.dart';
 import '../../core/widgets/vianexis_loading_view.dart';
+import '../../core/widgets/vianexis_logo_mark.dart';
+import '../../core/widgets/vianexis_metadata_notice.dart';
 import '../../l10n/app_localizations.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -43,108 +47,138 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final backendConfigured = ApiConfig.isConfigured;
 
     if (auth.isRestoringSession) {
-      return const Scaffold(body: VianexisLoadingView());
+      return const Scaffold(
+        body: VianexisAdminBackground(child: VianexisLoadingView()),
+      );
     }
 
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 420),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      l10n.loginTitle,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(l10n.loginSubtitle),
-                    if (!backendConfigured) ...[
-                      const SizedBox(height: 16),
-                      Text(
-                        l10n.authBackendNotConfigured,
-                        style: TextStyle(color: Theme.of(context).colorScheme.error),
-                      ),
-                    ],
-                    const SizedBox(height: 28),
-                    TextFormField(
-                      controller: _emailController,
-                      enabled: !auth.isLoading,
-                      keyboardType: TextInputType.emailAddress,
-                      autofillHints: const [AutofillHints.username],
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(labelText: l10n.authEmail),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return l10n.authRequiredField;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _passwordController,
-                      enabled: !auth.isLoading,
-                      obscureText: _obscurePassword,
-                      autofillHints: const [AutofillHints.password],
-                      textInputAction: TextInputAction.done,
-                      decoration: InputDecoration(
-                        labelText: l10n.authPassword,
-                        suffixIcon: IconButton(
-                          onPressed: auth.isLoading
-                              ? null
-                              : () => setState(
-                                  () => _obscurePassword = !_obscurePassword,
+      body: VianexisAdminBackground(
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 420),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Center(child: VianexisLogoMark(size: 80)),
+                      const SizedBox(height: 28),
+                      VianexisAdminCard(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              l10n.loginTitle,
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(l10n.loginSubtitle),
+                            const SizedBox(height: 12),
+                            Text(
+                              l10n.brandSecureAdminSession,
+                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
+                            ),
+                            if (!backendConfigured) ...[
+                              const SizedBox(height: 16),
+                              Text(
+                                l10n.authBackendNotConfigured,
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.error,
                                 ),
-                          icon: Icon(
-                            _obscurePassword
-                                ? Icons.visibility_outlined
-                                : Icons.visibility_off_outlined,
-                          ),
-                          tooltip: _obscurePassword
-                              ? l10n.authShowPassword
-                              : l10n.authHidePassword,
+                              ),
+                            ],
+                            const SizedBox(height: 24),
+                            TextFormField(
+                              controller: _emailController,
+                              enabled: !auth.isLoading,
+                              keyboardType: TextInputType.emailAddress,
+                              autofillHints: const [AutofillHints.username],
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(labelText: l10n.authEmail),
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return l10n.authRequiredField;
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            TextFormField(
+                              controller: _passwordController,
+                              enabled: !auth.isLoading,
+                              obscureText: _obscurePassword,
+                              autofillHints: const [AutofillHints.password],
+                              textInputAction: TextInputAction.done,
+                              decoration: InputDecoration(
+                                labelText: l10n.authPassword,
+                                suffixIcon: IconButton(
+                                  onPressed: auth.isLoading
+                                      ? null
+                                      : () => setState(
+                                          () => _obscurePassword = !_obscurePassword,
+                                        ),
+                                  icon: Icon(
+                                    _obscurePassword
+                                        ? Icons.visibility_outlined
+                                        : Icons.visibility_off_outlined,
+                                  ),
+                                  tooltip: _obscurePassword
+                                      ? l10n.authShowPassword
+                                      : l10n.authHidePassword,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return l10n.authRequiredField;
+                                }
+                                return null;
+                              },
+                              onFieldSubmitted: (_) => _submit(),
+                            ),
+                            if (errorKey != null) ...[
+                              const SizedBox(height: 16),
+                              Text(
+                                resolveLocalizationKey(context, errorKey),
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.error,
+                                ),
+                              ),
+                            ],
+                            const SizedBox(height: 24),
+                            FilledButton(
+                              onPressed:
+                                  auth.isLoading || !backendConfigured ? null : _submit,
+                              child: auth.isLoading
+                                  ? Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const SizedBox(
+                                          height: 20,
+                                          width: 20,
+                                          child: CircularProgressIndicator(strokeWidth: 2),
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Text(l10n.authSigningIn),
+                                      ],
+                                    )
+                                  : Text(l10n.authSignIn),
+                            ),
+                          ],
                         ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return l10n.authRequiredField;
-                        }
-                        return null;
-                      },
-                      onFieldSubmitted: (_) => _submit(),
-                    ),
-                    if (errorKey != null) ...[
                       const SizedBox(height: 16),
-                      Text(
-                        resolveLocalizationKey(context, errorKey),
-                        style: TextStyle(color: Theme.of(context).colorScheme.error),
+                      VianexisMetadataNotice(
+                        message: l10n.brandAdminOnlyAccess,
+                        badgeLabel: l10n.brandMetadataOnlyPlatformView,
                       ),
                     ],
-                    const SizedBox(height: 24),
-                    FilledButton(
-                      onPressed: auth.isLoading || !backendConfigured ? null : _submit,
-                      child: auth.isLoading
-                          ? Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(strokeWidth: 2),
-                                ),
-                                const SizedBox(width: 12),
-                                Text(l10n.authSigningIn),
-                              ],
-                            )
-                          : Text(l10n.authSignIn),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

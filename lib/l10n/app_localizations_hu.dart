@@ -12,6 +12,39 @@ class AppLocalizationsHu extends AppLocalizations {
   String get appTitle => 'ViaNexis Admin';
 
   @override
+  String get brandAppName => 'ViaNexis Admin';
+
+  @override
+  String get brandControlCenterSubtitle => 'Operatív irányítóközpont';
+
+  @override
+  String get brandOperationalControlCenter => 'Operatív irányítóközpont';
+
+  @override
+  String get brandPlatformControlCenterBody =>
+      'Platform irányítóközpont metaadat-alapú adminisztrációhoz, ellenőrzési sorokhoz és audit láthatósághoz.';
+
+  @override
+  String get brandAdminOnlyAccess =>
+      'Csak platform admin hozzáférés. Bérlői sofőr és diszpécser fiókok nem léphetnek be.';
+
+  @override
+  String get brandMetadataOnlyPlatformView =>
+      'Csak metaadat platform nézet — nincs üzemeltetési fuvar-, dokumentum- vagy üzenettartalom.';
+
+  @override
+  String get brandEnvironmentLabel => 'Környezet';
+
+  @override
+  String get brandSecureAdminSession => 'Biztonságos admin munkamenet';
+
+  @override
+  String get brandApiConnected => 'API csatlakoztatva';
+
+  @override
+  String get brandApiNotConfigured => 'API nincs beállítva';
+
+  @override
   String get navDashboard => 'Irányítópult';
 
   @override
@@ -33,10 +66,11 @@ class AppLocalizationsHu extends AppLocalizations {
   String get navSettings => 'Beállítások';
 
   @override
-  String get loginTitle => 'Platform belépés';
+  String get loginTitle => 'Belépés';
 
   @override
-  String get loginSubtitle => 'Jelentkezzen be ViaNexis platform fiókjával.';
+  String get loginSubtitle =>
+      'Biztonságos platform admin munkamenet ViaNexis műveleti csapatoknak.';
 
   @override
   String get authEmail => 'E-mail';
@@ -94,7 +128,7 @@ class AppLocalizationsHu extends AppLocalizations {
       'A backend kapcsolat még nincs beállítva.';
 
   @override
-  String get dashboardTitle => 'Platform irányítópult';
+  String get dashboardTitle => 'Irányítóközpont';
 
   @override
   String get dashboardOperationalOverviewTitle => 'Operatív áttekintés';

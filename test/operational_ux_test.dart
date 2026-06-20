@@ -308,6 +308,7 @@ void main() {
     );
     container.read(appRouterProvider).go(AdminRoutes.registrations);
     await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('Permission denied'), findsWidgets);
     expect(find.text('Back to dashboard'), findsOneWidget);

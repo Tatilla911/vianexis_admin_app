@@ -23,6 +23,8 @@ import '../../features/system_health/presentation/widgets/system_health_overview
 import '../../l10n/app_localizations.dart';
 import 'widgets/dashboard_operational_overview.dart';
 import 'widgets/dashboard_summary_error_card.dart';
+import '../../core/widgets/vianexis_brand_header.dart';
+import '../../core/widgets/vianexis_metadata_notice.dart';
 
 class AdminDashboardScreen extends ConsumerWidget {
   const AdminDashboardScreen({super.key});
@@ -73,6 +75,8 @@ class AdminDashboardScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          const VianexisBrandHeader(),
+          const SizedBox(height: 20),
           DashboardOperationalOverview(
             systemOverview: healthAsync.asData?.value.overview,
             pendingRegistrations: pendingRegistrations,
@@ -224,21 +228,7 @@ class AdminDashboardScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.shield_outlined, size: 20),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(l10n.privacyNoOperationalContent),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          VianexisMetadataNotice(message: l10n.privacyNoOperationalContent),
         ],
       ),
     );

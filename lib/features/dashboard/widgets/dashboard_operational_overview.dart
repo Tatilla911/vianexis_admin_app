@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/vianexis_brand.dart';
 import '../../../core/localization/localization_resolver.dart';
+import '../../../core/widgets/vianexis_admin_card.dart';
+import '../../../core/widgets/vianexis_metric_tile.dart';
+import '../../../core/widgets/vianexis_section_header.dart';
 import '../../system_health/domain/system_health_overview.dart';
 import '../../system_health/domain/system_health_severity.dart';
 
@@ -26,109 +30,100 @@ class DashboardOperationalOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final systemHealthy = systemOverview?.overallStatus ==
+        SystemHealthOverallStatus.healthy;
     final systemLabel = systemOverview == null
         ? '—'
         : resolveDashboardKey(
             context,
-            systemOverview!.overallStatus == SystemHealthOverallStatus.healthy
+            systemHealthy
                 ? 'dashboardSystemStatusHealthy'
                 : 'dashboardSystemStatusAttention',
           );
 
     final metrics = [
-      _Metric(resolveDashboardKey(context, 'dashboardMetricSystemStatus'), systemLabel),
-      _Metric(
+      (
+        resolveDashboardKey(context, 'dashboardMetricSystemStatus'),
+        systemLabel,
+        systemOverview == null
+            ? VianexisMetricTone.neutral
+            : systemHealthy
+            ? VianexisMetricTone.success
+            : VianexisMetricTone.warning,
+        Icons.monitor_heart_outlined,
+      ),
+      (
         resolveDashboardKey(context, 'dashboardMetricPendingRegistrations'),
         _formatCount(pendingRegistrations),
+        VianexisMetricTone.info,
+        Icons.apartment_outlined,
       ),
-      _Metric(
+      (
         resolveDashboardKey(context, 'dashboardMetricCompaniesAttention'),
         _formatCount(companiesNeedingAttention),
+        VianexisMetricTone.warning,
+        Icons.business_outlined,
       ),
-      _Metric(
+      (
         resolveDashboardKey(context, 'dashboardMetricBulkOnboardingReview'),
         _formatCount(bulkOnboardingWaiting),
+        VianexisMetricTone.info,
+        Icons.upload_file_outlined,
       ),
-      _Metric(
+      (
         resolveDashboardKey(context, 'dashboardMetricAiHighRisk'),
         _formatCount(aiHighRiskReviews),
+        VianexisMetricTone.danger,
+        Icons.auto_awesome_outlined,
       ),
-      _Metric(
+      (
         resolveDashboardKey(context, 'dashboardMetricSupportIssues'),
         _formatCount(supportOpenIssues),
+        VianexisMetricTone.warning,
+        Icons.support_agent_outlined,
       ),
-      _Metric(
+      (
         resolveDashboardKey(context, 'dashboardMetricAuditRisks'),
         _formatCount(auditFailedDenied),
+        VianexisMetricTone.danger,
+        Icons.receipt_long_outlined,
       ),
     ];
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              resolveDashboardKey(context, 'dashboardOperationalOverviewTitle'),
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              resolveDashboardKey(context, 'dashboardOperationalOverviewBody'),
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: metrics
-                  .map(
-                    (metric) => _OverviewChip(
-                      label: metric.label,
-                      value: metric.value,
+    return VianexisAdminCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          VianexisSectionHeader(
+            title: resolveDashboardKey(context, 'dashboardOperationalOverviewTitle'),
+            subtitle: resolveDashboardKey(context, 'dashboardOperationalOverviewBody'),
+          ),
+          const SizedBox(height: VianexisBrand.spaceLg),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final isWide = constraints.maxWidth >= VianexisBrand.tabletBreakpoint;
+              return Wrap(
+                spacing: VianexisBrand.spaceMd,
+                runSpacing: VianexisBrand.spaceMd,
+                children: [
+                  for (final (label, value, tone, icon) in metrics)
+                    SizedBox(
+                      width: isWide ? (constraints.maxWidth - VianexisBrand.spaceMd) / 2 : double.infinity,
+                      child: VianexisMetricTile(
+                        label: label,
+                        value: value,
+                        tone: tone,
+                        icon: icon,
+                      ),
                     ),
-                  )
-                  .toList(),
-            ),
-          ],
-        ),
+                ],
+              );
+            },
+          ),
+        ],
       ),
     );
   }
 
   String _formatCount(int? value) => value?.toString() ?? '—';
-}
-
-class _Metric {
-  const _Metric(this.label, this.value);
-
-  final String label;
-  final String value;
-}
-
-class _OverviewChip extends StatelessWidget {
-  const _OverviewChip({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Theme.of(context).dividerColor),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(label, style: Theme.of(context).textTheme.labelMedium),
-          const SizedBox(height: 4),
-          Text(value, style: Theme.of(context).textTheme.titleSmall),
-        ],
-      ),
-    );
-  }
 }

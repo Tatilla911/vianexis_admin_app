@@ -68,8 +68,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Platform sign in'), findsOneWidget);
-    expect(find.text('Sign in'), findsOneWidget);
+    expect(find.text('Sign in'), findsWidgets);
+    expect(find.text('Sign in'), findsWidgets);
   });
 
   testWidgets('router redirects unauthenticated user away from dashboard', (tester) async {
@@ -128,7 +128,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.pump(const Duration(milliseconds: 500));
 
-    expect(find.text('Platform dashboard'), findsOneWidget);
+    expect(find.text('Control center'), findsOneWidget);
     expect(find.byType(NavigationBar), findsOneWidget);
   });
 

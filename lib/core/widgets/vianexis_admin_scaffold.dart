@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/app_router.dart';import '../../app/app_theme.dart';
+import '../../app/app_router.dart';
+import '../../app/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../api/api_unauthorized_binding.dart';
 import '../auth/admin_auth_state.dart';
@@ -10,6 +11,8 @@ import '../auth/admin_user.dart';
 import '../connectivity/connectivity_status_provider.dart';
 import 'backend_mode_banner.dart';
 import 'offline_banner.dart';
+import 'vianexis_admin_background.dart';
+import 'vianexis_metadata_notice.dart';
 import 'vianexis_status_badge.dart';
 
 class VianexisAdminScaffold extends ConsumerWidget {
@@ -37,7 +40,12 @@ class VianexisAdminScaffold extends ConsumerWidget {
       children: [
         OfflineBanner(isOnline: isOnline),
         const BackendModeBanner(),
-        Expanded(child: child),
+        Expanded(
+          child: VianexisAdminBackground(
+            showWatermark: false,
+            child: child,
+          ),
+        ),
       ],
     );
 
@@ -243,21 +251,7 @@ class AdminFeatureScaffold extends StatelessWidget {
           ),
           if (showPrivacyNotice) ...[
             const SizedBox(height: 16),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(Icons.shield_outlined, size: 20),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(l10n.privacyNoOperationalContent),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            VianexisMetadataNotice(message: l10n.privacyNoOperationalContent),
           ],
           if (footer != null) ...[
             const SizedBox(height: 16),

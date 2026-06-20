@@ -83,6 +83,7 @@ Upload is visible only for `super_admin` and `onboarding_reviewer`.
 - [Architecture](docs/architecture.md)
 - [API integration plan](docs/api-integration-plan.md)
 - [Privacy and security](docs/privacy-and-security.md)
+- [Brand and visual system](docs/brand-and-visual-system.md)
 
 ## Quality checks
 

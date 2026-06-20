@@ -12,6 +12,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'ViaNexis Admin';
 
   @override
+  String get brandAppName => 'ViaNexis Admin';
+
+  @override
+  String get brandControlCenterSubtitle => 'Operational control center';
+
+  @override
+  String get brandOperationalControlCenter => 'Operational Control Center';
+
+  @override
+  String get brandPlatformControlCenterBody =>
+      'Platform control center for metadata-only administration, review queues, and audit visibility.';
+
+  @override
+  String get brandAdminOnlyAccess =>
+      'Platform admin access only. Tenant driver and dispatcher accounts cannot sign in here.';
+
+  @override
+  String get brandMetadataOnlyPlatformView =>
+      'Metadata-only platform view — no operational trip, document, or message content.';
+
+  @override
+  String get brandEnvironmentLabel => 'Environment';
+
+  @override
+  String get brandSecureAdminSession => 'Secure admin session';
+
+  @override
+  String get brandApiConnected => 'API connected';
+
+  @override
+  String get brandApiNotConfigured => 'API not configured';
+
+  @override
   String get navDashboard => 'Dashboard';
 
   @override
@@ -33,10 +66,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navSettings => 'Settings';
 
   @override
-  String get loginTitle => 'Platform sign in';
+  String get loginTitle => 'Sign in';
 
   @override
-  String get loginSubtitle => 'Sign in with your ViaNexis platform account.';
+  String get loginSubtitle =>
+      'Secure platform admin session for ViaNexis operations staff.';
 
   @override
   String get authEmail => 'Email';
@@ -94,7 +128,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Backend connection is not configured yet.';
 
   @override
-  String get dashboardTitle => 'Platform dashboard';
+  String get dashboardTitle => 'Control center';
 
   @override
   String get dashboardOperationalOverviewTitle => 'Operational overview';

@@ -104,6 +104,66 @@ abstract class AppLocalizations {
   /// **'ViaNexis Admin'**
   String get appTitle;
 
+  /// No description provided for @brandAppName.
+  ///
+  /// In en, this message translates to:
+  /// **'ViaNexis Admin'**
+  String get brandAppName;
+
+  /// No description provided for @brandControlCenterSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Operational control center'**
+  String get brandControlCenterSubtitle;
+
+  /// No description provided for @brandOperationalControlCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Operational Control Center'**
+  String get brandOperationalControlCenter;
+
+  /// No description provided for @brandPlatformControlCenterBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform control center for metadata-only administration, review queues, and audit visibility.'**
+  String get brandPlatformControlCenterBody;
+
+  /// No description provided for @brandAdminOnlyAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform admin access only. Tenant driver and dispatcher accounts cannot sign in here.'**
+  String get brandAdminOnlyAccess;
+
+  /// No description provided for @brandMetadataOnlyPlatformView.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata-only platform view — no operational trip, document, or message content.'**
+  String get brandMetadataOnlyPlatformView;
+
+  /// No description provided for @brandEnvironmentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get brandEnvironmentLabel;
+
+  /// No description provided for @brandSecureAdminSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure admin session'**
+  String get brandSecureAdminSession;
+
+  /// No description provided for @brandApiConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'API connected'**
+  String get brandApiConnected;
+
+  /// No description provided for @brandApiNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'API not configured'**
+  String get brandApiNotConfigured;
+
   /// No description provided for @navDashboard.
   ///
   /// In en, this message translates to:
@@ -149,13 +209,13 @@ abstract class AppLocalizations {
   /// No description provided for @loginTitle.
   ///
   /// In en, this message translates to:
-  /// **'Platform sign in'**
+  /// **'Sign in'**
   String get loginTitle;
 
   /// No description provided for @loginSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Sign in with your ViaNexis platform account.'**
+  /// **'Secure platform admin session for ViaNexis operations staff.'**
   String get loginSubtitle;
 
   /// No description provided for @authEmail.
@@ -263,7 +323,7 @@ abstract class AppLocalizations {
   /// No description provided for @dashboardTitle.
   ///
   /// In en, this message translates to:
-  /// **'Platform dashboard'**
+  /// **'Control center'**
   String get dashboardTitle;
 
   /// No description provided for @dashboardOperationalOverviewTitle.

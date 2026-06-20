@@ -42,6 +42,7 @@ Never store tokens in plain `SharedPreferences`.
 
 - Show **Metadata only** badge on summary screens (`privacyMetadataOnlyBadge`)
 - Display privacy notice on dashboard (`privacyNoOperationalContent`)
+- Shared `VianexisMetadataNotice` widget applies consistent gold-accent metadata styling on dashboard, login, audit, and placeholder screens
 - Do not cache operational content locally
 - Redact email/phone in list views where backend returns partial metadata
 
