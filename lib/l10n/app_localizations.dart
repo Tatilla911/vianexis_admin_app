@@ -4465,6 +4465,666 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Company status change is unavailable.'**
   String get platformCompanyStatusUnavailable;
+
+  /// No description provided for @navBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing'**
+  String get navBilling;
+
+  /// No description provided for @billingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing'**
+  String get billingTitle;
+
+  /// No description provided for @billingTabSubscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions'**
+  String get billingTabSubscriptions;
+
+  /// No description provided for @billingTabPricingIntakes.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing intakes'**
+  String get billingTabPricingIntakes;
+
+  /// No description provided for @billingTabQuoteRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote requests'**
+  String get billingTabQuoteRequests;
+
+  /// No description provided for @billingMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get billingMockDataBadge;
+
+  /// No description provided for @billingMetadataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only'**
+  String get billingMetadataBadge;
+
+  /// No description provided for @billingLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load billing data.'**
+  String get billingLoadError;
+
+  /// No description provided for @billingDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load billing detail.'**
+  String get billingDetailError;
+
+  /// No description provided for @billingOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open billing module'**
+  String get billingOpenModule;
+
+  /// No description provided for @billingPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing views show metadata and counts only. No payment processing or document access occurs here.'**
+  String get billingPrivacyNotice;
+
+  /// No description provided for @billingOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing overview'**
+  String get billingOverviewTitle;
+
+  /// No description provided for @billingOverviewActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active: {count}'**
+  String billingOverviewActive(String count);
+
+  /// No description provided for @billingOverviewTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'Trial: {count}'**
+  String billingOverviewTrial(String count);
+
+  /// No description provided for @billingOverviewPastDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Past due: {count}'**
+  String billingOverviewPastDue(String count);
+
+  /// No description provided for @billingOverviewSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended: {count}'**
+  String billingOverviewSuspended(String count);
+
+  /// No description provided for @billingOverviewPricingNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New intakes: {count}'**
+  String billingOverviewPricingNew(String count);
+
+  /// No description provided for @billingOverviewQuotesPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending quotes: {count}'**
+  String billingOverviewQuotesPending(String count);
+
+  /// No description provided for @billingOverviewLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated: {date}'**
+  String billingOverviewLastUpdated(String date);
+
+  /// No description provided for @dashboardMetricBillingAttention.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing attention'**
+  String get dashboardMetricBillingAttention;
+
+  /// No description provided for @billingSubscriptionSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search subscriptions'**
+  String get billingSubscriptionSearchHint;
+
+  /// No description provided for @billingSubscriptionListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No subscriptions match your filters.'**
+  String get billingSubscriptionListEmpty;
+
+  /// No description provided for @billingSubscriptionDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription detail'**
+  String get billingSubscriptionDetailTitle;
+
+  /// No description provided for @billingSubscriptionFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get billingSubscriptionFilterAll;
+
+  /// No description provided for @billingSubscriptionFilterActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get billingSubscriptionFilterActive;
+
+  /// No description provided for @billingSubscriptionFilterTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'Trial'**
+  String get billingSubscriptionFilterTrial;
+
+  /// No description provided for @billingSubscriptionFilterPastDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Past due'**
+  String get billingSubscriptionFilterPastDue;
+
+  /// No description provided for @billingSubscriptionFilterSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended'**
+  String get billingSubscriptionFilterSuspended;
+
+  /// No description provided for @billingSubscriptionFilterCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get billingSubscriptionFilterCancelled;
+
+  /// No description provided for @billingSubscriptionStatusTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'Trial'**
+  String get billingSubscriptionStatusTrial;
+
+  /// No description provided for @billingSubscriptionStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get billingSubscriptionStatusActive;
+
+  /// No description provided for @billingSubscriptionStatusPastDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Past due'**
+  String get billingSubscriptionStatusPastDue;
+
+  /// No description provided for @billingSubscriptionStatusSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended'**
+  String get billingSubscriptionStatusSuspended;
+
+  /// No description provided for @billingSubscriptionStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get billingSubscriptionStatusCancelled;
+
+  /// No description provided for @billingSubscriptionStatusCustomQuotePending.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom quote pending'**
+  String get billingSubscriptionStatusCustomQuotePending;
+
+  /// No description provided for @billingSubscriptionStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get billingSubscriptionStatusUnknown;
+
+  /// No description provided for @billingPricingIntakeSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search pricing intakes'**
+  String get billingPricingIntakeSearchHint;
+
+  /// No description provided for @billingPricingIntakeListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No pricing intakes match your filters.'**
+  String get billingPricingIntakeListEmpty;
+
+  /// No description provided for @billingPricingIntakeDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing intake detail'**
+  String get billingPricingIntakeDetailTitle;
+
+  /// No description provided for @billingPricingIntakeNeedsReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs human review'**
+  String get billingPricingIntakeNeedsReview;
+
+  /// No description provided for @billingPricingIntakeFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get billingPricingIntakeFilterAll;
+
+  /// No description provided for @billingPricingIntakeFilterNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get billingPricingIntakeFilterNew;
+
+  /// No description provided for @billingPricingIntakeFilterReviewing.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewing'**
+  String get billingPricingIntakeFilterReviewing;
+
+  /// No description provided for @billingPricingIntakeFilterQuoted.
+  ///
+  /// In en, this message translates to:
+  /// **'Quoted'**
+  String get billingPricingIntakeFilterQuoted;
+
+  /// No description provided for @billingPricingIntakeFilterAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get billingPricingIntakeFilterAccepted;
+
+  /// No description provided for @billingPricingIntakeFilterRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get billingPricingIntakeFilterRejected;
+
+  /// No description provided for @billingPricingIntakeStatusNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get billingPricingIntakeStatusNew;
+
+  /// No description provided for @billingPricingIntakeStatusReviewing.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewing'**
+  String get billingPricingIntakeStatusReviewing;
+
+  /// No description provided for @billingPricingIntakeStatusQuoted.
+  ///
+  /// In en, this message translates to:
+  /// **'Quoted'**
+  String get billingPricingIntakeStatusQuoted;
+
+  /// No description provided for @billingPricingIntakeStatusAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get billingPricingIntakeStatusAccepted;
+
+  /// No description provided for @billingPricingIntakeStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get billingPricingIntakeStatusRejected;
+
+  /// No description provided for @billingPricingIntakeStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get billingPricingIntakeStatusUnknown;
+
+  /// No description provided for @billingQuoteRequestSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search quote requests'**
+  String get billingQuoteRequestSearchHint;
+
+  /// No description provided for @billingQuoteRequestListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No quote requests match your filters.'**
+  String get billingQuoteRequestListEmpty;
+
+  /// No description provided for @billingQuoteRequestDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote request detail'**
+  String get billingQuoteRequestDetailTitle;
+
+  /// No description provided for @billingQuoteRequestFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get billingQuoteRequestFilterAll;
+
+  /// No description provided for @billingQuoteRequestFilterSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get billingQuoteRequestFilterSubmitted;
+
+  /// No description provided for @billingQuoteRequestFilterUnderReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Under review'**
+  String get billingQuoteRequestFilterUnderReview;
+
+  /// No description provided for @billingQuoteRequestFilterQuoted.
+  ///
+  /// In en, this message translates to:
+  /// **'Quoted'**
+  String get billingQuoteRequestFilterQuoted;
+
+  /// No description provided for @billingQuoteRequestFilterAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get billingQuoteRequestFilterAccepted;
+
+  /// No description provided for @billingQuoteRequestFilterRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get billingQuoteRequestFilterRejected;
+
+  /// No description provided for @billingQuoteRequestStatusDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get billingQuoteRequestStatusDraft;
+
+  /// No description provided for @billingQuoteRequestStatusSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get billingQuoteRequestStatusSubmitted;
+
+  /// No description provided for @billingQuoteRequestStatusUnderReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Under review'**
+  String get billingQuoteRequestStatusUnderReview;
+
+  /// No description provided for @billingQuoteRequestStatusQuoted.
+  ///
+  /// In en, this message translates to:
+  /// **'Quoted'**
+  String get billingQuoteRequestStatusQuoted;
+
+  /// No description provided for @billingQuoteRequestStatusAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get billingQuoteRequestStatusAccepted;
+
+  /// No description provided for @billingQuoteRequestStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get billingQuoteRequestStatusRejected;
+
+  /// No description provided for @billingQuoteRequestStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get billingQuoteRequestStatusUnknown;
+
+  /// No description provided for @billingMetricSeats.
+  ///
+  /// In en, this message translates to:
+  /// **'Seats: {used}/{included}'**
+  String billingMetricSeats(String used, String included);
+
+  /// No description provided for @billingMetricDriverApps.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver apps: {used}/{included}'**
+  String billingMetricDriverApps(String used, String included);
+
+  /// No description provided for @billingMetricFleetSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Fleet size: {count}'**
+  String billingMetricFleetSize(String count);
+
+  /// No description provided for @billingMetricOfficeUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Office users: {count}'**
+  String billingMetricOfficeUsers(String count);
+
+  /// No description provided for @billingMetricDriverAppsRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver apps requested: {count}'**
+  String billingMetricDriverAppsRequested(String count);
+
+  /// No description provided for @billingFieldCompanyId.
+  ///
+  /// In en, this message translates to:
+  /// **'Company #{id}'**
+  String billingFieldCompanyId(String id);
+
+  /// No description provided for @billingFieldPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan'**
+  String get billingFieldPlan;
+
+  /// No description provided for @billingFieldBillingCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing cycle'**
+  String get billingFieldBillingCycle;
+
+  /// No description provided for @billingFieldCurrency.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get billingFieldCurrency;
+
+  /// No description provided for @billingFieldPricingSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing source'**
+  String get billingFieldPricingSource;
+
+  /// No description provided for @billingFieldOperatingModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Operating model'**
+  String get billingFieldOperatingModel;
+
+  /// No description provided for @billingFieldAiAddOn.
+  ///
+  /// In en, this message translates to:
+  /// **'AI add-on'**
+  String get billingFieldAiAddOn;
+
+  /// No description provided for @billingFieldStartedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Started at'**
+  String get billingFieldStartedAt;
+
+  /// No description provided for @billingFieldRenewsAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Renews at'**
+  String get billingFieldRenewsAt;
+
+  /// No description provided for @billingFieldCancelledAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled at'**
+  String get billingFieldCancelledAt;
+
+  /// No description provided for @billingFieldLastPaymentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Last payment status'**
+  String get billingFieldLastPaymentStatus;
+
+  /// No description provided for @billingFieldContactEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact email'**
+  String get billingFieldContactEmail;
+
+  /// No description provided for @billingFieldCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get billingFieldCountry;
+
+  /// No description provided for @billingFieldCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created at'**
+  String get billingFieldCreatedAt;
+
+  /// No description provided for @billingSectionPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan & billing'**
+  String get billingSectionPlan;
+
+  /// No description provided for @billingSectionUsage.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage'**
+  String get billingSectionUsage;
+
+  /// No description provided for @billingSectionDates.
+  ///
+  /// In en, this message translates to:
+  /// **'Dates'**
+  String get billingSectionDates;
+
+  /// No description provided for @billingSectionContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get billingSectionContact;
+
+  /// No description provided for @billingSectionFleet.
+  ///
+  /// In en, this message translates to:
+  /// **'Fleet sizing'**
+  String get billingSectionFleet;
+
+  /// No description provided for @billingSectionModules.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested modules'**
+  String get billingSectionModules;
+
+  /// No description provided for @billingSectionAiFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested AI features'**
+  String get billingSectionAiFeatures;
+
+  /// No description provided for @billingYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get billingYes;
+
+  /// No description provided for @billingNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get billingNo;
+
+  /// No description provided for @billingNoneReported.
+  ///
+  /// In en, this message translates to:
+  /// **'None reported'**
+  String get billingNoneReported;
+
+  /// No description provided for @billingChangeStatusAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Change status'**
+  String get billingChangeStatusAction;
+
+  /// No description provided for @billingActionDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update billing status'**
+  String get billingActionDialogTitle;
+
+  /// No description provided for @billingActionAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Status changes are audit logged. No payment processing occurs here.'**
+  String get billingActionAuditNotice;
+
+  /// No description provided for @billingActionCurrentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Current status: {status}'**
+  String billingActionCurrentStatus(String status);
+
+  /// No description provided for @billingActionStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New status'**
+  String get billingActionStatusLabel;
+
+  /// No description provided for @billingActionStatusRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a status.'**
+  String get billingActionStatusRequired;
+
+  /// No description provided for @billingActionReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get billingActionReasonLabel;
+
+  /// No description provided for @billingActionReasonRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'A reason is required for this status.'**
+  String get billingActionReasonRequired;
+
+  /// No description provided for @billingActionNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal note (optional)'**
+  String get billingActionNoteLabel;
+
+  /// No description provided for @billingActionConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Update status'**
+  String get billingActionConfirm;
+
+  /// No description provided for @billingActionSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing status updated.'**
+  String get billingActionSuccess;
+
+  /// No description provided for @billingActionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update billing status.'**
+  String get billingActionError;
+
+  /// No description provided for @billingActionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing status change is unavailable.'**
+  String get billingActionUnavailable;
 }
 
 class _AppLocalizationsDelegate

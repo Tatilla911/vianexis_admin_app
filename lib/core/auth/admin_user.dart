@@ -49,6 +49,7 @@ enum AdminDestination {
   registrations,
   bulkOnboarding,
   companies,
+  billing,
   aiReviews,
   supportTickets,
   supportGrants,
@@ -64,6 +65,7 @@ extension AdminRoleCapabilities on AdminRole {
       AdminRole.supportAdmin => switch (destination) {
         AdminDestination.dashboard ||
         AdminDestination.companies ||
+        AdminDestination.billing ||
         AdminDestination.aiReviews ||
         AdminDestination.supportTickets ||
         AdminDestination.supportGrants ||
@@ -84,6 +86,7 @@ extension AdminRoleCapabilities on AdminRole {
       AdminRole.billingAdmin => switch (destination) {
         AdminDestination.dashboard ||
         AdminDestination.companies ||
+        AdminDestination.billing ||
         AdminDestination.registrations ||
         AdminDestination.settings => true,
         _ => false,

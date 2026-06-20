@@ -10,6 +10,8 @@ import '../../features/ai_reviews/presentation/ai_review_providers.dart';
 import '../../features/ai_reviews/presentation/widgets/ai_review_card.dart';
 import '../../features/audit_logs/presentation/audit_log_providers.dart';
 import '../../features/audit_logs/presentation/widgets/audit_log_card.dart';
+import '../../features/billing/presentation/billing_providers.dart';
+import '../../features/billing/presentation/widgets/billing_overview_card.dart';
 import '../../features/companies/presentation/platform_companies_providers.dart';
 import '../../features/companies/presentation/widgets/platform_company_summary_card.dart';
 import '../../features/bulk_onboarding/presentation/bulk_onboarding_providers.dart';
@@ -37,12 +39,14 @@ class AdminDashboardScreen extends ConsumerWidget {
     final auditAsync = ref.watch(platformAuditLogSummaryProvider);
     final bulkAsync = ref.watch(bulkOnboardingSummaryProvider);
     final companiesAsync = ref.watch(platformCompanyDashboardSummaryProvider);
+    final billingAsync = ref.watch(billingOverviewProvider);
     final aiReviewsAsync = ref.watch(aiReviewSummaryProvider);
     final registrationsAsync = ref.watch(registrationApplicationsProvider);
     final user = ref.watch(adminAuthProvider).user;
     final showBulkOnboarding =
         user?.canAccess(AdminDestination.bulkOnboarding) ?? false;
     final showCompanies = user?.canAccess(AdminDestination.companies) ?? false;
+    final showBilling = user?.canAccess(AdminDestination.billing) ?? false;
     final showAiReviews = user?.canAccess(AdminDestination.aiReviews) ?? false;
     final showRegistrations =
         user?.canAccess(AdminDestination.registrations) ?? false;
@@ -161,6 +165,27 @@ class AdminDashboardScreen extends ConsumerWidget {
               ),
             ),
           if (showCompanies) const SizedBox(height: 16),
+          if (showBilling)
+            billingAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => DashboardSummaryErrorCard(
+                error: error,
+                fallbackMessage: resolveBillingKey(context, 'billingLoadError'),
+                onRetry: () => ref.read(billingOverviewProvider.notifier).refresh(),
+              ),
+              data: (overview) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  BillingOverviewCard(overview: overview, compact: true),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: () => context.go(AdminRoutes.billing),
+                    child: Text(resolveBillingKey(context, 'billingOpenModule')),
+                  ),
+                ],
+              ),
+            ),
+          if (showBilling) const SizedBox(height: 16),
           if (showBulkOnboarding)
             bulkAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),

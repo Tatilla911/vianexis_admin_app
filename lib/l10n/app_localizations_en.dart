@@ -2378,4 +2378,370 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get platformCompanyStatusUnavailable =>
       'Company status change is unavailable.';
+
+  @override
+  String get navBilling => 'Billing';
+
+  @override
+  String get billingTitle => 'Billing';
+
+  @override
+  String get billingTabSubscriptions => 'Subscriptions';
+
+  @override
+  String get billingTabPricingIntakes => 'Pricing intakes';
+
+  @override
+  String get billingTabQuoteRequests => 'Quote requests';
+
+  @override
+  String get billingMockDataBadge => 'Mock data';
+
+  @override
+  String get billingMetadataBadge => 'Metadata only';
+
+  @override
+  String get billingLoadError => 'Could not load billing data.';
+
+  @override
+  String get billingDetailError => 'Could not load billing detail.';
+
+  @override
+  String get billingOpenModule => 'Open billing module';
+
+  @override
+  String get billingPrivacyNotice =>
+      'Billing views show metadata and counts only. No payment processing or document access occurs here.';
+
+  @override
+  String get billingOverviewTitle => 'Billing overview';
+
+  @override
+  String billingOverviewActive(String count) {
+    return 'Active: $count';
+  }
+
+  @override
+  String billingOverviewTrial(String count) {
+    return 'Trial: $count';
+  }
+
+  @override
+  String billingOverviewPastDue(String count) {
+    return 'Past due: $count';
+  }
+
+  @override
+  String billingOverviewSuspended(String count) {
+    return 'Suspended: $count';
+  }
+
+  @override
+  String billingOverviewPricingNew(String count) {
+    return 'New intakes: $count';
+  }
+
+  @override
+  String billingOverviewQuotesPending(String count) {
+    return 'Pending quotes: $count';
+  }
+
+  @override
+  String billingOverviewLastUpdated(String date) {
+    return 'Last updated: $date';
+  }
+
+  @override
+  String get dashboardMetricBillingAttention => 'Billing attention';
+
+  @override
+  String get billingSubscriptionSearchHint => 'Search subscriptions';
+
+  @override
+  String get billingSubscriptionListEmpty =>
+      'No subscriptions match your filters.';
+
+  @override
+  String get billingSubscriptionDetailTitle => 'Subscription detail';
+
+  @override
+  String get billingSubscriptionFilterAll => 'All';
+
+  @override
+  String get billingSubscriptionFilterActive => 'Active';
+
+  @override
+  String get billingSubscriptionFilterTrial => 'Trial';
+
+  @override
+  String get billingSubscriptionFilterPastDue => 'Past due';
+
+  @override
+  String get billingSubscriptionFilterSuspended => 'Suspended';
+
+  @override
+  String get billingSubscriptionFilterCancelled => 'Cancelled';
+
+  @override
+  String get billingSubscriptionStatusTrial => 'Trial';
+
+  @override
+  String get billingSubscriptionStatusActive => 'Active';
+
+  @override
+  String get billingSubscriptionStatusPastDue => 'Past due';
+
+  @override
+  String get billingSubscriptionStatusSuspended => 'Suspended';
+
+  @override
+  String get billingSubscriptionStatusCancelled => 'Cancelled';
+
+  @override
+  String get billingSubscriptionStatusCustomQuotePending =>
+      'Custom quote pending';
+
+  @override
+  String get billingSubscriptionStatusUnknown => 'Unknown';
+
+  @override
+  String get billingPricingIntakeSearchHint => 'Search pricing intakes';
+
+  @override
+  String get billingPricingIntakeListEmpty =>
+      'No pricing intakes match your filters.';
+
+  @override
+  String get billingPricingIntakeDetailTitle => 'Pricing intake detail';
+
+  @override
+  String get billingPricingIntakeNeedsReview => 'Needs human review';
+
+  @override
+  String get billingPricingIntakeFilterAll => 'All';
+
+  @override
+  String get billingPricingIntakeFilterNew => 'New';
+
+  @override
+  String get billingPricingIntakeFilterReviewing => 'Reviewing';
+
+  @override
+  String get billingPricingIntakeFilterQuoted => 'Quoted';
+
+  @override
+  String get billingPricingIntakeFilterAccepted => 'Accepted';
+
+  @override
+  String get billingPricingIntakeFilterRejected => 'Rejected';
+
+  @override
+  String get billingPricingIntakeStatusNew => 'New';
+
+  @override
+  String get billingPricingIntakeStatusReviewing => 'Reviewing';
+
+  @override
+  String get billingPricingIntakeStatusQuoted => 'Quoted';
+
+  @override
+  String get billingPricingIntakeStatusAccepted => 'Accepted';
+
+  @override
+  String get billingPricingIntakeStatusRejected => 'Rejected';
+
+  @override
+  String get billingPricingIntakeStatusUnknown => 'Unknown';
+
+  @override
+  String get billingQuoteRequestSearchHint => 'Search quote requests';
+
+  @override
+  String get billingQuoteRequestListEmpty =>
+      'No quote requests match your filters.';
+
+  @override
+  String get billingQuoteRequestDetailTitle => 'Quote request detail';
+
+  @override
+  String get billingQuoteRequestFilterAll => 'All';
+
+  @override
+  String get billingQuoteRequestFilterSubmitted => 'Submitted';
+
+  @override
+  String get billingQuoteRequestFilterUnderReview => 'Under review';
+
+  @override
+  String get billingQuoteRequestFilterQuoted => 'Quoted';
+
+  @override
+  String get billingQuoteRequestFilterAccepted => 'Accepted';
+
+  @override
+  String get billingQuoteRequestFilterRejected => 'Rejected';
+
+  @override
+  String get billingQuoteRequestStatusDraft => 'Draft';
+
+  @override
+  String get billingQuoteRequestStatusSubmitted => 'Submitted';
+
+  @override
+  String get billingQuoteRequestStatusUnderReview => 'Under review';
+
+  @override
+  String get billingQuoteRequestStatusQuoted => 'Quoted';
+
+  @override
+  String get billingQuoteRequestStatusAccepted => 'Accepted';
+
+  @override
+  String get billingQuoteRequestStatusRejected => 'Rejected';
+
+  @override
+  String get billingQuoteRequestStatusUnknown => 'Unknown';
+
+  @override
+  String billingMetricSeats(String used, String included) {
+    return 'Seats: $used/$included';
+  }
+
+  @override
+  String billingMetricDriverApps(String used, String included) {
+    return 'Driver apps: $used/$included';
+  }
+
+  @override
+  String billingMetricFleetSize(String count) {
+    return 'Fleet size: $count';
+  }
+
+  @override
+  String billingMetricOfficeUsers(String count) {
+    return 'Office users: $count';
+  }
+
+  @override
+  String billingMetricDriverAppsRequested(String count) {
+    return 'Driver apps requested: $count';
+  }
+
+  @override
+  String billingFieldCompanyId(String id) {
+    return 'Company #$id';
+  }
+
+  @override
+  String get billingFieldPlan => 'Plan';
+
+  @override
+  String get billingFieldBillingCycle => 'Billing cycle';
+
+  @override
+  String get billingFieldCurrency => 'Currency';
+
+  @override
+  String get billingFieldPricingSource => 'Pricing source';
+
+  @override
+  String get billingFieldOperatingModel => 'Operating model';
+
+  @override
+  String get billingFieldAiAddOn => 'AI add-on';
+
+  @override
+  String get billingFieldStartedAt => 'Started at';
+
+  @override
+  String get billingFieldRenewsAt => 'Renews at';
+
+  @override
+  String get billingFieldCancelledAt => 'Cancelled at';
+
+  @override
+  String get billingFieldLastPaymentStatus => 'Last payment status';
+
+  @override
+  String get billingFieldContactEmail => 'Contact email';
+
+  @override
+  String get billingFieldCountry => 'Country';
+
+  @override
+  String get billingFieldCreatedAt => 'Created at';
+
+  @override
+  String get billingSectionPlan => 'Plan & billing';
+
+  @override
+  String get billingSectionUsage => 'Usage';
+
+  @override
+  String get billingSectionDates => 'Dates';
+
+  @override
+  String get billingSectionContact => 'Contact';
+
+  @override
+  String get billingSectionFleet => 'Fleet sizing';
+
+  @override
+  String get billingSectionModules => 'Requested modules';
+
+  @override
+  String get billingSectionAiFeatures => 'Requested AI features';
+
+  @override
+  String get billingYes => 'Yes';
+
+  @override
+  String get billingNo => 'No';
+
+  @override
+  String get billingNoneReported => 'None reported';
+
+  @override
+  String get billingChangeStatusAction => 'Change status';
+
+  @override
+  String get billingActionDialogTitle => 'Update billing status';
+
+  @override
+  String get billingActionAuditNotice =>
+      'Status changes are audit logged. No payment processing occurs here.';
+
+  @override
+  String billingActionCurrentStatus(String status) {
+    return 'Current status: $status';
+  }
+
+  @override
+  String get billingActionStatusLabel => 'New status';
+
+  @override
+  String get billingActionStatusRequired => 'Select a status.';
+
+  @override
+  String get billingActionReasonLabel => 'Reason';
+
+  @override
+  String get billingActionReasonRequired =>
+      'A reason is required for this status.';
+
+  @override
+  String get billingActionNoteLabel => 'Internal note (optional)';
+
+  @override
+  String get billingActionConfirm => 'Update status';
+
+  @override
+  String get billingActionSuccess => 'Billing status updated.';
+
+  @override
+  String get billingActionError => 'Could not update billing status.';
+
+  @override
+  String get billingActionUnavailable =>
+      'Billing status change is unavailable.';
 }

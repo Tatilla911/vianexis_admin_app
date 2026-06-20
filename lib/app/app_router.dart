@@ -15,6 +15,10 @@ import '../features/bulk_onboarding/presentation/bulk_onboarding_jobs_screen.dar
 import '../features/bulk_onboarding/presentation/bulk_onboarding_row_detail_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_rows_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_upload_screen.dart';
+import '../features/billing/presentation/billing_screen.dart';
+import '../features/billing/presentation/pricing_intake_detail_screen.dart';
+import '../features/billing/presentation/quote_request_detail_screen.dart';
+import '../features/billing/presentation/subscription_detail_screen.dart';
 import '../features/companies/presentation/platform_companies_screen.dart';
 import '../features/companies/presentation/platform_company_detail_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
@@ -113,6 +117,32 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 path: ':id',
                 builder: (context, state) => PlatformCompanyDetailScreen(
                   companyId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AdminRoutes.billing,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: BillingScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: 'subscription/:id',
+                builder: (context, state) => SubscriptionDetailScreen(
+                  subscriptionId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+              GoRoute(
+                path: 'pricing-intake/:id',
+                builder: (context, state) => PricingIntakeDetailScreen(
+                  intakeId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+              GoRoute(
+                path: 'quote-request/:id',
+                builder: (context, state) => QuoteRequestDetailScreen(
+                  quoteRequestId: state.pathParameters['id'] ?? '',
                 ),
               ),
             ],
@@ -249,6 +279,7 @@ abstract final class AdminRoutes {
   static const dashboard = '/dashboard';
   static const registrations = '/registrations';
   static const companies = '/companies';
+  static const billing = '/billing';
   static const bulkOnboarding = '/bulk-onboarding';
   static const bulkOnboardingUpload = '/bulk-onboarding/upload';
   static const aiReviews = '/ai-reviews';
@@ -264,6 +295,12 @@ abstract final class AdminRoutes {
   static String registrationDetail(String id) => '$registrations/$id';
 
   static String platformCompanyDetail(String id) => '$companies/$id';
+
+  static String billingSubscriptionDetail(String id) => '$billing/subscription/$id';
+
+  static String billingPricingIntakeDetail(String id) => '$billing/pricing-intake/$id';
+
+  static String billingQuoteRequestDetail(String id) => '$billing/quote-request/$id';
 
   static String bulkOnboardingJobDetail(String id) => '$bulkOnboarding/$id';
 
@@ -287,6 +324,9 @@ abstract final class AdminRoutes {
     }
     if (location.startsWith(companies)) {
       return AdminDestination.companies;
+    }
+    if (location.startsWith(billing)) {
+      return AdminDestination.billing;
     }
     if (location.startsWith(bulkOnboarding)) {
       return AdminDestination.bulkOnboarding;

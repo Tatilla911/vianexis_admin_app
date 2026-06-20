@@ -2416,4 +2416,372 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get platformCompanyStatusUnavailable =>
       'A státuszváltoztatás nem érhető el.';
+
+  @override
+  String get navBilling => 'Számlázás';
+
+  @override
+  String get billingTitle => 'Számlázás';
+
+  @override
+  String get billingTabSubscriptions => 'Előfizetések';
+
+  @override
+  String get billingTabPricingIntakes => 'Árazási igények';
+
+  @override
+  String get billingTabQuoteRequests => 'Ajánlatkérések';
+
+  @override
+  String get billingMockDataBadge => 'Tesztadat';
+
+  @override
+  String get billingMetadataBadge => 'Csak metaadat';
+
+  @override
+  String get billingLoadError => 'A számlázási adatok betöltése sikertelen.';
+
+  @override
+  String get billingDetailError =>
+      'A számlázási részletek betöltése sikertelen.';
+
+  @override
+  String get billingOpenModule => 'Számlázás modul megnyitása';
+
+  @override
+  String get billingPrivacyNotice =>
+      'A számlázási nézetek csak metaadatot és számokat mutatnak. Itt nem történik fizetés-feldolgozás vagy dokumentum-hozzáférés.';
+
+  @override
+  String get billingOverviewTitle => 'Számlázási áttekintés';
+
+  @override
+  String billingOverviewActive(String count) {
+    return 'Aktív: $count';
+  }
+
+  @override
+  String billingOverviewTrial(String count) {
+    return 'Próba: $count';
+  }
+
+  @override
+  String billingOverviewPastDue(String count) {
+    return 'Lejárt: $count';
+  }
+
+  @override
+  String billingOverviewSuspended(String count) {
+    return 'Felfüggesztett: $count';
+  }
+
+  @override
+  String billingOverviewPricingNew(String count) {
+    return 'Új igények: $count';
+  }
+
+  @override
+  String billingOverviewQuotesPending(String count) {
+    return 'Függő ajánlatok: $count';
+  }
+
+  @override
+  String billingOverviewLastUpdated(String date) {
+    return 'Utolsó frissítés: $date';
+  }
+
+  @override
+  String get dashboardMetricBillingAttention => 'Számlázási figyelmet igényel';
+
+  @override
+  String get billingSubscriptionSearchHint => 'Előfizetések keresése';
+
+  @override
+  String get billingSubscriptionListEmpty =>
+      'Nincs a szűrőknek megfelelő előfizetés.';
+
+  @override
+  String get billingSubscriptionDetailTitle => 'Előfizetés részletei';
+
+  @override
+  String get billingSubscriptionFilterAll => 'Összes';
+
+  @override
+  String get billingSubscriptionFilterActive => 'Aktív';
+
+  @override
+  String get billingSubscriptionFilterTrial => 'Próba';
+
+  @override
+  String get billingSubscriptionFilterPastDue => 'Lejárt';
+
+  @override
+  String get billingSubscriptionFilterSuspended => 'Felfüggesztett';
+
+  @override
+  String get billingSubscriptionFilterCancelled => 'Lemondott';
+
+  @override
+  String get billingSubscriptionStatusTrial => 'Próba';
+
+  @override
+  String get billingSubscriptionStatusActive => 'Aktív';
+
+  @override
+  String get billingSubscriptionStatusPastDue => 'Lejárt';
+
+  @override
+  String get billingSubscriptionStatusSuspended => 'Felfüggesztett';
+
+  @override
+  String get billingSubscriptionStatusCancelled => 'Lemondott';
+
+  @override
+  String get billingSubscriptionStatusCustomQuotePending =>
+      'Egyedi ajánlat függőben';
+
+  @override
+  String get billingSubscriptionStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get billingPricingIntakeSearchHint => 'Árazási igények keresése';
+
+  @override
+  String get billingPricingIntakeListEmpty =>
+      'Nincs a szűrőknek megfelelő árazási igény.';
+
+  @override
+  String get billingPricingIntakeDetailTitle => 'Árazási igény részletei';
+
+  @override
+  String get billingPricingIntakeNeedsReview =>
+      'Emberi felülvizsgálat szükséges';
+
+  @override
+  String get billingPricingIntakeFilterAll => 'Összes';
+
+  @override
+  String get billingPricingIntakeFilterNew => 'Új';
+
+  @override
+  String get billingPricingIntakeFilterReviewing => 'Felülvizsgálat alatt';
+
+  @override
+  String get billingPricingIntakeFilterQuoted => 'Ajánlatolt';
+
+  @override
+  String get billingPricingIntakeFilterAccepted => 'Elfogadott';
+
+  @override
+  String get billingPricingIntakeFilterRejected => 'Elutasított';
+
+  @override
+  String get billingPricingIntakeStatusNew => 'Új';
+
+  @override
+  String get billingPricingIntakeStatusReviewing => 'Felülvizsgálat alatt';
+
+  @override
+  String get billingPricingIntakeStatusQuoted => 'Ajánlatolt';
+
+  @override
+  String get billingPricingIntakeStatusAccepted => 'Elfogadott';
+
+  @override
+  String get billingPricingIntakeStatusRejected => 'Elutasított';
+
+  @override
+  String get billingPricingIntakeStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get billingQuoteRequestSearchHint => 'Ajánlatkérések keresése';
+
+  @override
+  String get billingQuoteRequestListEmpty =>
+      'Nincs a szűrőknek megfelelő ajánlatkérés.';
+
+  @override
+  String get billingQuoteRequestDetailTitle => 'Ajánlatkérés részletei';
+
+  @override
+  String get billingQuoteRequestFilterAll => 'Összes';
+
+  @override
+  String get billingQuoteRequestFilterSubmitted => 'Beküldött';
+
+  @override
+  String get billingQuoteRequestFilterUnderReview => 'Felülvizsgálat alatt';
+
+  @override
+  String get billingQuoteRequestFilterQuoted => 'Ajánlatolt';
+
+  @override
+  String get billingQuoteRequestFilterAccepted => 'Elfogadott';
+
+  @override
+  String get billingQuoteRequestFilterRejected => 'Elutasított';
+
+  @override
+  String get billingQuoteRequestStatusDraft => 'Piszkozat';
+
+  @override
+  String get billingQuoteRequestStatusSubmitted => 'Beküldött';
+
+  @override
+  String get billingQuoteRequestStatusUnderReview => 'Felülvizsgálat alatt';
+
+  @override
+  String get billingQuoteRequestStatusQuoted => 'Ajánlatolt';
+
+  @override
+  String get billingQuoteRequestStatusAccepted => 'Elfogadott';
+
+  @override
+  String get billingQuoteRequestStatusRejected => 'Elutasított';
+
+  @override
+  String get billingQuoteRequestStatusUnknown => 'Ismeretlen';
+
+  @override
+  String billingMetricSeats(String used, String included) {
+    return 'Ülőhelyek: $used/$included';
+  }
+
+  @override
+  String billingMetricDriverApps(String used, String included) {
+    return 'Sofőr appok: $used/$included';
+  }
+
+  @override
+  String billingMetricFleetSize(String count) {
+    return 'Flotta méret: $count';
+  }
+
+  @override
+  String billingMetricOfficeUsers(String count) {
+    return 'Irodai felhasználók: $count';
+  }
+
+  @override
+  String billingMetricDriverAppsRequested(String count) {
+    return 'Igényelt sofőr appok: $count';
+  }
+
+  @override
+  String billingFieldCompanyId(String id) {
+    return 'Cég #$id';
+  }
+
+  @override
+  String get billingFieldPlan => 'Csomag';
+
+  @override
+  String get billingFieldBillingCycle => 'Számlázási ciklus';
+
+  @override
+  String get billingFieldCurrency => 'Pénznem';
+
+  @override
+  String get billingFieldPricingSource => 'Árazás forrása';
+
+  @override
+  String get billingFieldOperatingModel => 'Üzemeltetési modell';
+
+  @override
+  String get billingFieldAiAddOn => 'AI kiegészítő';
+
+  @override
+  String get billingFieldStartedAt => 'Kezdés';
+
+  @override
+  String get billingFieldRenewsAt => 'Megújul';
+
+  @override
+  String get billingFieldCancelledAt => 'Lemondva';
+
+  @override
+  String get billingFieldLastPaymentStatus => 'Utolsó fizetési státusz';
+
+  @override
+  String get billingFieldContactEmail => 'Kapcsolattartó e-mail';
+
+  @override
+  String get billingFieldCountry => 'Ország';
+
+  @override
+  String get billingFieldCreatedAt => 'Létrehozva';
+
+  @override
+  String get billingSectionPlan => 'Csomag és számlázás';
+
+  @override
+  String get billingSectionUsage => 'Használat';
+
+  @override
+  String get billingSectionDates => 'Dátumok';
+
+  @override
+  String get billingSectionContact => 'Kapcsolat';
+
+  @override
+  String get billingSectionFleet => 'Flotta méretezés';
+
+  @override
+  String get billingSectionModules => 'Igényelt modulok';
+
+  @override
+  String get billingSectionAiFeatures => 'Igényelt AI funkciók';
+
+  @override
+  String get billingYes => 'Igen';
+
+  @override
+  String get billingNo => 'Nem';
+
+  @override
+  String get billingNoneReported => 'Nincs megadva';
+
+  @override
+  String get billingChangeStatusAction => 'Státusz módosítása';
+
+  @override
+  String get billingActionDialogTitle => 'Számlázási státusz frissítése';
+
+  @override
+  String get billingActionAuditNotice =>
+      'A státuszváltozások audit naplózásra kerülnek. Itt nem történik fizetés-feldolgozás.';
+
+  @override
+  String billingActionCurrentStatus(String status) {
+    return 'Jelenlegi státusz: $status';
+  }
+
+  @override
+  String get billingActionStatusLabel => 'Új státusz';
+
+  @override
+  String get billingActionStatusRequired => 'Válasszon státuszt.';
+
+  @override
+  String get billingActionReasonLabel => 'Indok';
+
+  @override
+  String get billingActionReasonRequired =>
+      'Ehhez a státuszhoz indok szükséges.';
+
+  @override
+  String get billingActionNoteLabel => 'Belső megjegyzés (opcionális)';
+
+  @override
+  String get billingActionConfirm => 'Státusz frissítése';
+
+  @override
+  String get billingActionSuccess => 'A számlázási státusz frissítve.';
+
+  @override
+  String get billingActionError =>
+      'A számlázási státusz frissítése sikertelen.';
+
+  @override
+  String get billingActionUnavailable => 'A státuszváltoztatás nem érhető el.';
 }
