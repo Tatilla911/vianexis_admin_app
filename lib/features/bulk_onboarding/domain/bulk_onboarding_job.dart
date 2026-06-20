@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'bulk_onboarding_execution.dart';
 import 'bulk_onboarding_risk_level.dart';
 import 'bulk_onboarding_status.dart';
 import 'bulk_onboarding_type.dart';
@@ -21,9 +22,9 @@ class BulkOnboardingJobsPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(BulkOnboardingJob.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(BulkOnboardingJob.fromJson)
+              .toList(growable: false)
         : const <BulkOnboardingJob>[];
     return BulkOnboardingJobsPage(
       items: items,
@@ -58,6 +59,9 @@ class BulkOnboardingJob {
     required this.riskLevel,
     this.validationSummary,
     required this.processingAvailable,
+    this.provisioningAvailable = false,
+    this.provisioningStatus,
+    this.executionPolicy = const BulkOnboardingExecutionPolicy(enabled: false),
     this.lastValidatedAt,
     this.createdAt,
     this.updatedAt,
@@ -91,6 +95,9 @@ class BulkOnboardingJob {
   final BulkOnboardingRiskLevel riskLevel;
   final String? validationSummary;
   final bool processingAvailable;
+  final bool provisioningAvailable;
+  final String? provisioningStatus;
+  final BulkOnboardingExecutionPolicy executionPolicy;
   final DateTime? lastValidatedAt;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -114,19 +121,28 @@ class BulkOnboardingJob {
   }
 
   static BulkOnboardingJob fromJson(Map<String, dynamic> json) {
+    final summary = _decodeSummary(json['validationSummary']?.toString() ?? '');
+    final policyMap =
+        _asMap(json['executionPolicy']) ??
+        _asMap(summary['executionPolicy']) ??
+        _asMap(json['policy']) ??
+        const <String, dynamic>{};
     return BulkOnboardingJob(
       id: json['id']?.toString() ?? '',
       companyId: _parseNullableInt(json['companyId']),
-      companyName: json['companyName']?.toString() ??
-          json['name']?.toString() ??
-          '—',
-      submittedByUserId: _parseInt(json['submittedByUserId'] ?? json['createdByUserId']),
+      companyName:
+          json['companyName']?.toString() ?? json['name']?.toString() ?? '—',
+      submittedByUserId: _parseInt(
+        json['submittedByUserId'] ?? json['createdByUserId'],
+      ),
       submittedByName: json['submittedByName']?.toString(),
       sourceFileName: json['sourceFileName']?.toString(),
       sourceFileMimeType: json['sourceFileMimeType']?.toString(),
       sourceFileSizeBytes: _parseNullableInt(json['sourceFileSizeBytes']),
       type: BulkOnboardingJobType.fromBackendValue(json['type']?.toString()),
-      status: BulkOnboardingJobStatus.fromBackendValue(json['status']?.toString()),
+      status: BulkOnboardingJobStatus.fromBackendValue(
+        json['status']?.toString(),
+      ),
       totalRows: _parseInt(json['totalRows']),
       validRows: _parseInt(json['validRows']),
       warningRows: _parseInt(json['warningRows']),
@@ -136,9 +152,18 @@ class BulkOnboardingJob {
       failedRows: _parseInt(json['failedRows']),
       skippedRows: _parseInt(json['skippedRows']),
       aiSummary: json['aiSummary']?.toString(),
-      riskLevel: BulkOnboardingRiskLevel.fromBackendValue(json['riskLevel']?.toString()),
+      riskLevel: BulkOnboardingRiskLevel.fromBackendValue(
+        json['riskLevel']?.toString(),
+      ),
       validationSummary: json['validationSummary']?.toString(),
       processingAvailable: json['processingAvailable'] == true,
+      provisioningAvailable:
+          (json['provisioningAvailable'] == true) ||
+          (summary['provisioningAvailable'] == true),
+      provisioningStatus:
+          json['provisioningStatus']?.toString() ??
+          summary['provisioningStatus']?.toString(),
+      executionPolicy: BulkOnboardingExecutionPolicy.fromJson(policyMap),
       lastValidatedAt: parseDate(json['lastValidatedAt']),
       createdAt: parseDate(json['createdAt']),
       updatedAt: parseDate(json['updatedAt']),
@@ -182,10 +207,10 @@ class BulkOnboardingJob {
         status == BulkOnboardingJobStatus.validationFailed,
       BulkOnboardingListFilter.processing =>
         status == BulkOnboardingJobStatus.processing ||
-        status == BulkOnboardingJobStatus.approvedForProcessing,
+            status == BulkOnboardingJobStatus.approvedForProcessing,
       BulkOnboardingListFilter.completed =>
         status == BulkOnboardingJobStatus.completed ||
-        status == BulkOnboardingJobStatus.partiallyCompleted,
+            status == BulkOnboardingJobStatus.partiallyCompleted,
       BulkOnboardingListFilter.rejected =>
         status == BulkOnboardingJobStatus.rejected,
       BulkOnboardingListFilter.highRisk =>
@@ -210,6 +235,12 @@ Map<String, dynamic> _decodeSummary(String raw) {
     return Map<String, dynamic>.from(jsonDecode(trimmed) as Map);
   }
   return {};
+}
+
+Map<String, dynamic>? _asMap(Object? raw) {
+  if (raw is Map<String, dynamic>) return raw;
+  if (raw is Map) return Map<String, dynamic>.from(raw);
+  return null;
 }
 
 int _parseInt(Object? raw) {

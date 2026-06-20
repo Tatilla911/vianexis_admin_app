@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:vianexis_admin_app/core/api/api_client.dart';
+import 'package:vianexis_admin_app/core/api/api_exception.dart';
 import 'package:vianexis_admin_app/core/api/auth_token_storage.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/data/bulk_onboarding_api.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/data/bulk_onboarding_repository.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_action_request.dart';
+import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_execution.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_status.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_row_action.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_row_status.dart';
@@ -66,7 +68,8 @@ void main() {
               );
               return;
             }
-            if (options.path == '/platform-admin/bulk-onboarding/jobs/11/process') {
+            if (options.path ==
+                '/platform-admin/bulk-onboarding/jobs/11/process') {
               handler.resolve(
                 Response<Map<String, dynamic>>(
                   requestOptions: options,
@@ -88,6 +91,100 @@ void main() {
                       'riskLevel': 'low',
                       'processingAvailable': false,
                     },
+                  },
+                ),
+              );
+              return;
+            }
+            if (options.path ==
+                '/platform-admin/bulk-onboarding/jobs/11/dry-run') {
+              handler.resolve(
+                Response<Map<String, dynamic>>(
+                  requestOptions: options,
+                  statusCode: 200,
+                  data: {
+                    'job': {
+                      'id': 11,
+                      'companyName': 'Live Co',
+                      'submittedByUserId': 1,
+                      'type': 'company_users',
+                      'status': 'approved_for_processing',
+                      'totalRows': 2,
+                      'validRows': 2,
+                      'warningRows': 0,
+                      'invalidRows': 0,
+                      'duplicateRows': 0,
+                      'processedRows': 0,
+                      'failedRows': 0,
+                      'riskLevel': 'low',
+                      'processingAvailable': true,
+                    },
+                    'policy': {'enabled': true, 'maxRows': 1000, 'rowCount': 2},
+                    'summary': {
+                      'dryRunOk': 2,
+                      'blocked': 0,
+                      'duplicates': 0,
+                      'failed': 0,
+                      'provisioned': 0,
+                    },
+                    'rows': [
+                      {'rowId': '100', 'rowIndex': 1, 'status': 'valid'},
+                    ],
+                  },
+                ),
+              );
+              return;
+            }
+            if (options.path ==
+                '/platform-admin/bulk-onboarding/jobs/11/execute') {
+              if ((options.data as Map<String, dynamic>)['reason'] ==
+                  'blocked') {
+                handler.reject(
+                  DioException(
+                    requestOptions: options,
+                    response: Response(
+                      requestOptions: options,
+                      statusCode: 409,
+                      data: {'code': 'policy_blocked'},
+                    ),
+                    type: DioExceptionType.badResponse,
+                  ),
+                );
+                return;
+              }
+              handler.resolve(
+                Response<Map<String, dynamic>>(
+                  requestOptions: options,
+                  statusCode: 200,
+                  data: {
+                    'job': {
+                      'id': 11,
+                      'companyName': 'Live Co',
+                      'submittedByUserId': 1,
+                      'type': 'company_users',
+                      'status': 'completed',
+                      'totalRows': 2,
+                      'validRows': 2,
+                      'warningRows': 0,
+                      'invalidRows': 0,
+                      'duplicateRows': 0,
+                      'processedRows': 2,
+                      'failedRows': 0,
+                      'riskLevel': 'low',
+                      'processingAvailable': false,
+                    },
+                    'policy': {'enabled': true, 'maxRows': 1000, 'rowCount': 2},
+                    'summary': {
+                      'dryRunOk': 2,
+                      'blocked': 0,
+                      'duplicates': 0,
+                      'failed': 0,
+                      'provisioned': 2,
+                    },
+                    'rows': [
+                      {'rowId': '100', 'rowIndex': 1, 'status': 'processed'},
+                      {'rowId': '101', 'rowIndex': 2, 'status': 'processed'},
+                    ],
                   },
                 ),
               );
@@ -154,7 +251,8 @@ void main() {
               );
               return;
             }
-            if (options.path == '/platform-admin/bulk-onboarding/jobs/11/cancel') {
+            if (options.path ==
+                '/platform-admin/bulk-onboarding/jobs/11/cancel') {
               expect(options.method, 'PATCH');
               handler.resolve(
                 Response<Map<String, dynamic>>(
@@ -280,6 +378,31 @@ void main() {
       expect(result.processingAvailable, isFalse);
     });
 
+    test('dry run parses summary and rows', () async {
+      final result = await repo.dryRunJob('11');
+      expect(result.summary.dryRunOk, 2);
+      expect(result.rows.first.rowIndex, 1);
+    });
+
+    test('execute maps backend rejection to user-friendly error', () async {
+      expect(
+        () => repo.executeJob(
+          '11',
+          const BulkOnboardingExecutionRequest(
+            reason: 'blocked',
+            confirm: true,
+          ),
+        ),
+        throwsA(
+          isA<ApiException>().having(
+            (error) => error.messageKey,
+            'message key',
+            'bulkOnboardingExecuteRejectedPolicy',
+          ),
+        ),
+      );
+    });
+
     test('submits cancel action on correct path', () async {
       final result = await repo.submitAction(
         jobId: '11',
@@ -303,7 +426,9 @@ void main() {
     });
 
     test('downloadTemplate hits template endpoint', () async {
-      final template = await repo.downloadTemplate(BulkOnboardingJobType.drivers);
+      final template = await repo.downloadTemplate(
+        BulkOnboardingJobType.drivers,
+      );
       expect(template, contains('name,email'));
     });
 
@@ -373,26 +498,31 @@ void main() {
       expect(report, contains('validationErrors'));
     });
 
-    test('mock correct invalid row to valid and preserves original values', () async {
-      final repo = MockBulkOnboardingRepository();
-      final result = await repo.correctRow(
-        jobId: '502',
-        rowId: '9102',
-        request: const BulkOnboardingRowCorrectionRequest(
-          email: 'fixed@alpine.example',
-        ),
-      );
-      expect(result.row.status, BulkOnboardingRowStatus.valid);
-      expect(result.row.originalValues?['email'], 'bad-email');
-      expect(result.job.invalidRows, 0);
-    });
+    test(
+      'mock correct invalid row to valid and preserves original values',
+      () async {
+        final repo = MockBulkOnboardingRepository();
+        final result = await repo.correctRow(
+          jobId: '502',
+          rowId: '9102',
+          request: const BulkOnboardingRowCorrectionRequest(
+            email: 'fixed@alpine.example',
+          ),
+        );
+        expect(result.row.status, BulkOnboardingRowStatus.valid);
+        expect(result.row.originalValues?['email'], 'bad-email');
+        expect(result.job.invalidRows, 0);
+      },
+    );
 
     test('mock skip row requires summary update', () async {
       final repo = MockBulkOnboardingRepository();
       final result = await repo.skipRow(
         jobId: '502',
         rowId: '9103',
-        request: const BulkOnboardingRowSkipRequest(reason: 'Already onboarded'),
+        request: const BulkOnboardingRowSkipRequest(
+          reason: 'Already onboarded',
+        ),
       );
       expect(result.row.status, BulkOnboardingRowStatus.skipped);
       expect(result.job.skippedRows, 1);
@@ -403,12 +533,22 @@ void main() {
       await repo.correctRow(
         jobId: '502',
         rowId: '9102',
-        request: const BulkOnboardingRowCorrectionRequest(
-          email: 'still-bad',
-        ),
+        request: const BulkOnboardingRowCorrectionRequest(email: 'still-bad'),
       );
       final result = await repo.revalidateRow(jobId: '502', rowId: '9102');
       expect(result.row.status, BulkOnboardingRowStatus.invalid);
+    });
+
+    test('mock dry run and execute use policy checks', () async {
+      final repo = MockBulkOnboardingRepository();
+      final dryRun = await repo.dryRunJob('503');
+      expect(dryRun.policy.enabled, isTrue);
+
+      final result = await repo.executeJob(
+        '503',
+        const BulkOnboardingExecutionRequest(reason: 'Approved', confirm: true),
+      );
+      expect(result.summary.provisioned, result.summary.dryRunOk);
     });
   });
 }

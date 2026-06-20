@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_action_request.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_dashboard_summary.dart';
+import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_execution.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_job.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_risk_level.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_row.dart';
@@ -9,6 +10,8 @@ import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboardi
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_type.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_row_action.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_upload_result.dart';
+import 'package:vianexis_admin_app/features/bulk_onboarding/presentation/bulk_onboarding_providers.dart';
+import 'package:vianexis_admin_app/core/auth/admin_user.dart';
 
 void main() {
   group('BulkOnboardingJob JSON parsing', () {
@@ -87,6 +90,32 @@ void main() {
 
       expect(job.recommendedAction, 'approve_candidate');
     });
+
+    test('parses provisioning and execution policy from summary', () {
+      final job = BulkOnboardingJob.fromJson({
+        'id': 3,
+        'companyName': 'Policy Co',
+        'submittedByUserId': 1,
+        'type': 'company_users',
+        'status': 'approved_for_processing',
+        'totalRows': 10,
+        'validRows': 10,
+        'warningRows': 0,
+        'invalidRows': 0,
+        'duplicateRows': 0,
+        'processedRows': 0,
+        'failedRows': 0,
+        'riskLevel': 'low',
+        'processingAvailable': true,
+        'validationSummary':
+            '{"provisioningAvailable":true,"provisioningStatus":"ready","executionPolicy":{"enabled":false,"reason":"dry_run_required","maxRows":500,"rowCount":10}}',
+      });
+
+      expect(job.provisioningAvailable, isTrue);
+      expect(job.provisioningStatus, 'ready');
+      expect(job.executionPolicy.enabled, isFalse);
+      expect(job.executionPolicy.reason, 'dry_run_required');
+    });
   });
 
   group('BulkOnboardingRow JSON parsing', () {
@@ -162,7 +191,9 @@ void main() {
         'bulkOnboardingRowCorrectionFieldRequired',
       );
       expect(
-        const BulkOnboardingRowCorrectionRequest(email: 'fixed@example.com').validate(),
+        const BulkOnboardingRowCorrectionRequest(
+          email: 'fixed@example.com',
+        ).validate(),
         isNull,
       );
     });
@@ -231,21 +262,24 @@ void main() {
   group('BulkOnboardingActionRequest validation', () {
     test('reject and cancel require note', () {
       expect(
-        const BulkOnboardingActionRequest(kind: BulkOnboardingActionKind.reject)
-            .validate(),
+        const BulkOnboardingActionRequest(
+          kind: BulkOnboardingActionKind.reject,
+        ).validate(),
         'bulkOnboardingActionNoteRequired',
       );
       expect(
-        const BulkOnboardingActionRequest(kind: BulkOnboardingActionKind.cancel)
-            .validate(),
+        const BulkOnboardingActionRequest(
+          kind: BulkOnboardingActionKind.cancel,
+        ).validate(),
         'bulkOnboardingActionNoteRequired',
       );
     });
 
     test('process requires explicit confirmation', () {
       expect(
-        const BulkOnboardingActionRequest(kind: BulkOnboardingActionKind.process)
-            .validate(),
+        const BulkOnboardingActionRequest(
+          kind: BulkOnboardingActionKind.process,
+        ).validate(),
         'bulkOnboardingActionConfirmRequired',
       );
     });
@@ -258,6 +292,39 @@ void main() {
       expect(request.endpointSuffix(), 'cancel');
       expect(request.endpointSuffix(), isNot('ccancel'));
       expect(request.httpMethod(), 'PATCH');
+    });
+  });
+
+  group('execute visibility and policy', () {
+    test('forbidden roles cannot execute', () {
+      expect(
+        canShowExecuteButton(
+          role: AdminRole.supportAdmin,
+          status: BulkOnboardingJobStatus.approvedForProcessing,
+        ),
+        isFalse,
+      );
+    });
+
+    test('policy disables execution button', () {
+      expect(
+        isExecuteDisabledByPolicy(
+          provisioningAvailable: true,
+          policyEnabled: false,
+          rowCount: 10,
+          maxRows: 100,
+        ),
+        isTrue,
+      );
+      expect(
+        isExecuteDisabledByPolicy(
+          provisioningAvailable: true,
+          policyEnabled: true,
+          rowCount: 101,
+          maxRows: 100,
+        ),
+        isTrue,
+      );
     });
   });
 
@@ -283,7 +350,10 @@ void main() {
 
       expect(job.matchesSearch('searchable'), isTrue);
       expect(job.matchesFilter(BulkOnboardingListFilter.highRisk), isTrue);
-      expect(job.matchesFilter(BulkOnboardingListFilter.validationFailed), isFalse);
+      expect(
+        job.matchesFilter(BulkOnboardingListFilter.validationFailed),
+        isFalse,
+      );
     });
 
     test('dashboard summary computation', () {
@@ -415,6 +485,49 @@ void main() {
 
       expect(job.skippedRows, 1);
       expect(job.lastValidatedAt, isNotNull);
+    });
+
+    test('parses dry run and execute response payload', () {
+      final result = BulkOnboardingExecutionResult.fromJson({
+        'job': {
+          'id': 22,
+          'companyName': 'Execute Co',
+          'submittedByUserId': 1,
+          'type': 'drivers',
+          'status': 'approved_for_processing',
+          'totalRows': 2,
+          'validRows': 2,
+          'warningRows': 0,
+          'invalidRows': 0,
+          'duplicateRows': 0,
+          'processedRows': 0,
+          'failedRows': 0,
+          'riskLevel': 'low',
+          'processingAvailable': true,
+        },
+        'policy': {'enabled': true, 'maxRows': 1000, 'rowCount': 2},
+        'summary': {
+          'dryRunOk': 2,
+          'blocked': 0,
+          'duplicates': 0,
+          'failed': 0,
+          'provisioned': 2,
+        },
+        'rows': [
+          {'rowId': 'r1', 'rowIndex': 1, 'status': 'processed'},
+          {
+            'rowId': 'r2',
+            'rowIndex': 2,
+            'status': 'failed',
+            'reason': 'duplicate_email',
+          },
+        ],
+      });
+
+      expect(result.summary.provisioned, 2);
+      expect(result.rows.first.status, BulkOnboardingRowStatus.processed);
+      expect(result.rows.last.reason, 'duplicate_email');
+      expect(result.policy.enabled, isTrue);
     });
   });
 }

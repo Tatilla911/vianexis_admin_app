@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
 import '../domain/bulk_onboarding_action_request.dart';
+import '../domain/bulk_onboarding_execution.dart';
 import '../domain/bulk_onboarding_job.dart';
 import '../domain/bulk_onboarding_row.dart';
 import '../domain/bulk_onboarding_row_status.dart';
@@ -106,7 +107,8 @@ class BulkOnboardingApi {
       'file': MultipartFile.fromBytes(bytes, filename: fileName),
       'type': type.backendValue,
       'companyId': ?companyId,
-      if (companyName?.trim().isNotEmpty ?? false) 'companyName': companyName!.trim(),
+      if (companyName?.trim().isNotEmpty ?? false)
+        'companyName': companyName!.trim(),
       if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
     });
 
@@ -211,6 +213,34 @@ class BulkOnboardingApi {
       throw StateError('Empty bulk onboarding job revalidate response');
     }
     return BulkOnboardingJob.fromDetailResponseJson(data);
+  }
+
+  Future<BulkOnboardingExecutionResult> dryRunJob({
+    required String jobId,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/bulk-onboarding/jobs/$jobId/dry-run',
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty bulk onboarding dry-run response');
+    }
+    return BulkOnboardingExecutionResult.fromJson(data);
+  }
+
+  Future<BulkOnboardingExecutionResult> executeJob({
+    required String jobId,
+    required BulkOnboardingExecutionRequest request,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/bulk-onboarding/jobs/$jobId/execute',
+      data: request.toJson(),
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty bulk onboarding execute response');
+    }
+    return BulkOnboardingExecutionResult.fromJson(data);
   }
 }
 

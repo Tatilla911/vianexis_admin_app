@@ -4,6 +4,7 @@ import '../../../app/app_config.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/bulk_onboarding_action_request.dart';
+import '../domain/bulk_onboarding_execution.dart';
 import '../domain/bulk_onboarding_dashboard_summary.dart';
 import '../domain/bulk_onboarding_job.dart';
 import '../domain/bulk_onboarding_risk_level.dart';
@@ -67,6 +68,13 @@ abstract class BulkOnboardingRepository {
   });
 
   Future<BulkOnboardingJob> revalidateJob(String jobId);
+
+  Future<BulkOnboardingExecutionResult> dryRunJob(String jobId);
+
+  Future<BulkOnboardingExecutionResult> executeJob(
+    String jobId,
+    BulkOnboardingExecutionRequest request,
+  );
 
   bool get usesMockData;
 }
@@ -185,6 +193,23 @@ class LiveBulkOnboardingRepository implements BulkOnboardingRepository {
   Future<BulkOnboardingJob> revalidateJob(String jobId) {
     return _api.revalidateJob(jobId: jobId);
   }
+
+  @override
+  Future<BulkOnboardingExecutionResult> dryRunJob(String jobId) {
+    return _api.dryRunJob(jobId: jobId);
+  }
+
+  @override
+  Future<BulkOnboardingExecutionResult> executeJob(
+    String jobId,
+    BulkOnboardingExecutionRequest request,
+  ) async {
+    try {
+      return await _api.executeJob(jobId: jobId, request: request);
+    } on ApiException catch (error) {
+      throw _mapExecutionError(error);
+    }
+  }
 }
 
 class MockBulkOnboardingRepository implements BulkOnboardingRepository {
@@ -212,8 +237,7 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
       aiSummary:
           'Advisory AI review: warnings present. Human approval required before processing.',
       riskLevel: BulkOnboardingRiskLevel.medium,
-      validationSummary:
-          '{"recommendedAction":"review","advisoryOnly":true}',
+      validationSummary: '{"recommendedAction":"review","advisoryOnly":true}',
       processingAvailable: false,
       createdAt: DateTime.utc(2026, 6, 12, 10, 0),
     ),
@@ -235,8 +259,7 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
       aiSummary:
           'Advisory AI review: high invalid row rate detected. Human review required.',
       riskLevel: BulkOnboardingRiskLevel.high,
-      validationSummary:
-          '{"recommendedAction":"review","advisoryOnly":true}',
+      validationSummary: '{"recommendedAction":"review","advisoryOnly":true}',
       processingAvailable: false,
       createdAt: DateTime.utc(2026, 6, 11, 14, 30),
     ),
@@ -389,8 +412,7 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
       aiSummary:
           'Advisory AI review (mock upload preview). Human approval required.',
       riskLevel: BulkOnboardingRiskLevel.medium,
-      validationSummary:
-          '{"recommendedAction":"review","advisoryOnly":true}',
+      validationSummary: '{"recommendedAction":"review","advisoryOnly":true}',
       processingAvailable: false,
       createdAt: DateTime.now().toUtc(),
     );
@@ -449,7 +471,8 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
   @override
   Future<String> downloadValidationReport(String jobId) async {
     await Future<void>.delayed(const Duration(milliseconds: 100));
-    if (!_rowsByJob.containsKey(jobId) && _jobs.every((job) => job.id != jobId)) {
+    if (!_rowsByJob.containsKey(jobId) &&
+        _jobs.every((job) => job.id != jobId)) {
       throw const ApiException(
         messageKey: LocalizationKeys.errorActionUnavailable,
         kind: ApiExceptionKind.notFound,
@@ -476,20 +499,22 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
     ];
     final buffer = StringBuffer('${headers.join(',')}\n');
     for (final row in rows) {
-      buffer.writeln([
-        row.rowIndex,
-        row.status.backendValue,
-        _csvCell(row.displayLabel),
-        _csvCell(row.name),
-        _csvCell(row.email),
-        _csvCell(row.phone),
-        _csvCell(row.role),
-        _csvCell(row.vehiclePlate),
-        _csvCell(row.trailerPlate),
-        _csvCell(row.validationErrors.join('; ')),
-        _csvCell(row.validationWarnings.join('; ')),
-        _csvCell(row.duplicateReason),
-      ].join(','));
+      buffer.writeln(
+        [
+          row.rowIndex,
+          row.status.backendValue,
+          _csvCell(row.displayLabel),
+          _csvCell(row.name),
+          _csvCell(row.email),
+          _csvCell(row.phone),
+          _csvCell(row.role),
+          _csvCell(row.vehiclePlate),
+          _csvCell(row.trailerPlate),
+          _csvCell(row.validationErrors.join('; ')),
+          _csvCell(row.validationWarnings.join('; ')),
+          _csvCell(row.duplicateReason),
+        ].join(','),
+      );
     }
     return buffer.toString();
   }
@@ -571,7 +596,8 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
       );
     }
 
-    final originalValues = row.originalValues ??
+    final originalValues =
+        row.originalValues ??
         {
           if (row.name != null) 'name': row.name,
           if (row.email != null) 'email': row.email,
@@ -591,9 +617,10 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
       vehiclePlate: request.vehiclePlate ?? row.vehiclePlate,
       trailerPlate: request.trailerPlate ?? row.trailerPlate,
       originalValues: originalValues,
-      correctedValues: request.toJson()
-        ..remove('note'),
-      correctionNote: request.note?.trim().isEmpty ?? true ? row.correctionNote : request.note!.trim(),
+      correctedValues: request.toJson()..remove('note'),
+      correctionNote: request.note?.trim().isEmpty ?? true
+          ? row.correctionNote
+          : request.note!.trim(),
       correctedByUserId: 1,
       correctedAt: DateTime.now().toUtc(),
       lastValidatedAt: DateTime.now().toUtc(),
@@ -651,16 +678,101 @@ class MockBulkOnboardingRepository implements BulkOnboardingRepository {
   Future<BulkOnboardingJob> revalidateJob(String jobId) async {
     await Future<void>.delayed(const Duration(milliseconds: 180));
     final rows = List<BulkOnboardingRow>.from(_rowsByJob[jobId] ?? const []);
-    final updatedRows = rows.map((row) {
-      if (row.status == BulkOnboardingRowStatus.skipped) return row;
-      return _mockValidateRow(
-        row.copyWithFields(lastValidatedAt: DateTime.now().toUtc()),
-      );
-    }).toList(growable: false);
+    final updatedRows = rows
+        .map((row) {
+          if (row.status == BulkOnboardingRowStatus.skipped) return row;
+          return _mockValidateRow(
+            row.copyWithFields(lastValidatedAt: DateTime.now().toUtc()),
+          );
+        })
+        .toList(growable: false);
     _rowsByJob[jobId] = updatedRows;
-    return _syncMockJobSummary(
-      jobId,
-      lastValidatedAt: DateTime.now().toUtc(),
+    return _syncMockJobSummary(jobId, lastValidatedAt: DateTime.now().toUtc());
+  }
+
+  @override
+  Future<BulkOnboardingExecutionResult> dryRunJob(String jobId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 200));
+    final job = await fetchJob(jobId);
+    final rows = await fetchRows(jobId);
+    final policy = BulkOnboardingExecutionPolicy(
+      enabled: rows.length <= 1000,
+      maxRows: 1000,
+      rowCount: rows.length,
+      reason: rows.length > 1000 ? 'max_rows_exceeded' : null,
+    );
+    final summary = BulkOnboardingProvisioningSummary(
+      dryRunOk: rows
+          .where((row) => row.status == BulkOnboardingRowStatus.valid)
+          .length,
+      blocked: rows
+          .where(
+            (row) =>
+                row.status == BulkOnboardingRowStatus.invalid ||
+                row.status == BulkOnboardingRowStatus.warning,
+          )
+          .length,
+      duplicates: rows
+          .where((row) => row.status == BulkOnboardingRowStatus.duplicate)
+          .length,
+      failed: 0,
+      provisioned: 0,
+    );
+    return BulkOnboardingExecutionResult(
+      job: job,
+      rows: rows
+          .map(
+            (row) => BulkOnboardingExecutionRowStatus(
+              rowId: row.id,
+              rowIndex: row.rowIndex,
+              status: row.status,
+              reason: row.duplicateReason,
+            ),
+          )
+          .toList(growable: false),
+      policy: policy,
+      summary: summary,
+    );
+  }
+
+  @override
+  Future<BulkOnboardingExecutionResult> executeJob(
+    String jobId,
+    BulkOnboardingExecutionRequest request,
+  ) async {
+    await Future<void>.delayed(const Duration(milliseconds: 200));
+    final validation = request.validate();
+    if (validation != null) {
+      throw ApiException(
+        messageKey: validation,
+        kind: ApiExceptionKind.validation,
+      );
+    }
+    final dryRun = await dryRunJob(jobId);
+    if (!dryRun.policy.enabled) {
+      throw const ApiException(
+        messageKey: 'bulkOnboardingExecuteRejectedPolicy',
+        kind: ApiExceptionKind.validation,
+      );
+    }
+    final updated = await submitAction(
+      jobId: jobId,
+      request: const BulkOnboardingActionRequest(
+        kind: BulkOnboardingActionKind.process,
+        confirm: true,
+      ),
+    );
+    return BulkOnboardingExecutionResult(
+      job: updated,
+      rows: dryRun.rows,
+      policy: dryRun.policy,
+      summary: BulkOnboardingProvisioningSummary(
+        dryRunOk: dryRun.summary.dryRunOk,
+        blocked: dryRun.summary.blocked,
+        duplicates: dryRun.summary.duplicates,
+        failed: 0,
+        provisioned: dryRun.summary.dryRunOk,
+      ),
     );
   }
 
@@ -876,10 +988,37 @@ extension _BulkOnboardingJobMockCopy on BulkOnboardingJob {
   }
 }
 
-final bulkOnboardingRepositoryProvider = Provider<BulkOnboardingRepository>((ref) {
-
+final bulkOnboardingRepositoryProvider = Provider<BulkOnboardingRepository>((
+  ref,
+) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveBulkOnboardingRepository(ref.watch(bulkOnboardingApiProvider));
   }
   return MockBulkOnboardingRepository();
 });
+
+ApiException _mapExecutionError(ApiException error) {
+  final status = error.statusCode;
+  if (status == 403) {
+    return const ApiException(
+      messageKey: 'bulkOnboardingExecuteForbidden',
+      kind: ApiExceptionKind.forbidden,
+      statusCode: 403,
+    );
+  }
+  if (status == 409) {
+    return const ApiException(
+      messageKey: 'bulkOnboardingExecuteRejectedPolicy',
+      kind: ApiExceptionKind.conflict,
+      statusCode: 409,
+    );
+  }
+  if (status == 422 || error.kind == ApiExceptionKind.validation) {
+    return const ApiException(
+      messageKey: 'bulkOnboardingExecuteRejectedValidation',
+      kind: ApiExceptionKind.validation,
+      statusCode: 422,
+    );
+  }
+  return error;
+}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_action_request.dart';
+import 'package:vianexis_admin_app/features/bulk_onboarding/domain/bulk_onboarding_execution.dart';
 import 'package:vianexis_admin_app/features/bulk_onboarding/presentation/widgets/bulk_onboarding_action_dialog.dart';
 import 'package:vianexis_admin_app/l10n/app_localizations.dart';
 
@@ -54,5 +55,55 @@ void main() {
     await pumpDialog(tester, BulkOnboardingActionKind.reject);
 
     expect(find.text('Cancel'), findsOneWidget);
+  });
+
+  testWidgets('execute dialog requires reason before submit', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Builder(
+          builder: (context) => ElevatedButton(
+            onPressed: () {
+              showBulkOnboardingExecuteDialog(
+                context: context,
+                rowCount: 5,
+                maxRows: 100,
+              );
+            },
+            child: const Text('open execute'),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open execute'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Execute now'));
+    await tester.pump();
+
+    expect(find.text('Execution reason is required.'), findsOneWidget);
+  });
+
+  test('execute request requires reason and confirm', () {
+    expect(
+      const BulkOnboardingExecutionRequest(
+        reason: ' ',
+        confirm: false,
+      ).validate(),
+      'bulkOnboardingExecuteReasonRequired',
+    );
+    expect(
+      const BulkOnboardingExecutionRequest(
+        reason: 'Approved ticket',
+        confirm: false,
+      ).validate(),
+      'bulkOnboardingExecuteConfirmRequired',
+    );
   });
 }
