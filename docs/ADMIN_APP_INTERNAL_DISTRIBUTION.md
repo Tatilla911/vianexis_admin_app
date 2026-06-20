@@ -5,7 +5,8 @@ How to distribute the first internal staging APK to operators without Play Store
 ## Artifact
 
 - Output: `build/app/outputs/flutter-apk/app-release.apk` (or `app-debug.apk`)
-- Name releases: `vianexis-admin-staging-<version>+<build>.apk`
+- Naming: `ViaNexisAdmin-staging-v<version>.apk` — see [`ADMIN_APP_STAGING_APK_ARTIFACT.md`](./ADMIN_APP_STAGING_APK_ARTIFACT.md)
+- Prepare: `dart run tool/prepare_staging_apk_artifact.dart`
 
 ## Distribution channels (choose one)
 

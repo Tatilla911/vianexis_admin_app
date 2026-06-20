@@ -151,6 +151,13 @@ flutter build apk --release `
 
 Replace the URL with your staging API hostname. Do not commit real URLs or signing files.
 
+Artifact tool:
+
+```powershell
+$env:STAGING_APK_API_BASE_URL="https://api-staging.example.com"
+dart run tool/prepare_staging_apk_artifact.dart
+```
+
 ## Release readiness
 
 Run `dart run tool/admin_release_readiness_check.dart` before release builds. See [ADMIN_APP_RELEASE_CHECKLIST.md](docs/ADMIN_APP_RELEASE_CHECKLIST.md).
