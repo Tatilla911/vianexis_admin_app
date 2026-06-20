@@ -17,6 +17,10 @@ How to distribute the first internal staging APK to operators without Play Store
 | Direct USB / ADB | `adb install app-release.apk` |
 | Firebase App Distribution | Requires Firebase project — configure outside repo |
 
+### Render staging
+
+When backend is on Render, build with the Render API hostname — see [`ADMIN_APP_RENDER_STAGING_BUILD.md`](./ADMIN_APP_RENDER_STAGING_BUILD.md). Do not commit the real URL.
+
 ## Signing
 
 - **Debug builds** — for developer devices only

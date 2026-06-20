@@ -11,7 +11,7 @@ Admin app portion of staging rehearsal. Backend master flow: `transdoc-backend/d
 ## Build and install
 
 1. [ ] `dart run tool/prepare_staging_apk_artifact.dart` (dry-run)
-2. [ ] Build APK with staging dart-defines
+2. [ ] Build APK with staging dart-defines — see [`ADMIN_APP_RENDER_STAGING_BUILD.md`](./ADMIN_APP_RENDER_STAGING_BUILD.md) for Render
 3. [ ] Rename to `ViaNexisAdmin-staging-v<version>.apk`
 4. [ ] Install via secure channel — see [`ADMIN_APP_INTERNAL_DISTRIBUTION.md`](./ADMIN_APP_INTERNAL_DISTRIBUTION.md)
 

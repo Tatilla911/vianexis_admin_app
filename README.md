@@ -58,6 +58,8 @@ flutter run --dart-define=APP_ENV=local --dart-define=API_BASE_URL=http://10.0.2
 flutter build apk --release --dart-define=APP_ENV=staging --dart-define=API_BASE_URL=<STAGING_API_URL>
 ```
 
+Render staging: see [docs/ADMIN_APP_RENDER_STAGING_BUILD.md](docs/ADMIN_APP_RENDER_STAGING_BUILD.md) — use `https://<RENDER_STAGING_API_HOST>` at build time only.
+
 ### Production release APK
 
 ```powershell
