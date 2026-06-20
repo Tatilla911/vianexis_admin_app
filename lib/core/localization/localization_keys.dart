@@ -30,5 +30,8 @@ abstract final class LocalizationKeys {
   static const supportActionUnavailable = 'supportActionUnavailable';
   static const supportActionError = 'supportActionError';
 
+  static const customerCommunicationLoadError = 'customerCommunicationLoadError';
+  static const customerCommunicationActionError = 'customerCommunicationActionError';
+
   static const auditLogLoadError = 'auditLogLoadError';
 }

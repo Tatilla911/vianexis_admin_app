@@ -6056,6 +6056,12 @@ abstract class AppLocalizations {
   /// **'Critical/urgent'**
   String get actionCenterFilterCritical;
 
+  /// No description provided for @actionCenterFilterCustomerCommunication.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer communications'**
+  String get actionCenterFilterCustomerCommunication;
+
   /// No description provided for @actionCenterTypeRegistration.
   ///
   /// In en, this message translates to:
@@ -6103,6 +6109,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Company'**
   String get actionCenterTypeCompany;
+
+  /// No description provided for @actionCenterTypeCustomerCommunication.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer communication'**
+  String get actionCenterTypeCustomerCommunication;
 
   /// No description provided for @actionCenterTypeUnknown.
   ///
@@ -6907,6 +6919,520 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Translation approved. Copy or send through your normal support workflow.'**
   String get translationReplyApprovedNotice;
+
+  /// No description provided for @customerCommunicationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer communications'**
+  String get customerCommunicationsTitle;
+
+  /// No description provided for @customerCommunicationDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Communication thread'**
+  String get customerCommunicationDetailTitle;
+
+  /// No description provided for @customerCommunicationEvidencePackageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence package'**
+  String get customerCommunicationEvidencePackageTitle;
+
+  /// No description provided for @customerCommunicationLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load customer communications.'**
+  String get customerCommunicationLoadError;
+
+  /// No description provided for @customerCommunicationActionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer communication action failed.'**
+  String get customerCommunicationActionError;
+
+  /// No description provided for @customerCommunicationMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get customerCommunicationMockDataBadge;
+
+  /// No description provided for @customerCommunicationOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open customer communications'**
+  String get customerCommunicationOpenModule;
+
+  /// No description provided for @customerCommunicationPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'List views are metadata-first. Message bodies appear only on authorized detail access.'**
+  String get customerCommunicationPrivacyNotice;
+
+  /// No description provided for @customerCommunicationDetailMetadataOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Message bodies are hidden for your role or this thread scope.'**
+  String get customerCommunicationDetailMetadataOnly;
+
+  /// No description provided for @customerCommunicationSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name, domain, or company'**
+  String get customerCommunicationSearchHint;
+
+  /// No description provided for @customerCommunicationListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No customer communication threads match your filters.'**
+  String get customerCommunicationListEmpty;
+
+  /// No description provided for @customerCommunicationDisputedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Disputed'**
+  String get customerCommunicationDisputedBadge;
+
+  /// No description provided for @customerCommunicationBillingRelatedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing related'**
+  String get customerCommunicationBillingRelatedBadge;
+
+  /// No description provided for @customerCommunicationThreadSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{domain} · company {companyId}'**
+  String customerCommunicationThreadSubtitle(String domain, String companyId);
+
+  /// No description provided for @customerCommunicationUpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated: {date}'**
+  String customerCommunicationUpdatedAt(String date);
+
+  /// No description provided for @customerCommunicationFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get customerCommunicationFilterAll;
+
+  /// No description provided for @customerCommunicationFilterOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get customerCommunicationFilterOpen;
+
+  /// No description provided for @customerCommunicationFilterDisputed.
+  ///
+  /// In en, this message translates to:
+  /// **'Disputed'**
+  String get customerCommunicationFilterDisputed;
+
+  /// No description provided for @customerCommunicationFilterClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get customerCommunicationFilterClosed;
+
+  /// No description provided for @customerCommunicationFilterBillingRelated.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing related'**
+  String get customerCommunicationFilterBillingRelated;
+
+  /// No description provided for @customerCommunicationStatusOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get customerCommunicationStatusOpen;
+
+  /// No description provided for @customerCommunicationStatusClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get customerCommunicationStatusClosed;
+
+  /// No description provided for @customerCommunicationStatusArchived.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get customerCommunicationStatusArchived;
+
+  /// No description provided for @customerCommunicationStatusDisputed.
+  ///
+  /// In en, this message translates to:
+  /// **'Disputed'**
+  String get customerCommunicationStatusDisputed;
+
+  /// No description provided for @customerCommunicationStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get customerCommunicationStatusUnknown;
+
+  /// No description provided for @customerCommunicationSourcePublicSite.
+  ///
+  /// In en, this message translates to:
+  /// **'Public site'**
+  String get customerCommunicationSourcePublicSite;
+
+  /// No description provided for @customerCommunicationSourceEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get customerCommunicationSourceEmail;
+
+  /// No description provided for @customerCommunicationSourceAdminApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin app'**
+  String get customerCommunicationSourceAdminApp;
+
+  /// No description provided for @customerCommunicationSourceAdminWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin web'**
+  String get customerCommunicationSourceAdminWeb;
+
+  /// No description provided for @customerCommunicationSourceImport.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get customerCommunicationSourceImport;
+
+  /// No description provided for @customerCommunicationSourceSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get customerCommunicationSourceSupport;
+
+  /// No description provided for @customerCommunicationSourceSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get customerCommunicationSourceSystem;
+
+  /// No description provided for @customerCommunicationSourceUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get customerCommunicationSourceUnknown;
+
+  /// No description provided for @customerCommunicationDirectionInbound.
+  ///
+  /// In en, this message translates to:
+  /// **'Inbound'**
+  String get customerCommunicationDirectionInbound;
+
+  /// No description provided for @customerCommunicationDirectionOutbound.
+  ///
+  /// In en, this message translates to:
+  /// **'Outbound'**
+  String get customerCommunicationDirectionOutbound;
+
+  /// No description provided for @customerCommunicationDirectionInternalNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal note'**
+  String get customerCommunicationDirectionInternalNote;
+
+  /// No description provided for @customerCommunicationDirectionSystemEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'System event'**
+  String get customerCommunicationDirectionSystemEvent;
+
+  /// No description provided for @customerCommunicationDirectionUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get customerCommunicationDirectionUnknown;
+
+  /// No description provided for @customerCommunicationSenderCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get customerCommunicationSenderCustomer;
+
+  /// No description provided for @customerCommunicationSenderPlatformAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform admin'**
+  String get customerCommunicationSenderPlatformAdmin;
+
+  /// No description provided for @customerCommunicationSenderCompanyAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Company admin'**
+  String get customerCommunicationSenderCompanyAdmin;
+
+  /// No description provided for @customerCommunicationSenderSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get customerCommunicationSenderSystem;
+
+  /// No description provided for @customerCommunicationSenderUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get customerCommunicationSenderUnknown;
+
+  /// No description provided for @customerCommunicationHumanReviewedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Human reviewed'**
+  String get customerCommunicationHumanReviewedBadge;
+
+  /// No description provided for @customerCommunicationOriginalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Original ({language})'**
+  String customerCommunicationOriginalLabel(String language);
+
+  /// No description provided for @customerCommunicationTranslatedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Translated ({language})'**
+  String customerCommunicationTranslatedLabel(String language);
+
+  /// No description provided for @customerCommunicationMessageMetadataOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Message body hidden (metadata-only view).'**
+  String get customerCommunicationMessageMetadataOnly;
+
+  /// No description provided for @customerCommunicationMessagesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages logged yet.'**
+  String get customerCommunicationMessagesEmpty;
+
+  /// No description provided for @customerCommunicationTimelineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline'**
+  String get customerCommunicationTimelineTitle;
+
+  /// No description provided for @customerCommunicationAgreementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Agreement snapshots'**
+  String get customerCommunicationAgreementsTitle;
+
+  /// No description provided for @customerCommunicationEvidencePackagesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence packages'**
+  String get customerCommunicationEvidencePackagesTitle;
+
+  /// No description provided for @customerCommunicationPackagesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No evidence packages generated yet.'**
+  String get customerCommunicationPackagesEmpty;
+
+  /// No description provided for @customerCommunicationAgreementPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} {currency} · {cycle}'**
+  String customerCommunicationAgreementPrice(
+    String amount,
+    String currency,
+    String cycle,
+  );
+
+  /// No description provided for @customerCommunicationAgreementModules.
+  ///
+  /// In en, this message translates to:
+  /// **'Modules: {modules}'**
+  String customerCommunicationAgreementModules(String modules);
+
+  /// No description provided for @customerCommunicationAgreementAcceptedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted: {date}'**
+  String customerCommunicationAgreementAcceptedAt(String date);
+
+  /// No description provided for @customerCommunicationPdfPendingNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF rendering pending; structured evidence package generated from audit records.'**
+  String get customerCommunicationPdfPendingNotice;
+
+  /// No description provided for @customerCommunicationPackageGeneratedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Generated: {date}'**
+  String customerCommunicationPackageGeneratedAt(String date);
+
+  /// No description provided for @customerCommunicationPackageTypeCommunicationEvidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Communication evidence'**
+  String get customerCommunicationPackageTypeCommunicationEvidence;
+
+  /// No description provided for @customerCommunicationPackageTypeSubscriptionDispute.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription dispute'**
+  String get customerCommunicationPackageTypeSubscriptionDispute;
+
+  /// No description provided for @customerCommunicationPackageTypeRegistrationEvidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration evidence'**
+  String get customerCommunicationPackageTypeRegistrationEvidence;
+
+  /// No description provided for @customerCommunicationPackageTypePricingEvidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing evidence'**
+  String get customerCommunicationPackageTypePricingEvidence;
+
+  /// No description provided for @customerCommunicationPackageTypeUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown package type'**
+  String get customerCommunicationPackageTypeUnknown;
+
+  /// No description provided for @customerCommunicationPackageStatusGenerated.
+  ///
+  /// In en, this message translates to:
+  /// **'Generated'**
+  String get customerCommunicationPackageStatusGenerated;
+
+  /// No description provided for @customerCommunicationPackageStatusFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get customerCommunicationPackageStatusFailed;
+
+  /// No description provided for @customerCommunicationPackageStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown status'**
+  String get customerCommunicationPackageStatusUnknown;
+
+  /// No description provided for @customerCommunicationGeneratePackageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate evidence package'**
+  String get customerCommunicationGeneratePackageTitle;
+
+  /// No description provided for @customerCommunicationGeneratePackageAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate package'**
+  String get customerCommunicationGeneratePackageAction;
+
+  /// No description provided for @customerCommunicationMarkDisputedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark thread disputed'**
+  String get customerCommunicationMarkDisputedTitle;
+
+  /// No description provided for @customerCommunicationMarkDisputedAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark disputed'**
+  String get customerCommunicationMarkDisputedAction;
+
+  /// No description provided for @customerCommunicationDisputedSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispute'**
+  String get customerCommunicationDisputedSectionTitle;
+
+  /// No description provided for @customerCommunicationReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason (required)'**
+  String get customerCommunicationReasonLabel;
+
+  /// No description provided for @customerCommunicationReasonRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least 5 characters.'**
+  String get customerCommunicationReasonRequired;
+
+  /// No description provided for @customerCommunicationPackageTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Package type'**
+  String get customerCommunicationPackageTypeLabel;
+
+  /// No description provided for @customerCommunicationExportAuditWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Export creates an audited evidence package from database records. Provide a reason for compliance.'**
+  String get customerCommunicationExportAuditWarning;
+
+  /// No description provided for @customerCommunicationCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get customerCommunicationCancel;
+
+  /// No description provided for @customerCommunicationDisputeMarkedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Thread marked as disputed.'**
+  String get customerCommunicationDisputeMarkedSuccess;
+
+  /// No description provided for @customerCommunicationPackageGeneratedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence package generated.'**
+  String get customerCommunicationPackageGeneratedSuccess;
+
+  /// No description provided for @customerCommunicationSummaryJsonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Structured summary (source of truth until PDF renderer ships)'**
+  String get customerCommunicationSummaryJsonTitle;
+
+  /// No description provided for @customerCommunicationPackageReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason: {reason}'**
+  String customerCommunicationPackageReason(String reason);
+
+  /// No description provided for @customerCommunicationFileHash.
+  ///
+  /// In en, this message translates to:
+  /// **'Integrity hash: {hash}'**
+  String customerCommunicationFileHash(String hash);
+
+  /// No description provided for @customerCommunicationPackageNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence package not found.'**
+  String get customerCommunicationPackageNotFound;
+
+  /// No description provided for @customerCommunicationSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer communications'**
+  String get customerCommunicationSummaryTitle;
+
+  /// No description provided for @customerCommunicationSummaryDisputed.
+  ///
+  /// In en, this message translates to:
+  /// **'Disputed: {count}'**
+  String customerCommunicationSummaryDisputed(String count);
+
+  /// No description provided for @customerCommunicationSummaryOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open: {count}'**
+  String customerCommunicationSummaryOpen(String count);
+
+  /// No description provided for @customerCommunicationSummaryTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total: {count}'**
+  String customerCommunicationSummaryTotal(String count);
 }
 
 class _AppLocalizationsDelegate

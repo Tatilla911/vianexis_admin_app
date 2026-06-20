@@ -25,6 +25,9 @@ import '../features/billing/presentation/billing_screen.dart';
 import '../features/billing/presentation/pricing_intake_detail_screen.dart';
 import '../features/billing/presentation/quote_request_detail_screen.dart';
 import '../features/billing/presentation/subscription_detail_screen.dart';
+import '../features/customer_communications/presentation/customer_communication_detail_screen.dart';
+import '../features/customer_communications/presentation/customer_communications_screen.dart';
+import '../features/customer_communications/presentation/evidence_package_detail_screen.dart';
 import '../features/companies/presentation/platform_companies_screen.dart';
 import '../features/companies/presentation/platform_company_detail_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
@@ -119,6 +122,29 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => RegistrationApplicationDetailScreen(
                   applicationId: state.pathParameters['id'] ?? '',
                 ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AdminRoutes.customerCommunications,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: CustomerCommunicationsScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => CustomerCommunicationDetailScreen(
+                  threadId: state.pathParameters['id'] ?? '',
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'evidence-packages/:packageId',
+                    builder: (context, state) => EvidencePackageDetailScreen(
+                      threadId: state.pathParameters['id'] ?? '',
+                      packageId: state.pathParameters['packageId'] ?? '',
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -355,6 +381,7 @@ abstract final class AdminRoutes {
   static const aiReviews = '/ai-reviews';
   static const supportTickets = '/support/tickets';
   static const supportGrants = '/support/grants';
+  static const customerCommunications = '/customer-communications';
   static const systemHealth = '/system-health';
   static const auditLogs = '/audit-logs';
   static const notifications = '/notifications';
@@ -387,6 +414,14 @@ abstract final class AdminRoutes {
   static String supportTicketDetail(String id) => '$supportTickets/$id';
 
   static String supportGrantDetail(String id) => '$supportGrants/$id';
+
+  static String customerCommunicationDetail(String id) =>
+      '$customerCommunications/$id';
+
+  static String customerCommunicationEvidencePackageDetail(
+    String threadId,
+    String packageId,
+  ) => '$customerCommunications/$threadId/evidence-packages/$packageId';
 
   static String auditLogDetail(String id) => '$auditLogs/$id';
 
@@ -422,6 +457,9 @@ abstract final class AdminRoutes {
     if (location.startsWith(supportGrants)) {
       return AdminDestination.supportGrants;
     }
+    if (location.startsWith(customerCommunications)) {
+      return AdminDestination.customerCommunications;
+    }
     if (location.startsWith(auditLogs)) {
       return AdminDestination.auditLogs;
     }
@@ -443,6 +481,7 @@ abstract final class AdminRoutes {
       aiReviews => AdminDestination.aiReviews,
       supportTickets => AdminDestination.supportTickets,
       supportGrants => AdminDestination.supportGrants,
+      customerCommunications => AdminDestination.customerCommunications,
       systemHealth => AdminDestination.systemHealth,
       securityCenter => AdminDestination.securityCenter,
       adminUsers => AdminDestination.adminUsers,

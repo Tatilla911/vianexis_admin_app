@@ -15,6 +15,7 @@ void main() {
       expect(AdminRole.supportAdmin.canAccess(AdminDestination.securityCenter), isTrue);
       expect(AdminRole.supportAdmin.canAccess(AdminDestination.actionCenter), isTrue);
       expect(AdminRole.supportAdmin.canAccess(AdminDestination.releaseCenter), isTrue);
+      expect(AdminRole.supportAdmin.canAccess(AdminDestination.customerCommunications), isTrue);
       expect(AdminRole.supportAdmin.canAccess(AdminDestination.adminUsers), isFalse);
     });
 
@@ -27,9 +28,17 @@ void main() {
 
     test('billing_admin can access action center only among new modules', () {
       expect(AdminRole.billingAdmin.canAccess(AdminDestination.actionCenter), isTrue);
+      expect(AdminRole.billingAdmin.canAccess(AdminDestination.customerCommunications), isTrue);
       expect(AdminRole.billingAdmin.canAccess(AdminDestination.securityCenter), isFalse);
       expect(AdminRole.billingAdmin.canAccess(AdminDestination.adminUsers), isFalse);
       expect(AdminRole.billingAdmin.canAccess(AdminDestination.releaseCenter), isFalse);
+    });
+
+    test('onboarding_reviewer cannot access customer communications', () {
+      expect(
+        AdminRole.onboardingReviewer.canAccess(AdminDestination.customerCommunications),
+        isFalse,
+      );
     });
   });
 

@@ -3319,6 +3319,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get actionCenterFilterCritical => 'Kritikus/sürgős';
 
   @override
+  String get actionCenterFilterCustomerCommunication => 'Ügyfél kommunikáció';
+
+  @override
   String get actionCenterTypeRegistration => 'Regisztráció';
 
   @override
@@ -3341,6 +3344,9 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get actionCenterTypeCompany => 'Cég';
+
+  @override
+  String get actionCenterTypeCustomerCommunication => 'Ügyfél kommunikáció';
 
   @override
   String get actionCenterTypeUnknown => 'Ismeretlen';
@@ -3771,4 +3777,315 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get translationReplyApprovedNotice =>
       'A forditas jovahagyva. Masolja vagy kuldje a normal tamogatasi folyamaton keresztul.';
+
+  @override
+  String get customerCommunicationsTitle => 'Ugyfel kommunikacio';
+
+  @override
+  String get customerCommunicationDetailTitle => 'Kommunikacios szal';
+
+  @override
+  String get customerCommunicationEvidencePackageTitle => 'Bizonyitek csomag';
+
+  @override
+  String get customerCommunicationLoadError =>
+      'Az ugyfel kommunikacio betoltese sikertelen.';
+
+  @override
+  String get customerCommunicationActionError =>
+      'Az ugyfel kommunikacios muvelet sikertelen.';
+
+  @override
+  String get customerCommunicationMockDataBadge => 'Mintaadat';
+
+  @override
+  String get customerCommunicationOpenModule =>
+      'Ugyfel kommunikacio megnyitasa';
+
+  @override
+  String get customerCommunicationPrivacyNotice =>
+      'A listanezet metaadat-elso. Az uzenettorzs csak jogosult reszletes nezetben jelenik meg.';
+
+  @override
+  String get customerCommunicationDetailMetadataOnly =>
+      'Az uzenettorzs rejtve a szerepkor vagy a szal scope miatt.';
+
+  @override
+  String get customerCommunicationSearchHint =>
+      'Kereses nev, domain vagy ceg alapjan';
+
+  @override
+  String get customerCommunicationListEmpty =>
+      'Nincs egyezo ugyfel kommunikacios szal.';
+
+  @override
+  String get customerCommunicationDisputedBadge => 'Vitatott';
+
+  @override
+  String get customerCommunicationBillingRelatedBadge => 'Szamlazasi';
+
+  @override
+  String customerCommunicationThreadSubtitle(String domain, String companyId) {
+    return '$domain · ceg $companyId';
+  }
+
+  @override
+  String customerCommunicationUpdatedAt(String date) {
+    return 'Frissitve: $date';
+  }
+
+  @override
+  String get customerCommunicationFilterAll => 'Osszes';
+
+  @override
+  String get customerCommunicationFilterOpen => 'Nyitott';
+
+  @override
+  String get customerCommunicationFilterDisputed => 'Vitatott';
+
+  @override
+  String get customerCommunicationFilterClosed => 'Lezart';
+
+  @override
+  String get customerCommunicationFilterBillingRelated => 'Szamlazasi';
+
+  @override
+  String get customerCommunicationStatusOpen => 'Nyitott';
+
+  @override
+  String get customerCommunicationStatusClosed => 'Lezart';
+
+  @override
+  String get customerCommunicationStatusArchived => 'Archivalt';
+
+  @override
+  String get customerCommunicationStatusDisputed => 'Vitatott';
+
+  @override
+  String get customerCommunicationStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get customerCommunicationSourcePublicSite => 'Publikus oldal';
+
+  @override
+  String get customerCommunicationSourceEmail => 'E-mail';
+
+  @override
+  String get customerCommunicationSourceAdminApp => 'Admin app';
+
+  @override
+  String get customerCommunicationSourceAdminWeb => 'Admin web';
+
+  @override
+  String get customerCommunicationSourceImport => 'Import';
+
+  @override
+  String get customerCommunicationSourceSupport => 'Tamogatas';
+
+  @override
+  String get customerCommunicationSourceSystem => 'Rendszer';
+
+  @override
+  String get customerCommunicationSourceUnknown => 'Ismeretlen';
+
+  @override
+  String get customerCommunicationDirectionInbound => 'Bejovo';
+
+  @override
+  String get customerCommunicationDirectionOutbound => 'Kimeno';
+
+  @override
+  String get customerCommunicationDirectionInternalNote => 'Belso jegyzet';
+
+  @override
+  String get customerCommunicationDirectionSystemEvent => 'Rendszer esemeny';
+
+  @override
+  String get customerCommunicationDirectionUnknown => 'Ismeretlen';
+
+  @override
+  String get customerCommunicationSenderCustomer => 'Ugyfel';
+
+  @override
+  String get customerCommunicationSenderPlatformAdmin => 'Platform admin';
+
+  @override
+  String get customerCommunicationSenderCompanyAdmin => 'Ceg admin';
+
+  @override
+  String get customerCommunicationSenderSystem => 'Rendszer';
+
+  @override
+  String get customerCommunicationSenderUnknown => 'Ismeretlen';
+
+  @override
+  String get customerCommunicationHumanReviewedBadge => 'Emberi felulvizsgalat';
+
+  @override
+  String customerCommunicationOriginalLabel(String language) {
+    return 'Eredeti ($language)';
+  }
+
+  @override
+  String customerCommunicationTranslatedLabel(String language) {
+    return 'Leforditott ($language)';
+  }
+
+  @override
+  String get customerCommunicationMessageMetadataOnly =>
+      'Uzenettorzs rejtve (metaadat-only nezet).';
+
+  @override
+  String get customerCommunicationMessagesEmpty =>
+      'Meg nincs naplozott uzenet.';
+
+  @override
+  String get customerCommunicationTimelineTitle => 'Idovonal';
+
+  @override
+  String get customerCommunicationAgreementsTitle =>
+      'Megallapodas pillanatkepek';
+
+  @override
+  String get customerCommunicationEvidencePackagesTitle =>
+      'Bizonyitek csomagok';
+
+  @override
+  String get customerCommunicationPackagesEmpty =>
+      'Meg nincs generalva bizonyitek csomag.';
+
+  @override
+  String customerCommunicationAgreementPrice(
+    String amount,
+    String currency,
+    String cycle,
+  ) {
+    return '$amount $currency · $cycle';
+  }
+
+  @override
+  String customerCommunicationAgreementModules(String modules) {
+    return 'Modulok: $modules';
+  }
+
+  @override
+  String customerCommunicationAgreementAcceptedAt(String date) {
+    return 'Elfogadva: $date';
+  }
+
+  @override
+  String get customerCommunicationPdfPendingNotice =>
+      'PDF generalas fuggoben; strukturalt bizonyitek csomag keszult az audit rekordokbol.';
+
+  @override
+  String customerCommunicationPackageGeneratedAt(String date) {
+    return 'Generalva: $date';
+  }
+
+  @override
+  String get customerCommunicationPackageTypeCommunicationEvidence =>
+      'Kommunikacios bizonyitek';
+
+  @override
+  String get customerCommunicationPackageTypeSubscriptionDispute =>
+      'Elofizetes vitat';
+
+  @override
+  String get customerCommunicationPackageTypeRegistrationEvidence =>
+      'Regisztracios bizonyitek';
+
+  @override
+  String get customerCommunicationPackageTypePricingEvidence =>
+      'Arazasi bizonyitek';
+
+  @override
+  String get customerCommunicationPackageTypeUnknown =>
+      'Ismeretlen csomagtipus';
+
+  @override
+  String get customerCommunicationPackageStatusGenerated => 'Generalva';
+
+  @override
+  String get customerCommunicationPackageStatusFailed => 'Sikertelen';
+
+  @override
+  String get customerCommunicationPackageStatusUnknown => 'Ismeretlen allapot';
+
+  @override
+  String get customerCommunicationGeneratePackageTitle =>
+      'Bizonyitek csomag generalasa';
+
+  @override
+  String get customerCommunicationGeneratePackageAction => 'Csomag generalasa';
+
+  @override
+  String get customerCommunicationMarkDisputedTitle =>
+      'Szal vitatottkent jelolese';
+
+  @override
+  String get customerCommunicationMarkDisputedAction => 'Vitatott jeloles';
+
+  @override
+  String get customerCommunicationDisputedSectionTitle => 'Vita';
+
+  @override
+  String get customerCommunicationReasonLabel => 'Indoklas (kotelezo)';
+
+  @override
+  String get customerCommunicationReasonRequired =>
+      'Legalabb 5 karakter szukseges.';
+
+  @override
+  String get customerCommunicationPackageTypeLabel => 'Csomag tipus';
+
+  @override
+  String get customerCommunicationExportAuditWarning =>
+      'Az export audit altal naplozott bizonyitek csomagot keszit az adatbazis rekordokbol. Adjon meg indoklast.';
+
+  @override
+  String get customerCommunicationCancel => 'Megse';
+
+  @override
+  String get customerCommunicationDisputeMarkedSuccess =>
+      'A szal vitatottkent jelolve.';
+
+  @override
+  String get customerCommunicationPackageGeneratedSuccess =>
+      'Bizonyitek csomag generalva.';
+
+  @override
+  String get customerCommunicationSummaryJsonTitle =>
+      'Strukturalt osszefoglalo (forrasigazsag a PDF rendererig)';
+
+  @override
+  String customerCommunicationPackageReason(String reason) {
+    return 'Indoklas: $reason';
+  }
+
+  @override
+  String customerCommunicationFileHash(String hash) {
+    return 'Integritas hash: $hash';
+  }
+
+  @override
+  String get customerCommunicationPackageNotFound =>
+      'A bizonyitek csomag nem talalhato.';
+
+  @override
+  String get customerCommunicationSummaryTitle => 'Ugyfel kommunikacio';
+
+  @override
+  String customerCommunicationSummaryDisputed(String count) {
+    return 'Vitatott: $count';
+  }
+
+  @override
+  String customerCommunicationSummaryOpen(String count) {
+    return 'Nyitott: $count';
+  }
+
+  @override
+  String customerCommunicationSummaryTotal(String count) {
+    return 'Osszesen: $count';
+  }
 }

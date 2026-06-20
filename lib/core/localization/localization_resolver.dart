@@ -1322,6 +1322,8 @@ String resolveActionCenterKey(
     'actionCenterFilterBilling' => l10n.actionCenterFilterBilling,
     'actionCenterFilterAiReview' => l10n.actionCenterFilterAiReview,
     'actionCenterFilterCritical' => l10n.actionCenterFilterCritical,
+    'actionCenterFilterCustomerCommunication' =>
+      l10n.actionCenterFilterCustomerCommunication,
     'actionCenterTypeRegistration' => l10n.actionCenterTypeRegistration,
     'actionCenterTypeBulkOnboarding' => l10n.actionCenterTypeBulkOnboarding,
     'actionCenterTypeSupport' => l10n.actionCenterTypeSupport,
@@ -1330,6 +1332,8 @@ String resolveActionCenterKey(
     'actionCenterTypeBilling' => l10n.actionCenterTypeBilling,
     'actionCenterTypeAiReview' => l10n.actionCenterTypeAiReview,
     'actionCenterTypeCompany' => l10n.actionCenterTypeCompany,
+    'actionCenterTypeCustomerCommunication' =>
+      l10n.actionCenterTypeCustomerCommunication,
     'actionCenterTypeUnknown' => l10n.actionCenterTypeUnknown,
     'actionCenterPriorityLow' => l10n.actionCenterPriorityLow,
     'actionCenterPriorityNormal' => l10n.actionCenterPriorityNormal,
@@ -1342,6 +1346,163 @@ String resolveActionCenterKey(
     'actionCenterStatusDismissed' => l10n.actionCenterStatusDismissed,
     'actionCenterStatusResolved' => l10n.actionCenterStatusResolved,
     'actionCenterStatusUnknown' => l10n.actionCenterStatusUnknown,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveCustomerCommunicationsKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'customerCommunicationLoadError' => l10n.customerCommunicationLoadError,
+    'customerCommunicationActionError' => l10n.customerCommunicationActionError,
+    'customerCommunicationMockDataBadge' => l10n.customerCommunicationMockDataBadge,
+    'customerCommunicationOpenModule' => l10n.customerCommunicationOpenModule,
+    'customerCommunicationPrivacyNotice' => l10n.customerCommunicationPrivacyNotice,
+    'customerCommunicationDetailMetadataOnly' =>
+      l10n.customerCommunicationDetailMetadataOnly,
+    'customerCommunicationSearchHint' => l10n.customerCommunicationSearchHint,
+    'customerCommunicationListEmpty' => l10n.customerCommunicationListEmpty,
+    'customerCommunicationDisputedBadge' => l10n.customerCommunicationDisputedBadge,
+    'customerCommunicationBillingRelatedBadge' =>
+      l10n.customerCommunicationBillingRelatedBadge,
+    'customerCommunicationThreadSubtitle' =>
+      l10n.customerCommunicationThreadSubtitle(
+      params['domain'] ?? '',
+      params['companyId'] ?? '',
+    ),
+    'customerCommunicationUpdatedAt' => l10n.customerCommunicationUpdatedAt(
+      params['date'] ?? '',
+    ),
+    'customerCommunicationFilterAll' => l10n.customerCommunicationFilterAll,
+    'customerCommunicationFilterOpen' => l10n.customerCommunicationFilterOpen,
+    'customerCommunicationFilterDisputed' =>
+      l10n.customerCommunicationFilterDisputed,
+    'customerCommunicationFilterClosed' => l10n.customerCommunicationFilterClosed,
+    'customerCommunicationFilterBillingRelated' =>
+      l10n.customerCommunicationFilterBillingRelated,
+    'customerCommunicationStatusOpen' => l10n.customerCommunicationStatusOpen,
+    'customerCommunicationStatusClosed' => l10n.customerCommunicationStatusClosed,
+    'customerCommunicationStatusArchived' =>
+      l10n.customerCommunicationStatusArchived,
+    'customerCommunicationStatusDisputed' =>
+      l10n.customerCommunicationStatusDisputed,
+    'customerCommunicationStatusUnknown' =>
+      l10n.customerCommunicationStatusUnknown,
+    'customerCommunicationSourcePublicSite' =>
+      l10n.customerCommunicationSourcePublicSite,
+    'customerCommunicationSourceEmail' => l10n.customerCommunicationSourceEmail,
+    'customerCommunicationSourceAdminApp' =>
+      l10n.customerCommunicationSourceAdminApp,
+    'customerCommunicationSourceAdminWeb' =>
+      l10n.customerCommunicationSourceAdminWeb,
+    'customerCommunicationSourceImport' => l10n.customerCommunicationSourceImport,
+    'customerCommunicationSourceSupport' => l10n.customerCommunicationSourceSupport,
+    'customerCommunicationSourceSystem' => l10n.customerCommunicationSourceSystem,
+    'customerCommunicationSourceUnknown' => l10n.customerCommunicationSourceUnknown,
+    'customerCommunicationDirectionInbound' =>
+      l10n.customerCommunicationDirectionInbound,
+    'customerCommunicationDirectionOutbound' =>
+      l10n.customerCommunicationDirectionOutbound,
+    'customerCommunicationDirectionInternalNote' =>
+      l10n.customerCommunicationDirectionInternalNote,
+    'customerCommunicationDirectionSystemEvent' =>
+      l10n.customerCommunicationDirectionSystemEvent,
+    'customerCommunicationDirectionUnknown' =>
+      l10n.customerCommunicationDirectionUnknown,
+    'customerCommunicationSenderCustomer' =>
+      l10n.customerCommunicationSenderCustomer,
+    'customerCommunicationSenderPlatformAdmin' =>
+      l10n.customerCommunicationSenderPlatformAdmin,
+    'customerCommunicationSenderCompanyAdmin' =>
+      l10n.customerCommunicationSenderCompanyAdmin,
+    'customerCommunicationSenderSystem' => l10n.customerCommunicationSenderSystem,
+    'customerCommunicationSenderUnknown' => l10n.customerCommunicationSenderUnknown,
+    'customerCommunicationHumanReviewedBadge' =>
+      l10n.customerCommunicationHumanReviewedBadge,
+    'customerCommunicationOriginalLabel' => l10n.customerCommunicationOriginalLabel(
+      params['language'] ?? '',
+    ),
+    'customerCommunicationTranslatedLabel' =>
+      l10n.customerCommunicationTranslatedLabel(params['language'] ?? ''),
+    'customerCommunicationMessageMetadataOnly' =>
+      l10n.customerCommunicationMessageMetadataOnly,
+    'customerCommunicationMessagesEmpty' => l10n.customerCommunicationMessagesEmpty,
+    'customerCommunicationTimelineTitle' => l10n.customerCommunicationTimelineTitle,
+    'customerCommunicationAgreementsTitle' => l10n.customerCommunicationAgreementsTitle,
+    'customerCommunicationEvidencePackagesTitle' =>
+      l10n.customerCommunicationEvidencePackagesTitle,
+    'customerCommunicationPackagesEmpty' => l10n.customerCommunicationPackagesEmpty,
+    'customerCommunicationAgreementPrice' => l10n.customerCommunicationAgreementPrice(
+      params['amount'] ?? '',
+      params['currency'] ?? '',
+      params['cycle'] ?? '',
+    ),
+    'customerCommunicationAgreementModules' =>
+      l10n.customerCommunicationAgreementModules(params['modules'] ?? ''),
+    'customerCommunicationAgreementAcceptedAt' =>
+      l10n.customerCommunicationAgreementAcceptedAt(params['date'] ?? ''),
+    'customerCommunicationPdfPendingNotice' =>
+      l10n.customerCommunicationPdfPendingNotice,
+    'customerCommunicationPackageGeneratedAt' =>
+      l10n.customerCommunicationPackageGeneratedAt(params['date'] ?? ''),
+    'customerCommunicationPackageTypeCommunicationEvidence' =>
+      l10n.customerCommunicationPackageTypeCommunicationEvidence,
+    'customerCommunicationPackageTypeSubscriptionDispute' =>
+      l10n.customerCommunicationPackageTypeSubscriptionDispute,
+    'customerCommunicationPackageTypeRegistrationEvidence' =>
+      l10n.customerCommunicationPackageTypeRegistrationEvidence,
+    'customerCommunicationPackageTypePricingEvidence' =>
+      l10n.customerCommunicationPackageTypePricingEvidence,
+    'customerCommunicationPackageTypeUnknown' =>
+      l10n.customerCommunicationPackageTypeUnknown,
+    'customerCommunicationPackageStatusGenerated' =>
+      l10n.customerCommunicationPackageStatusGenerated,
+    'customerCommunicationPackageStatusFailed' =>
+      l10n.customerCommunicationPackageStatusFailed,
+    'customerCommunicationPackageStatusUnknown' =>
+      l10n.customerCommunicationPackageStatusUnknown,
+    'customerCommunicationGeneratePackageTitle' =>
+      l10n.customerCommunicationGeneratePackageTitle,
+    'customerCommunicationGeneratePackageAction' =>
+      l10n.customerCommunicationGeneratePackageAction,
+    'customerCommunicationMarkDisputedTitle' =>
+      l10n.customerCommunicationMarkDisputedTitle,
+    'customerCommunicationMarkDisputedAction' =>
+      l10n.customerCommunicationMarkDisputedAction,
+    'customerCommunicationDisputedSectionTitle' =>
+      l10n.customerCommunicationDisputedSectionTitle,
+    'customerCommunicationReasonLabel' => l10n.customerCommunicationReasonLabel,
+    'customerCommunicationReasonRequired' => l10n.customerCommunicationReasonRequired,
+    'customerCommunicationPackageTypeLabel' =>
+      l10n.customerCommunicationPackageTypeLabel,
+    'customerCommunicationExportAuditWarning' =>
+      l10n.customerCommunicationExportAuditWarning,
+    'customerCommunicationCancel' => l10n.customerCommunicationCancel,
+    'customerCommunicationDisputeMarkedSuccess' =>
+      l10n.customerCommunicationDisputeMarkedSuccess,
+    'customerCommunicationPackageGeneratedSuccess' =>
+      l10n.customerCommunicationPackageGeneratedSuccess,
+    'customerCommunicationSummaryJsonTitle' =>
+      l10n.customerCommunicationSummaryJsonTitle,
+    'customerCommunicationPackageReason' => l10n.customerCommunicationPackageReason(
+      params['reason'] ?? '',
+    ),
+    'customerCommunicationFileHash' => l10n.customerCommunicationFileHash(
+      params['hash'] ?? '',
+    ),
+    'customerCommunicationPackageNotFound' =>
+      l10n.customerCommunicationPackageNotFound,
+    'customerCommunicationSummaryTitle' => l10n.customerCommunicationSummaryTitle,
+    'customerCommunicationSummaryDisputed' =>
+      l10n.customerCommunicationSummaryDisputed(params['count'] ?? '0'),
+    'customerCommunicationSummaryOpen' =>
+      l10n.customerCommunicationSummaryOpen(params['count'] ?? '0'),
+    'customerCommunicationSummaryTotal' =>
+      l10n.customerCommunicationSummaryTotal(params['count'] ?? '0'),
     _ => l10n.errorGenericBody,
   };
 }

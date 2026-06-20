@@ -16,6 +16,8 @@ import '../../features/billing/presentation/billing_providers.dart';
 import '../../features/billing/presentation/widgets/billing_overview_card.dart';
 import '../../features/companies/presentation/platform_companies_providers.dart';
 import '../../features/companies/presentation/widgets/platform_company_summary_card.dart';
+import '../../features/customer_communications/presentation/customer_communications_providers.dart';
+import '../../features/customer_communications/presentation/widgets/customer_communications_filter_bar.dart';
 import '../../features/notifications/data/notifications_repository.dart';
 import '../../features/notifications/widgets/notification_badge.dart';
 import '../../features/bulk_onboarding/presentation/bulk_onboarding_providers.dart';
@@ -48,6 +50,8 @@ class AdminDashboardScreen extends ConsumerWidget {
     final billingAsync = ref.watch(billingOverviewProvider);
     final securityAsync = ref.watch(securityOverviewProvider);
     final actionCenterAsync = ref.watch(actionCenterProvider);
+    final customerCommunicationsAsync =
+        ref.watch(customerCommunicationSummaryProvider);
     final aiReviewsAsync = ref.watch(aiReviewSummaryProvider);
     final registrationsAsync = ref.watch(registrationApplicationsProvider);
     final user = ref.watch(adminAuthProvider).user;
@@ -62,6 +66,8 @@ class AdminDashboardScreen extends ConsumerWidget {
         user?.canAccess(AdminDestination.securityCenter) ?? false;
     final showActionCenter =
         user?.canAccess(AdminDestination.actionCenter) ?? false;
+    final showCustomerCommunications =
+        user?.canAccess(AdminDestination.customerCommunications) ?? false;
     final showNotifications =
         user?.canAccess(AdminDestination.notifications) ?? false;
     final unreadCount = ref.watch(unreadNotificationCountProvider);
@@ -150,6 +156,37 @@ class AdminDashboardScreen extends ConsumerWidget {
               ),
             ),
           if (showActionCenter) const SizedBox(height: 16),
+          if (showCustomerCommunications)
+            customerCommunicationsAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => DashboardSummaryErrorCard(
+                error: error,
+                fallbackMessage: resolveCustomerCommunicationsKey(
+                  context,
+                  'customerCommunicationLoadError',
+                ),
+                onRetry: () => ref
+                    .read(customerCommunicationSummaryProvider.notifier)
+                    .refresh(),
+              ),
+              data: (summary) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  CustomerCommunicationsSummaryCard(summary: summary, compact: true),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: () => context.go(AdminRoutes.customerCommunications),
+                    child: Text(
+                      resolveCustomerCommunicationsKey(
+                        context,
+                        'customerCommunicationOpenModule',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          if (showCustomerCommunications) const SizedBox(height: 16),
           healthAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, _) => DashboardSummaryErrorCard(

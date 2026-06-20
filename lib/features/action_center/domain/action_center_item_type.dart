@@ -7,6 +7,7 @@ enum ActionCenterItemType {
   billing('billing'),
   aiReview('ai_review'),
   company('company'),
+  customerCommunication('customer_communication'),
   unknown('unknown');
 
   const ActionCenterItemType(this.backendValue);
@@ -31,6 +32,7 @@ enum ActionCenterItemType {
       billing => 'actionCenterTypeBilling',
       aiReview => 'actionCenterTypeAiReview',
       company => 'actionCenterTypeCompany',
+      customerCommunication => 'actionCenterTypeCustomerCommunication',
       unknown => 'actionCenterTypeUnknown',
     };
   }

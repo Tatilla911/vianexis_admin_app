@@ -3271,6 +3271,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionCenterFilterCritical => 'Critical/urgent';
 
   @override
+  String get actionCenterFilterCustomerCommunication =>
+      'Customer communications';
+
+  @override
   String get actionCenterTypeRegistration => 'Registration';
 
   @override
@@ -3293,6 +3297,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionCenterTypeCompany => 'Company';
+
+  @override
+  String get actionCenterTypeCustomerCommunication => 'Customer communication';
 
   @override
   String get actionCenterTypeUnknown => 'Unknown';
@@ -3720,4 +3727,309 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get translationReplyApprovedNotice =>
       'Translation approved. Copy or send through your normal support workflow.';
+
+  @override
+  String get customerCommunicationsTitle => 'Customer communications';
+
+  @override
+  String get customerCommunicationDetailTitle => 'Communication thread';
+
+  @override
+  String get customerCommunicationEvidencePackageTitle => 'Evidence package';
+
+  @override
+  String get customerCommunicationLoadError =>
+      'Could not load customer communications.';
+
+  @override
+  String get customerCommunicationActionError =>
+      'Customer communication action failed.';
+
+  @override
+  String get customerCommunicationMockDataBadge => 'Mock data';
+
+  @override
+  String get customerCommunicationOpenModule => 'Open customer communications';
+
+  @override
+  String get customerCommunicationPrivacyNotice =>
+      'List views are metadata-first. Message bodies appear only on authorized detail access.';
+
+  @override
+  String get customerCommunicationDetailMetadataOnly =>
+      'Message bodies are hidden for your role or this thread scope.';
+
+  @override
+  String get customerCommunicationSearchHint =>
+      'Search by name, domain, or company';
+
+  @override
+  String get customerCommunicationListEmpty =>
+      'No customer communication threads match your filters.';
+
+  @override
+  String get customerCommunicationDisputedBadge => 'Disputed';
+
+  @override
+  String get customerCommunicationBillingRelatedBadge => 'Billing related';
+
+  @override
+  String customerCommunicationThreadSubtitle(String domain, String companyId) {
+    return '$domain · company $companyId';
+  }
+
+  @override
+  String customerCommunicationUpdatedAt(String date) {
+    return 'Updated: $date';
+  }
+
+  @override
+  String get customerCommunicationFilterAll => 'All';
+
+  @override
+  String get customerCommunicationFilterOpen => 'Open';
+
+  @override
+  String get customerCommunicationFilterDisputed => 'Disputed';
+
+  @override
+  String get customerCommunicationFilterClosed => 'Closed';
+
+  @override
+  String get customerCommunicationFilterBillingRelated => 'Billing related';
+
+  @override
+  String get customerCommunicationStatusOpen => 'Open';
+
+  @override
+  String get customerCommunicationStatusClosed => 'Closed';
+
+  @override
+  String get customerCommunicationStatusArchived => 'Archived';
+
+  @override
+  String get customerCommunicationStatusDisputed => 'Disputed';
+
+  @override
+  String get customerCommunicationStatusUnknown => 'Unknown';
+
+  @override
+  String get customerCommunicationSourcePublicSite => 'Public site';
+
+  @override
+  String get customerCommunicationSourceEmail => 'Email';
+
+  @override
+  String get customerCommunicationSourceAdminApp => 'Admin app';
+
+  @override
+  String get customerCommunicationSourceAdminWeb => 'Admin web';
+
+  @override
+  String get customerCommunicationSourceImport => 'Import';
+
+  @override
+  String get customerCommunicationSourceSupport => 'Support';
+
+  @override
+  String get customerCommunicationSourceSystem => 'System';
+
+  @override
+  String get customerCommunicationSourceUnknown => 'Unknown';
+
+  @override
+  String get customerCommunicationDirectionInbound => 'Inbound';
+
+  @override
+  String get customerCommunicationDirectionOutbound => 'Outbound';
+
+  @override
+  String get customerCommunicationDirectionInternalNote => 'Internal note';
+
+  @override
+  String get customerCommunicationDirectionSystemEvent => 'System event';
+
+  @override
+  String get customerCommunicationDirectionUnknown => 'Unknown';
+
+  @override
+  String get customerCommunicationSenderCustomer => 'Customer';
+
+  @override
+  String get customerCommunicationSenderPlatformAdmin => 'Platform admin';
+
+  @override
+  String get customerCommunicationSenderCompanyAdmin => 'Company admin';
+
+  @override
+  String get customerCommunicationSenderSystem => 'System';
+
+  @override
+  String get customerCommunicationSenderUnknown => 'Unknown';
+
+  @override
+  String get customerCommunicationHumanReviewedBadge => 'Human reviewed';
+
+  @override
+  String customerCommunicationOriginalLabel(String language) {
+    return 'Original ($language)';
+  }
+
+  @override
+  String customerCommunicationTranslatedLabel(String language) {
+    return 'Translated ($language)';
+  }
+
+  @override
+  String get customerCommunicationMessageMetadataOnly =>
+      'Message body hidden (metadata-only view).';
+
+  @override
+  String get customerCommunicationMessagesEmpty => 'No messages logged yet.';
+
+  @override
+  String get customerCommunicationTimelineTitle => 'Timeline';
+
+  @override
+  String get customerCommunicationAgreementsTitle => 'Agreement snapshots';
+
+  @override
+  String get customerCommunicationEvidencePackagesTitle => 'Evidence packages';
+
+  @override
+  String get customerCommunicationPackagesEmpty =>
+      'No evidence packages generated yet.';
+
+  @override
+  String customerCommunicationAgreementPrice(
+    String amount,
+    String currency,
+    String cycle,
+  ) {
+    return '$amount $currency · $cycle';
+  }
+
+  @override
+  String customerCommunicationAgreementModules(String modules) {
+    return 'Modules: $modules';
+  }
+
+  @override
+  String customerCommunicationAgreementAcceptedAt(String date) {
+    return 'Accepted: $date';
+  }
+
+  @override
+  String get customerCommunicationPdfPendingNotice =>
+      'PDF rendering pending; structured evidence package generated from audit records.';
+
+  @override
+  String customerCommunicationPackageGeneratedAt(String date) {
+    return 'Generated: $date';
+  }
+
+  @override
+  String get customerCommunicationPackageTypeCommunicationEvidence =>
+      'Communication evidence';
+
+  @override
+  String get customerCommunicationPackageTypeSubscriptionDispute =>
+      'Subscription dispute';
+
+  @override
+  String get customerCommunicationPackageTypeRegistrationEvidence =>
+      'Registration evidence';
+
+  @override
+  String get customerCommunicationPackageTypePricingEvidence =>
+      'Pricing evidence';
+
+  @override
+  String get customerCommunicationPackageTypeUnknown => 'Unknown package type';
+
+  @override
+  String get customerCommunicationPackageStatusGenerated => 'Generated';
+
+  @override
+  String get customerCommunicationPackageStatusFailed => 'Failed';
+
+  @override
+  String get customerCommunicationPackageStatusUnknown => 'Unknown status';
+
+  @override
+  String get customerCommunicationGeneratePackageTitle =>
+      'Generate evidence package';
+
+  @override
+  String get customerCommunicationGeneratePackageAction => 'Generate package';
+
+  @override
+  String get customerCommunicationMarkDisputedTitle => 'Mark thread disputed';
+
+  @override
+  String get customerCommunicationMarkDisputedAction => 'Mark disputed';
+
+  @override
+  String get customerCommunicationDisputedSectionTitle => 'Dispute';
+
+  @override
+  String get customerCommunicationReasonLabel => 'Reason (required)';
+
+  @override
+  String get customerCommunicationReasonRequired =>
+      'Enter at least 5 characters.';
+
+  @override
+  String get customerCommunicationPackageTypeLabel => 'Package type';
+
+  @override
+  String get customerCommunicationExportAuditWarning =>
+      'Export creates an audited evidence package from database records. Provide a reason for compliance.';
+
+  @override
+  String get customerCommunicationCancel => 'Cancel';
+
+  @override
+  String get customerCommunicationDisputeMarkedSuccess =>
+      'Thread marked as disputed.';
+
+  @override
+  String get customerCommunicationPackageGeneratedSuccess =>
+      'Evidence package generated.';
+
+  @override
+  String get customerCommunicationSummaryJsonTitle =>
+      'Structured summary (source of truth until PDF renderer ships)';
+
+  @override
+  String customerCommunicationPackageReason(String reason) {
+    return 'Reason: $reason';
+  }
+
+  @override
+  String customerCommunicationFileHash(String hash) {
+    return 'Integrity hash: $hash';
+  }
+
+  @override
+  String get customerCommunicationPackageNotFound =>
+      'Evidence package not found.';
+
+  @override
+  String get customerCommunicationSummaryTitle => 'Customer communications';
+
+  @override
+  String customerCommunicationSummaryDisputed(String count) {
+    return 'Disputed: $count';
+  }
+
+  @override
+  String customerCommunicationSummaryOpen(String count) {
+    return 'Open: $count';
+  }
+
+  @override
+  String customerCommunicationSummaryTotal(String count) {
+    return 'Total: $count';
+  }
 }

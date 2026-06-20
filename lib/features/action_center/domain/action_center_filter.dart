@@ -10,6 +10,7 @@ enum ActionCenterFilter {
   security,
   billing,
   aiReview,
+  customerCommunication,
   critical,
 }
 
@@ -24,6 +25,8 @@ extension ActionCenterFilterX on ActionCenterFilter {
       ActionCenterFilter.security => 'actionCenterFilterSecurity',
       ActionCenterFilter.billing => 'actionCenterFilterBilling',
       ActionCenterFilter.aiReview => 'actionCenterFilterAiReview',
+      ActionCenterFilter.customerCommunication =>
+        'actionCenterFilterCustomerCommunication',
       ActionCenterFilter.critical => 'actionCenterFilterCritical',
     };
   }
@@ -58,8 +61,15 @@ bool actionCenterItemMatchesFilter(ActionCenterItem item, ActionCenterFilter fil
     ActionCenterFilter.support => item.type == ActionCenterItemType.support,
     ActionCenterFilter.systemHealth => item.type == ActionCenterItemType.systemHealth,
     ActionCenterFilter.security => item.type == ActionCenterItemType.security,
-    ActionCenterFilter.billing => item.type == ActionCenterItemType.billing,
+    ActionCenterFilter.billing => item.type == ActionCenterItemType.billing ||
+      (item.type == ActionCenterItemType.customerCommunication &&
+          (item.sourceType.contains('subscription') ||
+              item.summary.toLowerCase().contains('subscription') ||
+              item.summary.toLowerCase().contains('billing') ||
+              item.summary.toLowerCase().contains('package'))),
     ActionCenterFilter.aiReview => item.type == ActionCenterItemType.aiReview,
+    ActionCenterFilter.customerCommunication =>
+      item.type == ActionCenterItemType.customerCommunication,
     ActionCenterFilter.critical =>
       item.priority == ActionCenterPriority.critical ||
       item.priority == ActionCenterPriority.urgent,
