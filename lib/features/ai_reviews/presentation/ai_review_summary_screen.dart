@@ -77,8 +77,10 @@ class _AiReviewSummaryScreenState extends ConsumerState<AiReviewSummaryScreen> {
           Expanded(
             child: reviewsAsync.when(
               loading: () => const VianexisLoadingView(),
-              error: (error, _) => VianexisErrorView(
-                message: resolveAiReviewKey(context, 'aiReviewLoadError'),
+              error: (error, _) => VianexisErrorView.fromError(
+                context,
+                error,
+                fallbackMessage: resolveAiReviewKey(context, 'aiReviewLoadError'),
                 onRetry: () => ref.read(aiReviewsProvider.notifier).refresh(),
               ),
               data: (items) {

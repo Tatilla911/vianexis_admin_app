@@ -78,8 +78,11 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
           Expanded(
             child: jobsAsync.when(
               loading: () => const VianexisLoadingView(),
-              error: (error, _) => VianexisErrorView(
-                message: resolveBulkOnboardingKey(context, 'bulkOnboardingListError'),
+              error: (error, _) => VianexisErrorView.fromError(
+                context,
+                error,
+                fallbackMessage:
+                    resolveBulkOnboardingKey(context, 'bulkOnboardingListError'),
                 onRetry: () => ref.read(bulkOnboardingJobsProvider.notifier).refresh(),
               ),
               data: (items) {

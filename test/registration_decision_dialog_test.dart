@@ -69,4 +69,10 @@ void main() {
       findsOneWidget,
     );
   });
+
+  testWidgets('reject dialog uses shared cancel label', (tester) async {
+    await pumpDialog(tester, RegistrationDecisionType.reject);
+
+    expect(find.text('Cancel'), findsOneWidget);
+  });
 }

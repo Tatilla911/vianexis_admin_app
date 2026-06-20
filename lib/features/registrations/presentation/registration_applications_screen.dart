@@ -68,8 +68,11 @@ class _RegistrationApplicationsScreenState
           Expanded(
             child: applicationsAsync.when(
               loading: () => const VianexisLoadingView(),
-              error: (error, _) => VianexisErrorView(
-                message: resolveRegistrationKey(context, 'registrationListError'),
+              error: (error, _) => VianexisErrorView.fromError(
+                context,
+                error,
+                fallbackMessage:
+                    resolveRegistrationKey(context, 'registrationListError'),
                 onRetry: () =>
                     ref.read(registrationApplicationsProvider.notifier).refresh(),
               ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/api/api_exception.dart';
+import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
@@ -32,8 +33,10 @@ class SupportAccessGrantDetailScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.supportGrantDetailTitle)),
       body: grantAsync.when(
         loading: () => const VianexisLoadingView(),
-        error: (error, _) => VianexisErrorView(
-          message: resolveSupportKey(context, 'supportLoadError'),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage: resolveSupportKey(context, 'supportLoadError'),
           onRetry: () => refreshSupportAccessGrantDetail(ref, grantId),
         ),
         data: (grant) => _DetailBody(
@@ -60,9 +63,7 @@ class SupportAccessGrantDetailScreen extends ConsumerWidget {
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveLocalizationKey(context, error.messageKey))),
-      );
+      showApiExceptionSnackBar(context, error);
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(

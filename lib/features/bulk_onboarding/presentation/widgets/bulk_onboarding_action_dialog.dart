@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/bulk_onboarding_action_request.dart';
 
@@ -170,9 +171,16 @@ class _BulkOnboardingActionDialogState extends State<_BulkOnboardingActionDialog
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingActionDismiss')),
+          child: Text(AppLocalizations.of(context).confirmDialogCancel),
         ),
         FilledButton(
+          style: widget.kind == BulkOnboardingActionKind.reject ||
+                  widget.kind == BulkOnboardingActionKind.cancel
+              ? FilledButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.error,
+                  foregroundColor: Theme.of(context).colorScheme.onError,
+                )
+              : null,
           onPressed: processDisabled ? null : _submit,
           child: Text(resolveBulkOnboardingKey(context, _confirmKey())),
         ),

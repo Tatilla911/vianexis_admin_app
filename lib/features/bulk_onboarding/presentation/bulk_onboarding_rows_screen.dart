@@ -96,8 +96,11 @@ class _BulkOnboardingRowsScreenState extends ConsumerState<BulkOnboardingRowsScr
           Expanded(
             child: rowsAsync.when(
               loading: () => const VianexisLoadingView(),
-              error: (error, _) => VianexisErrorView(
-                message: resolveBulkOnboardingKey(context, 'bulkOnboardingRowsError'),
+              error: (error, _) => VianexisErrorView.fromError(
+                context,
+                error,
+                fallbackMessage:
+                    resolveBulkOnboardingKey(context, 'bulkOnboardingRowsError'),
                 onRetry: () => ref.invalidate(
                   bulkOnboardingRowsProvider((
                     jobId: widget.jobId,

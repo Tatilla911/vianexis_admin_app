@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/support_access_grant_request.dart';
 import '../../domain/support_access_scope_type.dart';
@@ -99,9 +100,15 @@ class _SupportActionDialogState extends State<_SupportActionDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(resolveSupportKey(context, 'supportActionCancel')),
+          child: Text(AppLocalizations.of(context).confirmDialogCancel),
         ),
         FilledButton(
+          style: widget.type == SupportTicketActionType.close
+              ? FilledButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.error,
+                  foregroundColor: Theme.of(context).colorScheme.onError,
+                )
+              : null,
           onPressed: _submit,
           child: Text(resolveSupportKey(context, _confirmKey())),
         ),
@@ -180,9 +187,13 @@ class _SupportRevokeDialogState extends State<_SupportRevokeDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(resolveSupportKey(context, 'supportActionCancel')),
+          child: Text(AppLocalizations.of(context).confirmDialogCancel),
         ),
         FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.error,
+            foregroundColor: Theme.of(context).colorScheme.onError,
+          ),
           onPressed: _submit,
           child: Text(resolveSupportKey(context, 'supportGrantRevokeConfirm')),
         ),

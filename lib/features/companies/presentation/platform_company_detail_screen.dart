@@ -31,8 +31,11 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.platformCompanyDetailTitle)),
       body: companyAsync.when(
         loading: () => const VianexisLoadingView(),
-        error: (error, _) => VianexisErrorView(
-          message: resolvePlatformCompanyKey(context, 'platformCompanyDetailError'),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage:
+              resolvePlatformCompanyKey(context, 'platformCompanyDetailError'),
           onRetry: () => ref.invalidate(platformCompanyDetailProvider(companyId)),
         ),
         data: (company) {

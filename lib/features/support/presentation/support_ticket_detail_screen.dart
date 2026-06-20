@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../app/app_router.dart';
 import '../../../core/api/api_exception.dart';
+import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
@@ -34,8 +35,10 @@ class SupportTicketDetailScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.supportTicketDetailTitle)),
       body: ticketAsync.when(
         loading: () => const VianexisLoadingView(),
-        error: (error, _) => VianexisErrorView(
-          message: resolveSupportKey(context, 'supportLoadError'),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage: resolveSupportKey(context, 'supportLoadError'),
           onRetry: () => refreshSupportTicketDetail(ref, ticketId),
         ),
         data: (ticket) => _DetailBody(
@@ -67,9 +70,7 @@ class SupportTicketDetailScreen extends ConsumerWidget {
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveLocalizationKey(context, error.messageKey))),
-      );
+      showApiExceptionSnackBar(context, error);
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -105,9 +106,7 @@ class SupportTicketDetailScreen extends ConsumerWidget {
       context.push(AdminRoutes.supportGrantDetail(grant.id));
     } on ApiException catch (error) {
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveSupportKey(context, error.messageKey))),
-      );
+      showApiExceptionSnackBar(context, error);
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(

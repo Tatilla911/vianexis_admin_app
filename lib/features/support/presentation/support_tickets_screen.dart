@@ -66,8 +66,10 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
           Expanded(
             child: ticketsAsync.when(
               loading: () => const VianexisLoadingView(),
-              error: (error, _) => VianexisErrorView(
-                message: resolveSupportKey(context, 'supportLoadError'),
+              error: (error, _) => VianexisErrorView.fromError(
+                context,
+                error,
+                fallbackMessage: resolveSupportKey(context, 'supportLoadError'),
                 onRetry: () => ref.read(supportTicketsProvider.notifier).refresh(),
               ),
               data: (items) {

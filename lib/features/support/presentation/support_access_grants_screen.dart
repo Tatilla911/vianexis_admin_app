@@ -72,8 +72,10 @@ class _SupportAccessGrantsScreenState extends ConsumerState<SupportAccessGrantsS
           Expanded(
             child: grantsAsync.when(
               loading: () => const VianexisLoadingView(),
-              error: (error, _) => VianexisErrorView(
-                message: resolveSupportKey(context, 'supportLoadError'),
+              error: (error, _) => VianexisErrorView.fromError(
+                context,
+                error,
+                fallbackMessage: resolveSupportKey(context, 'supportLoadError'),
                 onRetry: () => ref.read(supportAccessGrantsProvider.notifier).refresh(),
               ),
               data: (items) {

@@ -543,6 +543,12 @@ String resolveBulkOnboardingKey(
     'bulkOnboardingImportTemplate' => l10n.bulkOnboardingImportTemplate,
     'bulkOnboardingDownloadTemplate' => l10n.bulkOnboardingDownloadTemplate,
     'bulkOnboardingTemplateCopied' => l10n.bulkOnboardingTemplateCopied,
+    'bulkOnboardingDownloadValidationReport' =>
+      l10n.bulkOnboardingDownloadValidationReport,
+    'bulkOnboardingValidationReportCopied' =>
+      l10n.bulkOnboardingValidationReportCopied,
+    'bulkOnboardingValidationReportFailed' =>
+      l10n.bulkOnboardingValidationReportFailed,
     'bulkOnboardingCsvOnlyNotice' => l10n.bulkOnboardingCsvOnlyNotice,
     'bulkOnboardingExcelComingLater' => l10n.bulkOnboardingExcelComingLater,
     'bulkOnboardingNoRealProvisioningNotice' =>

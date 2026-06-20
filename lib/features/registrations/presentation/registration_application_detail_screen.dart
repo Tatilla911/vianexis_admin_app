@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/api/api_exception.dart';
+import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/auth/admin_auth_state.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
@@ -36,8 +37,11 @@ class RegistrationApplicationDetailScreen extends ConsumerWidget {
       ),
       body: detailAsync.when(
         loading: () => const VianexisLoadingView(),
-        error: (error, _) => VianexisErrorView(
-          message: resolveRegistrationKey(context, 'registrationDetailError'),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage:
+              resolveRegistrationKey(context, 'registrationDetailError'),
           onRetry: () => refreshRegistrationApplicationDetail(ref, applicationId),
         ),
         data: (application) => _DetailBody(
@@ -77,11 +81,7 @@ class RegistrationApplicationDetailScreen extends ConsumerWidget {
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(resolveLocalizationKey(context, error.messageKey)),
-        ),
-      );
+      showApiExceptionSnackBar(context, error);
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(

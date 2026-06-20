@@ -30,6 +30,28 @@ class VianexisErrorView extends StatelessWidget {
     );
   }
 
+  factory VianexisErrorView.fromError(
+    BuildContext context,
+    Object error, {
+    Key? key,
+    required String fallbackMessage,
+    VoidCallback? onRetry,
+  }) {
+    if (error is ApiException) {
+      return VianexisErrorView.fromApiException(
+        context,
+        error,
+        key: key,
+        onRetry: onRetry,
+      );
+    }
+    return VianexisErrorView(
+      key: key,
+      message: fallbackMessage,
+      onRetry: onRetry,
+    );
+  }
+
   final String? title;
   final String? message;
   final VoidCallback? onRetry;

@@ -83,8 +83,11 @@ class _PlatformCompaniesScreenState extends ConsumerState<PlatformCompaniesScree
             Expanded(
               child: companiesAsync.when(
                 loading: () => const VianexisLoadingView(),
-                error: (error, _) => VianexisErrorView(
-                  message: resolvePlatformCompanyKey(context, 'platformCompanyListError'),
+                error: (error, _) => VianexisErrorView.fromError(
+                  context,
+                  error,
+                  fallbackMessage:
+                      resolvePlatformCompanyKey(context, 'platformCompanyListError'),
                   onRetry: () =>
                       ref.read(platformCompaniesProvider.notifier).refresh(),
                 ),

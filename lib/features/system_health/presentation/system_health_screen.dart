@@ -36,8 +36,10 @@ class SystemHealthScreen extends ConsumerWidget {
       ),
       body: snapshotAsync.when(
         loading: () => const VianexisLoadingView(),
-        error: (error, _) => VianexisErrorView(
-          message: resolveSystemHealthKey(context, 'systemHealthLoadError'),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage: resolveSystemHealthKey(context, 'systemHealthLoadError'),
           onRetry: () => ref.read(systemHealthSnapshotProvider.notifier).refresh(),
         ),
         data: (snapshot) {

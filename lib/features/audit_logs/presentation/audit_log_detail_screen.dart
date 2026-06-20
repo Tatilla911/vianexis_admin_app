@@ -30,8 +30,10 @@ class AuditLogDetailScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.auditLogDetailTitle)),
       body: logAsync.when(
         loading: () => const VianexisLoadingView(),
-        error: (error, _) => VianexisErrorView(
-          message: resolveAuditLogKey(context, 'auditLogLoadError'),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage: resolveAuditLogKey(context, 'auditLogLoadError'),
           onRetry: () => refreshPlatformAuditLogDetail(ref, logId),
         ),
         data: (log) => _DetailBody(log: log),

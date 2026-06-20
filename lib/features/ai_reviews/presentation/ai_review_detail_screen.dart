@@ -41,8 +41,10 @@ class AiReviewDetailScreen extends ConsumerWidget {
       ),
       body: reviewAsync.when(
         loading: () => const VianexisLoadingView(),
-        error: (error, _) => VianexisErrorView(
-          message: resolveAiReviewKey(context, 'aiReviewDetailError'),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage: resolveAiReviewKey(context, 'aiReviewDetailError'),
           onRetry: () => ref.invalidate(aiReviewDetailProvider(reviewId)),
         ),
         data: (review) {

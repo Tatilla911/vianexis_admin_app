@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/app_router.dart';
 import '../../../core/auth/admin_auth_state.dart';
+import '../../../core/api/api_exception.dart';
+import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
+import '../data/bulk_onboarding_repository.dart';
 import '../domain/bulk_onboarding_action_request.dart';
 import 'bulk_onboarding_providers.dart';
 import 'widgets/bulk_onboarding_ai_review_card.dart';
@@ -41,8 +45,10 @@ class BulkOnboardingJobDetailScreen extends ConsumerWidget {
       ),
       body: jobAsync.when(
         loading: () => const VianexisLoadingView(),
-        error: (error, _) => VianexisErrorView(
-          message: resolveBulkOnboardingKey(context, 'bulkOnboardingDetailError'),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage: resolveBulkOnboardingKey(context, 'bulkOnboardingDetailError'),
           onRetry: () => ref.invalidate(bulkOnboardingJobDetailProvider(jobId)),
         ),
         data: (job) {
@@ -79,6 +85,17 @@ class BulkOnboardingJobDetailScreen extends ConsumerWidget {
                 child: ListTile(
                   title: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingFieldSourceFile')),
                   subtitle: Text(job.sourceFileName ?? '—'),
+                ),
+              ),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                onPressed: () => _downloadValidationReport(context, ref),
+                icon: const Icon(Icons.download_outlined),
+                label: Text(
+                  resolveBulkOnboardingKey(
+                    context,
+                    'bulkOnboardingDownloadValidationReport',
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -200,11 +217,43 @@ class BulkOnboardingJobDetailScreen extends ConsumerWidget {
           content: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingActionSuccess')),
         ),
       );
+    } on ApiException catch (error) {
+      if (!context.mounted) return;
+      showApiExceptionSnackBar(context, error);
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingActionUnavailable')),
+        ),
+      );
+    }
+  }
+
+  Future<void> _downloadValidationReport(BuildContext context, WidgetRef ref) async {
+    try {
+      final csv = await ref
+          .read(bulkOnboardingRepositoryProvider)
+          .downloadValidationReport(jobId);
+      await Clipboard.setData(ClipboardData(text: csv));
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingValidationReportCopied'),
+          ),
+        ),
+      );
+    } on ApiException catch (error) {
+      if (!context.mounted) return;
+      showApiExceptionSnackBar(context, error);
+    } catch (_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingValidationReportFailed'),
+          ),
         ),
       );
     }
@@ -221,6 +270,9 @@ class BulkOnboardingJobDetailScreen extends ConsumerWidget {
           ),
         ),
       );
+    } on ApiException catch (error) {
+      if (!context.mounted) return;
+      showApiExceptionSnackBar(context, error);
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(

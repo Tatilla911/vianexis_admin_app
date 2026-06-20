@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/system_health_action_request.dart';
 
@@ -108,7 +109,7 @@ class _SystemHealthActionDialogState extends State<_SystemHealthActionDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(resolveSystemHealthKey(context, 'systemHealthActionCancel')),
+          child: Text(AppLocalizations.of(context).confirmDialogCancel),
         ),
         FilledButton(
           onPressed: _submit,

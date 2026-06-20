@@ -35,8 +35,11 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.bulkOnboardingRowDetailTitle)),
       body: rowAsync.when(
         loading: () => const VianexisLoadingView(),
-        error: (error, _) => VianexisErrorView(
-          message: resolveBulkOnboardingKey(context, 'bulkOnboardingRowDetailError'),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage:
+              resolveBulkOnboardingKey(context, 'bulkOnboardingRowDetailError'),
           onRetry: () => ref.invalidate(
             bulkOnboardingRowDetailProvider((jobId: jobId, rowId: rowId)),
           ),

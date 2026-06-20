@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/registration_decision_request.dart';
 
@@ -109,9 +110,15 @@ class _RegistrationDecisionDialogState extends State<_RegistrationDecisionDialog
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(resolveRegistrationKey(context, 'registrationDecisionCancel')),
+          child: Text(AppLocalizations.of(context).confirmDialogCancel),
         ),
         FilledButton(
+          style: widget.type == RegistrationDecisionType.reject
+              ? FilledButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.error,
+                  foregroundColor: Theme.of(context).colorScheme.onError,
+                )
+              : null,
           onPressed: _submit,
           child: Text(resolveRegistrationKey(context, _confirmKey())),
         ),

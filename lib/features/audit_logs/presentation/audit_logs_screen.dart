@@ -76,8 +76,10 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
           Expanded(
             child: logsAsync.when(
               loading: () => const VianexisLoadingView(),
-              error: (error, _) => VianexisErrorView(
-                message: resolveAuditLogKey(context, 'auditLogLoadError'),
+              error: (error, _) => VianexisErrorView.fromError(
+                context,
+                error,
+                fallbackMessage: resolveAuditLogKey(context, 'auditLogLoadError'),
                 onRetry: () => ref.read(platformAuditLogsProvider.notifier).refresh(),
               ),
               data: (items) {
