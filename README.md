@@ -27,15 +27,58 @@ It is **not** the driver app and **not** the tenant dispatcher portal.
 
 ## Getting started
 
-```bash
+```powershell
 cd vianexis_admin_app
 flutter pub get
-flutter run
+flutter gen-l10n
+flutter run --dart-define=APP_ENV=local --dart-define=API_BASE_URL=http://10.0.2.2:3000
 ```
+
+When `API_BASE_URL` is not set, **local** and **dev** profiles may use mock data for UI development. Staging and production require a configured API URL.
 
 ## Build configuration
 
-API connection uses `--dart-define=API_BASE_URL=...` (see `lib/core/api/api_config.dart`). When no base URL is configured, repositories fall back to mock data for local UI development.
+| Define | Default | Description |
+|--------|---------|-------------|
+| `APP_ENV` | `local` | `local`, `dev`, `staging`, or `production` |
+| `API_BASE_URL` | empty | Backend base URL (required for staging/production) |
+| `ALLOW_MOCK_FALLBACK` | false | Debug override only |
+
+See [docs/ADMIN_APP_ENVIRONMENTS.md](docs/ADMIN_APP_ENVIRONMENTS.md) for full examples.
+
+### Debug / local
+
+```powershell
+flutter run --dart-define=APP_ENV=local --dart-define=API_BASE_URL=http://10.0.2.2:3000
+```
+
+### Staging release APK
+
+```powershell
+flutter build apk --release --dart-define=APP_ENV=staging --dart-define=API_BASE_URL=<STAGING_API_URL>
+```
+
+### Production release APK
+
+```powershell
+flutter build apk --release --dart-define=APP_ENV=production --dart-define=API_BASE_URL=<PRODUCTION_API_URL>
+```
+
+### iOS production (when signing configured)
+
+```powershell
+flutter build ipa --release --dart-define=APP_ENV=production --dart-define=API_BASE_URL=<PRODUCTION_API_URL>
+```
+
+## App identity
+
+| Item | Value |
+|------|--------|
+| Android label | ViaNexis Admin |
+| iOS display name | ViaNexis Admin |
+| Android applicationId | `hu.vianexis.vianexis_admin_app` |
+| iOS bundle id | `hu.vianexis.vianexisAdminApp` |
+| Version | `1.0.0+1` |
 
 ## Phase 9 status (platform admin parity)
 
@@ -68,18 +111,16 @@ Navigation visibility: `super_admin`, `onboarding_reviewer` only.
 - Mock upload preview when API is unconfigured (badge shown)
 - Excel/XLSX rejected with localized “coming later” message
 
-Run locally:
-
-```bash
-flutter pub get
-flutter gen-l10n
-flutter run --dart-define=API_BASE_URL=http://localhost:3000
-```
-
 Upload is visible only for `super_admin` and `onboarding_reviewer`.
 
 ## Documentation
 
+- [Production readiness](docs/ADMIN_APP_PRODUCTION_READINESS.md)
+- [Environments](docs/ADMIN_APP_ENVIRONMENTS.md)
+- [Operator runbook](docs/ADMIN_APP_RUNBOOK.md)
+- [Release checklist](docs/ADMIN_APP_RELEASE_CHECKLIST.md)
+- [Quality gates](docs/QUALITY-GATES.md)
+- [Current status](docs/admin-app-current-status.md)
 - [Architecture](docs/architecture.md)
 - [API integration plan](docs/api-integration-plan.md)
 - [Privacy and security](docs/privacy-and-security.md)
@@ -87,7 +128,15 @@ Upload is visible only for `super_admin` and `onboarding_reviewer`.
 
 ## Quality checks
 
-```bash
+```powershell
+flutter clean
+flutter pub get
+flutter gen-l10n
 flutter analyze
 flutter test
+dart run tool/admin_release_readiness_check.dart
 ```
+
+## Release readiness
+
+Run `dart run tool/admin_release_readiness_check.dart` before release builds. See [ADMIN_APP_RELEASE_CHECKLIST.md](docs/ADMIN_APP_RELEASE_CHECKLIST.md).
