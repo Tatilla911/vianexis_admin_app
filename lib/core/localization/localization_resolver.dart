@@ -27,7 +27,8 @@ String resolveLocalizationKey(BuildContext context, String key) {
     LocalizationKeys.roleOnboardingReviewer => l10n.roleOnboardingReviewer,
     LocalizationKeys.roleBillingAdmin => l10n.roleBillingAdmin,
     LocalizationKeys.systemHealthLoadError => l10n.systemHealthLoadError,
-    LocalizationKeys.systemHealthActionUnavailable => l10n.systemHealthActionUnavailable,
+    LocalizationKeys.systemHealthActionUnavailable =>
+      l10n.systemHealthActionUnavailable,
     LocalizationKeys.supportLoadError => l10n.supportLoadError,
     LocalizationKeys.supportActionUnavailable => l10n.supportActionUnavailable,
     LocalizationKeys.supportActionError => l10n.supportActionError,
@@ -68,7 +69,9 @@ String resolveRegistrationKey(
     'registrationListError' => l10n.registrationListError,
     'registrationDetailError' => l10n.registrationDetailError,
     'registrationMockDataBadge' => l10n.registrationMockDataBadge,
-    'registrationSubmittedAt' => l10n.registrationSubmittedAt(params['date'] ?? ''),
+    'registrationSubmittedAt' => l10n.registrationSubmittedAt(
+      params['date'] ?? '',
+    ),
     'registrationSectionCompany' => l10n.registrationSectionCompany,
     'registrationSectionContact' => l10n.registrationSectionContact,
     'registrationSectionStatus' => l10n.registrationSectionStatus,
@@ -77,33 +80,42 @@ String resolveRegistrationKey(
     'registrationFieldCompanyName' => l10n.registrationFieldCompanyName,
     'registrationFieldCountry' => l10n.registrationFieldCountry,
     'registrationFieldVatNumber' => l10n.registrationFieldVatNumber,
-    'registrationFieldRegistrationNumber' => l10n.registrationFieldRegistrationNumber,
+    'registrationFieldRegistrationNumber' =>
+      l10n.registrationFieldRegistrationNumber,
     'registrationFieldContactName' => l10n.registrationFieldContactName,
     'registrationFieldContactEmail' => l10n.registrationFieldContactEmail,
     'registrationFieldSubmittedAt' => l10n.registrationFieldSubmittedAt,
     'registrationFieldReviewedAt' => l10n.registrationFieldReviewedAt,
     'registrationFieldReviewedBy' => l10n.registrationFieldReviewedBy,
-    'registrationFieldAiRecommendation' => l10n.registrationFieldAiRecommendation,
+    'registrationFieldAiRecommendation' =>
+      l10n.registrationFieldAiRecommendation,
     'registrationFieldAiSummary' => l10n.registrationFieldAiSummary,
-    'registrationFieldMissingInformation' => l10n.registrationFieldMissingInformation,
-    'registrationFieldDuplicateWarnings' => l10n.registrationFieldDuplicateWarnings,
+    'registrationFieldMissingInformation' =>
+      l10n.registrationFieldMissingInformation,
+    'registrationFieldDuplicateWarnings' =>
+      l10n.registrationFieldDuplicateWarnings,
     'registrationFieldRiskFlags' => l10n.registrationFieldRiskFlags,
     'registrationNoneReported' => l10n.registrationNoneReported,
-    'registrationDocumentsMetadataOnly' => l10n.registrationDocumentsMetadataOnly,
+    'registrationDocumentsMetadataOnly' =>
+      l10n.registrationDocumentsMetadataOnly,
     'registrationDocumentsEmpty' => l10n.registrationDocumentsEmpty,
     'registrationActionApprove' => l10n.registrationActionApprove,
     'registrationActionReject' => l10n.registrationActionReject,
     'registrationActionRequestInfo' => l10n.registrationActionRequestInfo,
     'registrationDecisionApproveTitle' => l10n.registrationDecisionApproveTitle,
     'registrationDecisionRejectTitle' => l10n.registrationDecisionRejectTitle,
-    'registrationDecisionRequestInfoTitle' => l10n.registrationDecisionRequestInfoTitle,
+    'registrationDecisionRequestInfoTitle' =>
+      l10n.registrationDecisionRequestInfoTitle,
     'registrationDecisionApproveBody' => l10n.registrationDecisionApproveBody,
     'registrationDecisionAuditNotice' => l10n.registrationDecisionAuditNotice,
     'registrationDecisionNotesLabel' => l10n.registrationDecisionNotesLabel,
-    'registrationDecisionNotesRequired' => l10n.registrationDecisionNotesRequired,
+    'registrationDecisionNotesRequired' =>
+      l10n.registrationDecisionNotesRequired,
     'registrationDecisionCancel' => l10n.registrationDecisionCancel,
-    'registrationDecisionApproveConfirm' => l10n.registrationDecisionApproveConfirm,
-    'registrationDecisionRejectConfirm' => l10n.registrationDecisionRejectConfirm,
+    'registrationDecisionApproveConfirm' =>
+      l10n.registrationDecisionApproveConfirm,
+    'registrationDecisionRejectConfirm' =>
+      l10n.registrationDecisionRejectConfirm,
     'registrationDecisionRequestInfoConfirm' =>
       l10n.registrationDecisionRequestInfoConfirm,
     'registrationDecisionSuccess' => l10n.registrationDecisionSuccess,
@@ -129,13 +141,22 @@ String resolveSystemHealthKey(
     'systemHealthEventsTitle' => l10n.systemHealthEventsTitle,
     'systemHealthEventsEmpty' => l10n.systemHealthEventsEmpty,
     'systemHealthEventDetailTitle' => l10n.systemHealthEventDetailTitle,
-    'systemHealthEventStartedAt' => l10n.systemHealthEventStartedAt(params['date'] ?? ''),
+    'systemHealthEventStartedAt' => l10n.systemHealthEventStartedAt(
+      params['date'] ?? '',
+    ),
     'systemHealthOpenModule' => l10n.systemHealthOpenModule,
-    'systemHealthOverallStatusLabel' => l10n.systemHealthOverallStatusLabel(params['status'] ?? ''),
-    'systemHealthLastUpdated' => l10n.systemHealthLastUpdated(params['date'] ?? ''),
-    'systemHealthMetricHealthyServices' => l10n.systemHealthMetricHealthyServices,
-    'systemHealthMetricWarningServices' => l10n.systemHealthMetricWarningServices,
-    'systemHealthMetricCriticalServices' => l10n.systemHealthMetricCriticalServices,
+    'systemHealthOverallStatusLabel' => l10n.systemHealthOverallStatusLabel(
+      params['status'] ?? '',
+    ),
+    'systemHealthLastUpdated' => l10n.systemHealthLastUpdated(
+      params['date'] ?? '',
+    ),
+    'systemHealthMetricHealthyServices' =>
+      l10n.systemHealthMetricHealthyServices,
+    'systemHealthMetricWarningServices' =>
+      l10n.systemHealthMetricWarningServices,
+    'systemHealthMetricCriticalServices' =>
+      l10n.systemHealthMetricCriticalServices,
     'systemHealthMetricCriticalEvents' => l10n.systemHealthMetricCriticalEvents,
     'systemHealthMetricWarningEvents' => l10n.systemHealthMetricWarningEvents,
     'systemHealthMetricFailedJobs' => l10n.systemHealthMetricFailedJobs,
@@ -153,40 +174,52 @@ String resolveSystemHealthKey(
     'systemHealthFilterOpen' => l10n.systemHealthFilterOpen,
     'systemHealthFilterAcknowledged' => l10n.systemHealthFilterAcknowledged,
     'systemHealthFilterResolved' => l10n.systemHealthFilterResolved,
-    'systemHealthFilterTenantImpacting' => l10n.systemHealthFilterTenantImpacting,
+    'systemHealthFilterTenantImpacting' =>
+      l10n.systemHealthFilterTenantImpacting,
     'systemHealthEventStatusOpen' => l10n.systemHealthEventStatusOpen,
-    'systemHealthEventStatusAcknowledged' => l10n.systemHealthEventStatusAcknowledged,
-    'systemHealthEventStatusInvestigating' => l10n.systemHealthEventStatusInvestigating,
+    'systemHealthEventStatusAcknowledged' =>
+      l10n.systemHealthEventStatusAcknowledged,
+    'systemHealthEventStatusInvestigating' =>
+      l10n.systemHealthEventStatusInvestigating,
     'systemHealthEventStatusResolved' => l10n.systemHealthEventStatusResolved,
     'systemHealthEventStatusUnknown' => l10n.systemHealthEventStatusUnknown,
     'systemHealthImpactNone' => l10n.systemHealthImpactNone,
     'systemHealthImpactSingleTenant' => l10n.systemHealthImpactSingleTenant,
-    'systemHealthImpactMultipleTenants' => l10n.systemHealthImpactMultipleTenants,
+    'systemHealthImpactMultipleTenants' =>
+      l10n.systemHealthImpactMultipleTenants,
     'systemHealthImpactPlatformWide' => l10n.systemHealthImpactPlatformWide,
     'systemHealthImpactUnknown' => l10n.systemHealthImpactUnknown,
     'systemHealthServiceBackendApi' => l10n.systemHealthServiceBackendApi,
     'systemHealthServiceDatabase' => l10n.systemHealthServiceDatabase,
-    'systemHealthServiceDocumentStorage' => l10n.systemHealthServiceDocumentStorage,
-    'systemHealthServiceBackgroundWorkers' => l10n.systemHealthServiceBackgroundWorkers,
+    'systemHealthServiceDocumentStorage' =>
+      l10n.systemHealthServiceDocumentStorage,
+    'systemHealthServiceBackgroundWorkers' =>
+      l10n.systemHealthServiceBackgroundWorkers,
     'systemHealthServiceAiOcrWorkers' => l10n.systemHealthServiceAiOcrWorkers,
-    'systemHealthServiceTranslationService' => l10n.systemHealthServiceTranslationService,
+    'systemHealthServiceTranslationService' =>
+      l10n.systemHealthServiceTranslationService,
     'systemHealthServiceEmailService' => l10n.systemHealthServiceEmailService,
-    'systemHealthServicePushNotificationService' => l10n.systemHealthServicePushNotificationService,
+    'systemHealthServicePushNotificationService' =>
+      l10n.systemHealthServicePushNotificationService,
     'systemHealthServiceQueueSystem' => l10n.systemHealthServiceQueueSystem,
     'systemHealthServiceAuthService' => l10n.systemHealthServiceAuthService,
     'systemHealthAiDiagnosticTitle' => l10n.systemHealthAiDiagnosticTitle,
     'systemHealthAiAdvisoryOnly' => l10n.systemHealthAiAdvisoryOnly,
     'systemHealthRecommendedAction' => l10n.systemHealthRecommendedAction,
-    'systemHealthActionAcknowledgeTitle' => l10n.systemHealthActionAcknowledgeTitle,
+    'systemHealthActionAcknowledgeTitle' =>
+      l10n.systemHealthActionAcknowledgeTitle,
     'systemHealthActionEscalateTitle' => l10n.systemHealthActionEscalateTitle,
     'systemHealthActionAuditNotice' => l10n.systemHealthActionAuditNotice,
     'systemHealthActionNoAutoRepair' => l10n.systemHealthActionNoAutoRepair,
     'systemHealthActionNoteLabel' => l10n.systemHealthActionNoteLabel,
     'systemHealthActionNoteRequired' => l10n.systemHealthActionNoteRequired,
-    'systemHealthActionAcknowledgeBody' => l10n.systemHealthActionAcknowledgeBody,
+    'systemHealthActionAcknowledgeBody' =>
+      l10n.systemHealthActionAcknowledgeBody,
     'systemHealthActionCancel' => l10n.systemHealthActionCancel,
-    'systemHealthActionAcknowledgeConfirm' => l10n.systemHealthActionAcknowledgeConfirm,
-    'systemHealthActionEscalateConfirm' => l10n.systemHealthActionEscalateConfirm,
+    'systemHealthActionAcknowledgeConfirm' =>
+      l10n.systemHealthActionAcknowledgeConfirm,
+    'systemHealthActionEscalateConfirm' =>
+      l10n.systemHealthActionEscalateConfirm,
     'systemHealthActionAcknowledge' => l10n.systemHealthActionAcknowledge,
     'systemHealthActionEscalate' => l10n.systemHealthActionEscalate,
     'systemHealthActionSuccess' => l10n.systemHealthActionSuccess,
@@ -226,25 +259,32 @@ String resolveSupportKey(
     'supportActionCancel' => l10n.supportActionCancel,
     'supportTicketSearchHint' => l10n.supportTicketSearchHint,
     'supportTicketListEmpty' => l10n.supportTicketListEmpty,
-    'supportTicketLastActivity' => l10n.supportTicketLastActivity(params['date'] ?? ''),
+    'supportTicketLastActivity' => l10n.supportTicketLastActivity(
+      params['date'] ?? '',
+    ),
     'supportTicketDetailTitle' => l10n.supportTicketDetailTitle,
     'supportGrantDetailTitle' => l10n.supportGrantDetailTitle,
     'supportGrantSearchHint' => l10n.supportGrantSearchHint,
     'supportGrantListEmpty' => l10n.supportGrantListEmpty,
-    'supportGrantScopeIdLabel' => l10n.supportGrantScopeIdLabel(params['id'] ?? ''),
+    'supportGrantScopeIdLabel' => l10n.supportGrantScopeIdLabel(
+      params['id'] ?? '',
+    ),
     'supportGrantExpiresAt' => l10n.supportGrantExpiresAt(params['date'] ?? ''),
     'supportSummaryTitle' => l10n.supportSummaryTitle,
     'supportSummaryOpenTickets' => l10n.supportSummaryOpenTickets,
     'supportSummaryUrgentCritical' => l10n.supportSummaryUrgentCritical,
     'supportSummaryActiveGrants' => l10n.supportSummaryActiveGrants,
-    'supportSummaryLastUpdated' => l10n.supportSummaryLastUpdated(params['date'] ?? ''),
+    'supportSummaryLastUpdated' => l10n.supportSummaryLastUpdated(
+      params['date'] ?? '',
+    ),
     'supportTicketCreateSuccess' => l10n.supportTicketCreateSuccess,
     'supportTicketFilterAll' => l10n.supportTicketFilterAll,
     'supportTicketFilterOpen' => l10n.supportTicketFilterOpen,
     'supportTicketFilterUrgent' => l10n.supportTicketFilterUrgent,
     'supportTicketFilterCritical' => l10n.supportTicketFilterCritical,
     'supportTicketFilterSystemHealth' => l10n.supportTicketFilterSystemHealth,
-    'supportTicketFilterWaitingForCustomer' => l10n.supportTicketFilterWaitingForCustomer,
+    'supportTicketFilterWaitingForCustomer' =>
+      l10n.supportTicketFilterWaitingForCustomer,
     'supportTicketFilterResolved' => l10n.supportTicketFilterResolved,
     'supportGrantFilterAll' => l10n.supportGrantFilterAll,
     'supportGrantFilterPending' => l10n.supportGrantFilterPending,
@@ -254,7 +294,8 @@ String resolveSupportKey(
     'supportTicketStatusOpen' => l10n.supportTicketStatusOpen,
     'supportTicketStatusAcknowledged' => l10n.supportTicketStatusAcknowledged,
     'supportTicketStatusInvestigating' => l10n.supportTicketStatusInvestigating,
-    'supportTicketStatusWaitingForCustomer' => l10n.supportTicketStatusWaitingForCustomer,
+    'supportTicketStatusWaitingForCustomer' =>
+      l10n.supportTicketStatusWaitingForCustomer,
     'supportTicketStatusResolved' => l10n.supportTicketStatusResolved,
     'supportTicketStatusClosed' => l10n.supportTicketStatusClosed,
     'supportTicketStatusUnknown' => l10n.supportTicketStatusUnknown,
@@ -264,8 +305,10 @@ String resolveSupportKey(
     'supportTicketPriorityUrgent' => l10n.supportTicketPriorityUrgent,
     'supportTicketPriorityCritical' => l10n.supportTicketPriorityCritical,
     'supportTicketPriorityUnknown' => l10n.supportTicketPriorityUnknown,
-    'supportTicketCategoryRegistration' => l10n.supportTicketCategoryRegistration,
-    'supportTicketCategorySystemHealth' => l10n.supportTicketCategorySystemHealth,
+    'supportTicketCategoryRegistration' =>
+      l10n.supportTicketCategoryRegistration,
+    'supportTicketCategorySystemHealth' =>
+      l10n.supportTicketCategorySystemHealth,
     'supportTicketCategoryUploadIssue' => l10n.supportTicketCategoryUploadIssue,
     'supportTicketCategoryBilling' => l10n.supportTicketCategoryBilling,
     'supportTicketCategoryAccess' => l10n.supportTicketCategoryAccess,
@@ -280,7 +323,8 @@ String resolveSupportKey(
     'supportGrantStatusUnknown' => l10n.supportGrantStatusUnknown,
     'supportScopeCompanyMetadata' => l10n.supportScopeCompanyMetadata,
     'supportScopeSpecificTrip' => l10n.supportScopeSpecificTrip,
-    'supportScopeSpecificDocumentIssue' => l10n.supportScopeSpecificDocumentIssue,
+    'supportScopeSpecificDocumentIssue' =>
+      l10n.supportScopeSpecificDocumentIssue,
     'supportScopeUploadQueueIssue' => l10n.supportScopeUploadQueueIssue,
     'supportScopeSystemHealthIssue' => l10n.supportScopeSystemHealthIssue,
     'supportScopeIntegrationIssue' => l10n.supportScopeIntegrationIssue,
@@ -293,7 +337,9 @@ String resolveSupportKey(
     'supportGrantCreateWarning' => l10n.supportGrantCreateWarning,
     'supportGrantCreateConfirm' => l10n.supportGrantCreateConfirm,
     'supportGrantCreateSuccess' => l10n.supportGrantCreateSuccess,
-    'supportGrantCompanyLabel' => l10n.supportGrantCompanyLabel(params['name'] ?? ''),
+    'supportGrantCompanyLabel' => l10n.supportGrantCompanyLabel(
+      params['name'] ?? '',
+    ),
     'supportGrantScopeTypeLabel' => l10n.supportGrantScopeTypeLabel,
     'supportGrantScopeIdFieldLabel' => l10n.supportGrantScopeIdFieldLabel,
     'supportGrantScopeIdRequired' => l10n.supportGrantScopeIdRequired,
@@ -303,7 +349,8 @@ String resolveSupportKey(
     'supportGrantBroadAccessRejected' => l10n.supportGrantBroadAccessRejected,
     'supportGrantExpiryLabel' => l10n.supportGrantExpiryLabel,
     'supportGrantExpiryTwoHours' => l10n.supportGrantExpiryTwoHours,
-    'supportGrantExpiryTwentyFourHours' => l10n.supportGrantExpiryTwentyFourHours,
+    'supportGrantExpiryTwentyFourHours' =>
+      l10n.supportGrantExpiryTwentyFourHours,
     'supportGrantRevokeTitle' => l10n.supportGrantRevokeTitle,
     'supportGrantRevokeNoteLabel' => l10n.supportGrantRevokeNoteLabel,
     'supportGrantRevokeConfirm' => l10n.supportGrantRevokeConfirm,
@@ -312,8 +359,10 @@ String resolveSupportKey(
     'supportGrantFieldCompany' => l10n.supportGrantFieldCompany,
     'supportGrantFieldScopeId' => l10n.supportGrantFieldScopeId,
     'supportGrantFieldReason' => l10n.supportGrantFieldReason,
-    'supportGrantFieldAllowedCategories' => l10n.supportGrantFieldAllowedCategories,
-    'supportGrantFieldExcludesDocuments' => l10n.supportGrantFieldExcludesDocuments,
+    'supportGrantFieldAllowedCategories' =>
+      l10n.supportGrantFieldAllowedCategories,
+    'supportGrantFieldExcludesDocuments' =>
+      l10n.supportGrantFieldExcludesDocuments,
     'supportGrantFieldCreatedAt' => l10n.supportGrantFieldCreatedAt,
     'supportGrantFieldExpiresAt' => l10n.supportGrantFieldExpiresAt,
     'supportGrantFieldRevokedAt' => l10n.supportGrantFieldRevokedAt,
@@ -328,15 +377,19 @@ String resolveSupportKey(
     'supportTicketFieldCreatedAt' => l10n.supportTicketFieldCreatedAt,
     'supportTicketFieldUpdatedAt' => l10n.supportTicketFieldUpdatedAt,
     'supportTicketFieldLastActivity' => l10n.supportTicketFieldLastActivity,
-    'supportTicketFieldLinkedHealthEvent' => l10n.supportTicketFieldLinkedHealthEvent,
+    'supportTicketFieldLinkedHealthEvent' =>
+      l10n.supportTicketFieldLinkedHealthEvent,
     'supportTicketFieldSupportGrant' => l10n.supportTicketFieldSupportGrant,
     'supportTicketActionAcknowledge' => l10n.supportTicketActionAcknowledge,
     'supportTicketActionClose' => l10n.supportTicketActionClose,
     'supportTicketActionCreateGrant' => l10n.supportTicketActionCreateGrant,
-    'supportTicketActionAcknowledgeTitle' => l10n.supportTicketActionAcknowledgeTitle,
+    'supportTicketActionAcknowledgeTitle' =>
+      l10n.supportTicketActionAcknowledgeTitle,
     'supportTicketActionCloseTitle' => l10n.supportTicketActionCloseTitle,
-    'supportTicketActionAcknowledgeBody' => l10n.supportTicketActionAcknowledgeBody,
-    'supportTicketActionAcknowledgeConfirm' => l10n.supportTicketActionAcknowledgeConfirm,
+    'supportTicketActionAcknowledgeBody' =>
+      l10n.supportTicketActionAcknowledgeBody,
+    'supportTicketActionAcknowledgeConfirm' =>
+      l10n.supportTicketActionAcknowledgeConfirm,
     'supportTicketActionCloseConfirm' => l10n.supportTicketActionCloseConfirm,
     _ => l10n.errorGenericBody,
   };
@@ -349,14 +402,18 @@ String resolveDashboardKey(
 }) {
   final l10n = AppLocalizations.of(context);
   return switch (key) {
-    'dashboardOperationalOverviewTitle' => l10n.dashboardOperationalOverviewTitle,
+    'dashboardOperationalOverviewTitle' =>
+      l10n.dashboardOperationalOverviewTitle,
     'dashboardOperationalOverviewBody' => l10n.dashboardOperationalOverviewBody,
     'dashboardSystemStatusHealthy' => l10n.dashboardSystemStatusHealthy,
     'dashboardSystemStatusAttention' => l10n.dashboardSystemStatusAttention,
     'dashboardMetricSystemStatus' => l10n.dashboardMetricSystemStatus,
-    'dashboardMetricPendingRegistrations' => l10n.dashboardMetricPendingRegistrations,
-    'dashboardMetricCompaniesAttention' => l10n.dashboardMetricCompaniesAttention,
-    'dashboardMetricBulkOnboardingReview' => l10n.dashboardMetricBulkOnboardingReview,
+    'dashboardMetricPendingRegistrations' =>
+      l10n.dashboardMetricPendingRegistrations,
+    'dashboardMetricCompaniesAttention' =>
+      l10n.dashboardMetricCompaniesAttention,
+    'dashboardMetricBulkOnboardingReview' =>
+      l10n.dashboardMetricBulkOnboardingReview,
     'dashboardMetricAiHighRisk' => l10n.dashboardMetricAiHighRisk,
     'dashboardMetricSupportIssues' => l10n.dashboardMetricSupportIssues,
     'dashboardMetricAuditRisks' => l10n.dashboardMetricAuditRisks,
@@ -384,7 +441,9 @@ String resolveAuditLogKey(
     ),
     'auditLogDateRangeClear' => l10n.auditLogDateRangeClear,
     'auditLogDateRangeComingSoon' => l10n.auditLogDateRangeComingSoon,
-    'auditLogTimestampLabel' => l10n.auditLogTimestampLabel(params['date'] ?? ''),
+    'auditLogTimestampLabel' => l10n.auditLogTimestampLabel(
+      params['date'] ?? '',
+    ),
     'auditLogDetailTitle' => l10n.auditLogDetailTitle,
     'auditLogPrivacyNotice' => l10n.auditLogPrivacyNotice,
     'auditLogExportDisabled' => l10n.auditLogExportDisabled,
@@ -398,7 +457,9 @@ String resolveAuditLogKey(
     'auditLogSummaryNoCritical' => l10n.auditLogSummaryNoCritical,
     'auditLogSummaryFailedDenied' => l10n.auditLogSummaryFailedDenied,
     'auditLogSummaryRecentActions' => l10n.auditLogSummaryRecentActions,
-    'auditLogSummaryLastUpdated' => l10n.auditLogSummaryLastUpdated(params['date'] ?? ''),
+    'auditLogSummaryLastUpdated' => l10n.auditLogSummaryLastUpdated(
+      params['date'] ?? '',
+    ),
     'auditLogFilterAll' => l10n.auditLogFilterAll,
     'auditLogFilterCritical' => l10n.auditLogFilterCritical,
     'auditLogFilterWarning' => l10n.auditLogFilterWarning,
@@ -420,15 +481,24 @@ String resolveAuditLogKey(
     'auditLogActionLogin' => l10n.auditLogActionLogin,
     'auditLogActionLogout' => l10n.auditLogActionLogout,
     'auditLogActionLoginFailed' => l10n.auditLogActionLoginFailed,
-    'auditLogActionRegistrationApproved' => l10n.auditLogActionRegistrationApproved,
-    'auditLogActionRegistrationRejected' => l10n.auditLogActionRegistrationRejected,
-    'auditLogActionRegistrationInfoRequested' => l10n.auditLogActionRegistrationInfoRequested,
-    'auditLogActionSupportTicketAcknowledged' => l10n.auditLogActionSupportTicketAcknowledged,
-    'auditLogActionSupportTicketClosed' => l10n.auditLogActionSupportTicketClosed,
-    'auditLogActionSupportAccessGranted' => l10n.auditLogActionSupportAccessGranted,
-    'auditLogActionSupportAccessRevoked' => l10n.auditLogActionSupportAccessRevoked,
-    'auditLogActionSystemHealthAcknowledged' => l10n.auditLogActionSystemHealthAcknowledged,
-    'auditLogActionSystemHealthEscalated' => l10n.auditLogActionSystemHealthEscalated,
+    'auditLogActionRegistrationApproved' =>
+      l10n.auditLogActionRegistrationApproved,
+    'auditLogActionRegistrationRejected' =>
+      l10n.auditLogActionRegistrationRejected,
+    'auditLogActionRegistrationInfoRequested' =>
+      l10n.auditLogActionRegistrationInfoRequested,
+    'auditLogActionSupportTicketAcknowledged' =>
+      l10n.auditLogActionSupportTicketAcknowledged,
+    'auditLogActionSupportTicketClosed' =>
+      l10n.auditLogActionSupportTicketClosed,
+    'auditLogActionSupportAccessGranted' =>
+      l10n.auditLogActionSupportAccessGranted,
+    'auditLogActionSupportAccessRevoked' =>
+      l10n.auditLogActionSupportAccessRevoked,
+    'auditLogActionSystemHealthAcknowledged' =>
+      l10n.auditLogActionSystemHealthAcknowledged,
+    'auditLogActionSystemHealthEscalated' =>
+      l10n.auditLogActionSystemHealthEscalated,
     'auditLogActionBillingUpdated' => l10n.auditLogActionBillingUpdated,
     'auditLogActionRoleChanged' => l10n.auditLogActionRoleChanged,
     'auditLogActionPermissionDenied' => l10n.auditLogActionPermissionDenied,
@@ -448,8 +518,10 @@ String resolveAuditLogKey(
     'auditLogFieldIpAddress' => l10n.auditLogFieldIpAddress,
     'auditLogFieldDeviceLabel' => l10n.auditLogFieldDeviceLabel,
     'auditLogFieldCorrelationId' => l10n.auditLogFieldCorrelationId,
-    'auditLogFieldRegistrationApplicationId' => l10n.auditLogFieldRegistrationApplicationId,
-    'auditLogFieldSupportAccessGrantId' => l10n.auditLogFieldSupportAccessGrantId,
+    'auditLogFieldRegistrationApplicationId' =>
+      l10n.auditLogFieldRegistrationApplicationId,
+    'auditLogFieldSupportAccessGrantId' =>
+      l10n.auditLogFieldSupportAccessGrantId,
     'auditLogFieldSystemHealthEventId' => l10n.auditLogFieldSystemHealthEventId,
     _ => l10n.errorGenericBody,
   };
@@ -475,13 +547,18 @@ String resolveBulkOnboardingKey(
     'bulkOnboardingNoSourceFile' => l10n.bulkOnboardingNoSourceFile,
     'bulkOnboardingFieldSourceFile' => l10n.bulkOnboardingFieldSourceFile,
     'bulkOnboardingDashboardTitle' => l10n.bulkOnboardingDashboardTitle,
-    'bulkOnboardingDashboardWaitingReview' => l10n.bulkOnboardingDashboardWaitingReview,
+    'bulkOnboardingDashboardWaitingReview' =>
+      l10n.bulkOnboardingDashboardWaitingReview,
     'bulkOnboardingDashboardHighRisk' => l10n.bulkOnboardingDashboardHighRisk,
-    'bulkOnboardingDashboardInvalidRows' => l10n.bulkOnboardingDashboardInvalidRows,
-    'bulkOnboardingDashboardProcessing' => l10n.bulkOnboardingDashboardProcessing,
+    'bulkOnboardingDashboardInvalidRows' =>
+      l10n.bulkOnboardingDashboardInvalidRows,
+    'bulkOnboardingDashboardProcessing' =>
+      l10n.bulkOnboardingDashboardProcessing,
     'bulkOnboardingFilterAll' => l10n.bulkOnboardingFilterAll,
-    'bulkOnboardingFilterReadyForReview' => l10n.bulkOnboardingFilterReadyForReview,
-    'bulkOnboardingFilterValidationFailed' => l10n.bulkOnboardingFilterValidationFailed,
+    'bulkOnboardingFilterReadyForReview' =>
+      l10n.bulkOnboardingFilterReadyForReview,
+    'bulkOnboardingFilterValidationFailed' =>
+      l10n.bulkOnboardingFilterValidationFailed,
     'bulkOnboardingFilterProcessing' => l10n.bulkOnboardingFilterProcessing,
     'bulkOnboardingFilterCompleted' => l10n.bulkOnboardingFilterCompleted,
     'bulkOnboardingFilterRejected' => l10n.bulkOnboardingFilterRejected,
@@ -489,12 +566,15 @@ String resolveBulkOnboardingKey(
     'bulkOnboardingStatusDraft' => l10n.bulkOnboardingStatusDraft,
     'bulkOnboardingStatusUploaded' => l10n.bulkOnboardingStatusUploaded,
     'bulkOnboardingStatusValidating' => l10n.bulkOnboardingStatusValidating,
-    'bulkOnboardingStatusValidationFailed' => l10n.bulkOnboardingStatusValidationFailed,
-    'bulkOnboardingStatusReadyForReview' => l10n.bulkOnboardingStatusReadyForReview,
+    'bulkOnboardingStatusValidationFailed' =>
+      l10n.bulkOnboardingStatusValidationFailed,
+    'bulkOnboardingStatusReadyForReview' =>
+      l10n.bulkOnboardingStatusReadyForReview,
     'bulkOnboardingStatusApprovedForProcessing' =>
       l10n.bulkOnboardingStatusApprovedForProcessing,
     'bulkOnboardingStatusProcessing' => l10n.bulkOnboardingStatusProcessing,
-    'bulkOnboardingStatusPartiallyCompleted' => l10n.bulkOnboardingStatusPartiallyCompleted,
+    'bulkOnboardingStatusPartiallyCompleted' =>
+      l10n.bulkOnboardingStatusPartiallyCompleted,
     'bulkOnboardingStatusCompleted' => l10n.bulkOnboardingStatusCompleted,
     'bulkOnboardingStatusRejected' => l10n.bulkOnboardingStatusRejected,
     'bulkOnboardingStatusCancelled' => l10n.bulkOnboardingStatusCancelled,
@@ -513,30 +593,38 @@ String resolveBulkOnboardingKey(
     'bulkOnboardingTypeDrivers' => l10n.bulkOnboardingTypeDrivers,
     'bulkOnboardingTypeVehicles' => l10n.bulkOnboardingTypeVehicles,
     'bulkOnboardingTypeTrailers' => l10n.bulkOnboardingTypeTrailers,
-    'bulkOnboardingTypeMixedCompanyImport' => l10n.bulkOnboardingTypeMixedCompanyImport,
+    'bulkOnboardingTypeMixedCompanyImport' =>
+      l10n.bulkOnboardingTypeMixedCompanyImport,
     'bulkOnboardingTypeUnknown' => l10n.bulkOnboardingTypeUnknown,
     'bulkOnboardingRiskLow' => l10n.bulkOnboardingRiskLow,
     'bulkOnboardingRiskMedium' => l10n.bulkOnboardingRiskMedium,
     'bulkOnboardingRiskHigh' => l10n.bulkOnboardingRiskHigh,
     'bulkOnboardingRiskUnknown' => l10n.bulkOnboardingRiskUnknown,
-    'bulkOnboardingMetricTotalRows' =>
-      l10n.bulkOnboardingMetricTotalRows(params['count'] ?? '0'),
-    'bulkOnboardingMetricValidRows' =>
-      l10n.bulkOnboardingMetricValidRows(params['count'] ?? '0'),
-    'bulkOnboardingMetricWarningRows' =>
-      l10n.bulkOnboardingMetricWarningRows(params['count'] ?? '0'),
-    'bulkOnboardingMetricInvalidRows' =>
-      l10n.bulkOnboardingMetricInvalidRows(params['count'] ?? '0'),
+    'bulkOnboardingMetricTotalRows' => l10n.bulkOnboardingMetricTotalRows(
+      params['count'] ?? '0',
+    ),
+    'bulkOnboardingMetricValidRows' => l10n.bulkOnboardingMetricValidRows(
+      params['count'] ?? '0',
+    ),
+    'bulkOnboardingMetricWarningRows' => l10n.bulkOnboardingMetricWarningRows(
+      params['count'] ?? '0',
+    ),
+    'bulkOnboardingMetricInvalidRows' => l10n.bulkOnboardingMetricInvalidRows(
+      params['count'] ?? '0',
+    ),
     'bulkOnboardingMetricDuplicateRows' =>
       l10n.bulkOnboardingMetricDuplicateRows(params['count'] ?? '0'),
-    'bulkOnboardingValidationSummaryTitle' => l10n.bulkOnboardingValidationSummaryTitle,
+    'bulkOnboardingValidationSummaryTitle' =>
+      l10n.bulkOnboardingValidationSummaryTitle,
     'bulkOnboardingValidationErrors' => l10n.bulkOnboardingValidationErrors,
-    'bulkOnboardingDuplicateReason' =>
-      l10n.bulkOnboardingDuplicateReason(params['reason'] ?? ''),
+    'bulkOnboardingDuplicateReason' => l10n.bulkOnboardingDuplicateReason(
+      params['reason'] ?? '',
+    ),
     'bulkOnboardingAiReviewTitle' => l10n.bulkOnboardingAiReviewTitle,
     'bulkOnboardingAiAdvisoryNotice' => l10n.bulkOnboardingAiAdvisoryNotice,
-    'bulkOnboardingRecommendedAction' =>
-      l10n.bulkOnboardingRecommendedAction(params['action'] ?? ''),
+    'bulkOnboardingRecommendedAction' => l10n.bulkOnboardingRecommendedAction(
+      params['action'] ?? '',
+    ),
     'bulkOnboardingRowFilterAll' => l10n.bulkOnboardingRowFilterAll,
     'bulkOnboardingRowFilterInvalid' => l10n.bulkOnboardingRowFilterInvalid,
     'bulkOnboardingRowFilterWarning' => l10n.bulkOnboardingRowFilterWarning,
@@ -552,27 +640,79 @@ String resolveBulkOnboardingKey(
     'bulkOnboardingActionSuccess' => l10n.bulkOnboardingActionSuccess,
     'bulkOnboardingActionAuditNotice' => l10n.bulkOnboardingActionAuditNotice,
     'bulkOnboardingActionNoteLabel' => l10n.bulkOnboardingActionNoteLabel,
-    'bulkOnboardingActionOptionalNoteLabel' => l10n.bulkOnboardingActionOptionalNoteLabel,
+    'bulkOnboardingActionOptionalNoteLabel' =>
+      l10n.bulkOnboardingActionOptionalNoteLabel,
     'bulkOnboardingActionNoteRequired' => l10n.bulkOnboardingActionNoteRequired,
-    'bulkOnboardingActionConfirmRequired' => l10n.bulkOnboardingActionConfirmRequired,
-    'bulkOnboardingActionExplicitConfirm' => l10n.bulkOnboardingActionExplicitConfirm,
+    'bulkOnboardingActionConfirmRequired' =>
+      l10n.bulkOnboardingActionConfirmRequired,
+    'bulkOnboardingActionExplicitConfirm' =>
+      l10n.bulkOnboardingActionExplicitConfirm,
     'bulkOnboardingActionDismiss' => l10n.bulkOnboardingActionDismiss,
-    'bulkOnboardingActionValidateTitle' => l10n.bulkOnboardingActionValidateTitle,
+    'bulkOnboardingActionValidateTitle' =>
+      l10n.bulkOnboardingActionValidateTitle,
     'bulkOnboardingActionApproveTitle' => l10n.bulkOnboardingActionApproveTitle,
     'bulkOnboardingActionRejectTitle' => l10n.bulkOnboardingActionRejectTitle,
     'bulkOnboardingActionCancelTitle' => l10n.bulkOnboardingActionCancelTitle,
     'bulkOnboardingActionProcessTitle' => l10n.bulkOnboardingActionProcessTitle,
-    'bulkOnboardingActionValidateConfirm' => l10n.bulkOnboardingActionValidateConfirm,
-    'bulkOnboardingActionApproveConfirm' => l10n.bulkOnboardingActionApproveConfirm,
-    'bulkOnboardingActionRejectConfirm' => l10n.bulkOnboardingActionRejectConfirm,
-    'bulkOnboardingActionCancelConfirm' => l10n.bulkOnboardingActionCancelConfirm,
-    'bulkOnboardingActionProcessConfirm' => l10n.bulkOnboardingActionProcessConfirm,
+    'bulkOnboardingActionValidateConfirm' =>
+      l10n.bulkOnboardingActionValidateConfirm,
+    'bulkOnboardingActionApproveConfirm' =>
+      l10n.bulkOnboardingActionApproveConfirm,
+    'bulkOnboardingActionRejectConfirm' =>
+      l10n.bulkOnboardingActionRejectConfirm,
+    'bulkOnboardingActionCancelConfirm' =>
+      l10n.bulkOnboardingActionCancelConfirm,
+    'bulkOnboardingActionProcessConfirm' =>
+      l10n.bulkOnboardingActionProcessConfirm,
+    'bulkOnboardingDryRunAction' => l10n.bulkOnboardingDryRunAction,
+    'bulkOnboardingExecuteAction' => l10n.bulkOnboardingExecuteAction,
+    'bulkOnboardingExecuteDisabled' => l10n.bulkOnboardingExecuteDisabled,
+    'bulkOnboardingDryRunSuccess' => l10n.bulkOnboardingDryRunSuccess,
+    'bulkOnboardingExecuteSuccess' => l10n.bulkOnboardingExecuteSuccess,
+    'bulkOnboardingProvisioningTitle' => l10n.bulkOnboardingProvisioningTitle,
+    'bulkOnboardingProvisioningStatus' => l10n.bulkOnboardingProvisioningStatus(
+      params['status'] ?? '',
+    ),
+    'bulkOnboardingExecutePolicyDisabled' =>
+      l10n.bulkOnboardingExecutePolicyDisabled(params['reason'] ?? ''),
+    'bulkOnboardingExecuteDialogTitle' => l10n.bulkOnboardingExecuteDialogTitle,
+    'bulkOnboardingExecuteMetadataNotice' =>
+      l10n.bulkOnboardingExecuteMetadataNotice,
+    'bulkOnboardingExecuteIrreversibleWarning' =>
+      l10n.bulkOnboardingExecuteIrreversibleWarning,
+    'bulkOnboardingExecuteRowWindow' => l10n.bulkOnboardingExecuteRowWindow(
+      params['count'] ?? '0',
+      params['maxRows'] ?? '0',
+    ),
+    'bulkOnboardingExecuteReasonLabel' => l10n.bulkOnboardingExecuteReasonLabel,
+    'bulkOnboardingExecuteReasonRequired' =>
+      l10n.bulkOnboardingExecuteReasonRequired,
+    'bulkOnboardingExecuteConfirmRequired' =>
+      l10n.bulkOnboardingExecuteConfirmRequired,
+    'bulkOnboardingExecuteConfirmCheckbox' =>
+      l10n.bulkOnboardingExecuteConfirmCheckbox,
+    'bulkOnboardingExecuteConfirmAction' =>
+      l10n.bulkOnboardingExecuteConfirmAction,
+    'bulkOnboardingSummaryDryRunOk' => l10n.bulkOnboardingSummaryDryRunOk,
+    'bulkOnboardingSummaryBlocked' => l10n.bulkOnboardingSummaryBlocked,
+    'bulkOnboardingSummaryDuplicates' => l10n.bulkOnboardingSummaryDuplicates,
+    'bulkOnboardingSummaryFailed' => l10n.bulkOnboardingSummaryFailed,
+    'bulkOnboardingSummaryProvisioned' => l10n.bulkOnboardingSummaryProvisioned,
+    'bulkOnboardingRowExecutionStatusesTitle' =>
+      l10n.bulkOnboardingRowExecutionStatusesTitle,
+    'bulkOnboardingExecuteRejectedPolicy' =>
+      l10n.bulkOnboardingExecuteRejectedPolicy,
+    'bulkOnboardingExecuteRejectedValidation' =>
+      l10n.bulkOnboardingExecuteRejectedValidation,
+    'bulkOnboardingExecuteForbidden' => l10n.bulkOnboardingExecuteForbidden,
     'bulkOnboardingUploadCsv' => l10n.bulkOnboardingUploadCsv,
     'bulkOnboardingChooseFile' => l10n.bulkOnboardingChooseFile,
-    'bulkOnboardingSelectedFile' =>
-      l10n.bulkOnboardingSelectedFile(params['name'] ?? ''),
-    'bulkOnboardingFileSize' =>
-      l10n.bulkOnboardingFileSize(params['size'] ?? ''),
+    'bulkOnboardingSelectedFile' => l10n.bulkOnboardingSelectedFile(
+      params['name'] ?? '',
+    ),
+    'bulkOnboardingFileSize' => l10n.bulkOnboardingFileSize(
+      params['size'] ?? '',
+    ),
     'bulkOnboardingUploadPreviewTitle' => l10n.bulkOnboardingUploadPreviewTitle,
     'bulkOnboardingImportTemplate' => l10n.bulkOnboardingImportTemplate,
     'bulkOnboardingDownloadTemplate' => l10n.bulkOnboardingDownloadTemplate,
@@ -587,18 +727,22 @@ String resolveBulkOnboardingKey(
     'bulkOnboardingExcelComingLater' => l10n.bulkOnboardingExcelComingLater,
     'bulkOnboardingNoRealProvisioningNotice' =>
       l10n.bulkOnboardingNoRealProvisioningNotice,
-    'bulkOnboardingHumanApprovalNotice' => l10n.bulkOnboardingHumanApprovalNotice,
-    'bulkOnboardingValidationCompleted' => l10n.bulkOnboardingValidationCompleted,
+    'bulkOnboardingHumanApprovalNotice' =>
+      l10n.bulkOnboardingHumanApprovalNotice,
+    'bulkOnboardingValidationCompleted' =>
+      l10n.bulkOnboardingValidationCompleted,
     'bulkOnboardingRowsParsed' => l10n.bulkOnboardingRowsParsed,
     'bulkOnboardingUploadSuccessful' => l10n.bulkOnboardingUploadSuccessful,
     'bulkOnboardingUploadFailed' => l10n.bulkOnboardingUploadFailed,
-    'bulkOnboardingUnsupportedFileType' => l10n.bulkOnboardingUnsupportedFileType,
+    'bulkOnboardingUnsupportedFileType' =>
+      l10n.bulkOnboardingUnsupportedFileType,
     'bulkOnboardingTooManyRows' => l10n.bulkOnboardingTooManyRows,
     'bulkOnboardingEmptyFile' => l10n.bulkOnboardingEmptyFile,
     'bulkOnboardingFileRequired' => l10n.bulkOnboardingFileRequired,
     'bulkOnboardingUploadTypeRequired' => l10n.bulkOnboardingUploadTypeRequired,
     'bulkOnboardingUploadTypeLabel' => l10n.bulkOnboardingUploadTypeLabel,
-    'bulkOnboardingUploadCompanyIdLabel' => l10n.bulkOnboardingUploadCompanyIdLabel,
+    'bulkOnboardingUploadCompanyIdLabel' =>
+      l10n.bulkOnboardingUploadCompanyIdLabel,
     'bulkOnboardingUploadCompanyNameLabel' =>
       l10n.bulkOnboardingUploadCompanyNameLabel,
     'bulkOnboardingUploadNoteLabel' => l10n.bulkOnboardingUploadNoteLabel,
@@ -612,17 +756,25 @@ String resolveBulkOnboardingKey(
     'bulkOnboardingRowFilterSkipped' => l10n.bulkOnboardingRowFilterSkipped,
     'bulkOnboardingRowDetailTitle' => l10n.bulkOnboardingRowDetailTitle,
     'bulkOnboardingRowDetailError' => l10n.bulkOnboardingRowDetailError,
-    'bulkOnboardingRowOriginalValuesTitle' => l10n.bulkOnboardingRowOriginalValuesTitle,
-    'bulkOnboardingRowCorrectedValuesTitle' => l10n.bulkOnboardingRowCorrectedValuesTitle,
-    'bulkOnboardingRowLastValidatedAt' =>
-      l10n.bulkOnboardingRowLastValidatedAt(params['date'] ?? ''),
-    'bulkOnboardingJobLastValidatedAt' =>
-      l10n.bulkOnboardingJobLastValidatedAt(params['date'] ?? ''),
+    'bulkOnboardingRowOriginalValuesTitle' =>
+      l10n.bulkOnboardingRowOriginalValuesTitle,
+    'bulkOnboardingRowCorrectedValuesTitle' =>
+      l10n.bulkOnboardingRowCorrectedValuesTitle,
+    'bulkOnboardingRowLastValidatedAt' => l10n.bulkOnboardingRowLastValidatedAt(
+      params['date'] ?? '',
+    ),
+    'bulkOnboardingJobLastValidatedAt' => l10n.bulkOnboardingJobLastValidatedAt(
+      params['date'] ?? '',
+    ),
     'bulkOnboardingRowCorrectionTitle' => l10n.bulkOnboardingRowCorrectionTitle,
-    'bulkOnboardingRowCorrectionNotice' => l10n.bulkOnboardingRowCorrectionNotice,
-    'bulkOnboardingRowCorrectionNoteLabel' => l10n.bulkOnboardingRowCorrectionNoteLabel,
-    'bulkOnboardingRowCorrectionConfirm' => l10n.bulkOnboardingRowCorrectionConfirm,
-    'bulkOnboardingRowCorrectionAction' => l10n.bulkOnboardingRowCorrectionAction,
+    'bulkOnboardingRowCorrectionNotice' =>
+      l10n.bulkOnboardingRowCorrectionNotice,
+    'bulkOnboardingRowCorrectionNoteLabel' =>
+      l10n.bulkOnboardingRowCorrectionNoteLabel,
+    'bulkOnboardingRowCorrectionConfirm' =>
+      l10n.bulkOnboardingRowCorrectionConfirm,
+    'bulkOnboardingRowCorrectionAction' =>
+      l10n.bulkOnboardingRowCorrectionAction,
     'bulkOnboardingRowCorrectionFieldRequired' =>
       l10n.bulkOnboardingRowCorrectionFieldRequired,
     'bulkOnboardingRowFieldName' => l10n.bulkOnboardingRowFieldName,
@@ -630,22 +782,31 @@ String resolveBulkOnboardingKey(
     'bulkOnboardingRowFieldPhone' => l10n.bulkOnboardingRowFieldPhone,
     'bulkOnboardingRowFieldCountry' => l10n.bulkOnboardingRowFieldCountry,
     'bulkOnboardingRowFieldRole' => l10n.bulkOnboardingRowFieldRole,
-    'bulkOnboardingRowFieldVehiclePlate' => l10n.bulkOnboardingRowFieldVehiclePlate,
-    'bulkOnboardingRowFieldTrailerPlate' => l10n.bulkOnboardingRowFieldTrailerPlate,
+    'bulkOnboardingRowFieldVehiclePlate' =>
+      l10n.bulkOnboardingRowFieldVehiclePlate,
+    'bulkOnboardingRowFieldTrailerPlate' =>
+      l10n.bulkOnboardingRowFieldTrailerPlate,
     'bulkOnboardingRowSkipTitle' => l10n.bulkOnboardingRowSkipTitle,
     'bulkOnboardingRowSkipNotice' => l10n.bulkOnboardingRowSkipNotice,
     'bulkOnboardingRowSkipReasonLabel' => l10n.bulkOnboardingRowSkipReasonLabel,
-    'bulkOnboardingRowSkipReasonRequired' => l10n.bulkOnboardingRowSkipReasonRequired,
+    'bulkOnboardingRowSkipReasonRequired' =>
+      l10n.bulkOnboardingRowSkipReasonRequired,
     'bulkOnboardingRowSkipConfirm' => l10n.bulkOnboardingRowSkipConfirm,
     'bulkOnboardingRowSkipAction' => l10n.bulkOnboardingRowSkipAction,
-    'bulkOnboardingRowRevalidateAction' => l10n.bulkOnboardingRowRevalidateAction,
-    'bulkOnboardingJobRevalidateAction' => l10n.bulkOnboardingJobRevalidateAction,
-    'bulkOnboardingJobRevalidateSuccess' => l10n.bulkOnboardingJobRevalidateSuccess,
-    'bulkOnboardingRowActionAuditNotice' => l10n.bulkOnboardingRowActionAuditNotice,
+    'bulkOnboardingRowRevalidateAction' =>
+      l10n.bulkOnboardingRowRevalidateAction,
+    'bulkOnboardingJobRevalidateAction' =>
+      l10n.bulkOnboardingJobRevalidateAction,
+    'bulkOnboardingJobRevalidateSuccess' =>
+      l10n.bulkOnboardingJobRevalidateSuccess,
+    'bulkOnboardingRowActionAuditNotice' =>
+      l10n.bulkOnboardingRowActionAuditNotice,
     'bulkOnboardingRowActionSuccess' => l10n.bulkOnboardingRowActionSuccess,
-    'bulkOnboardingRowActionUnavailable' => l10n.bulkOnboardingRowActionUnavailable,
-    'bulkOnboardingMetricSkippedRows' =>
-      l10n.bulkOnboardingMetricSkippedRows(params['count'] ?? '0'),
+    'bulkOnboardingRowActionUnavailable' =>
+      l10n.bulkOnboardingRowActionUnavailable,
+    'bulkOnboardingMetricSkippedRows' => l10n.bulkOnboardingMetricSkippedRows(
+      params['count'] ?? '0',
+    ),
     'bulkOnboardingValidationWarnings' => l10n.bulkOnboardingValidationWarnings,
     _ => l10n.errorGenericBody,
   };
@@ -668,8 +829,9 @@ String resolvePlatformCompanyKey(
     'platformCompanyOpenModule' => l10n.platformCompanyOpenModule,
     'platformCompanyPrivacyNotice' => l10n.platformCompanyPrivacyNotice,
     'platformCompanyDashboardTitle' => l10n.platformCompanyDashboardTitle,
-    'platformCompanyDashboardActive' =>
-      l10n.platformCompanyDashboardActive(params['count'] ?? '0'),
+    'platformCompanyDashboardActive' => l10n.platformCompanyDashboardActive(
+      params['count'] ?? '0',
+    ),
     'platformCompanyDashboardPendingReview' =>
       l10n.platformCompanyDashboardPendingReview(params['count'] ?? '0'),
     'platformCompanyDashboardSuspended' =>
@@ -680,29 +842,37 @@ String resolvePlatformCompanyKey(
       l10n.platformCompanyDashboardPendingOnboarding(params['count'] ?? '0'),
     'platformCompanyFilterAll' => l10n.platformCompanyFilterAll,
     'platformCompanyFilterActive' => l10n.platformCompanyFilterActive,
-    'platformCompanyFilterPendingReview' => l10n.platformCompanyFilterPendingReview,
+    'platformCompanyFilterPendingReview' =>
+      l10n.platformCompanyFilterPendingReview,
     'platformCompanyFilterSuspended' => l10n.platformCompanyFilterSuspended,
     'platformCompanyFilterDisabled' => l10n.platformCompanyFilterDisabled,
     'platformCompanyStatusActive' => l10n.platformCompanyStatusActive,
-    'platformCompanyStatusPendingReview' => l10n.platformCompanyStatusPendingReview,
+    'platformCompanyStatusPendingReview' =>
+      l10n.platformCompanyStatusPendingReview,
     'platformCompanyStatusSuspended' => l10n.platformCompanyStatusSuspended,
     'platformCompanyStatusDisabled' => l10n.platformCompanyStatusDisabled,
     'platformCompanyStatusArchived' => l10n.platformCompanyStatusArchived,
     'platformCompanyStatusUnknown' => l10n.platformCompanyStatusUnknown,
-    'platformCompanyMetricActiveUsers' =>
-      l10n.platformCompanyMetricActiveUsers(params['count'] ?? '0'),
-    'platformCompanyMetricDrivers' =>
-      l10n.platformCompanyMetricDrivers(params['count'] ?? '0'),
-    'platformCompanyMetricVehicles' =>
-      l10n.platformCompanyMetricVehicles(params['count'] ?? '0'),
-    'platformCompanyMetricTrailers' =>
-      l10n.platformCompanyMetricTrailers(params['count'] ?? '0'),
-    'platformCompanyMetricOpenSupport' =>
-      l10n.platformCompanyMetricOpenSupport(params['count'] ?? '0'),
+    'platformCompanyMetricActiveUsers' => l10n.platformCompanyMetricActiveUsers(
+      params['count'] ?? '0',
+    ),
+    'platformCompanyMetricDrivers' => l10n.platformCompanyMetricDrivers(
+      params['count'] ?? '0',
+    ),
+    'platformCompanyMetricVehicles' => l10n.platformCompanyMetricVehicles(
+      params['count'] ?? '0',
+    ),
+    'platformCompanyMetricTrailers' => l10n.platformCompanyMetricTrailers(
+      params['count'] ?? '0',
+    ),
+    'platformCompanyMetricOpenSupport' => l10n.platformCompanyMetricOpenSupport(
+      params['count'] ?? '0',
+    ),
     'platformCompanyMetricActiveGrants' =>
       l10n.platformCompanyMetricActiveGrants(params['count'] ?? '0'),
-    'platformCompanyMetricTotalUsers' =>
-      l10n.platformCompanyMetricTotalUsers(params['count'] ?? '0'),
+    'platformCompanyMetricTotalUsers' => l10n.platformCompanyMetricTotalUsers(
+      params['count'] ?? '0',
+    ),
     'platformCompanyMetricPendingRegistrations' =>
       l10n.platformCompanyMetricPendingRegistrations(params['count'] ?? '0'),
     'platformCompanyMetricPendingBulkJobs' =>
@@ -720,12 +890,15 @@ String resolvePlatformCompanyKey(
       l10n.platformCompanyFieldSubscriptionStatus,
     'platformCompanyFieldLastAdminActivity' =>
       l10n.platformCompanyFieldLastAdminActivity,
-    'platformCompanyChangeStatusAction' => l10n.platformCompanyChangeStatusAction,
+    'platformCompanyChangeStatusAction' =>
+      l10n.platformCompanyChangeStatusAction,
     'platformCompanyStatusDialogTitle' => l10n.platformCompanyStatusDialogTitle,
-    'platformCompanyStatusDialogNotice' => l10n.platformCompanyStatusDialogNotice,
+    'platformCompanyStatusDialogNotice' =>
+      l10n.platformCompanyStatusDialogNotice,
     'platformCompanyStatusFieldLabel' => l10n.platformCompanyStatusFieldLabel,
     'platformCompanyStatusReasonLabel' => l10n.platformCompanyStatusReasonLabel,
-    'platformCompanyStatusReasonRequired' => l10n.platformCompanyStatusReasonRequired,
+    'platformCompanyStatusReasonRequired' =>
+      l10n.platformCompanyStatusReasonRequired,
     'platformCompanyStatusAuditNotice' => l10n.platformCompanyStatusAuditNotice,
     'platformCompanyStatusDismiss' => l10n.platformCompanyStatusDismiss,
     'platformCompanyStatusConfirm' => l10n.platformCompanyStatusConfirm,
@@ -750,9 +923,12 @@ String resolveAiReviewKey(
     'aiReviewOpenModule' => l10n.aiReviewOpenModule,
     'aiReviewAdvisoryNotice' => l10n.aiReviewAdvisoryNotice,
     'aiReviewDashboardTitle' => l10n.aiReviewDashboardTitle,
-    'aiReviewDashboardTotal' => l10n.aiReviewDashboardTotal(params['count'] ?? '0'),
-    'aiReviewDashboardHighRisk' =>
-      l10n.aiReviewDashboardHighRisk(params['count'] ?? '0'),
+    'aiReviewDashboardTotal' => l10n.aiReviewDashboardTotal(
+      params['count'] ?? '0',
+    ),
+    'aiReviewDashboardHighRisk' => l10n.aiReviewDashboardHighRisk(
+      params['count'] ?? '0',
+    ),
     'aiReviewDashboardNeedsHumanReview' =>
       l10n.aiReviewDashboardNeedsHumanReview(params['count'] ?? '0'),
     'aiReviewFilterAll' => l10n.aiReviewFilterAll,
@@ -771,7 +947,8 @@ String resolveAiReviewKey(
     'aiReviewRiskHigh' => l10n.aiReviewRiskHigh,
     'aiReviewRiskUnknown' => l10n.aiReviewRiskUnknown,
     'aiReviewRecommendationReview' => l10n.aiReviewRecommendationReview,
-    'aiReviewRecommendationRequestInfo' => l10n.aiReviewRecommendationRequestInfo,
+    'aiReviewRecommendationRequestInfo' =>
+      l10n.aiReviewRecommendationRequestInfo,
     'aiReviewRecommendationApproveCandidate' =>
       l10n.aiReviewRecommendationApproveCandidate,
     'aiReviewRecommendationRejectCandidate' =>
@@ -785,8 +962,9 @@ String resolveAiReviewKey(
     'aiReviewFieldChecksPerformed' => l10n.aiReviewFieldChecksPerformed,
     'aiReviewFieldMissingInformation' => l10n.aiReviewFieldMissingInformation,
     'aiReviewFieldDuplicateWarnings' => l10n.aiReviewFieldDuplicateWarnings,
-    'aiReviewFieldConfidenceScore' =>
-      l10n.aiReviewFieldConfidenceScore(params['score'] ?? ''),
+    'aiReviewFieldConfidenceScore' => l10n.aiReviewFieldConfidenceScore(
+      params['score'] ?? '',
+    ),
     'aiReviewUpdatedAt' => l10n.aiReviewUpdatedAt(params['date'] ?? ''),
     _ => l10n.errorGenericBody,
   };
@@ -806,15 +984,25 @@ String resolveBillingKey(
     'billingOpenModule' => l10n.billingOpenModule,
     'billingPrivacyNotice' => l10n.billingPrivacyNotice,
     'billingOverviewTitle' => l10n.billingOverviewTitle,
-    'billingOverviewActive' => l10n.billingOverviewActive(params['count'] ?? '0'),
+    'billingOverviewActive' => l10n.billingOverviewActive(
+      params['count'] ?? '0',
+    ),
     'billingOverviewTrial' => l10n.billingOverviewTrial(params['count'] ?? '0'),
-    'billingOverviewPastDue' => l10n.billingOverviewPastDue(params['count'] ?? '0'),
-    'billingOverviewSuspended' => l10n.billingOverviewSuspended(params['count'] ?? '0'),
-    'billingOverviewPricingNew' => l10n.billingOverviewPricingNew(params['count'] ?? '0'),
-    'billingOverviewQuotesPending' =>
-      l10n.billingOverviewQuotesPending(params['count'] ?? '0'),
-    'billingOverviewLastUpdated' =>
-      l10n.billingOverviewLastUpdated(params['date'] ?? ''),
+    'billingOverviewPastDue' => l10n.billingOverviewPastDue(
+      params['count'] ?? '0',
+    ),
+    'billingOverviewSuspended' => l10n.billingOverviewSuspended(
+      params['count'] ?? '0',
+    ),
+    'billingOverviewPricingNew' => l10n.billingOverviewPricingNew(
+      params['count'] ?? '0',
+    ),
+    'billingOverviewQuotesPending' => l10n.billingOverviewQuotesPending(
+      params['count'] ?? '0',
+    ),
+    'billingOverviewLastUpdated' => l10n.billingOverviewLastUpdated(
+      params['date'] ?? '',
+    ),
     'billingTabSubscriptions' => l10n.billingTabSubscriptions,
     'billingTabPricingIntakes' => l10n.billingTabPricingIntakes,
     'billingTabQuoteRequests' => l10n.billingTabQuoteRequests,
@@ -825,13 +1013,17 @@ String resolveBillingKey(
     'billingSubscriptionFilterActive' => l10n.billingSubscriptionFilterActive,
     'billingSubscriptionFilterTrial' => l10n.billingSubscriptionFilterTrial,
     'billingSubscriptionFilterPastDue' => l10n.billingSubscriptionFilterPastDue,
-    'billingSubscriptionFilterSuspended' => l10n.billingSubscriptionFilterSuspended,
-    'billingSubscriptionFilterCancelled' => l10n.billingSubscriptionFilterCancelled,
+    'billingSubscriptionFilterSuspended' =>
+      l10n.billingSubscriptionFilterSuspended,
+    'billingSubscriptionFilterCancelled' =>
+      l10n.billingSubscriptionFilterCancelled,
     'billingSubscriptionStatusTrial' => l10n.billingSubscriptionStatusTrial,
     'billingSubscriptionStatusActive' => l10n.billingSubscriptionStatusActive,
     'billingSubscriptionStatusPastDue' => l10n.billingSubscriptionStatusPastDue,
-    'billingSubscriptionStatusSuspended' => l10n.billingSubscriptionStatusSuspended,
-    'billingSubscriptionStatusCancelled' => l10n.billingSubscriptionStatusCancelled,
+    'billingSubscriptionStatusSuspended' =>
+      l10n.billingSubscriptionStatusSuspended,
+    'billingSubscriptionStatusCancelled' =>
+      l10n.billingSubscriptionStatusCancelled,
     'billingSubscriptionStatusCustomQuotePending' =>
       l10n.billingSubscriptionStatusCustomQuotePending,
     'billingSubscriptionStatusUnknown' => l10n.billingSubscriptionStatusUnknown,
@@ -841,40 +1033,64 @@ String resolveBillingKey(
     'billingPricingIntakeNeedsReview' => l10n.billingPricingIntakeNeedsReview,
     'billingPricingIntakeFilterAll' => l10n.billingPricingIntakeFilterAll,
     'billingPricingIntakeFilterNew' => l10n.billingPricingIntakeFilterNew,
-    'billingPricingIntakeFilterReviewing' => l10n.billingPricingIntakeFilterReviewing,
+    'billingPricingIntakeFilterReviewing' =>
+      l10n.billingPricingIntakeFilterReviewing,
     'billingPricingIntakeFilterQuoted' => l10n.billingPricingIntakeFilterQuoted,
-    'billingPricingIntakeFilterAccepted' => l10n.billingPricingIntakeFilterAccepted,
-    'billingPricingIntakeFilterRejected' => l10n.billingPricingIntakeFilterRejected,
+    'billingPricingIntakeFilterAccepted' =>
+      l10n.billingPricingIntakeFilterAccepted,
+    'billingPricingIntakeFilterRejected' =>
+      l10n.billingPricingIntakeFilterRejected,
     'billingPricingIntakeStatusNew' => l10n.billingPricingIntakeStatusNew,
-    'billingPricingIntakeStatusReviewing' => l10n.billingPricingIntakeStatusReviewing,
+    'billingPricingIntakeStatusReviewing' =>
+      l10n.billingPricingIntakeStatusReviewing,
     'billingPricingIntakeStatusQuoted' => l10n.billingPricingIntakeStatusQuoted,
-    'billingPricingIntakeStatusAccepted' => l10n.billingPricingIntakeStatusAccepted,
-    'billingPricingIntakeStatusRejected' => l10n.billingPricingIntakeStatusRejected,
-    'billingPricingIntakeStatusUnknown' => l10n.billingPricingIntakeStatusUnknown,
+    'billingPricingIntakeStatusAccepted' =>
+      l10n.billingPricingIntakeStatusAccepted,
+    'billingPricingIntakeStatusRejected' =>
+      l10n.billingPricingIntakeStatusRejected,
+    'billingPricingIntakeStatusUnknown' =>
+      l10n.billingPricingIntakeStatusUnknown,
     'billingQuoteRequestSearchHint' => l10n.billingQuoteRequestSearchHint,
     'billingQuoteRequestListEmpty' => l10n.billingQuoteRequestListEmpty,
     'billingQuoteRequestDetailTitle' => l10n.billingQuoteRequestDetailTitle,
     'billingQuoteRequestFilterAll' => l10n.billingQuoteRequestFilterAll,
-    'billingQuoteRequestFilterSubmitted' => l10n.billingQuoteRequestFilterSubmitted,
-    'billingQuoteRequestFilterUnderReview' => l10n.billingQuoteRequestFilterUnderReview,
+    'billingQuoteRequestFilterSubmitted' =>
+      l10n.billingQuoteRequestFilterSubmitted,
+    'billingQuoteRequestFilterUnderReview' =>
+      l10n.billingQuoteRequestFilterUnderReview,
     'billingQuoteRequestFilterQuoted' => l10n.billingQuoteRequestFilterQuoted,
-    'billingQuoteRequestFilterAccepted' => l10n.billingQuoteRequestFilterAccepted,
-    'billingQuoteRequestFilterRejected' => l10n.billingQuoteRequestFilterRejected,
+    'billingQuoteRequestFilterAccepted' =>
+      l10n.billingQuoteRequestFilterAccepted,
+    'billingQuoteRequestFilterRejected' =>
+      l10n.billingQuoteRequestFilterRejected,
     'billingQuoteRequestStatusDraft' => l10n.billingQuoteRequestStatusDraft,
-    'billingQuoteRequestStatusSubmitted' => l10n.billingQuoteRequestStatusSubmitted,
-    'billingQuoteRequestStatusUnderReview' => l10n.billingQuoteRequestStatusUnderReview,
+    'billingQuoteRequestStatusSubmitted' =>
+      l10n.billingQuoteRequestStatusSubmitted,
+    'billingQuoteRequestStatusUnderReview' =>
+      l10n.billingQuoteRequestStatusUnderReview,
     'billingQuoteRequestStatusQuoted' => l10n.billingQuoteRequestStatusQuoted,
-    'billingQuoteRequestStatusAccepted' => l10n.billingQuoteRequestStatusAccepted,
-    'billingQuoteRequestStatusRejected' => l10n.billingQuoteRequestStatusRejected,
+    'billingQuoteRequestStatusAccepted' =>
+      l10n.billingQuoteRequestStatusAccepted,
+    'billingQuoteRequestStatusRejected' =>
+      l10n.billingQuoteRequestStatusRejected,
     'billingQuoteRequestStatusUnknown' => l10n.billingQuoteRequestStatusUnknown,
-    'billingMetricSeats' =>
-      l10n.billingMetricSeats(params['used'] ?? '0', params['included'] ?? '0'),
-    'billingMetricDriverApps' =>
-      l10n.billingMetricDriverApps(params['used'] ?? '0', params['included'] ?? '0'),
-    'billingMetricFleetSize' => l10n.billingMetricFleetSize(params['count'] ?? '0'),
-    'billingMetricOfficeUsers' => l10n.billingMetricOfficeUsers(params['count'] ?? '0'),
-    'billingMetricDriverAppsRequested' =>
-      l10n.billingMetricDriverAppsRequested(params['count'] ?? '0'),
+    'billingMetricSeats' => l10n.billingMetricSeats(
+      params['used'] ?? '0',
+      params['included'] ?? '0',
+    ),
+    'billingMetricDriverApps' => l10n.billingMetricDriverApps(
+      params['used'] ?? '0',
+      params['included'] ?? '0',
+    ),
+    'billingMetricFleetSize' => l10n.billingMetricFleetSize(
+      params['count'] ?? '0',
+    ),
+    'billingMetricOfficeUsers' => l10n.billingMetricOfficeUsers(
+      params['count'] ?? '0',
+    ),
+    'billingMetricDriverAppsRequested' => l10n.billingMetricDriverAppsRequested(
+      params['count'] ?? '0',
+    ),
     'billingFieldCompanyId' => l10n.billingFieldCompanyId(params['id'] ?? ''),
     'billingFieldPlan' => l10n.billingFieldPlan,
     'billingFieldBillingCycle' => l10n.billingFieldBillingCycle,
@@ -902,8 +1118,9 @@ String resolveBillingKey(
     'billingChangeStatusAction' => l10n.billingChangeStatusAction,
     'billingActionDialogTitle' => l10n.billingActionDialogTitle,
     'billingActionAuditNotice' => l10n.billingActionAuditNotice,
-    'billingActionCurrentStatus' =>
-      l10n.billingActionCurrentStatus(params['status'] ?? ''),
+    'billingActionCurrentStatus' => l10n.billingActionCurrentStatus(
+      params['status'] ?? '',
+    ),
     'billingActionStatusLabel' => l10n.billingActionStatusLabel,
     'billingActionStatusRequired' => l10n.billingActionStatusRequired,
     'billingActionReasonLabel' => l10n.billingActionReasonLabel,
@@ -950,7 +1167,9 @@ String resolveAdminUserKey(
     'adminUserStatusUnknown' => l10n.adminUserStatusUnknown,
     'adminUserRoleUnknown' => l10n.adminUserRoleUnknown,
     'adminUserLastLogin' => l10n.adminUserLastLogin(params['date'] ?? ''),
-    'adminUserFailedLogins' => l10n.adminUserFailedLogins(params['count'] ?? '0'),
+    'adminUserFailedLogins' => l10n.adminUserFailedLogins(
+      params['count'] ?? '0',
+    ),
     'adminUserFieldName' => l10n.adminUserFieldName,
     'adminUserFieldEmail' => l10n.adminUserFieldEmail,
     'adminUserFieldRole' => l10n.adminUserFieldRole,
@@ -962,9 +1181,12 @@ String resolveAdminUserKey(
     'adminUserChangeStatusAction' => l10n.adminUserChangeStatusAction,
     'adminUserRoleDialogTitle' => l10n.adminUserRoleDialogTitle,
     'adminUserStatusDialogTitle' => l10n.adminUserStatusDialogTitle,
-    'adminUserActionCurrentRole' => l10n.adminUserActionCurrentRole(params['role'] ?? ''),
-    'adminUserActionCurrentStatus' =>
-      l10n.adminUserActionCurrentStatus(params['status'] ?? ''),
+    'adminUserActionCurrentRole' => l10n.adminUserActionCurrentRole(
+      params['role'] ?? '',
+    ),
+    'adminUserActionCurrentStatus' => l10n.adminUserActionCurrentStatus(
+      params['status'] ?? '',
+    ),
     'adminUserReasonLabel' => l10n.adminUserReasonLabel,
     'adminUserReasonRequired' => l10n.adminUserReasonRequired,
     'adminUserNameRequired' => l10n.adminUserNameRequired,
@@ -992,29 +1214,40 @@ String resolveSecurityKey(
     'securityOpenModule' => l10n.securityOpenModule,
     'securityPrivacyNotice' => l10n.securityPrivacyNotice,
     'securityOverviewTitle' => l10n.securityOverviewTitle,
-    'securityOverviewFailedLogins' =>
-      l10n.securityOverviewFailedLogins(params['count'] ?? '0'),
-    'securityOverviewDeniedActions' =>
-      l10n.securityOverviewDeniedActions(params['count'] ?? '0'),
-    'securityOverviewActiveGrants' =>
-      l10n.securityOverviewActiveGrants(params['count'] ?? '0'),
-    'securityOverviewCriticalEvents' =>
-      l10n.securityOverviewCriticalEvents(params['count'] ?? '0'),
-    'securityOverviewExpiringGrants' =>
-      l10n.securityOverviewExpiringGrants(params['count'] ?? '0'),
-    'securityOverviewHighRiskAi' =>
-      l10n.securityOverviewHighRiskAi(params['count'] ?? '0'),
-    'securityOverviewSuspiciousBulk' =>
-      l10n.securityOverviewSuspiciousBulk(params['count'] ?? '0'),
+    'securityOverviewFailedLogins' => l10n.securityOverviewFailedLogins(
+      params['count'] ?? '0',
+    ),
+    'securityOverviewDeniedActions' => l10n.securityOverviewDeniedActions(
+      params['count'] ?? '0',
+    ),
+    'securityOverviewActiveGrants' => l10n.securityOverviewActiveGrants(
+      params['count'] ?? '0',
+    ),
+    'securityOverviewCriticalEvents' => l10n.securityOverviewCriticalEvents(
+      params['count'] ?? '0',
+    ),
+    'securityOverviewExpiringGrants' => l10n.securityOverviewExpiringGrants(
+      params['count'] ?? '0',
+    ),
+    'securityOverviewHighRiskAi' => l10n.securityOverviewHighRiskAi(
+      params['count'] ?? '0',
+    ),
+    'securityOverviewSuspiciousBulk' => l10n.securityOverviewSuspiciousBulk(
+      params['count'] ?? '0',
+    ),
     'securityOverviewNoCritical' => l10n.securityOverviewNoCritical,
-    'securityOverviewLastCritical' =>
-      l10n.securityOverviewLastCritical(params['date'] ?? ''),
+    'securityOverviewLastCritical' => l10n.securityOverviewLastCritical(
+      params['date'] ?? '',
+    ),
     'securityEventSearchHint' => l10n.securityEventSearchHint,
     'securityEventListEmpty' => l10n.securityEventListEmpty,
     'securityEventDetailError' => l10n.securityEventDetailError,
-    'securityEventCompanyLabel' =>
-      l10n.securityEventCompanyLabel(params['name'] ?? ''),
-    'securityEventCreatedAt' => l10n.securityEventCreatedAt(params['date'] ?? ''),
+    'securityEventCompanyLabel' => l10n.securityEventCompanyLabel(
+      params['name'] ?? '',
+    ),
+    'securityEventCreatedAt' => l10n.securityEventCreatedAt(
+      params['date'] ?? '',
+    ),
     'securityEventFieldSourceType' => l10n.securityEventFieldSourceType,
     'securityEventFieldSourceId' => l10n.securityEventFieldSourceId,
     'securityEventFieldActorEmail' => l10n.securityEventFieldActorEmail,
@@ -1024,17 +1257,21 @@ String resolveSecurityKey(
     'securityEventFieldCreatedAt' => l10n.securityEventFieldCreatedAt,
     'securityEventFilterAll' => l10n.securityEventFilterAll,
     'securityEventFilterFailedLogin' => l10n.securityEventFilterFailedLogin,
-    'securityEventFilterPermissionDenied' => l10n.securityEventFilterPermissionDenied,
+    'securityEventFilterPermissionDenied' =>
+      l10n.securityEventFilterPermissionDenied,
     'securityEventFilterSupportAccess' => l10n.securityEventFilterSupportAccess,
     'securityEventFilterHighRiskAi' => l10n.securityEventFilterHighRiskAi,
-    'securityEventFilterCriticalSystem' => l10n.securityEventFilterCriticalSystem,
-    'securityEventFilterAdminRoleChange' => l10n.securityEventFilterAdminRoleChange,
+    'securityEventFilterCriticalSystem' =>
+      l10n.securityEventFilterCriticalSystem,
+    'securityEventFilterAdminRoleChange' =>
+      l10n.securityEventFilterAdminRoleChange,
     'securityEventFilterSuspiciousBulkOnboarding' =>
       l10n.securityEventFilterSuspiciousBulkOnboarding,
     'securityEventFilterCritical' => l10n.securityEventFilterCritical,
     'securityEventFilterWarning' => l10n.securityEventFilterWarning,
     'securityEventTypeFailedLogin' => l10n.securityEventTypeFailedLogin,
-    'securityEventTypePermissionDenied' => l10n.securityEventTypePermissionDenied,
+    'securityEventTypePermissionDenied' =>
+      l10n.securityEventTypePermissionDenied,
     'securityEventTypeSupportAccess' => l10n.securityEventTypeSupportAccess,
     'securityEventTypeHighRiskAi' => l10n.securityEventTypeHighRiskAi,
     'securityEventTypeCriticalSystem' => l10n.securityEventTypeCriticalSystem,
@@ -1064,14 +1301,17 @@ String resolveActionCenterKey(
     'actionCenterSearchHint' => l10n.actionCenterSearchHint,
     'actionCenterListEmpty' => l10n.actionCenterListEmpty,
     'actionCenterNeedsAttentionTitle' => l10n.actionCenterNeedsAttentionTitle,
-    'actionCenterNeedsAttentionOpen' =>
-      l10n.actionCenterNeedsAttentionOpen(params['count'] ?? '0'),
+    'actionCenterNeedsAttentionOpen' => l10n.actionCenterNeedsAttentionOpen(
+      params['count'] ?? '0',
+    ),
     'actionCenterNeedsAttentionCritical' =>
       l10n.actionCenterNeedsAttentionCritical(params['count'] ?? '0'),
-    'actionCenterNeedsAttentionTotal' =>
-      l10n.actionCenterNeedsAttentionTotal(params['count'] ?? '0'),
-    'actionCenterCompanyLabel' =>
-      l10n.actionCenterCompanyLabel(params['name'] ?? ''),
+    'actionCenterNeedsAttentionTotal' => l10n.actionCenterNeedsAttentionTotal(
+      params['count'] ?? '0',
+    ),
+    'actionCenterCompanyLabel' => l10n.actionCenterCompanyLabel(
+      params['name'] ?? '',
+    ),
     'actionCenterCreatedAt' => l10n.actionCenterCreatedAt(params['date'] ?? ''),
     'actionCenterFilterAll' => l10n.actionCenterFilterAll,
     'actionCenterFilterRegistration' => l10n.actionCenterFilterRegistration,
@@ -1131,8 +1371,9 @@ String resolveReleaseCenterKey(
     'releaseFieldLatestDriverApp' => l10n.releaseFieldLatestDriverApp,
     'releaseFieldMinAdminApp' => l10n.releaseFieldMinAdminApp,
     'releaseFieldMinDriverApp' => l10n.releaseFieldMinDriverApp,
-    'releaseFieldLastDeployment' =>
-      l10n.releaseFieldLastDeployment(params['date'] ?? ''),
+    'releaseFieldLastDeployment' => l10n.releaseFieldLastDeployment(
+      params['date'] ?? '',
+    ),
     'releaseFieldMigrationStatus' => l10n.releaseFieldMigrationStatus,
     'releaseFieldDeploymentReady' => l10n.releaseFieldDeploymentReady,
     'releaseFieldApiPublicName' => l10n.releaseFieldApiPublicName,

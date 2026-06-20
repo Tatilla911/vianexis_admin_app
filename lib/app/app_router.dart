@@ -29,6 +29,9 @@ import '../features/companies/presentation/platform_companies_screen.dart';
 import '../features/companies/presentation/platform_company_detail_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
 import '../features/login/login_screen.dart';
+import '../features/notifications/presentation/notification_detail_screen.dart';
+import '../features/notifications/presentation/notification_preferences_screen.dart';
+import '../features/notifications/presentation/notifications_screen.dart';
 import '../features/registrations/presentation/registration_application_detail_screen.dart';
 import '../features/registrations/presentation/registration_applications_screen.dart';
 import '../features/settings/admin_settings_screen.dart';
@@ -301,6 +304,26 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ),
           ),
           GoRoute(
+            path: AdminRoutes.notifications,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: NotificationsScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: 'preferences',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: NotificationPreferencesScreen(),
+                ),
+              ),
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => NotificationDetailScreen(
+                  notificationId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
             path: AdminRoutes.settings,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: AdminSettingsScreen(),
@@ -334,6 +357,8 @@ abstract final class AdminRoutes {
   static const supportGrants = '/support/grants';
   static const systemHealth = '/system-health';
   static const auditLogs = '/audit-logs';
+  static const notifications = '/notifications';
+  static const notificationPreferences = '/notifications/preferences';
   static const securityCenter = '/security';
   static const adminUsers = '/admin-users';
   static const releaseCenter = '/release-center';
@@ -370,6 +395,8 @@ abstract final class AdminRoutes {
 
   static String adminUserDetail(String id) => '$adminUsers/$id';
 
+  static String notificationDetail(String id) => '$notifications/$id';
+
   static String securityEventDetail(String id) =>
       '$securityCenter/events/${Uri.encodeComponent(id)}';
 
@@ -404,6 +431,9 @@ abstract final class AdminRoutes {
     if (location.startsWith(adminUsers)) {
       return AdminDestination.adminUsers;
     }
+    if (location.startsWith(notifications)) {
+      return AdminDestination.notifications;
+    }
     if (location.startsWith(releaseCenter)) {
       return AdminDestination.releaseCenter;
     }
@@ -418,6 +448,7 @@ abstract final class AdminRoutes {
       adminUsers => AdminDestination.adminUsers,
       releaseCenter => AdminDestination.releaseCenter,
       auditLogs => AdminDestination.auditLogs,
+      notifications => AdminDestination.notifications,
       settings => AdminDestination.settings,
       _ => null,
     };

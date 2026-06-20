@@ -113,6 +113,22 @@ class AdminSettingsScreen extends ConsumerWidget {
               ),
             ),
           ],
+          const SizedBox(height: 20),
+          VianexisSectionHeader(title: l10n.settingsNotificationsSection),
+          const SizedBox(height: 12),
+          VianexisAdminCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(l10n.settingsNotificationsBody),
+                const SizedBox(height: 16),
+                OutlinedButton(
+                  onPressed: () => context.go(AdminRoutes.notificationPreferences),
+                  child: Text(l10n.settingsOpenNotificationPreferences),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(height: 24),
           VianexisSectionHeader(title: l10n.settingsSignOutSection),
           const SizedBox(height: 12),

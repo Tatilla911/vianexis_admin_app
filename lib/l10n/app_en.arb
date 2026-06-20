@@ -642,6 +642,48 @@
   "bulkOnboardingActionRejectConfirm": "Reject",
   "bulkOnboardingActionCancelConfirm": "Cancel job",
   "bulkOnboardingActionProcessConfirm": "Start processing",
+  "bulkOnboardingDryRunAction": "Dry run",
+  "bulkOnboardingExecuteAction": "Execute",
+  "bulkOnboardingExecuteDisabled": "Execution unavailable",
+  "bulkOnboardingDryRunSuccess": "Dry run completed.",
+  "bulkOnboardingExecuteSuccess": "Execution started and audit logged.",
+  "bulkOnboardingProvisioningTitle": "Provisioning",
+  "bulkOnboardingProvisioningStatus": "Provisioning status: {status}",
+  "@bulkOnboardingProvisioningStatus": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "bulkOnboardingExecutePolicyDisabled": "Execution policy blocked: {reason}",
+  "@bulkOnboardingExecutePolicyDisabled": {
+    "placeholders": {
+      "reason": {}
+    }
+  },
+  "bulkOnboardingExecuteDialogTitle": "Execute provisioning",
+  "bulkOnboardingExecuteMetadataNotice": "Metadata only is shown here. Tenant operational content is not exposed.",
+  "bulkOnboardingExecuteIrreversibleWarning": "This action is irreversible and may provision real entities.",
+  "bulkOnboardingExecuteRowWindow": "Rows to execute: {count} / max {maxRows}",
+  "@bulkOnboardingExecuteRowWindow": {
+    "placeholders": {
+      "count": {},
+      "maxRows": {}
+    }
+  },
+  "bulkOnboardingExecuteReasonLabel": "Execution reason",
+  "bulkOnboardingExecuteReasonRequired": "Execution reason is required.",
+  "bulkOnboardingExecuteConfirmRequired": "You must confirm execution.",
+  "bulkOnboardingExecuteConfirmCheckbox": "I understand this cannot be undone.",
+  "bulkOnboardingExecuteConfirmAction": "Execute now",
+  "bulkOnboardingSummaryDryRunOk": "Dry run ok",
+  "bulkOnboardingSummaryBlocked": "Blocked",
+  "bulkOnboardingSummaryDuplicates": "Duplicates",
+  "bulkOnboardingSummaryFailed": "Failed",
+  "bulkOnboardingSummaryProvisioned": "Provisioned",
+  "bulkOnboardingRowExecutionStatusesTitle": "Row execution statuses",
+  "bulkOnboardingExecuteRejectedPolicy": "Execution rejected by policy. Review row limits and job readiness.",
+  "bulkOnboardingExecuteRejectedValidation": "Execution rejected by backend validation.",
+  "bulkOnboardingExecuteForbidden": "You do not have permission to execute this job.",
   "bulkOnboardingUploadCsv": "Upload CSV",
   "bulkOnboardingChooseFile": "Choose file",
   "bulkOnboardingSelectedFile": "Selected file: {name}",
@@ -1133,5 +1175,29 @@
   "appConfigProductionMisconfigured": "Production build requires API_BASE_URL. Mock fallback is disabled.",
   "appConfigProductionLoginBlocked": "Sign-in is disabled until API_BASE_URL is configured for production.",
   "backendMockFallbackBanner": "Live backend is not configured. Modules use mock data for local UI development.",
-  "settingsApiHostLabel": "API host"
+  "settingsApiHostLabel": "API host",
+  "navNotifications": "Notifications",
+  "notificationsTitle": "Notifications",
+  "notificationsPreferences": "Preferences",
+  "notificationsMarkAllRead": "Mark all read",
+  "notificationsEmpty": "No notifications.",
+  "notificationsInAppOnlyTitle": "In-app only notifications",
+  "notificationsInAppOnlyBody": "Push channels are not enabled in this phase.",
+  "notificationsDetailTitle": "Notification detail",
+  "notificationsNotFound": "Notification not found.",
+  "notificationsPreferencesTitle": "Notification preferences",
+  "notificationsSavePreferences": "Save preferences",
+  "notificationsSaved": "Preferences saved.",
+  "notificationsPrefSystemHealth": "System health",
+  "notificationsPrefSecurity": "Security",
+  "notificationsPrefSupport": "Support",
+  "notificationsPrefBilling": "Billing",
+  "notificationsPrefRelease": "Release",
+  "notificationsPrefInAppOnlyHint": "Only in-app notifications are available in this phase.",
+  "notificationsPrefValidationAtLeastOne": "At least one channel must stay enabled.",
+  "notificationsPrefValidationInAppOnly": "Only in-app notifications are supported in this phase.",
+  "notificationsInAppChip": "In-app only",
+  "settingsNotificationsSection": "Notifications",
+  "settingsNotificationsBody": "Manage in-app notification preferences.",
+  "settingsOpenNotificationPreferences": "Open notification preferences"
 }

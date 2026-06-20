@@ -1936,6 +1936,100 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bulkOnboardingActionProcessConfirm => 'Start processing';
 
   @override
+  String get bulkOnboardingDryRunAction => 'Dry run';
+
+  @override
+  String get bulkOnboardingExecuteAction => 'Execute';
+
+  @override
+  String get bulkOnboardingExecuteDisabled => 'Execution unavailable';
+
+  @override
+  String get bulkOnboardingDryRunSuccess => 'Dry run completed.';
+
+  @override
+  String get bulkOnboardingExecuteSuccess =>
+      'Execution started and audit logged.';
+
+  @override
+  String get bulkOnboardingProvisioningTitle => 'Provisioning';
+
+  @override
+  String bulkOnboardingProvisioningStatus(Object status) {
+    return 'Provisioning status: $status';
+  }
+
+  @override
+  String bulkOnboardingExecutePolicyDisabled(Object reason) {
+    return 'Execution policy blocked: $reason';
+  }
+
+  @override
+  String get bulkOnboardingExecuteDialogTitle => 'Execute provisioning';
+
+  @override
+  String get bulkOnboardingExecuteMetadataNotice =>
+      'Metadata only is shown here. Tenant operational content is not exposed.';
+
+  @override
+  String get bulkOnboardingExecuteIrreversibleWarning =>
+      'This action is irreversible and may provision real entities.';
+
+  @override
+  String bulkOnboardingExecuteRowWindow(Object count, Object maxRows) {
+    return 'Rows to execute: $count / max $maxRows';
+  }
+
+  @override
+  String get bulkOnboardingExecuteReasonLabel => 'Execution reason';
+
+  @override
+  String get bulkOnboardingExecuteReasonRequired =>
+      'Execution reason is required.';
+
+  @override
+  String get bulkOnboardingExecuteConfirmRequired =>
+      'You must confirm execution.';
+
+  @override
+  String get bulkOnboardingExecuteConfirmCheckbox =>
+      'I understand this cannot be undone.';
+
+  @override
+  String get bulkOnboardingExecuteConfirmAction => 'Execute now';
+
+  @override
+  String get bulkOnboardingSummaryDryRunOk => 'Dry run ok';
+
+  @override
+  String get bulkOnboardingSummaryBlocked => 'Blocked';
+
+  @override
+  String get bulkOnboardingSummaryDuplicates => 'Duplicates';
+
+  @override
+  String get bulkOnboardingSummaryFailed => 'Failed';
+
+  @override
+  String get bulkOnboardingSummaryProvisioned => 'Provisioned';
+
+  @override
+  String get bulkOnboardingRowExecutionStatusesTitle =>
+      'Row execution statuses';
+
+  @override
+  String get bulkOnboardingExecuteRejectedPolicy =>
+      'Execution rejected by policy. Review row limits and job readiness.';
+
+  @override
+  String get bulkOnboardingExecuteRejectedValidation =>
+      'Execution rejected by backend validation.';
+
+  @override
+  String get bulkOnboardingExecuteForbidden =>
+      'You do not have permission to execute this job.';
+
+  @override
   String get bulkOnboardingUploadCsv => 'Upload CSV';
 
   @override
@@ -3374,4 +3468,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsApiHostLabel => 'API host';
+
+  @override
+  String get navNotifications => 'Notifications';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsPreferences => 'Preferences';
+
+  @override
+  String get notificationsMarkAllRead => 'Mark all read';
+
+  @override
+  String get notificationsEmpty => 'No notifications.';
+
+  @override
+  String get notificationsInAppOnlyTitle => 'In-app only notifications';
+
+  @override
+  String get notificationsInAppOnlyBody =>
+      'Push channels are not enabled in this phase.';
+
+  @override
+  String get notificationsDetailTitle => 'Notification detail';
+
+  @override
+  String get notificationsNotFound => 'Notification not found.';
+
+  @override
+  String get notificationsPreferencesTitle => 'Notification preferences';
+
+  @override
+  String get notificationsSavePreferences => 'Save preferences';
+
+  @override
+  String get notificationsSaved => 'Preferences saved.';
+
+  @override
+  String get notificationsPrefSystemHealth => 'System health';
+
+  @override
+  String get notificationsPrefSecurity => 'Security';
+
+  @override
+  String get notificationsPrefSupport => 'Support';
+
+  @override
+  String get notificationsPrefBilling => 'Billing';
+
+  @override
+  String get notificationsPrefRelease => 'Release';
+
+  @override
+  String get notificationsPrefInAppOnlyHint =>
+      'Only in-app notifications are available in this phase.';
+
+  @override
+  String get notificationsPrefValidationAtLeastOne =>
+      'At least one channel must stay enabled.';
+
+  @override
+  String get notificationsPrefValidationInAppOnly =>
+      'Only in-app notifications are supported in this phase.';
+
+  @override
+  String get notificationsInAppChip => 'In-app only';
+
+  @override
+  String get settingsNotificationsSection => 'Notifications';
+
+  @override
+  String get settingsNotificationsBody =>
+      'Manage in-app notification preferences.';
+
+  @override
+  String get settingsOpenNotificationPreferences =>
+      'Open notification preferences';
 }

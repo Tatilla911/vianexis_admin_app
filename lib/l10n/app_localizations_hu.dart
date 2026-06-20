@@ -1970,6 +1970,100 @@ class AppLocalizationsHu extends AppLocalizations {
   String get bulkOnboardingActionProcessConfirm => 'Feldolgozás indítása';
 
   @override
+  String get bulkOnboardingDryRunAction => 'Próbafuttatás';
+
+  @override
+  String get bulkOnboardingExecuteAction => 'Végrehajtás';
+
+  @override
+  String get bulkOnboardingExecuteDisabled => 'Végrehajtás nem elérhető';
+
+  @override
+  String get bulkOnboardingDryRunSuccess => 'A próbafuttatás befejeződött.';
+
+  @override
+  String get bulkOnboardingExecuteSuccess =>
+      'A végrehajtás elindult és audit naplózva lett.';
+
+  @override
+  String get bulkOnboardingProvisioningTitle => 'Provisioning';
+
+  @override
+  String bulkOnboardingProvisioningStatus(Object status) {
+    return 'Provisioning állapot: $status';
+  }
+
+  @override
+  String bulkOnboardingExecutePolicyDisabled(Object reason) {
+    return 'A végrehajtást szabályzat blokkolta: $reason';
+  }
+
+  @override
+  String get bulkOnboardingExecuteDialogTitle => 'Provisioning végrehajtása';
+
+  @override
+  String get bulkOnboardingExecuteMetadataNotice =>
+      'Itt csak metaadatok láthatók. Tenant működési tartalom nem jelenik meg.';
+
+  @override
+  String get bulkOnboardingExecuteIrreversibleWarning =>
+      'Ez a művelet visszafordíthatatlan, és valós entitásokat hozhat létre.';
+
+  @override
+  String bulkOnboardingExecuteRowWindow(Object count, Object maxRows) {
+    return 'Végrehajtandó sorok: $count / max $maxRows';
+  }
+
+  @override
+  String get bulkOnboardingExecuteReasonLabel => 'Végrehajtás indoka';
+
+  @override
+  String get bulkOnboardingExecuteReasonRequired =>
+      'A végrehajtás indoka kötelező.';
+
+  @override
+  String get bulkOnboardingExecuteConfirmRequired =>
+      'A végrehajtás megerősítése kötelező.';
+
+  @override
+  String get bulkOnboardingExecuteConfirmCheckbox =>
+      'Tudomásul veszem, hogy ez nem vonható vissza.';
+
+  @override
+  String get bulkOnboardingExecuteConfirmAction => 'Végrehajtás most';
+
+  @override
+  String get bulkOnboardingSummaryDryRunOk => 'Próbafuttatás ok';
+
+  @override
+  String get bulkOnboardingSummaryBlocked => 'Blokkolt';
+
+  @override
+  String get bulkOnboardingSummaryDuplicates => 'Duplikált';
+
+  @override
+  String get bulkOnboardingSummaryFailed => 'Hibás';
+
+  @override
+  String get bulkOnboardingSummaryProvisioned => 'Létrehozott';
+
+  @override
+  String get bulkOnboardingRowExecutionStatusesTitle =>
+      'Sor szintű végrehajtási állapotok';
+
+  @override
+  String get bulkOnboardingExecuteRejectedPolicy =>
+      'A végrehajtást szabályzat elutasította. Ellenőrizd a sorlimitet és az állapotot.';
+
+  @override
+  String get bulkOnboardingExecuteRejectedValidation =>
+      'A végrehajtást a backend validáció elutasította.';
+
+  @override
+  String get bulkOnboardingExecuteForbidden =>
+      'Nincs jogosultságod a feladat végrehajtásához.';
+
+  @override
   String get bulkOnboardingUploadCsv => 'CSV feltöltés';
 
   @override
@@ -3423,4 +3517,83 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get settingsApiHostLabel => 'API host';
+
+  @override
+  String get navNotifications => 'Ertesitesek';
+
+  @override
+  String get notificationsTitle => 'Ertesitesek';
+
+  @override
+  String get notificationsPreferences => 'Beallitasok';
+
+  @override
+  String get notificationsMarkAllRead => 'Osszes olvasottra';
+
+  @override
+  String get notificationsEmpty => 'Nincsenek ertesitesek.';
+
+  @override
+  String get notificationsInAppOnlyTitle =>
+      'Csak alkalmazason beluli ertesitesek';
+
+  @override
+  String get notificationsInAppOnlyBody =>
+      'A push csatornak ebben a fazisban nem aktivak.';
+
+  @override
+  String get notificationsDetailTitle => 'Ertesites reszletei';
+
+  @override
+  String get notificationsNotFound => 'Az ertesites nem talalhato.';
+
+  @override
+  String get notificationsPreferencesTitle => 'Ertesitesi beallitasok';
+
+  @override
+  String get notificationsSavePreferences => 'Beallitasok mentese';
+
+  @override
+  String get notificationsSaved => 'Beallitasok mentve.';
+
+  @override
+  String get notificationsPrefSystemHealth => 'Rendszerallapot';
+
+  @override
+  String get notificationsPrefSecurity => 'Biztonsag';
+
+  @override
+  String get notificationsPrefSupport => 'Tamogatas';
+
+  @override
+  String get notificationsPrefBilling => 'Szamlazas';
+
+  @override
+  String get notificationsPrefRelease => 'Kihelyezes';
+
+  @override
+  String get notificationsPrefInAppOnlyHint =>
+      'Ebben a fazisban csak alkalmazason beluli ertesitesek erhetok el.';
+
+  @override
+  String get notificationsPrefValidationAtLeastOne =>
+      'Legalabb egy csatorna maradjon engedelyezve.';
+
+  @override
+  String get notificationsPrefValidationInAppOnly =>
+      'Ebben a fazisban csak alkalmazason beluli ertesites tamogatott.';
+
+  @override
+  String get notificationsInAppChip => 'Csak alkalmazason belul';
+
+  @override
+  String get settingsNotificationsSection => 'Ertesitesek';
+
+  @override
+  String get settingsNotificationsBody =>
+      'Alkalmazason beluli ertesitesi beallitasok kezelese.';
+
+  @override
+  String get settingsOpenNotificationPreferences =>
+      'Ertesitesi beallitasok megnyitasa';
 }

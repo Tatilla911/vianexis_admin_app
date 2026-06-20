@@ -125,6 +125,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
       AdminDestination.systemHealth => l10n.navSystemHealth,
       AdminDestination.securityCenter => l10n.navSecurityCenter,
       AdminDestination.auditLogs => l10n.navAuditLogs,
+      AdminDestination.notifications => l10n.navNotifications,
       AdminDestination.adminUsers => l10n.navAdminUsers,
       AdminDestination.releaseCenter => l10n.navReleaseCenter,
       AdminDestination.settings => l10n.navSettings,

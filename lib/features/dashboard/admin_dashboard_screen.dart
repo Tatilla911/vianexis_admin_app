@@ -16,6 +16,8 @@ import '../../features/billing/presentation/billing_providers.dart';
 import '../../features/billing/presentation/widgets/billing_overview_card.dart';
 import '../../features/companies/presentation/platform_companies_providers.dart';
 import '../../features/companies/presentation/widgets/platform_company_summary_card.dart';
+import '../../features/notifications/data/notifications_repository.dart';
+import '../../features/notifications/widgets/notification_badge.dart';
 import '../../features/bulk_onboarding/presentation/bulk_onboarding_providers.dart';
 import '../../features/bulk_onboarding/presentation/widgets/bulk_onboarding_summary_card.dart';
 import '../../features/registrations/domain/registration_application_status.dart';
@@ -60,6 +62,9 @@ class AdminDashboardScreen extends ConsumerWidget {
         user?.canAccess(AdminDestination.securityCenter) ?? false;
     final showActionCenter =
         user?.canAccess(AdminDestination.actionCenter) ?? false;
+    final showNotifications =
+        user?.canAccess(AdminDestination.notifications) ?? false;
+    final unreadCount = ref.watch(unreadNotificationCountProvider);
 
     final pendingRegistrations = showRegistrations
         ? registrationsAsync.maybeWhen(
@@ -85,7 +90,26 @@ class AdminDashboardScreen extends ConsumerWidget {
         : null;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.dashboardTitle)),
+      appBar: AppBar(
+        title: Text(l10n.dashboardTitle),
+        actions: [
+          if (showNotifications)
+            IconButton(
+              onPressed: () => context.go(AdminRoutes.notifications),
+              icon: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  const Icon(Icons.notifications_outlined),
+                  Positioned(
+                    right: -8,
+                    top: -8,
+                    child: NotificationBadge(count: unreadCount),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [

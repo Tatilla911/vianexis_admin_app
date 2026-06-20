@@ -3698,6 +3698,162 @@ abstract class AppLocalizations {
   /// **'Start processing'**
   String get bulkOnboardingActionProcessConfirm;
 
+  /// No description provided for @bulkOnboardingDryRunAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Dry run'**
+  String get bulkOnboardingDryRunAction;
+
+  /// No description provided for @bulkOnboardingExecuteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Execute'**
+  String get bulkOnboardingExecuteAction;
+
+  /// No description provided for @bulkOnboardingExecuteDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Execution unavailable'**
+  String get bulkOnboardingExecuteDisabled;
+
+  /// No description provided for @bulkOnboardingDryRunSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Dry run completed.'**
+  String get bulkOnboardingDryRunSuccess;
+
+  /// No description provided for @bulkOnboardingExecuteSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Execution started and audit logged.'**
+  String get bulkOnboardingExecuteSuccess;
+
+  /// No description provided for @bulkOnboardingProvisioningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Provisioning'**
+  String get bulkOnboardingProvisioningTitle;
+
+  /// No description provided for @bulkOnboardingProvisioningStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Provisioning status: {status}'**
+  String bulkOnboardingProvisioningStatus(Object status);
+
+  /// No description provided for @bulkOnboardingExecutePolicyDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Execution policy blocked: {reason}'**
+  String bulkOnboardingExecutePolicyDisabled(Object reason);
+
+  /// No description provided for @bulkOnboardingExecuteDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Execute provisioning'**
+  String get bulkOnboardingExecuteDialogTitle;
+
+  /// No description provided for @bulkOnboardingExecuteMetadataNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only is shown here. Tenant operational content is not exposed.'**
+  String get bulkOnboardingExecuteMetadataNotice;
+
+  /// No description provided for @bulkOnboardingExecuteIrreversibleWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This action is irreversible and may provision real entities.'**
+  String get bulkOnboardingExecuteIrreversibleWarning;
+
+  /// No description provided for @bulkOnboardingExecuteRowWindow.
+  ///
+  /// In en, this message translates to:
+  /// **'Rows to execute: {count} / max {maxRows}'**
+  String bulkOnboardingExecuteRowWindow(Object count, Object maxRows);
+
+  /// No description provided for @bulkOnboardingExecuteReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Execution reason'**
+  String get bulkOnboardingExecuteReasonLabel;
+
+  /// No description provided for @bulkOnboardingExecuteReasonRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Execution reason is required.'**
+  String get bulkOnboardingExecuteReasonRequired;
+
+  /// No description provided for @bulkOnboardingExecuteConfirmRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'You must confirm execution.'**
+  String get bulkOnboardingExecuteConfirmRequired;
+
+  /// No description provided for @bulkOnboardingExecuteConfirmCheckbox.
+  ///
+  /// In en, this message translates to:
+  /// **'I understand this cannot be undone.'**
+  String get bulkOnboardingExecuteConfirmCheckbox;
+
+  /// No description provided for @bulkOnboardingExecuteConfirmAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Execute now'**
+  String get bulkOnboardingExecuteConfirmAction;
+
+  /// No description provided for @bulkOnboardingSummaryDryRunOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Dry run ok'**
+  String get bulkOnboardingSummaryDryRunOk;
+
+  /// No description provided for @bulkOnboardingSummaryBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked'**
+  String get bulkOnboardingSummaryBlocked;
+
+  /// No description provided for @bulkOnboardingSummaryDuplicates.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicates'**
+  String get bulkOnboardingSummaryDuplicates;
+
+  /// No description provided for @bulkOnboardingSummaryFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get bulkOnboardingSummaryFailed;
+
+  /// No description provided for @bulkOnboardingSummaryProvisioned.
+  ///
+  /// In en, this message translates to:
+  /// **'Provisioned'**
+  String get bulkOnboardingSummaryProvisioned;
+
+  /// No description provided for @bulkOnboardingRowExecutionStatusesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Row execution statuses'**
+  String get bulkOnboardingRowExecutionStatusesTitle;
+
+  /// No description provided for @bulkOnboardingExecuteRejectedPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Execution rejected by policy. Review row limits and job readiness.'**
+  String get bulkOnboardingExecuteRejectedPolicy;
+
+  /// No description provided for @bulkOnboardingExecuteRejectedValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Execution rejected by backend validation.'**
+  String get bulkOnboardingExecuteRejectedValidation;
+
+  /// No description provided for @bulkOnboardingExecuteForbidden.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to execute this job.'**
+  String get bulkOnboardingExecuteForbidden;
+
   /// No description provided for @bulkOnboardingUploadCsv.
   ///
   /// In en, this message translates to:
@@ -6283,6 +6439,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'API host'**
   String get settingsApiHostLabel;
+
+  /// No description provided for @navNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get navNotifications;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationsPreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get notificationsPreferences;
+
+  /// No description provided for @notificationsMarkAllRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all read'**
+  String get notificationsMarkAllRead;
+
+  /// No description provided for @notificationsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications.'**
+  String get notificationsEmpty;
+
+  /// No description provided for @notificationsInAppOnlyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'In-app only notifications'**
+  String get notificationsInAppOnlyTitle;
+
+  /// No description provided for @notificationsInAppOnlyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Push channels are not enabled in this phase.'**
+  String get notificationsInAppOnlyBody;
+
+  /// No description provided for @notificationsDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification detail'**
+  String get notificationsDetailTitle;
+
+  /// No description provided for @notificationsNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification not found.'**
+  String get notificationsNotFound;
+
+  /// No description provided for @notificationsPreferencesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification preferences'**
+  String get notificationsPreferencesTitle;
+
+  /// No description provided for @notificationsSavePreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Save preferences'**
+  String get notificationsSavePreferences;
+
+  /// No description provided for @notificationsSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences saved.'**
+  String get notificationsSaved;
+
+  /// No description provided for @notificationsPrefSystemHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'System health'**
+  String get notificationsPrefSystemHealth;
+
+  /// No description provided for @notificationsPrefSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get notificationsPrefSecurity;
+
+  /// No description provided for @notificationsPrefSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get notificationsPrefSupport;
+
+  /// No description provided for @notificationsPrefBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing'**
+  String get notificationsPrefBilling;
+
+  /// No description provided for @notificationsPrefRelease.
+  ///
+  /// In en, this message translates to:
+  /// **'Release'**
+  String get notificationsPrefRelease;
+
+  /// No description provided for @notificationsPrefInAppOnlyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Only in-app notifications are available in this phase.'**
+  String get notificationsPrefInAppOnlyHint;
+
+  /// No description provided for @notificationsPrefValidationAtLeastOne.
+  ///
+  /// In en, this message translates to:
+  /// **'At least one channel must stay enabled.'**
+  String get notificationsPrefValidationAtLeastOne;
+
+  /// No description provided for @notificationsPrefValidationInAppOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Only in-app notifications are supported in this phase.'**
+  String get notificationsPrefValidationInAppOnly;
+
+  /// No description provided for @notificationsInAppChip.
+  ///
+  /// In en, this message translates to:
+  /// **'In-app only'**
+  String get notificationsInAppChip;
+
+  /// No description provided for @settingsNotificationsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotificationsSection;
+
+  /// No description provided for @settingsNotificationsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage in-app notification preferences.'**
+  String get settingsNotificationsBody;
+
+  /// No description provided for @settingsOpenNotificationPreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Open notification preferences'**
+  String get settingsOpenNotificationPreferences;
 }
 
 class _AppLocalizationsDelegate

@@ -57,6 +57,7 @@ enum AdminDestination {
   systemHealth,
   securityCenter,
   auditLogs,
+  notifications,
   adminUsers,
   releaseCenter,
   settings,
@@ -77,6 +78,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.systemHealth ||
         AdminDestination.securityCenter ||
         AdminDestination.auditLogs ||
+        AdminDestination.notifications ||
         AdminDestination.releaseCenter ||
         AdminDestination.settings => true,
         _ => false,
@@ -88,6 +90,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.registrations ||
         AdminDestination.bulkOnboarding ||
         AdminDestination.aiReviews ||
+        AdminDestination.notifications ||
         AdminDestination.settings => true,
         _ => false,
       },
@@ -97,6 +100,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.companies ||
         AdminDestination.billing ||
         AdminDestination.registrations ||
+        AdminDestination.notifications ||
         AdminDestination.settings => true,
         _ => false,
       },

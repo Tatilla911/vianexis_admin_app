@@ -607,6 +607,48 @@
   "bulkOnboardingActionRejectConfirm": "Elutasítás",
   "bulkOnboardingActionCancelConfirm": "Feladat törlése",
   "bulkOnboardingActionProcessConfirm": "Feldolgozás indítása",
+  "bulkOnboardingDryRunAction": "Próbafuttatás",
+  "bulkOnboardingExecuteAction": "Végrehajtás",
+  "bulkOnboardingExecuteDisabled": "Végrehajtás nem elérhető",
+  "bulkOnboardingDryRunSuccess": "A próbafuttatás befejeződött.",
+  "bulkOnboardingExecuteSuccess": "A végrehajtás elindult és audit naplózva lett.",
+  "bulkOnboardingProvisioningTitle": "Provisioning",
+  "bulkOnboardingProvisioningStatus": "Provisioning állapot: {status}",
+  "@bulkOnboardingProvisioningStatus": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "bulkOnboardingExecutePolicyDisabled": "A végrehajtást szabályzat blokkolta: {reason}",
+  "@bulkOnboardingExecutePolicyDisabled": {
+    "placeholders": {
+      "reason": {}
+    }
+  },
+  "bulkOnboardingExecuteDialogTitle": "Provisioning végrehajtása",
+  "bulkOnboardingExecuteMetadataNotice": "Itt csak metaadatok láthatók. Tenant működési tartalom nem jelenik meg.",
+  "bulkOnboardingExecuteIrreversibleWarning": "Ez a művelet visszafordíthatatlan, és valós entitásokat hozhat létre.",
+  "bulkOnboardingExecuteRowWindow": "Végrehajtandó sorok: {count} / max {maxRows}",
+  "@bulkOnboardingExecuteRowWindow": {
+    "placeholders": {
+      "count": {},
+      "maxRows": {}
+    }
+  },
+  "bulkOnboardingExecuteReasonLabel": "Végrehajtás indoka",
+  "bulkOnboardingExecuteReasonRequired": "A végrehajtás indoka kötelező.",
+  "bulkOnboardingExecuteConfirmRequired": "A végrehajtás megerősítése kötelező.",
+  "bulkOnboardingExecuteConfirmCheckbox": "Tudomásul veszem, hogy ez nem vonható vissza.",
+  "bulkOnboardingExecuteConfirmAction": "Végrehajtás most",
+  "bulkOnboardingSummaryDryRunOk": "Próbafuttatás ok",
+  "bulkOnboardingSummaryBlocked": "Blokkolt",
+  "bulkOnboardingSummaryDuplicates": "Duplikált",
+  "bulkOnboardingSummaryFailed": "Hibás",
+  "bulkOnboardingSummaryProvisioned": "Létrehozott",
+  "bulkOnboardingRowExecutionStatusesTitle": "Sor szintű végrehajtási állapotok",
+  "bulkOnboardingExecuteRejectedPolicy": "A végrehajtást szabályzat elutasította. Ellenőrizd a sorlimitet és az állapotot.",
+  "bulkOnboardingExecuteRejectedValidation": "A végrehajtást a backend validáció elutasította.",
+  "bulkOnboardingExecuteForbidden": "Nincs jogosultságod a feladat végrehajtásához.",
   "bulkOnboardingUploadCsv": "CSV feltöltés",
   "bulkOnboardingChooseFile": "Fájl kiválasztása",
   "bulkOnboardingSelectedFile": "Kiválasztott fájl: {name}",
@@ -1045,5 +1087,29 @@
   "appConfigProductionMisconfigured": "Az éles buildhez API_BASE_URL szükséges. A mintavisszaesés le van tiltva.",
   "appConfigProductionLoginBlocked": "A bejelentkezés az éles API_BASE_URL beállításáig tiltott.",
   "backendMockFallbackBanner": "Az éles backend nincs beállítva. A modulok helyi fejlesztéshez mintaadatot használnak.",
-  "settingsApiHostLabel": "API host"
+  "settingsApiHostLabel": "API host",
+  "navNotifications": "Ertesitesek",
+  "notificationsTitle": "Ertesitesek",
+  "notificationsPreferences": "Beallitasok",
+  "notificationsMarkAllRead": "Osszes olvasottra",
+  "notificationsEmpty": "Nincsenek ertesitesek.",
+  "notificationsInAppOnlyTitle": "Csak alkalmazason beluli ertesitesek",
+  "notificationsInAppOnlyBody": "A push csatornak ebben a fazisban nem aktivak.",
+  "notificationsDetailTitle": "Ertesites reszletei",
+  "notificationsNotFound": "Az ertesites nem talalhato.",
+  "notificationsPreferencesTitle": "Ertesitesi beallitasok",
+  "notificationsSavePreferences": "Beallitasok mentese",
+  "notificationsSaved": "Beallitasok mentve.",
+  "notificationsPrefSystemHealth": "Rendszerallapot",
+  "notificationsPrefSecurity": "Biztonsag",
+  "notificationsPrefSupport": "Tamogatas",
+  "notificationsPrefBilling": "Szamlazas",
+  "notificationsPrefRelease": "Kihelyezes",
+  "notificationsPrefInAppOnlyHint": "Ebben a fazisban csak alkalmazason beluli ertesitesek erhetok el.",
+  "notificationsPrefValidationAtLeastOne": "Legalabb egy csatorna maradjon engedelyezve.",
+  "notificationsPrefValidationInAppOnly": "Ebben a fazisban csak alkalmazason beluli ertesites tamogatott.",
+  "notificationsInAppChip": "Csak alkalmazason belul",
+  "settingsNotificationsSection": "Ertesitesek",
+  "settingsNotificationsBody": "Alkalmazason beluli ertesitesi beallitasok kezelese.",
+  "settingsOpenNotificationPreferences": "Ertesitesi beallitasok megnyitasa"
 }
