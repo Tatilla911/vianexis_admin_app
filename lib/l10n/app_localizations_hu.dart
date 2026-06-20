@@ -122,6 +122,140 @@ class AppLocalizationsHu extends AppLocalizations {
       'Az AI által javasolt felülvizsgálati ajánlások itt jelennek meg.';
 
   @override
+  String get aiReviewLoadError => 'Az AI áttekintések betöltése sikertelen.';
+
+  @override
+  String get aiReviewDetailError =>
+      'Az AI áttekintés részletei nem tölthetők be.';
+
+  @override
+  String get aiReviewListEmpty =>
+      'Nincs a szűrőknek megfelelő AI tanácsadó áttekintés.';
+
+  @override
+  String get aiReviewSearchHint =>
+      'Keresés forrás, cég vagy összefoglaló szerint';
+
+  @override
+  String get aiReviewMockDataBadge => 'Mintaadat';
+
+  @override
+  String get aiReviewOpenModule => 'AI áttekintések megnyitása';
+
+  @override
+  String get aiReviewAdvisoryNotice =>
+      'Az AI ajánlások csak tanácsadó jellegűek. Minden döntéshez emberi jóváhagyás szükséges.';
+
+  @override
+  String get aiReviewDashboardTitle => 'AI tanácsadó áttekintések';
+
+  @override
+  String aiReviewDashboardTotal(String count) {
+    return 'Összes áttekintés: $count';
+  }
+
+  @override
+  String aiReviewDashboardHighRisk(String count) {
+    return 'Magas kockázat: $count';
+  }
+
+  @override
+  String aiReviewDashboardNeedsHumanReview(String count) {
+    return 'Emberi felülvizsgálat szükséges: $count';
+  }
+
+  @override
+  String get aiReviewFilterAll => 'Összes';
+
+  @override
+  String get aiReviewFilterHighRisk => 'Magas kockázat';
+
+  @override
+  String get aiReviewFilterRegistration => 'Regisztráció';
+
+  @override
+  String get aiReviewFilterBulkOnboarding => 'Bulk onboarding';
+
+  @override
+  String get aiReviewFilterSystemHealth => 'Rendszerállapot';
+
+  @override
+  String get aiReviewFilterNeedsHumanReview => 'Emberi felülvizsgálat';
+
+  @override
+  String get aiReviewSourceRegistration => 'Regisztráció';
+
+  @override
+  String get aiReviewSourceBulkOnboarding => 'Bulk onboarding';
+
+  @override
+  String get aiReviewSourceSystemHealth => 'Rendszerállapot';
+
+  @override
+  String get aiReviewSourceSupportTicket => 'Támogatási jegy';
+
+  @override
+  String get aiReviewSourceUnknown => 'Ismeretlen forrás';
+
+  @override
+  String get aiReviewRiskLow => 'Alacsony kockázat';
+
+  @override
+  String get aiReviewRiskMedium => 'Közepes kockázat';
+
+  @override
+  String get aiReviewRiskHigh => 'Magas kockázat';
+
+  @override
+  String get aiReviewRiskUnknown => 'Ismeretlen kockázat';
+
+  @override
+  String get aiReviewRecommendationReview => 'Felülvizsgálat javasolt';
+
+  @override
+  String get aiReviewRecommendationRequestInfo => 'Információ kérése';
+
+  @override
+  String get aiReviewRecommendationApproveCandidate => 'Jóváhagyási jelölt';
+
+  @override
+  String get aiReviewRecommendationRejectCandidate => 'Elutasítási jelölt';
+
+  @override
+  String get aiReviewRecommendationEscalate => 'Eszkalálás';
+
+  @override
+  String get aiReviewRecommendationCannotApproveYet => 'Még nem hagyható jóvá';
+
+  @override
+  String get aiReviewRecommendationUnknown => 'Ismeretlen ajánlás';
+
+  @override
+  String get aiReviewSectionSummary => 'Tanácsadó összefoglaló';
+
+  @override
+  String get aiReviewSectionChecks => 'Ellenőrzések és figyelmeztetések';
+
+  @override
+  String get aiReviewFieldChecksPerformed => 'Elvégzett ellenőrzések';
+
+  @override
+  String get aiReviewFieldMissingInformation => 'Hiányzó információ';
+
+  @override
+  String get aiReviewFieldDuplicateWarnings => 'Duplikátum figyelmeztetések';
+
+  @override
+  String aiReviewFieldConfidenceScore(String score) {
+    return 'Megbízhatósági pontszám: $score';
+  }
+
+  @override
+  String aiReviewUpdatedAt(String date) {
+    return 'Frissítve: $date';
+  }
+
+  @override
   String get supportTicketsTitle => 'Támogatási jegyek';
 
   @override

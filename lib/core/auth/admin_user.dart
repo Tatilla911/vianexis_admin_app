@@ -64,6 +64,7 @@ extension AdminRoleCapabilities on AdminRole {
       AdminRole.supportAdmin => switch (destination) {
         AdminDestination.dashboard ||
         AdminDestination.companies ||
+        AdminDestination.aiReviews ||
         AdminDestination.supportTickets ||
         AdminDestination.supportGrants ||
         AdminDestination.systemHealth ||

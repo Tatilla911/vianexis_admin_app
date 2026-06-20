@@ -122,6 +122,137 @@ class AppLocalizationsEn extends AppLocalizations {
       'AI-assisted review recommendations will appear here.';
 
   @override
+  String get aiReviewLoadError => 'Could not load AI reviews.';
+
+  @override
+  String get aiReviewDetailError => 'Could not load AI review detail.';
+
+  @override
+  String get aiReviewListEmpty => 'No AI advisory reviews match your filters.';
+
+  @override
+  String get aiReviewSearchHint => 'Search by source, company, or summary';
+
+  @override
+  String get aiReviewMockDataBadge => 'Mock data';
+
+  @override
+  String get aiReviewOpenModule => 'Open AI reviews';
+
+  @override
+  String get aiReviewAdvisoryNotice =>
+      'AI recommendations are advisory only. Human approval is required for all decisions.';
+
+  @override
+  String get aiReviewDashboardTitle => 'AI advisory reviews';
+
+  @override
+  String aiReviewDashboardTotal(String count) {
+    return 'Total reviews: $count';
+  }
+
+  @override
+  String aiReviewDashboardHighRisk(String count) {
+    return 'High risk: $count';
+  }
+
+  @override
+  String aiReviewDashboardNeedsHumanReview(String count) {
+    return 'Needs human review: $count';
+  }
+
+  @override
+  String get aiReviewFilterAll => 'All';
+
+  @override
+  String get aiReviewFilterHighRisk => 'High risk';
+
+  @override
+  String get aiReviewFilterRegistration => 'Registration';
+
+  @override
+  String get aiReviewFilterBulkOnboarding => 'Bulk onboarding';
+
+  @override
+  String get aiReviewFilterSystemHealth => 'System health';
+
+  @override
+  String get aiReviewFilterNeedsHumanReview => 'Needs human review';
+
+  @override
+  String get aiReviewSourceRegistration => 'Registration';
+
+  @override
+  String get aiReviewSourceBulkOnboarding => 'Bulk onboarding';
+
+  @override
+  String get aiReviewSourceSystemHealth => 'System health';
+
+  @override
+  String get aiReviewSourceSupportTicket => 'Support ticket';
+
+  @override
+  String get aiReviewSourceUnknown => 'Unknown source';
+
+  @override
+  String get aiReviewRiskLow => 'Low risk';
+
+  @override
+  String get aiReviewRiskMedium => 'Medium risk';
+
+  @override
+  String get aiReviewRiskHigh => 'High risk';
+
+  @override
+  String get aiReviewRiskUnknown => 'Unknown risk';
+
+  @override
+  String get aiReviewRecommendationReview => 'Review recommended';
+
+  @override
+  String get aiReviewRecommendationRequestInfo => 'Request info';
+
+  @override
+  String get aiReviewRecommendationApproveCandidate => 'Approve candidate';
+
+  @override
+  String get aiReviewRecommendationRejectCandidate => 'Reject candidate';
+
+  @override
+  String get aiReviewRecommendationEscalate => 'Escalate';
+
+  @override
+  String get aiReviewRecommendationCannotApproveYet => 'Cannot approve yet';
+
+  @override
+  String get aiReviewRecommendationUnknown => 'Unknown recommendation';
+
+  @override
+  String get aiReviewSectionSummary => 'Advisory summary';
+
+  @override
+  String get aiReviewSectionChecks => 'Checks and warnings';
+
+  @override
+  String get aiReviewFieldChecksPerformed => 'Checks performed';
+
+  @override
+  String get aiReviewFieldMissingInformation => 'Missing information';
+
+  @override
+  String get aiReviewFieldDuplicateWarnings => 'Duplicate warnings';
+
+  @override
+  String aiReviewFieldConfidenceScore(String score) {
+    return 'Confidence score: $score';
+  }
+
+  @override
+  String aiReviewUpdatedAt(String date) {
+    return 'Updated $date';
+  }
+
+  @override
   String get supportTicketsTitle => 'Support tickets';
 
   @override

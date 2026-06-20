@@ -6,6 +6,8 @@ import '../../app/app_router.dart';
 import '../../core/auth/admin_auth_state.dart';
 import '../../core/auth/admin_user.dart';
 import '../../core/localization/localization_resolver.dart';
+import '../../features/ai_reviews/presentation/ai_review_providers.dart';
+import '../../features/ai_reviews/presentation/widgets/ai_review_card.dart';
 import '../../features/audit_logs/presentation/audit_log_providers.dart';
 import '../../features/audit_logs/presentation/widgets/audit_log_card.dart';
 import '../../features/companies/presentation/platform_companies_providers.dart';
@@ -29,10 +31,12 @@ class AdminDashboardScreen extends ConsumerWidget {
     final auditAsync = ref.watch(platformAuditLogSummaryProvider);
     final bulkAsync = ref.watch(bulkOnboardingSummaryProvider);
     final companiesAsync = ref.watch(platformCompanyDashboardSummaryProvider);
+    final aiReviewsAsync = ref.watch(aiReviewSummaryProvider);
     final user = ref.watch(adminAuthProvider).user;
     final showBulkOnboarding =
         user?.canAccess(AdminDestination.bulkOnboarding) ?? false;
     final showCompanies = user?.canAccess(AdminDestination.companies) ?? false;
+    final showAiReviews = user?.canAccess(AdminDestination.aiReviews) ?? false;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.dashboardTitle)),
@@ -158,6 +162,31 @@ class AdminDashboardScreen extends ConsumerWidget {
               ),
             ),
           if (showBulkOnboarding) const SizedBox(height: 16),
+          if (showAiReviews)
+            aiReviewsAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => Card(
+                child: ListTile(
+                  title: Text(resolveAiReviewKey(context, 'aiReviewLoadError')),
+                  trailing: TextButton(
+                    onPressed: () => ref.read(aiReviewsProvider.notifier).refresh(),
+                    child: Text(l10n.errorRetryButton),
+                  ),
+                ),
+              ),
+              data: (summary) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AiReviewSummaryCard(summary: summary, compact: true),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: () => context.go(AdminRoutes.aiReviews),
+                    child: Text(resolveAiReviewKey(context, 'aiReviewOpenModule')),
+                  ),
+                ],
+              ),
+            ),
+          if (showAiReviews) const SizedBox(height: 16),
           auditAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, _) => Card(

@@ -694,3 +694,60 @@ String resolvePlatformCompanyKey(
     _ => l10n.errorGenericBody,
   };
 }
+
+String resolveAiReviewKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'aiReviewLoadError' => l10n.aiReviewLoadError,
+    'aiReviewDetailError' => l10n.aiReviewDetailError,
+    'aiReviewListEmpty' => l10n.aiReviewListEmpty,
+    'aiReviewSearchHint' => l10n.aiReviewSearchHint,
+    'aiReviewMockDataBadge' => l10n.aiReviewMockDataBadge,
+    'aiReviewOpenModule' => l10n.aiReviewOpenModule,
+    'aiReviewAdvisoryNotice' => l10n.aiReviewAdvisoryNotice,
+    'aiReviewDashboardTitle' => l10n.aiReviewDashboardTitle,
+    'aiReviewDashboardTotal' => l10n.aiReviewDashboardTotal(params['count'] ?? '0'),
+    'aiReviewDashboardHighRisk' =>
+      l10n.aiReviewDashboardHighRisk(params['count'] ?? '0'),
+    'aiReviewDashboardNeedsHumanReview' =>
+      l10n.aiReviewDashboardNeedsHumanReview(params['count'] ?? '0'),
+    'aiReviewFilterAll' => l10n.aiReviewFilterAll,
+    'aiReviewFilterHighRisk' => l10n.aiReviewFilterHighRisk,
+    'aiReviewFilterRegistration' => l10n.aiReviewFilterRegistration,
+    'aiReviewFilterBulkOnboarding' => l10n.aiReviewFilterBulkOnboarding,
+    'aiReviewFilterSystemHealth' => l10n.aiReviewFilterSystemHealth,
+    'aiReviewFilterNeedsHumanReview' => l10n.aiReviewFilterNeedsHumanReview,
+    'aiReviewSourceRegistration' => l10n.aiReviewSourceRegistration,
+    'aiReviewSourceBulkOnboarding' => l10n.aiReviewSourceBulkOnboarding,
+    'aiReviewSourceSystemHealth' => l10n.aiReviewSourceSystemHealth,
+    'aiReviewSourceSupportTicket' => l10n.aiReviewSourceSupportTicket,
+    'aiReviewSourceUnknown' => l10n.aiReviewSourceUnknown,
+    'aiReviewRiskLow' => l10n.aiReviewRiskLow,
+    'aiReviewRiskMedium' => l10n.aiReviewRiskMedium,
+    'aiReviewRiskHigh' => l10n.aiReviewRiskHigh,
+    'aiReviewRiskUnknown' => l10n.aiReviewRiskUnknown,
+    'aiReviewRecommendationReview' => l10n.aiReviewRecommendationReview,
+    'aiReviewRecommendationRequestInfo' => l10n.aiReviewRecommendationRequestInfo,
+    'aiReviewRecommendationApproveCandidate' =>
+      l10n.aiReviewRecommendationApproveCandidate,
+    'aiReviewRecommendationRejectCandidate' =>
+      l10n.aiReviewRecommendationRejectCandidate,
+    'aiReviewRecommendationEscalate' => l10n.aiReviewRecommendationEscalate,
+    'aiReviewRecommendationCannotApproveYet' =>
+      l10n.aiReviewRecommendationCannotApproveYet,
+    'aiReviewRecommendationUnknown' => l10n.aiReviewRecommendationUnknown,
+    'aiReviewSectionSummary' => l10n.aiReviewSectionSummary,
+    'aiReviewSectionChecks' => l10n.aiReviewSectionChecks,
+    'aiReviewFieldChecksPerformed' => l10n.aiReviewFieldChecksPerformed,
+    'aiReviewFieldMissingInformation' => l10n.aiReviewFieldMissingInformation,
+    'aiReviewFieldDuplicateWarnings' => l10n.aiReviewFieldDuplicateWarnings,
+    'aiReviewFieldConfidenceScore' =>
+      l10n.aiReviewFieldConfidenceScore(params['score'] ?? ''),
+    'aiReviewUpdatedAt' => l10n.aiReviewUpdatedAt(params['date'] ?? ''),
+    _ => l10n.errorGenericBody,
+  };
+}

@@ -6,7 +6,8 @@ import '../core/auth/admin_auth_state.dart';
 import '../core/auth/admin_user.dart';
 import '../core/widgets/permission_denied_screen.dart';
 import '../core/widgets/vianexis_admin_scaffold.dart';
-import '../features/ai_reviews/ai_review_summary_screen.dart';
+import '../features/ai_reviews/presentation/ai_review_detail_screen.dart';
+import '../features/ai_reviews/presentation/ai_review_summary_screen.dart';
 import '../features/audit_logs/presentation/audit_log_detail_screen.dart';
 import '../features/audit_logs/presentation/audit_logs_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_job_detail_screen.dart';
@@ -158,6 +159,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: AiReviewSummaryScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => AiReviewDetailScreen(
+                  reviewId: Uri.decodeComponent(state.pathParameters['id'] ?? ''),
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: AdminRoutes.supportTickets,
@@ -268,6 +277,9 @@ abstract final class AdminRoutes {
   static String supportGrantDetail(String id) => '$supportGrants/$id';
 
   static String auditLogDetail(String id) => '$auditLogs/$id';
+
+  static String aiReviewDetail(String id) =>
+      '$aiReviews/${Uri.encodeComponent(id)}';
 
   static AdminDestination? destinationForLocation(String location) {
     if (location.startsWith(registrations)) {

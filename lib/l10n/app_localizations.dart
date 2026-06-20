@@ -308,6 +308,246 @@ abstract class AppLocalizations {
   /// **'AI-assisted review recommendations will appear here.'**
   String get aiReviewsPlaceholderBody;
 
+  /// No description provided for @aiReviewLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load AI reviews.'**
+  String get aiReviewLoadError;
+
+  /// No description provided for @aiReviewDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load AI review detail.'**
+  String get aiReviewDetailError;
+
+  /// No description provided for @aiReviewListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No AI advisory reviews match your filters.'**
+  String get aiReviewListEmpty;
+
+  /// No description provided for @aiReviewSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by source, company, or summary'**
+  String get aiReviewSearchHint;
+
+  /// No description provided for @aiReviewMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get aiReviewMockDataBadge;
+
+  /// No description provided for @aiReviewOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open AI reviews'**
+  String get aiReviewOpenModule;
+
+  /// No description provided for @aiReviewAdvisoryNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'AI recommendations are advisory only. Human approval is required for all decisions.'**
+  String get aiReviewAdvisoryNotice;
+
+  /// No description provided for @aiReviewDashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI advisory reviews'**
+  String get aiReviewDashboardTitle;
+
+  /// No description provided for @aiReviewDashboardTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total reviews: {count}'**
+  String aiReviewDashboardTotal(String count);
+
+  /// No description provided for @aiReviewDashboardHighRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'High risk: {count}'**
+  String aiReviewDashboardHighRisk(String count);
+
+  /// No description provided for @aiReviewDashboardNeedsHumanReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs human review: {count}'**
+  String aiReviewDashboardNeedsHumanReview(String count);
+
+  /// No description provided for @aiReviewFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get aiReviewFilterAll;
+
+  /// No description provided for @aiReviewFilterHighRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'High risk'**
+  String get aiReviewFilterHighRisk;
+
+  /// No description provided for @aiReviewFilterRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration'**
+  String get aiReviewFilterRegistration;
+
+  /// No description provided for @aiReviewFilterBulkOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding'**
+  String get aiReviewFilterBulkOnboarding;
+
+  /// No description provided for @aiReviewFilterSystemHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'System health'**
+  String get aiReviewFilterSystemHealth;
+
+  /// No description provided for @aiReviewFilterNeedsHumanReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs human review'**
+  String get aiReviewFilterNeedsHumanReview;
+
+  /// No description provided for @aiReviewSourceRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration'**
+  String get aiReviewSourceRegistration;
+
+  /// No description provided for @aiReviewSourceBulkOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding'**
+  String get aiReviewSourceBulkOnboarding;
+
+  /// No description provided for @aiReviewSourceSystemHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'System health'**
+  String get aiReviewSourceSystemHealth;
+
+  /// No description provided for @aiReviewSourceSupportTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Support ticket'**
+  String get aiReviewSourceSupportTicket;
+
+  /// No description provided for @aiReviewSourceUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown source'**
+  String get aiReviewSourceUnknown;
+
+  /// No description provided for @aiReviewRiskLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low risk'**
+  String get aiReviewRiskLow;
+
+  /// No description provided for @aiReviewRiskMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium risk'**
+  String get aiReviewRiskMedium;
+
+  /// No description provided for @aiReviewRiskHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High risk'**
+  String get aiReviewRiskHigh;
+
+  /// No description provided for @aiReviewRiskUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown risk'**
+  String get aiReviewRiskUnknown;
+
+  /// No description provided for @aiReviewRecommendationReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review recommended'**
+  String get aiReviewRecommendationReview;
+
+  /// No description provided for @aiReviewRecommendationRequestInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Request info'**
+  String get aiReviewRecommendationRequestInfo;
+
+  /// No description provided for @aiReviewRecommendationApproveCandidate.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve candidate'**
+  String get aiReviewRecommendationApproveCandidate;
+
+  /// No description provided for @aiReviewRecommendationRejectCandidate.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject candidate'**
+  String get aiReviewRecommendationRejectCandidate;
+
+  /// No description provided for @aiReviewRecommendationEscalate.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalate'**
+  String get aiReviewRecommendationEscalate;
+
+  /// No description provided for @aiReviewRecommendationCannotApproveYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot approve yet'**
+  String get aiReviewRecommendationCannotApproveYet;
+
+  /// No description provided for @aiReviewRecommendationUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown recommendation'**
+  String get aiReviewRecommendationUnknown;
+
+  /// No description provided for @aiReviewSectionSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Advisory summary'**
+  String get aiReviewSectionSummary;
+
+  /// No description provided for @aiReviewSectionChecks.
+  ///
+  /// In en, this message translates to:
+  /// **'Checks and warnings'**
+  String get aiReviewSectionChecks;
+
+  /// No description provided for @aiReviewFieldChecksPerformed.
+  ///
+  /// In en, this message translates to:
+  /// **'Checks performed'**
+  String get aiReviewFieldChecksPerformed;
+
+  /// No description provided for @aiReviewFieldMissingInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing information'**
+  String get aiReviewFieldMissingInformation;
+
+  /// No description provided for @aiReviewFieldDuplicateWarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate warnings'**
+  String get aiReviewFieldDuplicateWarnings;
+
+  /// No description provided for @aiReviewFieldConfidenceScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence score: {score}'**
+  String aiReviewFieldConfidenceScore(String score);
+
+  /// No description provided for @aiReviewUpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated {date}'**
+  String aiReviewUpdatedAt(String date);
+
   /// No description provided for @supportTicketsTitle.
   ///
   /// In en, this message translates to:
