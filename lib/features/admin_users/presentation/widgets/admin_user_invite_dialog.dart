@@ -79,7 +79,7 @@ class _AdminUserInviteDialogState extends State<_AdminUserInviteDialog> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<PlatformAdminUserRole>(
-                value: _role,
+                initialValue: _role,
                 decoration: InputDecoration(
                   labelText: resolveAdminUserKey(context, 'adminUserFieldRole'),
                 ),

@@ -58,7 +58,7 @@ class _AdminUserStatusDialogState extends State<_AdminUserStatusDialog> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<PlatformAdminUserStatus>(
-              value: _status,
+              initialValue: _status,
               decoration: InputDecoration(
                 labelText: resolveAdminUserKey(context, 'adminUserFieldStatus'),
               ),

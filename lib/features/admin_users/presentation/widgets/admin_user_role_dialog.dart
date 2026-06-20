@@ -61,7 +61,7 @@ class _AdminUserRoleDialogState extends State<_AdminUserRoleDialog> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<PlatformAdminUserRole>(
-              value: _role,
+              initialValue: _role,
               decoration: InputDecoration(
                 labelText: resolveAdminUserKey(context, 'adminUserFieldRole'),
               ),

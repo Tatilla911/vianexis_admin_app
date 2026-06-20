@@ -49,7 +49,7 @@ class LiveSecurityCenterRepository implements SecurityCenterRepository {
 class MockSecurityCenterRepository implements SecurityCenterRepository {
   MockSecurityCenterRepository();
 
-  SecurityOverview _overview = SecurityOverview(
+  final SecurityOverview _overview = SecurityOverview(
     failedLoginCount: 12,
     permissionDeniedCount: 5,
     activeSupportGrantsCount: 3,

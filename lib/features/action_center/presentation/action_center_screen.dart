@@ -56,7 +56,7 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: snapshotAsync.when(
               loading: () => const LinearProgressIndicator(),
-              error: (_, __) => Text(resolveActionCenterKey(context, 'actionCenterLoadError')),
+              error: (_, _) => Text(resolveActionCenterKey(context, 'actionCenterLoadError')),
               data: (snapshot) =>
                   ActionCenterNeedsAttentionCard(snapshot: snapshot, compact: true),
             ),

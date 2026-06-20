@@ -53,7 +53,7 @@ class _SecurityCenterScreenState extends ConsumerState<SecurityCenterScreen> {
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: overviewAsync.when(
               loading: () => const LinearProgressIndicator(),
-              error: (_, __) => Text(resolveSecurityKey(context, 'securityLoadError')),
+              error: (_, _) => Text(resolveSecurityKey(context, 'securityLoadError')),
               data: (overview) => SecurityOverviewCard(overview: overview, compact: true),
             ),
           ),

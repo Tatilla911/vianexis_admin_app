@@ -24,7 +24,7 @@ class SecurityEventDetailScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.securityEventDetailTitle)),
       body: eventsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => Center(
+        error: (_, _) => Center(
           child: Text(resolveSecurityKey(context, 'securityLoadError')),
         ),
         data: (items) {
