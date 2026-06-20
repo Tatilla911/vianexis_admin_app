@@ -342,6 +342,28 @@ String resolveSupportKey(
   };
 }
 
+String resolveDashboardKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'dashboardOperationalOverviewTitle' => l10n.dashboardOperationalOverviewTitle,
+    'dashboardOperationalOverviewBody' => l10n.dashboardOperationalOverviewBody,
+    'dashboardSystemStatusHealthy' => l10n.dashboardSystemStatusHealthy,
+    'dashboardSystemStatusAttention' => l10n.dashboardSystemStatusAttention,
+    'dashboardMetricSystemStatus' => l10n.dashboardMetricSystemStatus,
+    'dashboardMetricPendingRegistrations' => l10n.dashboardMetricPendingRegistrations,
+    'dashboardMetricCompaniesAttention' => l10n.dashboardMetricCompaniesAttention,
+    'dashboardMetricBulkOnboardingReview' => l10n.dashboardMetricBulkOnboardingReview,
+    'dashboardMetricAiHighRisk' => l10n.dashboardMetricAiHighRisk,
+    'dashboardMetricSupportIssues' => l10n.dashboardMetricSupportIssues,
+    'dashboardMetricAuditRisks' => l10n.dashboardMetricAuditRisks,
+    _ => l10n.errorGenericBody,
+  };
+}
+
 String resolveAuditLogKey(
   BuildContext context,
   String key, {
@@ -354,11 +376,22 @@ String resolveAuditLogKey(
     'auditLogOpenModule' => l10n.auditLogOpenModule,
     'auditLogSearchHint' => l10n.auditLogSearchHint,
     'auditLogListEmpty' => l10n.auditLogListEmpty,
+    'auditLogDateRangeLabel' => l10n.auditLogDateRangeLabel,
+    'auditLogDateRangeSelected' => l10n.auditLogDateRangeSelected(
+      params['from'] ?? '',
+      params['to'] ?? '',
+    ),
+    'auditLogDateRangeClear' => l10n.auditLogDateRangeClear,
     'auditLogDateRangeComingSoon' => l10n.auditLogDateRangeComingSoon,
     'auditLogTimestampLabel' => l10n.auditLogTimestampLabel(params['date'] ?? ''),
     'auditLogDetailTitle' => l10n.auditLogDetailTitle,
     'auditLogPrivacyNotice' => l10n.auditLogPrivacyNotice,
     'auditLogExportDisabled' => l10n.auditLogExportDisabled,
+    'auditLogExportCsv' => l10n.auditLogExportCsv,
+    'auditLogExportCopied' => l10n.auditLogExportCopied,
+    'auditLogExportFailed' => l10n.auditLogExportFailed,
+    'auditLogExportUnavailable' => l10n.auditLogExportUnavailable,
+    'auditLogExportSafetyNotice' => l10n.auditLogExportSafetyNotice,
     'auditLogSummaryTitle' => l10n.auditLogSummaryTitle,
     'auditLogSummaryLastCritical' => l10n.auditLogSummaryLastCritical,
     'auditLogSummaryNoCritical' => l10n.auditLogSummaryNoCritical,

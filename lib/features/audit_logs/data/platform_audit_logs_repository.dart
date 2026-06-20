@@ -7,14 +7,19 @@ import '../domain/platform_audit_action_type.dart';
 import '../domain/platform_audit_log.dart';
 import '../domain/platform_audit_result.dart';
 import '../domain/platform_audit_severity.dart';
+import '../domain/platform_audit_log_query.dart';
 import 'platform_audit_logs_api.dart';
 
 abstract class PlatformAuditLogsRepository {
-  Future<List<PlatformAuditLog>> fetchLogs();
+  Future<List<PlatformAuditLog>> fetchLogs({PlatformAuditLogListQuery? query});
 
   Future<PlatformAuditLog> fetchLog(String id);
 
+  Future<String> exportCsv({PlatformAuditLogListQuery? query});
+
   bool get usesMockData;
+
+  bool get exportAvailable;
 }
 
 class LivePlatformAuditLogsRepository implements PlatformAuditLogsRepository {
@@ -27,10 +32,18 @@ class LivePlatformAuditLogsRepository implements PlatformAuditLogsRepository {
   bool get usesMockData => false;
 
   @override
-  Future<List<PlatformAuditLog>> fetchLogs() async {
-    final logs = await _api.listLogs();
+  bool get exportAvailable => true;
+
+  @override
+  Future<List<PlatformAuditLog>> fetchLogs({PlatformAuditLogListQuery? query}) async {
+    final logs = await _api.listLogs(query: query);
     _cachedLogs = logs;
     return logs;
+  }
+
+  @override
+  Future<String> exportCsv({PlatformAuditLogListQuery? query}) {
+    return _api.exportCsv(query: query);
   }
 
   @override
@@ -60,9 +73,64 @@ class MockPlatformAuditLogsRepository implements PlatformAuditLogsRepository {
   bool get usesMockData => true;
 
   @override
-  Future<List<PlatformAuditLog>> fetchLogs() async {
+  bool get exportAvailable => true;
+
+  @override
+  Future<List<PlatformAuditLog>> fetchLogs({PlatformAuditLogListQuery? query}) async {
     await Future<void>.delayed(const Duration(milliseconds: 250));
-    return _logs;
+    final queryValue = query ?? const PlatformAuditLogListQuery();
+    return _logs
+        .where((log) => log.matchesFilter(queryValue.filter))
+        .where((log) => log.matchesDateRange(queryValue.dateFrom, queryValue.dateTo))
+        .toList(growable: false);
+  }
+
+  @override
+  Future<String> exportCsv({PlatformAuditLogListQuery? query}) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    final logs = await fetchLogs(query: query);
+    return _buildExportCsv(logs);
+  }
+
+  static String _buildExportCsv(List<PlatformAuditLog> logs) {
+    const headers = [
+      'timestamp',
+      'actorEmail',
+      'actorRole',
+      'actionType',
+      'result',
+      'severity',
+      'targetType',
+      'targetId',
+      'companyName',
+      'reason',
+      'correlationId',
+    ];
+    final buffer = StringBuffer('${headers.join(',')}\n');
+    for (final log in logs) {
+      buffer.writeln([
+        log.timestamp.toUtc().toIso8601String(),
+        _csvCell(log.actorEmail),
+        _csvCell(log.actorRole),
+        _csvCell(log.actionType.name),
+        _csvCell(log.result.name),
+        _csvCell(log.severity.name),
+        _csvCell(log.targetType),
+        _csvCell(log.targetId),
+        _csvCell(log.companyName),
+        _csvCell(log.reason),
+        _csvCell(log.correlationId),
+      ].join(','));
+    }
+    return buffer.toString();
+  }
+
+  static String _csvCell(String? value) {
+    if (value == null || value.isEmpty) return '';
+    if (value.contains(',') || value.contains('"') || value.contains('\n')) {
+      return '"${value.replaceAll('"', '""')}"';
+    }
+    return value;
   }
 
   @override
@@ -183,4 +251,8 @@ final platformAuditLogsRepositoryProvider = Provider<PlatformAuditLogsRepository
     return LivePlatformAuditLogsRepository(ref.watch(platformAuditLogsApiProvider));
   }
   return MockPlatformAuditLogsRepository();
+});
+
+final platformAuditLogsExportAvailableProvider = Provider<bool>((ref) {
+  return ref.watch(platformAuditLogsRepositoryProvider).exportAvailable;
 });

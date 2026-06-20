@@ -2,27 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/platform_audit_logs_repository.dart';
 import '../domain/platform_audit_filter.dart';
+import '../domain/platform_audit_log_query.dart';
 import '../domain/platform_audit_log.dart';
-
-class PlatformAuditLogListQuery {
-  const PlatformAuditLogListQuery({
-    this.search = '',
-    this.filter = PlatformAuditLogFilter.all,
-  });
-
-  final String search;
-  final PlatformAuditLogFilter filter;
-
-  PlatformAuditLogListQuery copyWith({
-    String? search,
-    PlatformAuditLogFilter? filter,
-  }) {
-    return PlatformAuditLogListQuery(
-      search: search ?? this.search,
-      filter: filter ?? this.filter,
-    );
-  }
-}
 
 final platformAuditLogListQueryProvider =
     NotifierProvider<PlatformAuditLogListQueryNotifier, PlatformAuditLogListQuery>(
@@ -35,8 +16,20 @@ class PlatformAuditLogListQueryNotifier extends Notifier<PlatformAuditLogListQue
 
   void setSearch(String value) => state = state.copyWith(search: value);
 
-  void setFilter(PlatformAuditLogFilter filter) =>
-      state = state.copyWith(filter: filter);
+  void setFilter(PlatformAuditLogFilter filter) {
+    state = state.copyWith(filter: filter);
+    ref.invalidate(platformAuditLogsProvider);
+  }
+
+  void setDateRange(DateTime? from, DateTime? to) {
+    state = state.copyWith(dateFrom: from, dateTo: to);
+    ref.invalidate(platformAuditLogsProvider);
+  }
+
+  void clearDateRange() {
+    state = state.copyWith(clearDateFrom: true, clearDateTo: true);
+    ref.invalidate(platformAuditLogsProvider);
+  }
 }
 
 final platformAuditLogsProvider =
@@ -49,7 +42,8 @@ class PlatformAuditLogsNotifier extends AsyncNotifier<List<PlatformAuditLog>> {
   Future<List<PlatformAuditLog>> build() => _load();
 
   Future<List<PlatformAuditLog>> _load() {
-    return ref.read(platformAuditLogsRepositoryProvider).fetchLogs();
+    final query = ref.read(platformAuditLogListQueryProvider);
+    return ref.read(platformAuditLogsRepositoryProvider).fetchLogs(query: query);
   }
 
   Future<void> refresh() async {
@@ -65,6 +59,7 @@ List<PlatformAuditLog> filteredPlatformAuditLogs({
   return items
       .where((item) => item.matchesFilter(query.filter))
       .where((item) => item.matchesSearch(query.search))
+      .where((item) => item.matchesDateRange(query.dateFrom, query.dateTo))
       .toList(growable: false);
 }
 

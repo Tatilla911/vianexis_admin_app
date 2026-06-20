@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/api/api_exception.dart';
+import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
@@ -9,6 +12,7 @@ import '../../../l10n/app_localizations.dart';
 import '../data/platform_audit_logs_repository.dart';
 import 'audit_log_providers.dart';
 import 'widgets/audit_log_card.dart';
+import 'widgets/audit_log_date_range_button.dart';
 import 'widgets/audit_log_filter_bar.dart';
 
 class AuditLogsScreen extends ConsumerStatefulWidget {
@@ -20,11 +24,44 @@ class AuditLogsScreen extends ConsumerStatefulWidget {
 
 class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
   final _searchController = TextEditingController();
+  bool _isExporting = false;
 
   @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  Future<void> _exportCsv() async {
+    final repository = ref.read(platformAuditLogsRepositoryProvider);
+    if (!repository.exportAvailable) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(resolveAuditLogKey(context, 'auditLogExportUnavailable'))),
+      );
+      return;
+    }
+
+    setState(() => _isExporting = true);
+    try {
+      final query = ref.read(platformAuditLogListQueryProvider);
+      final csv = await repository.exportCsv(query: query);
+      await Clipboard.setData(ClipboardData(text: csv));
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(resolveAuditLogKey(context, 'auditLogExportCopied'))),
+      );
+    } on ApiException catch (error) {
+      if (!mounted) return;
+      showApiExceptionSnackBar(context, error);
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(resolveAuditLogKey(context, 'auditLogExportFailed'))),
+      );
+    } finally {
+      if (mounted) setState(() => _isExporting = false);
+    }
   }
 
   @override
@@ -33,6 +70,7 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
     final query = ref.watch(platformAuditLogListQueryProvider);
     final logsAsync = ref.watch(filteredPlatformAuditLogsProvider);
     final usesMock = ref.watch(platformAuditLogsRepositoryProvider).usesMockData;
+    final exportAvailable = ref.watch(platformAuditLogsExportAvailableProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -42,6 +80,17 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
             MockDataBadge(
               label: resolveAuditLogKey(context, 'auditLogMockDataBadge'),
             ),
+          IconButton(
+            tooltip: resolveAuditLogKey(context, 'auditLogExportCsv'),
+            onPressed: exportAvailable && !_isExporting ? _exportCsv : null,
+            icon: _isExporting
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.download_outlined),
+          ),
         ],
       ),
       body: Column(
@@ -60,12 +109,20 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: OutlinedButton(
-                onPressed: null,
-                child: Text(resolveAuditLogKey(context, 'auditLogDateRangeComingSoon')),
-              ),
+            child: AuditLogDateRangeButton(
+              query: query,
+              onChanged: (from, to) => ref
+                  .read(platformAuditLogListQueryProvider.notifier)
+                  .setDateRange(from, to),
+              onClear: () =>
+                  ref.read(platformAuditLogListQueryProvider.notifier).clearDateRange(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              resolveAuditLogKey(context, 'auditLogExportSafetyNotice'),
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
           AuditLogFilterBar(

@@ -1,19 +1,24 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/platform_audit_log.dart';
+import '../domain/platform_audit_log_query.dart';
 
 class PlatformAuditLogsApi {
   PlatformAuditLogsApi(this._apiClient);
 
   final ApiClient _apiClient;
 
-  Future<List<PlatformAuditLog>> listLogs({int limit = 200}) async {
+  Future<List<PlatformAuditLog>> listLogs({
+    PlatformAuditLogListQuery? query,
+    int limit = 200,
+  }) async {
     final response = await _apiClient.get<Map<String, dynamic>>(
       '/platform-admin/audit-logs',
-      queryParameters: {'limit': limit},
+      queryParameters: query?.toApiQuery(limit: limit) ?? {'limit': limit},
     );
     final data = response.data;
     if (data == null) {
@@ -27,6 +32,18 @@ class PlatformAuditLogsApi {
         .whereType<Map>()
         .map((item) => PlatformAuditLog.fromJson(Map<String, dynamic>.from(item)))
         .toList(growable: false);
+  }
+
+  Future<String> exportCsv({
+    PlatformAuditLogListQuery? query,
+    int limit = 10000,
+  }) async {
+    final response = await _apiClient.get<String>(
+      '/platform-admin/audit-logs/export.csv',
+      queryParameters: query?.toApiQuery(limit: limit) ?? {'limit': limit},
+      options: Options(responseType: ResponseType.plain),
+    );
+    return response.data ?? '';
   }
 
   Future<PlatformAuditLog> getLog(String id) async {

@@ -97,6 +97,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboardTitle => 'Platform dashboard';
 
   @override
+  String get dashboardOperationalOverviewTitle => 'Operational overview';
+
+  @override
+  String get dashboardOperationalOverviewBody =>
+      'Metadata-only control center snapshot across platform services and human review queues.';
+
+  @override
+  String get dashboardSystemStatusHealthy => 'Healthy';
+
+  @override
+  String get dashboardSystemStatusAttention => 'Needs attention';
+
+  @override
+  String get dashboardMetricSystemStatus => 'System status';
+
+  @override
+  String get dashboardMetricPendingRegistrations => 'Pending registrations';
+
+  @override
+  String get dashboardMetricCompaniesAttention => 'Companies needing attention';
+
+  @override
+  String get dashboardMetricBulkOnboardingReview =>
+      'Bulk onboarding waiting review';
+
+  @override
+  String get dashboardMetricAiHighRisk => 'AI high-risk reviews';
+
+  @override
+  String get dashboardMetricSupportIssues => 'Open support issues';
+
+  @override
+  String get dashboardMetricAuditRisks => 'Failed / denied audit events';
+
+  @override
   String get dashboardPlaceholderBody =>
       'Operational summaries and platform metrics will appear here.';
 
@@ -1295,7 +1330,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auditLogListEmpty => 'No audit logs match your filters.';
 
   @override
+  String get auditLogDateRangeLabel => 'Filter by date range';
+
+  @override
+  String auditLogDateRangeSelected(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get auditLogDateRangeClear => 'Clear dates';
+
+  @override
   String get auditLogDateRangeComingSoon => 'Date range filter (coming soon)';
+
+  @override
+  String get auditLogExportCsv => 'Export metadata CSV';
+
+  @override
+  String get auditLogExportCopied => 'Audit log export copied to clipboard.';
+
+  @override
+  String get auditLogExportFailed => 'Could not export audit logs.';
+
+  @override
+  String get auditLogExportUnavailable => 'Audit log export is unavailable.';
+
+  @override
+  String get auditLogExportSafetyNotice =>
+      'Exports include metadata only. No trip, document, or message content is included.';
 
   @override
   String auditLogTimestampLabel(String date) {

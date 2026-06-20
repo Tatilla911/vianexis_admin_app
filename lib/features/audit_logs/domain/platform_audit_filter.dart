@@ -24,4 +24,14 @@ extension PlatformAuditLogFilterX on PlatformAuditLogFilter {
       PlatformAuditLogFilter.security => 'auditLogFilterSecurity',
     };
   }
+
+  Map<String, String> apiQueryParams() {
+    return switch (this) {
+      PlatformAuditLogFilter.critical => const {'severity': 'critical'},
+      PlatformAuditLogFilter.warning => const {'severity': 'warning'},
+      PlatformAuditLogFilter.failures => const {'result': 'failure'},
+      PlatformAuditLogFilter.denied => const {'result': 'denied'},
+      _ => const {},
+    };
+  }
 }

@@ -14,11 +14,15 @@ import '../../features/companies/presentation/platform_companies_providers.dart'
 import '../../features/companies/presentation/widgets/platform_company_summary_card.dart';
 import '../../features/bulk_onboarding/presentation/bulk_onboarding_providers.dart';
 import '../../features/bulk_onboarding/presentation/widgets/bulk_onboarding_summary_card.dart';
+import '../../features/registrations/domain/registration_application_status.dart';
+import '../../features/registrations/presentation/registration_providers.dart';
 import '../../features/support/presentation/support_providers.dart';
 import '../../features/support/presentation/widgets/support_summary_card.dart';
 import '../../features/system_health/presentation/system_health_providers.dart';
 import '../../features/system_health/presentation/widgets/system_health_overview_card.dart';
 import '../../l10n/app_localizations.dart';
+import 'widgets/dashboard_operational_overview.dart';
+import 'widgets/dashboard_summary_error_card.dart';
 
 class AdminDashboardScreen extends ConsumerWidget {
   const AdminDashboardScreen({super.key});
@@ -32,33 +36,64 @@ class AdminDashboardScreen extends ConsumerWidget {
     final bulkAsync = ref.watch(bulkOnboardingSummaryProvider);
     final companiesAsync = ref.watch(platformCompanyDashboardSummaryProvider);
     final aiReviewsAsync = ref.watch(aiReviewSummaryProvider);
+    final registrationsAsync = ref.watch(registrationApplicationsProvider);
     final user = ref.watch(adminAuthProvider).user;
     final showBulkOnboarding =
         user?.canAccess(AdminDestination.bulkOnboarding) ?? false;
     final showCompanies = user?.canAccess(AdminDestination.companies) ?? false;
     final showAiReviews = user?.canAccess(AdminDestination.aiReviews) ?? false;
+    final showRegistrations =
+        user?.canAccess(AdminDestination.registrations) ?? false;
+
+    final pendingRegistrations = showRegistrations
+        ? registrationsAsync.maybeWhen(
+            data: (items) => items
+                .where(
+                  (item) =>
+                      item.status == RegistrationApplicationStatus.pending ||
+                      item.status == RegistrationApplicationStatus.needsMoreInfo,
+                )
+                .length,
+            orElse: () => null,
+          )
+        : null;
+
+    final companiesNeedingAttention = showCompanies
+        ? companiesAsync.maybeWhen(
+            data: (summary) =>
+                summary.pendingReviewCompanies +
+                summary.companiesWithOpenSupportIssues +
+                summary.companiesWithPendingOnboarding,
+            orElse: () => null,
+          )
+        : null;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.dashboardTitle)),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Text(
-            l10n.dashboardPlaceholderBody,
-            style: Theme.of(context).textTheme.bodyLarge,
+          DashboardOperationalOverview(
+            systemOverview: healthAsync.asData?.value.overview,
+            pendingRegistrations: pendingRegistrations,
+            companiesNeedingAttention: companiesNeedingAttention,
+            bulkOnboardingWaiting: showBulkOnboarding
+                ? bulkAsync.asData?.value.jobsWaitingForReview
+                : null,
+            aiHighRiskReviews:
+                showAiReviews ? aiReviewsAsync.asData?.value.highRiskCount : null,
+            supportOpenIssues: supportAsync.asData?.value.openTicketsCount,
+            auditFailedDenied: auditAsync.asData?.value.failedDeniedCount,
           ),
           const SizedBox(height: 20),
           healthAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) => Card(
-              child: ListTile(
-                title: Text(resolveSystemHealthKey(context, 'systemHealthLoadError')),
-                trailing: TextButton(
-                  onPressed: () =>
-                      ref.read(systemHealthSnapshotProvider.notifier).refresh(),
-                  child: Text(l10n.errorRetryButton),
-                ),
-              ),
+            error: (error, _) => DashboardSummaryErrorCard(
+              error: error,
+              fallbackMessage:
+                  resolveSystemHealthKey(context, 'systemHealthLoadError'),
+              onRetry: () =>
+                  ref.read(systemHealthSnapshotProvider.notifier).refresh(),
             ),
             data: (snapshot) => Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -78,15 +113,10 @@ class AdminDashboardScreen extends ConsumerWidget {
           const SizedBox(height: 16),
           supportAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) => Card(
-              child: ListTile(
-                title: Text(resolveSupportKey(context, 'supportLoadError')),
-                trailing: TextButton(
-                  onPressed: () =>
-                      ref.read(supportSummaryProvider.notifier).refresh(),
-                  child: Text(l10n.errorRetryButton),
-                ),
-              ),
+            error: (error, _) => DashboardSummaryErrorCard(
+              error: error,
+              fallbackMessage: resolveSupportKey(context, 'supportLoadError'),
+              onRetry: () => ref.read(supportSummaryProvider.notifier).refresh(),
             ),
             data: (summary) => Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -104,18 +134,13 @@ class AdminDashboardScreen extends ConsumerWidget {
           if (showCompanies)
             companiesAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, _) => Card(
-                child: ListTile(
-                  title: Text(
+              error: (error, _) => DashboardSummaryErrorCard(
+                error: error,
+                fallbackMessage:
                     resolvePlatformCompanyKey(context, 'platformCompanyListError'),
-                  ),
-                  trailing: TextButton(
-                    onPressed: () => ref
-                        .read(platformCompanyDashboardSummaryProvider.notifier)
-                        .refresh(),
-                    child: Text(l10n.errorRetryButton),
-                  ),
-                ),
+                onRetry: () => ref
+                    .read(platformCompanyDashboardSummaryProvider.notifier)
+                    .refresh(),
               ),
               data: (summary) => Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -135,17 +160,12 @@ class AdminDashboardScreen extends ConsumerWidget {
           if (showBulkOnboarding)
             bulkAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, _) => Card(
-                child: ListTile(
-                  title: Text(
+              error: (error, _) => DashboardSummaryErrorCard(
+                error: error,
+                fallbackMessage:
                     resolveBulkOnboardingKey(context, 'bulkOnboardingListError'),
-                  ),
-                  trailing: TextButton(
-                    onPressed: () =>
-                        ref.read(bulkOnboardingSummaryProvider.notifier).refresh(),
-                    child: Text(l10n.errorRetryButton),
-                  ),
-                ),
+                onRetry: () =>
+                    ref.read(bulkOnboardingSummaryProvider.notifier).refresh(),
               ),
               data: (summary) => Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -165,14 +185,10 @@ class AdminDashboardScreen extends ConsumerWidget {
           if (showAiReviews)
             aiReviewsAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, _) => Card(
-                child: ListTile(
-                  title: Text(resolveAiReviewKey(context, 'aiReviewLoadError')),
-                  trailing: TextButton(
-                    onPressed: () => ref.read(aiReviewsProvider.notifier).refresh(),
-                    child: Text(l10n.errorRetryButton),
-                  ),
-                ),
+              error: (error, _) => DashboardSummaryErrorCard(
+                error: error,
+                fallbackMessage: resolveAiReviewKey(context, 'aiReviewLoadError'),
+                onRetry: () => ref.read(aiReviewsProvider.notifier).refresh(),
               ),
               data: (summary) => Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -189,15 +205,11 @@ class AdminDashboardScreen extends ConsumerWidget {
           if (showAiReviews) const SizedBox(height: 16),
           auditAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) => Card(
-              child: ListTile(
-                title: Text(resolveAuditLogKey(context, 'auditLogLoadError')),
-                trailing: TextButton(
-                  onPressed: () =>
-                      ref.read(platformAuditLogSummaryProvider.notifier).refresh(),
-                  child: Text(l10n.errorRetryButton),
-                ),
-              ),
+            error: (error, _) => DashboardSummaryErrorCard(
+              error: error,
+              fallbackMessage: resolveAuditLogKey(context, 'auditLogLoadError'),
+              onRetry: () =>
+                  ref.read(platformAuditLogSummaryProvider.notifier).refresh(),
             ),
             data: (summary) => Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

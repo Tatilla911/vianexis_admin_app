@@ -97,6 +97,42 @@ class AppLocalizationsHu extends AppLocalizations {
   String get dashboardTitle => 'Platform irányítópult';
 
   @override
+  String get dashboardOperationalOverviewTitle => 'Operatív áttekintés';
+
+  @override
+  String get dashboardOperationalOverviewBody =>
+      'Metaadat-alapú irányítópult pillanatkép a platform szolgáltatásairól és emberi ellenőrzési sorokról.';
+
+  @override
+  String get dashboardSystemStatusHealthy => 'Egészséges';
+
+  @override
+  String get dashboardSystemStatusAttention => 'Figyelmet igényel';
+
+  @override
+  String get dashboardMetricSystemStatus => 'Rendszerállapot';
+
+  @override
+  String get dashboardMetricPendingRegistrations => 'Függő regisztrációk';
+
+  @override
+  String get dashboardMetricCompaniesAttention => 'Figyelmet igénylő cégek';
+
+  @override
+  String get dashboardMetricBulkOnboardingReview =>
+      'Tömeges onboarding ellenőrzésre vár';
+
+  @override
+  String get dashboardMetricAiHighRisk => 'Magas kockázatú AI értékelések';
+
+  @override
+  String get dashboardMetricSupportIssues => 'Nyitott support ügyek';
+
+  @override
+  String get dashboardMetricAuditRisks =>
+      'Sikertelen / elutasított audit események';
+
+  @override
   String get dashboardPlaceholderBody =>
       'Az operatív összesítések és platform mutatók itt jelennek meg.';
 
@@ -1316,7 +1352,36 @@ class AppLocalizationsHu extends AppLocalizations {
       'Nincs a szűrőnek megfelelő audit napló bejegyzés.';
 
   @override
+  String get auditLogDateRangeLabel => 'Szűrés dátumtartományra';
+
+  @override
+  String auditLogDateRangeSelected(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get auditLogDateRangeClear => 'Dátumok törlése';
+
+  @override
   String get auditLogDateRangeComingSoon => 'Dátumtartomány szűrő (hamarosan)';
+
+  @override
+  String get auditLogExportCsv => 'Metaadat CSV export';
+
+  @override
+  String get auditLogExportCopied =>
+      'Az audit napló export a vágólapra másolva.';
+
+  @override
+  String get auditLogExportFailed => 'Az audit napló exportja nem sikerült.';
+
+  @override
+  String get auditLogExportUnavailable =>
+      'Az audit napló export nem érhető el.';
+
+  @override
+  String get auditLogExportSafetyNotice =>
+      'Az export csak metaadatot tartalmaz. Nem szerepel benne fuvar, dokumentum vagy üzenet tartalom.';
 
   @override
   String auditLogTimestampLabel(String date) {

@@ -126,6 +126,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('Platform dashboard'), findsOneWidget);
     expect(find.byType(NavigationBar), findsOneWidget);
@@ -154,6 +155,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.byType(NavigationRail), findsOneWidget);
     expect(find.byType(NavigationBar), findsNothing);

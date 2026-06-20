@@ -69,6 +69,20 @@ class PlatformAuditLog {
     ].whereType<String>().any((value) => value.toLowerCase().contains(normalized));
   }
 
+  bool matchesDateRange(DateTime? from, DateTime? to) {
+    if (from == null && to == null) return true;
+    final day = DateTime.utc(timestamp.year, timestamp.month, timestamp.day);
+    if (from != null) {
+      final start = DateTime.utc(from.year, from.month, from.day);
+      if (day.isBefore(start)) return false;
+    }
+    if (to != null) {
+      final end = DateTime.utc(to.year, to.month, to.day);
+      if (day.isAfter(end)) return false;
+    }
+    return true;
+  }
+
   bool matchesFilter(PlatformAuditLogFilter filter) {
     return switch (filter) {
       PlatformAuditLogFilter.all => true,

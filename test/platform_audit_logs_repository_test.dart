@@ -7,6 +7,8 @@ import 'package:vianexis_admin_app/core/api/auth_token_storage.dart';
 import 'package:vianexis_admin_app/features/audit_logs/data/platform_audit_logs_api.dart';
 import 'package:vianexis_admin_app/features/audit_logs/data/platform_audit_logs_repository.dart';
 import 'package:vianexis_admin_app/features/audit_logs/domain/platform_audit_action_type.dart';
+import 'package:vianexis_admin_app/features/audit_logs/domain/platform_audit_filter.dart';
+import 'package:vianexis_admin_app/features/audit_logs/domain/platform_audit_log_query.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +52,8 @@ void main() {
                         'registrationApplicationId': 101,
                         'platformAdminRole': 'super_admin',
                         'createdAt': '2026-06-18T09:30:00.000Z',
+                        'result': 'success',
+                        'severity': 'critical',
                       },
                       {
                         'id': 1002,
@@ -62,6 +66,18 @@ void main() {
                       },
                     ],
                   },
+                ),
+              );
+              return;
+            }
+
+            if (options.path == '/platform-admin/audit-logs/export.csv') {
+              handler.resolve(
+                Response<String>(
+                  requestOptions: options,
+                  statusCode: 200,
+                  data:
+                      'timestamp,actorEmail,actorRole,actionType,result,severity,targetType,targetId,companyName,reason,correlationId\n',
                 ),
               );
               return;
@@ -101,12 +117,32 @@ void main() {
       );
     });
 
+    test('fetchLogs passes query parameters', () async {
+      final logs = await repository.fetchLogs(
+        query: PlatformAuditLogListQuery(
+          dateFrom: DateTime.utc(2026, 6, 1),
+          filter: PlatformAuditLogFilter.critical,
+        ),
+      );
+      expect(logs, hasLength(2));
+      expect(logs.first.id, '1001');
+    });
+
     test('fetchLogs returns parsed items', () async {
       final logs = await repository.fetchLogs();
       expect(logs, hasLength(2));
       expect(logs.first.id, '1001');
       expect(logs.first.actionType, PlatformAuditActionType.registrationApproved);
       expect(repository.usesMockData, isFalse);
+    });
+
+    test('exportCsv hits export endpoint', () async {
+      final csv = await repository.exportCsv(
+        query: PlatformAuditLogListQuery(
+          dateFrom: DateTime.utc(2026, 6, 1),
+        ),
+      );
+      expect(csv, contains('timestamp,actorEmail,actorRole'));
     });
 
     test('fetchLog loads live detail endpoint', () async {
@@ -140,6 +176,12 @@ void main() {
       expect(logs, isNotEmpty);
       final detail = await repository.fetchLog(logs.first.id);
       expect(detail.id, logs.first.id);
+    });
+    test('mock export csv contains metadata headers', () async {
+      final repository = MockPlatformAuditLogsRepository();
+      final csv = await repository.exportCsv();
+      expect(csv, contains('timestamp,actorEmail,actorRole'));
+      expect(csv, contains('correlationId'));
     });
   });
 }

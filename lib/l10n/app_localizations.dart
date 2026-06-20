@@ -266,6 +266,72 @@ abstract class AppLocalizations {
   /// **'Platform dashboard'**
   String get dashboardTitle;
 
+  /// No description provided for @dashboardOperationalOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Operational overview'**
+  String get dashboardOperationalOverviewTitle;
+
+  /// No description provided for @dashboardOperationalOverviewBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata-only control center snapshot across platform services and human review queues.'**
+  String get dashboardOperationalOverviewBody;
+
+  /// No description provided for @dashboardSystemStatusHealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy'**
+  String get dashboardSystemStatusHealthy;
+
+  /// No description provided for @dashboardSystemStatusAttention.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs attention'**
+  String get dashboardSystemStatusAttention;
+
+  /// No description provided for @dashboardMetricSystemStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'System status'**
+  String get dashboardMetricSystemStatus;
+
+  /// No description provided for @dashboardMetricPendingRegistrations.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending registrations'**
+  String get dashboardMetricPendingRegistrations;
+
+  /// No description provided for @dashboardMetricCompaniesAttention.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies needing attention'**
+  String get dashboardMetricCompaniesAttention;
+
+  /// No description provided for @dashboardMetricBulkOnboardingReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding waiting review'**
+  String get dashboardMetricBulkOnboardingReview;
+
+  /// No description provided for @dashboardMetricAiHighRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'AI high-risk reviews'**
+  String get dashboardMetricAiHighRisk;
+
+  /// No description provided for @dashboardMetricSupportIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'Open support issues'**
+  String get dashboardMetricSupportIssues;
+
+  /// No description provided for @dashboardMetricAuditRisks.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed / denied audit events'**
+  String get dashboardMetricAuditRisks;
+
   /// No description provided for @dashboardPlaceholderBody.
   ///
   /// In en, this message translates to:
@@ -2504,11 +2570,59 @@ abstract class AppLocalizations {
   /// **'No audit logs match your filters.'**
   String get auditLogListEmpty;
 
+  /// No description provided for @auditLogDateRangeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by date range'**
+  String get auditLogDateRangeLabel;
+
+  /// No description provided for @auditLogDateRangeSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} – {to}'**
+  String auditLogDateRangeSelected(String from, String to);
+
+  /// No description provided for @auditLogDateRangeClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear dates'**
+  String get auditLogDateRangeClear;
+
   /// No description provided for @auditLogDateRangeComingSoon.
   ///
   /// In en, this message translates to:
   /// **'Date range filter (coming soon)'**
   String get auditLogDateRangeComingSoon;
+
+  /// No description provided for @auditLogExportCsv.
+  ///
+  /// In en, this message translates to:
+  /// **'Export metadata CSV'**
+  String get auditLogExportCsv;
+
+  /// No description provided for @auditLogExportCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit log export copied to clipboard.'**
+  String get auditLogExportCopied;
+
+  /// No description provided for @auditLogExportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not export audit logs.'**
+  String get auditLogExportFailed;
+
+  /// No description provided for @auditLogExportUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit log export is unavailable.'**
+  String get auditLogExportUnavailable;
+
+  /// No description provided for @auditLogExportSafetyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Exports include metadata only. No trip, document, or message content is included.'**
+  String get auditLogExportSafetyNotice;
 
   /// No description provided for @auditLogTimestampLabel.
   ///
