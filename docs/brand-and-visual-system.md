@@ -64,8 +64,8 @@ Background watermark is enabled on login; authenticated module chrome uses a lig
 | Android app label | **ViaNexis Admin** |
 | iOS display name | **ViaNexis Admin** |
 | Android launch background | Navy `#0D1B2A` |
-| Launcher icon tooling | **Pending** — source asset at `assets/icons/app_icon.png`; run `flutter_launcher_icons` when ready |
-| Native splash tooling | **Pending** — use `assets/backgrounds/admin_background.png` with `flutter_native_splash` when ready |
+| Launcher icon tooling | **Configured** — `dart run flutter_launcher_icons` from `assets/icons/app_icon.png` |
+| Native splash tooling | **Configured** — `dart run flutter_native_splash:create` with mark on `#0D1B2A` |
 
 ## Adding future logo variants
 

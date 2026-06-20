@@ -9,6 +9,7 @@ import '../domain/admin_device_registration.dart';
 import '../domain/admin_notification.dart';
 import '../domain/notification_severity.dart';
 import '../domain/notification_preferences.dart';
+import '../domain/push_provider_status.dart';
 import '../domain/notification_type.dart';
 import 'notifications_api.dart';
 
@@ -19,6 +20,7 @@ abstract class NotificationsRepository {
   Future<NotificationPreferences> getPreferences();
   Future<NotificationPreferences> updatePreferences(NotificationPreferences value);
   Future<void> registerCurrentDevice();
+  Future<PushProviderStatus> fetchProviderStatus();
   bool get usesMockData;
   bool get inAppOnly;
 }
@@ -64,6 +66,9 @@ class LiveNotificationsRepository implements NotificationsRepository {
       ),
     );
   }
+
+  @override
+  Future<PushProviderStatus> fetchProviderStatus() => _api.getProviderStatus();
 }
 
 class MockNotificationsRepository implements NotificationsRepository {
@@ -140,6 +145,17 @@ class MockNotificationsRepository implements NotificationsRepository {
     );
     registration.toJson();
   }
+
+  @override
+  Future<PushProviderStatus> fetchProviderStatus() async {
+    await Future<void>.delayed(const Duration(milliseconds: 80));
+    return const PushProviderStatus(
+      provider: 'none',
+      deliveryEnabled: false,
+      configured: false,
+      tokenStorageMode: 'hash_only',
+    );
+  }
 }
 
 final notificationsRepositoryProvider = Provider<NotificationsRepository>((ref) {
@@ -209,6 +225,11 @@ final unreadNotificationCountProvider = Provider<int>((ref) {
     orElse: () => 0,
   );
 });
+
+final pushProviderStatusProvider =
+    FutureProvider.autoDispose<PushProviderStatus>((ref) {
+      return ref.watch(notificationsRepositoryProvider).fetchProviderStatus();
+    });
 
 String get _deviceId => _cachedDeviceId ??= _generateDeviceId();
 String? _cachedDeviceId;

@@ -68,6 +68,34 @@ List<String> runReleaseReadinessChecks(Directory root) {
     }
   }
 
+  if (pubspecText.isNotEmpty) {
+    if (!pubspecText.contains('flutter_launcher_icons:')) {
+      issues.add('pubspec.yaml should configure flutter_launcher_icons');
+    }
+    if (!pubspecText.contains('flutter_native_splash:')) {
+      issues.add('pubspec.yaml should configure flutter_native_splash');
+    }
+  }
+
+  final androidLauncher = File(
+    '${root.path}${Platform.pathSeparator}android${Platform.pathSeparator}app${Platform.pathSeparator}src${Platform.pathSeparator}main${Platform.pathSeparator}res${Platform.pathSeparator}mipmap-hdpi${Platform.pathSeparator}ic_launcher.png',
+  );
+  if (!androidLauncher.existsSync()) {
+    issues.add(
+      'Android launcher icon missing — run: dart run flutter_launcher_icons',
+    );
+  }
+
+  final splashDrawable = File(
+    '${root.path}${Platform.pathSeparator}android${Platform.pathSeparator}app${Platform.pathSeparator}src${Platform.pathSeparator}main${Platform.pathSeparator}res${Platform.pathSeparator}drawable${Platform.pathSeparator}launch_background.xml',
+  );
+  if (splashDrawable.existsSync()) {
+    final text = splashDrawable.readAsStringSync();
+    if (!text.contains('0D1B2A') && !text.contains('splash')) {
+      issues.add('Android splash should use ViaNexis navy background');
+    }
+  }
+
   return issues;
 }
 

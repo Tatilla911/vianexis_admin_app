@@ -14,11 +14,13 @@ Regenerate locally:
 
 ```bash
 python tool/generate_admin_branding.py
+dart run flutter_launcher_icons
+dart run flutter_native_splash:create
 ```
 
 ## App icon / splash
 
-- **App icon generation:** pending — no `flutter_launcher_icons` config in this repo yet.
-- **Native splash generation:** pending — Android uses navy `#0D1B2A` launch background; full branded splash tooling deferred.
+- **App icon:** `flutter_launcher_icons` configured in `pubspec.yaml` (`assets/icons/app_icon.png`).
+- **Native splash:** `flutter_native_splash` configured with navy `#0D1B2A` and `assets/branding/vianexis_mark.png`.
 
 Widgets fall back to a styled **VN** mark if assets are missing.

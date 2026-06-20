@@ -45,4 +45,13 @@ flutter build ipa --release --dart-define=APP_ENV=production --dart-define=API_B
 
 ## App icon / splash
 
-Status: **assets ready** — source assets available at `assets/icons/app_icon.png` and `assets/backgrounds/admin_background.png`. Native launcher icon and splash generation tooling (e.g. `flutter_launcher_icons`, `flutter_native_splash`) is still pending. See `docs/brand-and-visual-system.md`.
+Status: **configured** — `flutter_launcher_icons` and `flutter_native_splash` are declared in `pubspec.yaml`.
+
+Regenerate after updating source PNGs:
+
+```powershell
+dart run flutter_launcher_icons
+dart run flutter_native_splash:create
+```
+
+Source assets: `assets/icons/app_icon.png`, splash mark `assets/branding/vianexis_mark.png`, background `#0D1B2A`.

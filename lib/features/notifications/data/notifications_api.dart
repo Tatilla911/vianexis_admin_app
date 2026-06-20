@@ -4,6 +4,7 @@ import '../../../core/api/api_client.dart';
 import '../domain/admin_device_registration.dart';
 import '../domain/admin_notification.dart';
 import '../domain/notification_preferences.dart';
+import '../domain/push_provider_status.dart';
 
 class NotificationsApi {
   NotificationsApi(this._apiClient);
@@ -58,6 +59,13 @@ class NotificationsApi {
       '/platform-admin/devices/register',
       data: registration.toJson(),
     );
+  }
+
+  Future<PushProviderStatus> getProviderStatus() async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/notifications/provider-status',
+    );
+    return PushProviderStatus.fromJson(response.data ?? const {});
   }
 }
 
