@@ -916,3 +916,231 @@ String resolveBillingKey(
     _ => l10n.errorGenericBody,
   };
 }
+
+String resolveAdminUserKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'adminUserLoadError' => l10n.adminUserLoadError,
+    'adminUserDetailError' => l10n.adminUserDetailError,
+    'adminUserMockDataBadge' => l10n.adminUserMockDataBadge,
+    'adminUserMetadataBadge' => l10n.adminUserMetadataBadge,
+    'adminUserOpenModule' => l10n.adminUserOpenModule,
+    'adminUserPrivacyNotice' => l10n.adminUserPrivacyNotice,
+    'adminUserSearchHint' => l10n.adminUserSearchHint,
+    'adminUserListEmpty' => l10n.adminUserListEmpty,
+    'adminUserInviteAction' => l10n.adminUserInviteAction,
+    'adminUserInviteTitle' => l10n.adminUserInviteTitle,
+    'adminUserInviteNotice' => l10n.adminUserInviteNotice,
+    'adminUserInviteNoteLabel' => l10n.adminUserInviteNoteLabel,
+    'adminUserInviteConfirm' => l10n.adminUserInviteConfirm,
+    'adminUserInviteSuccess' => l10n.adminUserInviteSuccess,
+    'adminUserFilterAll' => l10n.adminUserFilterAll,
+    'adminUserFilterActive' => l10n.adminUserFilterActive,
+    'adminUserFilterInvited' => l10n.adminUserFilterInvited,
+    'adminUserFilterSuspended' => l10n.adminUserFilterSuspended,
+    'adminUserFilterDisabled' => l10n.adminUserFilterDisabled,
+    'adminUserStatusActive' => l10n.adminUserStatusActive,
+    'adminUserStatusInvited' => l10n.adminUserStatusInvited,
+    'adminUserStatusSuspended' => l10n.adminUserStatusSuspended,
+    'adminUserStatusDisabled' => l10n.adminUserStatusDisabled,
+    'adminUserStatusUnknown' => l10n.adminUserStatusUnknown,
+    'adminUserRoleUnknown' => l10n.adminUserRoleUnknown,
+    'adminUserLastLogin' => l10n.adminUserLastLogin(params['date'] ?? ''),
+    'adminUserFailedLogins' => l10n.adminUserFailedLogins(params['count'] ?? '0'),
+    'adminUserFieldName' => l10n.adminUserFieldName,
+    'adminUserFieldEmail' => l10n.adminUserFieldEmail,
+    'adminUserFieldRole' => l10n.adminUserFieldRole,
+    'adminUserFieldStatus' => l10n.adminUserFieldStatus,
+    'adminUserFieldCreatedAt' => l10n.adminUserFieldCreatedAt,
+    'adminUserFieldLastLoginAt' => l10n.adminUserFieldLastLoginAt,
+    'adminUserFieldFailedLoginCount' => l10n.adminUserFieldFailedLoginCount,
+    'adminUserChangeRoleAction' => l10n.adminUserChangeRoleAction,
+    'adminUserChangeStatusAction' => l10n.adminUserChangeStatusAction,
+    'adminUserRoleDialogTitle' => l10n.adminUserRoleDialogTitle,
+    'adminUserStatusDialogTitle' => l10n.adminUserStatusDialogTitle,
+    'adminUserActionCurrentRole' => l10n.adminUserActionCurrentRole(params['role'] ?? ''),
+    'adminUserActionCurrentStatus' =>
+      l10n.adminUserActionCurrentStatus(params['status'] ?? ''),
+    'adminUserReasonLabel' => l10n.adminUserReasonLabel,
+    'adminUserReasonRequired' => l10n.adminUserReasonRequired,
+    'adminUserNameRequired' => l10n.adminUserNameRequired,
+    'adminUserActionAuditNotice' => l10n.adminUserActionAuditNotice,
+    'adminUserActionCancel' => l10n.adminUserActionCancel,
+    'adminUserRoleConfirm' => l10n.adminUserRoleConfirm,
+    'adminUserStatusConfirm' => l10n.adminUserStatusConfirm,
+    'adminUserRoleSuccess' => l10n.adminUserRoleSuccess,
+    'adminUserStatusSuccess' => l10n.adminUserStatusSuccess,
+    'adminUserActionError' => l10n.adminUserActionError,
+    'adminUserActionUnavailable' => l10n.adminUserActionUnavailable,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveSecurityKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'securityLoadError' => l10n.securityLoadError,
+    'securityMockDataBadge' => l10n.securityMockDataBadge,
+    'securityOpenModule' => l10n.securityOpenModule,
+    'securityPrivacyNotice' => l10n.securityPrivacyNotice,
+    'securityOverviewTitle' => l10n.securityOverviewTitle,
+    'securityOverviewFailedLogins' =>
+      l10n.securityOverviewFailedLogins(params['count'] ?? '0'),
+    'securityOverviewDeniedActions' =>
+      l10n.securityOverviewDeniedActions(params['count'] ?? '0'),
+    'securityOverviewActiveGrants' =>
+      l10n.securityOverviewActiveGrants(params['count'] ?? '0'),
+    'securityOverviewCriticalEvents' =>
+      l10n.securityOverviewCriticalEvents(params['count'] ?? '0'),
+    'securityOverviewExpiringGrants' =>
+      l10n.securityOverviewExpiringGrants(params['count'] ?? '0'),
+    'securityOverviewHighRiskAi' =>
+      l10n.securityOverviewHighRiskAi(params['count'] ?? '0'),
+    'securityOverviewSuspiciousBulk' =>
+      l10n.securityOverviewSuspiciousBulk(params['count'] ?? '0'),
+    'securityOverviewNoCritical' => l10n.securityOverviewNoCritical,
+    'securityOverviewLastCritical' =>
+      l10n.securityOverviewLastCritical(params['date'] ?? ''),
+    'securityEventSearchHint' => l10n.securityEventSearchHint,
+    'securityEventListEmpty' => l10n.securityEventListEmpty,
+    'securityEventDetailError' => l10n.securityEventDetailError,
+    'securityEventCompanyLabel' =>
+      l10n.securityEventCompanyLabel(params['name'] ?? ''),
+    'securityEventCreatedAt' => l10n.securityEventCreatedAt(params['date'] ?? ''),
+    'securityEventFieldSourceType' => l10n.securityEventFieldSourceType,
+    'securityEventFieldSourceId' => l10n.securityEventFieldSourceId,
+    'securityEventFieldActorEmail' => l10n.securityEventFieldActorEmail,
+    'securityEventFieldActorRole' => l10n.securityEventFieldActorRole,
+    'securityEventFieldCompany' => l10n.securityEventFieldCompany,
+    'securityEventFieldCorrelationId' => l10n.securityEventFieldCorrelationId,
+    'securityEventFieldCreatedAt' => l10n.securityEventFieldCreatedAt,
+    'securityEventFilterAll' => l10n.securityEventFilterAll,
+    'securityEventFilterFailedLogin' => l10n.securityEventFilterFailedLogin,
+    'securityEventFilterPermissionDenied' => l10n.securityEventFilterPermissionDenied,
+    'securityEventFilterSupportAccess' => l10n.securityEventFilterSupportAccess,
+    'securityEventFilterHighRiskAi' => l10n.securityEventFilterHighRiskAi,
+    'securityEventFilterCriticalSystem' => l10n.securityEventFilterCriticalSystem,
+    'securityEventFilterAdminRoleChange' => l10n.securityEventFilterAdminRoleChange,
+    'securityEventFilterSuspiciousBulkOnboarding' =>
+      l10n.securityEventFilterSuspiciousBulkOnboarding,
+    'securityEventFilterCritical' => l10n.securityEventFilterCritical,
+    'securityEventFilterWarning' => l10n.securityEventFilterWarning,
+    'securityEventTypeFailedLogin' => l10n.securityEventTypeFailedLogin,
+    'securityEventTypePermissionDenied' => l10n.securityEventTypePermissionDenied,
+    'securityEventTypeSupportAccess' => l10n.securityEventTypeSupportAccess,
+    'securityEventTypeHighRiskAi' => l10n.securityEventTypeHighRiskAi,
+    'securityEventTypeCriticalSystem' => l10n.securityEventTypeCriticalSystem,
+    'securityEventTypeAdminRoleChange' => l10n.securityEventTypeAdminRoleChange,
+    'securityEventTypeSuspiciousBulkOnboarding' =>
+      l10n.securityEventTypeSuspiciousBulkOnboarding,
+    'securityEventTypeUnknown' => l10n.securityEventTypeUnknown,
+    'securityEventSeverityInfo' => l10n.securityEventSeverityInfo,
+    'securityEventSeverityWarning' => l10n.securityEventSeverityWarning,
+    'securityEventSeverityCritical' => l10n.securityEventSeverityCritical,
+    'securityEventSeverityUnknown' => l10n.securityEventSeverityUnknown,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveActionCenterKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'actionCenterLoadError' => l10n.actionCenterLoadError,
+    'actionCenterMockDataBadge' => l10n.actionCenterMockDataBadge,
+    'actionCenterOpenModule' => l10n.actionCenterOpenModule,
+    'actionCenterPrivacyNotice' => l10n.actionCenterPrivacyNotice,
+    'actionCenterSearchHint' => l10n.actionCenterSearchHint,
+    'actionCenterListEmpty' => l10n.actionCenterListEmpty,
+    'actionCenterNeedsAttentionTitle' => l10n.actionCenterNeedsAttentionTitle,
+    'actionCenterNeedsAttentionOpen' =>
+      l10n.actionCenterNeedsAttentionOpen(params['count'] ?? '0'),
+    'actionCenterNeedsAttentionCritical' =>
+      l10n.actionCenterNeedsAttentionCritical(params['count'] ?? '0'),
+    'actionCenterNeedsAttentionTotal' =>
+      l10n.actionCenterNeedsAttentionTotal(params['count'] ?? '0'),
+    'actionCenterCompanyLabel' =>
+      l10n.actionCenterCompanyLabel(params['name'] ?? ''),
+    'actionCenterCreatedAt' => l10n.actionCenterCreatedAt(params['date'] ?? ''),
+    'actionCenterFilterAll' => l10n.actionCenterFilterAll,
+    'actionCenterFilterRegistration' => l10n.actionCenterFilterRegistration,
+    'actionCenterFilterBulkOnboarding' => l10n.actionCenterFilterBulkOnboarding,
+    'actionCenterFilterSupport' => l10n.actionCenterFilterSupport,
+    'actionCenterFilterSystemHealth' => l10n.actionCenterFilterSystemHealth,
+    'actionCenterFilterSecurity' => l10n.actionCenterFilterSecurity,
+    'actionCenterFilterBilling' => l10n.actionCenterFilterBilling,
+    'actionCenterFilterAiReview' => l10n.actionCenterFilterAiReview,
+    'actionCenterFilterCritical' => l10n.actionCenterFilterCritical,
+    'actionCenterTypeRegistration' => l10n.actionCenterTypeRegistration,
+    'actionCenterTypeBulkOnboarding' => l10n.actionCenterTypeBulkOnboarding,
+    'actionCenterTypeSupport' => l10n.actionCenterTypeSupport,
+    'actionCenterTypeSystemHealth' => l10n.actionCenterTypeSystemHealth,
+    'actionCenterTypeSecurity' => l10n.actionCenterTypeSecurity,
+    'actionCenterTypeBilling' => l10n.actionCenterTypeBilling,
+    'actionCenterTypeAiReview' => l10n.actionCenterTypeAiReview,
+    'actionCenterTypeCompany' => l10n.actionCenterTypeCompany,
+    'actionCenterTypeUnknown' => l10n.actionCenterTypeUnknown,
+    'actionCenterPriorityLow' => l10n.actionCenterPriorityLow,
+    'actionCenterPriorityNormal' => l10n.actionCenterPriorityNormal,
+    'actionCenterPriorityHigh' => l10n.actionCenterPriorityHigh,
+    'actionCenterPriorityUrgent' => l10n.actionCenterPriorityUrgent,
+    'actionCenterPriorityCritical' => l10n.actionCenterPriorityCritical,
+    'actionCenterPriorityUnknown' => l10n.actionCenterPriorityUnknown,
+    'actionCenterStatusOpen' => l10n.actionCenterStatusOpen,
+    'actionCenterStatusAcknowledged' => l10n.actionCenterStatusAcknowledged,
+    'actionCenterStatusDismissed' => l10n.actionCenterStatusDismissed,
+    'actionCenterStatusResolved' => l10n.actionCenterStatusResolved,
+    'actionCenterStatusUnknown' => l10n.actionCenterStatusUnknown,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveReleaseCenterKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'releaseLoadError' => l10n.releaseLoadError,
+    'releaseMockDataBadge' => l10n.releaseMockDataBadge,
+    'releaseReadOnlyBadge' => l10n.releaseReadOnlyBadge,
+    'releasePrivacyNotice' => l10n.releasePrivacyNotice,
+    'releaseTabOverview' => l10n.releaseTabOverview,
+    'releaseTabAppVersions' => l10n.releaseTabAppVersions,
+    'releaseTabEnvironment' => l10n.releaseTabEnvironment,
+    'releaseOverviewTitle' => l10n.releaseOverviewTitle,
+    'releaseAppVersionsTitle' => l10n.releaseAppVersionsTitle,
+    'releaseEnvironmentTitle' => l10n.releaseEnvironmentTitle,
+    'releaseFieldBackendVersion' => l10n.releaseFieldBackendVersion,
+    'releaseFieldEnvironment' => l10n.releaseFieldEnvironment,
+    'releaseFieldNodeEnv' => l10n.releaseFieldNodeEnv,
+    'releaseFieldMaintenanceMode' => l10n.releaseFieldMaintenanceMode,
+    'releaseFieldLatestAdminApp' => l10n.releaseFieldLatestAdminApp,
+    'releaseFieldLatestDriverApp' => l10n.releaseFieldLatestDriverApp,
+    'releaseFieldMinAdminApp' => l10n.releaseFieldMinAdminApp,
+    'releaseFieldMinDriverApp' => l10n.releaseFieldMinDriverApp,
+    'releaseFieldLastDeployment' =>
+      l10n.releaseFieldLastDeployment(params['date'] ?? ''),
+    'releaseFieldMigrationStatus' => l10n.releaseFieldMigrationStatus,
+    'releaseFieldDeploymentReady' => l10n.releaseFieldDeploymentReady,
+    'releaseFieldApiPublicName' => l10n.releaseFieldApiPublicName,
+    'releaseActiveAdminVersions' => l10n.releaseActiveAdminVersions,
+    'releaseActiveDriverVersions' => l10n.releaseActiveDriverVersions,
+    'releaseDeploymentWarnings' => l10n.releaseDeploymentWarnings,
+    'releaseYes' => l10n.releaseYes,
+    'releaseNo' => l10n.releaseNo,
+    _ => l10n.errorGenericBody,
+  };
+}

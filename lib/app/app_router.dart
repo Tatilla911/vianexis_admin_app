@@ -6,10 +6,16 @@ import '../core/auth/admin_auth_state.dart';
 import '../core/auth/admin_user.dart';
 import '../core/widgets/permission_denied_screen.dart';
 import '../core/widgets/vianexis_admin_scaffold.dart';
-import '../features/ai_reviews/presentation/ai_review_detail_screen.dart';
+import '../features/action_center/presentation/action_center_screen.dart';
+import '../features/admin_users/presentation/admin_user_detail_screen.dart';
+import '../features/admin_users/presentation/admin_users_screen.dart';
 import '../features/ai_reviews/presentation/ai_review_summary_screen.dart';
 import '../features/audit_logs/presentation/audit_log_detail_screen.dart';
 import '../features/audit_logs/presentation/audit_logs_screen.dart';
+import '../features/ai_reviews/presentation/ai_review_detail_screen.dart';
+import '../features/release_center/presentation/release_center_screen.dart';
+import '../features/security_center/presentation/security_event_detail_screen.dart';
+import '../features/security_center/presentation/security_center_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_job_detail_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_jobs_screen.dart';
 import '../features/bulk_onboarding/presentation/bulk_onboarding_row_detail_screen.dart';
@@ -91,6 +97,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: AdminRoutes.dashboard,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: AdminDashboardScreen(),
+            ),
+          ),
+          GoRoute(
+            path: AdminRoutes.actionCenter,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ActionCenterScreen(),
             ),
           ),
           GoRoute(
@@ -255,6 +267,40 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
           GoRoute(
+            path: AdminRoutes.securityCenter,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: SecurityCenterScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: 'events/:id',
+                builder: (context, state) => SecurityEventDetailScreen(
+                  eventId: Uri.decodeComponent(state.pathParameters['id'] ?? ''),
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AdminRoutes.adminUsers,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: AdminUsersScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => AdminUserDetailScreen(
+                  userId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AdminRoutes.releaseCenter,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ReleaseCenterScreen(),
+            ),
+          ),
+          GoRoute(
             path: AdminRoutes.settings,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: AdminSettingsScreen(),
@@ -277,6 +323,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
 abstract final class AdminRoutes {
   static const login = '/login';
   static const dashboard = '/dashboard';
+  static const actionCenter = '/action-center';
   static const registrations = '/registrations';
   static const companies = '/companies';
   static const billing = '/billing';
@@ -287,6 +334,9 @@ abstract final class AdminRoutes {
   static const supportGrants = '/support/grants';
   static const systemHealth = '/system-health';
   static const auditLogs = '/audit-logs';
+  static const securityCenter = '/security';
+  static const adminUsers = '/admin-users';
+  static const releaseCenter = '/release-center';
   static const settings = '/settings';
   static const accessDenied = '/access-denied';
 
@@ -318,7 +368,15 @@ abstract final class AdminRoutes {
   static String aiReviewDetail(String id) =>
       '$aiReviews/${Uri.encodeComponent(id)}';
 
+  static String adminUserDetail(String id) => '$adminUsers/$id';
+
+  static String securityEventDetail(String id) =>
+      '$securityCenter/events/${Uri.encodeComponent(id)}';
+
   static AdminDestination? destinationForLocation(String location) {
+    if (location.startsWith(actionCenter)) {
+      return AdminDestination.actionCenter;
+    }
     if (location.startsWith(registrations)) {
       return AdminDestination.registrations;
     }
@@ -340,12 +398,25 @@ abstract final class AdminRoutes {
     if (location.startsWith(auditLogs)) {
       return AdminDestination.auditLogs;
     }
+    if (location.startsWith(securityCenter)) {
+      return AdminDestination.securityCenter;
+    }
+    if (location.startsWith(adminUsers)) {
+      return AdminDestination.adminUsers;
+    }
+    if (location.startsWith(releaseCenter)) {
+      return AdminDestination.releaseCenter;
+    }
     return switch (location) {
       dashboard => AdminDestination.dashboard,
+      actionCenter => AdminDestination.actionCenter,
       aiReviews => AdminDestination.aiReviews,
       supportTickets => AdminDestination.supportTickets,
       supportGrants => AdminDestination.supportGrants,
       systemHealth => AdminDestination.systemHealth,
+      securityCenter => AdminDestination.securityCenter,
+      adminUsers => AdminDestination.adminUsers,
+      releaseCenter => AdminDestination.releaseCenter,
       auditLogs => AdminDestination.auditLogs,
       settings => AdminDestination.settings,
       _ => null,

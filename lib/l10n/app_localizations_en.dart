@@ -2744,4 +2744,592 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get billingActionUnavailable =>
       'Billing status change is unavailable.';
+
+  @override
+  String get navActionCenter => 'Action center';
+
+  @override
+  String get navSecurityCenter => 'Security center';
+
+  @override
+  String get navAdminUsers => 'Admin users';
+
+  @override
+  String get navReleaseCenter => 'Release center';
+
+  @override
+  String get adminUsersTitle => 'Admin users';
+
+  @override
+  String get adminUserDetailTitle => 'Admin user detail';
+
+  @override
+  String get adminUserLoadError => 'Could not load admin users.';
+
+  @override
+  String get adminUserDetailError => 'Could not load admin user detail.';
+
+  @override
+  String get adminUserMockDataBadge => 'Mock data';
+
+  @override
+  String get adminUserMetadataBadge => 'Metadata only';
+
+  @override
+  String get adminUserOpenModule => 'Open admin users';
+
+  @override
+  String get adminUserPrivacyNotice =>
+      'Admin user views show metadata only. No passwords or credentials are exposed.';
+
+  @override
+  String get adminUserSearchHint => 'Search admin users';
+
+  @override
+  String get adminUserListEmpty => 'No admin users match your filters.';
+
+  @override
+  String get adminUserInviteAction => 'Invite admin user';
+
+  @override
+  String get adminUserInviteTitle => 'Invite platform admin';
+
+  @override
+  String get adminUserInviteNotice =>
+      'Invites create a metadata-only platform admin record. Email delivery may be pending.';
+
+  @override
+  String get adminUserInviteNoteLabel => 'Internal note (optional)';
+
+  @override
+  String get adminUserInviteConfirm => 'Send invite';
+
+  @override
+  String get adminUserInviteSuccess => 'Admin user invited.';
+
+  @override
+  String get adminUserFilterAll => 'All';
+
+  @override
+  String get adminUserFilterActive => 'Active';
+
+  @override
+  String get adminUserFilterInvited => 'Invited';
+
+  @override
+  String get adminUserFilterSuspended => 'Suspended';
+
+  @override
+  String get adminUserFilterDisabled => 'Disabled';
+
+  @override
+  String get adminUserStatusActive => 'Active';
+
+  @override
+  String get adminUserStatusInvited => 'Invited';
+
+  @override
+  String get adminUserStatusSuspended => 'Suspended';
+
+  @override
+  String get adminUserStatusDisabled => 'Disabled';
+
+  @override
+  String get adminUserStatusUnknown => 'Unknown';
+
+  @override
+  String get adminUserRoleUnknown => 'Unknown role';
+
+  @override
+  String adminUserLastLogin(String date) {
+    return 'Last login: $date';
+  }
+
+  @override
+  String adminUserFailedLogins(String count) {
+    return 'Failed logins: $count';
+  }
+
+  @override
+  String get adminUserFieldName => 'Name';
+
+  @override
+  String get adminUserFieldEmail => 'Email';
+
+  @override
+  String get adminUserFieldRole => 'Role';
+
+  @override
+  String get adminUserFieldStatus => 'Status';
+
+  @override
+  String get adminUserFieldCreatedAt => 'Created';
+
+  @override
+  String get adminUserFieldLastLoginAt => 'Last login';
+
+  @override
+  String get adminUserFieldFailedLoginCount => 'Failed login count';
+
+  @override
+  String get adminUserChangeRoleAction => 'Change role';
+
+  @override
+  String get adminUserChangeStatusAction => 'Change status';
+
+  @override
+  String get adminUserRoleDialogTitle => 'Change admin role';
+
+  @override
+  String get adminUserStatusDialogTitle => 'Change admin status';
+
+  @override
+  String adminUserActionCurrentRole(String role) {
+    return 'Current role: $role';
+  }
+
+  @override
+  String adminUserActionCurrentStatus(String status) {
+    return 'Current status: $status';
+  }
+
+  @override
+  String get adminUserReasonLabel => 'Reason';
+
+  @override
+  String get adminUserReasonRequired => 'A reason is required.';
+
+  @override
+  String get adminUserNameRequired => 'Name must be at least 2 characters.';
+
+  @override
+  String get adminUserActionAuditNotice =>
+      'Admin user changes are audit logged.';
+
+  @override
+  String get adminUserActionCancel => 'Cancel';
+
+  @override
+  String get adminUserRoleConfirm => 'Update role';
+
+  @override
+  String get adminUserStatusConfirm => 'Update status';
+
+  @override
+  String get adminUserRoleSuccess => 'Admin role updated.';
+
+  @override
+  String get adminUserStatusSuccess => 'Admin status updated.';
+
+  @override
+  String get adminUserActionError => 'Could not update admin user.';
+
+  @override
+  String get adminUserActionUnavailable =>
+      'Admin user management requires super_admin.';
+
+  @override
+  String get securityCenterTitle => 'Security center';
+
+  @override
+  String get securityEventDetailTitle => 'Security event detail';
+
+  @override
+  String get securityLoadError => 'Could not load security data.';
+
+  @override
+  String get securityMockDataBadge => 'Mock data';
+
+  @override
+  String get securityOpenModule => 'Open security center';
+
+  @override
+  String get securityPrivacyNotice =>
+      'Security views show metadata only. No message bodies or document content are shown.';
+
+  @override
+  String get securityOverviewTitle => 'Security overview';
+
+  @override
+  String securityOverviewFailedLogins(String count) {
+    return 'Failed logins: $count';
+  }
+
+  @override
+  String securityOverviewDeniedActions(String count) {
+    return 'Denied actions: $count';
+  }
+
+  @override
+  String securityOverviewActiveGrants(String count) {
+    return 'Active support grants: $count';
+  }
+
+  @override
+  String securityOverviewCriticalEvents(String count) {
+    return 'Critical security events: $count';
+  }
+
+  @override
+  String securityOverviewExpiringGrants(String count) {
+    return 'Expiring grants: $count';
+  }
+
+  @override
+  String securityOverviewHighRiskAi(String count) {
+    return 'High-risk AI reviews: $count';
+  }
+
+  @override
+  String securityOverviewSuspiciousBulk(String count) {
+    return 'Suspicious bulk jobs: $count';
+  }
+
+  @override
+  String get securityOverviewNoCritical => 'No critical events recorded';
+
+  @override
+  String securityOverviewLastCritical(String date) {
+    return 'Last critical event: $date';
+  }
+
+  @override
+  String get securityEventSearchHint => 'Search security events';
+
+  @override
+  String get securityEventListEmpty => 'No security events match your filters.';
+
+  @override
+  String get securityEventDetailError => 'Security event not found.';
+
+  @override
+  String securityEventCompanyLabel(String name) {
+    return 'Company: $name';
+  }
+
+  @override
+  String securityEventCreatedAt(String date) {
+    return 'Created: $date';
+  }
+
+  @override
+  String get securityEventFieldSourceType => 'Source type';
+
+  @override
+  String get securityEventFieldSourceId => 'Source ID';
+
+  @override
+  String get securityEventFieldActorEmail => 'Actor email';
+
+  @override
+  String get securityEventFieldActorRole => 'Actor role';
+
+  @override
+  String get securityEventFieldCompany => 'Company';
+
+  @override
+  String get securityEventFieldCorrelationId => 'Correlation ID';
+
+  @override
+  String get securityEventFieldCreatedAt => 'Created at';
+
+  @override
+  String get securityEventFilterAll => 'All';
+
+  @override
+  String get securityEventFilterFailedLogin => 'Failed logins';
+
+  @override
+  String get securityEventFilterPermissionDenied => 'Denied actions';
+
+  @override
+  String get securityEventFilterSupportAccess => 'Support access';
+
+  @override
+  String get securityEventFilterHighRiskAi => 'High-risk AI';
+
+  @override
+  String get securityEventFilterCriticalSystem => 'Critical system';
+
+  @override
+  String get securityEventFilterAdminRoleChange => 'Admin changes';
+
+  @override
+  String get securityEventFilterSuspiciousBulkOnboarding => 'Suspicious bulk';
+
+  @override
+  String get securityEventFilterCritical => 'Critical';
+
+  @override
+  String get securityEventFilterWarning => 'Warning';
+
+  @override
+  String get securityEventTypeFailedLogin => 'Failed login';
+
+  @override
+  String get securityEventTypePermissionDenied => 'Permission denied';
+
+  @override
+  String get securityEventTypeSupportAccess => 'Support access';
+
+  @override
+  String get securityEventTypeHighRiskAi => 'High-risk AI';
+
+  @override
+  String get securityEventTypeCriticalSystem => 'Critical system';
+
+  @override
+  String get securityEventTypeAdminRoleChange => 'Admin change';
+
+  @override
+  String get securityEventTypeSuspiciousBulkOnboarding => 'Suspicious bulk';
+
+  @override
+  String get securityEventTypeUnknown => 'Unknown';
+
+  @override
+  String get securityEventSeverityInfo => 'Info';
+
+  @override
+  String get securityEventSeverityWarning => 'Warning';
+
+  @override
+  String get securityEventSeverityCritical => 'Critical';
+
+  @override
+  String get securityEventSeverityUnknown => 'Unknown';
+
+  @override
+  String get actionCenterTitle => 'Action center';
+
+  @override
+  String get actionCenterLoadError => 'Could not load action center.';
+
+  @override
+  String get actionCenterMockDataBadge => 'Mock data';
+
+  @override
+  String get actionCenterOpenModule => 'Open action center';
+
+  @override
+  String get actionCenterPrivacyNotice =>
+      'Action center items are metadata-only summaries. Open linked modules for details.';
+
+  @override
+  String get actionCenterSearchHint => 'Search action items';
+
+  @override
+  String get actionCenterListEmpty => 'No action items match your filters.';
+
+  @override
+  String get actionCenterNeedsAttentionTitle => 'Needs attention';
+
+  @override
+  String actionCenterNeedsAttentionOpen(String count) {
+    return 'Open items: $count';
+  }
+
+  @override
+  String actionCenterNeedsAttentionCritical(String count) {
+    return 'Critical/urgent: $count';
+  }
+
+  @override
+  String actionCenterNeedsAttentionTotal(String count) {
+    return 'Total items: $count';
+  }
+
+  @override
+  String actionCenterCompanyLabel(String name) {
+    return 'Company: $name';
+  }
+
+  @override
+  String actionCenterCreatedAt(String date) {
+    return 'Created: $date';
+  }
+
+  @override
+  String get actionCenterFilterAll => 'All';
+
+  @override
+  String get actionCenterFilterRegistration => 'Registrations';
+
+  @override
+  String get actionCenterFilterBulkOnboarding => 'Bulk onboarding';
+
+  @override
+  String get actionCenterFilterSupport => 'Support';
+
+  @override
+  String get actionCenterFilterSystemHealth => 'System health';
+
+  @override
+  String get actionCenterFilterSecurity => 'Security';
+
+  @override
+  String get actionCenterFilterBilling => 'Billing';
+
+  @override
+  String get actionCenterFilterAiReview => 'AI reviews';
+
+  @override
+  String get actionCenterFilterCritical => 'Critical/urgent';
+
+  @override
+  String get actionCenterTypeRegistration => 'Registration';
+
+  @override
+  String get actionCenterTypeBulkOnboarding => 'Bulk onboarding';
+
+  @override
+  String get actionCenterTypeSupport => 'Support';
+
+  @override
+  String get actionCenterTypeSystemHealth => 'System health';
+
+  @override
+  String get actionCenterTypeSecurity => 'Security';
+
+  @override
+  String get actionCenterTypeBilling => 'Billing';
+
+  @override
+  String get actionCenterTypeAiReview => 'AI review';
+
+  @override
+  String get actionCenterTypeCompany => 'Company';
+
+  @override
+  String get actionCenterTypeUnknown => 'Unknown';
+
+  @override
+  String get actionCenterPriorityLow => 'Low';
+
+  @override
+  String get actionCenterPriorityNormal => 'Normal';
+
+  @override
+  String get actionCenterPriorityHigh => 'High';
+
+  @override
+  String get actionCenterPriorityUrgent => 'Urgent';
+
+  @override
+  String get actionCenterPriorityCritical => 'Critical';
+
+  @override
+  String get actionCenterPriorityUnknown => 'Unknown';
+
+  @override
+  String get actionCenterStatusOpen => 'Open';
+
+  @override
+  String get actionCenterStatusAcknowledged => 'Acknowledged';
+
+  @override
+  String get actionCenterStatusDismissed => 'Dismissed';
+
+  @override
+  String get actionCenterStatusResolved => 'Resolved';
+
+  @override
+  String get actionCenterStatusUnknown => 'Unknown';
+
+  @override
+  String get releaseCenterTitle => 'Release center';
+
+  @override
+  String get releaseLoadError => 'Could not load release metadata.';
+
+  @override
+  String get releaseMockDataBadge => 'Mock data';
+
+  @override
+  String get releaseReadOnlyBadge => 'Read only';
+
+  @override
+  String get releasePrivacyNotice =>
+      'Release views show deployment metadata only. No secrets or storage keys are exposed.';
+
+  @override
+  String get releaseTabOverview => 'Overview';
+
+  @override
+  String get releaseTabAppVersions => 'App versions';
+
+  @override
+  String get releaseTabEnvironment => 'Environment';
+
+  @override
+  String get releaseOverviewTitle => 'Release overview';
+
+  @override
+  String get releaseAppVersionsTitle => 'App versions';
+
+  @override
+  String get releaseEnvironmentTitle => 'Environment';
+
+  @override
+  String get releaseFieldBackendVersion => 'Backend version';
+
+  @override
+  String get releaseFieldEnvironment => 'Environment';
+
+  @override
+  String get releaseFieldNodeEnv => 'Node environment';
+
+  @override
+  String get releaseFieldMaintenanceMode => 'Maintenance mode';
+
+  @override
+  String get releaseFieldLatestAdminApp => 'Latest admin app';
+
+  @override
+  String get releaseFieldLatestDriverApp => 'Latest driver app';
+
+  @override
+  String get releaseFieldMinAdminApp => 'Minimum admin app';
+
+  @override
+  String get releaseFieldMinDriverApp => 'Minimum driver app';
+
+  @override
+  String releaseFieldLastDeployment(String date) {
+    return 'Last deployment: $date';
+  }
+
+  @override
+  String get releaseFieldMigrationStatus => 'Database migrations';
+
+  @override
+  String get releaseFieldDeploymentReady => 'Deployment ready';
+
+  @override
+  String get releaseFieldApiPublicName => 'Public API name';
+
+  @override
+  String get releaseActiveAdminVersions => 'Active admin app versions';
+
+  @override
+  String get releaseActiveDriverVersions => 'Active driver app versions';
+
+  @override
+  String get releaseDeploymentWarnings => 'Deployment warnings';
+
+  @override
+  String get releaseYes => 'Yes';
+
+  @override
+  String get releaseNo => 'No';
+
+  @override
+  String get settingsReleaseSection => 'Release & deployment';
+
+  @override
+  String get settingsReleaseCenterBody =>
+      'View read-only release metadata, app versions, and environment status.';
+
+  @override
+  String get settingsOpenReleaseCenter => 'Open release center';
 }

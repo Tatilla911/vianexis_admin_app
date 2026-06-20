@@ -46,6 +46,7 @@ enum AdminRole {
 /// Navigation destinations exposed in the admin shell.
 enum AdminDestination {
   dashboard,
+  actionCenter,
   registrations,
   bulkOnboarding,
   companies,
@@ -54,7 +55,10 @@ enum AdminDestination {
   supportTickets,
   supportGrants,
   systemHealth,
+  securityCenter,
   auditLogs,
+  adminUsers,
+  releaseCenter,
   settings,
 }
 
@@ -64,18 +68,22 @@ extension AdminRoleCapabilities on AdminRole {
       AdminRole.superAdmin => true,
       AdminRole.supportAdmin => switch (destination) {
         AdminDestination.dashboard ||
+        AdminDestination.actionCenter ||
         AdminDestination.companies ||
         AdminDestination.billing ||
         AdminDestination.aiReviews ||
         AdminDestination.supportTickets ||
         AdminDestination.supportGrants ||
         AdminDestination.systemHealth ||
+        AdminDestination.securityCenter ||
         AdminDestination.auditLogs ||
+        AdminDestination.releaseCenter ||
         AdminDestination.settings => true,
         _ => false,
       },
       AdminRole.onboardingReviewer => switch (destination) {
         AdminDestination.dashboard ||
+        AdminDestination.actionCenter ||
         AdminDestination.companies ||
         AdminDestination.registrations ||
         AdminDestination.bulkOnboarding ||
@@ -85,6 +93,7 @@ extension AdminRoleCapabilities on AdminRole {
       },
       AdminRole.billingAdmin => switch (destination) {
         AdminDestination.dashboard ||
+        AdminDestination.actionCenter ||
         AdminDestination.companies ||
         AdminDestination.billing ||
         AdminDestination.registrations ||

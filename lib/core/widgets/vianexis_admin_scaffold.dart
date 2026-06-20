@@ -114,6 +114,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     return switch (destination) {
       AdminDestination.dashboard => l10n.navDashboard,
+      AdminDestination.actionCenter => l10n.navActionCenter,
       AdminDestination.registrations => l10n.navRegistrations,
       AdminDestination.companies => l10n.navCompanies,
       AdminDestination.billing => l10n.navBilling,
@@ -122,7 +123,10 @@ class VianexisAdminScaffold extends ConsumerWidget {
       AdminDestination.supportTickets => l10n.supportTicketsTitle,
       AdminDestination.supportGrants => l10n.supportGrantsTitle,
       AdminDestination.systemHealth => l10n.navSystemHealth,
+      AdminDestination.securityCenter => l10n.navSecurityCenter,
       AdminDestination.auditLogs => l10n.navAuditLogs,
+      AdminDestination.adminUsers => l10n.navAdminUsers,
+      AdminDestination.releaseCenter => l10n.navReleaseCenter,
       AdminDestination.settings => l10n.navSettings,
     };
   }
@@ -148,6 +152,12 @@ const _allNavItems = <_NavItem>[
     route: AdminRoutes.dashboard,
     icon: Icons.dashboard_outlined,
     selectedIcon: Icons.dashboard,
+  ),
+  _NavItem(
+    destination: AdminDestination.actionCenter,
+    route: AdminRoutes.actionCenter,
+    icon: Icons.inbox_outlined,
+    selectedIcon: Icons.inbox,
   ),
   _NavItem(
     destination: AdminDestination.registrations,
@@ -198,10 +208,28 @@ const _allNavItems = <_NavItem>[
     selectedIcon: Icons.monitor_heart,
   ),
   _NavItem(
+    destination: AdminDestination.securityCenter,
+    route: AdminRoutes.securityCenter,
+    icon: Icons.security_outlined,
+    selectedIcon: Icons.security,
+  ),
+  _NavItem(
     destination: AdminDestination.auditLogs,
     route: AdminRoutes.auditLogs,
     icon: Icons.receipt_long_outlined,
     selectedIcon: Icons.receipt_long,
+  ),
+  _NavItem(
+    destination: AdminDestination.adminUsers,
+    route: AdminRoutes.adminUsers,
+    icon: Icons.admin_panel_settings_outlined,
+    selectedIcon: Icons.admin_panel_settings,
+  ),
+  _NavItem(
+    destination: AdminDestination.releaseCenter,
+    route: AdminRoutes.releaseCenter,
+    icon: Icons.rocket_launch_outlined,
+    selectedIcon: Icons.rocket_launch,
   ),
   _NavItem(
     destination: AdminDestination.settings,

@@ -10,6 +10,8 @@ import '../../features/ai_reviews/presentation/ai_review_providers.dart';
 import '../../features/ai_reviews/presentation/widgets/ai_review_card.dart';
 import '../../features/audit_logs/presentation/audit_log_providers.dart';
 import '../../features/audit_logs/presentation/widgets/audit_log_card.dart';
+import '../../features/action_center/presentation/action_center_providers.dart';
+import '../../features/action_center/presentation/widgets/action_center_item_card.dart';
 import '../../features/billing/presentation/billing_providers.dart';
 import '../../features/billing/presentation/widgets/billing_overview_card.dart';
 import '../../features/companies/presentation/platform_companies_providers.dart';
@@ -18,6 +20,8 @@ import '../../features/bulk_onboarding/presentation/bulk_onboarding_providers.da
 import '../../features/bulk_onboarding/presentation/widgets/bulk_onboarding_summary_card.dart';
 import '../../features/registrations/domain/registration_application_status.dart';
 import '../../features/registrations/presentation/registration_providers.dart';
+import '../../features/security_center/presentation/security_center_providers.dart';
+import '../../features/security_center/presentation/widgets/security_overview_card.dart';
 import '../../features/support/presentation/support_providers.dart';
 import '../../features/support/presentation/widgets/support_summary_card.dart';
 import '../../features/system_health/presentation/system_health_providers.dart';
@@ -40,6 +44,8 @@ class AdminDashboardScreen extends ConsumerWidget {
     final bulkAsync = ref.watch(bulkOnboardingSummaryProvider);
     final companiesAsync = ref.watch(platformCompanyDashboardSummaryProvider);
     final billingAsync = ref.watch(billingOverviewProvider);
+    final securityAsync = ref.watch(securityOverviewProvider);
+    final actionCenterAsync = ref.watch(actionCenterProvider);
     final aiReviewsAsync = ref.watch(aiReviewSummaryProvider);
     final registrationsAsync = ref.watch(registrationApplicationsProvider);
     final user = ref.watch(adminAuthProvider).user;
@@ -50,6 +56,10 @@ class AdminDashboardScreen extends ConsumerWidget {
     final showAiReviews = user?.canAccess(AdminDestination.aiReviews) ?? false;
     final showRegistrations =
         user?.canAccess(AdminDestination.registrations) ?? false;
+    final showSecurityCenter =
+        user?.canAccess(AdminDestination.securityCenter) ?? false;
+    final showActionCenter =
+        user?.canAccess(AdminDestination.actionCenter) ?? false;
 
     final pendingRegistrations = showRegistrations
         ? registrationsAsync.maybeWhen(
@@ -93,7 +103,29 @@ class AdminDashboardScreen extends ConsumerWidget {
             supportOpenIssues: supportAsync.asData?.value.openTicketsCount,
             auditFailedDenied: auditAsync.asData?.value.failedDeniedCount,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
+          if (showActionCenter)
+            actionCenterAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => DashboardSummaryErrorCard(
+                error: error,
+                fallbackMessage:
+                    resolveActionCenterKey(context, 'actionCenterLoadError'),
+                onRetry: () => ref.read(actionCenterProvider.notifier).refresh(),
+              ),
+              data: (snapshot) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ActionCenterNeedsAttentionCard(snapshot: snapshot, compact: true),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: () => context.go(AdminRoutes.actionCenter),
+                    child: Text(resolveActionCenterKey(context, 'actionCenterOpenModule')),
+                  ),
+                ],
+              ),
+            ),
+          if (showActionCenter) const SizedBox(height: 16),
           healthAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, _) => DashboardSummaryErrorCard(
@@ -186,6 +218,28 @@ class AdminDashboardScreen extends ConsumerWidget {
               ),
             ),
           if (showBilling) const SizedBox(height: 16),
+          if (showSecurityCenter)
+            securityAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => DashboardSummaryErrorCard(
+                error: error,
+                fallbackMessage: resolveSecurityKey(context, 'securityLoadError'),
+                onRetry: () =>
+                    ref.read(securityOverviewProvider.notifier).refresh(),
+              ),
+              data: (overview) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SecurityOverviewCard(overview: overview, compact: true),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: () => context.go(AdminRoutes.securityCenter),
+                    child: Text(resolveSecurityKey(context, 'securityOpenModule')),
+                  ),
+                ],
+              ),
+            ),
+          if (showSecurityCenter) const SizedBox(height: 16),
           if (showBulkOnboarding)
             bulkAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),

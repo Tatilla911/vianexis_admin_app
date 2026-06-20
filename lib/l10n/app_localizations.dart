@@ -5125,6 +5125,1086 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Billing status change is unavailable.'**
   String get billingActionUnavailable;
+
+  /// No description provided for @navActionCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Action center'**
+  String get navActionCenter;
+
+  /// No description provided for @navSecurityCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Security center'**
+  String get navSecurityCenter;
+
+  /// No description provided for @navAdminUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin users'**
+  String get navAdminUsers;
+
+  /// No description provided for @navReleaseCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Release center'**
+  String get navReleaseCenter;
+
+  /// No description provided for @adminUsersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin users'**
+  String get adminUsersTitle;
+
+  /// No description provided for @adminUserDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin user detail'**
+  String get adminUserDetailTitle;
+
+  /// No description provided for @adminUserLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load admin users.'**
+  String get adminUserLoadError;
+
+  /// No description provided for @adminUserDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load admin user detail.'**
+  String get adminUserDetailError;
+
+  /// No description provided for @adminUserMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get adminUserMockDataBadge;
+
+  /// No description provided for @adminUserMetadataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only'**
+  String get adminUserMetadataBadge;
+
+  /// No description provided for @adminUserOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open admin users'**
+  String get adminUserOpenModule;
+
+  /// No description provided for @adminUserPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin user views show metadata only. No passwords or credentials are exposed.'**
+  String get adminUserPrivacyNotice;
+
+  /// No description provided for @adminUserSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search admin users'**
+  String get adminUserSearchHint;
+
+  /// No description provided for @adminUserListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No admin users match your filters.'**
+  String get adminUserListEmpty;
+
+  /// No description provided for @adminUserInviteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite admin user'**
+  String get adminUserInviteAction;
+
+  /// No description provided for @adminUserInviteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite platform admin'**
+  String get adminUserInviteTitle;
+
+  /// No description provided for @adminUserInviteNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Invites create a metadata-only platform admin record. Email delivery may be pending.'**
+  String get adminUserInviteNotice;
+
+  /// No description provided for @adminUserInviteNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal note (optional)'**
+  String get adminUserInviteNoteLabel;
+
+  /// No description provided for @adminUserInviteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Send invite'**
+  String get adminUserInviteConfirm;
+
+  /// No description provided for @adminUserInviteSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin user invited.'**
+  String get adminUserInviteSuccess;
+
+  /// No description provided for @adminUserFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get adminUserFilterAll;
+
+  /// No description provided for @adminUserFilterActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get adminUserFilterActive;
+
+  /// No description provided for @adminUserFilterInvited.
+  ///
+  /// In en, this message translates to:
+  /// **'Invited'**
+  String get adminUserFilterInvited;
+
+  /// No description provided for @adminUserFilterSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended'**
+  String get adminUserFilterSuspended;
+
+  /// No description provided for @adminUserFilterDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get adminUserFilterDisabled;
+
+  /// No description provided for @adminUserStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get adminUserStatusActive;
+
+  /// No description provided for @adminUserStatusInvited.
+  ///
+  /// In en, this message translates to:
+  /// **'Invited'**
+  String get adminUserStatusInvited;
+
+  /// No description provided for @adminUserStatusSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended'**
+  String get adminUserStatusSuspended;
+
+  /// No description provided for @adminUserStatusDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get adminUserStatusDisabled;
+
+  /// No description provided for @adminUserStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get adminUserStatusUnknown;
+
+  /// No description provided for @adminUserRoleUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown role'**
+  String get adminUserRoleUnknown;
+
+  /// No description provided for @adminUserLastLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Last login: {date}'**
+  String adminUserLastLogin(String date);
+
+  /// No description provided for @adminUserFailedLogins.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed logins: {count}'**
+  String adminUserFailedLogins(String count);
+
+  /// No description provided for @adminUserFieldName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get adminUserFieldName;
+
+  /// No description provided for @adminUserFieldEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get adminUserFieldEmail;
+
+  /// No description provided for @adminUserFieldRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get adminUserFieldRole;
+
+  /// No description provided for @adminUserFieldStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get adminUserFieldStatus;
+
+  /// No description provided for @adminUserFieldCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get adminUserFieldCreatedAt;
+
+  /// No description provided for @adminUserFieldLastLoginAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Last login'**
+  String get adminUserFieldLastLoginAt;
+
+  /// No description provided for @adminUserFieldFailedLoginCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed login count'**
+  String get adminUserFieldFailedLoginCount;
+
+  /// No description provided for @adminUserChangeRoleAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Change role'**
+  String get adminUserChangeRoleAction;
+
+  /// No description provided for @adminUserChangeStatusAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Change status'**
+  String get adminUserChangeStatusAction;
+
+  /// No description provided for @adminUserRoleDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change admin role'**
+  String get adminUserRoleDialogTitle;
+
+  /// No description provided for @adminUserStatusDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change admin status'**
+  String get adminUserStatusDialogTitle;
+
+  /// No description provided for @adminUserActionCurrentRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Current role: {role}'**
+  String adminUserActionCurrentRole(String role);
+
+  /// No description provided for @adminUserActionCurrentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Current status: {status}'**
+  String adminUserActionCurrentStatus(String status);
+
+  /// No description provided for @adminUserReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get adminUserReasonLabel;
+
+  /// No description provided for @adminUserReasonRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'A reason is required.'**
+  String get adminUserReasonRequired;
+
+  /// No description provided for @adminUserNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at least 2 characters.'**
+  String get adminUserNameRequired;
+
+  /// No description provided for @adminUserActionAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin user changes are audit logged.'**
+  String get adminUserActionAuditNotice;
+
+  /// No description provided for @adminUserActionCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get adminUserActionCancel;
+
+  /// No description provided for @adminUserRoleConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Update role'**
+  String get adminUserRoleConfirm;
+
+  /// No description provided for @adminUserStatusConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Update status'**
+  String get adminUserStatusConfirm;
+
+  /// No description provided for @adminUserRoleSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin role updated.'**
+  String get adminUserRoleSuccess;
+
+  /// No description provided for @adminUserStatusSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin status updated.'**
+  String get adminUserStatusSuccess;
+
+  /// No description provided for @adminUserActionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update admin user.'**
+  String get adminUserActionError;
+
+  /// No description provided for @adminUserActionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin user management requires super_admin.'**
+  String get adminUserActionUnavailable;
+
+  /// No description provided for @securityCenterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Security center'**
+  String get securityCenterTitle;
+
+  /// No description provided for @securityEventDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Security event detail'**
+  String get securityEventDetailTitle;
+
+  /// No description provided for @securityLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load security data.'**
+  String get securityLoadError;
+
+  /// No description provided for @securityMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get securityMockDataBadge;
+
+  /// No description provided for @securityOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open security center'**
+  String get securityOpenModule;
+
+  /// No description provided for @securityPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Security views show metadata only. No message bodies or document content are shown.'**
+  String get securityPrivacyNotice;
+
+  /// No description provided for @securityOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Security overview'**
+  String get securityOverviewTitle;
+
+  /// No description provided for @securityOverviewFailedLogins.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed logins: {count}'**
+  String securityOverviewFailedLogins(String count);
+
+  /// No description provided for @securityOverviewDeniedActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Denied actions: {count}'**
+  String securityOverviewDeniedActions(String count);
+
+  /// No description provided for @securityOverviewActiveGrants.
+  ///
+  /// In en, this message translates to:
+  /// **'Active support grants: {count}'**
+  String securityOverviewActiveGrants(String count);
+
+  /// No description provided for @securityOverviewCriticalEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical security events: {count}'**
+  String securityOverviewCriticalEvents(String count);
+
+  /// No description provided for @securityOverviewExpiringGrants.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiring grants: {count}'**
+  String securityOverviewExpiringGrants(String count);
+
+  /// No description provided for @securityOverviewHighRiskAi.
+  ///
+  /// In en, this message translates to:
+  /// **'High-risk AI reviews: {count}'**
+  String securityOverviewHighRiskAi(String count);
+
+  /// No description provided for @securityOverviewSuspiciousBulk.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspicious bulk jobs: {count}'**
+  String securityOverviewSuspiciousBulk(String count);
+
+  /// No description provided for @securityOverviewNoCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'No critical events recorded'**
+  String get securityOverviewNoCritical;
+
+  /// No description provided for @securityOverviewLastCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Last critical event: {date}'**
+  String securityOverviewLastCritical(String date);
+
+  /// No description provided for @securityEventSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search security events'**
+  String get securityEventSearchHint;
+
+  /// No description provided for @securityEventListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No security events match your filters.'**
+  String get securityEventListEmpty;
+
+  /// No description provided for @securityEventDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Security event not found.'**
+  String get securityEventDetailError;
+
+  /// No description provided for @securityEventCompanyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Company: {name}'**
+  String securityEventCompanyLabel(String name);
+
+  /// No description provided for @securityEventCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created: {date}'**
+  String securityEventCreatedAt(String date);
+
+  /// No description provided for @securityEventFieldSourceType.
+  ///
+  /// In en, this message translates to:
+  /// **'Source type'**
+  String get securityEventFieldSourceType;
+
+  /// No description provided for @securityEventFieldSourceId.
+  ///
+  /// In en, this message translates to:
+  /// **'Source ID'**
+  String get securityEventFieldSourceId;
+
+  /// No description provided for @securityEventFieldActorEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Actor email'**
+  String get securityEventFieldActorEmail;
+
+  /// No description provided for @securityEventFieldActorRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Actor role'**
+  String get securityEventFieldActorRole;
+
+  /// No description provided for @securityEventFieldCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get securityEventFieldCompany;
+
+  /// No description provided for @securityEventFieldCorrelationId.
+  ///
+  /// In en, this message translates to:
+  /// **'Correlation ID'**
+  String get securityEventFieldCorrelationId;
+
+  /// No description provided for @securityEventFieldCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created at'**
+  String get securityEventFieldCreatedAt;
+
+  /// No description provided for @securityEventFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get securityEventFilterAll;
+
+  /// No description provided for @securityEventFilterFailedLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed logins'**
+  String get securityEventFilterFailedLogin;
+
+  /// No description provided for @securityEventFilterPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Denied actions'**
+  String get securityEventFilterPermissionDenied;
+
+  /// No description provided for @securityEventFilterSupportAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access'**
+  String get securityEventFilterSupportAccess;
+
+  /// No description provided for @securityEventFilterHighRiskAi.
+  ///
+  /// In en, this message translates to:
+  /// **'High-risk AI'**
+  String get securityEventFilterHighRiskAi;
+
+  /// No description provided for @securityEventFilterCriticalSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical system'**
+  String get securityEventFilterCriticalSystem;
+
+  /// No description provided for @securityEventFilterAdminRoleChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin changes'**
+  String get securityEventFilterAdminRoleChange;
+
+  /// No description provided for @securityEventFilterSuspiciousBulkOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspicious bulk'**
+  String get securityEventFilterSuspiciousBulkOnboarding;
+
+  /// No description provided for @securityEventFilterCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get securityEventFilterCritical;
+
+  /// No description provided for @securityEventFilterWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get securityEventFilterWarning;
+
+  /// No description provided for @securityEventTypeFailedLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed login'**
+  String get securityEventTypeFailedLogin;
+
+  /// No description provided for @securityEventTypePermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied'**
+  String get securityEventTypePermissionDenied;
+
+  /// No description provided for @securityEventTypeSupportAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access'**
+  String get securityEventTypeSupportAccess;
+
+  /// No description provided for @securityEventTypeHighRiskAi.
+  ///
+  /// In en, this message translates to:
+  /// **'High-risk AI'**
+  String get securityEventTypeHighRiskAi;
+
+  /// No description provided for @securityEventTypeCriticalSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical system'**
+  String get securityEventTypeCriticalSystem;
+
+  /// No description provided for @securityEventTypeAdminRoleChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin change'**
+  String get securityEventTypeAdminRoleChange;
+
+  /// No description provided for @securityEventTypeSuspiciousBulkOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspicious bulk'**
+  String get securityEventTypeSuspiciousBulkOnboarding;
+
+  /// No description provided for @securityEventTypeUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get securityEventTypeUnknown;
+
+  /// No description provided for @securityEventSeverityInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Info'**
+  String get securityEventSeverityInfo;
+
+  /// No description provided for @securityEventSeverityWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get securityEventSeverityWarning;
+
+  /// No description provided for @securityEventSeverityCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get securityEventSeverityCritical;
+
+  /// No description provided for @securityEventSeverityUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get securityEventSeverityUnknown;
+
+  /// No description provided for @actionCenterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Action center'**
+  String get actionCenterTitle;
+
+  /// No description provided for @actionCenterLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load action center.'**
+  String get actionCenterLoadError;
+
+  /// No description provided for @actionCenterMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get actionCenterMockDataBadge;
+
+  /// No description provided for @actionCenterOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open action center'**
+  String get actionCenterOpenModule;
+
+  /// No description provided for @actionCenterPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Action center items are metadata-only summaries. Open linked modules for details.'**
+  String get actionCenterPrivacyNotice;
+
+  /// No description provided for @actionCenterSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search action items'**
+  String get actionCenterSearchHint;
+
+  /// No description provided for @actionCenterListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No action items match your filters.'**
+  String get actionCenterListEmpty;
+
+  /// No description provided for @actionCenterNeedsAttentionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs attention'**
+  String get actionCenterNeedsAttentionTitle;
+
+  /// No description provided for @actionCenterNeedsAttentionOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open items: {count}'**
+  String actionCenterNeedsAttentionOpen(String count);
+
+  /// No description provided for @actionCenterNeedsAttentionCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical/urgent: {count}'**
+  String actionCenterNeedsAttentionCritical(String count);
+
+  /// No description provided for @actionCenterNeedsAttentionTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total items: {count}'**
+  String actionCenterNeedsAttentionTotal(String count);
+
+  /// No description provided for @actionCenterCompanyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Company: {name}'**
+  String actionCenterCompanyLabel(String name);
+
+  /// No description provided for @actionCenterCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created: {date}'**
+  String actionCenterCreatedAt(String date);
+
+  /// No description provided for @actionCenterFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get actionCenterFilterAll;
+
+  /// No description provided for @actionCenterFilterRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Registrations'**
+  String get actionCenterFilterRegistration;
+
+  /// No description provided for @actionCenterFilterBulkOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding'**
+  String get actionCenterFilterBulkOnboarding;
+
+  /// No description provided for @actionCenterFilterSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get actionCenterFilterSupport;
+
+  /// No description provided for @actionCenterFilterSystemHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'System health'**
+  String get actionCenterFilterSystemHealth;
+
+  /// No description provided for @actionCenterFilterSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get actionCenterFilterSecurity;
+
+  /// No description provided for @actionCenterFilterBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing'**
+  String get actionCenterFilterBilling;
+
+  /// No description provided for @actionCenterFilterAiReview.
+  ///
+  /// In en, this message translates to:
+  /// **'AI reviews'**
+  String get actionCenterFilterAiReview;
+
+  /// No description provided for @actionCenterFilterCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical/urgent'**
+  String get actionCenterFilterCritical;
+
+  /// No description provided for @actionCenterTypeRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration'**
+  String get actionCenterTypeRegistration;
+
+  /// No description provided for @actionCenterTypeBulkOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding'**
+  String get actionCenterTypeBulkOnboarding;
+
+  /// No description provided for @actionCenterTypeSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get actionCenterTypeSupport;
+
+  /// No description provided for @actionCenterTypeSystemHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'System health'**
+  String get actionCenterTypeSystemHealth;
+
+  /// No description provided for @actionCenterTypeSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get actionCenterTypeSecurity;
+
+  /// No description provided for @actionCenterTypeBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing'**
+  String get actionCenterTypeBilling;
+
+  /// No description provided for @actionCenterTypeAiReview.
+  ///
+  /// In en, this message translates to:
+  /// **'AI review'**
+  String get actionCenterTypeAiReview;
+
+  /// No description provided for @actionCenterTypeCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get actionCenterTypeCompany;
+
+  /// No description provided for @actionCenterTypeUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get actionCenterTypeUnknown;
+
+  /// No description provided for @actionCenterPriorityLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get actionCenterPriorityLow;
+
+  /// No description provided for @actionCenterPriorityNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get actionCenterPriorityNormal;
+
+  /// No description provided for @actionCenterPriorityHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get actionCenterPriorityHigh;
+
+  /// No description provided for @actionCenterPriorityUrgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get actionCenterPriorityUrgent;
+
+  /// No description provided for @actionCenterPriorityCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get actionCenterPriorityCritical;
+
+  /// No description provided for @actionCenterPriorityUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get actionCenterPriorityUnknown;
+
+  /// No description provided for @actionCenterStatusOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get actionCenterStatusOpen;
+
+  /// No description provided for @actionCenterStatusAcknowledged.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged'**
+  String get actionCenterStatusAcknowledged;
+
+  /// No description provided for @actionCenterStatusDismissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismissed'**
+  String get actionCenterStatusDismissed;
+
+  /// No description provided for @actionCenterStatusResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get actionCenterStatusResolved;
+
+  /// No description provided for @actionCenterStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get actionCenterStatusUnknown;
+
+  /// No description provided for @releaseCenterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Release center'**
+  String get releaseCenterTitle;
+
+  /// No description provided for @releaseLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load release metadata.'**
+  String get releaseLoadError;
+
+  /// No description provided for @releaseMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get releaseMockDataBadge;
+
+  /// No description provided for @releaseReadOnlyBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Read only'**
+  String get releaseReadOnlyBadge;
+
+  /// No description provided for @releasePrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Release views show deployment metadata only. No secrets or storage keys are exposed.'**
+  String get releasePrivacyNotice;
+
+  /// No description provided for @releaseTabOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get releaseTabOverview;
+
+  /// No description provided for @releaseTabAppVersions.
+  ///
+  /// In en, this message translates to:
+  /// **'App versions'**
+  String get releaseTabAppVersions;
+
+  /// No description provided for @releaseTabEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get releaseTabEnvironment;
+
+  /// No description provided for @releaseOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Release overview'**
+  String get releaseOverviewTitle;
+
+  /// No description provided for @releaseAppVersionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'App versions'**
+  String get releaseAppVersionsTitle;
+
+  /// No description provided for @releaseEnvironmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get releaseEnvironmentTitle;
+
+  /// No description provided for @releaseFieldBackendVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend version'**
+  String get releaseFieldBackendVersion;
+
+  /// No description provided for @releaseFieldEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get releaseFieldEnvironment;
+
+  /// No description provided for @releaseFieldNodeEnv.
+  ///
+  /// In en, this message translates to:
+  /// **'Node environment'**
+  String get releaseFieldNodeEnv;
+
+  /// No description provided for @releaseFieldMaintenanceMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintenance mode'**
+  String get releaseFieldMaintenanceMode;
+
+  /// No description provided for @releaseFieldLatestAdminApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest admin app'**
+  String get releaseFieldLatestAdminApp;
+
+  /// No description provided for @releaseFieldLatestDriverApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest driver app'**
+  String get releaseFieldLatestDriverApp;
+
+  /// No description provided for @releaseFieldMinAdminApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum admin app'**
+  String get releaseFieldMinAdminApp;
+
+  /// No description provided for @releaseFieldMinDriverApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum driver app'**
+  String get releaseFieldMinDriverApp;
+
+  /// No description provided for @releaseFieldLastDeployment.
+  ///
+  /// In en, this message translates to:
+  /// **'Last deployment: {date}'**
+  String releaseFieldLastDeployment(String date);
+
+  /// No description provided for @releaseFieldMigrationStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Database migrations'**
+  String get releaseFieldMigrationStatus;
+
+  /// No description provided for @releaseFieldDeploymentReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Deployment ready'**
+  String get releaseFieldDeploymentReady;
+
+  /// No description provided for @releaseFieldApiPublicName.
+  ///
+  /// In en, this message translates to:
+  /// **'Public API name'**
+  String get releaseFieldApiPublicName;
+
+  /// No description provided for @releaseActiveAdminVersions.
+  ///
+  /// In en, this message translates to:
+  /// **'Active admin app versions'**
+  String get releaseActiveAdminVersions;
+
+  /// No description provided for @releaseActiveDriverVersions.
+  ///
+  /// In en, this message translates to:
+  /// **'Active driver app versions'**
+  String get releaseActiveDriverVersions;
+
+  /// No description provided for @releaseDeploymentWarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Deployment warnings'**
+  String get releaseDeploymentWarnings;
+
+  /// No description provided for @releaseYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get releaseYes;
+
+  /// No description provided for @releaseNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get releaseNo;
+
+  /// No description provided for @settingsReleaseSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Release & deployment'**
+  String get settingsReleaseSection;
+
+  /// No description provided for @settingsReleaseCenterBody.
+  ///
+  /// In en, this message translates to:
+  /// **'View read-only release metadata, app versions, and environment status.'**
+  String get settingsReleaseCenterBody;
+
+  /// No description provided for @settingsOpenReleaseCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Open release center'**
+  String get settingsOpenReleaseCenter;
 }
 
 class _AppLocalizationsDelegate

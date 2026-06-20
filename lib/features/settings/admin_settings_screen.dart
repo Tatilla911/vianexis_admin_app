@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../app/app_environment.dart';
+import '../../app/app_router.dart';
 import '../../core/api/api_config.dart';
 import '../../core/auth/admin_auth_state.dart';
 import '../../core/auth/admin_user.dart';
@@ -20,6 +22,8 @@ class AdminSettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final user = ref.watch(adminAuthProvider).user;
+    final showReleaseCenter =
+        user?.canAccess(AdminDestination.releaseCenter) ?? false;
     final environment = AppEnvironment.fromDefine(
       const String.fromEnvironment(AppEnvironment.dartDefineKey),
     ).value;
@@ -73,6 +77,24 @@ class AdminSettingsScreen extends ConsumerWidget {
               ],
             ),
           ),
+          if (showReleaseCenter) ...[
+            const SizedBox(height: 20),
+            VianexisSectionHeader(title: l10n.settingsReleaseSection),
+            const SizedBox(height: 12),
+            VianexisAdminCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(l10n.settingsReleaseCenterBody),
+                  const SizedBox(height: 16),
+                  OutlinedButton(
+                    onPressed: () => context.go(AdminRoutes.releaseCenter),
+                    child: Text(l10n.settingsOpenReleaseCenter),
+                  ),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 24),
           VianexisSectionHeader(title: l10n.settingsSignOutSection),
           const SizedBox(height: 12),

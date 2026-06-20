@@ -2784,4 +2784,601 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get billingActionUnavailable => 'A státuszváltoztatás nem érhető el.';
+
+  @override
+  String get navActionCenter => 'Teendők';
+
+  @override
+  String get navSecurityCenter => 'Biztonsági központ';
+
+  @override
+  String get navAdminUsers => 'Admin felhasználók';
+
+  @override
+  String get navReleaseCenter => 'Kihelyezési központ';
+
+  @override
+  String get adminUsersTitle => 'Admin felhasználók';
+
+  @override
+  String get adminUserDetailTitle => 'Admin felhasználó részletei';
+
+  @override
+  String get adminUserLoadError =>
+      'Az admin felhasználók betöltése sikertelen.';
+
+  @override
+  String get adminUserDetailError =>
+      'Az admin felhasználó betöltése sikertelen.';
+
+  @override
+  String get adminUserMockDataBadge => 'Mintaadat';
+
+  @override
+  String get adminUserMetadataBadge => 'Csak metaadat';
+
+  @override
+  String get adminUserOpenModule => 'Admin felhasználók megnyitása';
+
+  @override
+  String get adminUserPrivacyNotice =>
+      'Az admin nézetek csak metaadatot mutatnak. Jelszavak és hitelesítő adatok nem jelennek meg.';
+
+  @override
+  String get adminUserSearchHint => 'Admin felhasználók keresése';
+
+  @override
+  String get adminUserListEmpty =>
+      'Nincs a szűrőnek megfelelő admin felhasználó.';
+
+  @override
+  String get adminUserInviteAction => 'Admin meghívása';
+
+  @override
+  String get adminUserInviteTitle => 'Platform admin meghívása';
+
+  @override
+  String get adminUserInviteNotice =>
+      'A meghívás metaadat-only platform admin rekordot hoz létre. Az e-mail kézbesítés függőben lehet.';
+
+  @override
+  String get adminUserInviteNoteLabel => 'Belső megjegyzés (opcionális)';
+
+  @override
+  String get adminUserInviteConfirm => 'Meghívás küldése';
+
+  @override
+  String get adminUserInviteSuccess => 'Admin felhasználó meghívva.';
+
+  @override
+  String get adminUserFilterAll => 'Összes';
+
+  @override
+  String get adminUserFilterActive => 'Aktív';
+
+  @override
+  String get adminUserFilterInvited => 'Meghívott';
+
+  @override
+  String get adminUserFilterSuspended => 'Felfüggesztett';
+
+  @override
+  String get adminUserFilterDisabled => 'Letiltott';
+
+  @override
+  String get adminUserStatusActive => 'Aktív';
+
+  @override
+  String get adminUserStatusInvited => 'Meghívott';
+
+  @override
+  String get adminUserStatusSuspended => 'Felfüggesztett';
+
+  @override
+  String get adminUserStatusDisabled => 'Letiltott';
+
+  @override
+  String get adminUserStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get adminUserRoleUnknown => 'Ismeretlen szerepkör';
+
+  @override
+  String adminUserLastLogin(String date) {
+    return 'Utolsó bejelentkezés: $date';
+  }
+
+  @override
+  String adminUserFailedLogins(String count) {
+    return 'Sikertelen bejelentkezések: $count';
+  }
+
+  @override
+  String get adminUserFieldName => 'Név';
+
+  @override
+  String get adminUserFieldEmail => 'E-mail';
+
+  @override
+  String get adminUserFieldRole => 'Szerepkör';
+
+  @override
+  String get adminUserFieldStatus => 'Státusz';
+
+  @override
+  String get adminUserFieldCreatedAt => 'Létrehozva';
+
+  @override
+  String get adminUserFieldLastLoginAt => 'Utolsó bejelentkezés';
+
+  @override
+  String get adminUserFieldFailedLoginCount =>
+      'Sikertelen bejelentkezések száma';
+
+  @override
+  String get adminUserChangeRoleAction => 'Szerepkör módosítása';
+
+  @override
+  String get adminUserChangeStatusAction => 'Státusz módosítása';
+
+  @override
+  String get adminUserRoleDialogTitle => 'Admin szerepkör módosítása';
+
+  @override
+  String get adminUserStatusDialogTitle => 'Admin státusz módosítása';
+
+  @override
+  String adminUserActionCurrentRole(String role) {
+    return 'Jelenlegi szerepkör: $role';
+  }
+
+  @override
+  String adminUserActionCurrentStatus(String status) {
+    return 'Jelenlegi státusz: $status';
+  }
+
+  @override
+  String get adminUserReasonLabel => 'Indok';
+
+  @override
+  String get adminUserReasonRequired => 'Indok megadása kötelező.';
+
+  @override
+  String get adminUserNameRequired => 'A név legalább 2 karakter legyen.';
+
+  @override
+  String get adminUserActionAuditNotice =>
+      'Az admin módosítások audit naplózásra kerülnek.';
+
+  @override
+  String get adminUserActionCancel => 'Mégse';
+
+  @override
+  String get adminUserRoleConfirm => 'Szerepkör frissítése';
+
+  @override
+  String get adminUserStatusConfirm => 'Státusz frissítése';
+
+  @override
+  String get adminUserRoleSuccess => 'Admin szerepkör frissítve.';
+
+  @override
+  String get adminUserStatusSuccess => 'Admin státusz frissítve.';
+
+  @override
+  String get adminUserActionError =>
+      'Az admin felhasználó frissítése sikertelen.';
+
+  @override
+  String get adminUserActionUnavailable =>
+      'Az admin kezelés super_admin jogosultságot igényel.';
+
+  @override
+  String get securityCenterTitle => 'Biztonsági központ';
+
+  @override
+  String get securityEventDetailTitle => 'Biztonsági esemény részletei';
+
+  @override
+  String get securityLoadError => 'A biztonsági adatok betöltése sikertelen.';
+
+  @override
+  String get securityMockDataBadge => 'Mintaadat';
+
+  @override
+  String get securityOpenModule => 'Biztonsági központ megnyitása';
+
+  @override
+  String get securityPrivacyNotice =>
+      'A biztonsági nézetek csak metaadatot mutatnak. Üzenettörzs és dokumentumtartalom nem jelenik meg.';
+
+  @override
+  String get securityOverviewTitle => 'Biztonsági áttekintés';
+
+  @override
+  String securityOverviewFailedLogins(String count) {
+    return 'Sikertelen bejelentkezések: $count';
+  }
+
+  @override
+  String securityOverviewDeniedActions(String count) {
+    return 'Elutasított műveletek: $count';
+  }
+
+  @override
+  String securityOverviewActiveGrants(String count) {
+    return 'Aktív támogatási jogosultságok: $count';
+  }
+
+  @override
+  String securityOverviewCriticalEvents(String count) {
+    return 'Kritikus biztonsági események: $count';
+  }
+
+  @override
+  String securityOverviewExpiringGrants(String count) {
+    return 'Lejáró jogosultságok: $count';
+  }
+
+  @override
+  String securityOverviewHighRiskAi(String count) {
+    return 'Magas kockázatú AI felülvizsgálatok: $count';
+  }
+
+  @override
+  String securityOverviewSuspiciousBulk(String count) {
+    return 'Gyanús tömeges importok: $count';
+  }
+
+  @override
+  String get securityOverviewNoCritical => 'Nincs rögzített kritikus esemény';
+
+  @override
+  String securityOverviewLastCritical(String date) {
+    return 'Utolsó kritikus esemény: $date';
+  }
+
+  @override
+  String get securityEventSearchHint => 'Biztonsági események keresése';
+
+  @override
+  String get securityEventListEmpty =>
+      'Nincs a szűrőnek megfelelő biztonsági esemény.';
+
+  @override
+  String get securityEventDetailError => 'A biztonsági esemény nem található.';
+
+  @override
+  String securityEventCompanyLabel(String name) {
+    return 'Cég: $name';
+  }
+
+  @override
+  String securityEventCreatedAt(String date) {
+    return 'Létrehozva: $date';
+  }
+
+  @override
+  String get securityEventFieldSourceType => 'Forrás típusa';
+
+  @override
+  String get securityEventFieldSourceId => 'Forrás azonosító';
+
+  @override
+  String get securityEventFieldActorEmail => 'Szereplő e-mail';
+
+  @override
+  String get securityEventFieldActorRole => 'Szereplő szerepkör';
+
+  @override
+  String get securityEventFieldCompany => 'Cég';
+
+  @override
+  String get securityEventFieldCorrelationId => 'Korrelációs azonosító';
+
+  @override
+  String get securityEventFieldCreatedAt => 'Létrehozva';
+
+  @override
+  String get securityEventFilterAll => 'Összes';
+
+  @override
+  String get securityEventFilterFailedLogin => 'Sikertelen bejelentkezések';
+
+  @override
+  String get securityEventFilterPermissionDenied => 'Elutasított műveletek';
+
+  @override
+  String get securityEventFilterSupportAccess => 'Támogatási hozzáférés';
+
+  @override
+  String get securityEventFilterHighRiskAi => 'Magas kockázatú AI';
+
+  @override
+  String get securityEventFilterCriticalSystem => 'Kritikus rendszer';
+
+  @override
+  String get securityEventFilterAdminRoleChange => 'Admin változások';
+
+  @override
+  String get securityEventFilterSuspiciousBulkOnboarding =>
+      'Gyanús tömeges import';
+
+  @override
+  String get securityEventFilterCritical => 'Kritikus';
+
+  @override
+  String get securityEventFilterWarning => 'Figyelmeztetés';
+
+  @override
+  String get securityEventTypeFailedLogin => 'Sikertelen bejelentkezés';
+
+  @override
+  String get securityEventTypePermissionDenied => 'Jogosultság megtagadva';
+
+  @override
+  String get securityEventTypeSupportAccess => 'Támogatási hozzáférés';
+
+  @override
+  String get securityEventTypeHighRiskAi => 'Magas kockázatú AI';
+
+  @override
+  String get securityEventTypeCriticalSystem => 'Kritikus rendszer';
+
+  @override
+  String get securityEventTypeAdminRoleChange => 'Admin változás';
+
+  @override
+  String get securityEventTypeSuspiciousBulkOnboarding =>
+      'Gyanús tömeges import';
+
+  @override
+  String get securityEventTypeUnknown => 'Ismeretlen';
+
+  @override
+  String get securityEventSeverityInfo => 'Információ';
+
+  @override
+  String get securityEventSeverityWarning => 'Figyelmeztetés';
+
+  @override
+  String get securityEventSeverityCritical => 'Kritikus';
+
+  @override
+  String get securityEventSeverityUnknown => 'Ismeretlen';
+
+  @override
+  String get actionCenterTitle => 'Teendők';
+
+  @override
+  String get actionCenterLoadError => 'A teendők betöltése sikertelen.';
+
+  @override
+  String get actionCenterMockDataBadge => 'Mintaadat';
+
+  @override
+  String get actionCenterOpenModule => 'Teendők megnyitása';
+
+  @override
+  String get actionCenterPrivacyNotice =>
+      'A teendők metaadat-only összefoglalók. A részletekért nyissa meg a kapcsolt modulokat.';
+
+  @override
+  String get actionCenterSearchHint => 'Teendők keresése';
+
+  @override
+  String get actionCenterListEmpty => 'Nincs a szűrőnek megfelelő teendő.';
+
+  @override
+  String get actionCenterNeedsAttentionTitle => 'Figyelmet igényel';
+
+  @override
+  String actionCenterNeedsAttentionOpen(String count) {
+    return 'Nyitott elemek: $count';
+  }
+
+  @override
+  String actionCenterNeedsAttentionCritical(String count) {
+    return 'Kritikus/sürgős: $count';
+  }
+
+  @override
+  String actionCenterNeedsAttentionTotal(String count) {
+    return 'Összes elem: $count';
+  }
+
+  @override
+  String actionCenterCompanyLabel(String name) {
+    return 'Cég: $name';
+  }
+
+  @override
+  String actionCenterCreatedAt(String date) {
+    return 'Létrehozva: $date';
+  }
+
+  @override
+  String get actionCenterFilterAll => 'Összes';
+
+  @override
+  String get actionCenterFilterRegistration => 'Regisztrációk';
+
+  @override
+  String get actionCenterFilterBulkOnboarding => 'Tömeges onboarding';
+
+  @override
+  String get actionCenterFilterSupport => 'Támogatás';
+
+  @override
+  String get actionCenterFilterSystemHealth => 'Rendszerállapot';
+
+  @override
+  String get actionCenterFilterSecurity => 'Biztonság';
+
+  @override
+  String get actionCenterFilterBilling => 'Számlázás';
+
+  @override
+  String get actionCenterFilterAiReview => 'AI felülvizsgálatok';
+
+  @override
+  String get actionCenterFilterCritical => 'Kritikus/sürgős';
+
+  @override
+  String get actionCenterTypeRegistration => 'Regisztráció';
+
+  @override
+  String get actionCenterTypeBulkOnboarding => 'Tömeges onboarding';
+
+  @override
+  String get actionCenterTypeSupport => 'Támogatás';
+
+  @override
+  String get actionCenterTypeSystemHealth => 'Rendszerállapot';
+
+  @override
+  String get actionCenterTypeSecurity => 'Biztonság';
+
+  @override
+  String get actionCenterTypeBilling => 'Számlázás';
+
+  @override
+  String get actionCenterTypeAiReview => 'AI felülvizsgálat';
+
+  @override
+  String get actionCenterTypeCompany => 'Cég';
+
+  @override
+  String get actionCenterTypeUnknown => 'Ismeretlen';
+
+  @override
+  String get actionCenterPriorityLow => 'Alacsony';
+
+  @override
+  String get actionCenterPriorityNormal => 'Normál';
+
+  @override
+  String get actionCenterPriorityHigh => 'Magas';
+
+  @override
+  String get actionCenterPriorityUrgent => 'Sürgős';
+
+  @override
+  String get actionCenterPriorityCritical => 'Kritikus';
+
+  @override
+  String get actionCenterPriorityUnknown => 'Ismeretlen';
+
+  @override
+  String get actionCenterStatusOpen => 'Nyitott';
+
+  @override
+  String get actionCenterStatusAcknowledged => 'Nyugtázott';
+
+  @override
+  String get actionCenterStatusDismissed => 'Elutasított';
+
+  @override
+  String get actionCenterStatusResolved => 'Megoldott';
+
+  @override
+  String get actionCenterStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get releaseCenterTitle => 'Kihelyezési központ';
+
+  @override
+  String get releaseLoadError =>
+      'A kihelyezési metaadatok betöltése sikertelen.';
+
+  @override
+  String get releaseMockDataBadge => 'Mintaadat';
+
+  @override
+  String get releaseReadOnlyBadge => 'Csak olvasható';
+
+  @override
+  String get releasePrivacyNotice =>
+      'A kihelyezési nézetek csak metaadatot mutatnak. Titkok és tárolókulcsok nem jelennek meg.';
+
+  @override
+  String get releaseTabOverview => 'Áttekintés';
+
+  @override
+  String get releaseTabAppVersions => 'App verziók';
+
+  @override
+  String get releaseTabEnvironment => 'Környezet';
+
+  @override
+  String get releaseOverviewTitle => 'Kihelyezés áttekintése';
+
+  @override
+  String get releaseAppVersionsTitle => 'App verziók';
+
+  @override
+  String get releaseEnvironmentTitle => 'Környezet';
+
+  @override
+  String get releaseFieldBackendVersion => 'Backend verzió';
+
+  @override
+  String get releaseFieldEnvironment => 'Környezet';
+
+  @override
+  String get releaseFieldNodeEnv => 'Node környezet';
+
+  @override
+  String get releaseFieldMaintenanceMode => 'Karbantartási mód';
+
+  @override
+  String get releaseFieldLatestAdminApp => 'Legújabb admin app';
+
+  @override
+  String get releaseFieldLatestDriverApp => 'Legújabb sofőr app';
+
+  @override
+  String get releaseFieldMinAdminApp => 'Minimális admin app';
+
+  @override
+  String get releaseFieldMinDriverApp => 'Minimális sofőr app';
+
+  @override
+  String releaseFieldLastDeployment(String date) {
+    return 'Utolsó kihelyezés: $date';
+  }
+
+  @override
+  String get releaseFieldMigrationStatus => 'Adatbázis migrációk';
+
+  @override
+  String get releaseFieldDeploymentReady => 'Kihelyezés kész';
+
+  @override
+  String get releaseFieldApiPublicName => 'Nyilvános API név';
+
+  @override
+  String get releaseActiveAdminVersions => 'Aktív admin app verziók';
+
+  @override
+  String get releaseActiveDriverVersions => 'Aktív sofőr app verziók';
+
+  @override
+  String get releaseDeploymentWarnings => 'Kihelyezési figyelmeztetések';
+
+  @override
+  String get releaseYes => 'Igen';
+
+  @override
+  String get releaseNo => 'Nem';
+
+  @override
+  String get settingsReleaseSection => 'Kihelyezés és környezet';
+
+  @override
+  String get settingsReleaseCenterBody =>
+      'Olvasható kihelyezési metaadatok, app verziók és környezeti státusz megtekintése.';
+
+  @override
+  String get settingsOpenReleaseCenter => 'Kihelyezési központ megnyitása';
 }
