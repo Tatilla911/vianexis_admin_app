@@ -55,6 +55,7 @@ enum AdminDestination {
   supportTickets,
   supportGrants,
   customerCommunications,
+  publicIntakes,
   systemHealth,
   securityCenter,
   auditLogs,
@@ -77,6 +78,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.supportTickets ||
         AdminDestination.supportGrants ||
         AdminDestination.customerCommunications ||
+        AdminDestination.publicIntakes ||
         AdminDestination.systemHealth ||
         AdminDestination.securityCenter ||
         AdminDestination.auditLogs ||
@@ -92,6 +94,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.registrations ||
         AdminDestination.bulkOnboarding ||
         AdminDestination.aiReviews ||
+        AdminDestination.publicIntakes ||
         AdminDestination.notifications ||
         AdminDestination.settings => true,
         _ => false,
@@ -102,6 +105,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.companies ||
         AdminDestination.billing ||
         AdminDestination.customerCommunications ||
+        AdminDestination.publicIntakes ||
         AdminDestination.registrations ||
         AdminDestination.notifications ||
         AdminDestination.settings => true,

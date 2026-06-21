@@ -11,6 +11,7 @@ enum ActionCenterFilter {
   billing,
   aiReview,
   customerCommunication,
+  publicIntake,
   critical,
 }
 
@@ -27,6 +28,7 @@ extension ActionCenterFilterX on ActionCenterFilter {
       ActionCenterFilter.aiReview => 'actionCenterFilterAiReview',
       ActionCenterFilter.customerCommunication =>
         'actionCenterFilterCustomerCommunication',
+      ActionCenterFilter.publicIntake => 'actionCenterFilterPublicIntake',
       ActionCenterFilter.critical => 'actionCenterFilterCritical',
     };
   }
@@ -70,6 +72,8 @@ bool actionCenterItemMatchesFilter(ActionCenterItem item, ActionCenterFilter fil
     ActionCenterFilter.aiReview => item.type == ActionCenterItemType.aiReview,
     ActionCenterFilter.customerCommunication =>
       item.type == ActionCenterItemType.customerCommunication,
+    ActionCenterFilter.publicIntake =>
+      item.type == ActionCenterItemType.publicIntake,
     ActionCenterFilter.critical =>
       item.priority == ActionCenterPriority.critical ||
       item.priority == ActionCenterPriority.urgent,

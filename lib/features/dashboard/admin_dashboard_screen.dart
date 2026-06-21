@@ -22,6 +22,7 @@ import '../../features/notifications/data/notifications_repository.dart';
 import '../../features/notifications/widgets/notification_badge.dart';
 import '../../features/bulk_onboarding/presentation/bulk_onboarding_providers.dart';
 import '../../features/bulk_onboarding/presentation/widgets/bulk_onboarding_summary_card.dart';
+import '../../features/public_intakes/presentation/public_intakes_providers.dart';
 import '../../features/registrations/domain/registration_application_status.dart';
 import '../../features/registrations/presentation/registration_providers.dart';
 import '../../features/security_center/presentation/security_center_providers.dart';
@@ -68,9 +69,14 @@ class AdminDashboardScreen extends ConsumerWidget {
         user?.canAccess(AdminDestination.actionCenter) ?? false;
     final showCustomerCommunications =
         user?.canAccess(AdminDestination.customerCommunications) ?? false;
+    final showPublicIntakes =
+        user?.canAccess(AdminDestination.publicIntakes) ?? false;
     final showNotifications =
         user?.canAccess(AdminDestination.notifications) ?? false;
     final unreadCount = ref.watch(unreadNotificationCountProvider);
+
+    final publicIntakesAsync =
+        showPublicIntakes ? ref.watch(publicIntakeSummaryProvider) : null;
 
     final pendingRegistrations = showRegistrations
         ? registrationsAsync.maybeWhen(
@@ -187,6 +193,51 @@ class AdminDashboardScreen extends ConsumerWidget {
               ),
             ),
           if (showCustomerCommunications) const SizedBox(height: 16),
+          if (showPublicIntakes && publicIntakesAsync != null)
+            publicIntakesAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (_, _) => const SizedBox.shrink(),
+              data: (summary) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            resolvePublicIntakeKey(context, 'publicIntakesTitle'),
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            resolvePublicIntakeKey(
+                              context,
+                              'publicIntakeDashboardNew',
+                              params: {'count': '${summary.newCount}'},
+                            ),
+                          ),
+                          Text(
+                            resolvePublicIntakeKey(
+                              context,
+                              'publicIntakeDashboardHighPriority',
+                              params: {'count': '${summary.highPriorityCount}'},
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: () => context.go(AdminRoutes.publicIntakes),
+                    child: Text(resolvePublicIntakeKey(context, 'publicIntakesTitle')),
+                  ),
+                ],
+              ),
+            ),
+          if (showPublicIntakes) const SizedBox(height: 16),
           healthAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, _) => DashboardSummaryErrorCard(

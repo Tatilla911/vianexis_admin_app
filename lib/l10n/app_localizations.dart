@@ -176,6 +176,12 @@ abstract class AppLocalizations {
   /// **'Registrations'**
   String get navRegistrations;
 
+  /// No description provided for @navPublicIntakes.
+  ///
+  /// In en, this message translates to:
+  /// **'Public intakes'**
+  String get navPublicIntakes;
+
   /// No description provided for @navBulkOnboarding.
   ///
   /// In en, this message translates to:
@@ -7817,6 +7823,408 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total: {count}'**
   String customerCommunicationSummaryTotal(String count);
+
+  /// No description provided for @publicIntakesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Public intakes'**
+  String get publicIntakesTitle;
+
+  /// No description provided for @publicIntakeDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Public intake'**
+  String get publicIntakeDetailTitle;
+
+  /// No description provided for @publicIntakeSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search company, domain, country…'**
+  String get publicIntakeSearchHint;
+
+  /// No description provided for @publicIntakeListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No public intakes match your filters.'**
+  String get publicIntakeListEmpty;
+
+  /// No description provided for @publicIntakeListError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load public intakes.'**
+  String get publicIntakeListError;
+
+  /// No description provided for @publicIntakeDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load public intake detail.'**
+  String get publicIntakeDetailError;
+
+  /// No description provided for @publicIntakeMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get publicIntakeMockDataBadge;
+
+  /// No description provided for @publicIntakeUnknownCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown contact'**
+  String get publicIntakeUnknownCustomer;
+
+  /// No description provided for @publicIntakeCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted: {date}'**
+  String publicIntakeCreatedAt(String date);
+
+  /// No description provided for @publicIntakeFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get publicIntakeFilterAll;
+
+  /// No description provided for @publicIntakeFilterNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get publicIntakeFilterNew;
+
+  /// No description provided for @publicIntakeFilterReviewing.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewing'**
+  String get publicIntakeFilterReviewing;
+
+  /// No description provided for @publicIntakeFilterQuoteDemo.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote / demo'**
+  String get publicIntakeFilterQuoteDemo;
+
+  /// No description provided for @publicIntakeFilterContacted.
+  ///
+  /// In en, this message translates to:
+  /// **'Contacted / quoted'**
+  String get publicIntakeFilterContacted;
+
+  /// No description provided for @publicIntakeFilterClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get publicIntakeFilterClosed;
+
+  /// No description provided for @publicIntakeTypeContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get publicIntakeTypeContact;
+
+  /// No description provided for @publicIntakeTypeDemoRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo request'**
+  String get publicIntakeTypeDemoRequest;
+
+  /// No description provided for @publicIntakeTypeQuoteRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote request'**
+  String get publicIntakeTypeQuoteRequest;
+
+  /// No description provided for @publicIntakeTypeRegistrationInterest.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration interest'**
+  String get publicIntakeTypeRegistrationInterest;
+
+  /// No description provided for @publicIntakeTypeSupportRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Support request'**
+  String get publicIntakeTypeSupportRequest;
+
+  /// No description provided for @publicIntakeTypeUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown type'**
+  String get publicIntakeTypeUnknown;
+
+  /// No description provided for @publicIntakeStatusNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get publicIntakeStatusNew;
+
+  /// No description provided for @publicIntakeStatusReviewing.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewing'**
+  String get publicIntakeStatusReviewing;
+
+  /// No description provided for @publicIntakeStatusContacted.
+  ///
+  /// In en, this message translates to:
+  /// **'Contacted'**
+  String get publicIntakeStatusContacted;
+
+  /// No description provided for @publicIntakeStatusQuoted.
+  ///
+  /// In en, this message translates to:
+  /// **'Quoted'**
+  String get publicIntakeStatusQuoted;
+
+  /// No description provided for @publicIntakeStatusConverted.
+  ///
+  /// In en, this message translates to:
+  /// **'Converted'**
+  String get publicIntakeStatusConverted;
+
+  /// No description provided for @publicIntakeStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get publicIntakeStatusRejected;
+
+  /// No description provided for @publicIntakeStatusClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get publicIntakeStatusClosed;
+
+  /// No description provided for @publicIntakeStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown status'**
+  String get publicIntakeStatusUnknown;
+
+  /// No description provided for @publicIntakeSectionCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get publicIntakeSectionCustomer;
+
+  /// No description provided for @publicIntakeSectionConsent.
+  ///
+  /// In en, this message translates to:
+  /// **'Consent'**
+  String get publicIntakeSectionConsent;
+
+  /// No description provided for @publicIntakeSectionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Original message'**
+  String get publicIntakeSectionMessage;
+
+  /// No description provided for @publicIntakeSectionQuote.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote details'**
+  String get publicIntakeSectionQuote;
+
+  /// No description provided for @publicIntakeSectionLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'Related records'**
+  String get publicIntakeSectionLinks;
+
+  /// No description provided for @publicIntakeFieldCustomerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact name'**
+  String get publicIntakeFieldCustomerName;
+
+  /// No description provided for @publicIntakeFieldEmailDomain.
+  ///
+  /// In en, this message translates to:
+  /// **'Email domain'**
+  String get publicIntakeFieldEmailDomain;
+
+  /// No description provided for @publicIntakeFieldCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get publicIntakeFieldCompany;
+
+  /// No description provided for @publicIntakeFieldCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get publicIntakeFieldCountry;
+
+  /// No description provided for @publicIntakeFieldOriginalLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Original language: {lang}'**
+  String publicIntakeFieldOriginalLanguage(String lang);
+
+  /// No description provided for @publicIntakeFieldFleetSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Fleet size: {count}'**
+  String publicIntakeFieldFleetSize(String count);
+
+  /// No description provided for @publicIntakeFieldOfficeUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Office users: {count}'**
+  String publicIntakeFieldOfficeUsers(String count);
+
+  /// No description provided for @publicIntakeFieldDriverApps.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver apps: {count}'**
+  String publicIntakeFieldDriverApps(String count);
+
+  /// No description provided for @publicIntakeFieldModules.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested modules'**
+  String get publicIntakeFieldModules;
+
+  /// No description provided for @publicIntakeFieldAiFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested AI features'**
+  String get publicIntakeFieldAiFeatures;
+
+  /// No description provided for @publicIntakeFieldStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get publicIntakeFieldStatus;
+
+  /// No description provided for @publicIntakeFieldConsentVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Consent version'**
+  String get publicIntakeFieldConsentVersion;
+
+  /// No description provided for @publicIntakeConsentPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy consent'**
+  String get publicIntakeConsentPrivacy;
+
+  /// No description provided for @publicIntakeConsentTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms consent'**
+  String get publicIntakeConsentTerms;
+
+  /// No description provided for @publicIntakeConsentMarketing.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketing consent'**
+  String get publicIntakeConsentMarketing;
+
+  /// No description provided for @publicIntakeConsentYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get publicIntakeConsentYes;
+
+  /// No description provided for @publicIntakeConsentNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get publicIntakeConsentNo;
+
+  /// No description provided for @publicIntakeOpenThreadAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Open customer communication thread'**
+  String get publicIntakeOpenThreadAction;
+
+  /// No description provided for @publicIntakeLinkedQuote.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked quote request'**
+  String get publicIntakeLinkedQuote;
+
+  /// No description provided for @publicIntakeLinkedPricing.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked pricing intake'**
+  String get publicIntakeLinkedPricing;
+
+  /// No description provided for @publicIntakeChangeStatusAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Update status'**
+  String get publicIntakeChangeStatusAction;
+
+  /// No description provided for @publicIntakeStatusDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update intake status'**
+  String get publicIntakeStatusDialogTitle;
+
+  /// No description provided for @publicIntakeReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get publicIntakeReasonLabel;
+
+  /// No description provided for @publicIntakeReasonRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason is required when closing or rejecting.'**
+  String get publicIntakeReasonRequired;
+
+  /// No description provided for @publicIntakeCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get publicIntakeCancel;
+
+  /// No description provided for @publicIntakeStatusConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Save status'**
+  String get publicIntakeStatusConfirm;
+
+  /// No description provided for @publicIntakeStatusSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Status updated.'**
+  String get publicIntakeStatusSuccess;
+
+  /// No description provided for @publicIntakeStatusError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update status.'**
+  String get publicIntakeStatusError;
+
+  /// No description provided for @publicIntakeEvidenceNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This public intake is logged from first contact and can be included in evidence packages.'**
+  String get publicIntakeEvidenceNotice;
+
+  /// No description provided for @publicIntakeDashboardNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New public intakes: {count}'**
+  String publicIntakeDashboardNew(String count);
+
+  /// No description provided for @publicIntakeDashboardHighPriority.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote/demo requests: {count}'**
+  String publicIntakeDashboardHighPriority(String count);
+
+  /// No description provided for @actionCenterFilterPublicIntake.
+  ///
+  /// In en, this message translates to:
+  /// **'Public intakes'**
+  String get actionCenterFilterPublicIntake;
+
+  /// No description provided for @actionCenterTypePublicIntake.
+  ///
+  /// In en, this message translates to:
+  /// **'Public intake'**
+  String get actionCenterTypePublicIntake;
 }
 
 class _AppLocalizationsDelegate

@@ -124,6 +124,87 @@ String resolveRegistrationKey(
   };
 }
 
+String resolvePublicIntakeKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'publicIntakeFilterAll' => l10n.publicIntakeFilterAll,
+    'publicIntakeFilterNew' => l10n.publicIntakeFilterNew,
+    'publicIntakeFilterReviewing' => l10n.publicIntakeFilterReviewing,
+    'publicIntakeFilterQuoteDemo' => l10n.publicIntakeFilterQuoteDemo,
+    'publicIntakeFilterContacted' => l10n.publicIntakeFilterContacted,
+    'publicIntakeFilterClosed' => l10n.publicIntakeFilterClosed,
+    'publicIntakeTypeContact' => l10n.publicIntakeTypeContact,
+    'publicIntakeTypeDemoRequest' => l10n.publicIntakeTypeDemoRequest,
+    'publicIntakeTypeQuoteRequest' => l10n.publicIntakeTypeQuoteRequest,
+    'publicIntakeTypeRegistrationInterest' =>
+      l10n.publicIntakeTypeRegistrationInterest,
+    'publicIntakeTypeSupportRequest' => l10n.publicIntakeTypeSupportRequest,
+    'publicIntakeTypeUnknown' => l10n.publicIntakeTypeUnknown,
+    'publicIntakeStatusNew' => l10n.publicIntakeStatusNew,
+    'publicIntakeStatusReviewing' => l10n.publicIntakeStatusReviewing,
+    'publicIntakeStatusContacted' => l10n.publicIntakeStatusContacted,
+    'publicIntakeStatusQuoted' => l10n.publicIntakeStatusQuoted,
+    'publicIntakeStatusConverted' => l10n.publicIntakeStatusConverted,
+    'publicIntakeStatusRejected' => l10n.publicIntakeStatusRejected,
+    'publicIntakeStatusClosed' => l10n.publicIntakeStatusClosed,
+    'publicIntakeStatusUnknown' => l10n.publicIntakeStatusUnknown,
+    'publicIntakeSearchHint' => l10n.publicIntakeSearchHint,
+    'publicIntakeListEmpty' => l10n.publicIntakeListEmpty,
+    'publicIntakeListError' => l10n.publicIntakeListError,
+    'publicIntakeDetailError' => l10n.publicIntakeDetailError,
+    'publicIntakeMockDataBadge' => l10n.publicIntakeMockDataBadge,
+    'publicIntakeUnknownCustomer' => l10n.publicIntakeUnknownCustomer,
+    'publicIntakeCreatedAt' => l10n.publicIntakeCreatedAt(params['date'] ?? ''),
+    'publicIntakeSectionCustomer' => l10n.publicIntakeSectionCustomer,
+    'publicIntakeSectionConsent' => l10n.publicIntakeSectionConsent,
+    'publicIntakeSectionMessage' => l10n.publicIntakeSectionMessage,
+    'publicIntakeSectionQuote' => l10n.publicIntakeSectionQuote,
+    'publicIntakeSectionLinks' => l10n.publicIntakeSectionLinks,
+    'publicIntakeFieldCustomerName' => l10n.publicIntakeFieldCustomerName,
+    'publicIntakeFieldEmailDomain' => l10n.publicIntakeFieldEmailDomain,
+    'publicIntakeFieldCompany' => l10n.publicIntakeFieldCompany,
+    'publicIntakeFieldCountry' => l10n.publicIntakeFieldCountry,
+    'publicIntakeFieldOriginalLanguage' =>
+      l10n.publicIntakeFieldOriginalLanguage(params['lang'] ?? ''),
+    'publicIntakeFieldFleetSize' =>
+      l10n.publicIntakeFieldFleetSize(params['count'] ?? ''),
+    'publicIntakeFieldOfficeUsers' =>
+      l10n.publicIntakeFieldOfficeUsers(params['count'] ?? ''),
+    'publicIntakeFieldDriverApps' =>
+      l10n.publicIntakeFieldDriverApps(params['count'] ?? ''),
+    'publicIntakeFieldModules' => l10n.publicIntakeFieldModules,
+    'publicIntakeFieldAiFeatures' => l10n.publicIntakeFieldAiFeatures,
+    'publicIntakeFieldStatus' => l10n.publicIntakeFieldStatus,
+    'publicIntakeFieldConsentVersion' => l10n.publicIntakeFieldConsentVersion,
+    'publicIntakeConsentPrivacy' => l10n.publicIntakeConsentPrivacy,
+    'publicIntakeConsentTerms' => l10n.publicIntakeConsentTerms,
+    'publicIntakeConsentMarketing' => l10n.publicIntakeConsentMarketing,
+    'publicIntakeConsentYes' => l10n.publicIntakeConsentYes,
+    'publicIntakeConsentNo' => l10n.publicIntakeConsentNo,
+    'publicIntakeOpenThreadAction' => l10n.publicIntakeOpenThreadAction,
+    'publicIntakeLinkedQuote' => l10n.publicIntakeLinkedQuote,
+    'publicIntakeLinkedPricing' => l10n.publicIntakeLinkedPricing,
+    'publicIntakeChangeStatusAction' => l10n.publicIntakeChangeStatusAction,
+    'publicIntakeStatusDialogTitle' => l10n.publicIntakeStatusDialogTitle,
+    'publicIntakeReasonLabel' => l10n.publicIntakeReasonLabel,
+    'publicIntakeReasonRequired' => l10n.publicIntakeReasonRequired,
+    'publicIntakeCancel' => l10n.publicIntakeCancel,
+    'publicIntakeStatusConfirm' => l10n.publicIntakeStatusConfirm,
+    'publicIntakeStatusSuccess' => l10n.publicIntakeStatusSuccess,
+    'publicIntakeStatusError' => l10n.publicIntakeStatusError,
+    'publicIntakeEvidenceNotice' => l10n.publicIntakeEvidenceNotice,
+    'publicIntakeDashboardNew' =>
+      l10n.publicIntakeDashboardNew(params['count'] ?? '0'),
+    'publicIntakeDashboardHighPriority' =>
+      l10n.publicIntakeDashboardHighPriority(params['count'] ?? '0'),
+    _ => l10n.errorGenericBody,
+  };
+}
+
 String roleLabel(BuildContext context, String roleKey) =>
     resolveLocalizationKey(context, roleKey);
 
@@ -1324,6 +1405,7 @@ String resolveActionCenterKey(
     'actionCenterFilterCritical' => l10n.actionCenterFilterCritical,
     'actionCenterFilterCustomerCommunication' =>
       l10n.actionCenterFilterCustomerCommunication,
+    'actionCenterFilterPublicIntake' => l10n.actionCenterFilterPublicIntake,
     'actionCenterTypeRegistration' => l10n.actionCenterTypeRegistration,
     'actionCenterTypeBulkOnboarding' => l10n.actionCenterTypeBulkOnboarding,
     'actionCenterTypeSupport' => l10n.actionCenterTypeSupport,
@@ -1334,6 +1416,7 @@ String resolveActionCenterKey(
     'actionCenterTypeCompany' => l10n.actionCenterTypeCompany,
     'actionCenterTypeCustomerCommunication' =>
       l10n.actionCenterTypeCustomerCommunication,
+    'actionCenterTypePublicIntake' => l10n.actionCenterTypePublicIntake,
     'actionCenterTypeUnknown' => l10n.actionCenterTypeUnknown,
     'actionCenterPriorityLow' => l10n.actionCenterPriorityLow,
     'actionCenterPriorityNormal' => l10n.actionCenterPriorityNormal,

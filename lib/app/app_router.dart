@@ -35,6 +35,8 @@ import '../features/login/login_screen.dart';
 import '../features/notifications/presentation/notification_detail_screen.dart';
 import '../features/notifications/presentation/notification_preferences_screen.dart';
 import '../features/notifications/presentation/notifications_screen.dart';
+import '../features/public_intakes/presentation/public_intake_detail_screen.dart';
+import '../features/public_intakes/presentation/public_intakes_screen.dart';
 import '../features/registrations/presentation/registration_application_detail_screen.dart';
 import '../features/registrations/presentation/registration_applications_screen.dart';
 import '../features/settings/admin_settings_screen.dart';
@@ -145,6 +147,20 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                     ),
                   ),
                 ],
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AdminRoutes.publicIntakes,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: PublicIntakesScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => PublicIntakeDetailScreen(
+                  intakeId: state.pathParameters['id'] ?? '',
+                ),
               ),
             ],
           ),
@@ -382,6 +398,7 @@ abstract final class AdminRoutes {
   static const supportTickets = '/support/tickets';
   static const supportGrants = '/support/grants';
   static const customerCommunications = '/customer-communications';
+  static const publicIntakes = '/public-intakes';
   static const systemHealth = '/system-health';
   static const auditLogs = '/audit-logs';
   static const notifications = '/notifications';
@@ -414,6 +431,8 @@ abstract final class AdminRoutes {
   static String supportTicketDetail(String id) => '$supportTickets/$id';
 
   static String supportGrantDetail(String id) => '$supportGrants/$id';
+
+  static String publicIntakeDetail(String id) => '$publicIntakes/$id';
 
   static String customerCommunicationDetail(String id) =>
       '$customerCommunications/$id';
@@ -457,6 +476,9 @@ abstract final class AdminRoutes {
     if (location.startsWith(supportGrants)) {
       return AdminDestination.supportGrants;
     }
+    if (location.startsWith(publicIntakes)) {
+      return AdminDestination.publicIntakes;
+    }
     if (location.startsWith(customerCommunications)) {
       return AdminDestination.customerCommunications;
     }
@@ -482,6 +504,7 @@ abstract final class AdminRoutes {
       supportTickets => AdminDestination.supportTickets,
       supportGrants => AdminDestination.supportGrants,
       customerCommunications => AdminDestination.customerCommunications,
+      publicIntakes => AdminDestination.publicIntakes,
       systemHealth => AdminDestination.systemHealth,
       securityCenter => AdminDestination.securityCenter,
       adminUsers => AdminDestination.adminUsers,

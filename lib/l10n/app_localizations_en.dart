@@ -51,6 +51,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navRegistrations => 'Registrations';
 
   @override
+  String get navPublicIntakes => 'Public intakes';
+
+  @override
   String get navBulkOnboarding => 'Bulk onboarding';
 
   @override
@@ -4253,4 +4256,222 @@ class AppLocalizationsEn extends AppLocalizations {
   String customerCommunicationSummaryTotal(String count) {
     return 'Total: $count';
   }
+
+  @override
+  String get publicIntakesTitle => 'Public intakes';
+
+  @override
+  String get publicIntakeDetailTitle => 'Public intake';
+
+  @override
+  String get publicIntakeSearchHint => 'Search company, domain, country…';
+
+  @override
+  String get publicIntakeListEmpty => 'No public intakes match your filters.';
+
+  @override
+  String get publicIntakeListError => 'Could not load public intakes.';
+
+  @override
+  String get publicIntakeDetailError => 'Could not load public intake detail.';
+
+  @override
+  String get publicIntakeMockDataBadge => 'Mock data';
+
+  @override
+  String get publicIntakeUnknownCustomer => 'Unknown contact';
+
+  @override
+  String publicIntakeCreatedAt(String date) {
+    return 'Submitted: $date';
+  }
+
+  @override
+  String get publicIntakeFilterAll => 'All';
+
+  @override
+  String get publicIntakeFilterNew => 'New';
+
+  @override
+  String get publicIntakeFilterReviewing => 'Reviewing';
+
+  @override
+  String get publicIntakeFilterQuoteDemo => 'Quote / demo';
+
+  @override
+  String get publicIntakeFilterContacted => 'Contacted / quoted';
+
+  @override
+  String get publicIntakeFilterClosed => 'Closed';
+
+  @override
+  String get publicIntakeTypeContact => 'Contact';
+
+  @override
+  String get publicIntakeTypeDemoRequest => 'Demo request';
+
+  @override
+  String get publicIntakeTypeQuoteRequest => 'Quote request';
+
+  @override
+  String get publicIntakeTypeRegistrationInterest => 'Registration interest';
+
+  @override
+  String get publicIntakeTypeSupportRequest => 'Support request';
+
+  @override
+  String get publicIntakeTypeUnknown => 'Unknown type';
+
+  @override
+  String get publicIntakeStatusNew => 'New';
+
+  @override
+  String get publicIntakeStatusReviewing => 'Reviewing';
+
+  @override
+  String get publicIntakeStatusContacted => 'Contacted';
+
+  @override
+  String get publicIntakeStatusQuoted => 'Quoted';
+
+  @override
+  String get publicIntakeStatusConverted => 'Converted';
+
+  @override
+  String get publicIntakeStatusRejected => 'Rejected';
+
+  @override
+  String get publicIntakeStatusClosed => 'Closed';
+
+  @override
+  String get publicIntakeStatusUnknown => 'Unknown status';
+
+  @override
+  String get publicIntakeSectionCustomer => 'Customer';
+
+  @override
+  String get publicIntakeSectionConsent => 'Consent';
+
+  @override
+  String get publicIntakeSectionMessage => 'Original message';
+
+  @override
+  String get publicIntakeSectionQuote => 'Quote details';
+
+  @override
+  String get publicIntakeSectionLinks => 'Related records';
+
+  @override
+  String get publicIntakeFieldCustomerName => 'Contact name';
+
+  @override
+  String get publicIntakeFieldEmailDomain => 'Email domain';
+
+  @override
+  String get publicIntakeFieldCompany => 'Company';
+
+  @override
+  String get publicIntakeFieldCountry => 'Country';
+
+  @override
+  String publicIntakeFieldOriginalLanguage(String lang) {
+    return 'Original language: $lang';
+  }
+
+  @override
+  String publicIntakeFieldFleetSize(String count) {
+    return 'Fleet size: $count';
+  }
+
+  @override
+  String publicIntakeFieldOfficeUsers(String count) {
+    return 'Office users: $count';
+  }
+
+  @override
+  String publicIntakeFieldDriverApps(String count) {
+    return 'Driver apps: $count';
+  }
+
+  @override
+  String get publicIntakeFieldModules => 'Requested modules';
+
+  @override
+  String get publicIntakeFieldAiFeatures => 'Requested AI features';
+
+  @override
+  String get publicIntakeFieldStatus => 'Status';
+
+  @override
+  String get publicIntakeFieldConsentVersion => 'Consent version';
+
+  @override
+  String get publicIntakeConsentPrivacy => 'Privacy consent';
+
+  @override
+  String get publicIntakeConsentTerms => 'Terms consent';
+
+  @override
+  String get publicIntakeConsentMarketing => 'Marketing consent';
+
+  @override
+  String get publicIntakeConsentYes => 'Yes';
+
+  @override
+  String get publicIntakeConsentNo => 'No';
+
+  @override
+  String get publicIntakeOpenThreadAction =>
+      'Open customer communication thread';
+
+  @override
+  String get publicIntakeLinkedQuote => 'Linked quote request';
+
+  @override
+  String get publicIntakeLinkedPricing => 'Linked pricing intake';
+
+  @override
+  String get publicIntakeChangeStatusAction => 'Update status';
+
+  @override
+  String get publicIntakeStatusDialogTitle => 'Update intake status';
+
+  @override
+  String get publicIntakeReasonLabel => 'Reason';
+
+  @override
+  String get publicIntakeReasonRequired =>
+      'Reason is required when closing or rejecting.';
+
+  @override
+  String get publicIntakeCancel => 'Cancel';
+
+  @override
+  String get publicIntakeStatusConfirm => 'Save status';
+
+  @override
+  String get publicIntakeStatusSuccess => 'Status updated.';
+
+  @override
+  String get publicIntakeStatusError => 'Could not update status.';
+
+  @override
+  String get publicIntakeEvidenceNotice =>
+      'This public intake is logged from first contact and can be included in evidence packages.';
+
+  @override
+  String publicIntakeDashboardNew(String count) {
+    return 'New public intakes: $count';
+  }
+
+  @override
+  String publicIntakeDashboardHighPriority(String count) {
+    return 'Quote/demo requests: $count';
+  }
+
+  @override
+  String get actionCenterFilterPublicIntake => 'Public intakes';
+
+  @override
+  String get actionCenterTypePublicIntake => 'Public intake';
 }

@@ -51,6 +51,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get navRegistrations => 'Regisztrációk';
 
   @override
+  String get navPublicIntakes => 'Publikus megkeresések';
+
+  @override
   String get navBulkOnboarding => 'Tömeges onboarding';
 
   @override
@@ -4312,4 +4315,225 @@ class AppLocalizationsHu extends AppLocalizations {
   String customerCommunicationSummaryTotal(String count) {
     return 'Osszesen: $count';
   }
+
+  @override
+  String get publicIntakesTitle => 'Publikus megkeresések';
+
+  @override
+  String get publicIntakeDetailTitle => 'Publikus megkeresés';
+
+  @override
+  String get publicIntakeSearchHint => 'Keresés cég, domain, ország…';
+
+  @override
+  String get publicIntakeListEmpty => 'Nincs a szűrőnek megfelelő megkeresés.';
+
+  @override
+  String get publicIntakeListError =>
+      'Nem sikerült betölteni a megkereséseket.';
+
+  @override
+  String get publicIntakeDetailError =>
+      'Nem sikerült betölteni a megkeresés részleteit.';
+
+  @override
+  String get publicIntakeMockDataBadge => 'Tesztadat';
+
+  @override
+  String get publicIntakeUnknownCustomer => 'Ismeretlen kapcsolat';
+
+  @override
+  String publicIntakeCreatedAt(String date) {
+    return 'Beküldve: $date';
+  }
+
+  @override
+  String get publicIntakeFilterAll => 'Mind';
+
+  @override
+  String get publicIntakeFilterNew => 'Új';
+
+  @override
+  String get publicIntakeFilterReviewing => 'Vizsgálat alatt';
+
+  @override
+  String get publicIntakeFilterQuoteDemo => 'Ajánlat / demo';
+
+  @override
+  String get publicIntakeFilterContacted => 'Kapcsolatfelvétel / ajánlat';
+
+  @override
+  String get publicIntakeFilterClosed => 'Lezárva';
+
+  @override
+  String get publicIntakeTypeContact => 'Kapcsolat';
+
+  @override
+  String get publicIntakeTypeDemoRequest => 'Demo kérés';
+
+  @override
+  String get publicIntakeTypeQuoteRequest => 'Ajánlatkérés';
+
+  @override
+  String get publicIntakeTypeRegistrationInterest => 'Regisztrációs érdeklődés';
+
+  @override
+  String get publicIntakeTypeSupportRequest => 'Támogatás';
+
+  @override
+  String get publicIntakeTypeUnknown => 'Ismeretlen típus';
+
+  @override
+  String get publicIntakeStatusNew => 'Új';
+
+  @override
+  String get publicIntakeStatusReviewing => 'Vizsgálat alatt';
+
+  @override
+  String get publicIntakeStatusContacted => 'Kapcsolatfelvétel';
+
+  @override
+  String get publicIntakeStatusQuoted => 'Ajánlatadva';
+
+  @override
+  String get publicIntakeStatusConverted => 'Konvertált';
+
+  @override
+  String get publicIntakeStatusRejected => 'Elutasítva';
+
+  @override
+  String get publicIntakeStatusClosed => 'Lezárva';
+
+  @override
+  String get publicIntakeStatusUnknown => 'Ismeretlen státusz';
+
+  @override
+  String get publicIntakeSectionCustomer => 'Ügyfél';
+
+  @override
+  String get publicIntakeSectionConsent => 'Hozzájárulás';
+
+  @override
+  String get publicIntakeSectionMessage => 'Eredeti üzenet';
+
+  @override
+  String get publicIntakeSectionQuote => 'Ajánlat részletei';
+
+  @override
+  String get publicIntakeSectionLinks => 'Kapcsolódó rekordok';
+
+  @override
+  String get publicIntakeFieldCustomerName => 'Kapcsolattartó neve';
+
+  @override
+  String get publicIntakeFieldEmailDomain => 'E-mail domain';
+
+  @override
+  String get publicIntakeFieldCompany => 'Cég';
+
+  @override
+  String get publicIntakeFieldCountry => 'Ország';
+
+  @override
+  String publicIntakeFieldOriginalLanguage(String lang) {
+    return 'Eredeti nyelv: $lang';
+  }
+
+  @override
+  String publicIntakeFieldFleetSize(String count) {
+    return 'Flotta méret: $count';
+  }
+
+  @override
+  String publicIntakeFieldOfficeUsers(String count) {
+    return 'Irodai felhasználók: $count';
+  }
+
+  @override
+  String publicIntakeFieldDriverApps(String count) {
+    return 'Sofőr appok: $count';
+  }
+
+  @override
+  String get publicIntakeFieldModules => 'Kért modulok';
+
+  @override
+  String get publicIntakeFieldAiFeatures => 'Kért AI funkciók';
+
+  @override
+  String get publicIntakeFieldStatus => 'Státusz';
+
+  @override
+  String get publicIntakeFieldConsentVersion => 'Hozzájárulás verzió';
+
+  @override
+  String get publicIntakeConsentPrivacy => 'Adatvédelmi hozzájárulás';
+
+  @override
+  String get publicIntakeConsentTerms => 'Felhasználási feltételek';
+
+  @override
+  String get publicIntakeConsentMarketing => 'Marketing hozzájárulás';
+
+  @override
+  String get publicIntakeConsentYes => 'Igen';
+
+  @override
+  String get publicIntakeConsentNo => 'Nem';
+
+  @override
+  String get publicIntakeOpenThreadAction =>
+      'Ügyfél-kommunikációs szál megnyitása';
+
+  @override
+  String get publicIntakeLinkedQuote => 'Kapcsolt ajánlatkérés';
+
+  @override
+  String get publicIntakeLinkedPricing => 'Kapcsolt árazási megkeresés';
+
+  @override
+  String get publicIntakeChangeStatusAction => 'Státusz módosítása';
+
+  @override
+  String get publicIntakeStatusDialogTitle =>
+      'Megkeresés státuszának módosítása';
+
+  @override
+  String get publicIntakeReasonLabel => 'Indoklás';
+
+  @override
+  String get publicIntakeReasonRequired =>
+      'Elutasításnál vagy lezárásnál kötelező az indoklás.';
+
+  @override
+  String get publicIntakeCancel => 'Mégse';
+
+  @override
+  String get publicIntakeStatusConfirm => 'Státusz mentése';
+
+  @override
+  String get publicIntakeStatusSuccess => 'Státusz frissítve.';
+
+  @override
+  String get publicIntakeStatusError => 'Nem sikerült frissíteni a státuszt.';
+
+  @override
+  String get publicIntakeEvidenceNotice =>
+      'Ez a publikus megkeresés az első kapcsolatfelvételtől naplózva van, és szerepelhet bizonyítékcsomagokban.';
+
+  @override
+  String publicIntakeDashboardNew(String count) {
+    return 'Új publikus megkeresések: $count';
+  }
+
+  @override
+  String publicIntakeDashboardHighPriority(String count) {
+    return 'Ajánlat/demo kérések: $count';
+  }
+
+  @override
+  String get actionCenterFilterPublicIntake => 'Publikus megkeresések';
+
+  @override
+  String get actionCenterTypePublicIntake => 'Publikus megkeresés';
 }
