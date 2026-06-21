@@ -3489,6 +3489,25 @@ class AppLocalizationsHu extends AppLocalizations {
       'Az e-mail kézbesítési státusz csak szolgáltatót és metaadatot mutat. SMTP jelszavak és üzenettörzs nem jelenik meg.';
 
   @override
+  String get releaseEmailDeliveryAllowlistEnabled =>
+      'Staging allowlist engedelyezve';
+
+  @override
+  String get releaseEmailDeliveryAllowlistDomains =>
+      'Engedelyezett domainek (szam)';
+
+  @override
+  String get releaseEmailDeliveryAllowlistRecipients =>
+      'Engedelyezett címzettek (szam)';
+
+  @override
+  String get releaseEmailDeliveryLastFailureCode => 'Utolso hibakod';
+
+  @override
+  String get releaseEmailDeliveryStagingAllowlistMissing =>
+      'Staging kezbesites engedelyezve, de hianyzik az allowlist — kulso kuldes blokkolva.';
+
+  @override
   String get releaseEmailProviderNoop => 'No-op (kikapcsolva)';
 
   @override
@@ -4090,6 +4109,97 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get customerCommunicationDeliveryChannelUnknown =>
       'Ismeretlen csatorna';
+
+  @override
+  String get customerCommunicationDeliveryHistoryTitle =>
+      'Kezbesitesi elozmenyek';
+
+  @override
+  String get customerCommunicationDeliveryHistoryEmpty =>
+      'Meg nincs kezbesitesi kiserlet.';
+
+  @override
+  String get customerCommunicationDeliveryFilterAll => 'Osszes';
+
+  @override
+  String get customerCommunicationDeliveryFilterSkipped => 'Kihagyva';
+
+  @override
+  String get customerCommunicationDeliveryFilterFailed => 'Sikertelen';
+
+  @override
+  String get customerCommunicationDeliveryFilterSent => 'Elkuldve';
+
+  @override
+  String get customerCommunicationDeliveryFilterQueued => 'Varolistan';
+
+  @override
+  String get customerCommunicationResendTitle => 'Kezbesites ujrakuldese';
+
+  @override
+  String get customerCommunicationResendAction => 'Ujrakuldes';
+
+  @override
+  String get customerCommunicationResendAuditNotice =>
+      'Az ujrakuldes uj, auditalt kezbesitesi kiserletet hoz letre.';
+
+  @override
+  String get customerCommunicationResendTranslationNotice =>
+      'A leforditott valaszok csak jovahagyott forditas utan kuldethetok.';
+
+  @override
+  String get customerCommunicationResendSuccess =>
+      'Ujrakuldes sikeresen naplozva.';
+
+  @override
+  String get customerCommunicationDeliveryMultipleAttempts =>
+      'Tobb kezbesitesi kiserlet — lasd a kezbesitesi elozmenyeket.';
+
+  @override
+  String get customerCommunicationDeliveryResendAttempt =>
+      'Ez a kiserlet egy korabbi kezbesites ujrakuldese.';
+
+  @override
+  String get customerCommunicationDeliveryTemplateLabel => 'E-mail sablon';
+
+  @override
+  String get customerCommunicationEvidenceRegenerationNotice =>
+      'Az evidence csomagot erdemes ujrageneralni uj kezbesitesi kiserletek utan.';
+
+  @override
+  String get customerCommunicationHumanConfirmRequired =>
+      'Emberi megerosites szukseges.';
+
+  @override
+  String get customerCommunicationDeliveryEventQueued => 'Varolistan';
+
+  @override
+  String get customerCommunicationDeliveryEventSent => 'Elkuldve';
+
+  @override
+  String get customerCommunicationDeliveryEventDelivered => 'Kezbesitve';
+
+  @override
+  String get customerCommunicationDeliveryEventBounced => 'Visszapattant';
+
+  @override
+  String get customerCommunicationDeliveryEventComplained => 'Panasz';
+
+  @override
+  String get customerCommunicationDeliveryEventOpened => 'Megnyitva';
+
+  @override
+  String get customerCommunicationDeliveryEventClicked => 'Kattintva';
+
+  @override
+  String get customerCommunicationDeliveryEventFailed => 'Sikertelen';
+
+  @override
+  String get customerCommunicationDeliveryEventProviderStatus =>
+      'Szolgaltato statusz';
+
+  @override
+  String get customerCommunicationDeliveryEventUnknown => 'Ismeretlen esemeny';
 
   @override
   String customerCommunicationPackageGeneratedAt(String date) {

@@ -191,20 +191,33 @@ class _EvidencePackageDetailScreenState
               ),
               if (pkg.isPdfReady) ...[
                 const SizedBox(height: 12),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    resolveCustomerCommunicationsKey(
-                      context,
-                      'customerCommunicationEvidenceDeliveryNotice',
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          resolveCustomerCommunicationsKey(
+                            context,
+                            'customerCommunicationEvidenceDeliveryNotice',
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          resolveCustomerCommunicationsKey(
+                            context,
+                            'customerCommunicationEvidenceRegenerationNotice',
+                          ),
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              Card(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                const SizedBox(height: 12),
+                Card(
+                  color: Theme.of(context).colorScheme.primaryContainer,
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Text(

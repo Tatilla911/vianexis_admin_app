@@ -6386,6 +6386,36 @@ abstract class AppLocalizations {
   /// **'Email delivery status shows provider and metadata only. No SMTP passwords or message bodies are exposed.'**
   String get releaseEmailDeliveryNotice;
 
+  /// No description provided for @releaseEmailDeliveryAllowlistEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Staging allowlist enabled'**
+  String get releaseEmailDeliveryAllowlistEnabled;
+
+  /// No description provided for @releaseEmailDeliveryAllowlistDomains.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowed domains (count)'**
+  String get releaseEmailDeliveryAllowlistDomains;
+
+  /// No description provided for @releaseEmailDeliveryAllowlistRecipients.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowed recipients (count)'**
+  String get releaseEmailDeliveryAllowlistRecipients;
+
+  /// No description provided for @releaseEmailDeliveryLastFailureCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Last failure code'**
+  String get releaseEmailDeliveryLastFailureCode;
+
+  /// No description provided for @releaseEmailDeliveryStagingAllowlistMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Staging delivery enabled but allowlist is missing — external sends are blocked.'**
+  String get releaseEmailDeliveryStagingAllowlistMissing;
+
   /// No description provided for @releaseEmailProviderNoop.
   ///
   /// In en, this message translates to:
@@ -7451,6 +7481,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown channel'**
   String get customerCommunicationDeliveryChannelUnknown;
+
+  /// No description provided for @customerCommunicationDeliveryHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery history'**
+  String get customerCommunicationDeliveryHistoryTitle;
+
+  /// No description provided for @customerCommunicationDeliveryHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No delivery attempts recorded yet.'**
+  String get customerCommunicationDeliveryHistoryEmpty;
+
+  /// No description provided for @customerCommunicationDeliveryFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get customerCommunicationDeliveryFilterAll;
+
+  /// No description provided for @customerCommunicationDeliveryFilterSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped'**
+  String get customerCommunicationDeliveryFilterSkipped;
+
+  /// No description provided for @customerCommunicationDeliveryFilterFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get customerCommunicationDeliveryFilterFailed;
+
+  /// No description provided for @customerCommunicationDeliveryFilterSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get customerCommunicationDeliveryFilterSent;
+
+  /// No description provided for @customerCommunicationDeliveryFilterQueued.
+  ///
+  /// In en, this message translates to:
+  /// **'Queued'**
+  String get customerCommunicationDeliveryFilterQueued;
+
+  /// No description provided for @customerCommunicationResendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend delivery'**
+  String get customerCommunicationResendTitle;
+
+  /// No description provided for @customerCommunicationResendAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get customerCommunicationResendAction;
+
+  /// No description provided for @customerCommunicationResendAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Resending creates a new audited delivery attempt.'**
+  String get customerCommunicationResendAuditNotice;
+
+  /// No description provided for @customerCommunicationResendTranslationNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Translated replies require approved translation before sending.'**
+  String get customerCommunicationResendTranslationNotice;
+
+  /// No description provided for @customerCommunicationResendSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend logged successfully.'**
+  String get customerCommunicationResendSuccess;
+
+  /// No description provided for @customerCommunicationDeliveryMultipleAttempts.
+  ///
+  /// In en, this message translates to:
+  /// **'Multiple delivery attempts recorded — see delivery history.'**
+  String get customerCommunicationDeliveryMultipleAttempts;
+
+  /// No description provided for @customerCommunicationDeliveryResendAttempt.
+  ///
+  /// In en, this message translates to:
+  /// **'This attempt is a resend of a prior delivery.'**
+  String get customerCommunicationDeliveryResendAttempt;
+
+  /// No description provided for @customerCommunicationDeliveryTemplateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email template'**
+  String get customerCommunicationDeliveryTemplateLabel;
+
+  /// No description provided for @customerCommunicationEvidenceRegenerationNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence package may need regeneration after new delivery attempts.'**
+  String get customerCommunicationEvidenceRegenerationNotice;
+
+  /// No description provided for @customerCommunicationHumanConfirmRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Human confirmation is required.'**
+  String get customerCommunicationHumanConfirmRequired;
+
+  /// No description provided for @customerCommunicationDeliveryEventQueued.
+  ///
+  /// In en, this message translates to:
+  /// **'Queued'**
+  String get customerCommunicationDeliveryEventQueued;
+
+  /// No description provided for @customerCommunicationDeliveryEventSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get customerCommunicationDeliveryEventSent;
+
+  /// No description provided for @customerCommunicationDeliveryEventDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get customerCommunicationDeliveryEventDelivered;
+
+  /// No description provided for @customerCommunicationDeliveryEventBounced.
+  ///
+  /// In en, this message translates to:
+  /// **'Bounced'**
+  String get customerCommunicationDeliveryEventBounced;
+
+  /// No description provided for @customerCommunicationDeliveryEventComplained.
+  ///
+  /// In en, this message translates to:
+  /// **'Complained'**
+  String get customerCommunicationDeliveryEventComplained;
+
+  /// No description provided for @customerCommunicationDeliveryEventOpened.
+  ///
+  /// In en, this message translates to:
+  /// **'Opened'**
+  String get customerCommunicationDeliveryEventOpened;
+
+  /// No description provided for @customerCommunicationDeliveryEventClicked.
+  ///
+  /// In en, this message translates to:
+  /// **'Clicked'**
+  String get customerCommunicationDeliveryEventClicked;
+
+  /// No description provided for @customerCommunicationDeliveryEventFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get customerCommunicationDeliveryEventFailed;
+
+  /// No description provided for @customerCommunicationDeliveryEventProviderStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider status'**
+  String get customerCommunicationDeliveryEventProviderStatus;
+
+  /// No description provided for @customerCommunicationDeliveryEventUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown event'**
+  String get customerCommunicationDeliveryEventUnknown;
 
   /// No description provided for @customerCommunicationPackageGeneratedAt.
   ///

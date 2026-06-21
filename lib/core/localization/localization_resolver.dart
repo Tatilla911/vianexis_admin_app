@@ -1511,6 +1511,37 @@ String resolveCustomerCommunicationsKey(
       l10n.customerCommunicationDeliveryChannelNone,
     'customerCommunicationDeliveryChannelUnknown' =>
       l10n.customerCommunicationDeliveryChannelUnknown,
+    'customerCommunicationDeliveryHistoryTitle' =>
+      l10n.customerCommunicationDeliveryHistoryTitle,
+    'customerCommunicationDeliveryHistoryEmpty' =>
+      l10n.customerCommunicationDeliveryHistoryEmpty,
+    'customerCommunicationDeliveryFilterAll' =>
+      l10n.customerCommunicationDeliveryFilterAll,
+    'customerCommunicationDeliveryFilterSkipped' =>
+      l10n.customerCommunicationDeliveryFilterSkipped,
+    'customerCommunicationDeliveryFilterFailed' =>
+      l10n.customerCommunicationDeliveryFilterFailed,
+    'customerCommunicationDeliveryFilterSent' =>
+      l10n.customerCommunicationDeliveryFilterSent,
+    'customerCommunicationDeliveryFilterQueued' =>
+      l10n.customerCommunicationDeliveryFilterQueued,
+    'customerCommunicationResendTitle' => l10n.customerCommunicationResendTitle,
+    'customerCommunicationResendAction' => l10n.customerCommunicationResendAction,
+    'customerCommunicationResendAuditNotice' =>
+      l10n.customerCommunicationResendAuditNotice,
+    'customerCommunicationResendTranslationNotice' =>
+      l10n.customerCommunicationResendTranslationNotice,
+    'customerCommunicationResendSuccess' => l10n.customerCommunicationResendSuccess,
+    'customerCommunicationDeliveryMultipleAttempts' =>
+      l10n.customerCommunicationDeliveryMultipleAttempts,
+    'customerCommunicationDeliveryResendAttempt' =>
+      l10n.customerCommunicationDeliveryResendAttempt,
+    'customerCommunicationDeliveryTemplateLabel' =>
+      l10n.customerCommunicationDeliveryTemplateLabel,
+    'customerCommunicationEvidenceRegenerationNotice' =>
+      l10n.customerCommunicationEvidenceRegenerationNotice,
+    'customerCommunicationHumanConfirmRequired' =>
+      l10n.customerCommunicationHumanConfirmRequired,
     'customerCommunicationPackageGeneratedAt' =>
       l10n.customerCommunicationPackageGeneratedAt(params['date'] ?? ''),
     'customerCommunicationPackageTypeCommunicationEvidence' =>
@@ -1612,6 +1643,16 @@ String resolveReleaseCenterKey(
     'releaseEmailDeliveryEnabled' => l10n.releaseEmailDeliveryEnabled,
     'releaseEmailDeliveryLastStatus' => l10n.releaseEmailDeliveryLastStatus,
     'releaseEmailDeliveryNotice' => l10n.releaseEmailDeliveryNotice,
+    'releaseEmailDeliveryAllowlistEnabled' =>
+      l10n.releaseEmailDeliveryAllowlistEnabled,
+    'releaseEmailDeliveryAllowlistDomains' =>
+      l10n.releaseEmailDeliveryAllowlistDomains,
+    'releaseEmailDeliveryAllowlistRecipients' =>
+      l10n.releaseEmailDeliveryAllowlistRecipients,
+    'releaseEmailDeliveryLastFailureCode' =>
+      l10n.releaseEmailDeliveryLastFailureCode,
+    'releaseEmailDeliveryStagingAllowlistMissing' =>
+      l10n.releaseEmailDeliveryStagingAllowlistMissing,
     'releaseEmailProviderNoop' => l10n.releaseEmailProviderNoop,
     'releaseEmailProviderSmtp' => l10n.releaseEmailProviderSmtp,
     'releaseEmailProviderPlaceholder' => l10n.releaseEmailProviderPlaceholder,

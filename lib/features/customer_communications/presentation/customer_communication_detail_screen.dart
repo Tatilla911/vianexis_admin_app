@@ -9,11 +9,13 @@ import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../core/widgets/vianexis_metadata_notice.dart';
 import '../../../core/widgets/vianexis_status_badge.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../release_center/presentation/release_center_providers.dart';
 import '../domain/evidence_package_request.dart';
 import '../domain/send_reply_request.dart';
 import 'customer_communications_providers.dart';
 import 'widgets/agreement_snapshot_card.dart';
 import 'widgets/communication_message_timeline.dart';
+import 'widgets/delivery_history_section.dart';
 import 'widgets/evidence_package_card.dart';
 import 'widgets/generate_evidence_package_dialog.dart';
 import 'widgets/send_customer_reply_dialog.dart';
@@ -102,7 +104,23 @@ class CustomerCommunicationDetailScreen extends ConsumerWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 12),
-            CommunicationMessageTimeline(messages: detail.messages),
+            CommunicationMessageTimeline(
+              messages: detail.messages,
+              deliveryCountForMessage: detail.deliveryCountForMessage,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              resolveCustomerCommunicationsKey(
+                context,
+                'customerCommunicationDeliveryHistoryTitle',
+              ),
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 12),
+            DeliveryHistorySection(
+              threadId: threadId,
+              deliveries: detail.deliveries,
+            ),
             if (detail.agreementSnapshots.isNotEmpty) ...[
               const SizedBox(height: 16),
               Text(
@@ -184,9 +202,16 @@ class CustomerCommunicationDetailScreen extends ConsumerWidget {
   }
 
   Future<void> _sendReply(BuildContext context, WidgetRef ref) async {
+    final emailStatusAsync = ref.read(emailDeliveryStatusProvider);
+    final emailStatus = emailStatusAsync.asData?.value;
+    final providerDisabled = emailStatus == null ||
+        !emailStatus.deliveryEnabled ||
+        emailStatus.noopMode;
     final request = await showDialog<SendCustomerReplyRequest>(
       context: context,
-      builder: (context) => const SendCustomerReplyDialog(providerDisabled: true),
+      builder: (context) => SendCustomerReplyDialog(
+        providerDisabled: providerDisabled,
+      ),
     );
     if (request == null) return;
 

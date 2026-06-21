@@ -2,6 +2,14 @@ class EmailDeliveryStatus {
   const EmailDeliveryStatus({
     required this.provider,
     required this.deliveryEnabled,
+    this.noopMode = true,
+    this.configured = false,
+    this.stagingAllowlistEnabled = false,
+    this.allowedDomainCount = 0,
+    this.allowedRecipientCount = 0,
+    this.lastAttemptAt,
+    this.lastSuccessAt,
+    this.lastFailureCode,
     this.lastDeliveryStatus,
     this.lastDeliveryAt,
     this.metadataOnly = true,
@@ -9,14 +17,37 @@ class EmailDeliveryStatus {
 
   final String provider;
   final bool deliveryEnabled;
+  final bool noopMode;
+  final bool configured;
+  final bool stagingAllowlistEnabled;
+  final int allowedDomainCount;
+  final int allowedRecipientCount;
+  final DateTime? lastAttemptAt;
+  final DateTime? lastSuccessAt;
+  final String? lastFailureCode;
   final String? lastDeliveryStatus;
   final DateTime? lastDeliveryAt;
   final bool metadataOnly;
+
+  bool get stagingAllowlistMissing =>
+      stagingAllowlistEnabled &&
+      allowedDomainCount == 0 &&
+      allowedRecipientCount == 0;
 
   factory EmailDeliveryStatus.fromJson(Map<String, dynamic> json) {
     return EmailDeliveryStatus(
       provider: json['provider']?.toString() ?? 'noop',
       deliveryEnabled: json['deliveryEnabled'] == true,
+      noopMode: json['noopMode'] == true,
+      configured: json['configured'] == true,
+      stagingAllowlistEnabled: json['stagingAllowlistEnabled'] == true,
+      allowedDomainCount:
+          int.tryParse(json['allowedDomainCount']?.toString() ?? '') ?? 0,
+      allowedRecipientCount:
+          int.tryParse(json['allowedRecipientCount']?.toString() ?? '') ?? 0,
+      lastAttemptAt: _parseDate(json['lastAttemptAt']),
+      lastSuccessAt: _parseDate(json['lastSuccessAt']),
+      lastFailureCode: json['lastFailureCode']?.toString(),
       lastDeliveryStatus: json['lastDeliveryStatus']?.toString(),
       lastDeliveryAt: _parseDate(json['lastDeliveryAt']),
       metadataOnly: json['metadataOnly'] != false,

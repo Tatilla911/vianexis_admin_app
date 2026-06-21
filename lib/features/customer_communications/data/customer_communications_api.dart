@@ -9,6 +9,8 @@ import '../domain/customer_communication_message.dart';
 import '../domain/customer_communication_thread.dart';
 import '../domain/customer_communication_thread_detail.dart';
 import '../domain/customer_evidence_package.dart';
+import '../domain/customer_delivery_models.dart';
+import '../domain/customer_message_delivery.dart';
 import '../domain/evidence_package_request.dart';
 import '../domain/send_reply_request.dart';
 
@@ -79,6 +81,7 @@ class CustomerCommunicationsApi {
     final messages = _parseMessages(data['messages']);
     final agreements = _parseAgreements(data['agreementSnapshots']);
     final packages = _parsePackages(data['evidencePackages']);
+    final deliveries = _parseDeliveries(data['deliveries']);
 
     return CustomerCommunicationThreadDetail(
       thread: CustomerCommunicationThread.fromJson(
@@ -87,8 +90,68 @@ class CustomerCommunicationsApi {
       messages: messages,
       agreementSnapshots: agreements,
       evidencePackages: packages,
+      deliveries: deliveries,
       metadataOnly: data['metadataOnly'] == true,
     );
+  }
+
+  Future<CustomerDeliveryListResult> listDeliveries({
+    required String threadId,
+    CustomerDeliveryHistoryFilter filter = CustomerDeliveryHistoryFilter.all,
+    String? channel,
+    String? messageId,
+  }) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/customer-communications/$threadId/deliveries',
+      queryParameters: {
+        if (filter.backendStatusValue() != null)
+          'status': filter.backendStatusValue(),
+        if (channel != null && channel.trim().isNotEmpty) 'channel': channel.trim(),
+        if (messageId != null && messageId.trim().isNotEmpty)
+          'messageId': messageId.trim(),
+      },
+    );
+    final data = response.data;
+    if (data == null) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.customerCommunicationLoadError,
+      );
+    }
+    return CustomerDeliveryListResult.fromJson(data);
+  }
+
+  Future<CustomerDeliveryDetail> getDeliveryDetail({
+    required String threadId,
+    required String deliveryId,
+  }) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/customer-communications/$threadId/deliveries/$deliveryId',
+    );
+    final data = response.data;
+    if (data == null) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.customerCommunicationLoadError,
+      );
+    }
+    return CustomerDeliveryDetail.fromJson(data);
+  }
+
+  Future<SendCustomerReplyResult> resendByDeliveryId({
+    required String threadId,
+    required String deliveryId,
+    required ResendCustomerReplyRequest request,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/customer-communications/$threadId/deliveries/$deliveryId/resend',
+      data: request.toJson(),
+    );
+    final data = response.data;
+    if (data == null) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.customerCommunicationActionError,
+      );
+    }
+    return SendCustomerReplyResult.fromJson(data);
   }
 
   Future<CustomerEvidencePackage> generateEvidencePackage({
@@ -220,6 +283,16 @@ class CustomerCommunicationsApi {
     return raw
         .whereType<Map>()
         .map((item) => CustomerEvidencePackage.fromJson(
+              Map<String, dynamic>.from(item),
+            ))
+        .toList(growable: false);
+  }
+
+  List<CustomerMessageDelivery> _parseDeliveries(Object? raw) {
+    if (raw is! List) return const [];
+    return raw
+        .whereType<Map>()
+        .map((item) => CustomerMessageDelivery.fromJson(
               Map<String, dynamic>.from(item),
             ))
         .toList(growable: false);

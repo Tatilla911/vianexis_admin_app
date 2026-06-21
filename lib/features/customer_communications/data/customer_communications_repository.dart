@@ -8,6 +8,7 @@ import '../domain/customer_communication_message.dart';
 import '../domain/customer_communication_thread.dart';
 import '../domain/customer_communication_thread_detail.dart';
 import '../domain/customer_evidence_package.dart';
+import '../domain/customer_delivery_models.dart';
 import '../domain/evidence_package_request.dart';
 import '../domain/customer_message_delivery.dart';
 import '../domain/send_reply_request.dart';
@@ -41,6 +42,22 @@ abstract class CustomerCommunicationsRepository {
   Future<SendCustomerReplyResult> resendReply({
     required String threadId,
     required String messageId,
+    required ResendCustomerReplyRequest request,
+  });
+
+  Future<CustomerDeliveryListResult> listDeliveries({
+    required String threadId,
+    CustomerDeliveryHistoryFilter filter = CustomerDeliveryHistoryFilter.all,
+  });
+
+  Future<CustomerDeliveryDetail> getDeliveryDetail({
+    required String threadId,
+    required String deliveryId,
+  });
+
+  Future<SendCustomerReplyResult> resendByDeliveryId({
+    required String threadId,
+    required String deliveryId,
     required ResendCustomerReplyRequest request,
   });
 
@@ -132,6 +149,35 @@ class LiveCustomerCommunicationsRepository
     return _api.resendReply(
       threadId: threadId,
       messageId: messageId,
+      request: request,
+    );
+  }
+
+  @override
+  Future<CustomerDeliveryListResult> listDeliveries({
+    required String threadId,
+    CustomerDeliveryHistoryFilter filter = CustomerDeliveryHistoryFilter.all,
+  }) {
+    return _api.listDeliveries(threadId: threadId, filter: filter);
+  }
+
+  @override
+  Future<CustomerDeliveryDetail> getDeliveryDetail({
+    required String threadId,
+    required String deliveryId,
+  }) {
+    return _api.getDeliveryDetail(threadId: threadId, deliveryId: deliveryId);
+  }
+
+  @override
+  Future<SendCustomerReplyResult> resendByDeliveryId({
+    required String threadId,
+    required String deliveryId,
+    required ResendCustomerReplyRequest request,
+  }) {
+    return _api.resendByDeliveryId(
+      threadId: threadId,
+      deliveryId: deliveryId,
       request: request,
     );
   }
@@ -273,9 +319,58 @@ class MockCustomerCommunicationsRepository
         deliveryProvider: 'noop',
         deliveryStatus: CustomerMessageDeliveryStatus.skipped,
         humanConfirmed: true,
+        resendOfDeliveryId: '901',
       ),
       deliveryStatus: 'skipped',
       providerNoopMode: true,
+    );
+  }
+
+  @override
+  Future<CustomerDeliveryListResult> listDeliveries({
+    required String threadId,
+    CustomerDeliveryHistoryFilter filter = CustomerDeliveryHistoryFilter.all,
+  }) async {
+    final detail = _details[threadId];
+    final items = detail?.deliveries ?? const [];
+    final status = filter.backendStatusValue();
+    final filtered = status == null
+        ? items
+        : items
+            .where((item) => item.deliveryStatus.name == status)
+            .toList(growable: false);
+    return CustomerDeliveryListResult(items: filtered, total: filtered.length);
+  }
+
+  @override
+  Future<CustomerDeliveryDetail> getDeliveryDetail({
+    required String threadId,
+    required String deliveryId,
+  }) async {
+    final items = await listDeliveries(threadId: threadId);
+    final delivery = items.items.firstWhere(
+      (item) => item.id == deliveryId,
+      orElse: () => CustomerMessageDelivery(
+        id: deliveryId,
+        threadId: threadId,
+        deliveryChannel: CustomerMessageDeliveryChannel.email,
+        deliveryProvider: 'noop',
+        deliveryStatus: CustomerMessageDeliveryStatus.skipped,
+      ),
+    );
+    return CustomerDeliveryDetail(delivery: delivery);
+  }
+
+  @override
+  Future<SendCustomerReplyResult> resendByDeliveryId({
+    required String threadId,
+    required String deliveryId,
+    required ResendCustomerReplyRequest request,
+  }) {
+    return resendReply(
+      threadId: threadId,
+      messageId: '801',
+      request: request,
     );
   }
 

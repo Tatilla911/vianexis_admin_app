@@ -88,8 +88,13 @@ class CustomerMessageDelivery {
     this.sentAt,
     this.failedAt,
     this.failureCode,
+    this.failureMessageSafe,
     this.humanConfirmed = false,
     this.translationApproved = false,
+    this.resendOfDeliveryId,
+    this.emailTemplateKey,
+    this.emailTemplateVersion,
+    this.createdAt,
     this.metadataOnly = true,
   });
 
@@ -105,12 +110,20 @@ class CustomerMessageDelivery {
   final DateTime? sentAt;
   final DateTime? failedAt;
   final String? failureCode;
+  final String? failureMessageSafe;
   final bool humanConfirmed;
   final bool translationApproved;
+  final String? resendOfDeliveryId;
+  final String? emailTemplateKey;
+  final String? emailTemplateVersion;
+  final DateTime? createdAt;
   final bool metadataOnly;
 
   bool get isSkippedOrNoop =>
       deliveryStatus == CustomerMessageDeliveryStatus.skipped;
+
+  bool get isResendAttempt =>
+      resendOfDeliveryId != null && resendOfDeliveryId!.isNotEmpty;
 
   factory CustomerMessageDelivery.fromJson(Map<String, dynamic> json) {
     return CustomerMessageDelivery(
@@ -130,8 +143,13 @@ class CustomerMessageDelivery {
       sentAt: _parseDate(json['sentAt']),
       failedAt: _parseDate(json['failedAt']),
       failureCode: json['failureCode']?.toString(),
+      failureMessageSafe: json['failureMessageSafe']?.toString(),
       humanConfirmed: json['humanConfirmed'] == true,
       translationApproved: json['translationApproved'] == true,
+      resendOfDeliveryId: json['resendOfDeliveryId']?.toString(),
+      emailTemplateKey: json['emailTemplateKey']?.toString(),
+      emailTemplateVersion: json['emailTemplateVersion']?.toString(),
+      createdAt: _parseDate(json['createdAt']),
       metadataOnly: json['metadataOnly'] != false,
     );
   }

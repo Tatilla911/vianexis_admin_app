@@ -9,9 +9,11 @@ class CommunicationMessageTimeline extends StatelessWidget {
   const CommunicationMessageTimeline({
     super.key,
     required this.messages,
+    this.deliveryCountForMessage,
   });
 
   final List<CustomerCommunicationMessage> messages;
+  final int Function(String messageId)? deliveryCountForMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +73,26 @@ class CommunicationMessageTimeline extends StatelessWidget {
                     if (message.delivery != null) ...[
                       const SizedBox(height: 12),
                       DeliveryStatusBadge(delivery: message.delivery!),
+                      if (deliveryCountForMessage != null &&
+                          deliveryCountForMessage!(message.id) > 1) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          resolveCustomerCommunicationsKey(
+                            context,
+                            'customerCommunicationDeliveryMultipleAttempts',
+                          ),
+                        ),
+                      ],
+                      if (message.delivery!.failureMessageSafe != null &&
+                          message.delivery!.failureMessageSafe!.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          message.delivery!.failureMessageSafe!,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        ),
+                      ],
                     ],
                   ],
                 ),

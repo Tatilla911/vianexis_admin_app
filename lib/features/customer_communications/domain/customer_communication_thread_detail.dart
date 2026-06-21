@@ -2,6 +2,7 @@ import 'customer_agreement_snapshot.dart';
 import 'customer_communication_message.dart';
 import 'customer_communication_thread.dart';
 import 'customer_evidence_package.dart';
+import 'customer_message_delivery.dart';
 
 class CustomerCommunicationThreadDetail {
   const CustomerCommunicationThreadDetail({
@@ -9,6 +10,7 @@ class CustomerCommunicationThreadDetail {
     required this.messages,
     required this.agreementSnapshots,
     required this.evidencePackages,
+    this.deliveries = const [],
     this.metadataOnly = false,
   });
 
@@ -16,5 +18,10 @@ class CustomerCommunicationThreadDetail {
   final List<CustomerCommunicationMessage> messages;
   final List<CustomerAgreementSnapshot> agreementSnapshots;
   final List<CustomerEvidencePackage> evidencePackages;
+  final List<CustomerMessageDelivery> deliveries;
   final bool metadataOnly;
+
+  int deliveryCountForMessage(String messageId) {
+    return deliveries.where((item) => item.messageId == messageId).length;
+  }
 }

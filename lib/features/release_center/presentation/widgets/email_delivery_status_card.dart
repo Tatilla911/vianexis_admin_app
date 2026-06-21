@@ -34,12 +34,57 @@ class EmailDeliveryStatusCard extends StatelessWidget {
                   ? resolveReleaseCenterKey(context, 'releaseYes')
                   : resolveReleaseCenterKey(context, 'releaseNo'),
             ),
+            _row(
+              context,
+              'releaseEmailDeliveryAllowlistEnabled',
+              status.stagingAllowlistEnabled
+                  ? resolveReleaseCenterKey(context, 'releaseYes')
+                  : resolveReleaseCenterKey(context, 'releaseNo'),
+            ),
+            if (status.stagingAllowlistEnabled) ...[
+              _row(
+                context,
+                'releaseEmailDeliveryAllowlistDomains',
+                status.allowedDomainCount.toString(),
+              ),
+              _row(
+                context,
+                'releaseEmailDeliveryAllowlistRecipients',
+                status.allowedRecipientCount.toString(),
+              ),
+            ],
+            if (status.lastFailureCode != null)
+              _row(
+                context,
+                'releaseEmailDeliveryLastFailureCode',
+                status.lastFailureCode!,
+              ),
             if (status.lastDeliveryStatus != null)
               _row(
                 context,
                 'releaseEmailDeliveryLastStatus',
                 status.lastDeliveryStatus!,
               ),
+            if (!status.deliveryEnabled || status.noopMode) ...[
+              const SizedBox(height: 8),
+              Text(
+                resolveCustomerCommunicationsKey(
+                  context,
+                  'customerCommunicationDeliveryProviderDisabledNotice',
+                ),
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+            ],
+            if (status.stagingAllowlistMissing) ...[
+              const SizedBox(height: 8),
+              Text(
+                resolveReleaseCenterKey(
+                  context,
+                  'releaseEmailDeliveryStagingAllowlistMissing',
+                ),
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+            ],
             const SizedBox(height: 12),
             VianexisMetadataNotice(
               message: resolveReleaseCenterKey(context, 'releaseEmailDeliveryNotice'),

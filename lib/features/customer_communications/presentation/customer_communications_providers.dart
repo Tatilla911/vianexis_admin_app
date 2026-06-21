@@ -153,3 +153,21 @@ Future<SendCustomerReplyResult> sendCustomerReply({
   await ref.read(customerCommunicationsProvider.notifier).refresh();
   return result;
 }
+
+Future<SendCustomerReplyResult> resendCustomerDelivery({
+  required WidgetRef ref,
+  required String threadId,
+  required String deliveryId,
+  required ResendCustomerReplyRequest request,
+}) async {
+  final result = await ref
+      .read(customerCommunicationsRepositoryProvider)
+      .resendByDeliveryId(
+        threadId: threadId,
+        deliveryId: deliveryId,
+        request: request,
+      );
+  ref.invalidate(customerCommunicationDetailProvider(threadId));
+  await ref.read(customerCommunicationsProvider.notifier).refresh();
+  return result;
+}

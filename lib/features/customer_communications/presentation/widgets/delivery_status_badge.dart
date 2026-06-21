@@ -53,6 +53,9 @@ class DeliveryStatusBadge extends StatelessWidget {
             ),
           ),
         ),
+        Chip(
+          label: Text(delivery.deliveryProvider),
+        ),
         if (delivery.humanConfirmed)
           Chip(
             label: Text(

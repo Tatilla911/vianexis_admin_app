@@ -3441,6 +3441,24 @@ class AppLocalizationsEn extends AppLocalizations {
       'Email delivery status shows provider and metadata only. No SMTP passwords or message bodies are exposed.';
 
   @override
+  String get releaseEmailDeliveryAllowlistEnabled =>
+      'Staging allowlist enabled';
+
+  @override
+  String get releaseEmailDeliveryAllowlistDomains => 'Allowed domains (count)';
+
+  @override
+  String get releaseEmailDeliveryAllowlistRecipients =>
+      'Allowed recipients (count)';
+
+  @override
+  String get releaseEmailDeliveryLastFailureCode => 'Last failure code';
+
+  @override
+  String get releaseEmailDeliveryStagingAllowlistMissing =>
+      'Staging delivery enabled but allowlist is missing — external sends are blocked.';
+
+  @override
   String get releaseEmailProviderNoop => 'No-op (disabled)';
 
   @override
@@ -4035,6 +4053,96 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get customerCommunicationDeliveryChannelUnknown => 'Unknown channel';
+
+  @override
+  String get customerCommunicationDeliveryHistoryTitle => 'Delivery history';
+
+  @override
+  String get customerCommunicationDeliveryHistoryEmpty =>
+      'No delivery attempts recorded yet.';
+
+  @override
+  String get customerCommunicationDeliveryFilterAll => 'All';
+
+  @override
+  String get customerCommunicationDeliveryFilterSkipped => 'Skipped';
+
+  @override
+  String get customerCommunicationDeliveryFilterFailed => 'Failed';
+
+  @override
+  String get customerCommunicationDeliveryFilterSent => 'Sent';
+
+  @override
+  String get customerCommunicationDeliveryFilterQueued => 'Queued';
+
+  @override
+  String get customerCommunicationResendTitle => 'Resend delivery';
+
+  @override
+  String get customerCommunicationResendAction => 'Resend';
+
+  @override
+  String get customerCommunicationResendAuditNotice =>
+      'Resending creates a new audited delivery attempt.';
+
+  @override
+  String get customerCommunicationResendTranslationNotice =>
+      'Translated replies require approved translation before sending.';
+
+  @override
+  String get customerCommunicationResendSuccess =>
+      'Resend logged successfully.';
+
+  @override
+  String get customerCommunicationDeliveryMultipleAttempts =>
+      'Multiple delivery attempts recorded — see delivery history.';
+
+  @override
+  String get customerCommunicationDeliveryResendAttempt =>
+      'This attempt is a resend of a prior delivery.';
+
+  @override
+  String get customerCommunicationDeliveryTemplateLabel => 'Email template';
+
+  @override
+  String get customerCommunicationEvidenceRegenerationNotice =>
+      'Evidence package may need regeneration after new delivery attempts.';
+
+  @override
+  String get customerCommunicationHumanConfirmRequired =>
+      'Human confirmation is required.';
+
+  @override
+  String get customerCommunicationDeliveryEventQueued => 'Queued';
+
+  @override
+  String get customerCommunicationDeliveryEventSent => 'Sent';
+
+  @override
+  String get customerCommunicationDeliveryEventDelivered => 'Delivered';
+
+  @override
+  String get customerCommunicationDeliveryEventBounced => 'Bounced';
+
+  @override
+  String get customerCommunicationDeliveryEventComplained => 'Complained';
+
+  @override
+  String get customerCommunicationDeliveryEventOpened => 'Opened';
+
+  @override
+  String get customerCommunicationDeliveryEventClicked => 'Clicked';
+
+  @override
+  String get customerCommunicationDeliveryEventFailed => 'Failed';
+
+  @override
+  String get customerCommunicationDeliveryEventProviderStatus =>
+      'Provider status';
+
+  @override
+  String get customerCommunicationDeliveryEventUnknown => 'Unknown event';
 
   @override
   String customerCommunicationPackageGeneratedAt(String date) {
