@@ -1447,6 +1447,20 @@ String resolveCustomerCommunicationsKey(
       l10n.customerCommunicationAgreementAcceptedAt(params['date'] ?? ''),
     'customerCommunicationPdfPendingNotice' =>
       l10n.customerCommunicationPdfPendingNotice,
+    'customerCommunicationPdfReadyNotice' =>
+      l10n.customerCommunicationPdfReadyNotice,
+    'customerCommunicationPdfFailedNotice' =>
+      l10n.customerCommunicationPdfFailedNotice,
+    'customerCommunicationPdfSourceOfTruthNotice' =>
+      l10n.customerCommunicationPdfSourceOfTruthNotice,
+    'customerCommunicationDownloadPdfAction' =>
+      l10n.customerCommunicationDownloadPdfAction,
+    'customerCommunicationDownloadPdfSuccess' =>
+      l10n.customerCommunicationDownloadPdfSuccess(params['bytes'] ?? '0'),
+    'customerCommunicationDownloadPdfFailed' =>
+      l10n.customerCommunicationDownloadPdfFailed,
+    'customerCommunicationGeneratedBy' =>
+      l10n.customerCommunicationGeneratedBy(params['userId'] ?? ''),
     'customerCommunicationPackageGeneratedAt' =>
       l10n.customerCommunicationPackageGeneratedAt(params['date'] ?? ''),
     'customerCommunicationPackageTypeCommunicationEvidence' =>

@@ -86,6 +86,8 @@ class CustomerEvidencePackage {
     this.fileUrl,
     this.fileHash,
     this.pdfRendererPending = false,
+    this.pdfReady = false,
+    this.sizeBytes,
     this.metadataOnly = true,
   });
 
@@ -103,11 +105,25 @@ class CustomerEvidencePackage {
   final String? fileUrl;
   final String? fileHash;
   final bool pdfRendererPending;
+  final bool pdfReady;
+  final int? sizeBytes;
   final bool metadataOnly;
 
-  bool get isPdfPending => fileUrl == null || pdfRendererPending;
+  bool get isPdfReady =>
+      pdfReady ||
+      (fileUrl != null &&
+          !pdfRendererPending &&
+          status == CustomerEvidencePackageStatus.generated);
+
+  bool get isPdfFailed =>
+      status == CustomerEvidencePackageStatus.failed && !isPdfReady;
+
+  bool get isPdfPending => !isPdfReady && !isPdfFailed;
+
+  bool get canDownload => isPdfReady && fileUrl != null && fileUrl!.isNotEmpty;
 
   factory CustomerEvidencePackage.fromJson(Map<String, dynamic> json) {
+    final pdfReady = json['pdfReady'] == true;
     return CustomerEvidencePackage(
       id: json['id']?.toString() ?? '',
       threadId: json['threadId']?.toString() ?? '',
@@ -127,7 +143,12 @@ class CustomerEvidencePackage {
       fileUrl: json['fileUrl']?.toString(),
       fileHash: json['fileHash']?.toString(),
       pdfRendererPending:
-          json['pdfRendererPending'] == true || json['fileUrl'] == null,
+          json['pdfRendererPending'] == true ||
+          (!pdfReady && json['fileUrl'] == null),
+      pdfReady: pdfReady,
+      sizeBytes: json['sizeBytes'] is num
+          ? (json['sizeBytes'] as num).toInt()
+          : int.tryParse(json['sizeBytes']?.toString() ?? ''),
       metadataOnly: json['metadataOnly'] != false,
     );
   }

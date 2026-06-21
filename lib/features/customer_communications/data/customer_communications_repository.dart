@@ -21,6 +21,11 @@ abstract class CustomerCommunicationsRepository {
     required EvidencePackageRequest request,
   });
 
+  Future<List<int>> downloadEvidencePackagePdf({
+    required String threadId,
+    required String packageId,
+  });
+
   Future<CustomerCommunicationThread> markDisputed({
     required String threadId,
     required MarkCustomerDisputeRequest request,
@@ -76,6 +81,17 @@ class LiveCustomerCommunicationsRepository
     required EvidencePackageRequest request,
   }) {
     return _api.generateEvidencePackage(threadId: threadId, request: request);
+  }
+
+  @override
+  Future<List<int>> downloadEvidencePackagePdf({
+    required String threadId,
+    required String packageId,
+  }) {
+    return _api.downloadEvidencePackagePdf(
+      threadId: threadId,
+      packageId: packageId,
+    );
   }
 
   @override
@@ -142,11 +158,14 @@ class MockCustomerCommunicationsRepository
       generationReason: request.reason.trim(),
       summaryJson: const {
         'header': 'ViaNexis Customer Communication Evidence Package',
-        'pdfRendererPending': true,
+        'pdfRendererPending': false,
       },
-      fileUrl: null,
-      fileHash: 'mock-summary-hash',
-      pdfRendererPending: true,
+      fileUrl:
+          '/platform-admin/customer-communications/$threadId/evidence-packages/mock/download',
+      fileHash: 'mock-pdf-hash',
+      pdfRendererPending: false,
+      pdfReady: true,
+      sizeBytes: 4096,
     );
 
     if (existing != null) {
@@ -158,6 +177,15 @@ class MockCustomerCommunicationsRepository
       );
     }
     return pkg;
+  }
+
+  @override
+  Future<List<int>> downloadEvidencePackagePdf({
+    required String threadId,
+    required String packageId,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    return [0x25, 0x50, 0x44, 0x46, 0x2D, 0x31, 0x2E, 0x34]; // %PDF-1.4
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
@@ -116,6 +117,17 @@ class CustomerCommunicationsApi {
     throw const ApiException(
       messageKey: LocalizationKeys.customerCommunicationActionError,
     );
+  }
+
+  Future<List<int>> downloadEvidencePackagePdf({
+    required String threadId,
+    required String packageId,
+  }) async {
+    final response = await _apiClient.get<List<int>>(
+      '/platform-admin/customer-communications/$threadId/evidence-packages/$packageId/download',
+      options: Options(responseType: ResponseType.bytes),
+    );
+    return response.data ?? const [];
   }
 
   Future<CustomerCommunicationThread> markDisputed({

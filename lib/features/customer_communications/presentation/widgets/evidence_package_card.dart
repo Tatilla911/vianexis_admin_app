@@ -24,6 +24,15 @@ class EvidencePackageCard extends StatelessWidget {
         ? DateFormat.yMMMd(locale).add_Hm().format(generated.toLocal())
         : '—';
 
+    String? statusNoticeKey;
+    if (package.isPdfReady) {
+      statusNoticeKey = 'customerCommunicationPdfReadyNotice';
+    } else if (package.isPdfFailed) {
+      statusNoticeKey = 'customerCommunicationPdfFailedNotice';
+    } else if (package.isPdfPending) {
+      statusNoticeKey = 'customerCommunicationPdfPendingNotice';
+    }
+
     return Card(
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.only(bottom: 12),
@@ -53,16 +62,26 @@ class EvidencePackageCard extends StatelessWidget {
                   package.status.localizationKey(),
                 ),
               ),
-              if (package.isPdfPending) ...[
+              if (statusNoticeKey != null) ...[
+                const SizedBox(height: 8),
+                Text(
+                  resolveCustomerCommunicationsKey(context, statusNoticeKey),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: package.isPdfFailed
+                            ? Theme.of(context).colorScheme.error
+                            : Theme.of(context).colorScheme.primary,
+                      ),
+                ),
+              ],
+              if (package.fileHash != null) ...[
                 const SizedBox(height: 8),
                 Text(
                   resolveCustomerCommunicationsKey(
                     context,
-                    'customerCommunicationPdfPendingNotice',
+                    'customerCommunicationFileHash',
+                    params: {'hash': package.fileHash!},
                   ),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
               const SizedBox(height: 8),

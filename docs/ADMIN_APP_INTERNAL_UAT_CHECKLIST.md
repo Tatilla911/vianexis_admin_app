@@ -32,6 +32,15 @@ Human acceptance testing for the first internal staging APK. Test on a **non-pro
 - [ ] Audit logs open
 - [ ] Release Center opens
 
+## Customer communications evidence PDF
+
+- [ ] Customer Communications module opens
+- [ ] Generate evidence package requires reason (≥5 chars)
+- [ ] PDF ready status shown after generation (`pdfReady` / download path)
+- [ ] Download PDF button visible when ready; pending/failed states shown otherwise
+- [ ] File hash displayed; structured summaryJson still visible
+- [ ] “Generated from ViaNexis audit records” notice visible before download
+
 ## Readiness status cards (Release Center / Settings)
 
 - [ ] Email delivery status — provider noop, delivery disabled, metadata-only notice

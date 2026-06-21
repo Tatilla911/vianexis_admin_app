@@ -33,6 +33,7 @@ Follow order in [`ADMIN_APP_INTERNAL_UAT_CHECKLIST.md`](./ADMIN_APP_INTERNAL_UAT
 7. System Health
 8. Audit logs (metadata)
 9. Release Center → email + observability cards
+10. Customer Communications → open thread → generate evidence package (reason required) → verify PDF ready + download
 
 ## 5. Negative tests
 

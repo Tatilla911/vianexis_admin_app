@@ -3978,6 +3978,35 @@ class AppLocalizationsHu extends AppLocalizations {
       'PDF generalas fuggoben; strukturalt bizonyitek csomag keszult az audit rekordokbol.';
 
   @override
+  String get customerCommunicationPdfReadyNotice =>
+      'A PDF bizonyitek csomag keszen all hitelesitett letoltesre.';
+
+  @override
+  String get customerCommunicationPdfFailedNotice =>
+      'A PDF generalas sikertelen. A strukturalt summaryJson tovabbra is elerheto az audit rekordokbol.';
+
+  @override
+  String get customerCommunicationPdfSourceOfTruthNotice =>
+      'ViaNexis audit rekordokbol generalva. Az adatbazis audit rekordok maradnak a forrasigazsag; ez a PDF csak bemutato export.';
+
+  @override
+  String get customerCommunicationDownloadPdfAction => 'PDF letoltese';
+
+  @override
+  String customerCommunicationDownloadPdfSuccess(String bytes) {
+    return 'PDF letoltve ($bytes bajt). Kezelje az adatvedelmi es megorezési szabalyzat szerint.';
+  }
+
+  @override
+  String get customerCommunicationDownloadPdfFailed =>
+      'A bizonyitek PDF letoltese sikertelen.';
+
+  @override
+  String customerCommunicationGeneratedBy(String userId) {
+    return 'Generalta felhasznalo ID: $userId';
+  }
+
+  @override
   String customerCommunicationPackageGeneratedAt(String date) {
     return 'Generalva: $date';
   }
@@ -4055,7 +4084,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get customerCommunicationSummaryJsonTitle =>
-      'Strukturalt osszefoglalo (forrasigazsag a PDF rendererig)';
+      'Strukturalt osszefoglalo (hiteles audit export)';
 
   @override
   String customerCommunicationPackageReason(String reason) {

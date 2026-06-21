@@ -30,12 +30,21 @@ Admin app portion of staging rehearsal. Backend master flow: `transdoc-backend/d
 12. [ ] Security Center
 13. [ ] System Health / Audit logs
 14. [ ] Release Center — email + observability readiness cards
+15. [ ] Customer Communications — generate evidence package, verify PDF ready + download
+
+## Customer communications evidence PDF
+
+16. [ ] Open disputed/billing thread
+17. [ ] Generate evidence package with reason
+18. [ ] Confirm PDF ready status and file hash on detail screen
+19. [ ] Download PDF via authenticated button
+20. [ ] If PDF failed/pending, confirm summaryJson still visible and retry path documented
 
 ## Failure paths
 
-15. [ ] Airplane mode — safe error, no stack trace
-16. [ ] Logout → login screen
-17. [ ] Session expiry behavior (if tested)
+21. [ ] Airplane mode — safe error, no stack trace
+22. [ ] Logout → login screen
+23. [ ] Session expiry behavior (if tested)
 
 ## Bug reporting
 
