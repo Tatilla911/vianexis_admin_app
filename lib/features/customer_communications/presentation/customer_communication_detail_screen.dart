@@ -10,11 +10,13 @@ import '../../../core/widgets/vianexis_metadata_notice.dart';
 import '../../../core/widgets/vianexis_status_badge.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/evidence_package_request.dart';
+import '../domain/send_reply_request.dart';
 import 'customer_communications_providers.dart';
 import 'widgets/agreement_snapshot_card.dart';
 import 'widgets/communication_message_timeline.dart';
 import 'widgets/evidence_package_card.dart';
 import 'widgets/generate_evidence_package_dialog.dart';
+import 'widgets/send_customer_reply_dialog.dart';
 
 class CustomerCommunicationDetailScreen extends ConsumerWidget {
   const CustomerCommunicationDetailScreen({
@@ -142,6 +144,16 @@ class CustomerCommunicationDetailScreen extends ConsumerWidget {
               runSpacing: 12,
               children: [
                 OutlinedButton.icon(
+                  onPressed: () => _sendReply(context, ref),
+                  icon: const Icon(Icons.reply_outlined),
+                  label: Text(
+                    resolveCustomerCommunicationsKey(
+                      context,
+                      'customerCommunicationSendReplyAction',
+                    ),
+                  ),
+                ),
+                OutlinedButton.icon(
                   onPressed: detail.thread.disputed
                       ? null
                       : () => _markDisputed(context, ref),
@@ -169,6 +181,40 @@ class CustomerCommunicationDetailScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _sendReply(BuildContext context, WidgetRef ref) async {
+    final request = await showDialog<SendCustomerReplyRequest>(
+      context: context,
+      builder: (context) => const SendCustomerReplyDialog(providerDisabled: true),
+    );
+    if (request == null) return;
+
+    try {
+      final result = await sendCustomerReply(
+        ref: ref,
+        threadId: threadId,
+        request: request,
+      );
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            resolveCustomerCommunicationsKey(
+              context,
+              result.delivery.isSkippedOrNoop
+                  ? 'customerCommunicationReplyLoggedSkippedNotice'
+                  : 'customerCommunicationReplySentSuccess',
+            ),
+          ),
+        ),
+      );
+    } catch (error) {
+      if (!context.mounted) return;
+      if (error is ApiException) {
+        showApiExceptionSnackBar(context, error);
+      }
+    }
   }
 
   Future<void> _markDisputed(BuildContext context, WidgetRef ref) async {

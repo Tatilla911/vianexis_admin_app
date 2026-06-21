@@ -9,6 +9,8 @@ import '../domain/customer_communication_thread.dart';
 import '../domain/customer_communication_thread_detail.dart';
 import '../domain/customer_evidence_package.dart';
 import '../domain/evidence_package_request.dart';
+import '../domain/customer_message_delivery.dart';
+import '../domain/send_reply_request.dart';
 import 'customer_communications_api.dart';
 
 abstract class CustomerCommunicationsRepository {
@@ -29,6 +31,17 @@ abstract class CustomerCommunicationsRepository {
   Future<CustomerCommunicationThread> markDisputed({
     required String threadId,
     required MarkCustomerDisputeRequest request,
+  });
+
+  Future<SendCustomerReplyResult> sendReply({
+    required String threadId,
+    required SendCustomerReplyRequest request,
+  });
+
+  Future<SendCustomerReplyResult> resendReply({
+    required String threadId,
+    required String messageId,
+    required ResendCustomerReplyRequest request,
   });
 
   bool get usesMockData;
@@ -100,6 +113,27 @@ class LiveCustomerCommunicationsRepository
     required MarkCustomerDisputeRequest request,
   }) {
     return _api.markDisputed(threadId: threadId, request: request);
+  }
+
+  @override
+  Future<SendCustomerReplyResult> sendReply({
+    required String threadId,
+    required SendCustomerReplyRequest request,
+  }) {
+    return _api.sendReply(threadId: threadId, request: request);
+  }
+
+  @override
+  Future<SendCustomerReplyResult> resendReply({
+    required String threadId,
+    required String messageId,
+    required ResendCustomerReplyRequest request,
+  }) {
+    return _api.resendReply(
+      threadId: threadId,
+      messageId: messageId,
+      request: request,
+    );
   }
 }
 
@@ -185,7 +219,64 @@ class MockCustomerCommunicationsRepository
     required String packageId,
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 100));
-    return [0x25, 0x50, 0x44, 0x46, 0x2D, 0x31, 0x2E, 0x34]; // %PDF-1.4
+    return [0x25, 0x50, 0x44, 0x46, 0x2D, 0x31, 0x2E, 0x34];
+  }
+
+  @override
+  Future<SendCustomerReplyResult> sendReply({
+    required String threadId,
+    required SendCustomerReplyRequest request,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 150));
+    if (!request.humanConfirmed) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.customerCommunicationActionError,
+        kind: ApiExceptionKind.validation,
+      );
+    }
+    return SendCustomerReplyResult(
+      messageId: '801',
+      delivery: CustomerMessageDelivery(
+        id: '901',
+        threadId: threadId,
+        messageId: '801',
+        deliveryChannel: CustomerMessageDeliveryChannel.email,
+        deliveryProvider: 'noop',
+        deliveryStatus: CustomerMessageDeliveryStatus.skipped,
+        humanConfirmed: true,
+        translationApproved: request.useTranslatedText,
+      ),
+      deliveryStatus: 'skipped',
+      providerNoopMode: true,
+    );
+  }
+
+  @override
+  Future<SendCustomerReplyResult> resendReply({
+    required String threadId,
+    required String messageId,
+    required ResendCustomerReplyRequest request,
+  }) async {
+    if (request.reason.trim().length < 5) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.customerCommunicationActionError,
+        kind: ApiExceptionKind.validation,
+      );
+    }
+    return SendCustomerReplyResult(
+      messageId: messageId,
+      delivery: CustomerMessageDelivery(
+        id: '902',
+        threadId: threadId,
+        messageId: messageId,
+        deliveryChannel: CustomerMessageDeliveryChannel.email,
+        deliveryProvider: 'noop',
+        deliveryStatus: CustomerMessageDeliveryStatus.skipped,
+        humanConfirmed: true,
+      ),
+      deliveryStatus: 'skipped',
+      providerNoopMode: true,
+    );
   }
 
   @override

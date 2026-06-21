@@ -1,3 +1,5 @@
+import 'customer_message_delivery.dart';
+
 enum CustomerCommunicationDirection {
   inbound,
   outbound,
@@ -84,6 +86,7 @@ class CustomerCommunicationMessage {
     this.sentAt,
     this.createdAt,
     this.metadataOnly = false,
+    this.delivery,
   });
 
   final String id;
@@ -102,6 +105,7 @@ class CustomerCommunicationMessage {
   final DateTime? sentAt;
   final DateTime? createdAt;
   final bool metadataOnly;
+  final CustomerMessageDelivery? delivery;
 
   bool get hasTranslation =>
       translatedText != null && translatedText!.trim().isNotEmpty;
@@ -128,6 +132,15 @@ class CustomerCommunicationMessage {
       sentAt: _parseDate(json['sentAt']),
       createdAt: _parseDate(json['createdAt']),
       metadataOnly: json['metadataOnly'] == true,
+      delivery: json['delivery'] is Map<String, dynamic>
+          ? CustomerMessageDelivery.fromJson(
+              json['delivery'] as Map<String, dynamic>,
+            )
+          : json['delivery'] is Map
+              ? CustomerMessageDelivery.fromJson(
+                  Map<String, dynamic>.from(json['delivery'] as Map),
+                )
+              : null,
     );
   }
 

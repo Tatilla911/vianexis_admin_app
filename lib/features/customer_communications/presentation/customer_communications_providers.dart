@@ -5,6 +5,7 @@ import '../domain/customer_communication_thread.dart';
 import '../domain/customer_communication_thread_detail.dart';
 import '../domain/customer_evidence_package.dart';
 import '../domain/evidence_package_request.dart';
+import '../domain/send_reply_request.dart';
 
 class CustomerCommunicationListQuery {
   const CustomerCommunicationListQuery({
@@ -138,4 +139,17 @@ Future<CustomerCommunicationThread> markCustomerCommunicationDisputed({
   await ref.read(customerCommunicationsProvider.notifier).refresh();
   await ref.read(customerCommunicationSummaryProvider.notifier).refresh();
   return thread;
+}
+
+Future<SendCustomerReplyResult> sendCustomerReply({
+  required WidgetRef ref,
+  required String threadId,
+  required SendCustomerReplyRequest request,
+}) async {
+  final result = await ref
+      .read(customerCommunicationsRepositoryProvider)
+      .sendReply(threadId: threadId, request: request);
+  ref.invalidate(customerCommunicationDetailProvider(threadId));
+  await ref.read(customerCommunicationsProvider.notifier).refresh();
+  return result;
 }

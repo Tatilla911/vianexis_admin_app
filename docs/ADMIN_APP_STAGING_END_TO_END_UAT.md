@@ -30,15 +30,19 @@ Admin app portion of staging rehearsal. Backend master flow: `transdoc-backend/d
 12. [ ] Security Center
 13. [ ] System Health / Audit logs
 14. [ ] Release Center — email + observability readiness cards
-15. [ ] Customer Communications — generate evidence package, verify PDF ready + download
+15. [ ] Customer Communications — send reply with human confirmation, verify skipped/noop delivery badge, generate evidence package, verify PDF ready + download
 
-## Customer communications evidence PDF
+## Customer communications delivery + evidence PDF
 
 16. [ ] Open disputed/billing thread
-17. [ ] Generate evidence package with reason
-18. [ ] Confirm PDF ready status and file hash on detail screen
-19. [ ] Download PDF via authenticated button
-20. [ ] If PDF failed/pending, confirm summaryJson still visible and retry path documented
+17. [ ] Send reply — confirm human confirmation checkbox required; translated reply warning visible if applicable
+18. [ ] Confirm delivery provider disabled notice when backend email noop/disabled
+19. [ ] Outbound message shows delivery status badge (skipped/sent/failed) and channel (email)
+20. [ ] Generate evidence package with reason — confirm delivery status included in summary notice
+21. [ ] Confirm PDF ready status and file hash on detail screen
+22. [ ] Download PDF via authenticated button
+23. [ ] If PDF failed/pending, confirm summaryJson still visible and retry path documented
+24. [ ] Optional: resend via API if backend allows — requires reason (admin resend UI may follow in later phase)
 
 ## Failure paths
 

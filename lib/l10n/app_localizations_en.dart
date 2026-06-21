@@ -3953,6 +3953,90 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get customerCommunicationSendReplyTitle => 'Send customer reply';
+
+  @override
+  String get customerCommunicationSendReplyAction => 'Send reply';
+
+  @override
+  String get customerCommunicationSendReplyMessageLabel => 'Reply message';
+
+  @override
+  String get customerCommunicationSendReplySubjectLabel =>
+      'Email subject (optional)';
+
+  @override
+  String get customerCommunicationUseTranslatedTextLabel =>
+      'Use approved translated text';
+
+  @override
+  String get customerCommunicationHumanConfirmationLabel =>
+      'I confirm this reply is ready to send';
+
+  @override
+  String get customerCommunicationHumanConfirmedBadge => 'Human confirmed';
+
+  @override
+  String get customerCommunicationTranslationApprovedBadge =>
+      'Translation approved';
+
+  @override
+  String get customerCommunicationTranslatedReplyWarning =>
+      'Translated replies are not sent automatically. Review and confirm before sending.';
+
+  @override
+  String get customerCommunicationDeliveryProviderDisabledNotice =>
+      'Delivery provider disabled; reply will be logged but not externally sent.';
+
+  @override
+  String get customerCommunicationReplyLoggedSkippedNotice =>
+      'Reply logged with skipped delivery (provider disabled).';
+
+  @override
+  String get customerCommunicationReplySentSuccess =>
+      'Reply sent successfully.';
+
+  @override
+  String get customerCommunicationEvidenceDeliveryNotice =>
+      'Evidence packages include outbound delivery status when available.';
+
+  @override
+  String get customerCommunicationDeliveryStatusDraft => 'Draft';
+
+  @override
+  String get customerCommunicationDeliveryStatusQueued => 'Queued';
+
+  @override
+  String get customerCommunicationDeliveryStatusSkipped => 'Skipped';
+
+  @override
+  String get customerCommunicationDeliveryStatusSent => 'Sent';
+
+  @override
+  String get customerCommunicationDeliveryStatusFailed => 'Failed';
+
+  @override
+  String get customerCommunicationDeliveryStatusCancelled => 'Cancelled';
+
+  @override
+  String get customerCommunicationDeliveryStatusUnknown => 'Unknown status';
+
+  @override
+  String get customerCommunicationDeliveryChannelEmail => 'Email';
+
+  @override
+  String get customerCommunicationDeliveryChannelPortal => 'Portal';
+
+  @override
+  String get customerCommunicationDeliveryChannelManual => 'Manual';
+
+  @override
+  String get customerCommunicationDeliveryChannelNone => 'None';
+
+  @override
+  String get customerCommunicationDeliveryChannelUnknown => 'Unknown channel';
+
+  @override
   String customerCommunicationPackageGeneratedAt(String date) {
     return 'Generated: $date';
   }

@@ -1461,6 +1461,56 @@ String resolveCustomerCommunicationsKey(
       l10n.customerCommunicationDownloadPdfFailed,
     'customerCommunicationGeneratedBy' =>
       l10n.customerCommunicationGeneratedBy(params['userId'] ?? ''),
+    'customerCommunicationSendReplyTitle' =>
+      l10n.customerCommunicationSendReplyTitle,
+    'customerCommunicationSendReplyAction' =>
+      l10n.customerCommunicationSendReplyAction,
+    'customerCommunicationSendReplyMessageLabel' =>
+      l10n.customerCommunicationSendReplyMessageLabel,
+    'customerCommunicationSendReplySubjectLabel' =>
+      l10n.customerCommunicationSendReplySubjectLabel,
+    'customerCommunicationUseTranslatedTextLabel' =>
+      l10n.customerCommunicationUseTranslatedTextLabel,
+    'customerCommunicationHumanConfirmationLabel' =>
+      l10n.customerCommunicationHumanConfirmationLabel,
+    'customerCommunicationHumanConfirmedBadge' =>
+      l10n.customerCommunicationHumanConfirmedBadge,
+    'customerCommunicationTranslationApprovedBadge' =>
+      l10n.customerCommunicationTranslationApprovedBadge,
+    'customerCommunicationTranslatedReplyWarning' =>
+      l10n.customerCommunicationTranslatedReplyWarning,
+    'customerCommunicationDeliveryProviderDisabledNotice' =>
+      l10n.customerCommunicationDeliveryProviderDisabledNotice,
+    'customerCommunicationReplyLoggedSkippedNotice' =>
+      l10n.customerCommunicationReplyLoggedSkippedNotice,
+    'customerCommunicationReplySentSuccess' =>
+      l10n.customerCommunicationReplySentSuccess,
+    'customerCommunicationEvidenceDeliveryNotice' =>
+      l10n.customerCommunicationEvidenceDeliveryNotice,
+    'customerCommunicationDeliveryStatusDraft' =>
+      l10n.customerCommunicationDeliveryStatusDraft,
+    'customerCommunicationDeliveryStatusQueued' =>
+      l10n.customerCommunicationDeliveryStatusQueued,
+    'customerCommunicationDeliveryStatusSkipped' =>
+      l10n.customerCommunicationDeliveryStatusSkipped,
+    'customerCommunicationDeliveryStatusSent' =>
+      l10n.customerCommunicationDeliveryStatusSent,
+    'customerCommunicationDeliveryStatusFailed' =>
+      l10n.customerCommunicationDeliveryStatusFailed,
+    'customerCommunicationDeliveryStatusCancelled' =>
+      l10n.customerCommunicationDeliveryStatusCancelled,
+    'customerCommunicationDeliveryStatusUnknown' =>
+      l10n.customerCommunicationDeliveryStatusUnknown,
+    'customerCommunicationDeliveryChannelEmail' =>
+      l10n.customerCommunicationDeliveryChannelEmail,
+    'customerCommunicationDeliveryChannelPortal' =>
+      l10n.customerCommunicationDeliveryChannelPortal,
+    'customerCommunicationDeliveryChannelManual' =>
+      l10n.customerCommunicationDeliveryChannelManual,
+    'customerCommunicationDeliveryChannelNone' =>
+      l10n.customerCommunicationDeliveryChannelNone,
+    'customerCommunicationDeliveryChannelUnknown' =>
+      l10n.customerCommunicationDeliveryChannelUnknown,
     'customerCommunicationPackageGeneratedAt' =>
       l10n.customerCommunicationPackageGeneratedAt(params['date'] ?? ''),
     'customerCommunicationPackageTypeCommunicationEvidence' =>

@@ -10,6 +10,7 @@ import '../domain/customer_communication_thread.dart';
 import '../domain/customer_communication_thread_detail.dart';
 import '../domain/customer_evidence_package.dart';
 import '../domain/evidence_package_request.dart';
+import '../domain/send_reply_request.dart';
 
 class CustomerCommunicationsApi {
   CustomerCommunicationsApi(this._apiClient);
@@ -128,6 +129,41 @@ class CustomerCommunicationsApi {
       options: Options(responseType: ResponseType.bytes),
     );
     return response.data ?? const [];
+  }
+
+  Future<SendCustomerReplyResult> sendReply({
+    required String threadId,
+    required SendCustomerReplyRequest request,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/customer-communications/$threadId/send-reply',
+      data: request.toJson(),
+    );
+    final data = response.data;
+    if (data == null) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.customerCommunicationActionError,
+      );
+    }
+    return SendCustomerReplyResult.fromJson(data);
+  }
+
+  Future<SendCustomerReplyResult> resendReply({
+    required String threadId,
+    required String messageId,
+    required ResendCustomerReplyRequest request,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/customer-communications/$threadId/messages/$messageId/resend',
+      data: request.toJson(),
+    );
+    final data = response.data;
+    if (data == null) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.customerCommunicationActionError,
+      );
+    }
+    return SendCustomerReplyResult.fromJson(data);
   }
 
   Future<CustomerCommunicationThread> markDisputed({

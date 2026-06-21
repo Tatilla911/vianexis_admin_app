@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/customer_communication_message.dart';
+import 'delivery_status_badge.dart';
 import 'translated_message_view.dart';
 
 class CommunicationMessageTimeline extends StatelessWidget {
@@ -67,6 +68,10 @@ class CommunicationMessageTimeline extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     TranslatedMessageView(message: message),
+                    if (message.delivery != null) ...[
+                      const SizedBox(height: 12),
+                      DeliveryStatusBadge(delivery: message.delivery!),
+                    ],
                   ],
                 ),
               ),

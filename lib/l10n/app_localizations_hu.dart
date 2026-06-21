@@ -4007,6 +4007,91 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
+  String get customerCommunicationSendReplyTitle => 'Ugyfel valasz kuldese';
+
+  @override
+  String get customerCommunicationSendReplyAction => 'Valasz kuldese';
+
+  @override
+  String get customerCommunicationSendReplyMessageLabel => 'Valasz uzenet';
+
+  @override
+  String get customerCommunicationSendReplySubjectLabel =>
+      'Email targy (opcionalis)';
+
+  @override
+  String get customerCommunicationUseTranslatedTextLabel =>
+      'Jovahagyott forditas hasznalata';
+
+  @override
+  String get customerCommunicationHumanConfirmationLabel =>
+      'Megerositem, hogy a valasz kuldheto';
+
+  @override
+  String get customerCommunicationHumanConfirmedBadge => 'Emberi megerosites';
+
+  @override
+  String get customerCommunicationTranslationApprovedBadge =>
+      'Forditas jovahagyva';
+
+  @override
+  String get customerCommunicationTranslatedReplyWarning =>
+      'A leforditott valaszok nem kerulnek automatikusan kikuldesre. Ellenorizd es erositsd meg kuldes elott.';
+
+  @override
+  String get customerCommunicationDeliveryProviderDisabledNotice =>
+      'A kuldesi szolgaltato le van tiltva; a valasz naplozva lesz, de nem megy ki kulso csatornara.';
+
+  @override
+  String get customerCommunicationReplyLoggedSkippedNotice =>
+      'Valasz naplozva, kuldes kihagyva (szolgaltato tiltva).';
+
+  @override
+  String get customerCommunicationReplySentSuccess =>
+      'Valasz sikeresen elkuldve.';
+
+  @override
+  String get customerCommunicationEvidenceDeliveryNotice =>
+      'A bizonyitek csomagok tartalmazzak a kimenő kuldesi allapotot, ha elerheto.';
+
+  @override
+  String get customerCommunicationDeliveryStatusDraft => 'Piszkozat';
+
+  @override
+  String get customerCommunicationDeliveryStatusQueued => 'Sorban';
+
+  @override
+  String get customerCommunicationDeliveryStatusSkipped => 'Kihagyva';
+
+  @override
+  String get customerCommunicationDeliveryStatusSent => 'Elkuldve';
+
+  @override
+  String get customerCommunicationDeliveryStatusFailed => 'Sikertelen';
+
+  @override
+  String get customerCommunicationDeliveryStatusCancelled => 'Megszakitva';
+
+  @override
+  String get customerCommunicationDeliveryStatusUnknown => 'Ismeretlen allapot';
+
+  @override
+  String get customerCommunicationDeliveryChannelEmail => 'Email';
+
+  @override
+  String get customerCommunicationDeliveryChannelPortal => 'Portal';
+
+  @override
+  String get customerCommunicationDeliveryChannelManual => 'Manualis';
+
+  @override
+  String get customerCommunicationDeliveryChannelNone => 'Nincs';
+
+  @override
+  String get customerCommunicationDeliveryChannelUnknown =>
+      'Ismeretlen csatorna';
+
+  @override
   String customerCommunicationPackageGeneratedAt(String date) {
     return 'Generalva: $date';
   }

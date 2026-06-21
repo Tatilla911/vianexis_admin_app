@@ -35,6 +35,8 @@ Human acceptance testing for the first internal staging APK. Test on a **non-pro
 ## Customer communications evidence PDF
 
 - [ ] Customer Communications module opens
+- [ ] Send reply requires human confirmation; provider disabled shows skipped delivery
+- [ ] Outbound messages show delivery status badge (skipped/sent/failed)
 - [ ] Generate evidence package requires reason (≥5 chars)
 - [ ] PDF ready status shown after generation (`pdfReady` / download path)
 - [ ] Download PDF button visible when ready; pending/failed states shown otherwise
