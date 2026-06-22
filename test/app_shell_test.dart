@@ -66,10 +66,10 @@ void main() {
         child: const VianexisAdminApp(),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text('Sign in'), findsWidgets);
-    expect(find.text('Sign in'), findsWidgets);
+    expect(find.text('Belépés'), findsWidgets);
   });
 
   testWidgets('router redirects unauthenticated user away from dashboard', (tester) async {
@@ -125,10 +125,10 @@ void main() {
         child: const VianexisAdminApp(),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
 
-    expect(find.text('Control center'), findsOneWidget);
+    expect(find.text('Irányítóközpont'), findsOneWidget);
     expect(find.byType(NavigationBar), findsOneWidget);
   });
 
@@ -154,7 +154,7 @@ void main() {
         child: const VianexisAdminApp(),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.byType(NavigationRail), findsOneWidget);

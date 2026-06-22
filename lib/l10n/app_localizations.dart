@@ -8225,6 +8225,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Public intake'**
   String get actionCenterTypePublicIntake;
+
+  /// No description provided for @navMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get navMore;
+
+  /// No description provided for @modulesHubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Modules'**
+  String get modulesHubTitle;
+
+  /// No description provided for @modulesHubBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional admin modules and settings.'**
+  String get modulesHubBody;
+
+  /// No description provided for @navReturnToDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Return to dashboard'**
+  String get navReturnToDashboard;
+
+  /// No description provided for @settingsLanguageSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguageSection;
+
+  /// No description provided for @settingsLanguageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the admin app display language.'**
+  String get settingsLanguageBody;
+
+  /// No description provided for @settingsLanguageHu.
+  ///
+  /// In en, this message translates to:
+  /// **'Hungarian'**
+  String get settingsLanguageHu;
+
+  /// No description provided for @settingsLanguageEn.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get settingsLanguageEn;
+
+  /// No description provided for @devicePinSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Device PIN'**
+  String get devicePinSectionTitle;
+
+  /// No description provided for @devicePinSectionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional local PIN for this device. Does not replace backend sign-in.'**
+  String get devicePinSectionBody;
+
+  /// No description provided for @devicePinSetAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Set PIN'**
+  String get devicePinSetAction;
+
+  /// No description provided for @devicePinChangeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Change PIN'**
+  String get devicePinChangeAction;
+
+  /// No description provided for @devicePinRemoveAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove PIN'**
+  String get devicePinRemoveAction;
+
+  /// No description provided for @devicePinCurrentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current PIN'**
+  String get devicePinCurrentLabel;
+
+  /// No description provided for @devicePinNewLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New PIN'**
+  String get devicePinNewLabel;
+
+  /// No description provided for @devicePinConfirmLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm PIN'**
+  String get devicePinConfirmLabel;
+
+  /// No description provided for @devicePinSetSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Device PIN saved.'**
+  String get devicePinSetSuccess;
+
+  /// No description provided for @devicePinChangeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Device PIN updated.'**
+  String get devicePinChangeSuccess;
+
+  /// No description provided for @devicePinRemoveSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Device PIN removed.'**
+  String get devicePinRemoveSuccess;
+
+  /// No description provided for @devicePinMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN entries do not match.'**
+  String get devicePinMismatch;
+
+  /// No description provided for @devicePinInvalidLength.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN must be 4–8 digits.'**
+  String get devicePinInvalidLength;
+
+  /// No description provided for @devicePinInvalidCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current PIN is incorrect.'**
+  String get devicePinInvalidCurrent;
+
+  /// No description provided for @devicePinNonNumeric.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN must contain digits only.'**
+  String get devicePinNonNumeric;
 }
 
 class _AppLocalizationsDelegate

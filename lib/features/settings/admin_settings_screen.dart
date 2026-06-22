@@ -14,6 +14,7 @@ import '../../core/widgets/vianexis_brand_header.dart';
 import '../../core/widgets/vianexis_confirm_dialog.dart';
 import '../../core/widgets/vianexis_section_header.dart';
 import '../../l10n/app_localizations.dart';
+import 'widgets/admin_security_settings_sections.dart';
 
 class AdminSettingsScreen extends ConsumerWidget {
   const AdminSettingsScreen({super.key});
@@ -113,6 +114,10 @@ class AdminSettingsScreen extends ConsumerWidget {
               ),
             ),
           ],
+          const SizedBox(height: 20),
+          const AdminLanguageSettingsSection(),
+          const SizedBox(height: 20),
+          const AdminPinSettingsSection(),
           const SizedBox(height: 20),
           VianexisSectionHeader(title: l10n.settingsNotificationsSection),
           const SizedBox(height: 12),

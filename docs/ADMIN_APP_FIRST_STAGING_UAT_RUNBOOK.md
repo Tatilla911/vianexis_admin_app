@@ -11,8 +11,16 @@ Use after Render backend deploy and APK build. Master checklist: `transdoc-backe
 
 ## Install and environment
 
+- [ ] **Use release/profile APK for operator UAT** — `flutter run` shows a DEBUG banner; staging sign-off must use:
+  ```bash
+  flutter build apk --release \
+    --dart-define=APP_ENV=staging \
+    --dart-define=API_BASE_URL=https://vianexis-staging-api.onrender.com
+  ```
+  Or: `dart run tool/prepare_staging_apk_artifact.dart --api-base-url=https://vianexis-staging-api.onrender.com --execute`
 - [ ] APK installed on test Android device
-- [ ] Staging badge visible (EN/HU)
+- [ ] Default app language is **Hungarian** (change in Settings → Language if needed)
+- [ ] Staging badge visible
 - [ ] Settings → API host matches Render hostname (metadata only)
 - [ ] Mock fallback **not** active
 
@@ -23,6 +31,8 @@ Use after Render backend deploy and APK build. Master checklist: `transdoc-backe
 
 ## Core navigation
 
+- [ ] Bottom nav on phone shows **max 5 items** (Dashboard, Action Center, Registrations, Communications, More)
+- [ ] Secondary modules reachable via **Továbbiak / More**
 - [ ] Dashboard
 - [ ] Action Center
 - [ ] Public intakes (list + detail)

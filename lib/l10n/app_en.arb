@@ -1499,5 +1499,31 @@
   "publicIntakeDashboardHighPriority": "Quote/demo requests: {count}",
   "@publicIntakeDashboardHighPriority": { "placeholders": { "count": { "type": "String" } } },
   "actionCenterFilterPublicIntake": "Public intakes",
-  "actionCenterTypePublicIntake": "Public intake"
+  "actionCenterTypePublicIntake": "Public intake",
+
+  "navMore": "More",
+  "modulesHubTitle": "Modules",
+  "modulesHubBody": "Additional admin modules and settings.",
+  "navReturnToDashboard": "Return to dashboard",
+
+  "settingsLanguageSection": "Language",
+  "settingsLanguageBody": "Choose the admin app display language.",
+  "settingsLanguageHu": "Hungarian",
+  "settingsLanguageEn": "English",
+
+  "devicePinSectionTitle": "Device PIN",
+  "devicePinSectionBody": "Optional local PIN for this device. Does not replace backend sign-in.",
+  "devicePinSetAction": "Set PIN",
+  "devicePinChangeAction": "Change PIN",
+  "devicePinRemoveAction": "Remove PIN",
+  "devicePinCurrentLabel": "Current PIN",
+  "devicePinNewLabel": "New PIN",
+  "devicePinConfirmLabel": "Confirm PIN",
+  "devicePinSetSuccess": "Device PIN saved.",
+  "devicePinChangeSuccess": "Device PIN updated.",
+  "devicePinRemoveSuccess": "Device PIN removed.",
+  "devicePinMismatch": "PIN entries do not match.",
+  "devicePinInvalidLength": "PIN must be 4–8 digits.",
+  "devicePinInvalidCurrent": "Current PIN is incorrect.",
+  "devicePinNonNumeric": "PIN must contain digits only."
 }

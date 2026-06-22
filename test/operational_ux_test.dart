@@ -312,8 +312,8 @@ void main() {
     await tester.pumpAndSettle();
     await tester.pump(const Duration(milliseconds: 500));
 
-    expect(find.text('Permission denied'), findsWidgets);
-    expect(find.text('Back to dashboard'), findsOneWidget);
+    expect(find.text('Hozzáférés megtagadva'), findsWidgets);
+    expect(find.text('Vissza az irányítópulthoz'), findsOneWidget);
   });
 
   testWidgets('settings screen shows signed-in admin metadata', (tester) async {

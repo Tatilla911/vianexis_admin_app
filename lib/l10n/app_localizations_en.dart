@@ -4474,4 +4474,74 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionCenterTypePublicIntake => 'Public intake';
+
+  @override
+  String get navMore => 'More';
+
+  @override
+  String get modulesHubTitle => 'Modules';
+
+  @override
+  String get modulesHubBody => 'Additional admin modules and settings.';
+
+  @override
+  String get navReturnToDashboard => 'Return to dashboard';
+
+  @override
+  String get settingsLanguageSection => 'Language';
+
+  @override
+  String get settingsLanguageBody => 'Choose the admin app display language.';
+
+  @override
+  String get settingsLanguageHu => 'Hungarian';
+
+  @override
+  String get settingsLanguageEn => 'English';
+
+  @override
+  String get devicePinSectionTitle => 'Device PIN';
+
+  @override
+  String get devicePinSectionBody =>
+      'Optional local PIN for this device. Does not replace backend sign-in.';
+
+  @override
+  String get devicePinSetAction => 'Set PIN';
+
+  @override
+  String get devicePinChangeAction => 'Change PIN';
+
+  @override
+  String get devicePinRemoveAction => 'Remove PIN';
+
+  @override
+  String get devicePinCurrentLabel => 'Current PIN';
+
+  @override
+  String get devicePinNewLabel => 'New PIN';
+
+  @override
+  String get devicePinConfirmLabel => 'Confirm PIN';
+
+  @override
+  String get devicePinSetSuccess => 'Device PIN saved.';
+
+  @override
+  String get devicePinChangeSuccess => 'Device PIN updated.';
+
+  @override
+  String get devicePinRemoveSuccess => 'Device PIN removed.';
+
+  @override
+  String get devicePinMismatch => 'PIN entries do not match.';
+
+  @override
+  String get devicePinInvalidLength => 'PIN must be 4–8 digits.';
+
+  @override
+  String get devicePinInvalidCurrent => 'Current PIN is incorrect.';
+
+  @override
+  String get devicePinNonNumeric => 'PIN must contain digits only.';
 }

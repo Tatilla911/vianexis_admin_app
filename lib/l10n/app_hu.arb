@@ -1388,5 +1388,31 @@
   "publicIntakeDashboardNew": "Új publikus megkeresések: {count}",
   "publicIntakeDashboardHighPriority": "Ajánlat/demo kérések: {count}",
   "actionCenterFilterPublicIntake": "Publikus megkeresések",
-  "actionCenterTypePublicIntake": "Publikus megkeresés"
+  "actionCenterTypePublicIntake": "Publikus megkeresés",
+
+  "navMore": "Továbbiak",
+  "modulesHubTitle": "Modulok",
+  "modulesHubBody": "További admin modulok és beállítások.",
+  "navReturnToDashboard": "Vissza az irányítópultra",
+
+  "settingsLanguageSection": "Nyelv",
+  "settingsLanguageBody": "Válaszd ki az admin app megjelenítési nyelvét.",
+  "settingsLanguageHu": "Magyar",
+  "settingsLanguageEn": "Angol",
+
+  "devicePinSectionTitle": "Eszköz PIN",
+  "devicePinSectionBody": "Opcionális helyi PIN ehhez az eszközhöz. Nem helyettesíti a backend bejelentkezést.",
+  "devicePinSetAction": "PIN beállítása",
+  "devicePinChangeAction": "PIN módosítása",
+  "devicePinRemoveAction": "PIN eltávolítása",
+  "devicePinCurrentLabel": "Jelenlegi PIN",
+  "devicePinNewLabel": "Új PIN",
+  "devicePinConfirmLabel": "PIN megerősítése",
+  "devicePinSetSuccess": "Az eszköz PIN mentve.",
+  "devicePinChangeSuccess": "Az eszköz PIN frissítve.",
+  "devicePinRemoveSuccess": "Az eszköz PIN eltávolítva.",
+  "devicePinMismatch": "A két PIN nem egyezik.",
+  "devicePinInvalidLength": "A PIN 4–8 számjegy legyen.",
+  "devicePinInvalidCurrent": "A jelenlegi PIN helytelen.",
+  "devicePinNonNumeric": "A PIN csak számjegyeket tartalmazhat."
 }

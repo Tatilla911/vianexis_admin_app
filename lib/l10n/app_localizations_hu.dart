@@ -4536,4 +4536,75 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get actionCenterTypePublicIntake => 'Publikus megkeresés';
+
+  @override
+  String get navMore => 'Továbbiak';
+
+  @override
+  String get modulesHubTitle => 'Modulok';
+
+  @override
+  String get modulesHubBody => 'További admin modulok és beállítások.';
+
+  @override
+  String get navReturnToDashboard => 'Vissza az irányítópultra';
+
+  @override
+  String get settingsLanguageSection => 'Nyelv';
+
+  @override
+  String get settingsLanguageBody =>
+      'Válaszd ki az admin app megjelenítési nyelvét.';
+
+  @override
+  String get settingsLanguageHu => 'Magyar';
+
+  @override
+  String get settingsLanguageEn => 'Angol';
+
+  @override
+  String get devicePinSectionTitle => 'Eszköz PIN';
+
+  @override
+  String get devicePinSectionBody =>
+      'Opcionális helyi PIN ehhez az eszközhöz. Nem helyettesíti a backend bejelentkezést.';
+
+  @override
+  String get devicePinSetAction => 'PIN beállítása';
+
+  @override
+  String get devicePinChangeAction => 'PIN módosítása';
+
+  @override
+  String get devicePinRemoveAction => 'PIN eltávolítása';
+
+  @override
+  String get devicePinCurrentLabel => 'Jelenlegi PIN';
+
+  @override
+  String get devicePinNewLabel => 'Új PIN';
+
+  @override
+  String get devicePinConfirmLabel => 'PIN megerősítése';
+
+  @override
+  String get devicePinSetSuccess => 'Az eszköz PIN mentve.';
+
+  @override
+  String get devicePinChangeSuccess => 'Az eszköz PIN frissítve.';
+
+  @override
+  String get devicePinRemoveSuccess => 'Az eszköz PIN eltávolítva.';
+
+  @override
+  String get devicePinMismatch => 'A két PIN nem egyezik.';
+
+  @override
+  String get devicePinInvalidLength => 'A PIN 4–8 számjegy legyen.';
+
+  @override
+  String get devicePinInvalidCurrent => 'A jelenlegi PIN helytelen.';
+
+  @override
+  String get devicePinNonNumeric => 'A PIN csak számjegyeket tartalmazhat.';
 }

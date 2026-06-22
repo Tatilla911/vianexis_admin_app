@@ -9,6 +9,7 @@ import '../api/api_unauthorized_binding.dart';
 import '../auth/admin_auth_state.dart';
 import '../auth/admin_user.dart';
 import '../connectivity/connectivity_status_provider.dart';
+import '../navigation/admin_shell_navigation.dart';
 import 'backend_mode_banner.dart';
 import 'offline_banner.dart';
 import 'vianexis_admin_background.dart';
@@ -29,10 +30,8 @@ class VianexisAdminScaffold extends ConsumerWidget {
     }
 
     final isOnline = ref.watch(connectivityOnlineProvider);
-    final destinations = _visibleDestinations(user);
+    final allVisible = _visibleDestinations(user);
     final location = GoRouterState.of(context).matchedLocation;
-    final selectedIndex = _indexForLocation(location, destinations);
-
     final isTablet =
         MediaQuery.sizeOf(context).width >= AppTheme.tabletBreakpoint;
 
@@ -50,6 +49,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
     );
 
     if (isTablet) {
+      final selectedIndex = _indexForLocation(location, allVisible);
       return Scaffold(
         body: Row(
           children: [
@@ -57,10 +57,10 @@ class VianexisAdminScaffold extends ConsumerWidget {
               extended: MediaQuery.sizeOf(context).width >= 900,
               selectedIndex: selectedIndex,
               onDestinationSelected: (index) =>
-                  _goToDestination(context, destinations[index]),
+                  _goToDestination(context, allVisible[index]),
               labelType: NavigationRailLabelType.none,
               destinations: [
-                for (final item in destinations)
+                for (final item in allVisible)
                   NavigationRailDestination(
                     icon: Icon(item.icon),
                     selectedIcon: Icon(item.selectedIcon),
@@ -75,18 +75,22 @@ class VianexisAdminScaffold extends ConsumerWidget {
       );
     }
 
+    final mobileItems = _mobileNavItems(user, allVisible);
+    final selectedIndex = _mobileIndexForLocation(location, mobileItems);
+
     return Scaffold(
       body: content,
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         onDestinationSelected: (index) =>
-            _goToDestination(context, destinations[index]),
+            _goToDestination(context, mobileItems[index]),
         destinations: [
-          for (final item in destinations)
+          for (final item in mobileItems)
             NavigationDestination(
               icon: Icon(item.icon),
               selectedIcon: Icon(item.selectedIcon),
-              label: _label(context, item.destination),
+              label: _mobileLabel(context, item),
             ),
         ],
       ),
@@ -99,11 +103,56 @@ class VianexisAdminScaffold extends ConsumerWidget {
         .toList(growable: false);
   }
 
+  List<_NavItem> _mobileNavItems(AdminUser user, List<_NavItem> allVisible) {
+    final primary = <_NavItem>[];
+    for (final destination in mobilePrimaryDestinations) {
+      final match = allVisible.where((item) => item.destination == destination);
+      if (match.isNotEmpty) {
+        primary.add(match.first);
+      }
+    }
+
+    final hasSecondary = allVisible.any(
+      (item) => !isMobilePrimaryDestination(item.destination),
+    );
+
+    if (hasSecondary) {
+      primary.add(_moreNavItem);
+    }
+
+    assert(
+      primary.length <= mobileBottomNavMaxItems,
+      'Mobile nav must not exceed $mobileBottomNavMaxItems items',
+    );
+
+    return primary;
+  }
+
   int _indexForLocation(String location, List<_NavItem> items) {
     final destination = AdminRoutes.destinationForLocation(location);
     if (destination == null) return 0;
     final index = items.indexWhere((item) => item.destination == destination);
     return index >= 0 ? index : 0;
+  }
+
+  int _mobileIndexForLocation(String location, List<_NavItem> mobileItems) {
+    if (shouldHighlightMoreTab(
+      location,
+      AdminRoutes.destinationForLocation(location),
+    )) {
+      final moreIndex = mobileItems.indexWhere((item) => item.isMore);
+      if (moreIndex >= 0) return moreIndex;
+    }
+
+    final destination = AdminRoutes.destinationForLocation(location);
+    if (destination != null) {
+      final index = mobileItems.indexWhere(
+        (item) => item.destination == destination,
+      );
+      if (index >= 0) return index;
+    }
+
+    return 0;
   }
 
   void _goToDestination(BuildContext context, _NavItem item) {
@@ -133,6 +182,13 @@ class VianexisAdminScaffold extends ConsumerWidget {
       AdminDestination.settings => l10n.navSettings,
     };
   }
+
+  String _mobileLabel(BuildContext context, _NavItem item) {
+    if (item.isMore) {
+      return AppLocalizations.of(context).navMore;
+    }
+    return _label(context, item.destination);
+  }
 }
 
 class _NavItem {
@@ -141,13 +197,23 @@ class _NavItem {
     required this.route,
     required this.icon,
     required this.selectedIcon,
+    this.isMore = false,
   });
 
   final AdminDestination destination;
   final String route;
   final IconData icon;
   final IconData selectedIcon;
+  final bool isMore;
 }
+
+const _moreNavItem = _NavItem(
+  destination: AdminDestination.settings,
+  route: AdminRoutes.modulesHub,
+  icon: Icons.apps_outlined,
+  selectedIcon: Icons.apps,
+  isMore: true,
+);
 
 const _allNavItems = <_NavItem>[
   _NavItem(
@@ -275,6 +341,13 @@ class AdminFeatureScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        leading: Navigator.of(context).canPop()
+            ? BackButton(onPressed: () => context.pop())
+            : IconButton(
+                tooltip: l10n.navReturnToDashboard,
+                icon: const Icon(Icons.home_outlined),
+                onPressed: () => context.go(AdminRoutes.dashboard),
+              ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),

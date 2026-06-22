@@ -31,7 +31,7 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
 
   void _openItem(String? routeHint) {
     if (routeHint == null || routeHint.trim().isEmpty) return;
-    context.go(routeHint);
+    context.push(routeHint);
   }
 
   @override
@@ -92,44 +92,56 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
           ),
           const SizedBox(height: 8),
           Expanded(
-            child: itemsAsync.when(
-              loading: () => const VianexisLoadingView(),
-              error: (error, _) => VianexisErrorView.fromError(
-                context,
-                error,
-                fallbackMessage: resolveActionCenterKey(context, 'actionCenterLoadError'),
-                onRetry: () => ref.read(actionCenterProvider.notifier).refresh(),
-              ),
-              data: (items) {
-                if (items.isEmpty) {
-                  return Center(
-                    child: Text(resolveActionCenterKey(context, 'actionCenterListEmpty')),
-                  );
-                }
-                return RefreshIndicator(
-                  onRefresh: () => ref.read(actionCenterProvider.notifier).refresh(),
-                  child: ListView.builder(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      final item = items[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: ActionCenterItemCard(
-                          item: item,
-                          onTap: () => _openItem(item.actionRouteHint),
+            child: Column(
+              children: [
+                Expanded(
+                  child: itemsAsync.when(
+                    loading: () => const VianexisLoadingView(),
+                    error: (error, _) => VianexisErrorView.fromError(
+                      context,
+                      error,
+                      fallbackMessage:
+                          resolveActionCenterKey(context, 'actionCenterLoadError'),
+                      onRetry: () => ref.read(actionCenterProvider.notifier).refresh(),
+                    ),
+                    data: (items) {
+                      if (items.isEmpty) {
+                        return Center(
+                          child: Text(
+                            resolveActionCenterKey(context, 'actionCenterListEmpty'),
+                          ),
+                        );
+                      }
+                      return RefreshIndicator(
+                        onRefresh: () => ref.read(actionCenterProvider.notifier).refresh(),
+                        child: ListView.builder(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+                          itemCount: items.length,
+                          itemBuilder: (context, index) {
+                            final item = items[index];
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: ActionCenterItemCard(
+                                item: item,
+                                onTap: () => _openItem(item.actionRouteHint),
+                              ),
+                            );
+                          },
                         ),
                       );
                     },
                   ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: VianexisMetadataNotice(
-              message: resolveActionCenterKey(context, 'actionCenterPrivacyNotice'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  child: VianexisMetadataNotice(
+                    message: resolveActionCenterKey(
+                      context,
+                      'actionCenterPrivacyNotice',
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

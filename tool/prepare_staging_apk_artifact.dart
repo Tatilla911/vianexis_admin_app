@@ -5,28 +5,27 @@ import 'package:vianexis_admin_app/app/admin_staging_apk_artifact.dart';
 
 /// Run: dart run tool/prepare_staging_apk_artifact.dart
 ///
-/// Env / args:
+/// CLI flags (override env vars):
+///   --api-base-url=https://vianexis-staging-api.onrender.com
+///   --app-env=staging
+///   --dry-run
+///   --execute
+///   --copy
+///
+/// Env vars (fallback):
 ///   STAGING_APK_APP_ENV=staging (default)
-///   STAGING_APK_API_BASE_URL=https://api-staging.example.com (required)
+///   STAGING_APK_API_BASE_URL=https://... (required)
 ///   STAGING_APK_DRY_RUN=true (default — prints command only)
 ///   STAGING_APK_COPY=true (optional — copy to build/artifacts/staging/ after build)
 ///   STAGING_APK_EXECUTE=true (runs flutter build when dry-run false)
 void main(List<String> args) async {
+  final parsed = _parseArgs(args);
   final root = _findProjectRoot();
-  final appEnv = Platform.environment['STAGING_APK_APP_ENV'] ?? 'staging';
-  final apiBaseUrl = Platform.environment['STAGING_APK_API_BASE_URL'] ?? '';
-  final dryRun = _parseBool(
-    Platform.environment['STAGING_APK_DRY_RUN'],
-    defaultValue: true,
-  );
-  final copyToArtifacts = _parseBool(
-    Platform.environment['STAGING_APK_COPY'],
-    defaultValue: false,
-  );
-  final execute = _parseBool(
-    Platform.environment['STAGING_APK_EXECUTE'],
-    defaultValue: !dryRun,
-  );
+  final appEnv = parsed['appEnv'] as String;
+  final apiBaseUrl = parsed['apiBaseUrl'] as String;
+  final dryRun = parsed['dryRun'] as bool;
+  final copyToArtifacts = parsed['copyToArtifacts'] as bool;
+  final execute = parsed['execute'] as bool;
 
   final issues = runStagingApkArtifactChecks(
     root,
@@ -58,7 +57,7 @@ void main(List<String> args) async {
   print('  command: ${plan.buildCommand.join(' ')}');
 
   if (dryRun) {
-    print('\nDry-run mode — no build executed. Set STAGING_APK_DRY_RUN=false to build.');
+    print('\nDry-run mode — no build executed. Pass --execute or set STAGING_APK_DRY_RUN=false.');
     exit(0);
   }
 
@@ -89,6 +88,60 @@ void main(List<String> args) async {
 
   print('\nDefault output: build/app/outputs/flutter-apk/app-release.apk');
   print('Rename to: ${plan.artifactFileName} for distribution');
+}
+
+Map<String, Object> _parseArgs(List<String> args) {
+  var appEnv = Platform.environment['STAGING_APK_APP_ENV'] ?? 'staging';
+  var apiBaseUrl = Platform.environment['STAGING_APK_API_BASE_URL'] ?? '';
+  var dryRun = _parseBool(
+    Platform.environment['STAGING_APK_DRY_RUN'],
+    defaultValue: true,
+  );
+  var copyToArtifacts = _parseBool(
+    Platform.environment['STAGING_APK_COPY'],
+    defaultValue: false,
+  );
+  var execute = _parseBool(
+    Platform.environment['STAGING_APK_EXECUTE'],
+    defaultValue: !dryRun,
+  );
+
+  for (final arg in args) {
+    if (arg.startsWith('--api-base-url=')) {
+      apiBaseUrl = arg.substring('--api-base-url='.length).trim();
+      continue;
+    }
+    if (arg.startsWith('--app-env=')) {
+      appEnv = arg.substring('--app-env='.length).trim();
+      continue;
+    }
+    if (arg == '--dry-run') {
+      dryRun = true;
+      execute = false;
+      continue;
+    }
+    if (arg == '--execute') {
+      dryRun = false;
+      execute = true;
+      continue;
+    }
+    if (arg == '--copy') {
+      copyToArtifacts = true;
+    }
+  }
+
+  // Also accept API_BASE_URL when passed as a bare env-style flag.
+  if (apiBaseUrl.isEmpty) {
+    apiBaseUrl = Platform.environment['API_BASE_URL'] ?? '';
+  }
+
+  return {
+    'appEnv': appEnv,
+    'apiBaseUrl': apiBaseUrl,
+    'dryRun': dryRun,
+    'copyToArtifacts': copyToArtifacts,
+    'execute': execute,
+  };
 }
 
 Directory _findProjectRoot() {

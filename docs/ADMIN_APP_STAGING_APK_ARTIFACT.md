@@ -15,11 +15,25 @@ dart run tool/prepare_staging_apk_artifact.dart
 Prints safe build command and artifact name — **does not build**:
 
 ```powershell
+dart run tool/prepare_staging_apk_artifact.dart --api-base-url=https://vianexis-staging-api.onrender.com
+```
+
+Or via env:
+
+```powershell
 $env:STAGING_APK_API_BASE_URL="https://api-staging.example.com"
 dart run tool/prepare_staging_apk_artifact.dart
 ```
 
+Also accepts `$env:API_BASE_URL` when `STAGING_APK_API_BASE_URL` is unset.
+
 ## Execute build
+
+```powershell
+dart run tool/prepare_staging_apk_artifact.dart --api-base-url=https://vianexis-staging-api.onrender.com --execute
+```
+
+Or via env:
 
 ```powershell
 $env:STAGING_APK_API_BASE_URL="https://api-staging.example.com"

@@ -32,6 +32,7 @@ import '../features/companies/presentation/platform_companies_screen.dart';
 import '../features/companies/presentation/platform_company_detail_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
 import '../features/login/login_screen.dart';
+import '../features/modules/admin_modules_hub_screen.dart';
 import '../features/notifications/presentation/notification_detail_screen.dart';
 import '../features/notifications/presentation/notification_preferences_screen.dart';
 import '../features/notifications/presentation/notifications_screen.dart';
@@ -366,6 +367,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
           GoRoute(
+            path: AdminRoutes.modulesHub,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: AdminModulesHubScreen(),
+            ),
+          ),
+          GoRoute(
             path: AdminRoutes.settings,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: AdminSettingsScreen(),
@@ -407,6 +414,7 @@ abstract final class AdminRoutes {
   static const adminUsers = '/admin-users';
   static const releaseCenter = '/release-center';
   static const settings = '/settings';
+  static const modulesHub = '/modules';
   static const accessDenied = '/access-denied';
 
   static String systemHealthEventDetail(String id) => '$systemHealth/events/$id';
@@ -455,6 +463,9 @@ abstract final class AdminRoutes {
       '$securityCenter/events/${Uri.encodeComponent(id)}';
 
   static AdminDestination? destinationForLocation(String location) {
+    if (location.startsWith(modulesHub)) {
+      return AdminDestination.settings;
+    }
     if (location.startsWith(actionCenter)) {
       return AdminDestination.actionCenter;
     }
