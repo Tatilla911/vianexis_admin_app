@@ -4,8 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../localization/localization_keys.dart';
 import 'api_config.dart';
-import 'api_error_resolver.dart';
+import 'api_error_mapping.dart';
 import 'api_exception.dart';
+import 'api_request_path.dart';
 import 'auth_token_storage.dart';
 
 typedef UnauthorizedCallback = Future<void> Function();
@@ -38,7 +39,7 @@ class ApiClient {
         onError: (error, handler) async {
           final statusCode = error.response?.statusCode;
           if (statusCode == 401 &&
-              !_isLoginPath(error.requestOptions.path) &&
+              !isAuthLoginRequestPath(resolveApiRequestPath(error.requestOptions)) &&
               _onUnauthorized != null) {
             await _onUnauthorized!();
           }
@@ -160,97 +161,42 @@ class ApiClient {
 }
 
 ApiException mapDioException(DioException error) {
-  switch (error.type) {
-    case DioExceptionType.connectionTimeout:
-    case DioExceptionType.sendTimeout:
-    case DioExceptionType.receiveTimeout:
-      return ApiException(
-        messageKey: LocalizationKeys.authNetworkError,
-        kind: ApiExceptionKind.timeout,
-        cause: error,
-      );
-    case DioExceptionType.connectionError:
-    case DioExceptionType.unknown:
-      if (error.error != null && error.response == null) {
-        return ApiException(
-          messageKey: LocalizationKeys.authNetworkError,
-          kind: ApiExceptionKind.network,
-          cause: error,
-        );
-      }
-      break;
-    case DioExceptionType.badResponse:
-      break;
-    case DioExceptionType.cancel:
-      return ApiException(
-        messageKey: LocalizationKeys.errorGenericBody,
-        kind: ApiExceptionKind.unknown,
-        cause: error,
-      );
-    case DioExceptionType.badCertificate:
-      return ApiException(
-        messageKey: LocalizationKeys.authNetworkError,
-        kind: ApiExceptionKind.network,
-        cause: error,
-      );
+  final statusCode = error.response?.statusCode;
+  final path = resolveApiRequestPath(error.requestOptions);
+
+  if (statusCode != null) {
+    return mapHttpStatusException(
+      statusCode: statusCode,
+      path: path,
+      error: error,
+    );
   }
 
-  final statusCode = error.response?.statusCode;
-  final path = error.requestOptions.path;
-  final messageKey = apiExceptionMessageKeyForStatus(
-    statusCode: statusCode,
-    path: path,
-  );
+  if (isTransportLevelDioException(error)) {
+    return ApiException(
+      messageKey: LocalizationKeys.authNetworkError,
+      kind: error.type == DioExceptionType.connectionTimeout ||
+              error.type == DioExceptionType.sendTimeout ||
+              error.type == DioExceptionType.receiveTimeout
+          ? ApiExceptionKind.timeout
+          : ApiExceptionKind.network,
+      cause: error,
+    );
+  }
 
-  return switch (statusCode) {
-    400 => ApiException(
-      messageKey: LocalizationKeys.authRequiredField,
-      kind: ApiExceptionKind.validation,
-      statusCode: statusCode,
-      cause: error,
-    ),
-    401 => ApiException(
-      messageKey: messageKey,
-      kind: ApiExceptionKind.unauthorized,
-      statusCode: statusCode,
-      cause: error,
-    ),
-    403 => ApiException(
-      messageKey: messageKey,
-      kind: ApiExceptionKind.forbidden,
-      statusCode: statusCode,
-      cause: error,
-    ),
-    404 => ApiException(
-      messageKey: messageKey,
-      kind: ApiExceptionKind.notFound,
-      statusCode: statusCode,
-      cause: error,
-    ),
-    409 => ApiException(
+  if (error.type == DioExceptionType.cancel) {
+    return ApiException(
       messageKey: LocalizationKeys.errorGenericBody,
-      kind: ApiExceptionKind.conflict,
-      statusCode: statusCode,
-      cause: error,
-    ),
-    500 || 502 || 503 || 504 => ApiException(
-      messageKey: LocalizationKeys.authServerError,
-      kind: ApiExceptionKind.server,
-      statusCode: statusCode,
-      cause: error,
-    ),
-    _ => ApiException(
-      messageKey: messageKey,
       kind: ApiExceptionKind.unknown,
-      statusCode: statusCode,
       cause: error,
-    ),
-  };
-}
+    );
+  }
 
-bool _isLoginPath(String path) {
-  final normalized = path.trim().toLowerCase();
-  return normalized.endsWith('/auth/login') || normalized == '/auth/login';
+  return ApiException(
+    messageKey: LocalizationKeys.authNetworkError,
+    kind: ApiExceptionKind.network,
+    cause: error,
+  );
 }
 
 String _redactSecrets(Object object) {

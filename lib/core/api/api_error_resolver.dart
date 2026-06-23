@@ -4,6 +4,7 @@ import '../../l10n/app_localizations.dart';
 import '../localization/localization_keys.dart';
 import '../localization/localization_resolver.dart';
 import 'api_exception.dart';
+import 'api_request_path.dart';
 
 class ApiErrorPresentation {
   const ApiErrorPresentation({
@@ -71,11 +72,13 @@ ApiErrorPresentation resolveApiException(
 String apiExceptionMessageKeyForStatus({
   required int? statusCode,
   required String path,
+  Object? responseData,
 }) {
+  if (isInvalidCredentialsStatus(statusCode, path)) {
+    return LocalizationKeys.authInvalidCredentials;
+  }
   if (statusCode == 401) {
-    return _isLoginPath(path)
-        ? LocalizationKeys.authInvalidCredentials
-        : LocalizationKeys.authSessionExpired;
+    return LocalizationKeys.authSessionExpired;
   }
   if (statusCode == 403) {
     return LocalizationKeys.authForbiddenRole;
@@ -84,9 +87,4 @@ String apiExceptionMessageKeyForStatus({
     return LocalizationKeys.errorActionUnavailable;
   }
   return LocalizationKeys.errorGenericBody;
-}
-
-bool _isLoginPath(String path) {
-  final normalized = path.trim().toLowerCase();
-  return normalized.endsWith('/auth/login') || normalized == '/auth/login';
 }

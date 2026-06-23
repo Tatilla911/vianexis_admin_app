@@ -103,6 +103,33 @@ class AdminAuthNotifier extends Notifier<AdminAuthState> {
     state = const AdminAuthState.unauthenticated();
   }
 
+  Future<bool> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    state = state.copyWith(isLoading: true, clearError: true);
+    try {
+      await _repository.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+      state = const AdminAuthState.unauthenticated();
+      return true;
+    } on ApiException catch (error) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessageKey: error.messageKey,
+      );
+      return false;
+    } catch (_) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessageKey: LocalizationKeys.errorGenericBody,
+      );
+      return false;
+    }
+  }
+
   Future<void> handleSessionExpired() async {
     await _repository.signOut();
     state = AdminAuthState(

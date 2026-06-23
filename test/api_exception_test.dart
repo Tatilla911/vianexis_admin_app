@@ -48,6 +48,57 @@ void main() {
       expect(exception.messageKey, LocalizationKeys.authInvalidCredentials);
     });
 
+    test('maps login 401 with full URL path to invalid credentials', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(
+            path: 'https://vianexis-staging-api.onrender.com/auth/login',
+          ),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(
+              path: 'https://vianexis-staging-api.onrender.com/auth/login',
+            ),
+            statusCode: 401,
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.unauthorized);
+      expect(exception.messageKey, LocalizationKeys.authInvalidCredentials);
+    });
+
+    test('maps login 400 to invalid credentials', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/login'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/auth/login'),
+            statusCode: 400,
+          ),
+        ),
+      );
+
+      expect(exception.messageKey, LocalizationKeys.authInvalidCredentials);
+    });
+
+    test('maps password change invalid current code', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/me/password'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/auth/me/password'),
+            statusCode: 401,
+            data: const {'code': 'invalid_current_password'},
+          ),
+        ),
+      );
+
+      expect(exception.messageKey, LocalizationKeys.authPasswordChangeInvalidCurrent);
+    });
+
     test('maps authenticated 401 to session expired', () {
       final exception = mapDioException(
         DioException(

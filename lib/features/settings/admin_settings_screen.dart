@@ -58,6 +58,8 @@ class AdminSettingsScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 20),
+          const AdminAccountPasswordSection(),
+          const SizedBox(height: 20),
           VianexisSectionHeader(title: l10n.brandEnvironmentLabel),
           const SizedBox(height: 12),
           VianexisAdminCard(

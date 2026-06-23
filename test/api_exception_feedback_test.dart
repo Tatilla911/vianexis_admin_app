@@ -38,7 +38,7 @@ void main() {
 
     expect(
       message,
-      'This account is not authorized for the platform admin app.',
+      'This account cannot sign in to the admin app.',
     );
   });
 }

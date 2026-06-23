@@ -157,5 +157,48 @@ void main() {
       final user = await repository.restoreSession();
       expect(user?.role, AdminRole.superAdmin);
     });
+
+    test('changePassword clears stored tokens after success', () async {
+      await tokenStorage.writeTokens(
+        accessToken: 'access-token-123',
+        refreshToken: 'refresh-token-456',
+      );
+
+      dio.interceptors.clear();
+      dio.interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            if (options.path == '/auth/me/password' && options.method == 'PATCH') {
+              handler.resolve(
+                Response<Map<String, dynamic>>(
+                  requestOptions: options,
+                  statusCode: 200,
+                  data: const {'success': true},
+                ),
+              );
+              return;
+            }
+            handler.reject(
+              DioException(
+                requestOptions: options,
+                type: DioExceptionType.badResponse,
+                response: Response(
+                  requestOptions: options,
+                  statusCode: 404,
+                ),
+              ),
+            );
+          },
+        ),
+      );
+
+      await repository.changePassword(
+        currentPassword: 'CurrentPassword123!',
+        newPassword: 'NewSecurePassword99!',
+      );
+
+      expect(await tokenStorage.readAccessToken(), isNull);
+      expect(await tokenStorage.readRefreshToken(), isNull);
+    });
   });
 }

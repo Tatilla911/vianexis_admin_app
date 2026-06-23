@@ -102,7 +102,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authForbiddenRole =>
-      'This account is not authorized for the platform admin app.';
+      'This account cannot sign in to the admin app.';
+
+  @override
+  String get authPasswordChangeInvalidCurrent =>
+      'The current password is incorrect.';
+
+  @override
+  String get authPasswordChangeWeakPassword =>
+      'The new password must be at least 16 characters.';
+
+  @override
+  String get authPasswordChangeUnchanged =>
+      'The new password must differ from the current password.';
+
+  @override
+  String get settingsAccountSecuritySection => 'Account security';
+
+  @override
+  String get settingsChangePasswordAction => 'Change password';
+
+  @override
+  String get settingsChangePasswordTitle => 'Change account password';
+
+  @override
+  String get settingsChangePasswordBody =>
+      'Update your platform account password. This is separate from the local device PIN.';
+
+  @override
+  String get settingsCurrentPasswordLabel => 'Current password';
+
+  @override
+  String get settingsNewPasswordLabel => 'New password';
+
+  @override
+  String get settingsConfirmPasswordLabel => 'Confirm new password';
+
+  @override
+  String get settingsPasswordChangeSuccess =>
+      'Password updated. Sign in again with your new password.';
+
+  @override
+  String get settingsPasswordMinLengthValidation =>
+      'Password must be at least 16 characters.';
+
+  @override
+  String get settingsPasswordMismatchValidation => 'Passwords do not match.';
 
   @override
   String get authBackendNotConfigured =>

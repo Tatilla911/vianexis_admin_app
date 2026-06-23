@@ -83,6 +83,28 @@ class AdminAuthRepository {
     await _tokenStorage.clear();
   }
 
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    _ensureConfigured();
+    try {
+      await _authApi.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+    } on ApiException {
+      rethrow;
+    } catch (_) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.errorGenericBody,
+        kind: ApiExceptionKind.unknown,
+      );
+    } finally {
+      await _tokenStorage.clear();
+    }
+  }
+
   void _ensureConfigured() {
     if (!_apiClient.isConfigured) {
       throw const ApiException(

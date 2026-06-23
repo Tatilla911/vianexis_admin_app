@@ -21,6 +21,18 @@ String resolveLocalizationKey(BuildContext context, String key) {
     LocalizationKeys.authRequiredField => l10n.authRequiredField,
     LocalizationKeys.authShowPassword => l10n.authShowPassword,
     LocalizationKeys.authHidePassword => l10n.authHidePassword,
+    LocalizationKeys.authPasswordChangeInvalidCurrent =>
+      l10n.authPasswordChangeInvalidCurrent,
+    LocalizationKeys.authPasswordChangeWeakPassword =>
+      l10n.authPasswordChangeWeakPassword,
+    LocalizationKeys.authPasswordChangeUnchanged =>
+      l10n.authPasswordChangeUnchanged,
+    LocalizationKeys.settingsPasswordChangeSuccess =>
+      l10n.settingsPasswordChangeSuccess,
+    LocalizationKeys.settingsPasswordMinLengthValidation =>
+      l10n.settingsPasswordMinLengthValidation,
+    LocalizationKeys.settingsPasswordMismatchValidation =>
+      l10n.settingsPasswordMismatchValidation,
     LocalizationKeys.errorGenericBody => l10n.errorGenericBody,
     LocalizationKeys.roleSuperAdmin => l10n.roleSuperAdmin,
     LocalizationKeys.roleSupportAdmin => l10n.roleSupportAdmin,

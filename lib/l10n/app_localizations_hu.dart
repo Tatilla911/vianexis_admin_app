@@ -91,7 +91,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get authLogout => 'Kijelentkezés';
 
   @override
-  String get authInvalidCredentials => 'Érvénytelen e-mail vagy jelszó.';
+  String get authInvalidCredentials => 'Hibás e-mail cím vagy jelszó.';
 
   @override
   String get authNetworkError =>
@@ -102,7 +102,52 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get authForbiddenRole =>
-      'Ez a fiók nem jogosult a platform admin alkalmazás használatára.';
+      'Ezzel a fiókkal nem lehet belépni az admin alkalmazásba.';
+
+  @override
+  String get authPasswordChangeInvalidCurrent =>
+      'A jelenlegi jelszó helytelen.';
+
+  @override
+  String get authPasswordChangeWeakPassword =>
+      'Az új jelszónak legalább 16 karakter hosszúnak kell lennie.';
+
+  @override
+  String get authPasswordChangeUnchanged =>
+      'Az új jelszó nem egyezhet a jelenlegivel.';
+
+  @override
+  String get settingsAccountSecuritySection => 'Fiók biztonsága';
+
+  @override
+  String get settingsChangePasswordAction => 'Jelszó módosítása';
+
+  @override
+  String get settingsChangePasswordTitle => 'Fiókjelszó módosítása';
+
+  @override
+  String get settingsChangePasswordBody =>
+      'Frissítse a platform fiók jelszavát. Ez különáll a helyi eszköz PIN-től.';
+
+  @override
+  String get settingsCurrentPasswordLabel => 'Jelenlegi jelszó';
+
+  @override
+  String get settingsNewPasswordLabel => 'Új jelszó';
+
+  @override
+  String get settingsConfirmPasswordLabel => 'Új jelszó megerősítése';
+
+  @override
+  String get settingsPasswordChangeSuccess =>
+      'A jelszó frissült. Jelentkezzen be újra az új jelszóval.';
+
+  @override
+  String get settingsPasswordMinLengthValidation =>
+      'A jelszónak legalább 16 karakter hosszúnak kell lennie.';
+
+  @override
+  String get settingsPasswordMismatchValidation => 'A jelszavak nem egyeznek.';
 
   @override
   String get authBackendNotConfigured =>

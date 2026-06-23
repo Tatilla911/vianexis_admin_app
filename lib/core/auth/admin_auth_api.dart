@@ -88,6 +88,19 @@ class AdminAuthApi {
     );
   }
 
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    await _apiClient.patch<void>(
+      '/auth/me/password',
+      data: {
+        'currentPassword': currentPassword,
+        'newPassword': newPassword,
+      },
+    );
+  }
+
   String? _readToken(
     Map<String, dynamic> json,
     String snakeCase,

@@ -15,6 +15,15 @@ abstract final class LocalizationKeys {
   static const authRequiredField = 'authRequiredField';
   static const authShowPassword = 'authShowPassword';
   static const authHidePassword = 'authHidePassword';
+  static const authPasswordChangeInvalidCurrent =
+      'authPasswordChangeInvalidCurrent';
+  static const authPasswordChangeWeakPassword = 'authPasswordChangeWeakPassword';
+  static const authPasswordChangeUnchanged = 'authPasswordChangeUnchanged';
+  static const settingsPasswordChangeSuccess = 'settingsPasswordChangeSuccess';
+  static const settingsPasswordMinLengthValidation =
+      'settingsPasswordMinLengthValidation';
+  static const settingsPasswordMismatchValidation =
+      'settingsPasswordMismatchValidation';
 
   static const loginBackendNotConfigured = 'authBackendNotConfigured';
   static const errorGenericBody = 'errorGenericBody';

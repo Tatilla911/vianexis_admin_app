@@ -331,6 +331,7 @@ void main() {
           ),
         ],
         child: MaterialApp(
+          locale: const Locale('en'),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: const AdminSettingsScreen(),
@@ -341,8 +342,15 @@ void main() {
 
     expect(find.text('admin@vianexis.hu'), findsOneWidget);
     expect(find.text('Super admin'), findsOneWidget);
-    expect(find.text('Not configured'), findsOneWidget);
-    expect(find.text('Local'), findsOneWidget);
+    expect(find.text('Account security'), findsOneWidget);
+    expect(find.text('Change password'), findsOneWidget);
+
+    await tester.scrollUntilVisible(
+      find.text('Device PIN'),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    expect(find.text('Device PIN'), findsOneWidget);
   });
 
   testWidgets('resolveApiException maps forbidden to permission denied title', (tester) async {

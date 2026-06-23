@@ -275,8 +275,86 @@ abstract class AppLocalizations {
   /// No description provided for @authForbiddenRole.
   ///
   /// In en, this message translates to:
-  /// **'This account is not authorized for the platform admin app.'**
+  /// **'This account cannot sign in to the admin app.'**
   String get authForbiddenRole;
+
+  /// No description provided for @authPasswordChangeInvalidCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'The current password is incorrect.'**
+  String get authPasswordChangeInvalidCurrent;
+
+  /// No description provided for @authPasswordChangeWeakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'The new password must be at least 16 characters.'**
+  String get authPasswordChangeWeakPassword;
+
+  /// No description provided for @authPasswordChangeUnchanged.
+  ///
+  /// In en, this message translates to:
+  /// **'The new password must differ from the current password.'**
+  String get authPasswordChangeUnchanged;
+
+  /// No description provided for @settingsAccountSecuritySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Account security'**
+  String get settingsAccountSecuritySection;
+
+  /// No description provided for @settingsChangePasswordAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get settingsChangePasswordAction;
+
+  /// No description provided for @settingsChangePasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change account password'**
+  String get settingsChangePasswordTitle;
+
+  /// No description provided for @settingsChangePasswordBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your platform account password. This is separate from the local device PIN.'**
+  String get settingsChangePasswordBody;
+
+  /// No description provided for @settingsCurrentPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current password'**
+  String get settingsCurrentPasswordLabel;
+
+  /// No description provided for @settingsNewPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get settingsNewPasswordLabel;
+
+  /// No description provided for @settingsConfirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm new password'**
+  String get settingsConfirmPasswordLabel;
+
+  /// No description provided for @settingsPasswordChangeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Password updated. Sign in again with your new password.'**
+  String get settingsPasswordChangeSuccess;
+
+  /// No description provided for @settingsPasswordMinLengthValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 16 characters.'**
+  String get settingsPasswordMinLengthValidation;
+
+  /// No description provided for @settingsPasswordMismatchValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match.'**
+  String get settingsPasswordMismatchValidation;
 
   /// No description provided for @authBackendNotConfigured.
   ///
