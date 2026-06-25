@@ -240,6 +240,11 @@ class _LinksSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final threadId = intake.linkedCustomerCommunicationThreadId;
+    final hasQuote = intake.linkedQuoteRequestId != null;
+    final hasPricing = intake.linkedPricingIntakeId != null;
+    final hasThread = threadId != null;
+    final hasAnyLink = hasThread || hasQuote || hasPricing;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -250,36 +255,81 @@ class _LinksSection extends StatelessWidget {
               resolvePublicIntakeKey(context, 'publicIntakeSectionLinks'),
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            if (threadId != null) ...[
+            if (!hasAnyLink) ...[
+              const SizedBox(height: 12),
+              Text(
+                resolvePublicIntakeKey(context, 'publicIntakeNoLinksTitle'),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
               const SizedBox(height: 8),
-              OutlinedButton.icon(
-                onPressed: () => context.push(
-                  AdminRoutes.customerCommunicationDetail(threadId),
-                ),
-                icon: const Icon(Icons.forum_outlined),
-                label: Text(
-                  resolvePublicIntakeKey(context, 'publicIntakeOpenThreadAction'),
-                ),
+              Text(
+                resolvePublicIntakeKey(context, 'publicIntakeNoLinksBody'),
+                style: Theme.of(context).textTheme.bodySmall,
               ),
+            ] else ...[
+              if (!hasThread) ...[
+                const SizedBox(height: 12),
+                Text(
+                  resolvePublicIntakeKey(
+                    context,
+                    'publicIntakeNoLinkedThreadTitle',
+                  ),
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  resolvePublicIntakeKey(
+                    context,
+                    'publicIntakeNoLinkedThreadBody',
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+              if (hasThread) ...[
+                const SizedBox(height: 8),
+                OutlinedButton.icon(
+                  onPressed: () => context.push(
+                    AdminRoutes.customerCommunicationDetail(threadId),
+                  ),
+                  icon: const Icon(Icons.forum_outlined),
+                  label: Text(
+                    resolvePublicIntakeKey(
+                      context,
+                      'publicIntakeOpenThreadAction',
+                    ),
+                  ),
+                ),
+              ],
+              if (hasQuote)
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(
+                    resolvePublicIntakeKey(context, 'publicIntakeLinkedQuote'),
+                  ),
+                  subtitle: Text(intake.linkedQuoteRequestId!),
+                  onTap: () => context.push(
+                    AdminRoutes.billingQuoteRequestDetail(
+                      intake.linkedQuoteRequestId!,
+                    ),
+                  ),
+                ),
+              if (hasPricing)
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(
+                    resolvePublicIntakeKey(
+                      context,
+                      'publicIntakeLinkedPricing',
+                    ),
+                  ),
+                  subtitle: Text(intake.linkedPricingIntakeId!),
+                  onTap: () => context.push(
+                    AdminRoutes.billingPricingIntakeDetail(
+                      intake.linkedPricingIntakeId!,
+                    ),
+                  ),
+                ),
             ],
-            if (intake.linkedQuoteRequestId != null)
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(resolvePublicIntakeKey(context, 'publicIntakeLinkedQuote')),
-                subtitle: Text(intake.linkedQuoteRequestId!),
-                onTap: () => context.push(
-                  AdminRoutes.billingQuoteRequestDetail(intake.linkedQuoteRequestId!),
-                ),
-              ),
-            if (intake.linkedPricingIntakeId != null)
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(resolvePublicIntakeKey(context, 'publicIntakeLinkedPricing')),
-                subtitle: Text(intake.linkedPricingIntakeId!),
-                onTap: () => context.push(
-                  AdminRoutes.billingPricingIntakeDetail(intake.linkedPricingIntakeId!),
-                ),
-              ),
             if (intake.createdAt != null)
               Padding(
                 padding: const EdgeInsets.only(top: 8),

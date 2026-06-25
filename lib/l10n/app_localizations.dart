@@ -6038,6 +6038,12 @@ abstract class AppLocalizations {
   /// **'Action center items are metadata-only summaries. Open linked modules for details.'**
   String get actionCenterPrivacyNotice;
 
+  /// No description provided for @actionCenterReadOnlyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Items reflect current system state. They clear when the underlying issue is resolved. Server dismiss is not available in this release.'**
+  String get actionCenterReadOnlyNotice;
+
   /// No description provided for @actionCenterSearchHint.
   ///
   /// In en, this message translates to:
@@ -6049,6 +6055,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No action items match your filters.'**
   String get actionCenterListEmpty;
+
+  /// No description provided for @actionCenterListEmptyDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'When registrations, support tickets, public intakes, or health events need attention, they appear here automatically.'**
+  String get actionCenterListEmptyDetail;
 
   /// No description provided for @actionCenterNeedsAttentionTitle.
   ///
@@ -7377,7 +7389,7 @@ abstract class AppLocalizations {
   /// No description provided for @customerCommunicationPdfReadyNotice.
   ///
   /// In en, this message translates to:
-  /// **'PDF evidence package is ready for authenticated download.'**
+  /// **'PDF evidence package is ready to share from this device.'**
   String get customerCommunicationPdfReadyNotice;
 
   /// No description provided for @customerCommunicationPdfFailedNotice.
@@ -7409,6 +7421,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not download the evidence PDF.'**
   String get customerCommunicationDownloadPdfFailed;
+
+  /// No description provided for @customerCommunicationSharePdfAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Share PDF'**
+  String get customerCommunicationSharePdfAction;
+
+  /// No description provided for @customerCommunicationSharePdfSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF ready to share. Use your device share sheet to open or save the file.'**
+  String get customerCommunicationSharePdfSuccess;
+
+  /// No description provided for @customerCommunicationSharePdfFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not share the evidence PDF.'**
+  String get customerCommunicationSharePdfFailed;
+
+  /// No description provided for @customerCommunicationSharePdfInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'The evidence PDF file is empty or invalid. Regenerate the package or try again.'**
+  String get customerCommunicationSharePdfInvalid;
+
+  /// No description provided for @customerCommunicationSharePdfUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing is not available on this device. Try again or use another device.'**
+  String get customerCommunicationSharePdfUnavailable;
+
+  /// No description provided for @customerCommunicationSharePdfNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF is not ready yet. Wait for generation to finish or regenerate the package.'**
+  String get customerCommunicationSharePdfNotReady;
 
   /// No description provided for @customerCommunicationGeneratedBy.
   ///
@@ -7907,6 +7955,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Public intakes'**
   String get publicIntakesTitle;
+
+  /// No description provided for @publicIntakeDashboardSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review website leads and quote requests. Also available under More.'**
+  String get publicIntakeDashboardSubtitle;
+
+  /// No description provided for @publicIntakeDashboardOpenAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Open public intakes'**
+  String get publicIntakeDashboardOpenAction;
+
+  /// No description provided for @publicIntakeModuleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Website leads, demo and quote requests'**
+  String get publicIntakeModuleDescription;
+
+  /// No description provided for @publicIntakeNoLinkedThreadTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No customer communication thread yet'**
+  String get publicIntakeNoLinkedThreadTitle;
+
+  /// No description provided for @publicIntakeNoLinkedThreadBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This intake is not linked to a customer communication thread. Review the intake details here; a thread may be created when backend workflow links it.'**
+  String get publicIntakeNoLinkedThreadBody;
+
+  /// No description provided for @publicIntakeNoLinksTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No linked records'**
+  String get publicIntakeNoLinksTitle;
+
+  /// No description provided for @publicIntakeNoLinksBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No communication thread, quote request, or pricing intake is linked to this submission yet.'**
+  String get publicIntakeNoLinksBody;
 
   /// No description provided for @publicIntakeDetailTitle.
   ///

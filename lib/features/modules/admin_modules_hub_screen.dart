@@ -62,6 +62,16 @@ class AdminModulesHubScreen extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
+                      if (module.description(context) != null) ...[
+                        const SizedBox(height: 6),
+                        Text(
+                          module.description(context)!,
+                          textAlign: TextAlign.center,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -89,14 +99,18 @@ class _ModuleTile {
     required this.route,
     required this.icon,
     required this.labelKey,
+    this.descriptionKey,
   });
 
   final AdminDestination destination;
   final String route;
   final IconData icon;
   final String Function(BuildContext context) labelKey;
+  final String? Function(BuildContext context)? descriptionKey;
 
   String label(BuildContext context) => labelKey(context);
+
+  String? description(BuildContext context) => descriptionKey?.call(context);
 }
 
 List<_ModuleTile> get _allModules => [
@@ -141,6 +155,7 @@ List<_ModuleTile> get _allModules => [
     route: AdminRoutes.publicIntakes,
     icon: Icons.public_outlined,
     labelKey: (c) => AppLocalizations.of(c).navPublicIntakes,
+    descriptionKey: (c) => AppLocalizations.of(c).publicIntakeModuleDescription,
   ),
   _ModuleTile(
     destination: AdminDestination.systemHealth,

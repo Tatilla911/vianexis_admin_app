@@ -3258,10 +3258,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'Action center items are metadata-only summaries. Open linked modules for details.';
 
   @override
+  String get actionCenterReadOnlyNotice =>
+      'Items reflect current system state. They clear when the underlying issue is resolved. Server dismiss is not available in this release.';
+
+  @override
   String get actionCenterSearchHint => 'Search action items';
 
   @override
   String get actionCenterListEmpty => 'No action items match your filters.';
+
+  @override
+  String get actionCenterListEmptyDetail =>
+      'When registrations, support tickets, public intakes, or health events need attention, they appear here automatically.';
 
   @override
   String get actionCenterNeedsAttentionTitle => 'Needs attention';
@@ -3991,7 +3999,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get customerCommunicationPdfReadyNotice =>
-      'PDF evidence package is ready for authenticated download.';
+      'PDF evidence package is ready to share from this device.';
 
   @override
   String get customerCommunicationPdfFailedNotice =>
@@ -4012,6 +4020,29 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get customerCommunicationDownloadPdfFailed =>
       'Could not download the evidence PDF.';
+
+  @override
+  String get customerCommunicationSharePdfAction => 'Share PDF';
+
+  @override
+  String get customerCommunicationSharePdfSuccess =>
+      'PDF ready to share. Use your device share sheet to open or save the file.';
+
+  @override
+  String get customerCommunicationSharePdfFailed =>
+      'Could not share the evidence PDF.';
+
+  @override
+  String get customerCommunicationSharePdfInvalid =>
+      'The evidence PDF file is empty or invalid. Regenerate the package or try again.';
+
+  @override
+  String get customerCommunicationSharePdfUnavailable =>
+      'Sharing is not available on this device. Try again or use another device.';
+
+  @override
+  String get customerCommunicationSharePdfNotReady =>
+      'PDF is not ready yet. Wait for generation to finish or regenerate the package.';
 
   @override
   String customerCommunicationGeneratedBy(String userId) {
@@ -4304,6 +4335,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publicIntakesTitle => 'Public intakes';
+
+  @override
+  String get publicIntakeDashboardSubtitle =>
+      'Review website leads and quote requests. Also available under More.';
+
+  @override
+  String get publicIntakeDashboardOpenAction => 'Open public intakes';
+
+  @override
+  String get publicIntakeModuleDescription =>
+      'Website leads, demo and quote requests';
+
+  @override
+  String get publicIntakeNoLinkedThreadTitle =>
+      'No customer communication thread yet';
+
+  @override
+  String get publicIntakeNoLinkedThreadBody =>
+      'This intake is not linked to a customer communication thread. Review the intake details here; a thread may be created when backend workflow links it.';
+
+  @override
+  String get publicIntakeNoLinksTitle => 'No linked records';
+
+  @override
+  String get publicIntakeNoLinksBody =>
+      'No communication thread, quote request, or pricing intake is linked to this submission yet.';
 
   @override
   String get publicIntakeDetailTitle => 'Public intake';

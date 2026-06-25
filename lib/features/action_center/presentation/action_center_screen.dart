@@ -50,101 +50,153 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
             MockDataBadge(label: resolveActionCenterKey(context, 'actionCenterMockDataBadge')),
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-            child: snapshotAsync.when(
-              loading: () => const LinearProgressIndicator(),
-              error: (_, _) => Text(resolveActionCenterKey(context, 'actionCenterLoadError')),
-              data: (snapshot) =>
-                  ActionCenterNeedsAttentionCard(snapshot: snapshot, compact: true),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.search),
-                hintText: resolveActionCenterKey(context, 'actionCenterSearchHint'),
-              ),
-              onChanged: (value) =>
-                  ref.read(actionCenterListQueryProvider.notifier).setSearch(value),
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: ActionCenterFilter.values.map((filter) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: FilterChip(
-                    label: Text(resolveActionCenterKey(context, filter.localizationKey())),
-                    selected: query.filter == filter,
-                    onSelected: (_) =>
-                        ref.read(actionCenterListQueryProvider.notifier).setFilter(filter),
-                  ),
-                );
-              }).toList(growable: false),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: Column(
-              children: [
-                Expanded(
-                  child: itemsAsync.when(
-                    loading: () => const VianexisLoadingView(),
-                    error: (error, _) => VianexisErrorView.fromError(
-                      context,
-                      error,
-                      fallbackMessage:
-                          resolveActionCenterKey(context, 'actionCenterLoadError'),
-                      onRetry: () => ref.read(actionCenterProvider.notifier).refresh(),
+      body: itemsAsync.when(
+        loading: () => const VianexisLoadingView(),
+        error: (error, _) => VianexisErrorView.fromError(
+          context,
+          error,
+          fallbackMessage: resolveActionCenterKey(context, 'actionCenterLoadError'),
+          onRetry: () => ref.read(actionCenterProvider.notifier).refresh(),
+        ),
+        data: (items) {
+          return RefreshIndicator(
+            onRefresh: () => ref.read(actionCenterProvider.notifier).refresh(),
+            child: CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                    child: VianexisMetadataNotice(
+                      message: resolveActionCenterKey(
+                        context,
+                        'actionCenterReadOnlyNotice',
+                      ),
                     ),
-                    data: (items) {
-                      if (items.isEmpty) {
-                        return Center(
-                          child: Text(
-                            resolveActionCenterKey(context, 'actionCenterListEmpty'),
-                          ),
-                        );
-                      }
-                      return RefreshIndicator(
-                        onRefresh: () => ref.read(actionCenterProvider.notifier).refresh(),
-                        child: ListView.builder(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-                          itemCount: items.length,
-                          itemBuilder: (context, index) {
-                            final item = items[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: ActionCenterItemCard(
-                                item: item,
-                                onTap: () => _openItem(item.actionRouteHint),
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  child: VianexisMetadataNotice(
-                    message: resolveActionCenterKey(
-                      context,
-                      'actionCenterPrivacyNotice',
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                    child: snapshotAsync.when(
+                      loading: () => const LinearProgressIndicator(),
+                      error: (_, _) =>
+                          Text(resolveActionCenterKey(context, 'actionCenterLoadError')),
+                      data: (snapshot) => ActionCenterNeedsAttentionCard(
+                        snapshot: snapshot,
+                        compact: true,
+                      ),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        hintText: resolveActionCenterKey(
+                          context,
+                          'actionCenterSearchHint',
+                        ),
+                      ),
+                      onChanged: (value) => ref
+                          .read(actionCenterListQueryProvider.notifier)
+                          .setSearch(value),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: ActionCenterFilter.values.map((filter) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: FilterChip(
+                            label: Text(
+                              resolveActionCenterKey(
+                                context,
+                                filter.localizationKey(),
+                              ),
+                            ),
+                            selected: query.filter == filter,
+                            onSelected: (_) => ref
+                                .read(actionCenterListQueryProvider.notifier)
+                                .setFilter(filter),
+                          ),
+                        );
+                      }).toList(growable: false),
+                    ),
+                  ),
+                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 8)),
+                if (items.isEmpty)
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              resolveActionCenterKey(
+                                context,
+                                'actionCenterListEmpty',
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              resolveActionCenterKey(
+                                context,
+                                'actionCenterListEmptyDetail',
+                              ),
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                else
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final item = items[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: ActionCenterItemCard(
+                              item: item,
+                              onTap: () => _openItem(item.actionRouteHint),
+                            ),
+                          );
+                        },
+                        childCount: items.length,
+                      ),
+                    ),
+                  ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    child: VianexisMetadataNotice(
+                      message: resolveActionCenterKey(
+                        context,
+                        'actionCenterPrivacyNotice',
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

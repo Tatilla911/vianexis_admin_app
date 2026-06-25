@@ -3306,10 +3306,18 @@ class AppLocalizationsHu extends AppLocalizations {
       'A teendők metaadat-only összefoglalók. A részletekért nyissa meg a kapcsolt modulokat.';
 
   @override
+  String get actionCenterReadOnlyNotice =>
+      'A tételek a rendszer aktuális állapotát tükrözik. A mögöttes ügy megoldásakor eltűnnek. Szerver oldali elvetés ebben a kiadásban nem érhető el.';
+
+  @override
   String get actionCenterSearchHint => 'Teendők keresése';
 
   @override
   String get actionCenterListEmpty => 'Nincs a szűrőnek megfelelő teendő.';
+
+  @override
+  String get actionCenterListEmptyDetail =>
+      'Ha regisztrációk, support jegyek, publikus megkeresések vagy állapot események figyelmet igényelnek, itt jelennek meg automatikusan.';
 
   @override
   String get actionCenterNeedsAttentionTitle => 'Figyelmet igényel';
@@ -4046,7 +4054,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get customerCommunicationPdfReadyNotice =>
-      'A PDF bizonyitek csomag keszen all hitelesitett letoltesre.';
+      'A PDF bizonyitek csomag keszen all megosztasra ezen az eszkozon.';
 
   @override
   String get customerCommunicationPdfFailedNotice =>
@@ -4067,6 +4075,29 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get customerCommunicationDownloadPdfFailed =>
       'A bizonyitek PDF letoltese sikertelen.';
+
+  @override
+  String get customerCommunicationSharePdfAction => 'PDF megosztasa';
+
+  @override
+  String get customerCommunicationSharePdfSuccess =>
+      'A PDF megosztható. Használja az eszköz megosztási menüjét a megnyitáshoz vagy mentéshez.';
+
+  @override
+  String get customerCommunicationSharePdfFailed =>
+      'A bizonyitek PDF megosztasa sikertelen.';
+
+  @override
+  String get customerCommunicationSharePdfInvalid =>
+      'A bizonyitek PDF ures vagy hibas. Generalja ujra a csomagot, vagy probalja meg ujra.';
+
+  @override
+  String get customerCommunicationSharePdfUnavailable =>
+      'A megosztas nem erheto el ezen az eszkozon. Probalkozzon ujra vagy hasznaljon masik eszkozt.';
+
+  @override
+  String get customerCommunicationSharePdfNotReady =>
+      'A PDF meg nem all keszen. Varjon a generalasra, vagy generalja ujra a csomagot.';
 
   @override
   String customerCommunicationGeneratedBy(String userId) {
@@ -4363,6 +4394,33 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get publicIntakesTitle => 'Publikus megkeresések';
+
+  @override
+  String get publicIntakeDashboardSubtitle =>
+      'Webes érdeklődések és árajánlat-kérések. Elérhető a Továbbiak menüben is.';
+
+  @override
+  String get publicIntakeDashboardOpenAction =>
+      'Publikus megkeresések megnyitása';
+
+  @override
+  String get publicIntakeModuleDescription =>
+      'Webes érdeklődések, demo és árajánlat-kérések';
+
+  @override
+  String get publicIntakeNoLinkedThreadTitle =>
+      'Még nincs ügyfélkommunikációs szál';
+
+  @override
+  String get publicIntakeNoLinkedThreadBody =>
+      'Ez a megkeresés nincs ügyfélkommunikációs szálhoz kapcsolva. Itt tekintheti át a részleteket; a szál a háttér folyamat kapcsolásakor jelenhet meg.';
+
+  @override
+  String get publicIntakeNoLinksTitle => 'Nincs kapcsolt rekord';
+
+  @override
+  String get publicIntakeNoLinksBody =>
+      'Ehhez a beküldéshez még nincs kommunikációs szál, árajánlat- vagy díjazási kérelem kapcsolva.';
 
   @override
   String get publicIntakeDetailTitle => 'Publikus megkeresés';

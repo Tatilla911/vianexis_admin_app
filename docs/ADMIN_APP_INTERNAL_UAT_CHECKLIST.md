@@ -39,7 +39,7 @@ Human acceptance testing for the first internal staging APK. Test on a **non-pro
 - [ ] Outbound messages show delivery status badge (skipped/sent/failed)
 - [ ] Generate evidence package requires reason (≥5 chars)
 - [ ] PDF ready status shown after generation (`pdfReady` / download path)
-- [ ] Download PDF button visible when ready; pending/failed states shown otherwise
+- [ ] **Share PDF** opens device share sheet when ready; pending/failed states shown otherwise
 - [ ] File hash displayed; structured summaryJson still visible
 - [ ] “Generated from ViaNexis audit records” notice visible before download
 

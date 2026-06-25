@@ -16,7 +16,7 @@
 | Check | Command | Result |
 |-------|---------|--------|
 | Analyzer | `flutter analyze` | **No issues** |
-| Unit/widget tests | `flutter test` | **308/308 passed** |
+| Unit/widget tests | `flutter test` | **317/317 passed** (post UAT polish) |
 | Release readiness | `dart run tool/admin_release_readiness_check.dart` | **OK** |
 | Staging build check | `dart run tool/admin_staging_build_check.dart` | **OK** |
 | App smoke (static) | `dart run tool/admin_app_smoke_check.dart` | **OK** |
@@ -84,15 +84,25 @@ Companies · Billing · Bulk onboarding · AI reviews · Support tickets · Supp
 
 ## 5. Known staging / UAT blockers
 
-| # | Blocker | Severity | Notes |
-|---|---------|----------|-------|
-| 1 | **Evidence PDF “download” copies base64 to clipboard** | **High** | `evidence_package_detail_screen.dart` — UAT expects PDF to open; operators get clipboard + byte count snackbar only |
-| 2 | **Staging backend not verified from this machine** | **High** | UAT requires deployed Render API + `smoke:platform-admin:prod`; blocks real end-to-end sign-off |
-| 3 | **Public intakes not in primary bottom nav** | **Medium** | UAT runbook lists public intakes in “core navigation” but phone users must open **More** — discoverability risk |
-| 4 | **Mock fallback if `API_BASE_URL` missing** | **Medium** | Staging build must use release APK + defines; DEBUG `flutter run` shows debug banner and may confuse sign-off |
-| 5 | **Action Center items cannot be dismissed** | **Low** | Documented in production readiness; operators may expect ack/dismiss |
-| 6 | **No FCM/APNS push** | **Low** | Release Center shows push not configured — expected for staging |
-| 7 | **`artifacts/` untracked locally** | **Low** | APK output discipline; use `tool/prepare_staging_apk_artifact.dart` |
+| # | Blocker | Severity | Status (post polish) |
+|---|---------|----------|----------------------|
+| 1 | **Evidence PDF clipboard copy** | **High** | **Fixed** — Share PDF via temp file + platform share sheet (`share_plus`) |
+| 2 | **Staging backend not verified from dev machine** | **High** | **Open** — operator UAT on Render still required |
+| 3 | **Public intakes discoverability** | **Medium** | **Improved** — dashboard quick action + More hub description |
+| 4 | **Mock fallback if `API_BASE_URL` missing** | **Medium** | **Open** — release APK discipline |
+| 5 | **Action Center dismiss persistence** | **Low** | **Clarified** — read-only notice; no server dismiss API |
+| 6 | **No FCM/APNS push** | **Low** | Expected for staging |
+| 7 | **`artifacts/` untracked locally** | **Low** | Local build output only |
+
+---
+
+## 5b. Implemented in UAT polish package (pending commit)
+
+- Evidence PDF: `EvidencePdfShareService` + `EvidencePdfBytes` validation; button **Share PDF**
+- Public intake: dashboard filled quick action; More hub module description; no-linked-thread / no-links cards
+- Action Center: read-only aggregate notice; richer empty state
+- Localization: HU + EN for all new strings
+- Dependencies added: `path_provider`, `share_plus` (PDF share only)
 
 ---
 
@@ -100,7 +110,7 @@ Companies · Billing · Bulk onboarding · AI reviews · Support tickets · Supp
 
 | Area | Issue |
 |------|--------|
-| **Evidence PDF** | Button labeled download but behavior is clipboard copy — mismatch with UAT wording “opens successfully” |
+| **Evidence PDF** | ~~Button labeled download but clipboard~~ → **Share PDF** opens platform share sheet |
 | **Public intakes vs communications** | Two related workflows; only communications on bottom nav; thread link on intake detail only when backend links thread |
 | **Translation panel** | Provider-disabled state correct but easy to misread as broken feature |
 | **Mock data badge** | Good safety signal — but operators must confirm **absent** on staging dashboard before UAT |

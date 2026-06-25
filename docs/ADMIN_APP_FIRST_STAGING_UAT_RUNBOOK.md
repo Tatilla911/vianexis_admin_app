@@ -33,9 +33,7 @@ Use after Render backend deploy and APK build. Master checklist: `transdoc-backe
 
 - [ ] Bottom nav on phone shows **max 5 items** (Dashboard, Action Center, Registrations, Communications, More)
 - [ ] Secondary modules reachable via **Továbbiak / More**
-- [ ] Dashboard
-- [ ] Action Center
-- [ ] Public intakes (list + detail)
+- [ ] **Public intakes** quick action on dashboard + tile under More (with description)
 - [ ] Customer communications
 - [ ] Billing overview
 - [ ] Release Center
@@ -47,7 +45,7 @@ Use after Render backend deploy and APK build. Master checklist: `transdoc-backe
 - [ ] Open thread linked from public intake (if available)
 - [ ] Send reply — **noop** email provider; delivery skipped logged
 - [ ] Generate evidence PDF
-- [ ] Download PDF opens successfully
+- [ ] **Share PDF** opens device share sheet (save/open with another app) — not clipboard copy
 
 ## Translation panel (provider disabled)
 

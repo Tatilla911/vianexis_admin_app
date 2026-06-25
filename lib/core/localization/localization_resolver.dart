@@ -213,6 +213,14 @@ String resolvePublicIntakeKey(
       l10n.publicIntakeDashboardNew(params['count'] ?? '0'),
     'publicIntakeDashboardHighPriority' =>
       l10n.publicIntakeDashboardHighPriority(params['count'] ?? '0'),
+    'publicIntakesTitle' => l10n.publicIntakesTitle,
+    'publicIntakeDashboardSubtitle' => l10n.publicIntakeDashboardSubtitle,
+    'publicIntakeDashboardOpenAction' => l10n.publicIntakeDashboardOpenAction,
+    'publicIntakeModuleDescription' => l10n.publicIntakeModuleDescription,
+    'publicIntakeNoLinkedThreadTitle' => l10n.publicIntakeNoLinkedThreadTitle,
+    'publicIntakeNoLinkedThreadBody' => l10n.publicIntakeNoLinkedThreadBody,
+    'publicIntakeNoLinksTitle' => l10n.publicIntakeNoLinksTitle,
+    'publicIntakeNoLinksBody' => l10n.publicIntakeNoLinksBody,
     _ => l10n.errorGenericBody,
   };
 }
@@ -1391,8 +1399,10 @@ String resolveActionCenterKey(
     'actionCenterMockDataBadge' => l10n.actionCenterMockDataBadge,
     'actionCenterOpenModule' => l10n.actionCenterOpenModule,
     'actionCenterPrivacyNotice' => l10n.actionCenterPrivacyNotice,
+    'actionCenterReadOnlyNotice' => l10n.actionCenterReadOnlyNotice,
     'actionCenterSearchHint' => l10n.actionCenterSearchHint,
     'actionCenterListEmpty' => l10n.actionCenterListEmpty,
+    'actionCenterListEmptyDetail' => l10n.actionCenterListEmptyDetail,
     'actionCenterNeedsAttentionTitle' => l10n.actionCenterNeedsAttentionTitle,
     'actionCenterNeedsAttentionOpen' => l10n.actionCenterNeedsAttentionOpen(
       params['count'] ?? '0',
@@ -1554,6 +1564,17 @@ String resolveCustomerCommunicationsKey(
       l10n.customerCommunicationDownloadPdfSuccess(params['bytes'] ?? '0'),
     'customerCommunicationDownloadPdfFailed' =>
       l10n.customerCommunicationDownloadPdfFailed,
+    'customerCommunicationSharePdfAction' => l10n.customerCommunicationSharePdfAction,
+    'customerCommunicationSharePdfSuccess' =>
+      l10n.customerCommunicationSharePdfSuccess,
+    'customerCommunicationSharePdfFailed' =>
+      l10n.customerCommunicationSharePdfFailed,
+    'customerCommunicationSharePdfInvalid' =>
+      l10n.customerCommunicationSharePdfInvalid,
+    'customerCommunicationSharePdfUnavailable' =>
+      l10n.customerCommunicationSharePdfUnavailable,
+    'customerCommunicationSharePdfNotReady' =>
+      l10n.customerCommunicationSharePdfNotReady,
     'customerCommunicationGeneratedBy' =>
       l10n.customerCommunicationGeneratedBy(params['userId'] ?? ''),
     'customerCommunicationSendReplyTitle' =>

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -13,6 +12,8 @@ import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/customer_evidence_package.dart';
 import '../data/customer_communications_repository.dart';
+import '../services/evidence_pdf_bytes.dart';
+import '../services/evidence_pdf_share_service.dart';
 import 'customer_communications_providers.dart';
 
 class EvidencePackageDetailScreen extends ConsumerStatefulWidget {
@@ -32,11 +33,13 @@ class EvidencePackageDetailScreen extends ConsumerStatefulWidget {
 
 class _EvidencePackageDetailScreenState
     extends ConsumerState<EvidencePackageDetailScreen> {
-  bool _downloading = false;
+  static const _shareService = EvidencePdfShareService();
 
-  Future<void> _downloadPdf(CustomerEvidencePackage pkg) async {
-    if (!pkg.canDownload || _downloading) return;
-    setState(() => _downloading = true);
+  bool _sharing = false;
+
+  Future<void> _sharePdf(CustomerEvidencePackage pkg) async {
+    if (!pkg.canDownload || _sharing) return;
+    setState(() => _sharing = true);
     try {
       final bytes = await ref
           .read(customerCommunicationsRepositoryProvider)
@@ -44,23 +47,54 @@ class _EvidencePackageDetailScreenState
             threadId: widget.threadId,
             packageId: widget.packageId,
           );
-      if (bytes.length >= 4 &&
-          String.fromCharCodes(bytes.take(4)) == '%PDF') {
-        await Clipboard.setData(
-          ClipboardData(text: base64Encode(bytes)),
+      if (!mounted) return;
+      if (!EvidencePdfBytes.isValidPdf(bytes)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              resolveCustomerCommunicationsKey(
+                context,
+                'customerCommunicationSharePdfInvalid',
+              ),
+            ),
+          ),
         );
+        return;
       }
+
+      final shareSubject = resolveCustomerCommunicationsKey(
+        context,
+        'customerCommunicationEvidencePackageTitle',
+      );
+
+      await _shareService.sharePdfBytes(
+        bytes: bytes,
+        packageId: widget.packageId,
+        shareSubject: shareSubject,
+      );
+
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             resolveCustomerCommunicationsKey(
               context,
-              'customerCommunicationDownloadPdfSuccess',
-              params: {'bytes': '${bytes.length}'},
+              'customerCommunicationSharePdfSuccess',
             ),
           ),
         ),
+      );
+    } on EvidencePdfShareFailure catch (failure) {
+      if (!mounted) return;
+      final key = switch (failure) {
+        EvidencePdfShareFailure.empty ||
+        EvidencePdfShareFailure.invalid =>
+          'customerCommunicationSharePdfInvalid',
+        EvidencePdfShareFailure.shareUnavailable =>
+          'customerCommunicationSharePdfUnavailable',
+      };
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(resolveCustomerCommunicationsKey(context, key))),
       );
     } on ApiException catch (error) {
       if (!mounted) return;
@@ -72,14 +106,14 @@ class _EvidencePackageDetailScreenState
           content: Text(
             resolveCustomerCommunicationsKey(
               context,
-              'customerCommunicationDownloadPdfFailed',
+              'customerCommunicationSharePdfFailed',
             ),
           ),
         ),
       );
     } finally {
       if (mounted) {
-        setState(() => _downloading = false);
+        setState(() => _sharing = false);
       }
     }
   }
@@ -267,20 +301,29 @@ class _EvidencePackageDetailScreenState
                 ),
                 const SizedBox(height: 8),
                 FilledButton.icon(
-                  onPressed: _downloading ? null : () => _downloadPdf(pkg!),
-                  icon: _downloading
+                  onPressed: _sharing ? null : () => _sharePdf(pkg!),
+                  icon: _sharing
                       ? const SizedBox(
                           width: 18,
                           height: 18,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Icon(Icons.download_outlined),
+                      : const Icon(Icons.ios_share_outlined),
                   label: Text(
                     resolveCustomerCommunicationsKey(
                       context,
-                      'customerCommunicationDownloadPdfAction',
+                      'customerCommunicationSharePdfAction',
                     ),
                   ),
+                ),
+              ] else if (pkg.isPdfPending) ...[
+                const SizedBox(height: 8),
+                Text(
+                  resolveCustomerCommunicationsKey(
+                    context,
+                    'customerCommunicationSharePdfNotReady',
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
               const SizedBox(height: 16),

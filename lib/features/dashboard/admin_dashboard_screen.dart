@@ -206,11 +206,33 @@ class AdminDashboardScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            resolvePublicIntakeKey(context, 'publicIntakesTitle'),
-                            style: Theme.of(context).textTheme.titleMedium,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.public_outlined,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  resolvePublicIntakeKey(
+                                    context,
+                                    'publicIntakesTitle',
+                                  ),
+                                  style: Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 8),
+                          Text(
+                            resolvePublicIntakeKey(
+                              context,
+                              'publicIntakeDashboardSubtitle',
+                            ),
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          const SizedBox(height: 12),
                           Text(
                             resolvePublicIntakeKey(
                               context,
@@ -230,9 +252,15 @@ class AdminDashboardScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  OutlinedButton(
+                  FilledButton.icon(
                     onPressed: () => context.go(AdminRoutes.publicIntakes),
-                    child: Text(resolvePublicIntakeKey(context, 'publicIntakesTitle')),
+                    icon: const Icon(Icons.public_outlined),
+                    label: Text(
+                      resolvePublicIntakeKey(
+                        context,
+                        'publicIntakeDashboardOpenAction',
+                      ),
+                    ),
                   ),
                 ],
               ),
