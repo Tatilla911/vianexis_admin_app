@@ -351,6 +351,8 @@ String resolveSupportKey(
     'supportActionUnavailable' => l10n.supportActionUnavailable,
     'supportActionError' => l10n.supportActionError,
     'supportActionSuccess' => l10n.supportActionSuccess,
+    'supportTicketAcknowledgedSuccess' => l10n.supportTicketAcknowledgedSuccess,
+    'supportTicketClosedSuccess' => l10n.supportTicketClosedSuccess,
     'supportMockDataBadge' => l10n.supportMockDataBadge,
     'supportOpenModule' => l10n.supportOpenModule,
     'supportPrivacyNotice' => l10n.supportPrivacyNotice,

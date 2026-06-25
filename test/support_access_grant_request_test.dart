@@ -42,7 +42,7 @@ void main() {
       expect(json['metadata'], containsPair('scopeId', '501'));
     });
 
-    test('revoke json includes note', () {
+    test('revoke json includes reason for backend contract', () {
       final request = SupportAccessGrantRequest(
         companyId: '12',
         scopeType: SupportAccessScopeType.companyMetadata,
@@ -51,7 +51,7 @@ void main() {
         type: SupportAccessGrantActionType.revoke,
       );
 
-      expect(request.toJson(), {'note': 'Investigation complete'});
+      expect(request.toJson(), {'reason': 'Investigation complete'});
       expect(request.endpointSuffix(), 'revoke');
       expect(request.httpMethod(), 'PATCH');
     });

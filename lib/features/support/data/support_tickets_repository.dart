@@ -90,18 +90,7 @@ class LiveSupportTicketsRepository implements SupportTicketsRepository {
     }
 
     final updated = await fetchTicket(ticketId);
-    return switch (request.type) {
-      SupportTicketActionType.acknowledge => updated.copyWith(
-        status: SupportTicketStatus.acknowledged,
-        lastActivityAt: DateTime.now().toUtc(),
-        updatedAt: DateTime.now().toUtc(),
-      ),
-      SupportTicketActionType.close => updated.copyWith(
-        status: SupportTicketStatus.closed,
-        lastActivityAt: DateTime.now().toUtc(),
-        updatedAt: DateTime.now().toUtc(),
-      ),
-    };
+    return updated;
   }
 
   @override

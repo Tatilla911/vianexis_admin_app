@@ -73,7 +73,7 @@ class SupportAccessGrantRequest {
         },
       },
       SupportAccessGrantActionType.revoke => {
-        'note': reason.trim(),
+        'reason': reason.trim(),
       },
     };
   }

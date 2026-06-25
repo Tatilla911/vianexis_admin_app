@@ -69,8 +69,8 @@ Companies · Billing · Bulk onboarding · AI reviews · Support tickets · Supp
 | **Action Center** | `/action-center` | Deep-links via `actionRouteHint`; **no dismiss/ack persist** (read-model) |
 | **Registrations** | `/registrations` | Approve/reject flows; invite depends on backend email |
 | **Companies** | `/companies` | Metadata summaries |
-| **Support tickets** | `/support/tickets` | Acknowledge + close; grant create from ticket |
-| **Support grants** | `/support/grants` | Revoke with reason dialog |
+| **Support tickets** | `/support/tickets` | Live detail + acknowledge + close via platform-admin PATCH; investigating maps from backend `in_progress` |
+| **Support grants** | `/support/grants` | Live detail + revoke (`reason` field); metadata-only display |
 | **Customer communications** | `/customer-communications` | Reply, delivery history, evidence PDF — **see blockers** |
 | **Public intakes** | `/public-intakes` | Status change, translation panel, link to comm thread when `linkedCustomerCommunicationThreadId` set |
 | **Billing** | `/billing` | Plans, pricing intakes, quote requests — metadata/status only |

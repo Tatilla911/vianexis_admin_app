@@ -43,6 +43,18 @@ Human acceptance testing for the first internal staging APK. Test on a **non-pro
 - [ ] File hash displayed; structured summaryJson still visible
 - [ ] “Generated from ViaNexis audit records” notice visible before download
 
+## Support tickets and access grants
+
+- [ ] Support tickets list opens (`/support/tickets`)
+- [ ] Ticket detail loads from live API (metadata summary only)
+- [ ] Acknowledge ticket succeeds; status shows investigating
+- [ ] Close ticket requires note and succeeds
+- [ ] Create grant from ticket detail (scoped metadata access)
+- [ ] Support grants list opens (`/support/grants`)
+- [ ] Grant detail loads; revoked/expired status clear after revoke
+- [ ] Revoke grant requires reason (≥3 chars) and succeeds
+- [ ] No document content or message bodies in support screens
+
 ## Readiness status cards (Release Center / Settings)
 
 - [ ] Email delivery status — provider noop, delivery disabled, metadata-only notice

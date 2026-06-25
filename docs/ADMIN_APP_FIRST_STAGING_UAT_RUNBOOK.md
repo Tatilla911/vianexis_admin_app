@@ -52,6 +52,17 @@ Use after Render backend deploy and APK build. Master checklist: `transdoc-backe
 - [ ] Public intake detail shows provider disabled state
 - [ ] No auto-send of translated replies
 
+## Support operations UAT
+
+- [ ] Open support ticket detail from list (live `GET /platform-admin/support-tickets/:id`)
+- [ ] Acknowledge ticket — status moves to investigating (`in_progress` on backend)
+- [ ] Close ticket — required note; status becomes closed
+- [ ] Create support access grant from ticket detail (metadata-only scope)
+- [ ] Open grant detail (live `GET /platform-admin/support-access-grants/:id`)
+- [ ] Revoke grant with reason — grant remains visible as revoked
+- [ ] Privacy notice visible; no document/message body fields in UI
+- [ ] Roles: `support_admin` / `super_admin` only; others see permission denied
+
 ## Release / observability
 
 - [ ] Release Center shows email noop, push none

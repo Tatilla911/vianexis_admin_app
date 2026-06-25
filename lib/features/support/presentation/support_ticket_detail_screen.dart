@@ -68,8 +68,12 @@ class SupportTicketDetailScreen extends ConsumerWidget {
         request: request,
       );
       if (!context.mounted) return;
+      final successKey = switch (type) {
+        SupportTicketActionType.acknowledge => 'supportTicketAcknowledgedSuccess',
+        SupportTicketActionType.close => 'supportTicketClosedSuccess',
+      };
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveSupportKey(context, 'supportActionSuccess'))),
+        SnackBar(content: Text(resolveSupportKey(context, successKey))),
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;

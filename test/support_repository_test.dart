@@ -26,8 +26,10 @@ void main() {
     late ApiClient apiClient;
     late SupportApi api;
     late LiveSupportTicketsRepository repository;
+    var ticketStatus = 'open';
 
     setUp(() {
+      ticketStatus = 'open';
       dio = Dio(BaseOptions(baseUrl: 'https://api.test.local'));
       apiClient = ApiClient(
         tokenStorage: AuthTokenStorage(),
@@ -72,7 +74,7 @@ void main() {
                       'id': 801,
                       'subject': 'Upload queue stalled',
                       'descriptionSummary': 'Metadata only',
-                      'status': 'acknowledged',
+                      'status': ticketStatus,
                       'priority': 'urgent',
                     },
                   },
@@ -82,6 +84,7 @@ void main() {
             }
 
             if (options.path.endsWith('/acknowledge')) {
+              ticketStatus = 'in_progress';
               handler.resolve(
                 Response<Map<String, dynamic>>(
                   requestOptions: options,
@@ -93,6 +96,7 @@ void main() {
             }
 
             if (options.path.endsWith('/close')) {
+              ticketStatus = 'closed';
               handler.resolve(
                 Response<Map<String, dynamic>>(
                   requestOptions: options,
@@ -138,7 +142,7 @@ void main() {
           type: SupportTicketActionType.acknowledge,
         ),
       );
-      expect(updated.status, SupportTicketStatus.acknowledged);
+      expect(updated.status, SupportTicketStatus.investigating);
     });
     test('submitAction close updates status', () async {
       await repository.fetchTickets();
@@ -158,8 +162,10 @@ void main() {
     late ApiClient apiClient;
     late SupportApi api;
     late LiveSupportAccessGrantsRepository repository;
+    Map<String, dynamic>? lastRevokeBody;
 
     setUp(() {
+      lastRevokeBody = null;
       dio = Dio(BaseOptions(baseUrl: 'https://api.test.local'));
       apiClient = ApiClient(
         tokenStorage: AuthTokenStorage(),
@@ -218,6 +224,9 @@ void main() {
             }
 
             if (options.path.endsWith('/revoke')) {
+              lastRevokeBody = options.data is Map<String, dynamic>
+                  ? options.data as Map<String, dynamic>
+                  : null;
               handler.resolve(
                 Response<Map<String, dynamic>>(
                   requestOptions: options,
@@ -265,6 +274,8 @@ void main() {
         ),
       );
       expect(revoked.status, SupportAccessGrantStatus.revoked);
+      expect(lastRevokeBody?['reason'], 'Investigation complete');
+      expect(lastRevokeBody?.containsKey('note'), isFalse);
     });
   });
 
