@@ -8340,6 +8340,12 @@ abstract class AppLocalizations {
   /// **'Reason is required when closing or rejecting.'**
   String get publicIntakeReasonRequired;
 
+  /// No description provided for @publicIntakeReasonMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least 5 characters.'**
+  String get publicIntakeReasonMinLength;
+
   /// No description provided for @publicIntakeCancel.
   ///
   /// In en, this message translates to:

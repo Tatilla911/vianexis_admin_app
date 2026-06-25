@@ -4546,6 +4546,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Reason is required when closing or rejecting.';
 
   @override
+  String get publicIntakeReasonMinLength => 'Enter at least 5 characters.';
+
+  @override
   String get publicIntakeCancel => 'Cancel';
 
   @override

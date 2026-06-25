@@ -103,11 +103,14 @@ class _PublicIntakeStatusDialogState extends State<_PublicIntakeStatusDialog> {
         FilledButton(
           onPressed: () {
             final reason = _reasonController.text.trim();
-            if (_status.requiresReasonOnClose && reason.length < 3) {
+            if (_status.requiresReasonOnClose && reason.length < 5) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    resolvePublicIntakeKey(context, 'publicIntakeReasonRequired'),
+                    resolvePublicIntakeKey(
+                      context,
+                      'publicIntakeReasonMinLength',
+                    ),
                   ),
                 ),
               );

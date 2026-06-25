@@ -53,6 +53,7 @@ Human acceptance testing for the first internal staging APK. Test on a **non-pro
 - [ ] Support grants list opens (`/support/grants`)
 - [ ] Grant detail loads; revoked/expired status clear after revoke
 - [ ] Revoke grant requires reason (≥3 chars) and succeeds
+- [ ] Public intake reject/close requires reason (≥5 chars) to match backend DTO
 - [ ] No document content or message bodies in support screens
 
 ## Readiness status cards (Release Center / Settings)

@@ -4609,6 +4609,9 @@ class AppLocalizationsHu extends AppLocalizations {
       'Elutasításnál vagy lezárásnál kötelező az indoklás.';
 
   @override
+  String get publicIntakeReasonMinLength => 'Legalább 5 karakter szükséges.';
+
+  @override
   String get publicIntakeCancel => 'Mégse';
 
   @override

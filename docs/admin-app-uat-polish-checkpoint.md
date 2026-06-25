@@ -69,8 +69,8 @@ Companies · Billing · Bulk onboarding · AI reviews · Support tickets · Supp
 | **Action Center** | `/action-center` | Deep-links via `actionRouteHint`; **no dismiss/ack persist** (read-model) |
 | **Registrations** | `/registrations` | Approve/reject flows; invite depends on backend email |
 | **Companies** | `/companies` | Metadata summaries |
-| **Support tickets** | `/support/tickets` | Live detail + acknowledge + close via platform-admin PATCH; investigating maps from backend `in_progress` |
-| **Support grants** | `/support/grants` | Live detail + revoke (`reason` field); metadata-only display |
+| **Support tickets** | `/support/tickets` | Live detail + acknowledge + close; revoke uses `reason` (not `note`); investigating maps from `in_progress` |
+| **Support grants** | `/support/grants` | Live detail + revoke; contract tests assert JSON field names |
 | **Customer communications** | `/customer-communications` | Reply, delivery history, evidence PDF — **see blockers** |
 | **Public intakes** | `/public-intakes` | Status change, translation panel, link to comm thread when `linkedCustomerCommunicationThreadId` set |
 | **Billing** | `/billing` | Plans, pricing intakes, quote requests — metadata/status only |
@@ -103,6 +103,15 @@ Companies · Billing · Bulk onboarding · AI reviews · Support tickets · Supp
 - Action Center: read-only aggregate notice; richer empty state
 - Localization: HU + EN for all new strings
 - Dependencies added: `path_provider`, `share_plus` (PDF share only)
+
+## 5c. Platform-admin contract hardening (post support ops)
+
+- Support grant revoke: admin sends `reason` (fixed from prior `note` mismatch)
+- Contract tests: `test/platform_support_request_contracts_test.dart` (support, customer comms, billing JSON)
+- Public intake status: admin UI min reason **5 chars** aligned with backend `UpdatePublicIntakeStatusDto`
+- Backend **Phase 9G** e2e: close/revoke validation 400s, repeat close/revoke 400, re-acknowledge idempotent 200, list/detail audit sensitive-field checks
+
+**Follow-ups:** public intake link/translate endpoints not wired; list `offset`/server filters client-side only; live staging smoke with credentials.
 
 ---
 

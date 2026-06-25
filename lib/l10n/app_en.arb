@@ -1517,6 +1517,7 @@
   "publicIntakeStatusDialogTitle": "Update intake status",
   "publicIntakeReasonLabel": "Reason",
   "publicIntakeReasonRequired": "Reason is required when closing or rejecting.",
+  "publicIntakeReasonMinLength": "Enter at least 5 characters.",
   "publicIntakeCancel": "Cancel",
   "publicIntakeStatusConfirm": "Save status",
   "publicIntakeStatusSuccess": "Status updated.",

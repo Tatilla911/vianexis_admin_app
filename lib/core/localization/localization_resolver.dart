@@ -204,6 +204,7 @@ String resolvePublicIntakeKey(
     'publicIntakeStatusDialogTitle' => l10n.publicIntakeStatusDialogTitle,
     'publicIntakeReasonLabel' => l10n.publicIntakeReasonLabel,
     'publicIntakeReasonRequired' => l10n.publicIntakeReasonRequired,
+    'publicIntakeReasonMinLength' => l10n.publicIntakeReasonMinLength,
     'publicIntakeCancel' => l10n.publicIntakeCancel,
     'publicIntakeStatusConfirm' => l10n.publicIntakeStatusConfirm,
     'publicIntakeStatusSuccess' => l10n.publicIntakeStatusSuccess,
