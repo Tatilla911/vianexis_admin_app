@@ -38,7 +38,7 @@ void main() {
 
     expect(
       message,
-      'This account cannot sign in to the admin app.',
+      'You do not have permission to access this interface.',
     );
   });
 }

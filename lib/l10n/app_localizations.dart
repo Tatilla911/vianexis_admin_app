@@ -263,7 +263,7 @@ abstract class AppLocalizations {
   /// No description provided for @authNetworkError.
   ///
   /// In en, this message translates to:
-  /// **'Network error. Check your connection and try again.'**
+  /// **'Network error. Check your internet connection or staging API availability.'**
   String get authNetworkError;
 
   /// No description provided for @authServerError.
@@ -275,8 +275,14 @@ abstract class AppLocalizations {
   /// No description provided for @authForbiddenRole.
   ///
   /// In en, this message translates to:
-  /// **'This account cannot sign in to the admin app.'**
+  /// **'You do not have permission to access this interface.'**
   String get authForbiddenRole;
+
+  /// No description provided for @authLoginServiceUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'The sign-in service is not available in this environment.'**
+  String get authLoginServiceUnavailable;
 
   /// No description provided for @authPasswordChangeInvalidCurrent.
   ///

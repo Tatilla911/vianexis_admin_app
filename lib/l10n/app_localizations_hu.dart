@@ -95,14 +95,18 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get authNetworkError =>
-      'Hálózati hiba. Ellenőrizze a kapcsolatot, majd próbálja újra.';
+      'Hálózati hiba. Ellenőrizd az internetkapcsolatot vagy a staging API elérhetőségét.';
 
   @override
   String get authServerError => 'Szerverhiba. Próbálja újra később.';
 
   @override
   String get authForbiddenRole =>
-      'Ezzel a fiókkal nem lehet belépni az admin alkalmazásba.';
+      'Ehhez a felülethez nincs megfelelő jogosultságod.';
+
+  @override
+  String get authLoginServiceUnavailable =>
+      'A bejelentkezési szolgáltatás nem érhető el ebben a környezetben.';
 
   @override
   String get authPasswordChangeInvalidCurrent =>

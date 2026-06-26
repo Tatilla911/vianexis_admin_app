@@ -131,6 +131,25 @@ void main() {
       expect(exception.messageKey, LocalizationKeys.authForbiddenRole);
     });
 
+    test('maps 404 on login path to auth service unavailable', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/login'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/auth/login'),
+            statusCode: 404,
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.notFound);
+      expect(
+        exception.messageKey,
+        LocalizationKeys.authLoginServiceUnavailable,
+      );
+    });
+
     test('maps 404 to action unavailable', () {
       final exception = mapDioException(
         DioException(

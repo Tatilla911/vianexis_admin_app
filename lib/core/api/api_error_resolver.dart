@@ -83,6 +83,9 @@ String apiExceptionMessageKeyForStatus({
   if (statusCode == 403) {
     return LocalizationKeys.authForbiddenRole;
   }
+  if (statusCode == 404 && isAuthLoginRequestPath(path)) {
+    return LocalizationKeys.authLoginServiceUnavailable;
+  }
   if (statusCode == 404) {
     return LocalizationKeys.errorActionUnavailable;
   }

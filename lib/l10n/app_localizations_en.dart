@@ -95,14 +95,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authNetworkError =>
-      'Network error. Check your connection and try again.';
+      'Network error. Check your internet connection or staging API availability.';
 
   @override
   String get authServerError => 'Server error. Try again later.';
 
   @override
   String get authForbiddenRole =>
-      'This account cannot sign in to the admin app.';
+      'You do not have permission to access this interface.';
+
+  @override
+  String get authLoginServiceUnavailable =>
+      'The sign-in service is not available in this environment.';
 
   @override
   String get authPasswordChangeInvalidCurrent =>

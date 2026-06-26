@@ -10,6 +10,7 @@ abstract final class LocalizationKeys {
   static const authNetworkError = 'authNetworkError';
   static const authServerError = 'authServerError';
   static const authForbiddenRole = 'authForbiddenRole';
+  static const authLoginServiceUnavailable = 'authLoginServiceUnavailable';
   static const authBackendNotConfigured = 'authBackendNotConfigured';
   static const errorActionUnavailable = 'errorActionUnavailable';
   static const authRequiredField = 'authRequiredField';

@@ -16,6 +16,7 @@ String resolveLocalizationKey(BuildContext context, String key) {
     LocalizationKeys.authNetworkError => l10n.authNetworkError,
     LocalizationKeys.authServerError => l10n.authServerError,
     LocalizationKeys.authForbiddenRole => l10n.authForbiddenRole,
+    LocalizationKeys.authLoginServiceUnavailable => l10n.authLoginServiceUnavailable,
     LocalizationKeys.authBackendNotConfigured => l10n.authBackendNotConfigured,
     LocalizationKeys.errorActionUnavailable => l10n.errorActionUnavailable,
     LocalizationKeys.authRequiredField => l10n.authRequiredField,
