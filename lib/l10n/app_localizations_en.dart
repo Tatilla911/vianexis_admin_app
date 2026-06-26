@@ -3595,6 +3595,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Sign-in is disabled until API_BASE_URL is configured for production.';
 
   @override
+  String loginStagingApiHost(String host) {
+    return 'Staging API: $host';
+  }
+
+  @override
   String get backendMockFallbackBanner =>
       'Live backend is not configured. Modules use mock data for local UI development.';
 

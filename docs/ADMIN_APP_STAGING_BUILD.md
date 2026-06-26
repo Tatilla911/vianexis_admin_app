@@ -30,6 +30,8 @@ dart run tool/admin_staging_build_check.dart
 |------|------|
 | `APP_ENV` | Must be `staging` |
 | `API_BASE_URL` | Required — HTTPS staging API hostname |
+| `APP_ENV` dart-define | Use **`APP_ENV`**, not driver’s `VIANEXIS_ENV` |
+| Android `INTERNET` | Required in `android/app/src/main/AndroidManifest.xml` for release APK (CI check in `admin_staging_build_check.dart`) |
 | Mock fallback | Disabled for staging by default |
 | Icon / splash | Generated (`flutter_launcher_icons`, `flutter_native_splash`) |
 | Version | Set in `pubspec.yaml` (e.g. `1.0.0+1`) |

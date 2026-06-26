@@ -30,8 +30,31 @@ List<String> runAdminStagingBuildChecks(
   _validateStagingBuildDocs(root, issues);
   _validateNoHardcodedRenderStagingUrl(root, issues);
   _validateDartDefineBasedApiConfig(root, issues);
+  _validateReleaseAndroidInternetPermission(root, issues);
 
   return issues;
+}
+
+void _validateReleaseAndroidInternetPermission(
+  Directory root,
+  List<String> issues,
+) {
+  final manifest = File(
+    '${root.path}${Platform.pathSeparator}android${Platform.pathSeparator}app${Platform.pathSeparator}src${Platform.pathSeparator}main${Platform.pathSeparator}AndroidManifest.xml',
+  );
+  if (!manifest.existsSync()) {
+    issues.add('Missing android/app/src/main/AndroidManifest.xml');
+    return;
+  }
+  final text = manifest.readAsStringSync();
+  if (!RegExp(
+    r'<uses-permission\s+android:name="android\.permission\.INTERNET"\s*/>',
+  ).hasMatch(text)) {
+    issues.add(
+      'Release Android manifest must declare INTERNET permission — '
+      'without it staging login shows network error on physical devices',
+    );
+  }
 }
 
 /// Validates staging [apiBaseUrl] — HTTPS host required; Render onrender.com allowed.

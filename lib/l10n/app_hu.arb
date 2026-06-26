@@ -1127,6 +1127,14 @@
   "appConfigMockFallbackActive": "Mintavisszaesés aktív",
   "appConfigProductionMisconfigured": "Az éles buildhez API_BASE_URL szükséges. A mintavisszaesés le van tiltva.",
   "appConfigProductionLoginBlocked": "A bejelentkezés az éles API_BASE_URL beállításáig tiltott.",
+  "loginStagingApiHost": "Staging API: {host}",
+  "@loginStagingApiHost": {
+    "placeholders": {
+      "host": {
+        "type": "String"
+      }
+    }
+  },
   "backendMockFallbackBanner": "Az éles backend nincs beállítva. A modulok helyi fejlesztéshez mintaadatot használnak.",
   "settingsApiHostLabel": "API host",
   "navNotifications": "Ertesitesek",

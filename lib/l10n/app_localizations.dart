@@ -6662,6 +6662,12 @@ abstract class AppLocalizations {
   /// **'Sign-in is disabled until API_BASE_URL is configured for production.'**
   String get appConfigProductionLoginBlocked;
 
+  /// No description provided for @loginStagingApiHost.
+  ///
+  /// In en, this message translates to:
+  /// **'Staging API: {host}'**
+  String loginStagingApiHost(String host);
+
   /// No description provided for @backendMockFallbackBanner.
   ///
   /// In en, this message translates to:

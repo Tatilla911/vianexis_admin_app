@@ -79,6 +79,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             ),
                             const SizedBox(height: 8),
                             Text(l10n.loginSubtitle),
+                            if (config.environment.isStaging &&
+                                config.safeApiHostDisplay != null) ...[
+                              const SizedBox(height: 8),
+                              Text(
+                                l10n.loginStagingApiHost(config.safeApiHostDisplay!),
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Theme.of(context).colorScheme.outline,
+                                ),
+                              ),
+                            ],
                             const SizedBox(height: 12),
                             Text(
                               l10n.brandSecureAdminSession,

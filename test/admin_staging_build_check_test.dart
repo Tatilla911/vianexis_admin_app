@@ -37,6 +37,19 @@ void main() {
     );
   });
 
+  test('staging build checker requires release INTERNET permission', () {
+    final issues = runAdminStagingBuildChecks(
+      Directory.current,
+      appEnv: 'staging',
+      apiBaseUrl: 'https://api-staging.example.com',
+    );
+    expect(
+      issues.any((i) => i.contains('INTERNET')),
+      isFalse,
+      reason: issues.join('\n'),
+    );
+  });
+
   test('accepts onrender.com HTTPS URL', () {
     final issues = validateStagingApiBaseUrl(
       'https://vianexis-backend-staging.onrender.com',

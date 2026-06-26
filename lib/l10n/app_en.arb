@@ -1215,6 +1215,14 @@
   "appConfigMockFallbackActive": "Mock fallback active",
   "appConfigProductionMisconfigured": "Production build requires API_BASE_URL. Mock fallback is disabled.",
   "appConfigProductionLoginBlocked": "Sign-in is disabled until API_BASE_URL is configured for production.",
+  "loginStagingApiHost": "Staging API: {host}",
+  "@loginStagingApiHost": {
+    "placeholders": {
+      "host": {
+        "type": "String"
+      }
+    }
+  },
   "backendMockFallbackBanner": "Live backend is not configured. Modules use mock data for local UI development.",
   "settingsApiHostLabel": "API host",
   "navNotifications": "Notifications",

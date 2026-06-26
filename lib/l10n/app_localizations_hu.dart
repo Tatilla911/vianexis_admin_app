@@ -3645,6 +3645,11 @@ class AppLocalizationsHu extends AppLocalizations {
       'A bejelentkezés az éles API_BASE_URL beállításáig tiltott.';
 
   @override
+  String loginStagingApiHost(String host) {
+    return 'Staging API: $host';
+  }
+
+  @override
   String get backendMockFallbackBanner =>
       'Az éles backend nincs beállítva. A modulok helyi fejlesztéshez mintaadatot használnak.';
 
