@@ -115,6 +115,13 @@ class _ModuleTile {
 
 List<_ModuleTile> get _allModules => [
   _ModuleTile(
+    destination: AdminDestination.operations,
+    route: AdminRoutes.operations,
+    icon: Icons.dashboard_customize_outlined,
+    labelKey: (c) => AppLocalizations.of(c).navOperations,
+    descriptionKey: (c) => AppLocalizations.of(c).operationsModuleDescription,
+  ),
+  _ModuleTile(
     destination: AdminDestination.companies,
     route: AdminRoutes.companies,
     icon: Icons.business_outlined,

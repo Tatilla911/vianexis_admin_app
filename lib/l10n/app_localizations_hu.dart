@@ -4793,4 +4793,324 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get devicePinNonNumeric => 'A PIN csak számjegyeket tartalmazhat.';
+
+  @override
+  String get navOperations => 'Műveleti áttekintés';
+
+  @override
+  String get operationsTitle => 'Műveleti áttekintés';
+
+  @override
+  String get operationsModuleDescription =>
+      'Platform működési mutatók, fuvarok, sofőrök és függőségek.';
+
+  @override
+  String get operationsOpenModule => 'Műveleti áttekintés megnyitása';
+
+  @override
+  String get operationsMockBadge => 'Tesztadat';
+
+  @override
+  String get operationsLoadFailed =>
+      'A műveleti áttekintés betöltése sikertelen.';
+
+  @override
+  String get operationsPrivacyNotice =>
+      'Csak aggregált platform metaadat. Fuvar-, dokumentum- és üzenettartalom nem jelenik meg.';
+
+  @override
+  String get operationsPendingSyncTitle => 'Függőben lévő szinkron problémák';
+
+  @override
+  String get operationsPendingSyncDependency =>
+      'A szinkron figyelmeztetések platform szintű listája még nincs bekötve.';
+
+  @override
+  String get operationsExchangeRecordsTitle => 'Raklap/göngyöleg rekordok';
+
+  @override
+  String get operationsExchangeRecordsDependency =>
+      'A platform szintű exchange rekord lista endpointja még nem érhető el.';
+
+  @override
+  String get operationsCompanyCount => 'Cégek (aktív/összes)';
+
+  @override
+  String get operationsActiveDrivers => 'Aktív sofőrök (becslés)';
+
+  @override
+  String get operationsActiveTrips => 'Aktív fuvarok';
+
+  @override
+  String get operationsCompletedTrips => 'Lezárt fuvarok';
+
+  @override
+  String get operationsSupportAccess => 'Aktív support hozzáférés';
+
+  @override
+  String get operationsPublicIntakes => 'Függő publikus megkeresések';
+
+  @override
+  String get operationsPendingRegistrations => 'Függő regisztrációk';
+
+  @override
+  String get operationsPackagesGenerated => 'Generált csomagok';
+
+  @override
+  String get operationsModulesTitle => 'Műveleti modulok';
+
+  @override
+  String get operationsLinkDriverAccess => 'Sofőr hozzáférés';
+
+  @override
+  String get operationsLinkTrips => 'Fuvar áttekintő';
+
+  @override
+  String get operationsLinkExchangeRecords => 'Exchange rekordok';
+
+  @override
+  String get operationsLinkNotificationStatus => 'Értesítések státusza';
+
+  @override
+  String get operationsLinkSupportAccess => 'Support hozzáférés';
+
+  @override
+  String get operationsLinkPublicIntakes => 'Publikus megkeresések';
+
+  @override
+  String get driverAccessTitle => 'Sofőr hozzáférés';
+
+  @override
+  String get driverAccessMockBadge => 'Tesztadat';
+
+  @override
+  String get driverAccessLoadFailed => 'A sofőr lista betöltése sikertelen.';
+
+  @override
+  String get driverAccessPrivacyNotice =>
+      'Csak metaadat: név, státusz, eszköz címke, session szám. Token, PIN hash és üzenettartalom nem jelenik meg.';
+
+  @override
+  String get driverAccessBackendTitle => 'Backend függőség';
+
+  @override
+  String get driverAccessBackendMessage =>
+      'A platform sofőr lista endpointja még nem érhető el. Mock módban minta adat látható.';
+
+  @override
+  String get driverAccessDetailTitle => 'Sofőr részletek';
+
+  @override
+  String get driverAccessNotFound => 'A sofőr nem található.';
+
+  @override
+  String get driverAccessFieldName => 'Név';
+
+  @override
+  String get driverAccessFieldCompany => 'Cég';
+
+  @override
+  String get driverAccessRegistrationStatus => 'Regisztráció státusz';
+
+  @override
+  String get driverAccessFieldDeviceLabel => 'Eszköz címke';
+
+  @override
+  String get driverAccessFieldActiveSessions => 'Aktív sessionök';
+
+  @override
+  String get driverAccessFieldLastActivity => 'Utolsó aktivitás';
+
+  @override
+  String get driverAccessEnableDisableTitle => 'Sofőr engedélyezés/tiltás';
+
+  @override
+  String get driverAccessEnableDisableDependency =>
+      'A sofőr státusz módosítása endpoint még nem érhető el.';
+
+  @override
+  String get driverAccessStatusPending => 'Függőben';
+
+  @override
+  String get driverAccessStatusActive => 'Aktív';
+
+  @override
+  String get driverAccessStatusDisabled => 'Letiltva';
+
+  @override
+  String get driverAccessStatusInvited => 'Meghívott';
+
+  @override
+  String get tripsOverviewTitle => 'Fuvar áttekintő';
+
+  @override
+  String get tripsOverviewMockBadge => 'Tesztadat';
+
+  @override
+  String get tripsOverviewLoadFailed =>
+      'A fuvar áttekintő betöltése sikertelen.';
+
+  @override
+  String get tripsOverviewPrivacyNotice =>
+      'Csak fuvar metaadat: azonosító, státusz, exchange jelzők. Dokumentum- és üzenettartalom nem jelenik meg.';
+
+  @override
+  String get tripsOverviewActiveCount => 'Aktív fuvarok';
+
+  @override
+  String get tripsOverviewCompletedCount => 'Lezárt fuvarok';
+
+  @override
+  String get tripsOverviewParkedCount => 'Parkolt fuvarok';
+
+  @override
+  String get tripsOverviewBackendTitle => 'Backend függőség';
+
+  @override
+  String get tripsOverviewBackendMessage =>
+      'A platform fuvar lista endpointja még nem érhető el. Összesítő számok a dashboard API-ból jönnek.';
+
+  @override
+  String get tripsOverviewListTitle => 'Fuvarok';
+
+  @override
+  String get tripsOverviewExchangeIndicator => 'Van exchange rekord';
+
+  @override
+  String get tripsOverviewExchangeAttention => 'Exchange figyelmeztetés';
+
+  @override
+  String get tripsOverviewPendingSync => 'Függő szinkron';
+
+  @override
+  String get tripsOverviewStatusActive => 'Aktív';
+
+  @override
+  String get tripsOverviewStatusCompleted => 'Lezárt';
+
+  @override
+  String get tripsOverviewStatusParked => 'Parkolt';
+
+  @override
+  String get tripsOverviewStatusPending => 'Függő';
+
+  @override
+  String get exchangeRecordsTitle => 'Exchange rekordok';
+
+  @override
+  String get exchangeRecordsMockBadge => 'Tesztadat';
+
+  @override
+  String get exchangeRecordsLoadFailed =>
+      'Az exchange rekordok betöltése sikertelen.';
+
+  @override
+  String get exchangeRecordsPrivacyNotice =>
+      'Csak rekord metaadat: tétel, mennyiség, státusz, időbélyeg. Melléklet tartalom és storage kulcs nem jelenik meg.';
+
+  @override
+  String get exchangeRecordsBackendTitle => 'Backend függőség';
+
+  @override
+  String get exchangeRecordsBackendMessage =>
+      'A platform szintű exchange rekord lista endpointja még nem érhető el.';
+
+  @override
+  String get exchangeRecordsFilterAll => 'Összes';
+
+  @override
+  String get exchangeRecordsFilterDisputed => 'Vitás';
+
+  @override
+  String get exchangeRecordsFilterDamaged => 'Sérült';
+
+  @override
+  String get exchangeRecordsFilterMissing => 'Hiányzó';
+
+  @override
+  String get exchangeRecordsListEmpty =>
+      'Nincs megjeleníthető rekord a szűrővel.';
+
+  @override
+  String get exchangeRecordsFieldStatus => 'Státusz';
+
+  @override
+  String get exchangeRecordsFieldMissing => 'Hiány';
+
+  @override
+  String get exchangeRecordsFieldDamaged => 'Sérült';
+
+  @override
+  String get exchangeRecordsStatusCompleted => 'Lezárt';
+
+  @override
+  String get exchangeRecordsStatusDisputed => 'Vitás';
+
+  @override
+  String get exchangeRecordsStatusDamaged => 'Sérült';
+
+  @override
+  String get exchangeRecordsStatusMissing => 'Hiányzó';
+
+  @override
+  String get exchangeRecordsStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get notificationStatusTitle => 'Értesítések státusza';
+
+  @override
+  String get notificationStatusPrivacyNotice =>
+      'Csak push infrastruktúra metaadat. FCM/APNS token, secret és credential nem jelenik meg.';
+
+  @override
+  String get notificationStatusLoadFailed =>
+      'Az értesítés státusz betöltése sikertelen.';
+
+  @override
+  String get notificationStatusDriverFoundationTitle =>
+      'Sofőr app értesítés alap';
+
+  @override
+  String get notificationStatusDriverFoundationReady =>
+      'Kész — in-app és push foundation implementálva.';
+
+  @override
+  String get notificationStatusDeviceTokenTitle => 'Eszköz token regisztráció';
+
+  @override
+  String get notificationStatusDeviceTokenDependency =>
+      'A sofőr eszköz token regisztráció endpointja még nem érhető el az admin számára.';
+
+  @override
+  String get notificationStatusEventsTitle => 'Utolsó értesítési események';
+
+  @override
+  String get notificationStatusEventsDependency =>
+      'A platform értesítési esemény lista endpointja még nem érhető el.';
+
+  @override
+  String get notificationStatusProductionPushConfigured =>
+      'Éles push backend konfigurálva';
+
+  @override
+  String get notificationStatusBackendDependency =>
+      'Backend függőség — éles push még nem teljes.';
+
+  @override
+  String get companyExchangeItemSortOrder => 'Sorrend';
+
+  @override
+  String get companyExchangePackagingCrudTitle => 'Göngyöleg lista szerkesztés';
+
+  @override
+  String get companyExchangePackagingCrudDependency =>
+      'Az alapértelmezett göngyöleg tételek CRUD műveletei még nem érhetők el. Jelenleg csak olvasható lista.';
+
+  @override
+  String get companyExchangeManualPalletRecordTitle =>
+      'Sofőr manuális raklap rögzítés';
+
+  @override
+  String get companyExchangeManualPalletRecordDependency =>
+      'A sofőr manuális raklap rögzítés policy kapcsoló endpointja még nem érhető el.';
 }

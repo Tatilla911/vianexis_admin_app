@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/widgets/backend_dependency_card.dart';
 import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
@@ -195,9 +196,14 @@ class _CompanyExchangeSettingsScreenState
                   contentPadding: EdgeInsets.zero,
                   leading: const Icon(Icons.inventory_2_outlined),
                   title: Text(item.name),
-                  subtitle: item.localizedNameKey != null
-                      ? Text(item.localizedNameKey!)
-                      : null,
+                  subtitle: Text(
+                    [
+                      if (item.localizedNameKey != null) item.localizedNameKey!,
+                      if (item.sortOrder > 0)
+                        '${l10n.companyExchangeItemSortOrder}: ${item.sortOrder}',
+                      if (item.notes != null && item.notes!.isNotEmpty) item.notes!,
+                    ].join(' · '),
+                  ),
                   trailing: item.active
                       ? null
                       : Text(
@@ -205,6 +211,20 @@ class _CompanyExchangeSettingsScreenState
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                 ),
+              const SizedBox(height: 16),
+              BackendDependencyCard(
+                title: l10n.companyExchangePackagingCrudTitle,
+                message: l10n.companyExchangePackagingCrudDependency,
+                endpointHint:
+                    'POST/PATCH/DELETE /companies/:id/exchange-settings/packaging-items (planned)',
+              ),
+              const SizedBox(height: 12),
+              BackendDependencyCard(
+                title: l10n.companyExchangeManualPalletRecordTitle,
+                message: l10n.companyExchangeManualPalletRecordDependency,
+                endpointHint:
+                    'PATCH /companies/:id/exchange-settings allowDriverManualPalletRecord (planned)',
+              ),
             ],
           );
         },

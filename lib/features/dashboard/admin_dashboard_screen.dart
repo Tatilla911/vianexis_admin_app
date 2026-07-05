@@ -73,6 +73,7 @@ class AdminDashboardScreen extends ConsumerWidget {
         user?.canAccess(AdminDestination.publicIntakes) ?? false;
     final showNotifications =
         user?.canAccess(AdminDestination.notifications) ?? false;
+    final showOperations = user?.canAccess(AdminDestination.operations) ?? false;
     final unreadCount = ref.watch(unreadNotificationCountProvider);
 
     final publicIntakesAsync =
@@ -139,6 +140,14 @@ class AdminDashboardScreen extends ConsumerWidget {
             supportOpenIssues: supportAsync.asData?.value.openTicketsCount,
             auditFailedDenied: auditAsync.asData?.value.failedDeniedCount,
           ),
+          if (showOperations) ...[
+            const SizedBox(height: 12),
+            OutlinedButton.icon(
+              onPressed: () => context.go(AdminRoutes.operations),
+              icon: const Icon(Icons.dashboard_customize_outlined),
+              label: Text(l10n.operationsOpenModule),
+            ),
+          ],
           const SizedBox(height: 16),
           if (showActionCenter)
             actionCenterAsync.when(

@@ -35,6 +35,11 @@ import '../features/dashboard/admin_dashboard_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/modules/admin_modules_hub_screen.dart';
 import '../features/notifications/presentation/notification_detail_screen.dart';
+import '../features/notifications/presentation/notification_status_screen.dart';
+import '../features/operations/presentation/operations_screen.dart';
+import '../features/driver_access/presentation/driver_access_screen.dart';
+import '../features/trips_overview/presentation/trips_overview_screen.dart';
+import '../features/exchange_records/presentation/exchange_records_screen.dart';
 import '../features/notifications/presentation/notification_preferences_screen.dart';
 import '../features/notifications/presentation/notifications_screen.dart';
 import '../features/public_intakes/presentation/public_intake_detail_screen.dart';
@@ -376,6 +381,44 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
           GoRoute(
+            path: AdminRoutes.operations,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: OperationsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: AdminRoutes.driverAccess,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: DriverAccessScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => DriverAccessDetailScreen(
+                  driverId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AdminRoutes.tripsOverview,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: TripsOverviewScreen(),
+            ),
+          ),
+          GoRoute(
+            path: AdminRoutes.exchangeRecords,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ExchangeRecordsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: AdminRoutes.notificationStatus,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: NotificationStatusScreen(),
+            ),
+          ),
+          GoRoute(
             path: AdminRoutes.modulesHub,
             pageBuilder: (context, state) => const NoTransitionPage(
               child: AdminModulesHubScreen(),
@@ -422,6 +465,11 @@ abstract final class AdminRoutes {
   static const securityCenter = '/security';
   static const adminUsers = '/admin-users';
   static const releaseCenter = '/release-center';
+  static const operations = '/operations';
+  static const driverAccess = '/driver-access';
+  static const tripsOverview = '/trips-overview';
+  static const exchangeRecords = '/exchange-records';
+  static const notificationStatus = '/notification-status';
   static const settings = '/settings';
   static const modulesHub = '/modules';
   static const accessDenied = '/access-denied';
@@ -471,12 +519,21 @@ abstract final class AdminRoutes {
 
   static String notificationDetail(String id) => '$notifications/$id';
 
+  static String driverAccessDetail(String id) => '$driverAccess/$id';
+
   static String securityEventDetail(String id) =>
       '$securityCenter/events/${Uri.encodeComponent(id)}';
 
   static AdminDestination? destinationForLocation(String location) {
     if (location.startsWith(modulesHub)) {
       return AdminDestination.settings;
+    }
+    if (location.startsWith(operations) ||
+        location.startsWith(driverAccess) ||
+        location.startsWith(tripsOverview) ||
+        location.startsWith(exchangeRecords) ||
+        location.startsWith(notificationStatus)) {
+      return AdminDestination.operations;
     }
     if (location.startsWith(actionCenter)) {
       return AdminDestination.actionCenter;
@@ -532,6 +589,11 @@ abstract final class AdminRoutes {
       securityCenter => AdminDestination.securityCenter,
       adminUsers => AdminDestination.adminUsers,
       releaseCenter => AdminDestination.releaseCenter,
+      operations => AdminDestination.operations,
+      driverAccess => AdminDestination.operations,
+      tripsOverview => AdminDestination.operations,
+      exchangeRecords => AdminDestination.operations,
+      notificationStatus => AdminDestination.operations,
       auditLogs => AdminDestination.auditLogs,
       notifications => AdminDestination.notifications,
       settings => AdminDestination.settings,

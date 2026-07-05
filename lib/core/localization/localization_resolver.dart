@@ -1833,3 +1833,132 @@ String resolveAppConfigKey(BuildContext context, String key) {
     _ => l10n.errorGenericBody,
   };
 }
+
+String resolveOperationsKey(BuildContext context, String key) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'operationsTitle' => l10n.operationsTitle,
+    'operationsMockBadge' => l10n.operationsMockBadge,
+    'operationsLoadFailed' => l10n.operationsLoadFailed,
+    'operationsPrivacyNotice' => l10n.operationsPrivacyNotice,
+    'operationsPendingSyncTitle' => l10n.operationsPendingSyncTitle,
+    'operationsPendingSyncDependency' => l10n.operationsPendingSyncDependency,
+    'operationsExchangeRecordsTitle' => l10n.operationsExchangeRecordsTitle,
+    'operationsExchangeRecordsDependency' => l10n.operationsExchangeRecordsDependency,
+    'operationsCompanyCount' => l10n.operationsCompanyCount,
+    'operationsActiveDrivers' => l10n.operationsActiveDrivers,
+    'operationsActiveTrips' => l10n.operationsActiveTrips,
+    'operationsCompletedTrips' => l10n.operationsCompletedTrips,
+    'operationsSupportAccess' => l10n.operationsSupportAccess,
+    'operationsPublicIntakes' => l10n.operationsPublicIntakes,
+    'operationsPendingRegistrations' => l10n.operationsPendingRegistrations,
+    'operationsPackagesGenerated' => l10n.operationsPackagesGenerated,
+    'operationsModulesTitle' => l10n.operationsModulesTitle,
+    'operationsLinkDriverAccess' => l10n.operationsLinkDriverAccess,
+    'operationsLinkTrips' => l10n.operationsLinkTrips,
+    'operationsLinkExchangeRecords' => l10n.operationsLinkExchangeRecords,
+    'operationsLinkNotificationStatus' => l10n.operationsLinkNotificationStatus,
+    'operationsLinkSupportAccess' => l10n.operationsLinkSupportAccess,
+    'operationsLinkPublicIntakes' => l10n.operationsLinkPublicIntakes,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveDriverAccessKey(BuildContext context, String key) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'driverAccessTitle' => l10n.driverAccessTitle,
+    'driverAccessMockBadge' => l10n.driverAccessMockBadge,
+    'driverAccessLoadFailed' => l10n.driverAccessLoadFailed,
+    'driverAccessPrivacyNotice' => l10n.driverAccessPrivacyNotice,
+    'driverAccessBackendTitle' => l10n.driverAccessBackendTitle,
+    'driverAccessBackendMessage' => l10n.driverAccessBackendMessage,
+    'driverAccessDetailTitle' => l10n.driverAccessDetailTitle,
+    'driverAccessNotFound' => l10n.driverAccessNotFound,
+    'driverAccessFieldName' => l10n.driverAccessFieldName,
+    'driverAccessFieldCompany' => l10n.driverAccessFieldCompany,
+    'driverAccessRegistrationStatus' => l10n.driverAccessRegistrationStatus,
+    'driverAccessFieldDeviceLabel' => l10n.driverAccessFieldDeviceLabel,
+    'driverAccessFieldActiveSessions' => l10n.driverAccessFieldActiveSessions,
+    'driverAccessFieldLastActivity' => l10n.driverAccessFieldLastActivity,
+    'driverAccessEnableDisableTitle' => l10n.driverAccessEnableDisableTitle,
+    'driverAccessEnableDisableDependency' => l10n.driverAccessEnableDisableDependency,
+    'driverAccessStatusPending' => l10n.driverAccessStatusPending,
+    'driverAccessStatusActive' => l10n.driverAccessStatusActive,
+    'driverAccessStatusDisabled' => l10n.driverAccessStatusDisabled,
+    'driverAccessStatusInvited' => l10n.driverAccessStatusInvited,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveTripsOverviewKey(BuildContext context, String key) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'tripsOverviewTitle' => l10n.tripsOverviewTitle,
+    'tripsOverviewMockBadge' => l10n.tripsOverviewMockBadge,
+    'tripsOverviewLoadFailed' => l10n.tripsOverviewLoadFailed,
+    'tripsOverviewPrivacyNotice' => l10n.tripsOverviewPrivacyNotice,
+    'tripsOverviewActiveCount' => l10n.tripsOverviewActiveCount,
+    'tripsOverviewCompletedCount' => l10n.tripsOverviewCompletedCount,
+    'tripsOverviewParkedCount' => l10n.tripsOverviewParkedCount,
+    'tripsOverviewBackendTitle' => l10n.tripsOverviewBackendTitle,
+    'tripsOverviewBackendMessage' => l10n.tripsOverviewBackendMessage,
+    'tripsOverviewListTitle' => l10n.tripsOverviewListTitle,
+    'tripsOverviewExchangeIndicator' => l10n.tripsOverviewExchangeIndicator,
+    'tripsOverviewExchangeAttention' => l10n.tripsOverviewExchangeAttention,
+    'tripsOverviewPendingSync' => l10n.tripsOverviewPendingSync,
+    'tripsOverviewStatusActive' => l10n.tripsOverviewStatusActive,
+    'tripsOverviewStatusCompleted' => l10n.tripsOverviewStatusCompleted,
+    'tripsOverviewStatusParked' => l10n.tripsOverviewStatusParked,
+    'tripsOverviewStatusPending' => l10n.tripsOverviewStatusPending,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveExchangeRecordsKey(BuildContext context, String key) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'exchangeRecordsTitle' => l10n.exchangeRecordsTitle,
+    'exchangeRecordsMockBadge' => l10n.exchangeRecordsMockBadge,
+    'exchangeRecordsLoadFailed' => l10n.exchangeRecordsLoadFailed,
+    'exchangeRecordsPrivacyNotice' => l10n.exchangeRecordsPrivacyNotice,
+    'exchangeRecordsBackendTitle' => l10n.exchangeRecordsBackendTitle,
+    'exchangeRecordsBackendMessage' => l10n.exchangeRecordsBackendMessage,
+    'exchangeRecordsFilterAll' => l10n.exchangeRecordsFilterAll,
+    'exchangeRecordsFilterDisputed' => l10n.exchangeRecordsFilterDisputed,
+    'exchangeRecordsFilterDamaged' => l10n.exchangeRecordsFilterDamaged,
+    'exchangeRecordsFilterMissing' => l10n.exchangeRecordsFilterMissing,
+    'exchangeRecordsListEmpty' => l10n.exchangeRecordsListEmpty,
+    'exchangeRecordsFieldStatus' => l10n.exchangeRecordsFieldStatus,
+    'exchangeRecordsFieldMissing' => l10n.exchangeRecordsFieldMissing,
+    'exchangeRecordsFieldDamaged' => l10n.exchangeRecordsFieldDamaged,
+    'exchangeRecordsStatusCompleted' => l10n.exchangeRecordsStatusCompleted,
+    'exchangeRecordsStatusDisputed' => l10n.exchangeRecordsStatusDisputed,
+    'exchangeRecordsStatusDamaged' => l10n.exchangeRecordsStatusDamaged,
+    'exchangeRecordsStatusMissing' => l10n.exchangeRecordsStatusMissing,
+    'exchangeRecordsStatusUnknown' => l10n.exchangeRecordsStatusUnknown,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveNotificationStatusKey(BuildContext context, String key) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'notificationStatusTitle' => l10n.notificationStatusTitle,
+    'notificationStatusPrivacyNotice' => l10n.notificationStatusPrivacyNotice,
+    'notificationStatusLoadFailed' => l10n.notificationStatusLoadFailed,
+    'notificationStatusDriverFoundationTitle' =>
+      l10n.notificationStatusDriverFoundationTitle,
+    'notificationStatusDriverFoundationReady' =>
+      l10n.notificationStatusDriverFoundationReady,
+    'notificationStatusDeviceTokenTitle' => l10n.notificationStatusDeviceTokenTitle,
+    'notificationStatusDeviceTokenDependency' =>
+      l10n.notificationStatusDeviceTokenDependency,
+    'notificationStatusEventsTitle' => l10n.notificationStatusEventsTitle,
+    'notificationStatusEventsDependency' => l10n.notificationStatusEventsDependency,
+    'notificationStatusProductionPushConfigured' =>
+      l10n.notificationStatusProductionPushConfigured,
+    'notificationStatusBackendDependency' => l10n.notificationStatusBackendDependency,
+    _ => l10n.errorGenericBody,
+  };
+}

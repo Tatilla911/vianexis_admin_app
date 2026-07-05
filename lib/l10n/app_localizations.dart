@@ -8669,6 +8669,594 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PIN must contain digits only.'**
   String get devicePinNonNumeric;
+
+  /// No description provided for @navOperations.
+  ///
+  /// In en, this message translates to:
+  /// **'Operations overview'**
+  String get navOperations;
+
+  /// No description provided for @operationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Operations overview'**
+  String get operationsTitle;
+
+  /// No description provided for @operationsModuleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform metrics, trips, drivers, and backend dependencies.'**
+  String get operationsModuleDescription;
+
+  /// No description provided for @operationsOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open operations overview'**
+  String get operationsOpenModule;
+
+  /// No description provided for @operationsMockBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get operationsMockBadge;
+
+  /// No description provided for @operationsLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load operations overview.'**
+  String get operationsLoadFailed;
+
+  /// No description provided for @operationsPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Aggregated platform metadata only. No trip, document, or message content.'**
+  String get operationsPrivacyNotice;
+
+  /// No description provided for @operationsPendingSyncTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending sync issues'**
+  String get operationsPendingSyncTitle;
+
+  /// No description provided for @operationsPendingSyncDependency.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform-wide sync warning list is not wired yet.'**
+  String get operationsPendingSyncDependency;
+
+  /// No description provided for @operationsExchangeRecordsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pallet/packaging records'**
+  String get operationsExchangeRecordsTitle;
+
+  /// No description provided for @operationsExchangeRecordsDependency.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform exchange record list endpoint is not available yet.'**
+  String get operationsExchangeRecordsDependency;
+
+  /// No description provided for @operationsCompanyCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies (active/total)'**
+  String get operationsCompanyCount;
+
+  /// No description provided for @operationsActiveDrivers.
+  ///
+  /// In en, this message translates to:
+  /// **'Active drivers (estimate)'**
+  String get operationsActiveDrivers;
+
+  /// No description provided for @operationsActiveTrips.
+  ///
+  /// In en, this message translates to:
+  /// **'Active trips'**
+  String get operationsActiveTrips;
+
+  /// No description provided for @operationsCompletedTrips.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed trips'**
+  String get operationsCompletedTrips;
+
+  /// No description provided for @operationsSupportAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Active support access'**
+  String get operationsSupportAccess;
+
+  /// No description provided for @operationsPublicIntakes.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending public intakes'**
+  String get operationsPublicIntakes;
+
+  /// No description provided for @operationsPendingRegistrations.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending registrations'**
+  String get operationsPendingRegistrations;
+
+  /// No description provided for @operationsPackagesGenerated.
+  ///
+  /// In en, this message translates to:
+  /// **'Generated packages'**
+  String get operationsPackagesGenerated;
+
+  /// No description provided for @operationsModulesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Operations modules'**
+  String get operationsModulesTitle;
+
+  /// No description provided for @operationsLinkDriverAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver access'**
+  String get operationsLinkDriverAccess;
+
+  /// No description provided for @operationsLinkTrips.
+  ///
+  /// In en, this message translates to:
+  /// **'Trips overview'**
+  String get operationsLinkTrips;
+
+  /// No description provided for @operationsLinkExchangeRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'Exchange records'**
+  String get operationsLinkExchangeRecords;
+
+  /// No description provided for @operationsLinkNotificationStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification status'**
+  String get operationsLinkNotificationStatus;
+
+  /// No description provided for @operationsLinkSupportAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access'**
+  String get operationsLinkSupportAccess;
+
+  /// No description provided for @operationsLinkPublicIntakes.
+  ///
+  /// In en, this message translates to:
+  /// **'Public intakes'**
+  String get operationsLinkPublicIntakes;
+
+  /// No description provided for @driverAccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver access'**
+  String get driverAccessTitle;
+
+  /// No description provided for @driverAccessMockBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get driverAccessMockBadge;
+
+  /// No description provided for @driverAccessLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load driver list.'**
+  String get driverAccessLoadFailed;
+
+  /// No description provided for @driverAccessPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only: name, status, device label, session count. No tokens, PIN hash, or message content.'**
+  String get driverAccessPrivacyNotice;
+
+  /// No description provided for @driverAccessBackendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend dependency'**
+  String get driverAccessBackendTitle;
+
+  /// No description provided for @driverAccessBackendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform driver list endpoint is not available yet. Sample data appears in mock mode.'**
+  String get driverAccessBackendMessage;
+
+  /// No description provided for @driverAccessDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver details'**
+  String get driverAccessDetailTitle;
+
+  /// No description provided for @driverAccessNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver not found.'**
+  String get driverAccessNotFound;
+
+  /// No description provided for @driverAccessFieldName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get driverAccessFieldName;
+
+  /// No description provided for @driverAccessFieldCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get driverAccessFieldCompany;
+
+  /// No description provided for @driverAccessRegistrationStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration status'**
+  String get driverAccessRegistrationStatus;
+
+  /// No description provided for @driverAccessFieldDeviceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Device label'**
+  String get driverAccessFieldDeviceLabel;
+
+  /// No description provided for @driverAccessFieldActiveSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'Active sessions'**
+  String get driverAccessFieldActiveSessions;
+
+  /// No description provided for @driverAccessFieldLastActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Last activity'**
+  String get driverAccessFieldLastActivity;
+
+  /// No description provided for @driverAccessEnableDisableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable/disable driver'**
+  String get driverAccessEnableDisableTitle;
+
+  /// No description provided for @driverAccessEnableDisableDependency.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver status change endpoint is not available yet.'**
+  String get driverAccessEnableDisableDependency;
+
+  /// No description provided for @driverAccessStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get driverAccessStatusPending;
+
+  /// No description provided for @driverAccessStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get driverAccessStatusActive;
+
+  /// No description provided for @driverAccessStatusDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get driverAccessStatusDisabled;
+
+  /// No description provided for @driverAccessStatusInvited.
+  ///
+  /// In en, this message translates to:
+  /// **'Invited'**
+  String get driverAccessStatusInvited;
+
+  /// No description provided for @tripsOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trips overview'**
+  String get tripsOverviewTitle;
+
+  /// No description provided for @tripsOverviewMockBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get tripsOverviewMockBadge;
+
+  /// No description provided for @tripsOverviewLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load trips overview.'**
+  String get tripsOverviewLoadFailed;
+
+  /// No description provided for @tripsOverviewPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip metadata only: reference, status, exchange indicators. No document or message content.'**
+  String get tripsOverviewPrivacyNotice;
+
+  /// No description provided for @tripsOverviewActiveCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Active trips'**
+  String get tripsOverviewActiveCount;
+
+  /// No description provided for @tripsOverviewCompletedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed trips'**
+  String get tripsOverviewCompletedCount;
+
+  /// No description provided for @tripsOverviewParkedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Parked trips'**
+  String get tripsOverviewParkedCount;
+
+  /// No description provided for @tripsOverviewBackendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend dependency'**
+  String get tripsOverviewBackendTitle;
+
+  /// No description provided for @tripsOverviewBackendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform trip list endpoint is not available yet. Summary counts come from the dashboard API.'**
+  String get tripsOverviewBackendMessage;
+
+  /// No description provided for @tripsOverviewListTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trips'**
+  String get tripsOverviewListTitle;
+
+  /// No description provided for @tripsOverviewExchangeIndicator.
+  ///
+  /// In en, this message translates to:
+  /// **'Has exchange record'**
+  String get tripsOverviewExchangeIndicator;
+
+  /// No description provided for @tripsOverviewExchangeAttention.
+  ///
+  /// In en, this message translates to:
+  /// **'Exchange attention'**
+  String get tripsOverviewExchangeAttention;
+
+  /// No description provided for @tripsOverviewPendingSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending sync'**
+  String get tripsOverviewPendingSync;
+
+  /// No description provided for @tripsOverviewStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get tripsOverviewStatusActive;
+
+  /// No description provided for @tripsOverviewStatusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get tripsOverviewStatusCompleted;
+
+  /// No description provided for @tripsOverviewStatusParked.
+  ///
+  /// In en, this message translates to:
+  /// **'Parked'**
+  String get tripsOverviewStatusParked;
+
+  /// No description provided for @tripsOverviewStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get tripsOverviewStatusPending;
+
+  /// No description provided for @exchangeRecordsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Exchange records'**
+  String get exchangeRecordsTitle;
+
+  /// No description provided for @exchangeRecordsMockBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get exchangeRecordsMockBadge;
+
+  /// No description provided for @exchangeRecordsLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load exchange records.'**
+  String get exchangeRecordsLoadFailed;
+
+  /// No description provided for @exchangeRecordsPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Record metadata only: item, quantities, status, timestamp. No attachment content or storage keys.'**
+  String get exchangeRecordsPrivacyNotice;
+
+  /// No description provided for @exchangeRecordsBackendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend dependency'**
+  String get exchangeRecordsBackendTitle;
+
+  /// No description provided for @exchangeRecordsBackendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform exchange record list endpoint is not available yet.'**
+  String get exchangeRecordsBackendMessage;
+
+  /// No description provided for @exchangeRecordsFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get exchangeRecordsFilterAll;
+
+  /// No description provided for @exchangeRecordsFilterDisputed.
+  ///
+  /// In en, this message translates to:
+  /// **'Disputed'**
+  String get exchangeRecordsFilterDisputed;
+
+  /// No description provided for @exchangeRecordsFilterDamaged.
+  ///
+  /// In en, this message translates to:
+  /// **'Damaged'**
+  String get exchangeRecordsFilterDamaged;
+
+  /// No description provided for @exchangeRecordsFilterMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing'**
+  String get exchangeRecordsFilterMissing;
+
+  /// No description provided for @exchangeRecordsListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No records match the filter.'**
+  String get exchangeRecordsListEmpty;
+
+  /// No description provided for @exchangeRecordsFieldStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get exchangeRecordsFieldStatus;
+
+  /// No description provided for @exchangeRecordsFieldMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing'**
+  String get exchangeRecordsFieldMissing;
+
+  /// No description provided for @exchangeRecordsFieldDamaged.
+  ///
+  /// In en, this message translates to:
+  /// **'Damaged'**
+  String get exchangeRecordsFieldDamaged;
+
+  /// No description provided for @exchangeRecordsStatusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get exchangeRecordsStatusCompleted;
+
+  /// No description provided for @exchangeRecordsStatusDisputed.
+  ///
+  /// In en, this message translates to:
+  /// **'Disputed'**
+  String get exchangeRecordsStatusDisputed;
+
+  /// No description provided for @exchangeRecordsStatusDamaged.
+  ///
+  /// In en, this message translates to:
+  /// **'Damaged'**
+  String get exchangeRecordsStatusDamaged;
+
+  /// No description provided for @exchangeRecordsStatusMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing'**
+  String get exchangeRecordsStatusMissing;
+
+  /// No description provided for @exchangeRecordsStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get exchangeRecordsStatusUnknown;
+
+  /// No description provided for @notificationStatusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification status'**
+  String get notificationStatusTitle;
+
+  /// No description provided for @notificationStatusPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Push infrastructure metadata only. No FCM/APNS tokens, secrets, or credentials.'**
+  String get notificationStatusPrivacyNotice;
+
+  /// No description provided for @notificationStatusLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load notification status.'**
+  String get notificationStatusLoadFailed;
+
+  /// No description provided for @notificationStatusDriverFoundationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver app notification foundation'**
+  String get notificationStatusDriverFoundationTitle;
+
+  /// No description provided for @notificationStatusDriverFoundationReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready — in-app and push foundation implemented.'**
+  String get notificationStatusDriverFoundationReady;
+
+  /// No description provided for @notificationStatusDeviceTokenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Device token registration'**
+  String get notificationStatusDeviceTokenTitle;
+
+  /// No description provided for @notificationStatusDeviceTokenDependency.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver device token registration endpoint is not available to admin yet.'**
+  String get notificationStatusDeviceTokenDependency;
+
+  /// No description provided for @notificationStatusEventsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent notification events'**
+  String get notificationStatusEventsTitle;
+
+  /// No description provided for @notificationStatusEventsDependency.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform notification event list endpoint is not available yet.'**
+  String get notificationStatusEventsDependency;
+
+  /// No description provided for @notificationStatusProductionPushConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Production push backend configured'**
+  String get notificationStatusProductionPushConfigured;
+
+  /// No description provided for @notificationStatusBackendDependency.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend dependency — production push not fully wired.'**
+  String get notificationStatusBackendDependency;
+
+  /// No description provided for @companyExchangeItemSortOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort order'**
+  String get companyExchangeItemSortOrder;
+
+  /// No description provided for @companyExchangePackagingCrudTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging list editing'**
+  String get companyExchangePackagingCrudTitle;
+
+  /// No description provided for @companyExchangePackagingCrudDependency.
+  ///
+  /// In en, this message translates to:
+  /// **'Default packaging item CRUD is not available yet. Read-only list for now.'**
+  String get companyExchangePackagingCrudDependency;
+
+  /// No description provided for @companyExchangeManualPalletRecordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver manual pallet record'**
+  String get companyExchangeManualPalletRecordTitle;
+
+  /// No description provided for @companyExchangeManualPalletRecordDependency.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver manual pallet record policy toggle endpoint is not available yet.'**
+  String get companyExchangeManualPalletRecordDependency;
 }
 
 class _AppLocalizationsDelegate

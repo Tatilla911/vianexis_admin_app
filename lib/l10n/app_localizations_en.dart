@@ -4727,4 +4727,320 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get devicePinNonNumeric => 'PIN must contain digits only.';
+
+  @override
+  String get navOperations => 'Operations overview';
+
+  @override
+  String get operationsTitle => 'Operations overview';
+
+  @override
+  String get operationsModuleDescription =>
+      'Platform metrics, trips, drivers, and backend dependencies.';
+
+  @override
+  String get operationsOpenModule => 'Open operations overview';
+
+  @override
+  String get operationsMockBadge => 'Mock data';
+
+  @override
+  String get operationsLoadFailed => 'Failed to load operations overview.';
+
+  @override
+  String get operationsPrivacyNotice =>
+      'Aggregated platform metadata only. No trip, document, or message content.';
+
+  @override
+  String get operationsPendingSyncTitle => 'Pending sync issues';
+
+  @override
+  String get operationsPendingSyncDependency =>
+      'Platform-wide sync warning list is not wired yet.';
+
+  @override
+  String get operationsExchangeRecordsTitle => 'Pallet/packaging records';
+
+  @override
+  String get operationsExchangeRecordsDependency =>
+      'Platform exchange record list endpoint is not available yet.';
+
+  @override
+  String get operationsCompanyCount => 'Companies (active/total)';
+
+  @override
+  String get operationsActiveDrivers => 'Active drivers (estimate)';
+
+  @override
+  String get operationsActiveTrips => 'Active trips';
+
+  @override
+  String get operationsCompletedTrips => 'Completed trips';
+
+  @override
+  String get operationsSupportAccess => 'Active support access';
+
+  @override
+  String get operationsPublicIntakes => 'Pending public intakes';
+
+  @override
+  String get operationsPendingRegistrations => 'Pending registrations';
+
+  @override
+  String get operationsPackagesGenerated => 'Generated packages';
+
+  @override
+  String get operationsModulesTitle => 'Operations modules';
+
+  @override
+  String get operationsLinkDriverAccess => 'Driver access';
+
+  @override
+  String get operationsLinkTrips => 'Trips overview';
+
+  @override
+  String get operationsLinkExchangeRecords => 'Exchange records';
+
+  @override
+  String get operationsLinkNotificationStatus => 'Notification status';
+
+  @override
+  String get operationsLinkSupportAccess => 'Support access';
+
+  @override
+  String get operationsLinkPublicIntakes => 'Public intakes';
+
+  @override
+  String get driverAccessTitle => 'Driver access';
+
+  @override
+  String get driverAccessMockBadge => 'Mock data';
+
+  @override
+  String get driverAccessLoadFailed => 'Failed to load driver list.';
+
+  @override
+  String get driverAccessPrivacyNotice =>
+      'Metadata only: name, status, device label, session count. No tokens, PIN hash, or message content.';
+
+  @override
+  String get driverAccessBackendTitle => 'Backend dependency';
+
+  @override
+  String get driverAccessBackendMessage =>
+      'Platform driver list endpoint is not available yet. Sample data appears in mock mode.';
+
+  @override
+  String get driverAccessDetailTitle => 'Driver details';
+
+  @override
+  String get driverAccessNotFound => 'Driver not found.';
+
+  @override
+  String get driverAccessFieldName => 'Name';
+
+  @override
+  String get driverAccessFieldCompany => 'Company';
+
+  @override
+  String get driverAccessRegistrationStatus => 'Registration status';
+
+  @override
+  String get driverAccessFieldDeviceLabel => 'Device label';
+
+  @override
+  String get driverAccessFieldActiveSessions => 'Active sessions';
+
+  @override
+  String get driverAccessFieldLastActivity => 'Last activity';
+
+  @override
+  String get driverAccessEnableDisableTitle => 'Enable/disable driver';
+
+  @override
+  String get driverAccessEnableDisableDependency =>
+      'Driver status change endpoint is not available yet.';
+
+  @override
+  String get driverAccessStatusPending => 'Pending';
+
+  @override
+  String get driverAccessStatusActive => 'Active';
+
+  @override
+  String get driverAccessStatusDisabled => 'Disabled';
+
+  @override
+  String get driverAccessStatusInvited => 'Invited';
+
+  @override
+  String get tripsOverviewTitle => 'Trips overview';
+
+  @override
+  String get tripsOverviewMockBadge => 'Mock data';
+
+  @override
+  String get tripsOverviewLoadFailed => 'Failed to load trips overview.';
+
+  @override
+  String get tripsOverviewPrivacyNotice =>
+      'Trip metadata only: reference, status, exchange indicators. No document or message content.';
+
+  @override
+  String get tripsOverviewActiveCount => 'Active trips';
+
+  @override
+  String get tripsOverviewCompletedCount => 'Completed trips';
+
+  @override
+  String get tripsOverviewParkedCount => 'Parked trips';
+
+  @override
+  String get tripsOverviewBackendTitle => 'Backend dependency';
+
+  @override
+  String get tripsOverviewBackendMessage =>
+      'Platform trip list endpoint is not available yet. Summary counts come from the dashboard API.';
+
+  @override
+  String get tripsOverviewListTitle => 'Trips';
+
+  @override
+  String get tripsOverviewExchangeIndicator => 'Has exchange record';
+
+  @override
+  String get tripsOverviewExchangeAttention => 'Exchange attention';
+
+  @override
+  String get tripsOverviewPendingSync => 'Pending sync';
+
+  @override
+  String get tripsOverviewStatusActive => 'Active';
+
+  @override
+  String get tripsOverviewStatusCompleted => 'Completed';
+
+  @override
+  String get tripsOverviewStatusParked => 'Parked';
+
+  @override
+  String get tripsOverviewStatusPending => 'Pending';
+
+  @override
+  String get exchangeRecordsTitle => 'Exchange records';
+
+  @override
+  String get exchangeRecordsMockBadge => 'Mock data';
+
+  @override
+  String get exchangeRecordsLoadFailed => 'Failed to load exchange records.';
+
+  @override
+  String get exchangeRecordsPrivacyNotice =>
+      'Record metadata only: item, quantities, status, timestamp. No attachment content or storage keys.';
+
+  @override
+  String get exchangeRecordsBackendTitle => 'Backend dependency';
+
+  @override
+  String get exchangeRecordsBackendMessage =>
+      'Platform exchange record list endpoint is not available yet.';
+
+  @override
+  String get exchangeRecordsFilterAll => 'All';
+
+  @override
+  String get exchangeRecordsFilterDisputed => 'Disputed';
+
+  @override
+  String get exchangeRecordsFilterDamaged => 'Damaged';
+
+  @override
+  String get exchangeRecordsFilterMissing => 'Missing';
+
+  @override
+  String get exchangeRecordsListEmpty => 'No records match the filter.';
+
+  @override
+  String get exchangeRecordsFieldStatus => 'Status';
+
+  @override
+  String get exchangeRecordsFieldMissing => 'Missing';
+
+  @override
+  String get exchangeRecordsFieldDamaged => 'Damaged';
+
+  @override
+  String get exchangeRecordsStatusCompleted => 'Completed';
+
+  @override
+  String get exchangeRecordsStatusDisputed => 'Disputed';
+
+  @override
+  String get exchangeRecordsStatusDamaged => 'Damaged';
+
+  @override
+  String get exchangeRecordsStatusMissing => 'Missing';
+
+  @override
+  String get exchangeRecordsStatusUnknown => 'Unknown';
+
+  @override
+  String get notificationStatusTitle => 'Notification status';
+
+  @override
+  String get notificationStatusPrivacyNotice =>
+      'Push infrastructure metadata only. No FCM/APNS tokens, secrets, or credentials.';
+
+  @override
+  String get notificationStatusLoadFailed =>
+      'Failed to load notification status.';
+
+  @override
+  String get notificationStatusDriverFoundationTitle =>
+      'Driver app notification foundation';
+
+  @override
+  String get notificationStatusDriverFoundationReady =>
+      'Ready — in-app and push foundation implemented.';
+
+  @override
+  String get notificationStatusDeviceTokenTitle => 'Device token registration';
+
+  @override
+  String get notificationStatusDeviceTokenDependency =>
+      'Driver device token registration endpoint is not available to admin yet.';
+
+  @override
+  String get notificationStatusEventsTitle => 'Recent notification events';
+
+  @override
+  String get notificationStatusEventsDependency =>
+      'Platform notification event list endpoint is not available yet.';
+
+  @override
+  String get notificationStatusProductionPushConfigured =>
+      'Production push backend configured';
+
+  @override
+  String get notificationStatusBackendDependency =>
+      'Backend dependency — production push not fully wired.';
+
+  @override
+  String get companyExchangeItemSortOrder => 'Sort order';
+
+  @override
+  String get companyExchangePackagingCrudTitle => 'Packaging list editing';
+
+  @override
+  String get companyExchangePackagingCrudDependency =>
+      'Default packaging item CRUD is not available yet. Read-only list for now.';
+
+  @override
+  String get companyExchangeManualPalletRecordTitle =>
+      'Driver manual pallet record';
+
+  @override
+  String get companyExchangeManualPalletRecordDependency =>
+      'Driver manual pallet record policy toggle endpoint is not available yet.';
 }
