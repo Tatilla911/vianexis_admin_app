@@ -1,8 +1,19 @@
 # ViaNexis Admin App — production readiness
 
-## Summary
+## Summary (2026-07-05 platform checkpoint)
 
-The ViaNexis Admin App is a Flutter client for platform staff. It connects to `transdoc-backend` `/platform-admin/*` endpoints and enforces metadata-only views by default.
+| Gate | Result |
+|------|--------|
+| `flutter analyze lib` | **PASS** — 0 issues |
+| `flutter test` | **334/334 PASS** |
+| Release readiness script | **OK** |
+| Git tree | **Clean** at `d8a533b` |
+
+**Exchange settings admin:** Company exchange toggles (pallet, packaging, driver custom items) — foundation at `d8a533b`. Default packaging list editor phase 2.
+
+**Blockers:** No app store pipeline; staging URL at build time; push notifications not started.
+
+See backend repo `transdoc-backend/docs/platform-integration-matrix.md` (cross-repo matrix).
 
 ## Configuration
 
