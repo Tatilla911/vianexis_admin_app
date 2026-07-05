@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+
+import '../../../app/app_router.dart';
 
 import '../../../core/auth/admin_auth_state.dart';
 import '../../../core/localization/localization_resolver.dart';
@@ -160,6 +163,19 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
               Text(
                 resolvePlatformCompanyKey(context, 'platformCompanyPrivacyNotice'),
                 style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                onPressed: () => context.push(
+                  AdminRoutes.platformCompanyExchangeSettings(companyId),
+                ),
+                icon: const Icon(Icons.swap_horiz_outlined),
+                label: Text(
+                  resolvePlatformCompanyKey(
+                    context,
+                    'platformCompanyExchangeSettingsAction',
+                  ),
+                ),
               ),
               if (canChangeStatus) ...[
                 const SizedBox(height: 20),

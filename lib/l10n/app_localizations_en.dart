@@ -2526,6 +2526,75 @@ class AppLocalizationsEn extends AppLocalizations {
       'Company status change is unavailable.';
 
   @override
+  String get platformCompanyExchangeSettingsAction =>
+      'Pallet / packaging settings';
+
+  @override
+  String get companyExchangeSettingsTitle => 'Company exchange settings';
+
+  @override
+  String get companyExchangeMockDataBadge => 'Mock data';
+
+  @override
+  String get companyExchangeSaved => 'Settings saved.';
+
+  @override
+  String get companyExchangeSaveFailed => 'Save failed.';
+
+  @override
+  String get companyExchangeLoadFailed => 'Failed to load settings.';
+
+  @override
+  String get companyExchangeBackendDependency =>
+      'Backend exchange settings endpoint unavailable. Check API access and role.';
+
+  @override
+  String get companyExchangePrivacyNotice =>
+      'Company feature flags and list metadata only. No trip, document, or message content.';
+
+  @override
+  String get companyExchangeMockNotice =>
+      'Mock mode: save updates local preview data only. Production requires the backend API.';
+
+  @override
+  String get companyExchangePalletEnabled => 'Pallet exchange enabled';
+
+  @override
+  String get companyExchangePalletEnabledHint =>
+      'Show pallet exchange card in the driver app.';
+
+  @override
+  String get companyExchangePackagingEnabled => 'Packaging exchange enabled';
+
+  @override
+  String get companyExchangePackagingEnabledHint =>
+      'Show packaging exchange card in the driver app.';
+
+  @override
+  String get companyExchangeCustomItemsEnabled =>
+      'Driver custom packaging items';
+
+  @override
+  String get companyExchangeCustomItemsEnabledHint =>
+      'Allow drivers to add custom packaging items.';
+
+  @override
+  String get companyExchangeDefaultPalletTypes => 'Default pallet types';
+
+  @override
+  String get companyExchangeDefaultPackagingItems => 'Default packaging list';
+
+  @override
+  String get companyExchangeDefaultPackagingPlaceholder =>
+      'List editing arrives in a later admin version. Read-only preview for now.';
+
+  @override
+  String get companyExchangeItemInactive => 'Inactive';
+
+  @override
+  String get companyExchangeSave => 'Save';
+
+  @override
   String get navBilling => 'Billing';
 
   @override

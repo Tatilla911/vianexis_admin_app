@@ -30,6 +30,7 @@ import '../features/customer_communications/presentation/customer_communications
 import '../features/customer_communications/presentation/evidence_package_detail_screen.dart';
 import '../features/companies/presentation/platform_companies_screen.dart';
 import '../features/companies/presentation/platform_company_detail_screen.dart';
+import '../features/company_settings/presentation/company_exchange_settings_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/modules/admin_modules_hub_screen.dart';
@@ -176,6 +177,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => PlatformCompanyDetailScreen(
                   companyId: state.pathParameters['id'] ?? '',
                 ),
+                routes: [
+                  GoRoute(
+                    path: 'exchange-settings',
+                    builder: (context, state) => CompanyExchangeSettingsScreen(
+                      companyId: state.pathParameters['id'] ?? '',
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -422,6 +431,9 @@ abstract final class AdminRoutes {
   static String registrationDetail(String id) => '$registrations/$id';
 
   static String platformCompanyDetail(String id) => '$companies/$id';
+
+  static String platformCompanyExchangeSettings(String id) =>
+      '$companies/$id/exchange-settings';
 
   static String billingSubscriptionDetail(String id) => '$billing/subscription/$id';
 

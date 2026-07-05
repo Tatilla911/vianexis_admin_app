@@ -1009,6 +1009,8 @@ String resolvePlatformCompanyKey(
     'platformCompanyStatusConfirm' => l10n.platformCompanyStatusConfirm,
     'platformCompanyStatusSuccess' => l10n.platformCompanyStatusSuccess,
     'platformCompanyStatusUnavailable' => l10n.platformCompanyStatusUnavailable,
+    'platformCompanyExchangeSettingsAction' =>
+      l10n.platformCompanyExchangeSettingsAction,
     _ => l10n.errorGenericBody,
   };
 }

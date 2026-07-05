@@ -2564,6 +2564,77 @@ class AppLocalizationsHu extends AppLocalizations {
       'A státuszváltoztatás nem érhető el.';
 
   @override
+  String get platformCompanyExchangeSettingsAction =>
+      'Raklap / göngyöleg beállítások';
+
+  @override
+  String get companyExchangeSettingsTitle => 'Céges exchange beállítások';
+
+  @override
+  String get companyExchangeMockDataBadge => 'Tesztadat';
+
+  @override
+  String get companyExchangeSaved => 'A beállítások mentve.';
+
+  @override
+  String get companyExchangeSaveFailed => 'A mentés sikertelen.';
+
+  @override
+  String get companyExchangeLoadFailed => 'A beállítások betöltése sikertelen.';
+
+  @override
+  String get companyExchangeBackendDependency =>
+      'A backend exchange beállítások endpointja nem érhető el. Ellenőrizze az API hozzáférést és a szerepkört.';
+
+  @override
+  String get companyExchangePrivacyNotice =>
+      'Csak céges feature flag és lista metaadat. Fuvar-, dokumentum- és üzenettartalom nem jelenik meg.';
+
+  @override
+  String get companyExchangeMockNotice =>
+      'Teszt mód: a mentés csak helyi mock adatot frissít. Éles környezetben a backend API szükséges.';
+
+  @override
+  String get companyExchangePalletEnabled => 'Raklapcsere engedélyezve';
+
+  @override
+  String get companyExchangePalletEnabledHint =>
+      'Sofőr app raklapcsere kártya megjelenítése.';
+
+  @override
+  String get companyExchangePackagingEnabled => 'Göngyölegcsere engedélyezve';
+
+  @override
+  String get companyExchangePackagingEnabledHint =>
+      'Sofőr app göngyöleg kártya megjelenítése.';
+
+  @override
+  String get companyExchangeCustomItemsEnabled =>
+      'Sofőr egyedi göngyöleg tételek';
+
+  @override
+  String get companyExchangeCustomItemsEnabledHint =>
+      'Engedélyezi az egyedi tétel hozzáadást a sofőr appban.';
+
+  @override
+  String get companyExchangeDefaultPalletTypes =>
+      'Alapértelmezett raklap típusok';
+
+  @override
+  String get companyExchangeDefaultPackagingItems =>
+      'Alapértelmezett göngyöleg lista';
+
+  @override
+  String get companyExchangeDefaultPackagingPlaceholder =>
+      'A lista szerkesztése későbbi admin verzióban érkezik. Jelenleg csak olvasható előnézet.';
+
+  @override
+  String get companyExchangeItemInactive => 'Inaktív';
+
+  @override
+  String get companyExchangeSave => 'Mentés';
+
+  @override
   String get navBilling => 'Számlázás';
 
   @override

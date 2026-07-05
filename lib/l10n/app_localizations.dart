@@ -4712,6 +4712,126 @@ abstract class AppLocalizations {
   /// **'Company status change is unavailable.'**
   String get platformCompanyStatusUnavailable;
 
+  /// No description provided for @platformCompanyExchangeSettingsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Pallet / packaging settings'**
+  String get platformCompanyExchangeSettingsAction;
+
+  /// No description provided for @companyExchangeSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Company exchange settings'**
+  String get companyExchangeSettingsTitle;
+
+  /// No description provided for @companyExchangeMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get companyExchangeMockDataBadge;
+
+  /// No description provided for @companyExchangeSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings saved.'**
+  String get companyExchangeSaved;
+
+  /// No description provided for @companyExchangeSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Save failed.'**
+  String get companyExchangeSaveFailed;
+
+  /// No description provided for @companyExchangeLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load settings.'**
+  String get companyExchangeLoadFailed;
+
+  /// No description provided for @companyExchangeBackendDependency.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend exchange settings endpoint unavailable. Check API access and role.'**
+  String get companyExchangeBackendDependency;
+
+  /// No description provided for @companyExchangePrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Company feature flags and list metadata only. No trip, document, or message content.'**
+  String get companyExchangePrivacyNotice;
+
+  /// No description provided for @companyExchangeMockNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock mode: save updates local preview data only. Production requires the backend API.'**
+  String get companyExchangeMockNotice;
+
+  /// No description provided for @companyExchangePalletEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Pallet exchange enabled'**
+  String get companyExchangePalletEnabled;
+
+  /// No description provided for @companyExchangePalletEnabledHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Show pallet exchange card in the driver app.'**
+  String get companyExchangePalletEnabledHint;
+
+  /// No description provided for @companyExchangePackagingEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging exchange enabled'**
+  String get companyExchangePackagingEnabled;
+
+  /// No description provided for @companyExchangePackagingEnabledHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Show packaging exchange card in the driver app.'**
+  String get companyExchangePackagingEnabledHint;
+
+  /// No description provided for @companyExchangeCustomItemsEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver custom packaging items'**
+  String get companyExchangeCustomItemsEnabled;
+
+  /// No description provided for @companyExchangeCustomItemsEnabledHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow drivers to add custom packaging items.'**
+  String get companyExchangeCustomItemsEnabledHint;
+
+  /// No description provided for @companyExchangeDefaultPalletTypes.
+  ///
+  /// In en, this message translates to:
+  /// **'Default pallet types'**
+  String get companyExchangeDefaultPalletTypes;
+
+  /// No description provided for @companyExchangeDefaultPackagingItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Default packaging list'**
+  String get companyExchangeDefaultPackagingItems;
+
+  /// No description provided for @companyExchangeDefaultPackagingPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'List editing arrives in a later admin version. Read-only preview for now.'**
+  String get companyExchangeDefaultPackagingPlaceholder;
+
+  /// No description provided for @companyExchangeItemInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get companyExchangeItemInactive;
+
+  /// No description provided for @companyExchangeSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get companyExchangeSave;
+
   /// No description provided for @navBilling.
   ///
   /// In en, this message translates to:
