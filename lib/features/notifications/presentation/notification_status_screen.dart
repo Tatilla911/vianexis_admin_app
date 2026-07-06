@@ -15,6 +15,7 @@ class NotificationStatusScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pushStatusAsync = ref.watch(pushProviderStatusProvider);
+    final eventsAsync = ref.watch(notificationEventsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -71,19 +72,74 @@ class NotificationStatusScreen extends ConsumerWidget {
               context,
               'notificationStatusDeviceTokenDependency',
             ),
-            endpointHint: 'POST /drivers/device-tokens (planned)',
+            endpointHint:
+                'GET /platform-admin/drivers/:id/device-notification-status',
           ),
           const SizedBox(height: 12),
-          BackendDependencyCard(
-            title: resolveNotificationStatusKey(
+          eventsAsync.when(
+            loading: () => const VianexisLoadingView(),
+            error: (error, _) => VianexisErrorView.fromError(
               context,
-              'notificationStatusEventsTitle',
+              error,
+              fallbackMessage: resolveNotificationStatusKey(
+                context,
+                'notificationStatusLoadFailed',
+              ),
+              onRetry: () => ref.invalidate(notificationEventsProvider),
             ),
-            message: resolveNotificationStatusKey(
-              context,
-              'notificationStatusEventsDependency',
-            ),
-            endpointHint: 'GET /platform-admin/notification-events (planned)',
+            data: (events) {
+              if (events.sourceUnavailable) {
+                return BackendDependencyCard(
+                  title: resolveNotificationStatusKey(
+                    context,
+                    'notificationStatusEventsTitle',
+                  ),
+                  message: resolveNotificationStatusKey(
+                    context,
+                    'notificationStatusEventsUnavailable',
+                  ),
+                  endpointHint: 'GET /platform-admin/notification-events',
+                );
+              }
+              if (events.items.isEmpty) {
+                return Card(
+                  child: ListTile(
+                    title: Text(
+                      resolveNotificationStatusKey(
+                        context,
+                        'notificationStatusEventsTitle',
+                      ),
+                    ),
+                    subtitle: Text(
+                      resolveNotificationStatusKey(
+                        context,
+                        'notificationStatusEventsEmpty',
+                      ),
+                    ),
+                  ),
+                );
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    resolveNotificationStatusKey(
+                      context,
+                      'notificationStatusEventsTitle',
+                    ),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  const SizedBox(height: 8),
+                  for (final event in events.items)
+                    Card(
+                      child: ListTile(
+                        title: Text(event.type),
+                        subtitle: Text('${event.status} · ${event.id}'),
+                      ),
+                    ),
+                ],
+              );
+            },
           ),
         ],
       ),

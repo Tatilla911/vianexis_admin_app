@@ -61,6 +61,7 @@ class CompanyExchangeSettings {
     required this.palletExchangeEnabled,
     required this.packagingExchangeEnabled,
     required this.allowDriverCustomPackagingItems,
+    required this.allowDriverManualPalletRecords,
     required this.defaultPalletTypes,
     required this.defaultPackagingItems,
   });
@@ -68,6 +69,7 @@ class CompanyExchangeSettings {
   final bool palletExchangeEnabled;
   final bool packagingExchangeEnabled;
   final bool allowDriverCustomPackagingItems;
+  final bool allowDriverManualPalletRecords;
   final List<String> defaultPalletTypes;
   final List<DefaultPackagingItem> defaultPackagingItems;
 
@@ -79,6 +81,8 @@ class CompanyExchangeSettings {
       packagingExchangeEnabled: json['packagingExchangeEnabled'] != false,
       allowDriverCustomPackagingItems:
           json['allowDriverCustomPackagingItems'] != false,
+      allowDriverManualPalletRecords:
+          json['allowDriverManualPalletRecords'] != false,
       defaultPalletTypes: palletTypes is List
           ? palletTypes.map((value) => value.toString()).toList(growable: false)
           : const [],
@@ -95,6 +99,7 @@ class CompanyExchangeSettings {
     bool? palletExchangeEnabled,
     bool? packagingExchangeEnabled,
     bool? allowDriverCustomPackagingItems,
+    bool? allowDriverManualPalletRecords,
     List<String>? defaultPalletTypes,
     List<DefaultPackagingItem>? defaultPackagingItems,
   }) {
@@ -106,6 +111,8 @@ class CompanyExchangeSettings {
       allowDriverCustomPackagingItems:
           allowDriverCustomPackagingItems ??
           this.allowDriverCustomPackagingItems,
+      allowDriverManualPalletRecords:
+          allowDriverManualPalletRecords ?? this.allowDriverManualPalletRecords,
       defaultPalletTypes: defaultPalletTypes ?? this.defaultPalletTypes,
       defaultPackagingItems:
           defaultPackagingItems ?? this.defaultPackagingItems,
@@ -118,11 +125,13 @@ class CompanyExchangeSettingsPatch {
     this.palletExchangeEnabled,
     this.packagingExchangeEnabled,
     this.allowDriverCustomPackagingItems,
+    this.allowDriverManualPalletRecords,
   });
 
   final bool? palletExchangeEnabled;
   final bool? packagingExchangeEnabled;
   final bool? allowDriverCustomPackagingItems;
+  final bool? allowDriverManualPalletRecords;
 
   Map<String, dynamic> toJson() {
     return {
@@ -132,6 +141,8 @@ class CompanyExchangeSettingsPatch {
         'packagingExchangeEnabled': packagingExchangeEnabled,
       if (allowDriverCustomPackagingItems != null)
         'allowDriverCustomPackagingItems': allowDriverCustomPackagingItems,
+      if (allowDriverManualPalletRecords != null)
+        'allowDriverManualPalletRecords': allowDriverManualPalletRecords,
     };
   }
 }

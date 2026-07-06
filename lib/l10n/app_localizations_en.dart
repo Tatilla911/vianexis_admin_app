@@ -4759,6 +4759,19 @@ class AppLocalizationsEn extends AppLocalizations {
       'Platform-wide sync warning list is not wired yet.';
 
   @override
+  String get operationsPendingSyncUnavailable =>
+      'Pending sync count is not available from a reliable backend source yet.';
+
+  @override
+  String operationsExchangeMetricsSummary(
+    int total,
+    int disputed,
+    int missing,
+  ) {
+    return '$total records · $disputed disputed · $missing missing';
+  }
+
+  @override
   String get operationsExchangeRecordsTitle => 'Pallet/packaging records';
 
   @override
@@ -4860,6 +4873,33 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get driverAccessEnableDisableDependency =>
       'Driver status change endpoint is not available yet.';
+
+  @override
+  String get driverAccessEnable => 'Enable driver';
+
+  @override
+  String get driverAccessDisable => 'Disable driver';
+
+  @override
+  String get driverAccessStatusChangeSuccess => 'Driver status updated.';
+
+  @override
+  String get driverAccessStatusChangeFailed =>
+      'Could not update driver status.';
+
+  @override
+  String get driverAccessDeviceNotificationTitle => 'Device push registration';
+
+  @override
+  String get driverAccessDeviceNotificationUnavailable =>
+      'Driver device push metadata is not available from backend yet.';
+
+  @override
+  String get driverAccessHasPushToken =>
+      'Push token registered (metadata only).';
+
+  @override
+  String get driverAccessNoPushToken => 'No push token registered.';
 
   @override
   String get driverAccessStatusPending => 'Pending';
@@ -5019,6 +5059,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Platform notification event list endpoint is not available yet.';
 
   @override
+  String get notificationStatusEventsUnavailable =>
+      'Notification event store is not available yet (sourceUnavailable).';
+
+  @override
+  String get notificationStatusEventsEmpty =>
+      'No notification events recorded yet.';
+
+  @override
   String get notificationStatusProductionPushConfigured =>
       'Production push backend configured';
 
@@ -5043,6 +5091,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get companyExchangeManualPalletRecordDependency =>
       'Driver manual pallet record policy toggle endpoint is not available yet.';
+
+  @override
+  String get companyExchangeManualPalletEnabled =>
+      'Allow driver manual pallet records';
+
+  @override
+  String get companyExchangeManualPalletEnabledHint =>
+      'Drivers can record pallet exchange manually when enabled.';
 
   @override
   String get companyExchangeAddPackagingItem => 'Add packaging item';

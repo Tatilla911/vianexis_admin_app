@@ -11,6 +11,7 @@ import 'package:vianexis_admin_app/features/notifications/data/notifications_rep
 import 'package:vianexis_admin_app/features/notifications/domain/push_provider_status.dart';
 import 'package:vianexis_admin_app/features/notifications/presentation/notification_status_screen.dart';
 import 'package:vianexis_admin_app/features/operations/data/operations_repository.dart';
+import 'package:vianexis_admin_app/features/operations/domain/operational_metrics_snapshot.dart';
 import 'package:vianexis_admin_app/features/operations/domain/platform_operations_snapshot.dart';
 import 'package:vianexis_admin_app/features/operations/presentation/operations_screen.dart';
 import 'package:vianexis_admin_app/features/trips_overview/presentation/trips_overview_screen.dart';
@@ -26,6 +27,22 @@ class _FixedOperationsRepository implements OperationsRepository {
 
   @override
   Future<PlatformOperationsSnapshot> fetchSnapshot() async => _snapshot;
+
+  @override
+  Future<OperationalMetricsSnapshot?> fetchOperationalMetrics() async {
+    return const OperationalMetricsSnapshot(
+      metadataOnly: true,
+      exchangeRecordsTotal: 5,
+      exchangeDisputed: 1,
+      exchangeDamaged: 0,
+      exchangeMissing: 1,
+      pendingSyncCount: null,
+      pendingSyncSourceUnavailable: true,
+      driversActive: 10,
+      driversDisabled: 1,
+      driversPending: 0,
+    );
+  }
 }
 
 const _sampleSnapshot = PlatformOperationsSnapshot(

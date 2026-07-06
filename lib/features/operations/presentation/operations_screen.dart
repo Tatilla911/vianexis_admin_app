@@ -13,7 +13,9 @@ import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../core/widgets/vianexis_metadata_notice.dart';
 import '../../../core/widgets/vianexis_metric_tile.dart';
 import '../../../app/vianexis_brand.dart';
+import '../../../l10n/app_localizations.dart';
 import '../data/operations_repository.dart';
+import '../domain/operational_metrics_snapshot.dart';
 import '../domain/platform_operations_snapshot.dart';
 
 class OperationsScreen extends ConsumerWidget {
@@ -40,47 +42,119 @@ class OperationsScreen extends ConsumerWidget {
           fallbackMessage: resolveOperationsKey(context, 'operationsLoadFailed'),
           onRetry: () => ref.invalidate(platformOperationsSnapshotProvider),
         ),
-        data: (snapshot) => ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            VianexisMetadataNotice(
-              message: resolveOperationsKey(context, 'operationsPrivacyNotice'),
+        data: (snapshot) {
+          final metricsAsync = ref.watch(operationalMetricsProvider);
+          return ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              VianexisMetadataNotice(
+                message: resolveOperationsKey(context, 'operationsPrivacyNotice'),
+              ),
+              const SizedBox(height: 12),
+              _metricsGrid(
+              context,
+              snapshot,
+              metricsAsync.asData?.value,
             ),
-            const SizedBox(height: 12),
-            _metricsGrid(context, snapshot),
-            const SizedBox(height: 16),
-            _moduleLinks(context, snapshot),
-            const SizedBox(height: 16),
-            BackendDependencyCard(
-              title: resolveOperationsKey(context, 'operationsPendingSyncTitle'),
-              message: resolveOperationsKey(context, 'operationsPendingSyncDependency'),
-              endpointHint: 'GET /platform-admin/operational-metrics (planned)',
-            ),
-            const SizedBox(height: 12),
-            BackendDependencyCard(
-              title: resolveOperationsKey(context, 'operationsExchangeRecordsTitle'),
-              message: resolveOperationsKey(context, 'operationsExchangeRecordsDependency'),
-              endpointHint: 'GET /platform-admin/exchange-records (planned)',
-            ),
-          ],
-        ),
+              const SizedBox(height: 16),
+              _moduleLinks(context, snapshot),
+              const SizedBox(height: 16),
+              metricsAsync.when(
+                loading: () => const SizedBox.shrink(),
+                error: (_, __) => BackendDependencyCard(
+                  title: resolveOperationsKey(
+                    context,
+                    'operationsPendingSyncTitle',
+                  ),
+                  message: resolveOperationsKey(
+                    context,
+                    'operationsPendingSyncDependency',
+                  ),
+                  endpointHint: 'GET /platform-admin/operational-metrics',
+                ),
+                data: (metrics) {
+                  if (metrics == null) {
+                    return const SizedBox.shrink();
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Card(
+                        child: ListTile(
+                          leading: const Icon(Icons.swap_horiz_outlined),
+                          title: Text(
+                            resolveOperationsKey(
+                              context,
+                              'operationsExchangeRecordsTitle',
+                            ),
+                          ),
+                          subtitle: Text(
+                            AppLocalizations.of(context).operationsExchangeMetricsSummary(
+                              metrics.exchangeRecordsTotal,
+                              metrics.exchangeDisputed,
+                              metrics.exchangeMissing,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      if (metrics.pendingSyncSourceUnavailable)
+                        BackendDependencyCard(
+                          title: resolveOperationsKey(
+                            context,
+                            'operationsPendingSyncTitle',
+                          ),
+                          message: resolveOperationsKey(
+                            context,
+                            'operationsPendingSyncUnavailable',
+                          ),
+                          endpointHint: 'pendingSync.sourceUnavailable',
+                        )
+                      else
+                        Card(
+                          child: ListTile(
+                            leading: const Icon(Icons.sync_problem_outlined),
+                            title: Text(
+                              resolveOperationsKey(
+                                context,
+                                'operationsPendingSyncTitle',
+                              ),
+                            ),
+                            subtitle: Text('${metrics.pendingSyncCount ?? 0}'),
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  Widget _metricsGrid(BuildContext context, PlatformOperationsSnapshot snapshot) {
+  Widget _metricsGrid(
+    BuildContext context,
+    PlatformOperationsSnapshot snapshot,
+    OperationalMetricsSnapshot? operationalMetrics,
+  ) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth >= VianexisBrand.tabletBreakpoint;
         final tileWidth = isWide
             ? (constraints.maxWidth - VianexisBrand.spaceMd) / 2
             : double.infinity;
-        final metrics = _buildMetrics(context, snapshot);
+        final metricTiles = _buildMetrics(
+          context,
+          snapshot,
+          operationalMetrics,
+        );
         return Wrap(
           spacing: VianexisBrand.spaceMd,
           runSpacing: VianexisBrand.spaceMd,
           children: [
-            for (final metric in metrics)
+            for (final metric in metricTiles)
               SizedBox(
                 width: tileWidth,
                 child: VianexisMetricTile(
@@ -99,7 +173,11 @@ class OperationsScreen extends ConsumerWidget {
   List<(String, String, VianexisMetricTone, IconData)> _buildMetrics(
     BuildContext context,
     PlatformOperationsSnapshot snapshot,
+    OperationalMetricsSnapshot? operationalMetrics,
   ) {
+    final driversValue = operationalMetrics != null
+        ? '${operationalMetrics.driversActive}'
+        : '${snapshot.driversEstimate}';
     return [
       (
         resolveOperationsKey(context, 'operationsCompanyCount'),
@@ -109,7 +187,7 @@ class OperationsScreen extends ConsumerWidget {
       ),
       (
         resolveOperationsKey(context, 'operationsActiveDrivers'),
-        '${snapshot.driversEstimate}',
+        driversValue,
         VianexisMetricTone.success,
         Icons.local_shipping_outlined,
       ),

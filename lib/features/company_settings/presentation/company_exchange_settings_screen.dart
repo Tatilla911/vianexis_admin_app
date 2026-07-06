@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/widgets/backend_dependency_card.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
-import '../../../l10n/app_localizations.dart';
 import '../data/company_exchange_settings_repository.dart';
 import '../domain/company_exchange_settings.dart';
 
@@ -25,6 +24,7 @@ class _CompanyExchangeSettingsScreenState
   bool? _palletEnabled;
   bool? _packagingEnabled;
   bool? _customItemsEnabled;
+  bool? _manualPalletEnabled;
   bool _dirty = false;
   bool _saving = false;
   bool _packagingActionInProgress = false;
@@ -33,6 +33,7 @@ class _CompanyExchangeSettingsScreenState
     _palletEnabled = settings.palletExchangeEnabled;
     _packagingEnabled = settings.packagingExchangeEnabled;
     _customItemsEnabled = settings.allowDriverCustomPackagingItems;
+    _manualPalletEnabled = settings.allowDriverManualPalletRecords;
     _dirty = false;
   }
 
@@ -47,6 +48,7 @@ class _CompanyExchangeSettingsScreenState
           palletExchangeEnabled: _palletEnabled,
           packagingExchangeEnabled: _packagingEnabled,
           allowDriverCustomPackagingItems: _customItemsEnabled,
+          allowDriverManualPalletRecords: _manualPalletEnabled,
         ),
       );
       if (!mounted) return;
@@ -281,7 +283,8 @@ class _CompanyExchangeSettingsScreenState
           if (!_dirty &&
               (_palletEnabled == null ||
                   _packagingEnabled == null ||
-                  _customItemsEnabled == null)) {
+                  _customItemsEnabled == null ||
+                  _manualPalletEnabled == null)) {
             _syncFromSettings(settings);
           }
 
@@ -334,6 +337,17 @@ class _CompanyExchangeSettingsScreenState
                     settings.allowDriverCustomPackagingItems,
                 onChanged: (value) => setState(() {
                   _customItemsEnabled = value;
+                  _dirty = true;
+                }),
+              ),
+              SwitchListTile(
+                title: Text(l10n.companyExchangeManualPalletEnabled),
+                subtitle: Text(l10n.companyExchangeManualPalletEnabledHint),
+                value:
+                    _manualPalletEnabled ??
+                    settings.allowDriverManualPalletRecords,
+                onChanged: (value) => setState(() {
+                  _manualPalletEnabled = value;
                   _dirty = true;
                 }),
               ),
@@ -433,13 +447,6 @@ class _CompanyExchangeSettingsScreenState
                       ),
                     ),
                   ),
-              const SizedBox(height: 16),
-              BackendDependencyCard(
-                title: l10n.companyExchangeManualPalletRecordTitle,
-                message: l10n.companyExchangeManualPalletRecordDependency,
-                endpointHint:
-                    'PATCH /companies/:id/exchange-settings allowDriverManualPalletRecord (planned)',
-              ),
             ],
           );
         },

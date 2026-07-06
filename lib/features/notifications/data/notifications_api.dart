@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/api/api_client.dart';
 import '../domain/admin_device_registration.dart';
 import '../domain/admin_notification.dart';
+import '../domain/notification_events_result.dart';
 import '../domain/notification_preferences.dart';
 import '../domain/push_provider_status.dart';
 
@@ -66,6 +67,17 @@ class NotificationsApi {
       '/platform-admin/notifications/provider-status',
     );
     return PushProviderStatus.fromJson(response.data ?? const {});
+  }
+
+  Future<NotificationEventsResult> listNotificationEvents({
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/notification-events',
+      queryParameters: {'limit': limit, 'offset': offset},
+    );
+    return NotificationEventsResult.fromJson(response.data ?? const {});
   }
 }
 

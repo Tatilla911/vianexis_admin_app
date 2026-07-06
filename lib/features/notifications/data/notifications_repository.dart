@@ -8,6 +8,7 @@ import '../../../app/app_config.dart';
 import '../domain/admin_device_registration.dart';
 import '../domain/admin_notification.dart';
 import '../domain/notification_severity.dart';
+import '../domain/notification_events_result.dart';
 import '../domain/notification_preferences.dart';
 import '../domain/push_provider_status.dart';
 import '../domain/notification_type.dart';
@@ -21,6 +22,7 @@ abstract class NotificationsRepository {
   Future<NotificationPreferences> updatePreferences(NotificationPreferences value);
   Future<void> registerCurrentDevice();
   Future<PushProviderStatus> fetchProviderStatus();
+  Future<NotificationEventsResult> fetchNotificationEvents();
   bool get usesMockData;
   bool get inAppOnly;
 }
@@ -69,6 +71,10 @@ class LiveNotificationsRepository implements NotificationsRepository {
 
   @override
   Future<PushProviderStatus> fetchProviderStatus() => _api.getProviderStatus();
+
+  @override
+  Future<NotificationEventsResult> fetchNotificationEvents() =>
+      _api.listNotificationEvents();
 }
 
 class MockNotificationsRepository implements NotificationsRepository {
@@ -156,6 +162,16 @@ class MockNotificationsRepository implements NotificationsRepository {
       tokenStorageMode: 'hash_only',
     );
   }
+
+  @override
+  Future<NotificationEventsResult> fetchNotificationEvents() async {
+    return const NotificationEventsResult(
+      metadataOnly: true,
+      sourceUnavailable: true,
+      items: [],
+      total: 0,
+    );
+  }
 }
 
 final notificationsRepositoryProvider = Provider<NotificationsRepository>((ref) {
@@ -229,6 +245,11 @@ final unreadNotificationCountProvider = Provider<int>((ref) {
 final pushProviderStatusProvider =
     FutureProvider.autoDispose<PushProviderStatus>((ref) {
       return ref.watch(notificationsRepositoryProvider).fetchProviderStatus();
+    });
+
+final notificationEventsProvider =
+    FutureProvider.autoDispose<NotificationEventsResult>((ref) {
+      return ref.watch(notificationsRepositoryProvider).fetchNotificationEvents();
     });
 
 String get _deviceId => _cachedDeviceId ??= _generateDeviceId();

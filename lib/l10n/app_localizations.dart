@@ -8724,6 +8724,18 @@ abstract class AppLocalizations {
   /// **'Platform-wide sync warning list is not wired yet.'**
   String get operationsPendingSyncDependency;
 
+  /// No description provided for @operationsPendingSyncUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending sync count is not available from a reliable backend source yet.'**
+  String get operationsPendingSyncUnavailable;
+
+  /// No description provided for @operationsExchangeMetricsSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{total} records · {disputed} disputed · {missing} missing'**
+  String operationsExchangeMetricsSummary(int total, int disputed, int missing);
+
   /// No description provided for @operationsExchangeRecordsTitle.
   ///
   /// In en, this message translates to:
@@ -8921,6 +8933,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Driver status change endpoint is not available yet.'**
   String get driverAccessEnableDisableDependency;
+
+  /// No description provided for @driverAccessEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable driver'**
+  String get driverAccessEnable;
+
+  /// No description provided for @driverAccessDisable.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable driver'**
+  String get driverAccessDisable;
+
+  /// No description provided for @driverAccessStatusChangeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver status updated.'**
+  String get driverAccessStatusChangeSuccess;
+
+  /// No description provided for @driverAccessStatusChangeFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update driver status.'**
+  String get driverAccessStatusChangeFailed;
+
+  /// No description provided for @driverAccessDeviceNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Device push registration'**
+  String get driverAccessDeviceNotificationTitle;
+
+  /// No description provided for @driverAccessDeviceNotificationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver device push metadata is not available from backend yet.'**
+  String get driverAccessDeviceNotificationUnavailable;
+
+  /// No description provided for @driverAccessHasPushToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Push token registered (metadata only).'**
+  String get driverAccessHasPushToken;
+
+  /// No description provided for @driverAccessNoPushToken.
+  ///
+  /// In en, this message translates to:
+  /// **'No push token registered.'**
+  String get driverAccessNoPushToken;
 
   /// No description provided for @driverAccessStatusPending.
   ///
@@ -9216,6 +9276,18 @@ abstract class AppLocalizations {
   /// **'Platform notification event list endpoint is not available yet.'**
   String get notificationStatusEventsDependency;
 
+  /// No description provided for @notificationStatusEventsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification event store is not available yet (sourceUnavailable).'**
+  String get notificationStatusEventsUnavailable;
+
+  /// No description provided for @notificationStatusEventsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No notification events recorded yet.'**
+  String get notificationStatusEventsEmpty;
+
   /// No description provided for @notificationStatusProductionPushConfigured.
   ///
   /// In en, this message translates to:
@@ -9257,6 +9329,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Driver manual pallet record policy toggle endpoint is not available yet.'**
   String get companyExchangeManualPalletRecordDependency;
+
+  /// No description provided for @companyExchangeManualPalletEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow driver manual pallet records'**
+  String get companyExchangeManualPalletEnabled;
+
+  /// No description provided for @companyExchangeManualPalletEnabledHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drivers can record pallet exchange manually when enabled.'**
+  String get companyExchangeManualPalletEnabledHint;
 
   /// No description provided for @companyExchangeAddPackagingItem.
   ///

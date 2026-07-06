@@ -91,6 +91,7 @@ class MockCompanyExchangeSettingsRepository
     palletExchangeEnabled: true,
     packagingExchangeEnabled: true,
     allowDriverCustomPackagingItems: true,
+    allowDriverManualPalletRecords: true,
     defaultPalletTypes: ['EUR', 'EPAL', 'CHEP'],
     defaultPackagingItems: [
       DefaultPackagingItem(id: 'box', name: 'Doboz'),
@@ -116,6 +117,7 @@ class MockCompanyExchangeSettingsRepository
       palletExchangeEnabled: patch.palletExchangeEnabled,
       packagingExchangeEnabled: patch.packagingExchangeEnabled,
       allowDriverCustomPackagingItems: patch.allowDriverCustomPackagingItems,
+      allowDriverManualPalletRecords: patch.allowDriverManualPalletRecords,
     );
     return _settings;
   }

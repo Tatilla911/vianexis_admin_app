@@ -4826,6 +4826,19 @@ class AppLocalizationsHu extends AppLocalizations {
       'A szinkron figyelmeztetések platform szintű listája még nincs bekötve.';
 
   @override
+  String get operationsPendingSyncUnavailable =>
+      'A függő szinkron számláló megbízható backend forrásból még nem érhető el.';
+
+  @override
+  String operationsExchangeMetricsSummary(
+    int total,
+    int disputed,
+    int missing,
+  ) {
+    return '$total rekord · $disputed vitás · $missing hiányos';
+  }
+
+  @override
   String get operationsExchangeRecordsTitle => 'Raklap/göngyöleg rekordok';
 
   @override
@@ -4927,6 +4940,33 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get driverAccessEnableDisableDependency =>
       'A sofőr státusz módosítása endpoint még nem érhető el.';
+
+  @override
+  String get driverAccessEnable => 'Sofőr engedélyezése';
+
+  @override
+  String get driverAccessDisable => 'Sofőr tiltása';
+
+  @override
+  String get driverAccessStatusChangeSuccess => 'Sofőr státusz frissítve.';
+
+  @override
+  String get driverAccessStatusChangeFailed =>
+      'A sofőr státusz nem módosítható.';
+
+  @override
+  String get driverAccessDeviceNotificationTitle => 'Eszköz push regisztráció';
+
+  @override
+  String get driverAccessDeviceNotificationUnavailable =>
+      'A sofőr eszköz push metaadat még nem érhető el a backendből.';
+
+  @override
+  String get driverAccessHasPushToken =>
+      'Push token regisztrálva (csak metaadat).';
+
+  @override
+  String get driverAccessNoPushToken => 'Nincs regisztrált push token.';
 
   @override
   String get driverAccessStatusPending => 'Függőben';
@@ -5089,6 +5129,14 @@ class AppLocalizationsHu extends AppLocalizations {
       'A platform értesítési esemény lista endpointja még nem érhető el.';
 
   @override
+  String get notificationStatusEventsUnavailable =>
+      'Az értesítési esemény tároló még nem érhető el (sourceUnavailable).';
+
+  @override
+  String get notificationStatusEventsEmpty =>
+      'Még nincs rögzített értesítési esemény.';
+
+  @override
   String get notificationStatusProductionPushConfigured =>
       'Éles push backend konfigurálva';
 
@@ -5113,6 +5161,14 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get companyExchangeManualPalletRecordDependency =>
       'A sofőr manuális raklap rögzítés policy kapcsoló endpointja még nem érhető el.';
+
+  @override
+  String get companyExchangeManualPalletEnabled =>
+      'Sofőr manuális raklap rögzítés engedélyezése';
+
+  @override
+  String get companyExchangeManualPalletEnabledHint =>
+      'Bekapcsolva a sofőr manuálisan rögzíthet raklapcserét.';
 
   @override
   String get companyExchangeAddPackagingItem => 'Göngyöleg hozzáadása';

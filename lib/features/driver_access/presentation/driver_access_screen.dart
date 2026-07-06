@@ -81,14 +81,58 @@ class DriverAccessScreen extends ConsumerWidget {
   }
 }
 
-class DriverAccessDetailScreen extends ConsumerWidget {
+class DriverAccessDetailScreen extends ConsumerStatefulWidget {
   const DriverAccessDetailScreen({super.key, required this.driverId});
 
   final String driverId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DriverAccessDetailScreen> createState() =>
+      _DriverAccessDetailScreenState();
+}
+
+class _DriverAccessDetailScreenState
+    extends ConsumerState<DriverAccessDetailScreen> {
+  bool _statusChangeInProgress = false;
+
+  Future<void> _changeStatus(DriverAccessProfile driver, String status) async {
+    if (_statusChangeInProgress) return;
+    setState(() => _statusChangeInProgress = true);
+    try {
+      await ref.read(driverAccessRepositoryProvider).patchDriverStatus(
+            driver.id,
+            status: status,
+            reason: 'Admin app status change',
+          );
+      ref.invalidate(driverAccessListProvider);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            resolveDriverAccessKey(context, 'driverAccessStatusChangeSuccess'),
+          ),
+        ),
+      );
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            resolveDriverAccessKey(context, 'driverAccessStatusChangeFailed'),
+          ),
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _statusChangeInProgress = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final listAsync = ref.watch(driverAccessListProvider);
+    final deviceStatusAsync = ref.watch(
+      driverDeviceNotificationStatusProvider(widget.driverId),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -104,7 +148,7 @@ class DriverAccessDetailScreen extends ConsumerWidget {
         ),
         data: (result) {
           final driver = result.items.cast<DriverAccessProfile?>().firstWhere(
-                (item) => item?.id == driverId,
+                (item) => item?.id == widget.driverId,
                 orElse: () => null,
               );
           if (driver == null) {
@@ -112,6 +156,8 @@ class DriverAccessDetailScreen extends ConsumerWidget {
               child: Text(resolveDriverAccessKey(context, 'driverAccessNotFound')),
             );
           }
+          final canChangeStatus = result.listEndpointReady &&
+              !ref.watch(driverAccessRepositoryProvider).usesMockData;
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
@@ -144,11 +190,99 @@ class DriverAccessDetailScreen extends ConsumerWidget {
                     : '—',
               ),
               const SizedBox(height: 12),
-              BackendDependencyCard(
-                title: resolveDriverAccessKey(context, 'driverAccessEnableDisableTitle'),
-                message: resolveDriverAccessKey(context, 'driverAccessEnableDisableDependency'),
-                endpointHint: 'PATCH /platform-admin/drivers/:id/status (planned)',
+              deviceStatusAsync.when(
+                loading: () => const SizedBox.shrink(),
+                error: (_, __) => BackendDependencyCard(
+                  title: resolveDriverAccessKey(
+                    context,
+                    'driverAccessDeviceNotificationTitle',
+                  ),
+                  message: resolveDriverAccessKey(
+                    context,
+                    'driverAccessDeviceNotificationUnavailable',
+                  ),
+                  endpointHint:
+                      'GET /platform-admin/drivers/:id/device-notification-status',
+                ),
+                data: (status) {
+                  if (status == null) return const SizedBox.shrink();
+                  if (status.sourceUnavailable) {
+                    return BackendDependencyCard(
+                      title: resolveDriverAccessKey(
+                        context,
+                        'driverAccessDeviceNotificationTitle',
+                      ),
+                      message: resolveDriverAccessKey(
+                        context,
+                        'driverAccessDeviceNotificationUnavailable',
+                      ),
+                      endpointHint: 'sourceUnavailable: true',
+                    );
+                  }
+                  return Card(
+                    child: ListTile(
+                      leading: Icon(
+                        status.hasPushToken
+                            ? Icons.notifications_active_outlined
+                            : Icons.notifications_off_outlined,
+                      ),
+                      title: Text(
+                        resolveDriverAccessKey(
+                          context,
+                          'driverAccessDeviceNotificationTitle',
+                        ),
+                      ),
+                      subtitle: Text(
+                        status.hasPushToken
+                            ? resolveDriverAccessKey(
+                                context,
+                                'driverAccessHasPushToken',
+                              )
+                            : resolveDriverAccessKey(
+                                context,
+                                'driverAccessNoPushToken',
+                              ),
+                      ),
+                    ),
+                  );
+                },
               ),
+              const SizedBox(height: 12),
+              if (canChangeStatus) ...[
+                if (driver.registrationStatus != DriverRegistrationStatus.active)
+                  FilledButton.icon(
+                    onPressed: _statusChangeInProgress
+                        ? null
+                        : () => _changeStatus(driver, 'active'),
+                    icon: const Icon(Icons.check_circle_outline),
+                    label: Text(
+                      resolveDriverAccessKey(context, 'driverAccessEnable'),
+                    ),
+                  ),
+                if (driver.registrationStatus != DriverRegistrationStatus.disabled) ...[
+                  const SizedBox(height: 8),
+                  OutlinedButton.icon(
+                    onPressed: _statusChangeInProgress
+                        ? null
+                        : () => _changeStatus(driver, 'disabled'),
+                    icon: const Icon(Icons.block_outlined),
+                    label: Text(
+                      resolveDriverAccessKey(context, 'driverAccessDisable'),
+                    ),
+                  ),
+                ],
+              ] else
+                BackendDependencyCard(
+                  title: resolveDriverAccessKey(
+                    context,
+                    'driverAccessEnableDisableTitle',
+                  ),
+                  message: resolveDriverAccessKey(
+                    context,
+                    'driverAccessEnableDisableDependency',
+                  ),
+                  endpointHint: 'PATCH /platform-admin/drivers/:id/status',
+                ),
             ],
           );
         },
