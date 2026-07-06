@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
+import '../../../core/api/api_client.dart';
 import '../domain/exchange_record_overview_item.dart';
 
 abstract class ExchangeRecordsRepository {
@@ -10,14 +11,39 @@ abstract class ExchangeRecordsRepository {
 }
 
 class LiveExchangeRecordsRepository implements ExchangeRecordsRepository {
+  LiveExchangeRecordsRepository([this._apiClient]);
+
+  final ApiClient? _apiClient;
+
   @override
   bool get usesMockData => false;
 
   @override
   Future<ExchangeRecordsListResult> listRecords() async {
-    return const ExchangeRecordsListResult(
-      items: [],
-      listEndpointReady: false,
+    final apiClient = _apiClient;
+    if (apiClient == null) {
+      return const ExchangeRecordsListResult(
+        items: [],
+        listEndpointReady: false,
+        metadataOnly: true,
+      );
+    }
+
+    final response = await apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/exchange-records',
+    );
+    final data = response.data;
+    final rawItems = data?['items'];
+    final items = rawItems is List
+        ? rawItems
+              .whereType<Map<String, dynamic>>()
+              .map(ExchangeRecordOverviewItem.fromJson)
+              .toList(growable: false)
+        : const <ExchangeRecordOverviewItem>[];
+
+    return ExchangeRecordsListResult(
+      items: items,
+      listEndpointReady: true,
       metadataOnly: true,
     );
   }
@@ -62,14 +88,16 @@ class MockExchangeRecordsRepository implements ExchangeRecordsRepository {
   }
 }
 
-final exchangeRecordsRepositoryProvider = Provider<ExchangeRecordsRepository>((ref) {
+final exchangeRecordsRepositoryProvider = Provider<ExchangeRecordsRepository>((
+  ref,
+) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
-    return LiveExchangeRecordsRepository();
+    return LiveExchangeRecordsRepository(ref.watch(apiClientProvider));
   }
   return MockExchangeRecordsRepository();
 });
 
 final exchangeRecordsListProvider =
     FutureProvider.autoDispose<ExchangeRecordsListResult>((ref) {
-  return ref.watch(exchangeRecordsRepositoryProvider).listRecords();
-});
+      return ref.watch(exchangeRecordsRepositoryProvider).listRecords();
+    });

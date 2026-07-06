@@ -5,11 +5,11 @@ enum ExchangeRecordStatusFilter {
   missing;
 
   String get localizationKey => switch (this) {
-        all => 'exchangeRecordsFilterAll',
-        disputed => 'exchangeRecordsFilterDisputed',
-        damaged => 'exchangeRecordsFilterDamaged',
-        missing => 'exchangeRecordsFilterMissing',
-      };
+    all => 'exchangeRecordsFilterAll',
+    disputed => 'exchangeRecordsFilterDisputed',
+    damaged => 'exchangeRecordsFilterDamaged',
+    missing => 'exchangeRecordsFilterMissing',
+  };
 }
 
 /// Privacy-safe exchange record metadata.
@@ -52,17 +52,24 @@ class ExchangeRecordOverviewItem {
     return ExchangeRecordOverviewItem(
       id: json['id']?.toString() ?? '',
       recordType: json['recordType']?.toString() ?? 'pallet',
-      itemLabel: json['itemLabel']?.toString() ??
+      itemLabel:
+          json['itemLabel']?.toString() ??
           json['itemName']?.toString() ??
+          json['itemType']?.toString() ??
           json['palletType']?.toString() ??
           '—',
       tripId: json['tripId']?.toString() ?? '',
       driverName: json['driverName']?.toString() ?? '—',
       status: json['status']?.toString() ?? 'completed',
-      missingQuantity: int.tryParse(json['missingQuantity']?.toString() ?? '') ?? 0,
-      damagedQuantity: int.tryParse(json['damagedQuantity']?.toString() ?? '') ?? 0,
+      missingQuantity:
+          int.tryParse(json['missingQuantity']?.toString() ?? '') ?? 0,
+      damagedQuantity:
+          int.tryParse(json['damagedQuantity']?.toString() ?? '') ?? 0,
       stopId: json['stopId']?.toString(),
-      notesPreview: json['notesPreview']?.toString(),
+      notesPreview:
+          json['notesPreview']?.toString() ??
+          json['notes']?.toString() ??
+          json['counterpartyName']?.toString(),
       recordedAt: DateTime.tryParse(json['recordedAt']?.toString() ?? ''),
       metadataOnly: json['metadataOnly'] != false,
     );

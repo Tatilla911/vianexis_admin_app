@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
+import '../../../core/api/api_client.dart';
 import '../domain/trip_overview_item.dart';
 
 abstract class TripsOverviewRepository {
@@ -10,14 +11,39 @@ abstract class TripsOverviewRepository {
 }
 
 class LiveTripsOverviewRepository implements TripsOverviewRepository {
+  LiveTripsOverviewRepository([this._apiClient]);
+
+  final ApiClient? _apiClient;
+
   @override
   bool get usesMockData => false;
 
   @override
   Future<TripOverviewListResult> listTrips() async {
-    return const TripOverviewListResult(
-      items: [],
-      listEndpointReady: false,
+    final apiClient = _apiClient;
+    if (apiClient == null) {
+      return const TripOverviewListResult(
+        items: [],
+        listEndpointReady: false,
+        metadataOnly: true,
+      );
+    }
+
+    final response = await apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/trips',
+    );
+    final data = response.data;
+    final rawItems = data?['items'];
+    final items = rawItems is List
+        ? rawItems
+              .whereType<Map<String, dynamic>>()
+              .map(TripOverviewItem.fromJson)
+              .toList(growable: false)
+        : const <TripOverviewItem>[];
+
+    return TripOverviewListResult(
+      items: items,
+      listEndpointReady: true,
       metadataOnly: true,
     );
   }
@@ -60,14 +86,16 @@ class MockTripsOverviewRepository implements TripsOverviewRepository {
   }
 }
 
-final tripsOverviewRepositoryProvider = Provider<TripsOverviewRepository>((ref) {
+final tripsOverviewRepositoryProvider = Provider<TripsOverviewRepository>((
+  ref,
+) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
-    return LiveTripsOverviewRepository();
+    return LiveTripsOverviewRepository(ref.watch(apiClientProvider));
   }
   return MockTripsOverviewRepository();
 });
 
 final tripOverviewListProvider =
     FutureProvider.autoDispose<TripOverviewListResult>((ref) {
-  return ref.watch(tripsOverviewRepositoryProvider).listTrips();
-});
+      return ref.watch(tripsOverviewRepositoryProvider).listTrips();
+    });

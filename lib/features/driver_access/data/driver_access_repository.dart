@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
+import '../../../core/api/api_client.dart';
 import '../domain/driver_access_profile.dart';
 
 abstract class DriverAccessRepository {
@@ -10,14 +11,39 @@ abstract class DriverAccessRepository {
 }
 
 class LiveDriverAccessRepository implements DriverAccessRepository {
+  LiveDriverAccessRepository([this._apiClient]);
+
+  final ApiClient? _apiClient;
+
   @override
   bool get usesMockData => false;
 
   @override
   Future<DriverAccessListResult> listDrivers() async {
-    return const DriverAccessListResult(
-      items: [],
-      listEndpointReady: false,
+    final apiClient = _apiClient;
+    if (apiClient == null) {
+      return const DriverAccessListResult(
+        items: [],
+        listEndpointReady: false,
+        metadataOnly: true,
+      );
+    }
+
+    final response = await apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/drivers',
+    );
+    final data = response.data;
+    final rawItems = data?['items'];
+    final items = rawItems is List
+        ? rawItems
+              .whereType<Map<String, dynamic>>()
+              .map(DriverAccessProfile.fromJson)
+              .toList(growable: false)
+        : const <DriverAccessProfile>[];
+
+    return DriverAccessListResult(
+      items: items,
+      listEndpointReady: true,
       metadataOnly: true,
     );
   }
@@ -59,12 +85,12 @@ class MockDriverAccessRepository implements DriverAccessRepository {
 
 final driverAccessRepositoryProvider = Provider<DriverAccessRepository>((ref) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
-    return LiveDriverAccessRepository();
+    return LiveDriverAccessRepository(ref.watch(apiClientProvider));
   }
   return MockDriverAccessRepository();
 });
 
 final driverAccessListProvider =
     FutureProvider.autoDispose<DriverAccessListResult>((ref) {
-  return ref.watch(driverAccessRepositoryProvider).listDrivers();
-});
+      return ref.watch(driverAccessRepositoryProvider).listDrivers();
+    });

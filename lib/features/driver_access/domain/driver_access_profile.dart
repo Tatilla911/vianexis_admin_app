@@ -5,11 +5,11 @@ enum DriverRegistrationStatus {
   invited;
 
   String get localizationKey => switch (this) {
-        pending => 'driverAccessStatusPending',
-        active => 'driverAccessStatusActive',
-        disabled => 'driverAccessStatusDisabled',
-        invited => 'driverAccessStatusInvited',
-      };
+    pending => 'driverAccessStatusPending',
+    active => 'driverAccessStatusActive',
+    disabled => 'driverAccessStatusDisabled',
+    invited => 'driverAccessStatusInvited',
+  };
 
   static DriverRegistrationStatus fromBackend(String? raw) {
     return switch (raw?.toLowerCase()) {
@@ -50,15 +50,25 @@ class DriverAccessProfile {
   factory DriverAccessProfile.fromJson(Map<String, dynamic> json) {
     return DriverAccessProfile(
       id: json['id']?.toString() ?? '',
-      displayName: json['displayName']?.toString() ?? json['name']?.toString() ?? '—',
+      displayName:
+          json['displayName']?.toString() ?? json['name']?.toString() ?? '—',
       companyName: json['companyName']?.toString() ?? '—',
       companyId: json['companyId']?.toString() ?? '',
       registrationStatus: DriverRegistrationStatus.fromBackend(
         json['status']?.toString() ?? json['registrationStatus']?.toString(),
       ),
-      lastActivityAt: DateTime.tryParse(json['lastActivityAt']?.toString() ?? ''),
-      deviceLabel: json['deviceLabel']?.toString(),
-      activeSessionCount: int.tryParse(json['activeSessionCount']?.toString() ?? '') ?? 0,
+      lastActivityAt: DateTime.tryParse(
+        json['lastActivityAt']?.toString() ??
+            json['lastSeenAt']?.toString() ??
+            '',
+      ),
+      deviceLabel:
+          json['deviceLabel']?.toString() ??
+          json['devicePlatform']?.toString() ??
+          (json['deviceRegistered'] == true ? 'registered' : null),
+      activeSessionCount:
+          int.tryParse(json['activeSessionCount']?.toString() ?? '') ??
+          (json['deviceRegistered'] == true ? 1 : 0),
       metadataOnly: json['metadataOnly'] != false,
     );
   }

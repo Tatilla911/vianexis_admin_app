@@ -39,7 +39,9 @@ class ApiClient {
         onError: (error, handler) async {
           final statusCode = error.response?.statusCode;
           if (statusCode == 401 &&
-              !isAuthLoginRequestPath(resolveApiRequestPath(error.requestOptions)) &&
+              !isAuthLoginRequestPath(
+                resolveApiRequestPath(error.requestOptions),
+              ) &&
               _onUnauthorized != null) {
             await _onUnauthorized!();
           }
@@ -150,6 +152,25 @@ class ApiClient {
     }
   }
 
+  Future<Response<T>> delete<T>(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    _assertConfigured();
+    try {
+      return await dio.delete<T>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
+    } on DioException catch (error) {
+      throw mapDioException(error);
+    }
+  }
+
   void _assertConfigured() {
     if (!isConfigured) {
       throw const ApiException(
@@ -175,7 +196,8 @@ ApiException mapDioException(DioException error) {
   if (isTransportLevelDioException(error)) {
     return ApiException(
       messageKey: LocalizationKeys.authNetworkError,
-      kind: error.type == DioExceptionType.connectionTimeout ||
+      kind:
+          error.type == DioExceptionType.connectionTimeout ||
               error.type == DioExceptionType.sendTimeout ||
               error.type == DioExceptionType.receiveTimeout
           ? ApiExceptionKind.timeout
@@ -202,12 +224,30 @@ ApiException mapDioException(DioException error) {
 String _redactSecrets(Object object) {
   return object
       .toString()
-      .replaceAll(RegExp(r'Bearer\s+\S+', caseSensitive: false), 'Bearer [redacted]')
-      .replaceAll(RegExp(r'"access_token"\s*:\s*"[^"]*"'), '"access_token":"[redacted]"')
-      .replaceAll(RegExp(r'"accessToken"\s*:\s*"[^"]*"'), '"accessToken":"[redacted]"')
-      .replaceAll(RegExp(r'"refresh_token"\s*:\s*"[^"]*"'), '"refresh_token":"[redacted]"')
-      .replaceAll(RegExp(r'"refreshToken"\s*:\s*"[^"]*"'), '"refreshToken":"[redacted]"')
-      .replaceAll(RegExp(r'"password"\s*:\s*"[^"]*"'), '"password":"[redacted]"');
+      .replaceAll(
+        RegExp(r'Bearer\s+\S+', caseSensitive: false),
+        'Bearer [redacted]',
+      )
+      .replaceAll(
+        RegExp(r'"access_token"\s*:\s*"[^"]*"'),
+        '"access_token":"[redacted]"',
+      )
+      .replaceAll(
+        RegExp(r'"accessToken"\s*:\s*"[^"]*"'),
+        '"accessToken":"[redacted]"',
+      )
+      .replaceAll(
+        RegExp(r'"refresh_token"\s*:\s*"[^"]*"'),
+        '"refresh_token":"[redacted]"',
+      )
+      .replaceAll(
+        RegExp(r'"refreshToken"\s*:\s*"[^"]*"'),
+        '"refreshToken":"[redacted]"',
+      )
+      .replaceAll(
+        RegExp(r'"password"\s*:\s*"[^"]*"'),
+        '"password":"[redacted]"',
+      );
 }
 
 final authTokenStorageProvider = Provider<AuthTokenStorage>(

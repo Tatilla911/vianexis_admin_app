@@ -5,11 +5,11 @@ enum TripOverviewStatus {
   pending;
 
   String get localizationKey => switch (this) {
-        active => 'tripsOverviewStatusActive',
-        completed => 'tripsOverviewStatusCompleted',
-        parked => 'tripsOverviewStatusParked',
-        pending => 'tripsOverviewStatusPending',
-      };
+    active => 'tripsOverviewStatusActive',
+    completed => 'tripsOverviewStatusCompleted',
+    parked => 'tripsOverviewStatusParked',
+    pending => 'tripsOverviewStatusPending',
+  };
 }
 
 /// Privacy-safe trip operations row — no document/message content.
@@ -41,13 +41,22 @@ class TripOverviewItem {
   factory TripOverviewItem.fromJson(Map<String, dynamic> json) {
     return TripOverviewItem(
       id: json['id']?.toString() ?? '',
-      reference: json['reference']?.toString() ?? json['tripReference']?.toString() ?? '—',
+      reference:
+          json['reference']?.toString() ??
+          json['tripReference']?.toString() ??
+          json['tripNumber']?.toString() ??
+          '—',
       companyName: json['companyName']?.toString() ?? '—',
       driverName: json['driverName']?.toString() ?? '—',
       status: _statusFrom(json['status']?.toString()),
-      hasExchangeRecords: json['hasExchangeRecords'] == true,
+      hasExchangeRecords:
+          json['hasExchangeRecords'] == true ||
+          (int.tryParse(json['exchangeRecordCount']?.toString() ?? '') ?? 0) >
+              0,
       hasExchangeAttention: json['hasExchangeAttention'] == true,
-      hasPackage: json['hasPackage'] == true,
+      hasPackage:
+          json['hasPackage'] == true ||
+          (int.tryParse(json['packageCount']?.toString() ?? '') ?? 0) > 0,
       pendingSyncWarning: json['pendingSyncWarning'] == true,
       metadataOnly: json['metadataOnly'] != false,
     );

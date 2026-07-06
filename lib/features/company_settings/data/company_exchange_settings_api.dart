@@ -16,7 +16,8 @@ class CompanyExchangeSettingsApi {
     if (data == null) {
       throw StateError('Empty exchange settings response');
     }
-    return CompanyExchangeSettings.fromJson(data);
+    final settings = CompanyExchangeSettings.fromJson(data);
+    return _mergePackagingItems(companyId, settings);
   }
 
   Future<CompanyExchangeSettings> patchSettings({
@@ -31,7 +32,29 @@ class CompanyExchangeSettingsApi {
     if (data == null) {
       throw StateError('Empty exchange settings patch response');
     }
-    return CompanyExchangeSettings.fromJson(data);
+    final settings = CompanyExchangeSettings.fromJson(data);
+    return _mergePackagingItems(companyId, settings);
+  }
+
+  Future<CompanyExchangeSettings> _mergePackagingItems(
+    String companyId,
+    CompanyExchangeSettings settings,
+  ) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/companies/$companyId/packaging-items',
+      queryParameters: const {'includeInactive': true},
+    );
+    final rawItems = response.data?['items'];
+    if (rawItems is! List) {
+      return settings;
+    }
+
+    final items = rawItems
+        .whereType<Map<String, dynamic>>()
+        .map(DefaultPackagingItem.fromJson)
+        .toList(growable: false);
+
+    return settings.copyWith(defaultPackagingItems: items);
   }
 }
 
