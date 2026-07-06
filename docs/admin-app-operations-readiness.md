@@ -1,52 +1,68 @@
-# Admin app operations readiness
+# Admin app operations readiness (HEAD)
 
-## Summary
+Current reference: `47adc94` (includes `b6a2378` live endpoint wiring and packaging CRUD UI).
 
-This sprint adds an **Operations overview** hub and supporting screens so platform admins can monitor ViaNexis day-to-day operations without dispatch complexity.
+## Scope
 
-## Ready (admin app)
+This document tracks the current operational readiness of the admin app for company/admin workflows, with clear separation between live features and backend dependencies.
 
-| Area | Status |
-|------|--------|
-| Operations dashboard (`/operations`) | Live counts from `GET /platform-admin/dashboard` + module links |
-| Driver access list/detail | Mock sample data; live shows backend dependency |
-| Trips overview | Dashboard aggregate counts + mock trip list |
-| Exchange records overview | Mock filters/list; live shows backend dependency |
-| Notification status | Push provider card + driver foundation + dependency cards |
-| Support access | Existing module (`/support/grants`) — metadata-only preserved |
-| Public intakes | Existing module (`/public-intakes`) — linked from operations |
-| Company exchange settings | Toggles + read-only lists + CRUD dependency banners |
-| HU/EN localization | All new UI strings via l10n keys |
-| Tests | `test/operations_readiness_test.dart` |
+## Operations dashboard
 
-## Backend dependencies (not wired in live mode)
+- **Route:** `/operations`
+- **Purpose:** operational hub for visibility across companies, drivers, trips, exchange, notifications, support, and public intake modules.
+- **Data source:** `GET /platform-admin/dashboard` for aggregate metric cards.
+- **Current cards:** companies (active/total), active drivers (estimate), active trips, completed trips, support grants, pending public intakes, pending registrations, generated packages.
+- **Module links:** driver access, trips overview, exchange records, notification status, support grants, public intakes.
+- **Dependency cards shown in UI:**
+  - pending sync metrics: `GET /platform-admin/operational-metrics` (missing)
+  - extra exchange operational metrics card remains dependency-oriented
 
-| Feature | Planned endpoint | Notes |
-|---------|------------------|-------|
-| Platform driver list | `GET /platform-admin/drivers` | Privacy-safe metadata only |
-| Driver enable/disable | `PATCH /platform-admin/drivers/:id/status` | UI placeholder only |
-| Platform trip list | `GET /platform-admin/trips` | Dashboard counts work today |
-| Pending sync metrics | `GET /platform-admin/operational-metrics` | No fake counts |
-| Platform exchange records | `GET /platform-admin/exchange-records` | Trip-scoped API exists for driver |
-| Packaging item CRUD | `POST/PATCH/DELETE .../packaging-items` | Read-only list in admin |
-| Manual pallet record policy | `PATCH .../exchange-settings` field | Not in current contract |
-| Driver device tokens | `POST /drivers/device-tokens` | Admin visibility only |
-| Notification events | `GET /platform-admin/notification-events` | Optional audit trail |
+## Live endpoint wiring (since `b6a2378`)
 
-## Security / privacy boundary
+The admin app now uses these live platform-admin endpoints:
 
-- No FCM/APNS tokens, secrets, PIN hashes, document bodies, message content, or storage keys in new screens.
-- Live repositories return empty lists + `listEndpointReady: false` rather than fabricated production data.
-- Mock mode is clearly badged.
+- `GET /platform-admin/drivers`
+- `GET /platform-admin/trips`
+- `GET /platform-admin/exchange-records`
+- `GET /platform-admin/companies/:companyId/packaging-items`
 
-## Known blockers
+Company exchange settings loading now merges default packaging items from the packaging-items endpoint into the exchange settings view model.
 
-1. Platform-level trip/driver/exchange list endpoints missing — operations visibility is partial in live mode.
-2. Production push delivery depends on backend FCM/APNS configuration (admin sees status via existing push provider API).
-3. Packaging default list editing awaits backend CRUD contract.
+## Current module state
 
-## Related docs
+- **Company exchange settings:** live toggles + packaging list merge + CRUD UI (see dedicated doc).
+- **Driver access:** live list endpoint wired (`/platform-admin/drivers`) with metadata-only rendering; enable/disable still dependency.
+- **Trips overview:** live list endpoint wired (`/platform-admin/trips`) + dashboard aggregates.
+- **Exchange records overview:** live list endpoint wired (`/platform-admin/exchange-records`) + metadata-safe filters.
+- **Notification status:** push provider status is live via existing notification provider status API; token/admin events remain dependency.
+- **Support access:** existing metadata-only support grants module linked from operations.
+- **Public intake:** existing `/public-intakes` module linked from operations.
 
-- [Company exchange settings](./admin-app-company-settings.md)
-- [Support access](./admin-app-support-access.md)
-- [Notification status](./admin-app-notification-status.md)
+## Readiness matrix
+
+| Modul | Admin UI | Backend endpoint | Live/mock/dependency | Státusz | Következő lépés |
+|---|---|---|---|---|---|
+| Operations dashboard | `/operations` cards + hub links | `GET /platform-admin/dashboard` | Live + dependency cards | Ready | Add pending sync operational metrics endpoint |
+| Company exchange settings | `/companies/:id/exchange-settings` | `GET/PATCH /companies/:id/exchange-settings` + packaging merge endpoint | Live | Ready | Add manual pallet policy field in backend contract |
+| Packaging item CRUD | Add/edit/deactivate/reactivate actions in exchange settings | `POST/PATCH/DELETE /platform-admin/companies/:id/packaging-items` | Live (+ mock fallback) | Ready | Optional server-side validation/error metadata improvements |
+| Driver access | `/driver-access`, `/driver-access/:id` | `GET /platform-admin/drivers` | Live (+ dependency for status change) | Conditional | Add `PATCH /platform-admin/drivers/:id/status` |
+| Trips overview | `/trips-overview` list + summaries | `GET /platform-admin/trips` | Live (+ dependency for pending sync metrics) | Conditional | Add `GET /platform-admin/operational-metrics` |
+| Exchange records | `/exchange-records` | `GET /platform-admin/exchange-records` | Live | Ready | Add richer server-side filter params if needed |
+| Notification status | `/notification-status` | Push provider status API (existing) | Live + dependencies | Conditional | Add admin token metadata endpoint + notification events endpoint |
+| Support access | Existing support grants UI (`/support/grants`) | Existing platform-admin support grants endpoints | Live | Ready | Maintain metadata-only policy |
+| Public intake | Existing UI (`/public-intakes`) + operations link | Existing public intake endpoints | Live | Ready | Continue status/source taxonomy hardening |
+
+## Open backend dependencies
+
+- `GET /platform-admin/operational-metrics`
+- `PATCH /platform-admin/drivers/:id/status`
+- Driver device token admin metadata endpoint
+- Notification events list endpoint
+- Manual pallet record policy backend field on exchange settings
+
+## Security and privacy boundary
+
+- No raw FCM/APNS token values in normal admin views.
+- No PIN hash exposure.
+- No raw document/message/storage payload content in operations modules.
+- Metadata-only rendering remains enforced for support/public-intake operational views.

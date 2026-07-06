@@ -1,40 +1,65 @@
-# Admin app — company exchange settings
+# Admin app company exchange settings (HEAD)
 
-## Implemented
+Current reference: `47adc94`.
 
-Screen: **Companies → company detail → Exchange settings** (`/companies/:id/exchange-settings`)
+## Screen and route
 
-| Control | API field | Writable |
-|---------|-----------|----------|
-| Pallet exchange enabled | `palletExchangeEnabled` | Yes (`PATCH`) |
-| Packaging exchange enabled | `packagingExchangeEnabled` | Yes |
-| Driver custom packaging items | `allowDriverCustomPackagingItems` | Yes |
-| Default pallet types | `defaultPalletTypes` | Read-only display |
-| Default packaging items | `defaultPackagingItems` | Read-only display (name, active, sort order, notes) |
+- **Route:** `/companies/:id/exchange-settings`
+- **Context:** company-level exchange configuration for pallet and packaging behavior.
 
-API: `GET/PATCH /companies/:companyId/exchange-settings`
+## Current behavior
 
-## Backend dependencies
+### Pallet exchange
 
-| Feature | Status |
-|---------|--------|
-| Add/edit/delete packaging items | **Not available** — dependency card shown |
-| Reorder packaging items | **Not available** |
-| Driver manual pallet record policy toggle | **Not available** — `allowDriverManualPalletRecord` not in current contract |
+- Toggle: enabled/disabled (`palletExchangeEnabled`)
+- Default pallet types are displayed as read-only chips
+- Manual pallet record policy is still a backend dependency (not wired as a writable field)
 
-Planned endpoints (document only):
+### Packaging (göngyöleg)
 
-```
-POST   /companies/:id/exchange-settings/packaging-items
-PATCH  /companies/:id/exchange-settings/packaging-items/:itemId
-DELETE /companies/:id/exchange-settings/packaging-items/:itemId
-PATCH  /companies/:id/exchange-settings  { allowDriverManualPalletRecord: bool }
-```
+- Toggle: enabled/disabled (`packagingExchangeEnabled`)
+- Toggle: allow driver custom packaging items (`allowDriverCustomPackagingItems`)
+- Default packaging list is shown with metadata (name, active state, sort order, notes)
+- List source is merged from live endpoint: `GET /platform-admin/companies/:companyId/packaging-items` (`includeInactive=true`)
 
-## Privacy
+## Packaging CRUD UI (added in `47adc94`)
 
-Settings screen shows company feature flags and list metadata only. No trip payloads, PDF content, or driver-entered free text from stops.
+Supported actions in admin UI:
 
-## Blockers
+- Add packaging item
+- Edit packaging item
+- Deactivate packaging item
+- Reactivate packaging item
 
-- Full göngyöleg default lista kezelés requires backend CRUD before admin can offer edit/delete/inactivate UI beyond read-only preview.
+Supported fields:
+
+- Name
+- Sort order
+- Notes (optional)
+- Active/inactive flag
+
+Backend calls:
+
+- `POST /platform-admin/companies/:companyId/packaging-items`
+- `PATCH /platform-admin/companies/:companyId/packaging-items/:itemId`
+- `DELETE /platform-admin/companies/:companyId/packaging-items/:itemId`
+
+## Live and mock behavior
+
+- **Live mode:** reads and mutates packaging items through platform-admin endpoints.
+- **Mock mode:** local in-memory fallback remains available for development/testing and is explicitly badged in UI.
+
+## Localization and layout
+
+- New and existing UI labels are localized (HU/EN).
+- Dialog and list layout are responsive and used in mobile-safe patterns (no forced horizontal overflow in current implementation).
+
+## Dependencies still open
+
+- Manual pallet record policy backend field (documented in UI as dependency):
+  - planned direction: extend exchange settings contract (for example `allowDriverManualPalletRecord`)
+
+## Privacy boundary
+
+- Company settings view is metadata/configuration only.
+- No trip document content, message body, storage key, or token secrets are displayed.

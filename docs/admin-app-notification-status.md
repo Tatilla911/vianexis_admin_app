@@ -1,42 +1,50 @@
-# Admin app — notification / push status
+# Admin app notification status (HEAD)
+
+Current reference: `47adc94`.
 
 ## Screen
 
-**Operations → Notification status** (`/notification-status`)
+- **Route:** `/notification-status`
+- **Entry point:** linked from `/operations`
 
-## What admin sees
+## Current UI state
 
-| Item | Source | Live? |
-|------|--------|-------|
-| Driver app notification foundation | Static “ready” card | N/A (product status) |
-| Push provider status | `GET /platform-admin/notifications/push-provider` (existing) | Yes |
-| Device token registration | Dependency card | **Missing endpoint** |
-| Recent notification events | Dependency card | **Missing endpoint** |
+The screen shows:
 
-## Push provider card (existing)
+- Driver app notification foundation card (ready status)
+- Production push provider status card (from existing push provider status API usage)
+- Device token registration dependency card
+- Notification events dependency card
 
-Reuses `PushProviderStatusCard` from notification preferences:
+## Push provider status details
 
-- Provider label (none / FCM / APNS) — localized, not raw enum
-- Delivery enabled flag
-- Configured flag
-- Token storage mode (`hash_only` metadata)
-- Last failure code (if any)
+Rendered as metadata, localized:
 
-**Not displayed:** raw FCM/APNS tokens, secrets, credential JSON.
+- Provider label (`none` / `fcm` / `apns` mapped to localized labels)
+- Delivery enabled state
+- Provider configured state
+- Token storage mode
+- Last failure code (if present)
 
-## Production push dependency
+## Privacy boundary
 
-If `configured: false` or `deliveryEnabled: false`, admin sees localized “not configured” / backend dependency messaging — not a fake “working” state.
+- No raw FCM token values for normal admins
+- No secret/credential payload rendering
+- Metadata-only status presentation
 
-## Planned backend (driver side)
+## Open dependencies
 
-```
-POST /drivers/device-tokens
-GET  /platform-admin/notification-events  (optional admin audit)
-```
+- Driver device token admin metadata endpoint (for platform visibility)
+- Notification events list endpoint
 
-## Blockers
+Planned endpoint direction:
 
-- Driver device token registration visibility for platform admins awaits backend listing/aggregate endpoint.
-- Event history not wired; dependency card only.
+- device token admin visibility endpoint (platform-admin scope)
+- `GET /platform-admin/notification-events`
+
+## Related operational dependency context
+
+Notification status remains part of the operations readiness picture together with:
+
+- `GET /platform-admin/operational-metrics` (pending sync visibility)
+- `PATCH /platform-admin/drivers/:id/status` (driver lifecycle action dependency)

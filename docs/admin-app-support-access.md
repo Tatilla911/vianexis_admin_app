@@ -1,36 +1,40 @@
-# Admin app — support access
+# Admin app support access metadata boundary (HEAD)
 
-## Status: existing module (unchanged boundary)
+Current reference: `47adc94`.
 
-Support access grants remain in **Support → Access grants** (`/support/grants`).
+## Route and operations link
 
-Roles: `super_admin`, `support_admin` (per existing `AdminRole` gates).
+- **Primary screen:** `/support/grants`
+- **Operations hub link:** available from `/operations` (support access module link)
 
-## Metadata shown
+## Access model
 
-- Company name / id
+- Intended platform roles: `super_admin` and `support_admin` for support grant management views.
+- Existing list/create/revoke flows remain on the current support grants module.
+
+## Metadata-only policy (must remain)
+
+Displayed metadata:
+
+- Company
 - Scope
-- Status (active, expired, revoked, …)
-- `createdAt`, `expiresAt`
-- `createdBy` (admin reference)
+- Status
+- `createdAt`
+- `expiresAt`
+- `createdBy`
 
-Create/revoke flows remain where backend endpoints exist (existing implementation).
+Must not be displayed:
 
-## Never shown
+- `documentContent`
+- `messageBody`
+- `storageKey`
+- Any operational sensitive content payload
 
-- Document content
-- Message body
-- Storage keys
-- Operational sensitive payloads
+## Backend status
 
-## Operations hub link
+- Support grants backend integration already exists and is used by the current admin module.
+- No extra backend code changes are required for the docs refresh.
 
-The new **Operations overview** links to the existing support grants module; no duplicate grant UI was added.
+## Notes
 
-## Backend
-
-Existing platform-admin support grant endpoints (see backend platform-admin module). No admin-app changes required for list/create/revoke in this sprint.
-
-## Blockers
-
-None for metadata-only listing. Full operational impersonation tooling is out of scope.
+- This document reflects boundary enforcement and routing/linking state after operations readiness updates.
