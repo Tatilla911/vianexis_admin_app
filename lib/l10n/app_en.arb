@@ -80,11 +80,29 @@
   "aiReviewAdvisoryNotice": "AI recommendations are advisory only. Human approval is required for all decisions.",
   "aiReviewDashboardTitle": "AI advisory reviews",
   "aiReviewDashboardTotal": "Total reviews: {count}",
-  "@aiReviewDashboardTotal": { "placeholders": { "count": { "type": "String" } } },
+  "@aiReviewDashboardTotal": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "aiReviewDashboardHighRisk": "High risk: {count}",
-  "@aiReviewDashboardHighRisk": { "placeholders": { "count": { "type": "String" } } },
+  "@aiReviewDashboardHighRisk": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "aiReviewDashboardNeedsHumanReview": "Needs human review: {count}",
-  "@aiReviewDashboardNeedsHumanReview": { "placeholders": { "count": { "type": "String" } } },
+  "@aiReviewDashboardNeedsHumanReview": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "aiReviewFilterAll": "All",
   "aiReviewFilterHighRisk": "High risk",
   "aiReviewFilterRegistration": "Registration",
@@ -113,9 +131,21 @@
   "aiReviewFieldMissingInformation": "Missing information",
   "aiReviewFieldDuplicateWarnings": "Duplicate warnings",
   "aiReviewFieldConfidenceScore": "Confidence score: {score}",
-  "@aiReviewFieldConfidenceScore": { "placeholders": { "score": { "type": "String" } } },
+  "@aiReviewFieldConfidenceScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
   "aiReviewUpdatedAt": "Updated {date}",
-  "@aiReviewUpdatedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@aiReviewUpdatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "supportTicketsTitle": "Support tickets",
   "supportTicketsPlaceholderBody": "Support ticket metadata will appear here.",
   "supportGrantsTitle": "Support access grants",
@@ -254,12 +284,30 @@
   "systemHealthEventsEmpty": "No health events match your filters.",
   "systemHealthEventDetailTitle": "Health event",
   "systemHealthEventStartedAt": "Started {date}",
-  "@systemHealthEventStartedAt": {"placeholders": {"date": {"type": "String"}}},
+  "@systemHealthEventStartedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "systemHealthOpenModule": "Open system health",
   "systemHealthOverallStatusLabel": "Overall status: {status}",
-  "@systemHealthOverallStatusLabel": {"placeholders": {"status": {"type": "String"}}},
+  "@systemHealthOverallStatusLabel": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
   "systemHealthLastUpdated": "Last updated {date}",
-  "@systemHealthLastUpdated": {"placeholders": {"date": {"type": "String"}}},
+  "@systemHealthLastUpdated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "systemHealthMetricHealthyServices": "Healthy services",
   "systemHealthMetricWarningServices": "Warning services",
   "systemHealthMetricCriticalServices": "Critical services",
@@ -343,21 +391,45 @@
   "supportTicketSearchHint": "Search company, title, or requester email",
   "supportTicketListEmpty": "No support tickets match your filters.",
   "supportTicketLastActivity": "Last activity {date}",
-  "@supportTicketLastActivity": {"placeholders": {"date": {"type": "String"}}},
+  "@supportTicketLastActivity": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "supportTicketDetailTitle": "Support ticket",
   "supportGrantDetailTitle": "Support access grant",
   "supportGrantSearchHint": "Search company, scope id, or requester",
   "supportGrantListEmpty": "No support access grants match your filters.",
   "supportGrantScopeIdLabel": "Scope ID: {id}",
-  "@supportGrantScopeIdLabel": {"placeholders": {"id": {"type": "String"}}},
+  "@supportGrantScopeIdLabel": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
   "supportGrantExpiresAt": "Expires {date}",
-  "@supportGrantExpiresAt": {"placeholders": {"date": {"type": "String"}}},
+  "@supportGrantExpiresAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "supportSummaryTitle": "Support overview",
   "supportSummaryOpenTickets": "Open tickets",
   "supportSummaryUrgentCritical": "Urgent / critical",
   "supportSummaryActiveGrants": "Active grants",
   "supportSummaryLastUpdated": "Last updated {date}",
-  "@supportSummaryLastUpdated": {"placeholders": {"date": {"type": "String"}}},
+  "@supportSummaryLastUpdated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "supportTicketCreateSuccess": "Support ticket created.",
   "supportTicketFilterAll": "All",
   "supportTicketFilterOpen": "Open",
@@ -414,7 +486,13 @@
   "supportGrantCreateConfirm": "Create grant",
   "supportGrantCreateSuccess": "Support access grant created.",
   "supportGrantCompanyLabel": "Company: {name}",
-  "@supportGrantCompanyLabel": {"placeholders": {"name": {"type": "String"}}},
+  "@supportGrantCompanyLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "supportGrantScopeTypeLabel": "Scope type",
   "supportGrantScopeIdFieldLabel": "Scope ID",
   "supportGrantScopeIdRequired": "Scope ID is required for this scope type.",
@@ -468,8 +546,12 @@
   "auditLogDateRangeSelected": "{from} – {to}",
   "@auditLogDateRangeSelected": {
     "placeholders": {
-      "from": {"type": "String"},
-      "to": {"type": "String"}
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
     }
   },
   "auditLogDateRangeClear": "Clear dates",
@@ -480,7 +562,13 @@
   "auditLogExportUnavailable": "Audit log export is unavailable.",
   "auditLogExportSafetyNotice": "Exports include metadata only. No trip, document, or message content is included.",
   "auditLogTimestampLabel": "{date}",
-  "@auditLogTimestampLabel": {"placeholders": {"date": {"type": "String"}}},
+  "@auditLogTimestampLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "auditLogDetailTitle": "Audit log entry",
   "auditLogPrivacyNotice": "Metadata only — no tenant operational trip, document, or message content is shown.",
   "auditLogExportDisabled": "Export audit log (coming soon)",
@@ -490,7 +578,13 @@
   "auditLogSummaryFailedDenied": "Failed / denied",
   "auditLogSummaryRecentActions": "Recent platform actions",
   "auditLogSummaryLastUpdated": "Last updated {date}",
-  "@auditLogSummaryLastUpdated": {"placeholders": {"date": {"type": "String"}}},
+  "@auditLogSummaryLastUpdated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "auditLogFilterAll": "All",
   "auditLogFilterCritical": "Critical",
   "auditLogFilterWarning": "Warning",
@@ -610,23 +704,65 @@
   "bulkOnboardingRiskHigh": "High risk",
   "bulkOnboardingRiskUnknown": "Unknown risk",
   "bulkOnboardingMetricTotalRows": "Total rows: {count}",
-  "@bulkOnboardingMetricTotalRows": { "placeholders": { "count": { "type": "String" } } },
+  "@bulkOnboardingMetricTotalRows": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingMetricValidRows": "Valid: {count}",
-  "@bulkOnboardingMetricValidRows": { "placeholders": { "count": { "type": "String" } } },
+  "@bulkOnboardingMetricValidRows": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingMetricWarningRows": "Warnings: {count}",
-  "@bulkOnboardingMetricWarningRows": { "placeholders": { "count": { "type": "String" } } },
+  "@bulkOnboardingMetricWarningRows": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingMetricInvalidRows": "Invalid: {count}",
-  "@bulkOnboardingMetricInvalidRows": { "placeholders": { "count": { "type": "String" } } },
+  "@bulkOnboardingMetricInvalidRows": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingMetricDuplicateRows": "Duplicates: {count}",
-  "@bulkOnboardingMetricDuplicateRows": { "placeholders": { "count": { "type": "String" } } },
+  "@bulkOnboardingMetricDuplicateRows": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingValidationSummaryTitle": "Validation summary",
   "bulkOnboardingValidationErrors": "Validation errors",
   "bulkOnboardingDuplicateReason": "Duplicate: {reason}",
-  "@bulkOnboardingDuplicateReason": { "placeholders": { "reason": { "type": "String" } } },
+  "@bulkOnboardingDuplicateReason": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingAiReviewTitle": "AI review (advisory)",
   "bulkOnboardingAiAdvisoryNotice": "Recommendations are advisory only. Human approval is required.",
   "bulkOnboardingRecommendedAction": "Recommended action: {action}",
-  "@bulkOnboardingRecommendedAction": { "placeholders": { "action": { "type": "String" } } },
+  "@bulkOnboardingRecommendedAction": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingRowFilterAll": "All rows",
   "bulkOnboardingRowFilterInvalid": "Invalid",
   "bulkOnboardingRowFilterWarning": "Warnings",
@@ -702,9 +838,21 @@
   "bulkOnboardingUploadCsv": "Upload CSV",
   "bulkOnboardingChooseFile": "Choose file",
   "bulkOnboardingSelectedFile": "Selected file: {name}",
-  "@bulkOnboardingSelectedFile": { "placeholders": { "name": { "type": "String" } } },
+  "@bulkOnboardingSelectedFile": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingFileSize": "File size: {size}",
-  "@bulkOnboardingFileSize": { "placeholders": { "size": { "type": "String" } } },
+  "@bulkOnboardingFileSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingUploadPreviewTitle": "Upload preview",
   "bulkOnboardingImportTemplate": "Import template",
   "bulkOnboardingDownloadTemplate": "Download template",
@@ -742,9 +890,21 @@
   "bulkOnboardingRowOriginalValuesTitle": "Original imported values",
   "bulkOnboardingRowCorrectedValuesTitle": "Corrected values",
   "bulkOnboardingRowLastValidatedAt": "Last validated: {date}",
-  "@bulkOnboardingRowLastValidatedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@bulkOnboardingRowLastValidatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingJobLastValidatedAt": "Job last validated: {date}",
-  "@bulkOnboardingJobLastValidatedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@bulkOnboardingJobLastValidatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingRowCorrectionTitle": "Correct import row",
   "bulkOnboardingRowCorrectionNotice": "Update invalid fields. Original imported values are preserved for audit.",
   "bulkOnboardingRowCorrectionNoteLabel": "Correction note (optional)",
@@ -771,7 +931,13 @@
   "bulkOnboardingRowActionSuccess": "Row updated successfully.",
   "bulkOnboardingRowActionUnavailable": "Row action is unavailable.",
   "bulkOnboardingMetricSkippedRows": "Skipped: {count}",
-  "@bulkOnboardingMetricSkippedRows": { "placeholders": { "count": { "type": "String" } } },
+  "@bulkOnboardingMetricSkippedRows": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "bulkOnboardingValidationWarnings": "Validation warnings",
   "navCompanies": "Companies",
   "platformCompaniesTitle": "Companies",
@@ -787,15 +953,45 @@
   "platformCompanyPrivacyNotice": "Metadata-only tenant view. No trips, documents, or messages are shown.",
   "platformCompanyDashboardTitle": "Company overview",
   "platformCompanyDashboardActive": "Active: {count}",
-  "@platformCompanyDashboardActive": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyDashboardActive": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyDashboardPendingReview": "Pending review: {count}",
-  "@platformCompanyDashboardPendingReview": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyDashboardPendingReview": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyDashboardSuspended": "Suspended: {count}",
-  "@platformCompanyDashboardSuspended": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyDashboardSuspended": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyDashboardOpenSupport": "Open support issues: {count}",
-  "@platformCompanyDashboardOpenSupport": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyDashboardOpenSupport": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyDashboardPendingOnboarding": "Pending onboarding: {count}",
-  "@platformCompanyDashboardPendingOnboarding": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyDashboardPendingOnboarding": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyFilterAll": "All",
   "platformCompanyFilterActive": "Active",
   "platformCompanyFilterPendingReview": "Pending review",
@@ -808,23 +1004,77 @@
   "platformCompanyStatusArchived": "Archived",
   "platformCompanyStatusUnknown": "Unknown",
   "platformCompanyMetricActiveUsers": "Active users: {count}",
-  "@platformCompanyMetricActiveUsers": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyMetricActiveUsers": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyMetricDrivers": "Drivers: {count}",
-  "@platformCompanyMetricDrivers": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyMetricDrivers": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyMetricVehicles": "Vehicles: {count}",
-  "@platformCompanyMetricVehicles": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyMetricVehicles": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyMetricTrailers": "Trailers: {count}",
-  "@platformCompanyMetricTrailers": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyMetricTrailers": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyMetricOpenSupport": "Open support: {count}",
-  "@platformCompanyMetricOpenSupport": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyMetricOpenSupport": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyMetricActiveGrants": "Active grants: {count}",
-  "@platformCompanyMetricActiveGrants": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyMetricActiveGrants": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyMetricTotalUsers": "Total users: {count}",
-  "@platformCompanyMetricTotalUsers": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyMetricTotalUsers": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyMetricPendingRegistrations": "Pending registrations: {count}",
-  "@platformCompanyMetricPendingRegistrations": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyMetricPendingRegistrations": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanyMetricPendingBulkJobs": "Pending bulk jobs: {count}",
-  "@platformCompanyMetricPendingBulkJobs": { "placeholders": { "count": { "type": "String" } } },
+  "@platformCompanyMetricPendingBulkJobs": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "platformCompanySectionMetadata": "Company metadata",
   "platformCompanySectionUsers": "Users summary",
   "platformCompanySectionSupport": "Support & fleet summary",
@@ -847,7 +1097,6 @@
   "platformCompanyStatusSuccess": "Company status updated.",
   "platformCompanyStatusUnavailable": "Company status change is unavailable.",
   "platformCompanyExchangeSettingsAction": "Pallet / packaging settings",
-
   "companyExchangeSettingsTitle": "Company exchange settings",
   "companyExchangeMockDataBadge": "Mock data",
   "companyExchangeSaved": "Settings saved.",
@@ -867,7 +1116,6 @@
   "companyExchangeDefaultPackagingPlaceholder": "List editing arrives in a later admin version. Read-only preview for now.",
   "companyExchangeItemInactive": "Inactive",
   "companyExchangeSave": "Save",
-
   "navBilling": "Billing",
   "billingTitle": "Billing",
   "billingTabSubscriptions": "Subscriptions",
@@ -881,19 +1129,61 @@
   "billingPrivacyNotice": "Billing views show metadata and counts only. No payment processing or document access occurs here.",
   "billingOverviewTitle": "Billing overview",
   "billingOverviewActive": "Active: {count}",
-  "@billingOverviewActive": { "placeholders": { "count": { "type": "String" } } },
+  "@billingOverviewActive": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "billingOverviewTrial": "Trial: {count}",
-  "@billingOverviewTrial": { "placeholders": { "count": { "type": "String" } } },
+  "@billingOverviewTrial": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "billingOverviewPastDue": "Past due: {count}",
-  "@billingOverviewPastDue": { "placeholders": { "count": { "type": "String" } } },
+  "@billingOverviewPastDue": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "billingOverviewSuspended": "Suspended: {count}",
-  "@billingOverviewSuspended": { "placeholders": { "count": { "type": "String" } } },
+  "@billingOverviewSuspended": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "billingOverviewPricingNew": "New intakes: {count}",
-  "@billingOverviewPricingNew": { "placeholders": { "count": { "type": "String" } } },
+  "@billingOverviewPricingNew": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "billingOverviewQuotesPending": "Pending quotes: {count}",
-  "@billingOverviewQuotesPending": { "placeholders": { "count": { "type": "String" } } },
+  "@billingOverviewQuotesPending": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "billingOverviewLastUpdated": "Last updated: {date}",
-  "@billingOverviewLastUpdated": { "placeholders": { "date": { "type": "String" } } },
+  "@billingOverviewLastUpdated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "dashboardMetricBillingAttention": "Billing attention",
   "billingSubscriptionSearchHint": "Search subscriptions",
   "billingSubscriptionListEmpty": "No subscriptions match your filters.",
@@ -944,17 +1234,59 @@
   "billingQuoteRequestStatusRejected": "Rejected",
   "billingQuoteRequestStatusUnknown": "Unknown",
   "billingMetricSeats": "Seats: {used}/{included}",
-  "@billingMetricSeats": { "placeholders": { "used": { "type": "String" }, "included": { "type": "String" } } },
+  "@billingMetricSeats": {
+    "placeholders": {
+      "used": {
+        "type": "String"
+      },
+      "included": {
+        "type": "String"
+      }
+    }
+  },
   "billingMetricDriverApps": "Driver apps: {used}/{included}",
-  "@billingMetricDriverApps": { "placeholders": { "used": { "type": "String" }, "included": { "type": "String" } } },
+  "@billingMetricDriverApps": {
+    "placeholders": {
+      "used": {
+        "type": "String"
+      },
+      "included": {
+        "type": "String"
+      }
+    }
+  },
   "billingMetricFleetSize": "Fleet size: {count}",
-  "@billingMetricFleetSize": { "placeholders": { "count": { "type": "String" } } },
+  "@billingMetricFleetSize": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "billingMetricOfficeUsers": "Office users: {count}",
-  "@billingMetricOfficeUsers": { "placeholders": { "count": { "type": "String" } } },
+  "@billingMetricOfficeUsers": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "billingMetricDriverAppsRequested": "Driver apps requested: {count}",
-  "@billingMetricDriverAppsRequested": { "placeholders": { "count": { "type": "String" } } },
+  "@billingMetricDriverAppsRequested": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "billingFieldCompanyId": "Company #{id}",
-  "@billingFieldCompanyId": { "placeholders": { "id": { "type": "String" } } },
+  "@billingFieldCompanyId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
   "billingFieldPlan": "Plan",
   "billingFieldBillingCycle": "Billing cycle",
   "billingFieldCurrency": "Currency",
@@ -982,7 +1314,13 @@
   "billingActionDialogTitle": "Update billing status",
   "billingActionAuditNotice": "Status changes are audit logged. No payment processing occurs here.",
   "billingActionCurrentStatus": "Current status: {status}",
-  "@billingActionCurrentStatus": { "placeholders": { "status": { "type": "String" } } },
+  "@billingActionCurrentStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
   "billingActionStatusLabel": "New status",
   "billingActionStatusRequired": "Select a status.",
   "billingActionReasonLabel": "Reason",
@@ -992,12 +1330,10 @@
   "billingActionSuccess": "Billing status updated.",
   "billingActionError": "Could not update billing status.",
   "billingActionUnavailable": "Billing status change is unavailable.",
-
   "navActionCenter": "Action center",
   "navSecurityCenter": "Security center",
   "navAdminUsers": "Admin users",
   "navReleaseCenter": "Release center",
-
   "adminUsersTitle": "Admin users",
   "adminUserDetailTitle": "Admin user detail",
   "adminUserLoadError": "Could not load admin users.",
@@ -1026,9 +1362,21 @@
   "adminUserStatusUnknown": "Unknown",
   "adminUserRoleUnknown": "Unknown role",
   "adminUserLastLogin": "Last login: {date}",
-  "@adminUserLastLogin": { "placeholders": { "date": { "type": "String" } } },
+  "@adminUserLastLogin": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "adminUserFailedLogins": "Failed logins: {count}",
-  "@adminUserFailedLogins": { "placeholders": { "count": { "type": "String" } } },
+  "@adminUserFailedLogins": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "adminUserFieldName": "Name",
   "adminUserFieldEmail": "Email",
   "adminUserFieldRole": "Role",
@@ -1041,9 +1389,21 @@
   "adminUserRoleDialogTitle": "Change admin role",
   "adminUserStatusDialogTitle": "Change admin status",
   "adminUserActionCurrentRole": "Current role: {role}",
-  "@adminUserActionCurrentRole": { "placeholders": { "role": { "type": "String" } } },
+  "@adminUserActionCurrentRole": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
   "adminUserActionCurrentStatus": "Current status: {status}",
-  "@adminUserActionCurrentStatus": { "placeholders": { "status": { "type": "String" } } },
+  "@adminUserActionCurrentStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
   "adminUserReasonLabel": "Reason",
   "adminUserReasonRequired": "A reason is required.",
   "adminUserNameRequired": "Name must be at least 2 characters.",
@@ -1055,7 +1415,6 @@
   "adminUserStatusSuccess": "Admin status updated.",
   "adminUserActionError": "Could not update admin user.",
   "adminUserActionUnavailable": "Admin user management requires super_admin.",
-
   "securityCenterTitle": "Security center",
   "securityEventDetailTitle": "Security event detail",
   "securityLoadError": "Could not load security data.",
@@ -1064,29 +1423,89 @@
   "securityPrivacyNotice": "Security views show metadata only. No message bodies or document content are shown.",
   "securityOverviewTitle": "Security overview",
   "securityOverviewFailedLogins": "Failed logins: {count}",
-  "@securityOverviewFailedLogins": { "placeholders": { "count": { "type": "String" } } },
+  "@securityOverviewFailedLogins": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "securityOverviewDeniedActions": "Denied actions: {count}",
-  "@securityOverviewDeniedActions": { "placeholders": { "count": { "type": "String" } } },
+  "@securityOverviewDeniedActions": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "securityOverviewActiveGrants": "Active support grants: {count}",
-  "@securityOverviewActiveGrants": { "placeholders": { "count": { "type": "String" } } },
+  "@securityOverviewActiveGrants": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "securityOverviewCriticalEvents": "Critical security events: {count}",
-  "@securityOverviewCriticalEvents": { "placeholders": { "count": { "type": "String" } } },
+  "@securityOverviewCriticalEvents": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "securityOverviewExpiringGrants": "Expiring grants: {count}",
-  "@securityOverviewExpiringGrants": { "placeholders": { "count": { "type": "String" } } },
+  "@securityOverviewExpiringGrants": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "securityOverviewHighRiskAi": "High-risk AI reviews: {count}",
-  "@securityOverviewHighRiskAi": { "placeholders": { "count": { "type": "String" } } },
+  "@securityOverviewHighRiskAi": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "securityOverviewSuspiciousBulk": "Suspicious bulk jobs: {count}",
-  "@securityOverviewSuspiciousBulk": { "placeholders": { "count": { "type": "String" } } },
+  "@securityOverviewSuspiciousBulk": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "securityOverviewNoCritical": "No critical events recorded",
   "securityOverviewLastCritical": "Last critical event: {date}",
-  "@securityOverviewLastCritical": { "placeholders": { "date": { "type": "String" } } },
+  "@securityOverviewLastCritical": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "securityEventSearchHint": "Search security events",
   "securityEventListEmpty": "No security events match your filters.",
   "securityEventDetailError": "Security event not found.",
   "securityEventCompanyLabel": "Company: {name}",
-  "@securityEventCompanyLabel": { "placeholders": { "name": { "type": "String" } } },
+  "@securityEventCompanyLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "securityEventCreatedAt": "Created: {date}",
-  "@securityEventCreatedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@securityEventCreatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "securityEventFieldSourceType": "Source type",
   "securityEventFieldSourceId": "Source ID",
   "securityEventFieldActorEmail": "Actor email",
@@ -1116,7 +1535,6 @@
   "securityEventSeverityWarning": "Warning",
   "securityEventSeverityCritical": "Critical",
   "securityEventSeverityUnknown": "Unknown",
-
   "actionCenterTitle": "Action center",
   "actionCenterLoadError": "Could not load action center.",
   "actionCenterMockDataBadge": "Mock data",
@@ -1128,15 +1546,45 @@
   "actionCenterListEmptyDetail": "When registrations, support tickets, public intakes, or health events need attention, they appear here automatically.",
   "actionCenterNeedsAttentionTitle": "Needs attention",
   "actionCenterNeedsAttentionOpen": "Open items: {count}",
-  "@actionCenterNeedsAttentionOpen": { "placeholders": { "count": { "type": "String" } } },
+  "@actionCenterNeedsAttentionOpen": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "actionCenterNeedsAttentionCritical": "Critical/urgent: {count}",
-  "@actionCenterNeedsAttentionCritical": { "placeholders": { "count": { "type": "String" } } },
+  "@actionCenterNeedsAttentionCritical": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "actionCenterNeedsAttentionTotal": "Total items: {count}",
-  "@actionCenterNeedsAttentionTotal": { "placeholders": { "count": { "type": "String" } } },
+  "@actionCenterNeedsAttentionTotal": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "actionCenterCompanyLabel": "Company: {name}",
-  "@actionCenterCompanyLabel": { "placeholders": { "name": { "type": "String" } } },
+  "@actionCenterCompanyLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "actionCenterCreatedAt": "Created: {date}",
-  "@actionCenterCreatedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@actionCenterCreatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "actionCenterFilterAll": "All",
   "actionCenterFilterRegistration": "Registrations",
   "actionCenterFilterBulkOnboarding": "Bulk onboarding",
@@ -1168,7 +1616,6 @@
   "actionCenterStatusDismissed": "Dismissed",
   "actionCenterStatusResolved": "Resolved",
   "actionCenterStatusUnknown": "Unknown",
-
   "releaseCenterTitle": "Release center",
   "releaseLoadError": "Could not load release metadata.",
   "releaseMockDataBadge": "Mock data",
@@ -1189,7 +1636,13 @@
   "releaseFieldMinAdminApp": "Minimum admin app",
   "releaseFieldMinDriverApp": "Minimum driver app",
   "releaseFieldLastDeployment": "Last deployment: {date}",
-  "@releaseFieldLastDeployment": { "placeholders": { "date": { "type": "String" } } },
+  "@releaseFieldLastDeployment": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "releaseFieldMigrationStatus": "Database migrations",
   "releaseFieldDeploymentReady": "Deployment ready",
   "releaseFieldApiPublicName": "Public API name",
@@ -1198,7 +1651,6 @@
   "releaseDeploymentWarnings": "Deployment warnings",
   "releaseYes": "Yes",
   "releaseNo": "No",
-
   "releaseEmailDeliveryTitle": "Email delivery",
   "releaseEmailDeliveryProvider": "Provider",
   "releaseEmailDeliveryEnabled": "Delivery enabled",
@@ -1212,7 +1664,6 @@
   "releaseEmailProviderNoop": "No-op (disabled)",
   "releaseEmailProviderSmtp": "SMTP",
   "releaseEmailProviderPlaceholder": "Provider placeholder",
-
   "releaseObservabilityTitle": "Observability",
   "releaseObservabilityLogLevel": "Log level",
   "releaseObservabilityMetricsEnabled": "Metrics enabled",
@@ -1220,11 +1671,9 @@
   "releaseObservabilityOtelConfigured": "OpenTelemetry configured",
   "releaseObservabilityCorrelationId": "Correlation ID enabled",
   "releaseObservabilityNotice": "Observability status shows configuration flags only. No DSN, endpoint URLs, or secrets are displayed.",
-
   "settingsReleaseSection": "Release & deployment",
   "settingsReleaseCenterBody": "View read-only release metadata, app versions, and environment status.",
   "settingsOpenReleaseCenter": "Open release center",
-
   "appEnvLocal": "Local",
   "appEnvDev": "Development",
   "appEnvStaging": "Staging",
@@ -1284,7 +1733,6 @@
   "settingsNotificationsSection": "Notifications",
   "settingsNotificationsBody": "Manage in-app notification preferences.",
   "settingsOpenNotificationPreferences": "Open notification preferences",
-
   "translationPanelTitle": "Translation",
   "translationProviderDisabled": "Translation provider not configured",
   "translationTargetLanguageLabel": "Target language",
@@ -1295,7 +1743,13 @@
   "translationOriginalTitle": "Original text",
   "translationTranslatedTitle": "Translated text",
   "translationLanguageLabel": "Language: {code}",
-  "@translationLanguageLabel": { "placeholders": { "code": { "type": "String" } } },
+  "@translationLanguageLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
   "translationMetadataOnlyNotice": "Translated text is hidden in metadata-only view",
   "translationBadgeMachine": "Machine translation",
   "translationBadgeNeedsReview": "Needs review",
@@ -1311,7 +1765,6 @@
   "translationApproving": "Approving…",
   "translationDraftReplyAction": "Draft reply translation",
   "translationReplyApprovedNotice": "Translation approved. Copy or send through your normal support workflow.",
-
   "customerCommunicationsTitle": "Customer communications",
   "customerCommunicationDetailTitle": "Communication thread",
   "customerCommunicationEvidencePackageTitle": "Evidence package",
@@ -1326,9 +1779,24 @@
   "customerCommunicationDisputedBadge": "Disputed",
   "customerCommunicationBillingRelatedBadge": "Billing related",
   "customerCommunicationThreadSubtitle": "{domain} · company {companyId}",
-  "@customerCommunicationThreadSubtitle": { "placeholders": { "domain": { "type": "String" }, "companyId": { "type": "String" } } },
+  "@customerCommunicationThreadSubtitle": {
+    "placeholders": {
+      "domain": {
+        "type": "String"
+      },
+      "companyId": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationUpdatedAt": "Updated: {date}",
-  "@customerCommunicationUpdatedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@customerCommunicationUpdatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationFilterAll": "All",
   "customerCommunicationFilterOpen": "Open",
   "customerCommunicationFilterDisputed": "Disputed",
@@ -1359,9 +1827,21 @@
   "customerCommunicationSenderUnknown": "Unknown",
   "customerCommunicationHumanReviewedBadge": "Human reviewed",
   "customerCommunicationOriginalLabel": "Original ({language})",
-  "@customerCommunicationOriginalLabel": { "placeholders": { "language": { "type": "String" } } },
+  "@customerCommunicationOriginalLabel": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationTranslatedLabel": "Translated ({language})",
-  "@customerCommunicationTranslatedLabel": { "placeholders": { "language": { "type": "String" } } },
+  "@customerCommunicationTranslatedLabel": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationMessageMetadataOnly": "Message body hidden (metadata-only view).",
   "customerCommunicationMessagesEmpty": "No messages logged yet.",
   "customerCommunicationTimelineTitle": "Timeline",
@@ -1369,18 +1849,48 @@
   "customerCommunicationEvidencePackagesTitle": "Evidence packages",
   "customerCommunicationPackagesEmpty": "No evidence packages generated yet.",
   "customerCommunicationAgreementPrice": "{amount} {currency} · {cycle}",
-  "@customerCommunicationAgreementPrice": { "placeholders": { "amount": { "type": "String" }, "currency": { "type": "String" }, "cycle": { "type": "String" } } },
+  "@customerCommunicationAgreementPrice": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      },
+      "cycle": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationAgreementModules": "Modules: {modules}",
-  "@customerCommunicationAgreementModules": { "placeholders": { "modules": { "type": "String" } } },
+  "@customerCommunicationAgreementModules": {
+    "placeholders": {
+      "modules": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationAgreementAcceptedAt": "Accepted: {date}",
-  "@customerCommunicationAgreementAcceptedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@customerCommunicationAgreementAcceptedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationPdfPendingNotice": "PDF rendering pending; structured evidence package generated from audit records.",
   "customerCommunicationPdfReadyNotice": "PDF evidence package is ready to share from this device.",
   "customerCommunicationPdfFailedNotice": "PDF rendering failed. Structured summaryJson remains available from audit records.",
   "customerCommunicationPdfSourceOfTruthNotice": "Generated from ViaNexis audit records. Database audit records remain the source of truth; this PDF is a presentation export only.",
   "customerCommunicationDownloadPdfAction": "Download PDF",
   "customerCommunicationDownloadPdfSuccess": "PDF downloaded ({bytes} bytes). Handle according to your privacy and retention policy.",
-  "@customerCommunicationDownloadPdfSuccess": { "placeholders": { "bytes": { "type": "String" } } },
+  "@customerCommunicationDownloadPdfSuccess": {
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationDownloadPdfFailed": "Could not download the evidence PDF.",
   "customerCommunicationSharePdfAction": "Share PDF",
   "customerCommunicationSharePdfSuccess": "PDF ready to share. Use your device share sheet to open or save the file.",
@@ -1389,7 +1899,13 @@
   "customerCommunicationSharePdfUnavailable": "Sharing is not available on this device. Try again or use another device.",
   "customerCommunicationSharePdfNotReady": "PDF is not ready yet. Wait for generation to finish or regenerate the package.",
   "customerCommunicationGeneratedBy": "Generated by user ID: {userId}",
-  "@customerCommunicationGeneratedBy": { "placeholders": { "userId": { "type": "String" } } },
+  "@customerCommunicationGeneratedBy": {
+    "placeholders": {
+      "userId": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationSendReplyTitle": "Send customer reply",
   "customerCommunicationSendReplyAction": "Send reply",
   "customerCommunicationSendReplyMessageLabel": "Reply message",
@@ -1443,7 +1959,13 @@
   "customerCommunicationDeliveryEventProviderStatus": "Provider status",
   "customerCommunicationDeliveryEventUnknown": "Unknown event",
   "customerCommunicationPackageGeneratedAt": "Generated: {date}",
-  "@customerCommunicationPackageGeneratedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@customerCommunicationPackageGeneratedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationPackageTypeCommunicationEvidence": "Communication evidence",
   "customerCommunicationPackageTypeSubscriptionDispute": "Subscription dispute",
   "customerCommunicationPackageTypeRegistrationEvidence": "Registration evidence",
@@ -1466,17 +1988,47 @@
   "customerCommunicationPackageGeneratedSuccess": "Evidence package generated.",
   "customerCommunicationSummaryJsonTitle": "Structured summary (authoritative audit export)",
   "customerCommunicationPackageReason": "Reason: {reason}",
-  "@customerCommunicationPackageReason": { "placeholders": { "reason": { "type": "String" } } },
+  "@customerCommunicationPackageReason": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationFileHash": "Integrity hash: {hash}",
-  "@customerCommunicationFileHash": { "placeholders": { "hash": { "type": "String" } } },
+  "@customerCommunicationFileHash": {
+    "placeholders": {
+      "hash": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationPackageNotFound": "Evidence package not found.",
   "customerCommunicationSummaryTitle": "Customer communications",
   "customerCommunicationSummaryDisputed": "Disputed: {count}",
-  "@customerCommunicationSummaryDisputed": { "placeholders": { "count": { "type": "String" } } },
+  "@customerCommunicationSummaryDisputed": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationSummaryOpen": "Open: {count}",
-  "@customerCommunicationSummaryOpen": { "placeholders": { "count": { "type": "String" } } },
+  "@customerCommunicationSummaryOpen": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "customerCommunicationSummaryTotal": "Total: {count}",
-  "@customerCommunicationSummaryTotal": { "placeholders": { "count": { "type": "String" } } },
+  "@customerCommunicationSummaryTotal": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "publicIntakesTitle": "Public intakes",
   "publicIntakeDashboardSubtitle": "Review website leads and quote requests. Also available under More.",
   "publicIntakeDashboardOpenAction": "Open public intakes",
@@ -1493,7 +2045,13 @@
   "publicIntakeMockDataBadge": "Mock data",
   "publicIntakeUnknownCustomer": "Unknown contact",
   "publicIntakeCreatedAt": "Submitted: {date}",
-  "@publicIntakeCreatedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@publicIntakeCreatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "publicIntakeFilterAll": "All",
   "publicIntakeFilterNew": "New",
   "publicIntakeFilterReviewing": "Reviewing",
@@ -1524,13 +2082,37 @@
   "publicIntakeFieldCompany": "Company",
   "publicIntakeFieldCountry": "Country",
   "publicIntakeFieldOriginalLanguage": "Original language: {lang}",
-  "@publicIntakeFieldOriginalLanguage": { "placeholders": { "lang": { "type": "String" } } },
+  "@publicIntakeFieldOriginalLanguage": {
+    "placeholders": {
+      "lang": {
+        "type": "String"
+      }
+    }
+  },
   "publicIntakeFieldFleetSize": "Fleet size: {count}",
-  "@publicIntakeFieldFleetSize": { "placeholders": { "count": { "type": "String" } } },
+  "@publicIntakeFieldFleetSize": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "publicIntakeFieldOfficeUsers": "Office users: {count}",
-  "@publicIntakeFieldOfficeUsers": { "placeholders": { "count": { "type": "String" } } },
+  "@publicIntakeFieldOfficeUsers": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "publicIntakeFieldDriverApps": "Driver apps: {count}",
-  "@publicIntakeFieldDriverApps": { "placeholders": { "count": { "type": "String" } } },
+  "@publicIntakeFieldDriverApps": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "publicIntakeFieldModules": "Requested modules",
   "publicIntakeFieldAiFeatures": "Requested AI features",
   "publicIntakeFieldStatus": "Status",
@@ -1554,22 +2136,31 @@
   "publicIntakeStatusError": "Could not update status.",
   "publicIntakeEvidenceNotice": "This public intake is logged from first contact and can be included in evidence packages.",
   "publicIntakeDashboardNew": "New public intakes: {count}",
-  "@publicIntakeDashboardNew": { "placeholders": { "count": { "type": "String" } } },
+  "@publicIntakeDashboardNew": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "publicIntakeDashboardHighPriority": "Quote/demo requests: {count}",
-  "@publicIntakeDashboardHighPriority": { "placeholders": { "count": { "type": "String" } } },
+  "@publicIntakeDashboardHighPriority": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "actionCenterFilterPublicIntake": "Public intakes",
   "actionCenterTypePublicIntake": "Public intake",
-
   "navMore": "More",
   "modulesHubTitle": "Modules",
   "modulesHubBody": "Additional admin modules and settings.",
   "navReturnToDashboard": "Return to dashboard",
-
   "settingsLanguageSection": "Language",
   "settingsLanguageBody": "Choose the admin app display language.",
   "settingsLanguageHu": "Hungarian",
   "settingsLanguageEn": "English",
-
   "devicePinSectionTitle": "Device PIN",
   "devicePinSectionBody": "Optional local PIN for this device. Does not replace backend sign-in.",
   "devicePinSetAction": "Set PIN",
@@ -1585,7 +2176,6 @@
   "devicePinInvalidLength": "PIN must be 4–8 digits.",
   "devicePinInvalidCurrent": "Current PIN is incorrect.",
   "devicePinNonNumeric": "PIN must contain digits only.",
-
   "navOperations": "Operations overview",
   "operationsTitle": "Operations overview",
   "operationsModuleDescription": "Platform metrics, trips, drivers, and backend dependencies.",
@@ -1612,7 +2202,6 @@
   "operationsLinkNotificationStatus": "Notification status",
   "operationsLinkSupportAccess": "Support access",
   "operationsLinkPublicIntakes": "Public intakes",
-
   "driverAccessTitle": "Driver access",
   "driverAccessMockBadge": "Mock data",
   "driverAccessLoadFailed": "Failed to load driver list.",
@@ -1633,7 +2222,6 @@
   "driverAccessStatusActive": "Active",
   "driverAccessStatusDisabled": "Disabled",
   "driverAccessStatusInvited": "Invited",
-
   "tripsOverviewTitle": "Trips overview",
   "tripsOverviewMockBadge": "Mock data",
   "tripsOverviewLoadFailed": "Failed to load trips overview.",
@@ -1651,7 +2239,6 @@
   "tripsOverviewStatusCompleted": "Completed",
   "tripsOverviewStatusParked": "Parked",
   "tripsOverviewStatusPending": "Pending",
-
   "exchangeRecordsTitle": "Exchange records",
   "exchangeRecordsMockBadge": "Mock data",
   "exchangeRecordsLoadFailed": "Failed to load exchange records.",
@@ -1671,7 +2258,6 @@
   "exchangeRecordsStatusDamaged": "Damaged",
   "exchangeRecordsStatusMissing": "Missing",
   "exchangeRecordsStatusUnknown": "Unknown",
-
   "notificationStatusTitle": "Notification status",
   "notificationStatusPrivacyNotice": "Push infrastructure metadata only. No FCM/APNS tokens, secrets, or credentials.",
   "notificationStatusLoadFailed": "Failed to load notification status.",
@@ -1683,10 +2269,22 @@
   "notificationStatusEventsDependency": "Platform notification event list endpoint is not available yet.",
   "notificationStatusProductionPushConfigured": "Production push backend configured",
   "notificationStatusBackendDependency": "Backend dependency — production push not fully wired.",
-
   "companyExchangeItemSortOrder": "Sort order",
   "companyExchangePackagingCrudTitle": "Packaging list editing",
   "companyExchangePackagingCrudDependency": "Default packaging item CRUD is not available yet. Read-only list for now.",
   "companyExchangeManualPalletRecordTitle": "Driver manual pallet record",
-  "companyExchangeManualPalletRecordDependency": "Driver manual pallet record policy toggle endpoint is not available yet."
+  "companyExchangeManualPalletRecordDependency": "Driver manual pallet record policy toggle endpoint is not available yet.",
+  "companyExchangeAddPackagingItem": "Add packaging item",
+  "companyExchangeEditPackagingItem": "Edit packaging item",
+  "companyExchangePackagingItemName": "Packaging item name",
+  "companyExchangePackagingItemNameRequired": "Enter the packaging item name.",
+  "companyExchangePackagingItemNotes": "Notes",
+  "companyExchangePackagingItemSortOrder": "Sort order",
+  "companyExchangeSavePackagingItem": "Save",
+  "companyExchangePackagingItemSaved": "Packaging list saved.",
+  "companyExchangePackagingItemSaveFailed": "Could not save the packaging item.",
+  "companyExchangeDeactivatePackagingItem": "Deactivate",
+  "companyExchangeReactivatePackagingItem": "Reactivate",
+  "companyExchangePackagingItemEmpty": "No packaging items have been configured for this company yet.",
+  "companyExchangeCancel": "Cancel"
 }

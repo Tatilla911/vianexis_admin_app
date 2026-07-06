@@ -9257,6 +9257,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Driver manual pallet record policy toggle endpoint is not available yet.'**
   String get companyExchangeManualPalletRecordDependency;
+
+  /// No description provided for @companyExchangeAddPackagingItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Add packaging item'**
+  String get companyExchangeAddPackagingItem;
+
+  /// No description provided for @companyExchangeEditPackagingItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit packaging item'**
+  String get companyExchangeEditPackagingItem;
+
+  /// No description provided for @companyExchangePackagingItemName.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging item name'**
+  String get companyExchangePackagingItemName;
+
+  /// No description provided for @companyExchangePackagingItemNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the packaging item name.'**
+  String get companyExchangePackagingItemNameRequired;
+
+  /// No description provided for @companyExchangePackagingItemNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get companyExchangePackagingItemNotes;
+
+  /// No description provided for @companyExchangePackagingItemSortOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort order'**
+  String get companyExchangePackagingItemSortOrder;
+
+  /// No description provided for @companyExchangeSavePackagingItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get companyExchangeSavePackagingItem;
+
+  /// No description provided for @companyExchangePackagingItemSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging list saved.'**
+  String get companyExchangePackagingItemSaved;
+
+  /// No description provided for @companyExchangePackagingItemSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save the packaging item.'**
+  String get companyExchangePackagingItemSaveFailed;
+
+  /// No description provided for @companyExchangeDeactivatePackagingItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Deactivate'**
+  String get companyExchangeDeactivatePackagingItem;
+
+  /// No description provided for @companyExchangeReactivatePackagingItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Reactivate'**
+  String get companyExchangeReactivatePackagingItem;
+
+  /// No description provided for @companyExchangePackagingItemEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No packaging items have been configured for this company yet.'**
+  String get companyExchangePackagingItemEmpty;
+
+  /// No description provided for @companyExchangeCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get companyExchangeCancel;
 }
 
 class _AppLocalizationsDelegate

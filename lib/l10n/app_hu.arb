@@ -441,8 +441,12 @@
   "auditLogDateRangeSelected": "{from} – {to}",
   "@auditLogDateRangeSelected": {
     "placeholders": {
-      "from": {"type": "String"},
-      "to": {"type": "String"}
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
     }
   },
   "auditLogDateRangeClear": "Dátumok törlése",
@@ -452,7 +456,6 @@
   "auditLogExportFailed": "Az audit napló exportja nem sikerült.",
   "auditLogExportUnavailable": "Az audit napló export nem érhető el.",
   "auditLogExportSafetyNotice": "Az export csak metaadatot tartalmaz. Nem szerepel benne fuvar, dokumentum vagy üzenet tartalom.",
-  "auditLogDateRangeComingSoon": "Dátumtartomány szűrő (hamarosan)",
   "auditLogTimestampLabel": "{date}",
   "auditLogDetailTitle": "Audit napló bejegyzés",
   "auditLogPrivacyNotice": "Csak metaadat — bérlői fuvar-, dokumentum- vagy üzenettartalom nem jelenik meg.",
@@ -793,7 +796,6 @@
   "platformCompanyStatusSuccess": "A cég státusza frissült.",
   "platformCompanyStatusUnavailable": "A státuszváltoztatás nem érhető el.",
   "platformCompanyExchangeSettingsAction": "Raklap / göngyöleg beállítások",
-
   "companyExchangeSettingsTitle": "Céges exchange beállítások",
   "companyExchangeMockDataBadge": "Tesztadat",
   "companyExchangeSaved": "A beállítások mentve.",
@@ -813,7 +815,6 @@
   "companyExchangeDefaultPackagingPlaceholder": "A lista szerkesztése későbbi admin verzióban érkezik. Jelenleg csak olvasható előnézet.",
   "companyExchangeItemInactive": "Inaktív",
   "companyExchangeSave": "Mentés",
-
   "navBilling": "Számlázás",
   "billingTitle": "Számlázás",
   "billingTabSubscriptions": "Előfizetések",
@@ -924,12 +925,10 @@
   "billingActionSuccess": "A számlázási státusz frissítve.",
   "billingActionError": "A számlázási státusz frissítése sikertelen.",
   "billingActionUnavailable": "A státuszváltoztatás nem érhető el.",
-
   "navActionCenter": "Teendők",
   "navSecurityCenter": "Biztonsági központ",
   "navAdminUsers": "Admin felhasználók",
   "navReleaseCenter": "Kihelyezési központ",
-
   "adminUsersTitle": "Admin felhasználók",
   "adminUserDetailTitle": "Admin felhasználó részletei",
   "adminUserLoadError": "Az admin felhasználók betöltése sikertelen.",
@@ -983,7 +982,6 @@
   "adminUserStatusSuccess": "Admin státusz frissítve.",
   "adminUserActionError": "Az admin felhasználó frissítése sikertelen.",
   "adminUserActionUnavailable": "Az admin kezelés super_admin jogosultságot igényel.",
-
   "securityCenterTitle": "Biztonsági központ",
   "securityEventDetailTitle": "Biztonsági esemény részletei",
   "securityLoadError": "A biztonsági adatok betöltése sikertelen.",
@@ -1034,7 +1032,6 @@
   "securityEventSeverityWarning": "Figyelmeztetés",
   "securityEventSeverityCritical": "Kritikus",
   "securityEventSeverityUnknown": "Ismeretlen",
-
   "actionCenterTitle": "Teendők",
   "actionCenterLoadError": "A teendők betöltése sikertelen.",
   "actionCenterMockDataBadge": "Mintaadat",
@@ -1081,7 +1078,6 @@
   "actionCenterStatusDismissed": "Elutasított",
   "actionCenterStatusResolved": "Megoldott",
   "actionCenterStatusUnknown": "Ismeretlen",
-
   "releaseCenterTitle": "Kihelyezési központ",
   "releaseLoadError": "A kihelyezési metaadatok betöltése sikertelen.",
   "releaseMockDataBadge": "Mintaadat",
@@ -1110,7 +1106,6 @@
   "releaseDeploymentWarnings": "Kihelyezési figyelmeztetések",
   "releaseYes": "Igen",
   "releaseNo": "Nem",
-
   "releaseEmailDeliveryTitle": "E-mail kézbesítés",
   "releaseEmailDeliveryProvider": "Szolgáltató",
   "releaseEmailDeliveryEnabled": "Kézbesítés engedélyezve",
@@ -1124,7 +1119,6 @@
   "releaseEmailProviderNoop": "No-op (kikapcsolva)",
   "releaseEmailProviderSmtp": "SMTP",
   "releaseEmailProviderPlaceholder": "Szolgáltató helyőrző",
-
   "releaseObservabilityTitle": "Megfigyelhetőség",
   "releaseObservabilityLogLevel": "Naplózási szint",
   "releaseObservabilityMetricsEnabled": "Metrikák engedélyezve",
@@ -1132,11 +1126,9 @@
   "releaseObservabilityOtelConfigured": "OpenTelemetry beállítva",
   "releaseObservabilityCorrelationId": "Korrelációs azonosító engedélyezve",
   "releaseObservabilityNotice": "A megfigyelhetőségi státusz csak konfigurációs jelzőket mutat. DSN, végpont URL-ek és titkok nem jelennek meg.",
-
   "settingsReleaseSection": "Kihelyezés és környezet",
   "settingsReleaseCenterBody": "Olvasható kihelyezési metaadatok, app verziók és környezeti státusz megtekintése.",
   "settingsOpenReleaseCenter": "Kihelyezési központ megnyitása",
-
   "appEnvLocal": "Helyi",
   "appEnvDev": "Fejlesztői",
   "appEnvStaging": "Staging",
@@ -1196,7 +1188,6 @@
   "settingsNotificationsSection": "Ertesitesek",
   "settingsNotificationsBody": "Alkalmazason beluli ertesitesi beallitasok kezelese.",
   "settingsOpenNotificationPreferences": "Ertesitesi beallitasok megnyitasa",
-
   "translationPanelTitle": "Forditas",
   "translationProviderDisabled": "A fordito szolgaltato nincs beallitva",
   "translationTargetLanguageLabel": "Celnyelv",
@@ -1222,7 +1213,6 @@
   "translationApproving": "Jovahagyas…",
   "translationDraftReplyAction": "Valasz forditas piszkozata",
   "translationReplyApprovedNotice": "A forditas jovahagyva. Masolja vagy kuldje a normal tamogatasi folyamaton keresztul.",
-
   "customerCommunicationsTitle": "Ugyfel kommunikacio",
   "customerCommunicationDetailTitle": "Kommunikacios szal",
   "customerCommunicationEvidencePackageTitle": "Bizonyitek csomag",
@@ -1448,17 +1438,14 @@
   "publicIntakeDashboardHighPriority": "Ajánlat/demo kérések: {count}",
   "actionCenterFilterPublicIntake": "Publikus megkeresések",
   "actionCenterTypePublicIntake": "Publikus megkeresés",
-
   "navMore": "Továbbiak",
   "modulesHubTitle": "Modulok",
   "modulesHubBody": "További admin modulok és beállítások.",
   "navReturnToDashboard": "Vissza az irányítópultra",
-
   "settingsLanguageSection": "Nyelv",
   "settingsLanguageBody": "Válaszd ki az admin app megjelenítési nyelvét.",
   "settingsLanguageHu": "Magyar",
   "settingsLanguageEn": "Angol",
-
   "devicePinSectionTitle": "Eszköz PIN",
   "devicePinSectionBody": "Opcionális helyi PIN ehhez az eszközhöz. Nem helyettesíti a backend bejelentkezést.",
   "devicePinSetAction": "PIN beállítása",
@@ -1474,7 +1461,6 @@
   "devicePinInvalidLength": "A PIN 4–8 számjegy legyen.",
   "devicePinInvalidCurrent": "A jelenlegi PIN helytelen.",
   "devicePinNonNumeric": "A PIN csak számjegyeket tartalmazhat.",
-
   "navOperations": "Műveleti áttekintés",
   "operationsTitle": "Műveleti áttekintés",
   "operationsModuleDescription": "Platform működési mutatók, fuvarok, sofőrök és függőségek.",
@@ -1501,7 +1487,6 @@
   "operationsLinkNotificationStatus": "Értesítések státusza",
   "operationsLinkSupportAccess": "Support hozzáférés",
   "operationsLinkPublicIntakes": "Publikus megkeresések",
-
   "driverAccessTitle": "Sofőr hozzáférés",
   "driverAccessMockBadge": "Tesztadat",
   "driverAccessLoadFailed": "A sofőr lista betöltése sikertelen.",
@@ -1522,7 +1507,6 @@
   "driverAccessStatusActive": "Aktív",
   "driverAccessStatusDisabled": "Letiltva",
   "driverAccessStatusInvited": "Meghívott",
-
   "tripsOverviewTitle": "Fuvar áttekintő",
   "tripsOverviewMockBadge": "Tesztadat",
   "tripsOverviewLoadFailed": "A fuvar áttekintő betöltése sikertelen.",
@@ -1540,7 +1524,6 @@
   "tripsOverviewStatusCompleted": "Lezárt",
   "tripsOverviewStatusParked": "Parkolt",
   "tripsOverviewStatusPending": "Függő",
-
   "exchangeRecordsTitle": "Exchange rekordok",
   "exchangeRecordsMockBadge": "Tesztadat",
   "exchangeRecordsLoadFailed": "Az exchange rekordok betöltése sikertelen.",
@@ -1560,7 +1543,6 @@
   "exchangeRecordsStatusDamaged": "Sérült",
   "exchangeRecordsStatusMissing": "Hiányzó",
   "exchangeRecordsStatusUnknown": "Ismeretlen",
-
   "notificationStatusTitle": "Értesítések státusza",
   "notificationStatusPrivacyNotice": "Csak push infrastruktúra metaadat. FCM/APNS token, secret és credential nem jelenik meg.",
   "notificationStatusLoadFailed": "Az értesítés státusz betöltése sikertelen.",
@@ -1572,10 +1554,22 @@
   "notificationStatusEventsDependency": "A platform értesítési esemény lista endpointja még nem érhető el.",
   "notificationStatusProductionPushConfigured": "Éles push backend konfigurálva",
   "notificationStatusBackendDependency": "Backend függőség — éles push még nem teljes.",
-
   "companyExchangeItemSortOrder": "Sorrend",
   "companyExchangePackagingCrudTitle": "Göngyöleg lista szerkesztés",
   "companyExchangePackagingCrudDependency": "Az alapértelmezett göngyöleg tételek CRUD műveletei még nem érhetők el. Jelenleg csak olvasható lista.",
   "companyExchangeManualPalletRecordTitle": "Sofőr manuális raklap rögzítés",
-  "companyExchangeManualPalletRecordDependency": "A sofőr manuális raklap rögzítés policy kapcsoló endpointja még nem érhető el."
+  "companyExchangeManualPalletRecordDependency": "A sofőr manuális raklap rögzítés policy kapcsoló endpointja még nem érhető el.",
+  "companyExchangeAddPackagingItem": "Göngyöleg hozzáadása",
+  "companyExchangeEditPackagingItem": "Göngyöleg szerkesztése",
+  "companyExchangePackagingItemName": "Göngyöleg neve",
+  "companyExchangePackagingItemNameRequired": "Add meg a göngyöleg nevét.",
+  "companyExchangePackagingItemNotes": "Megjegyzés",
+  "companyExchangePackagingItemSortOrder": "Sorrend",
+  "companyExchangeSavePackagingItem": "Mentés",
+  "companyExchangePackagingItemSaved": "Göngyöleg lista mentve.",
+  "companyExchangePackagingItemSaveFailed": "Nem sikerült menteni a göngyöleg elemet.",
+  "companyExchangeDeactivatePackagingItem": "Deaktiválás",
+  "companyExchangeReactivatePackagingItem": "Újraaktiválás",
+  "companyExchangePackagingItemEmpty": "Még nincs rögzített göngyöleg elem ennél a cégnél.",
+  "companyExchangeCancel": "Mégse"
 }

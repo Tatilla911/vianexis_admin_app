@@ -3,6 +3,7 @@ class DefaultPackagingItem {
     required this.id,
     required this.name,
     this.localizedNameKey,
+    this.localizedNames,
     this.active = true,
     this.sortOrder = 0,
     this.requiresReturn = false,
@@ -13,6 +14,7 @@ class DefaultPackagingItem {
   final String id;
   final String name;
   final String? localizedNameKey;
+  final Map<String, String>? localizedNames;
   final bool active;
   final int sortOrder;
   final bool requiresReturn;
@@ -20,11 +22,17 @@ class DefaultPackagingItem {
   final String? notes;
 
   factory DefaultPackagingItem.fromJson(Map<String, dynamic> json) {
+    final rawLocalizedNames = json['localizedNames'];
     return DefaultPackagingItem(
       id: json['id']?.toString() ?? '',
       name: json['name']?.toString() ?? '',
       localizedNameKey: json['localizedNameKey']?.toString(),
-      active: json['active'] != false,
+      localizedNames: rawLocalizedNames is Map
+          ? rawLocalizedNames.map(
+              (key, value) => MapEntry(key.toString(), value.toString()),
+            )
+          : null,
+      active: json['active'] != false && json['isActive'] != false,
       sortOrder: json['sortOrder'] is int
           ? json['sortOrder'] as int
           : int.tryParse(json['sortOrder']?.toString() ?? '') ?? 0,
@@ -35,15 +43,17 @@ class DefaultPackagingItem {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        if (localizedNameKey != null) 'localizedNameKey': localizedNameKey,
-        'active': active,
-        'sortOrder': sortOrder,
-        'requiresReturn': requiresReturn,
-        'allowQuantity': allowQuantity,
-        if (notes != null) 'notes': notes,
-      };
+    'id': id,
+    'name': name,
+    if (localizedNameKey != null) 'localizedNameKey': localizedNameKey,
+    if (localizedNames != null) 'localizedNames': localizedNames,
+    'active': active,
+    'isActive': active,
+    'sortOrder': sortOrder,
+    'requiresReturn': requiresReturn,
+    'allowQuantity': allowQuantity,
+    if (notes != null) 'notes': notes,
+  };
 }
 
 class CompanyExchangeSettings {
@@ -74,9 +84,9 @@ class CompanyExchangeSettings {
           : const [],
       defaultPackagingItems: packagingItems is List
           ? packagingItems
-              .whereType<Map<String, dynamic>>()
-              .map(DefaultPackagingItem.fromJson)
-              .toList(growable: false)
+                .whereType<Map<String, dynamic>>()
+                .map(DefaultPackagingItem.fromJson)
+                .toList(growable: false)
           : const [],
     );
   }
@@ -89,10 +99,12 @@ class CompanyExchangeSettings {
     List<DefaultPackagingItem>? defaultPackagingItems,
   }) {
     return CompanyExchangeSettings(
-      palletExchangeEnabled: palletExchangeEnabled ?? this.palletExchangeEnabled,
+      palletExchangeEnabled:
+          palletExchangeEnabled ?? this.palletExchangeEnabled,
       packagingExchangeEnabled:
           packagingExchangeEnabled ?? this.packagingExchangeEnabled,
-      allowDriverCustomPackagingItems: allowDriverCustomPackagingItems ??
+      allowDriverCustomPackagingItems:
+          allowDriverCustomPackagingItems ??
           this.allowDriverCustomPackagingItems,
       defaultPalletTypes: defaultPalletTypes ?? this.defaultPalletTypes,
       defaultPackagingItems:
@@ -120,6 +132,32 @@ class CompanyExchangeSettingsPatch {
         'packagingExchangeEnabled': packagingExchangeEnabled,
       if (allowDriverCustomPackagingItems != null)
         'allowDriverCustomPackagingItems': allowDriverCustomPackagingItems,
+    };
+  }
+}
+
+class PackagingItemPatch {
+  const PackagingItemPatch({
+    this.name,
+    this.localizedNames,
+    this.sortOrder,
+    this.isActive,
+    this.notes,
+  });
+
+  final String? name;
+  final Map<String, String>? localizedNames;
+  final int? sortOrder;
+  final bool? isActive;
+  final String? notes;
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (name != null) 'name': name,
+      if (localizedNames != null) 'localizedNames': localizedNames,
+      if (sortOrder != null) 'sortOrder': sortOrder,
+      if (isActive != null) 'isActive': isActive,
+      if (notes != null) 'notes': notes,
     };
   }
 }

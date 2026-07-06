@@ -36,6 +36,51 @@ class CompanyExchangeSettingsApi {
     return _mergePackagingItems(companyId, settings);
   }
 
+  Future<DefaultPackagingItem> createPackagingItem({
+    required String companyId,
+    required PackagingItemPatch patch,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/companies/$companyId/packaging-items',
+      data: patch.toJson(),
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty packaging item create response');
+    }
+    return DefaultPackagingItem.fromJson(data);
+  }
+
+  Future<DefaultPackagingItem> patchPackagingItem({
+    required String companyId,
+    required String itemId,
+    required PackagingItemPatch patch,
+  }) async {
+    final response = await _apiClient.patch<Map<String, dynamic>>(
+      '/platform-admin/companies/$companyId/packaging-items/$itemId',
+      data: patch.toJson(),
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty packaging item patch response');
+    }
+    return DefaultPackagingItem.fromJson(data);
+  }
+
+  Future<DefaultPackagingItem> deactivatePackagingItem({
+    required String companyId,
+    required String itemId,
+  }) async {
+    final response = await _apiClient.delete<Map<String, dynamic>>(
+      '/platform-admin/companies/$companyId/packaging-items/$itemId',
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty packaging item deactivate response');
+    }
+    return DefaultPackagingItem.fromJson(data);
+  }
+
   Future<CompanyExchangeSettings> _mergePackagingItems(
     String companyId,
     CompanyExchangeSettings settings,

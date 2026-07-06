@@ -5043,4 +5043,46 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get companyExchangeManualPalletRecordDependency =>
       'Driver manual pallet record policy toggle endpoint is not available yet.';
+
+  @override
+  String get companyExchangeAddPackagingItem => 'Add packaging item';
+
+  @override
+  String get companyExchangeEditPackagingItem => 'Edit packaging item';
+
+  @override
+  String get companyExchangePackagingItemName => 'Packaging item name';
+
+  @override
+  String get companyExchangePackagingItemNameRequired =>
+      'Enter the packaging item name.';
+
+  @override
+  String get companyExchangePackagingItemNotes => 'Notes';
+
+  @override
+  String get companyExchangePackagingItemSortOrder => 'Sort order';
+
+  @override
+  String get companyExchangeSavePackagingItem => 'Save';
+
+  @override
+  String get companyExchangePackagingItemSaved => 'Packaging list saved.';
+
+  @override
+  String get companyExchangePackagingItemSaveFailed =>
+      'Could not save the packaging item.';
+
+  @override
+  String get companyExchangeDeactivatePackagingItem => 'Deactivate';
+
+  @override
+  String get companyExchangeReactivatePackagingItem => 'Reactivate';
+
+  @override
+  String get companyExchangePackagingItemEmpty =>
+      'No packaging items have been configured for this company yet.';
+
+  @override
+  String get companyExchangeCancel => 'Cancel';
 }

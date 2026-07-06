@@ -5113,4 +5113,46 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get companyExchangeManualPalletRecordDependency =>
       'A sofőr manuális raklap rögzítés policy kapcsoló endpointja még nem érhető el.';
+
+  @override
+  String get companyExchangeAddPackagingItem => 'Göngyöleg hozzáadása';
+
+  @override
+  String get companyExchangeEditPackagingItem => 'Göngyöleg szerkesztése';
+
+  @override
+  String get companyExchangePackagingItemName => 'Göngyöleg neve';
+
+  @override
+  String get companyExchangePackagingItemNameRequired =>
+      'Add meg a göngyöleg nevét.';
+
+  @override
+  String get companyExchangePackagingItemNotes => 'Megjegyzés';
+
+  @override
+  String get companyExchangePackagingItemSortOrder => 'Sorrend';
+
+  @override
+  String get companyExchangeSavePackagingItem => 'Mentés';
+
+  @override
+  String get companyExchangePackagingItemSaved => 'Göngyöleg lista mentve.';
+
+  @override
+  String get companyExchangePackagingItemSaveFailed =>
+      'Nem sikerült menteni a göngyöleg elemet.';
+
+  @override
+  String get companyExchangeDeactivatePackagingItem => 'Deaktiválás';
+
+  @override
+  String get companyExchangeReactivatePackagingItem => 'Újraaktiválás';
+
+  @override
+  String get companyExchangePackagingItemEmpty =>
+      'Még nincs rögzített göngyöleg elem ennél a cégnél.';
+
+  @override
+  String get companyExchangeCancel => 'Mégse';
 }

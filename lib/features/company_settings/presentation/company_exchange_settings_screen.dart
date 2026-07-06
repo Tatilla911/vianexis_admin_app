@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/widgets/backend_dependency_card.dart';
@@ -26,6 +27,7 @@ class _CompanyExchangeSettingsScreenState
   bool? _customItemsEnabled;
   bool _dirty = false;
   bool _saving = false;
+  bool _packagingActionInProgress = false;
 
   void _syncFromSettings(CompanyExchangeSettings settings) {
     _palletEnabled = settings.palletExchangeEnabled;
@@ -53,7 +55,9 @@ class _CompanyExchangeSettingsScreenState
         _saving = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).companyExchangeSaved)),
+        SnackBar(
+          content: Text(AppLocalizations.of(context).companyExchangeSaved),
+        ),
       );
     } catch (_) {
       if (!mounted) return;
@@ -66,19 +70,185 @@ class _CompanyExchangeSettingsScreenState
     }
   }
 
+  Future<void> _showPackagingItemDialog([DefaultPackagingItem? item]) async {
+    final l10n = AppLocalizations.of(context);
+    final nameController = TextEditingController(text: item?.name ?? '');
+    final sortOrderController = TextEditingController(
+      text: item?.sortOrder == null ? '' : item!.sortOrder.toString(),
+    );
+    final notesController = TextEditingController(text: item?.notes ?? '');
+    final formKey = GlobalKey<FormState>();
+
+    final patch = await showDialog<PackagingItemPatch>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            item == null
+                ? l10n.companyExchangeAddPackagingItem
+                : l10n.companyExchangeEditPackagingItem,
+          ),
+          content: Form(
+            key: formKey,
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 420),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextFormField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        labelText: l10n.companyExchangePackagingItemName,
+                      ),
+                      textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return l10n.companyExchangePackagingItemNameRequired;
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      controller: sortOrderController,
+                      decoration: InputDecoration(
+                        labelText: l10n.companyExchangePackagingItemSortOrder,
+                      ),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    ),
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      controller: notesController,
+                      decoration: InputDecoration(
+                        labelText: l10n.companyExchangePackagingItemNotes,
+                      ),
+                      minLines: 2,
+                      maxLines: 4,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(l10n.companyExchangeCancel),
+            ),
+            FilledButton(
+              onPressed: () {
+                if (!formKey.currentState!.validate()) return;
+                Navigator.of(context).pop(
+                  PackagingItemPatch(
+                    name: nameController.text.trim(),
+                    sortOrder:
+                        int.tryParse(sortOrderController.text.trim()) ?? 0,
+                    notes: notesController.text.trim().isEmpty
+                        ? null
+                        : notesController.text.trim(),
+                    isActive: item?.active ?? true,
+                  ),
+                );
+              },
+              child: Text(l10n.companyExchangeSavePackagingItem),
+            ),
+          ],
+        );
+      },
+    );
+
+    nameController.dispose();
+    sortOrderController.dispose();
+    notesController.dispose();
+
+    if (patch == null) return;
+
+    setState(() => _packagingActionInProgress = true);
+    try {
+      if (item == null) {
+        await createCompanyPackagingItem(
+          ref,
+          companyId: widget.companyId,
+          patch: patch,
+        );
+      } else {
+        await patchCompanyPackagingItem(
+          ref,
+          companyId: widget.companyId,
+          itemId: item.id,
+          patch: patch,
+        );
+      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.companyExchangePackagingItemSaved)),
+      );
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.companyExchangePackagingItemSaveFailed)),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _packagingActionInProgress = false);
+      }
+    }
+  }
+
+  Future<void> _setPackagingItemActive(
+    DefaultPackagingItem item,
+    bool active,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    setState(() => _packagingActionInProgress = true);
+    try {
+      if (active) {
+        await patchCompanyPackagingItem(
+          ref,
+          companyId: widget.companyId,
+          itemId: item.id,
+          patch: const PackagingItemPatch(isActive: true),
+        );
+      } else {
+        await deactivateCompanyPackagingItem(
+          ref,
+          companyId: widget.companyId,
+          itemId: item.id,
+        );
+      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.companyExchangePackagingItemSaved)),
+      );
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.companyExchangePackagingItemSaveFailed)),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _packagingActionInProgress = false);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final settingsAsync = ref.watch(companyExchangeSettingsProvider(widget.companyId));
-    final usesMock =
-        ref.watch(companyExchangeSettingsRepositoryProvider).usesMockData;
+    final settingsAsync = ref.watch(
+      companyExchangeSettingsProvider(widget.companyId),
+    );
+    final usesMock = ref
+        .watch(companyExchangeSettingsRepositoryProvider)
+        .usesMockData;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.companyExchangeSettingsTitle),
         actions: [
-          if (usesMock)
-            MockDataBadge(label: l10n.companyExchangeMockDataBadge),
+          if (usesMock) MockDataBadge(label: l10n.companyExchangeMockDataBadge),
           if (_dirty)
             TextButton(
               onPressed: _saving ? null : _save,
@@ -160,7 +330,8 @@ class _CompanyExchangeSettingsScreenState
                 title: Text(l10n.companyExchangeCustomItemsEnabled),
                 subtitle: Text(l10n.companyExchangeCustomItemsEnabledHint),
                 value:
-                    _customItemsEnabled ?? settings.allowDriverCustomPackagingItems,
+                    _customItemsEnabled ??
+                    settings.allowDriverCustomPackagingItems,
                 onChanged: (value) => setState(() {
                   _customItemsEnabled = value;
                   _dirty = true;
@@ -181,9 +352,22 @@ class _CompanyExchangeSettingsScreenState
                 ],
               ),
               const SizedBox(height: 16),
-              Text(
-                l10n.companyExchangeDefaultPackagingItems,
-                style: Theme.of(context).textTheme.titleSmall,
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      l10n.companyExchangeDefaultPackagingItems,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
+                  FilledButton.icon(
+                    onPressed: _packagingActionInProgress
+                        ? null
+                        : () => _showPackagingItemDialog(),
+                    icon: const Icon(Icons.add),
+                    label: Text(l10n.companyExchangeAddPackagingItem),
+                  ),
+                ],
               ),
               const SizedBox(height: 4),
               Text(
@@ -191,34 +375,65 @@ class _CompanyExchangeSettingsScreenState
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: 8),
-              for (final item in settings.defaultPackagingItems)
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.inventory_2_outlined),
-                  title: Text(item.name),
-                  subtitle: Text(
-                    [
-                      if (item.localizedNameKey != null) item.localizedNameKey!,
-                      if (item.sortOrder > 0)
-                        '${l10n.companyExchangeItemSortOrder}: ${item.sortOrder}',
-                      if (item.notes != null && item.notes!.isNotEmpty) item.notes!,
-                    ].join(' · '),
+              if (settings.defaultPackagingItems.isEmpty)
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(l10n.companyExchangePackagingItemEmpty),
                   ),
-                  trailing: item.active
-                      ? null
-                      : Text(
-                          l10n.companyExchangeItemInactive,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                ),
+                )
+              else
+                for (final item in settings.defaultPackagingItems)
+                  Card(
+                    child: ListTile(
+                      leading: Icon(
+                        item.active
+                            ? Icons.inventory_2_outlined
+                            : Icons.inventory_2,
+                      ),
+                      title: Text(item.name),
+                      subtitle: Text(
+                        [
+                          if (item.localizedNameKey != null)
+                            item.localizedNameKey!,
+                          if (item.sortOrder > 0)
+                            '${l10n.companyExchangeItemSortOrder}: ${item.sortOrder}',
+                          if (item.notes != null && item.notes!.isNotEmpty)
+                            item.notes!,
+                          if (!item.active) l10n.companyExchangeItemInactive,
+                        ].join(' · '),
+                      ),
+                      trailing: Wrap(
+                        spacing: 4,
+                        children: [
+                          IconButton(
+                            tooltip: l10n.companyExchangeEditPackagingItem,
+                            onPressed: _packagingActionInProgress
+                                ? null
+                                : () => _showPackagingItemDialog(item),
+                            icon: const Icon(Icons.edit_outlined),
+                          ),
+                          IconButton(
+                            tooltip: item.active
+                                ? l10n.companyExchangeDeactivatePackagingItem
+                                : l10n.companyExchangeReactivatePackagingItem,
+                            onPressed: _packagingActionInProgress
+                                ? null
+                                : () => _setPackagingItemActive(
+                                    item,
+                                    !item.active,
+                                  ),
+                            icon: Icon(
+                              item.active
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
               const SizedBox(height: 16),
-              BackendDependencyCard(
-                title: l10n.companyExchangePackagingCrudTitle,
-                message: l10n.companyExchangePackagingCrudDependency,
-                endpointHint:
-                    'POST/PATCH/DELETE /companies/:id/exchange-settings/packaging-items (planned)',
-              ),
-              const SizedBox(height: 12),
               BackendDependencyCard(
                 title: l10n.companyExchangeManualPalletRecordTitle,
                 message: l10n.companyExchangeManualPalletRecordDependency,
