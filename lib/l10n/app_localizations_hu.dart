@@ -4981,6 +4981,36 @@ class AppLocalizationsHu extends AppLocalizations {
   String get driverAccessStatusInvited => 'Meghívott';
 
   @override
+  String get driverAccessPendingTitle => 'Függő sofőr regisztrációk';
+
+  @override
+  String get driverAccessPendingEmpty =>
+      'Nincs függőben lévő sofőr regisztráció.';
+
+  @override
+  String get driverAccessPendingApprove => 'Jóváhagyás';
+
+  @override
+  String get driverAccessPendingApproveSuccess =>
+      'Sofőr regisztráció jóváhagyva.';
+
+  @override
+  String get driverAccessPendingApproveFailed =>
+      'A sofőr regisztráció jóváhagyása sikertelen.';
+
+  @override
+  String get driverAccessPendingLoadFailed =>
+      'A függő sofőr regisztrációk betöltése sikertelen.';
+
+  @override
+  String get driverAccessPendingBackendMessage =>
+      'A függő sofőr regisztráció endpoint még nem érhető el a staging backenden.';
+
+  @override
+  String get driverAccessNoActiveDrivers =>
+      'Nincs aktív sofőr profil a listában.';
+
+  @override
   String get tripsOverviewTitle => 'Fuvar áttekintő';
 
   @override

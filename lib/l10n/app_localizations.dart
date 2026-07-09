@@ -9006,6 +9006,54 @@ abstract class AppLocalizations {
   /// **'Invited'**
   String get driverAccessStatusInvited;
 
+  /// No description provided for @driverAccessPendingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending driver registrations'**
+  String get driverAccessPendingTitle;
+
+  /// No description provided for @driverAccessPendingEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No pending driver registrations.'**
+  String get driverAccessPendingEmpty;
+
+  /// No description provided for @driverAccessPendingApprove.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get driverAccessPendingApprove;
+
+  /// No description provided for @driverAccessPendingApproveSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver registration approved.'**
+  String get driverAccessPendingApproveSuccess;
+
+  /// No description provided for @driverAccessPendingApproveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not approve driver registration.'**
+  String get driverAccessPendingApproveFailed;
+
+  /// No description provided for @driverAccessPendingLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load pending driver registrations.'**
+  String get driverAccessPendingLoadFailed;
+
+  /// No description provided for @driverAccessPendingBackendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending driver registration endpoint is not available on staging backend yet.'**
+  String get driverAccessPendingBackendMessage;
+
+  /// No description provided for @driverAccessNoActiveDrivers.
+  ///
+  /// In en, this message translates to:
+  /// **'No active driver profiles in the list.'**
+  String get driverAccessNoActiveDrivers;
+
   /// No description provided for @tripsOverviewTitle.
   ///
   /// In en, this message translates to:

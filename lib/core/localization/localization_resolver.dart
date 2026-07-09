@@ -1897,6 +1897,14 @@ String resolveDriverAccessKey(BuildContext context, String key) {
     'driverAccessStatusActive' => l10n.driverAccessStatusActive,
     'driverAccessStatusDisabled' => l10n.driverAccessStatusDisabled,
     'driverAccessStatusInvited' => l10n.driverAccessStatusInvited,
+    'driverAccessPendingTitle' => l10n.driverAccessPendingTitle,
+    'driverAccessPendingEmpty' => l10n.driverAccessPendingEmpty,
+    'driverAccessPendingApprove' => l10n.driverAccessPendingApprove,
+    'driverAccessPendingApproveSuccess' => l10n.driverAccessPendingApproveSuccess,
+    'driverAccessPendingApproveFailed' => l10n.driverAccessPendingApproveFailed,
+    'driverAccessPendingLoadFailed' => l10n.driverAccessPendingLoadFailed,
+    'driverAccessPendingBackendMessage' => l10n.driverAccessPendingBackendMessage,
+    'driverAccessNoActiveDrivers' => l10n.driverAccessNoActiveDrivers,
     _ => l10n.errorGenericBody,
   };
 }

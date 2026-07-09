@@ -4914,6 +4914,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String get driverAccessStatusInvited => 'Invited';
 
   @override
+  String get driverAccessPendingTitle => 'Pending driver registrations';
+
+  @override
+  String get driverAccessPendingEmpty => 'No pending driver registrations.';
+
+  @override
+  String get driverAccessPendingApprove => 'Approve';
+
+  @override
+  String get driverAccessPendingApproveSuccess =>
+      'Driver registration approved.';
+
+  @override
+  String get driverAccessPendingApproveFailed =>
+      'Could not approve driver registration.';
+
+  @override
+  String get driverAccessPendingLoadFailed =>
+      'Failed to load pending driver registrations.';
+
+  @override
+  String get driverAccessPendingBackendMessage =>
+      'Pending driver registration endpoint is not available on staging backend yet.';
+
+  @override
+  String get driverAccessNoActiveDrivers =>
+      'No active driver profiles in the list.';
+
+  @override
   String get tripsOverviewTitle => 'Trips overview';
 
   @override
