@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
@@ -21,8 +22,20 @@ class LiveDriverRegistrationRequestsRepository
   bool get usesMockData => false;
 
   @override
-  Future<DriverRegistrationRequestsPage> listPending() {
-    return _api.listPending();
+  Future<DriverRegistrationRequestsPage> listPending() async {
+    try {
+      return await _api.listPending();
+    } on DioException catch (error) {
+      final status = error.response?.statusCode;
+      if (status == 404 || status == 501) {
+        return const DriverRegistrationRequestsPage(
+          items: [],
+          total: 0,
+          listEndpointReady: false,
+        );
+      }
+      rethrow;
+    }
   }
 
   @override

@@ -4939,6 +4939,35 @@ class AppLocalizationsEn extends AppLocalizations {
       'Pending driver registration endpoint is not available on staging backend yet.';
 
   @override
+  String get driverAccessPendingReject => 'Reject';
+
+  @override
+  String get driverAccessPendingRejectTitle => 'Reject driver registration';
+
+  @override
+  String get driverAccessPendingRejectReason => 'Reason (required)';
+
+  @override
+  String get driverAccessPendingRejectCancel => 'Cancel';
+
+  @override
+  String get driverAccessPendingRejectConfirm => 'Reject registration';
+
+  @override
+  String get driverAccessPendingRejectSuccess =>
+      'Driver registration rejected.';
+
+  @override
+  String get driverAccessPendingRejectFailed =>
+      'Could not reject driver registration.';
+
+  @override
+  String get driverAccessPendingCompanyCode => 'Company code';
+
+  @override
+  String get driverAccessPendingCreatedAt => 'Submitted';
+
+  @override
   String get driverAccessNoActiveDrivers =>
       'No active driver profiles in the list.';
 

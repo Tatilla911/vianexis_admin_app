@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
@@ -40,23 +41,35 @@ class LiveDriverAccessRepository implements DriverAccessRepository {
       );
     }
 
-    final response = await apiClient.get<Map<String, dynamic>>(
-      '/platform-admin/drivers',
-    );
-    final data = response.data;
-    final rawItems = data?['items'];
-    final items = rawItems is List
-        ? rawItems
-              .whereType<Map<String, dynamic>>()
-              .map(DriverAccessProfile.fromJson)
-              .toList(growable: false)
-        : const <DriverAccessProfile>[];
+    try {
+      final response = await apiClient.get<Map<String, dynamic>>(
+        '/platform-admin/drivers',
+      );
+      final data = response.data;
+      final rawItems = data?['items'];
+      final items = rawItems is List
+          ? rawItems
+                .whereType<Map<String, dynamic>>()
+                .map(DriverAccessProfile.fromJson)
+                .toList(growable: false)
+          : const <DriverAccessProfile>[];
 
-    return DriverAccessListResult(
-      items: items,
-      listEndpointReady: true,
-      metadataOnly: true,
-    );
+      return DriverAccessListResult(
+        items: items,
+        listEndpointReady: true,
+        metadataOnly: true,
+      );
+    } on DioException catch (error) {
+      final status = error.response?.statusCode;
+      if (status == 404 || status == 501) {
+        return const DriverAccessListResult(
+          items: [],
+          listEndpointReady: false,
+          metadataOnly: true,
+        );
+      }
+      rethrow;
+    }
   }
 
   @override

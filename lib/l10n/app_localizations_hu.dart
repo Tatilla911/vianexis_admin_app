@@ -5007,6 +5007,35 @@ class AppLocalizationsHu extends AppLocalizations {
       'A függő sofőr regisztráció endpoint még nem érhető el a staging backenden.';
 
   @override
+  String get driverAccessPendingReject => 'Elutasítás';
+
+  @override
+  String get driverAccessPendingRejectTitle => 'Sofőr regisztráció elutasítása';
+
+  @override
+  String get driverAccessPendingRejectReason => 'Indoklás (kötelező)';
+
+  @override
+  String get driverAccessPendingRejectCancel => 'Mégse';
+
+  @override
+  String get driverAccessPendingRejectConfirm => 'Regisztráció elutasítása';
+
+  @override
+  String get driverAccessPendingRejectSuccess =>
+      'Sofőr regisztráció elutasítva.';
+
+  @override
+  String get driverAccessPendingRejectFailed =>
+      'A sofőr regisztráció elutasítása sikertelen.';
+
+  @override
+  String get driverAccessPendingCompanyCode => 'Cégkód';
+
+  @override
+  String get driverAccessPendingCreatedAt => 'Beküldve';
+
+  @override
   String get driverAccessNoActiveDrivers =>
       'Nincs aktív sofőr profil a listában.';
 

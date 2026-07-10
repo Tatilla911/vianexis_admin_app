@@ -8,6 +8,8 @@ class DriverRegistrationRequestItem {
     this.companyCode,
     this.matchedCompanyId,
     this.matchedCompanyName,
+    this.companyId,
+    this.companyName,
     this.preferredLanguage,
     this.vehicleHint,
     this.createdAt,
@@ -21,6 +23,8 @@ class DriverRegistrationRequestItem {
   final String? companyCode;
   final String? matchedCompanyId;
   final String? matchedCompanyName;
+  final String? companyId;
+  final String? companyName;
   final String? preferredLanguage;
   final String? vehicleHint;
   final DateTime? createdAt;
@@ -37,6 +41,8 @@ class DriverRegistrationRequestItem {
       companyCode: json['companyCode']?.toString(),
       matchedCompanyId: json['matchedCompanyId']?.toString(),
       matchedCompanyName: json['matchedCompanyName']?.toString(),
+      companyId: json['companyId']?.toString(),
+      companyName: json['companyName']?.toString(),
       preferredLanguage: json['preferredLanguage']?.toString(),
       vehicleHint: json['vehicleHint']?.toString(),
       createdAt: DateTime.tryParse(json['createdAt']?.toString() ?? ''),

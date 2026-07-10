@@ -9048,6 +9048,60 @@ abstract class AppLocalizations {
   /// **'Pending driver registration endpoint is not available on staging backend yet.'**
   String get driverAccessPendingBackendMessage;
 
+  /// No description provided for @driverAccessPendingReject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get driverAccessPendingReject;
+
+  /// No description provided for @driverAccessPendingRejectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject driver registration'**
+  String get driverAccessPendingRejectTitle;
+
+  /// No description provided for @driverAccessPendingRejectReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason (required)'**
+  String get driverAccessPendingRejectReason;
+
+  /// No description provided for @driverAccessPendingRejectCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get driverAccessPendingRejectCancel;
+
+  /// No description provided for @driverAccessPendingRejectConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject registration'**
+  String get driverAccessPendingRejectConfirm;
+
+  /// No description provided for @driverAccessPendingRejectSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver registration rejected.'**
+  String get driverAccessPendingRejectSuccess;
+
+  /// No description provided for @driverAccessPendingRejectFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not reject driver registration.'**
+  String get driverAccessPendingRejectFailed;
+
+  /// No description provided for @driverAccessPendingCompanyCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Company code'**
+  String get driverAccessPendingCompanyCode;
+
+  /// No description provided for @driverAccessPendingCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get driverAccessPendingCreatedAt;
+
   /// No description provided for @driverAccessNoActiveDrivers.
   ///
   /// In en, this message translates to:
