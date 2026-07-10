@@ -44,6 +44,7 @@ import '../features/notifications/presentation/notification_preferences_screen.d
 import '../features/notifications/presentation/notifications_screen.dart';
 import '../features/public_intakes/presentation/public_intake_detail_screen.dart';
 import '../features/public_intakes/presentation/public_intakes_screen.dart';
+import '../features/applications/presentation/applications_inbox_screen.dart';
 import '../features/registrations/presentation/registration_application_detail_screen.dart';
 import '../features/registrations/presentation/registration_applications_screen.dart';
 import '../features/settings/admin_settings_screen.dart';
@@ -130,6 +131,20 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 path: ':id',
                 builder: (context, state) => RegistrationApplicationDetailScreen(
                   applicationId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AdminRoutes.applications,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ApplicationsInboxScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => ApplicationDetailScreen(
+                  id: state.pathParameters['id'] ?? '',
                 ),
               ),
             ],
@@ -449,6 +464,7 @@ abstract final class AdminRoutes {
   static const dashboard = '/dashboard';
   static const actionCenter = '/action-center';
   static const registrations = '/registrations';
+  static const applications = '/applications';
   static const companies = '/companies';
   static const billing = '/billing';
   static const bulkOnboarding = '/bulk-onboarding';
@@ -539,6 +555,9 @@ abstract final class AdminRoutes {
       return AdminDestination.actionCenter;
     }
     if (location.startsWith(registrations)) {
+      return AdminDestination.registrations;
+    }
+    if (location.startsWith(applications)) {
       return AdminDestination.registrations;
     }
     if (location.startsWith(companies)) {
