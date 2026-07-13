@@ -890,6 +890,78 @@ abstract class AppLocalizations {
   /// **'Your session expired. Sign in again to continue.'**
   String get authSessionExpired;
 
+  /// No description provided for @authSessionRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'This session was revoked. Sign in again to continue.'**
+  String get authSessionRevoked;
+
+  /// No description provided for @authUnableToRestoreSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to restore your session. Sign in again.'**
+  String get authUnableToRestoreSession;
+
+  /// No description provided for @authOfflineSessionRestorePending.
+  ///
+  /// In en, this message translates to:
+  /// **'Session restore is pending while offline. Your saved session will resume when the network is available.'**
+  String get authOfflineSessionRestorePending;
+
+  /// No description provided for @authRememberDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me on this device'**
+  String get authRememberDevice;
+
+  /// No description provided for @authActiveSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'Active devices'**
+  String get authActiveSessions;
+
+  /// No description provided for @authCurrentDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'This device'**
+  String get authCurrentDevice;
+
+  /// No description provided for @authUnknownDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown device'**
+  String get authUnknownDevice;
+
+  /// No description provided for @authLegacySession.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous sign-in'**
+  String get authLegacySession;
+
+  /// No description provided for @authLastActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Last active'**
+  String get authLastActive;
+
+  /// No description provided for @authSessionExpires.
+  ///
+  /// In en, this message translates to:
+  /// **'Session expires'**
+  String get authSessionExpires;
+
+  /// No description provided for @authRemoveSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove session'**
+  String get authRemoveSession;
+
+  /// No description provided for @authLogoutAllOtherDevices.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out all other devices'**
+  String get authLogoutAllOtherDevices;
+
   /// No description provided for @errorPermissionDeniedTitle.
   ///
   /// In en, this message translates to:

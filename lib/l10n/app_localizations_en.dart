@@ -444,6 +444,45 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your session expired. Sign in again to continue.';
 
   @override
+  String get authSessionRevoked =>
+      'This session was revoked. Sign in again to continue.';
+
+  @override
+  String get authUnableToRestoreSession =>
+      'Unable to restore your session. Sign in again.';
+
+  @override
+  String get authOfflineSessionRestorePending =>
+      'Session restore is pending while offline. Your saved session will resume when the network is available.';
+
+  @override
+  String get authRememberDevice => 'Remember me on this device';
+
+  @override
+  String get authActiveSessions => 'Active devices';
+
+  @override
+  String get authCurrentDevice => 'This device';
+
+  @override
+  String get authUnknownDevice => 'Unknown device';
+
+  @override
+  String get authLegacySession => 'Previous sign-in';
+
+  @override
+  String get authLastActive => 'Last active';
+
+  @override
+  String get authSessionExpires => 'Session expires';
+
+  @override
+  String get authRemoveSession => 'Remove session';
+
+  @override
+  String get authLogoutAllOtherDevices => 'Log out all other devices';
+
+  @override
   String get errorPermissionDeniedTitle => 'Permission denied';
 
   @override

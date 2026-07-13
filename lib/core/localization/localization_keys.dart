@@ -7,6 +7,19 @@ abstract final class LocalizationKeys {
   static const authLogout = 'authLogout';
   static const authInvalidCredentials = 'authInvalidCredentials';
   static const authSessionExpired = 'authSessionExpired';
+  static const authSessionRevoked = 'authSessionRevoked';
+  static const authUnableToRestoreSession = 'authUnableToRestoreSession';
+  static const authOfflineSessionRestorePending =
+      'authOfflineSessionRestorePending';
+  static const authRememberDevice = 'authRememberDevice';
+  static const authActiveSessions = 'authActiveSessions';
+  static const authCurrentDevice = 'authCurrentDevice';
+  static const authUnknownDevice = 'authUnknownDevice';
+  static const authLegacySession = 'authLegacySession';
+  static const authLastActive = 'authLastActive';
+  static const authSessionExpires = 'authSessionExpires';
+  static const authRemoveSession = 'authRemoveSession';
+  static const authLogoutAllOtherDevices = 'authLogoutAllOtherDevices';
   static const authNetworkError = 'authNetworkError';
   static const authServerError = 'authServerError';
   static const authForbiddenRole = 'authForbiddenRole';
@@ -18,7 +31,8 @@ abstract final class LocalizationKeys {
   static const authHidePassword = 'authHidePassword';
   static const authPasswordChangeInvalidCurrent =
       'authPasswordChangeInvalidCurrent';
-  static const authPasswordChangeWeakPassword = 'authPasswordChangeWeakPassword';
+  static const authPasswordChangeWeakPassword =
+      'authPasswordChangeWeakPassword';
   static const authPasswordChangeUnchanged = 'authPasswordChangeUnchanged';
   static const settingsPasswordChangeSuccess = 'settingsPasswordChangeSuccess';
   static const settingsPasswordMinLengthValidation =
@@ -40,8 +54,10 @@ abstract final class LocalizationKeys {
   static const supportActionUnavailable = 'supportActionUnavailable';
   static const supportActionError = 'supportActionError';
 
-  static const customerCommunicationLoadError = 'customerCommunicationLoadError';
-  static const customerCommunicationActionError = 'customerCommunicationActionError';
+  static const customerCommunicationLoadError =
+      'customerCommunicationLoadError';
+  static const customerCommunicationActionError =
+      'customerCommunicationActionError';
 
   static const auditLogLoadError = 'auditLogLoadError';
 }

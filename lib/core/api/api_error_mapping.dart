@@ -19,6 +19,18 @@ String apiExceptionMessageKeyForStatus({
   if (errorCode == 'password_unchanged') {
     return LocalizationKeys.authPasswordChangeUnchanged;
   }
+  if (errorCode == 'REFRESH_TOKEN_INVALID') {
+    return LocalizationKeys.authSessionExpired;
+  }
+  if (errorCode == 'SESSION_EXPIRED') {
+    return LocalizationKeys.authSessionExpired;
+  }
+  if (errorCode == 'SESSION_REVOKED') {
+    return LocalizationKeys.authSessionRevoked;
+  }
+  if (errorCode == 'USER_DISABLED') {
+    return LocalizationKeys.authForbiddenRole;
+  }
 
   if (isInvalidCredentialsStatus(statusCode, path)) {
     return LocalizationKeys.authInvalidCredentials;
@@ -55,42 +67,49 @@ ApiException mapHttpStatusException({
       messageKey: messageKey,
       kind: ApiExceptionKind.validation,
       statusCode: statusCode,
+      errorCode: readApiErrorCode(error.response?.data),
       cause: error,
     ),
     401 => ApiException(
       messageKey: messageKey,
       kind: ApiExceptionKind.unauthorized,
       statusCode: statusCode,
+      errorCode: readApiErrorCode(error.response?.data),
       cause: error,
     ),
     403 => ApiException(
       messageKey: messageKey,
       kind: ApiExceptionKind.forbidden,
       statusCode: statusCode,
+      errorCode: readApiErrorCode(error.response?.data),
       cause: error,
     ),
     404 => ApiException(
       messageKey: messageKey,
       kind: ApiExceptionKind.notFound,
       statusCode: statusCode,
+      errorCode: readApiErrorCode(error.response?.data),
       cause: error,
     ),
     409 => ApiException(
       messageKey: LocalizationKeys.errorGenericBody,
       kind: ApiExceptionKind.conflict,
       statusCode: statusCode,
+      errorCode: readApiErrorCode(error.response?.data),
       cause: error,
     ),
     500 || 502 || 503 || 504 => ApiException(
       messageKey: LocalizationKeys.authServerError,
       kind: ApiExceptionKind.server,
       statusCode: statusCode,
+      errorCode: readApiErrorCode(error.response?.data),
       cause: error,
     ),
     _ => ApiException(
       messageKey: messageKey,
       kind: ApiExceptionKind.unknown,
       statusCode: statusCode,
+      errorCode: readApiErrorCode(error.response?.data),
       cause: error,
     ),
   };

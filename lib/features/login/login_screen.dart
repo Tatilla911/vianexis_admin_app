@@ -24,6 +24,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
+  bool _rememberDevice = true;
 
   @override
   void dispose() {
@@ -34,10 +35,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
-    await ref.read(adminAuthProvider.notifier).signIn(
-      email: _emailController.text.trim(),
-      password: _passwordController.text,
-    );
+    await ref
+        .read(adminAuthProvider.notifier)
+        .signIn(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+          rememberDevice: _rememberDevice,
+        );
   }
 
   @override
@@ -83,18 +87,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 config.safeApiHostDisplay != null) ...[
                               const SizedBox(height: 8),
                               Text(
-                                l10n.loginStagingApiHost(config.safeApiHostDisplay!),
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.outline,
+                                l10n.loginStagingApiHost(
+                                  config.safeApiHostDisplay!,
                                 ),
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.outline,
+                                    ),
                               ),
                             ],
                             const SizedBox(height: 12),
                             Text(
                               l10n.brandSecureAdminSession,
-                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: Theme.of(context).colorScheme.tertiary,
-                              ),
+                              style: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.tertiary,
+                                  ),
                             ),
                             if (!backendConfigured) ...[
                               const SizedBox(height: 16),
@@ -117,7 +129,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               keyboardType: TextInputType.emailAddress,
                               autofillHints: const [AutofillHints.username],
                               textInputAction: TextInputAction.next,
-                              decoration: InputDecoration(labelText: l10n.authEmail),
+                              decoration: InputDecoration(
+                                labelText: l10n.authEmail,
+                              ),
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
                                   return l10n.authRequiredField;
@@ -138,7 +152,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   onPressed: auth.isLoading
                                       ? null
                                       : () => setState(
-                                          () => _obscurePassword = !_obscurePassword,
+                                          () => _obscurePassword =
+                                              !_obscurePassword,
                                         ),
                                   icon: Icon(
                                     _obscurePassword
@@ -167,10 +182,37 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 ),
                               ),
                             ],
-                            const SizedBox(height: 24),
+                            if (auth.offlineSessionRestorePending) ...[
+                              const SizedBox(height: 16),
+                              Text(
+                                l10n.authOfflineSessionRestorePending,
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.outline,
+                                    ),
+                              ),
+                            ],
+                            const SizedBox(height: 16),
+                            Material(
+                              type: MaterialType.transparency,
+                              child: SwitchListTile(
+                                contentPadding: EdgeInsets.zero,
+                                value: _rememberDevice,
+                                onChanged: auth.isLoading
+                                    ? null
+                                    : (value) => setState(
+                                        () => _rememberDevice = value,
+                                      ),
+                                title: Text(l10n.authRememberDevice),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
                             FilledButton(
-                              onPressed:
-                                  auth.isLoading || !backendConfigured ? null : _submit,
+                              onPressed: auth.isLoading || !backendConfigured
+                                  ? null
+                                  : _submit,
                               child: auth.isLoading
                                   ? Row(
                                       mainAxisSize: MainAxisSize.min,
@@ -178,7 +220,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                         const SizedBox(
                                           height: 20,
                                           width: 20,
-                                          child: CircularProgressIndicator(strokeWidth: 2),
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ),
                                         ),
                                         const SizedBox(width: 12),
                                         Text(l10n.authSigningIn),

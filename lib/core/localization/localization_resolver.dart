@@ -13,10 +13,26 @@ String resolveLocalizationKey(BuildContext context, String key) {
     LocalizationKeys.authLogout => l10n.authLogout,
     LocalizationKeys.authInvalidCredentials => l10n.authInvalidCredentials,
     LocalizationKeys.authSessionExpired => l10n.authSessionExpired,
+    LocalizationKeys.authSessionRevoked => l10n.authSessionRevoked,
+    LocalizationKeys.authUnableToRestoreSession =>
+      l10n.authUnableToRestoreSession,
+    LocalizationKeys.authOfflineSessionRestorePending =>
+      l10n.authOfflineSessionRestorePending,
+    LocalizationKeys.authRememberDevice => l10n.authRememberDevice,
+    LocalizationKeys.authActiveSessions => l10n.authActiveSessions,
+    LocalizationKeys.authCurrentDevice => l10n.authCurrentDevice,
+    LocalizationKeys.authUnknownDevice => l10n.authUnknownDevice,
+    LocalizationKeys.authLegacySession => l10n.authLegacySession,
+    LocalizationKeys.authLastActive => l10n.authLastActive,
+    LocalizationKeys.authSessionExpires => l10n.authSessionExpires,
+    LocalizationKeys.authRemoveSession => l10n.authRemoveSession,
+    LocalizationKeys.authLogoutAllOtherDevices =>
+      l10n.authLogoutAllOtherDevices,
     LocalizationKeys.authNetworkError => l10n.authNetworkError,
     LocalizationKeys.authServerError => l10n.authServerError,
     LocalizationKeys.authForbiddenRole => l10n.authForbiddenRole,
-    LocalizationKeys.authLoginServiceUnavailable => l10n.authLoginServiceUnavailable,
+    LocalizationKeys.authLoginServiceUnavailable =>
+      l10n.authLoginServiceUnavailable,
     LocalizationKeys.authBackendNotConfigured => l10n.authBackendNotConfigured,
     LocalizationKeys.errorActionUnavailable => l10n.errorActionUnavailable,
     LocalizationKeys.authRequiredField => l10n.authRequiredField,
@@ -183,12 +199,15 @@ String resolvePublicIntakeKey(
     'publicIntakeFieldCountry' => l10n.publicIntakeFieldCountry,
     'publicIntakeFieldOriginalLanguage' =>
       l10n.publicIntakeFieldOriginalLanguage(params['lang'] ?? ''),
-    'publicIntakeFieldFleetSize' =>
-      l10n.publicIntakeFieldFleetSize(params['count'] ?? ''),
-    'publicIntakeFieldOfficeUsers' =>
-      l10n.publicIntakeFieldOfficeUsers(params['count'] ?? ''),
-    'publicIntakeFieldDriverApps' =>
-      l10n.publicIntakeFieldDriverApps(params['count'] ?? ''),
+    'publicIntakeFieldFleetSize' => l10n.publicIntakeFieldFleetSize(
+      params['count'] ?? '',
+    ),
+    'publicIntakeFieldOfficeUsers' => l10n.publicIntakeFieldOfficeUsers(
+      params['count'] ?? '',
+    ),
+    'publicIntakeFieldDriverApps' => l10n.publicIntakeFieldDriverApps(
+      params['count'] ?? '',
+    ),
     'publicIntakeFieldModules' => l10n.publicIntakeFieldModules,
     'publicIntakeFieldAiFeatures' => l10n.publicIntakeFieldAiFeatures,
     'publicIntakeFieldStatus' => l10n.publicIntakeFieldStatus,
@@ -211,8 +230,9 @@ String resolvePublicIntakeKey(
     'publicIntakeStatusSuccess' => l10n.publicIntakeStatusSuccess,
     'publicIntakeStatusError' => l10n.publicIntakeStatusError,
     'publicIntakeEvidenceNotice' => l10n.publicIntakeEvidenceNotice,
-    'publicIntakeDashboardNew' =>
-      l10n.publicIntakeDashboardNew(params['count'] ?? '0'),
+    'publicIntakeDashboardNew' => l10n.publicIntakeDashboardNew(
+      params['count'] ?? '0',
+    ),
     'publicIntakeDashboardHighPriority' =>
       l10n.publicIntakeDashboardHighPriority(params['count'] ?? '0'),
     'publicIntakesTitle' => l10n.publicIntakesTitle,
@@ -1470,21 +1490,24 @@ String resolveCustomerCommunicationsKey(
   return switch (key) {
     'customerCommunicationLoadError' => l10n.customerCommunicationLoadError,
     'customerCommunicationActionError' => l10n.customerCommunicationActionError,
-    'customerCommunicationMockDataBadge' => l10n.customerCommunicationMockDataBadge,
+    'customerCommunicationMockDataBadge' =>
+      l10n.customerCommunicationMockDataBadge,
     'customerCommunicationOpenModule' => l10n.customerCommunicationOpenModule,
-    'customerCommunicationPrivacyNotice' => l10n.customerCommunicationPrivacyNotice,
+    'customerCommunicationPrivacyNotice' =>
+      l10n.customerCommunicationPrivacyNotice,
     'customerCommunicationDetailMetadataOnly' =>
       l10n.customerCommunicationDetailMetadataOnly,
     'customerCommunicationSearchHint' => l10n.customerCommunicationSearchHint,
     'customerCommunicationListEmpty' => l10n.customerCommunicationListEmpty,
-    'customerCommunicationDisputedBadge' => l10n.customerCommunicationDisputedBadge,
+    'customerCommunicationDisputedBadge' =>
+      l10n.customerCommunicationDisputedBadge,
     'customerCommunicationBillingRelatedBadge' =>
       l10n.customerCommunicationBillingRelatedBadge,
     'customerCommunicationThreadSubtitle' =>
       l10n.customerCommunicationThreadSubtitle(
-      params['domain'] ?? '',
-      params['companyId'] ?? '',
-    ),
+        params['domain'] ?? '',
+        params['companyId'] ?? '',
+      ),
     'customerCommunicationUpdatedAt' => l10n.customerCommunicationUpdatedAt(
       params['date'] ?? '',
     ),
@@ -1492,11 +1515,13 @@ String resolveCustomerCommunicationsKey(
     'customerCommunicationFilterOpen' => l10n.customerCommunicationFilterOpen,
     'customerCommunicationFilterDisputed' =>
       l10n.customerCommunicationFilterDisputed,
-    'customerCommunicationFilterClosed' => l10n.customerCommunicationFilterClosed,
+    'customerCommunicationFilterClosed' =>
+      l10n.customerCommunicationFilterClosed,
     'customerCommunicationFilterBillingRelated' =>
       l10n.customerCommunicationFilterBillingRelated,
     'customerCommunicationStatusOpen' => l10n.customerCommunicationStatusOpen,
-    'customerCommunicationStatusClosed' => l10n.customerCommunicationStatusClosed,
+    'customerCommunicationStatusClosed' =>
+      l10n.customerCommunicationStatusClosed,
     'customerCommunicationStatusArchived' =>
       l10n.customerCommunicationStatusArchived,
     'customerCommunicationStatusDisputed' =>
@@ -1510,10 +1535,14 @@ String resolveCustomerCommunicationsKey(
       l10n.customerCommunicationSourceAdminApp,
     'customerCommunicationSourceAdminWeb' =>
       l10n.customerCommunicationSourceAdminWeb,
-    'customerCommunicationSourceImport' => l10n.customerCommunicationSourceImport,
-    'customerCommunicationSourceSupport' => l10n.customerCommunicationSourceSupport,
-    'customerCommunicationSourceSystem' => l10n.customerCommunicationSourceSystem,
-    'customerCommunicationSourceUnknown' => l10n.customerCommunicationSourceUnknown,
+    'customerCommunicationSourceImport' =>
+      l10n.customerCommunicationSourceImport,
+    'customerCommunicationSourceSupport' =>
+      l10n.customerCommunicationSourceSupport,
+    'customerCommunicationSourceSystem' =>
+      l10n.customerCommunicationSourceSystem,
+    'customerCommunicationSourceUnknown' =>
+      l10n.customerCommunicationSourceUnknown,
     'customerCommunicationDirectionInbound' =>
       l10n.customerCommunicationDirectionInbound,
     'customerCommunicationDirectionOutbound' =>
@@ -1530,28 +1559,34 @@ String resolveCustomerCommunicationsKey(
       l10n.customerCommunicationSenderPlatformAdmin,
     'customerCommunicationSenderCompanyAdmin' =>
       l10n.customerCommunicationSenderCompanyAdmin,
-    'customerCommunicationSenderSystem' => l10n.customerCommunicationSenderSystem,
-    'customerCommunicationSenderUnknown' => l10n.customerCommunicationSenderUnknown,
+    'customerCommunicationSenderSystem' =>
+      l10n.customerCommunicationSenderSystem,
+    'customerCommunicationSenderUnknown' =>
+      l10n.customerCommunicationSenderUnknown,
     'customerCommunicationHumanReviewedBadge' =>
       l10n.customerCommunicationHumanReviewedBadge,
-    'customerCommunicationOriginalLabel' => l10n.customerCommunicationOriginalLabel(
-      params['language'] ?? '',
-    ),
+    'customerCommunicationOriginalLabel' =>
+      l10n.customerCommunicationOriginalLabel(params['language'] ?? ''),
     'customerCommunicationTranslatedLabel' =>
       l10n.customerCommunicationTranslatedLabel(params['language'] ?? ''),
     'customerCommunicationMessageMetadataOnly' =>
       l10n.customerCommunicationMessageMetadataOnly,
-    'customerCommunicationMessagesEmpty' => l10n.customerCommunicationMessagesEmpty,
-    'customerCommunicationTimelineTitle' => l10n.customerCommunicationTimelineTitle,
-    'customerCommunicationAgreementsTitle' => l10n.customerCommunicationAgreementsTitle,
+    'customerCommunicationMessagesEmpty' =>
+      l10n.customerCommunicationMessagesEmpty,
+    'customerCommunicationTimelineTitle' =>
+      l10n.customerCommunicationTimelineTitle,
+    'customerCommunicationAgreementsTitle' =>
+      l10n.customerCommunicationAgreementsTitle,
     'customerCommunicationEvidencePackagesTitle' =>
       l10n.customerCommunicationEvidencePackagesTitle,
-    'customerCommunicationPackagesEmpty' => l10n.customerCommunicationPackagesEmpty,
-    'customerCommunicationAgreementPrice' => l10n.customerCommunicationAgreementPrice(
-      params['amount'] ?? '',
-      params['currency'] ?? '',
-      params['cycle'] ?? '',
-    ),
+    'customerCommunicationPackagesEmpty' =>
+      l10n.customerCommunicationPackagesEmpty,
+    'customerCommunicationAgreementPrice' =>
+      l10n.customerCommunicationAgreementPrice(
+        params['amount'] ?? '',
+        params['currency'] ?? '',
+        params['cycle'] ?? '',
+      ),
     'customerCommunicationAgreementModules' =>
       l10n.customerCommunicationAgreementModules(params['modules'] ?? ''),
     'customerCommunicationAgreementAcceptedAt' =>
@@ -1570,7 +1605,8 @@ String resolveCustomerCommunicationsKey(
       l10n.customerCommunicationDownloadPdfSuccess(params['bytes'] ?? '0'),
     'customerCommunicationDownloadPdfFailed' =>
       l10n.customerCommunicationDownloadPdfFailed,
-    'customerCommunicationSharePdfAction' => l10n.customerCommunicationSharePdfAction,
+    'customerCommunicationSharePdfAction' =>
+      l10n.customerCommunicationSharePdfAction,
     'customerCommunicationSharePdfSuccess' =>
       l10n.customerCommunicationSharePdfSuccess,
     'customerCommunicationSharePdfFailed' =>
@@ -1581,8 +1617,9 @@ String resolveCustomerCommunicationsKey(
       l10n.customerCommunicationSharePdfUnavailable,
     'customerCommunicationSharePdfNotReady' =>
       l10n.customerCommunicationSharePdfNotReady,
-    'customerCommunicationGeneratedBy' =>
-      l10n.customerCommunicationGeneratedBy(params['userId'] ?? ''),
+    'customerCommunicationGeneratedBy' => l10n.customerCommunicationGeneratedBy(
+      params['userId'] ?? '',
+    ),
     'customerCommunicationSendReplyTitle' =>
       l10n.customerCommunicationSendReplyTitle,
     'customerCommunicationSendReplyAction' =>
@@ -1648,12 +1685,14 @@ String resolveCustomerCommunicationsKey(
     'customerCommunicationDeliveryFilterQueued' =>
       l10n.customerCommunicationDeliveryFilterQueued,
     'customerCommunicationResendTitle' => l10n.customerCommunicationResendTitle,
-    'customerCommunicationResendAction' => l10n.customerCommunicationResendAction,
+    'customerCommunicationResendAction' =>
+      l10n.customerCommunicationResendAction,
     'customerCommunicationResendAuditNotice' =>
       l10n.customerCommunicationResendAuditNotice,
     'customerCommunicationResendTranslationNotice' =>
       l10n.customerCommunicationResendTranslationNotice,
-    'customerCommunicationResendSuccess' => l10n.customerCommunicationResendSuccess,
+    'customerCommunicationResendSuccess' =>
+      l10n.customerCommunicationResendSuccess,
     'customerCommunicationDeliveryMultipleAttempts' =>
       l10n.customerCommunicationDeliveryMultipleAttempts,
     'customerCommunicationDeliveryResendAttempt' =>
@@ -1693,7 +1732,8 @@ String resolveCustomerCommunicationsKey(
     'customerCommunicationDisputedSectionTitle' =>
       l10n.customerCommunicationDisputedSectionTitle,
     'customerCommunicationReasonLabel' => l10n.customerCommunicationReasonLabel,
-    'customerCommunicationReasonRequired' => l10n.customerCommunicationReasonRequired,
+    'customerCommunicationReasonRequired' =>
+      l10n.customerCommunicationReasonRequired,
     'customerCommunicationPackageTypeLabel' =>
       l10n.customerCommunicationPackageTypeLabel,
     'customerCommunicationExportAuditWarning' =>
@@ -1705,19 +1745,20 @@ String resolveCustomerCommunicationsKey(
       l10n.customerCommunicationPackageGeneratedSuccess,
     'customerCommunicationSummaryJsonTitle' =>
       l10n.customerCommunicationSummaryJsonTitle,
-    'customerCommunicationPackageReason' => l10n.customerCommunicationPackageReason(
-      params['reason'] ?? '',
-    ),
+    'customerCommunicationPackageReason' =>
+      l10n.customerCommunicationPackageReason(params['reason'] ?? ''),
     'customerCommunicationFileHash' => l10n.customerCommunicationFileHash(
       params['hash'] ?? '',
     ),
     'customerCommunicationPackageNotFound' =>
       l10n.customerCommunicationPackageNotFound,
-    'customerCommunicationSummaryTitle' => l10n.customerCommunicationSummaryTitle,
+    'customerCommunicationSummaryTitle' =>
+      l10n.customerCommunicationSummaryTitle,
     'customerCommunicationSummaryDisputed' =>
       l10n.customerCommunicationSummaryDisputed(params['count'] ?? '0'),
-    'customerCommunicationSummaryOpen' =>
-      l10n.customerCommunicationSummaryOpen(params['count'] ?? '0'),
+    'customerCommunicationSummaryOpen' => l10n.customerCommunicationSummaryOpen(
+      params['count'] ?? '0',
+    ),
     'customerCommunicationSummaryTotal' =>
       l10n.customerCommunicationSummaryTotal(params['count'] ?? '0'),
     _ => l10n.errorGenericBody,
@@ -1780,10 +1821,14 @@ String resolveReleaseCenterKey(
     'releaseEmailProviderPlaceholder' => l10n.releaseEmailProviderPlaceholder,
     'releaseObservabilityTitle' => l10n.releaseObservabilityTitle,
     'releaseObservabilityLogLevel' => l10n.releaseObservabilityLogLevel,
-    'releaseObservabilityMetricsEnabled' => l10n.releaseObservabilityMetricsEnabled,
-    'releaseObservabilitySentryConfigured' => l10n.releaseObservabilitySentryConfigured,
-    'releaseObservabilityOtelConfigured' => l10n.releaseObservabilityOtelConfigured,
-    'releaseObservabilityCorrelationId' => l10n.releaseObservabilityCorrelationId,
+    'releaseObservabilityMetricsEnabled' =>
+      l10n.releaseObservabilityMetricsEnabled,
+    'releaseObservabilitySentryConfigured' =>
+      l10n.releaseObservabilitySentryConfigured,
+    'releaseObservabilityOtelConfigured' =>
+      l10n.releaseObservabilityOtelConfigured,
+    'releaseObservabilityCorrelationId' =>
+      l10n.releaseObservabilityCorrelationId,
     'releaseObservabilityNotice' => l10n.releaseObservabilityNotice,
     _ => l10n.errorGenericBody,
   };
@@ -1845,7 +1890,8 @@ String resolveOperationsKey(BuildContext context, String key) {
     'operationsPendingSyncDependency' => l10n.operationsPendingSyncDependency,
     'operationsPendingSyncUnavailable' => l10n.operationsPendingSyncUnavailable,
     'operationsExchangeRecordsTitle' => l10n.operationsExchangeRecordsTitle,
-    'operationsExchangeRecordsDependency' => l10n.operationsExchangeRecordsDependency,
+    'operationsExchangeRecordsDependency' =>
+      l10n.operationsExchangeRecordsDependency,
     'operationsCompanyCount' => l10n.operationsCompanyCount,
     'operationsActiveDrivers' => l10n.operationsActiveDrivers,
     'operationsActiveTrips' => l10n.operationsActiveTrips,
@@ -1883,12 +1929,14 @@ String resolveDriverAccessKey(BuildContext context, String key) {
     'driverAccessFieldActiveSessions' => l10n.driverAccessFieldActiveSessions,
     'driverAccessFieldLastActivity' => l10n.driverAccessFieldLastActivity,
     'driverAccessEnableDisableTitle' => l10n.driverAccessEnableDisableTitle,
-    'driverAccessEnableDisableDependency' => l10n.driverAccessEnableDisableDependency,
+    'driverAccessEnableDisableDependency' =>
+      l10n.driverAccessEnableDisableDependency,
     'driverAccessEnable' => l10n.driverAccessEnable,
     'driverAccessDisable' => l10n.driverAccessDisable,
     'driverAccessStatusChangeSuccess' => l10n.driverAccessStatusChangeSuccess,
     'driverAccessStatusChangeFailed' => l10n.driverAccessStatusChangeFailed,
-    'driverAccessDeviceNotificationTitle' => l10n.driverAccessDeviceNotificationTitle,
+    'driverAccessDeviceNotificationTitle' =>
+      l10n.driverAccessDeviceNotificationTitle,
     'driverAccessDeviceNotificationUnavailable' =>
       l10n.driverAccessDeviceNotificationUnavailable,
     'driverAccessHasPushToken' => l10n.driverAccessHasPushToken,
@@ -1900,10 +1948,12 @@ String resolveDriverAccessKey(BuildContext context, String key) {
     'driverAccessPendingTitle' => l10n.driverAccessPendingTitle,
     'driverAccessPendingEmpty' => l10n.driverAccessPendingEmpty,
     'driverAccessPendingApprove' => l10n.driverAccessPendingApprove,
-    'driverAccessPendingApproveSuccess' => l10n.driverAccessPendingApproveSuccess,
+    'driverAccessPendingApproveSuccess' =>
+      l10n.driverAccessPendingApproveSuccess,
     'driverAccessPendingApproveFailed' => l10n.driverAccessPendingApproveFailed,
     'driverAccessPendingLoadFailed' => l10n.driverAccessPendingLoadFailed,
-    'driverAccessPendingBackendMessage' => l10n.driverAccessPendingBackendMessage,
+    'driverAccessPendingBackendMessage' =>
+      l10n.driverAccessPendingBackendMessage,
     'driverAccessPendingReject' => l10n.driverAccessPendingReject,
     'driverAccessPendingRejectTitle' => l10n.driverAccessPendingRejectTitle,
     'driverAccessPendingRejectReason' => l10n.driverAccessPendingRejectReason,
@@ -1978,16 +2028,20 @@ String resolveNotificationStatusKey(BuildContext context, String key) {
       l10n.notificationStatusDriverFoundationTitle,
     'notificationStatusDriverFoundationReady' =>
       l10n.notificationStatusDriverFoundationReady,
-    'notificationStatusDeviceTokenTitle' => l10n.notificationStatusDeviceTokenTitle,
+    'notificationStatusDeviceTokenTitle' =>
+      l10n.notificationStatusDeviceTokenTitle,
     'notificationStatusDeviceTokenDependency' =>
       l10n.notificationStatusDeviceTokenDependency,
     'notificationStatusEventsTitle' => l10n.notificationStatusEventsTitle,
-    'notificationStatusEventsDependency' => l10n.notificationStatusEventsDependency,
-    'notificationStatusEventsUnavailable' => l10n.notificationStatusEventsUnavailable,
+    'notificationStatusEventsDependency' =>
+      l10n.notificationStatusEventsDependency,
+    'notificationStatusEventsUnavailable' =>
+      l10n.notificationStatusEventsUnavailable,
     'notificationStatusEventsEmpty' => l10n.notificationStatusEventsEmpty,
     'notificationStatusProductionPushConfigured' =>
       l10n.notificationStatusProductionPushConfigured,
-    'notificationStatusBackendDependency' => l10n.notificationStatusBackendDependency,
+    'notificationStatusBackendDependency' =>
+      l10n.notificationStatusBackendDependency,
     _ => l10n.errorGenericBody,
   };
 }

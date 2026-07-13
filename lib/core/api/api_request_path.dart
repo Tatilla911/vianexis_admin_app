@@ -31,6 +31,17 @@ bool isAuthLoginRequestPath(String path) {
   return normalized.endsWith('/auth/login') || normalized == '/auth/login';
 }
 
+bool isAuthRefreshRequestPath(String path) {
+  final normalized = resolveApiRequestPath(
+    RequestOptions(path: path),
+  ).trim().toLowerCase();
+  return normalized.endsWith('/auth/refresh') || normalized == '/auth/refresh';
+}
+
+bool isAuthExemptFromRefreshRetry(String path) {
+  return isAuthLoginRequestPath(path) || isAuthRefreshRequestPath(path);
+}
+
 bool isAuthPasswordChangeRequestPath(String path) {
   final normalized = resolveApiRequestPath(
     RequestOptions(path: path),
@@ -56,7 +67,8 @@ bool isInvalidCredentialsStatus(int? statusCode, String path) {
   if (statusCode == 401 && isAuthLoginRequestPath(path)) {
     return true;
   }
-  if ((statusCode == 400 || statusCode == 401) && isAuthLoginRequestPath(path)) {
+  if ((statusCode == 400 || statusCode == 401) &&
+      isAuthLoginRequestPath(path)) {
     return true;
   }
   return false;

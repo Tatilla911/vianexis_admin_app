@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vianexis_admin_app/app/vianexis_admin_app.dart';
@@ -39,10 +40,13 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() {
+    FlutterSecureStorage.setMockInitialValues({});
     SharedPreferences.setMockInitialValues({});
   });
 
-  testWidgets('mobile nav shows at most five items for super_admin', (tester) async {
+  testWidgets('mobile nav shows at most five items for super_admin', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(400, 800);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(tester.view.resetPhysicalSize);
@@ -61,14 +65,15 @@ void main() {
 
   testWidgets('login screen renders Hungarian by default', (tester) async {
     await tester.pumpWidget(const ProviderScope(child: VianexisAdminApp()));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
+    await tester.pumpAndSettle();
 
     expect(find.text('Belépés'), findsWidgets);
     expect(find.text('Sign in'), findsNothing);
   });
 
-  testWidgets('action center renders Hungarian labels by default', (tester) async {
+  testWidgets('action center renders Hungarian labels by default', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(400, 800);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(tester.view.resetPhysicalSize);
@@ -90,8 +95,7 @@ void main() {
     SharedPreferences.setMockInitialValues({'admin_app_locale_code': 'en'});
 
     await tester.pumpWidget(const ProviderScope(child: VianexisAdminApp()));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
+    await tester.pumpAndSettle();
 
     expect(find.text('Sign in'), findsWidgets);
   });

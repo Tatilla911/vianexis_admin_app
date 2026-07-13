@@ -32,6 +32,7 @@ import '../features/companies/presentation/platform_companies_screen.dart';
 import '../features/companies/presentation/platform_company_detail_screen.dart';
 import '../features/company_settings/presentation/company_exchange_settings_screen.dart';
 import '../features/dashboard/admin_dashboard_screen.dart';
+import '../features/security/admin_pin_lock_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/modules/admin_modules_hub_screen.dart';
 import '../features/notifications/presentation/notification_detail_screen.dart';
@@ -57,7 +58,10 @@ import '../features/system_health/presentation/system_health_screen.dart';
 
 class RouterRefreshNotifier extends ChangeNotifier {
   RouterRefreshNotifier(this._ref) {
-    _ref.listen<AdminAuthState>(adminAuthProvider, (previous, next) => notifyListeners());
+    _ref.listen<AdminAuthState>(
+      adminAuthProvider,
+      (previous, next) => notifyListeners(),
+    );
   }
 
   final Ref _ref;
@@ -83,8 +87,19 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         return isLoggingIn ? null : AdminRoutes.login;
       }
 
-      if (!auth.isAuthenticated) {
+      final hasLocalUser = auth.user != null;
+      final isPinLock = state.matchedLocation == AdminRoutes.pinLock;
+
+      if (hasLocalUser && auth.isPinLocked) {
+        return isPinLock ? null : AdminRoutes.pinLock;
+      }
+
+      if (!hasLocalUser) {
         return isLoggingIn ? null : AdminRoutes.login;
+      }
+
+      if (isPinLock) {
+        return AdminRoutes.dashboard;
       }
 
       if (isLoggingIn) {
@@ -93,7 +108,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
 
       final user = auth.user;
       if (user != null) {
-        final destination = AdminRoutes.destinationForLocation(state.matchedLocation);
+        final destination = AdminRoutes.destinationForLocation(
+          state.matchedLocation,
+        );
         if (destination != null && !user.canAccess(destination)) {
           return AdminRoutes.accessDenied;
         }
@@ -106,40 +123,41 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AdminRoutes.login,
         builder: (context, state) => const LoginScreen(),
       ),
+      GoRoute(
+        path: AdminRoutes.pinLock,
+        builder: (context, state) => const AdminPinLockScreen(),
+      ),
       ShellRoute(
         builder: (context, state, child) => VianexisAdminScaffold(child: child),
         routes: [
           GoRoute(
             path: AdminRoutes.dashboard,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: AdminDashboardScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: AdminDashboardScreen()),
           ),
           GoRoute(
             path: AdminRoutes.actionCenter,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ActionCenterScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: ActionCenterScreen()),
           ),
           GoRoute(
             path: AdminRoutes.registrations,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: RegistrationApplicationsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: RegistrationApplicationsScreen()),
             routes: [
               GoRoute(
                 path: ':id',
-                builder: (context, state) => RegistrationApplicationDetailScreen(
-                  applicationId: state.pathParameters['id'] ?? '',
-                ),
+                builder: (context, state) =>
+                    RegistrationApplicationDetailScreen(
+                      applicationId: state.pathParameters['id'] ?? '',
+                    ),
               ),
             ],
           ),
           GoRoute(
             path: AdminRoutes.applications,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ApplicationsInboxScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: ApplicationsInboxScreen()),
             routes: [
               GoRoute(
                 path: ':id',
@@ -151,9 +169,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.customerCommunications,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: CustomerCommunicationsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: CustomerCommunicationsScreen()),
             routes: [
               GoRoute(
                 path: ':id',
@@ -174,9 +191,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.publicIntakes,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: PublicIntakesScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: PublicIntakesScreen()),
             routes: [
               GoRoute(
                 path: ':id',
@@ -188,9 +204,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.companies,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: PlatformCompaniesScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: PlatformCompaniesScreen()),
             routes: [
               GoRoute(
                 path: ':id',
@@ -210,9 +225,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.billing,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: BillingScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: BillingScreen()),
             routes: [
               GoRoute(
                 path: 'subscription/:id',
@@ -236,15 +250,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.bulkOnboarding,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: BulkOnboardingJobsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: BulkOnboardingJobsScreen()),
             routes: [
               GoRoute(
                 path: 'upload',
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: BulkOnboardingUploadScreen(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: BulkOnboardingUploadScreen()),
               ),
               GoRoute(
                 path: ':id',
@@ -260,10 +272,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                     routes: [
                       GoRoute(
                         path: ':rowId',
-                        builder: (context, state) => BulkOnboardingRowDetailScreen(
-                          jobId: state.pathParameters['id'] ?? '',
-                          rowId: state.pathParameters['rowId'] ?? '',
-                        ),
+                        builder: (context, state) =>
+                            BulkOnboardingRowDetailScreen(
+                              jobId: state.pathParameters['id'] ?? '',
+                              rowId: state.pathParameters['rowId'] ?? '',
+                            ),
                       ),
                     ],
                   ),
@@ -273,23 +286,23 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.aiReviews,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: AiReviewSummaryScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: AiReviewSummaryScreen()),
             routes: [
               GoRoute(
                 path: ':id',
                 builder: (context, state) => AiReviewDetailScreen(
-                  reviewId: Uri.decodeComponent(state.pathParameters['id'] ?? ''),
+                  reviewId: Uri.decodeComponent(
+                    state.pathParameters['id'] ?? '',
+                  ),
                 ),
               ),
             ],
           ),
           GoRoute(
             path: AdminRoutes.supportTickets,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: SupportTicketsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SupportTicketsScreen()),
             routes: [
               GoRoute(
                 path: ':id',
@@ -301,9 +314,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.supportGrants,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: SupportAccessGrantsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SupportAccessGrantsScreen()),
             routes: [
               GoRoute(
                 path: ':id',
@@ -315,9 +327,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.systemHealth,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: SystemHealthScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SystemHealthScreen()),
             routes: [
               GoRoute(
                 path: 'events/:id',
@@ -329,9 +340,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.auditLogs,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: AuditLogsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: AuditLogsScreen()),
             routes: [
               GoRoute(
                 path: ':id',
@@ -343,23 +353,23 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.securityCenter,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: SecurityCenterScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SecurityCenterScreen()),
             routes: [
               GoRoute(
                 path: 'events/:id',
                 builder: (context, state) => SecurityEventDetailScreen(
-                  eventId: Uri.decodeComponent(state.pathParameters['id'] ?? ''),
+                  eventId: Uri.decodeComponent(
+                    state.pathParameters['id'] ?? '',
+                  ),
                 ),
               ),
             ],
           ),
           GoRoute(
             path: AdminRoutes.adminUsers,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: AdminUsersScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: AdminUsersScreen()),
             routes: [
               GoRoute(
                 path: ':id',
@@ -371,15 +381,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.releaseCenter,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ReleaseCenterScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: ReleaseCenterScreen()),
           ),
           GoRoute(
             path: AdminRoutes.notifications,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: NotificationsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: NotificationsScreen()),
             routes: [
               GoRoute(
                 path: 'preferences',
@@ -397,15 +405,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.operations,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: OperationsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: OperationsScreen()),
           ),
           GoRoute(
             path: AdminRoutes.driverAccess,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: DriverAccessScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: DriverAccessScreen()),
             routes: [
               GoRoute(
                 path: ':id',
@@ -417,33 +423,28 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: AdminRoutes.tripsOverview,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: TripsOverviewScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: TripsOverviewScreen()),
           ),
           GoRoute(
             path: AdminRoutes.exchangeRecords,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ExchangeRecordsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: ExchangeRecordsScreen()),
           ),
           GoRoute(
             path: AdminRoutes.notificationStatus,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: NotificationStatusScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: NotificationStatusScreen()),
           ),
           GoRoute(
             path: AdminRoutes.modulesHub,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: AdminModulesHubScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: AdminModulesHubScreen()),
           ),
           GoRoute(
             path: AdminRoutes.settings,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: AdminSettingsScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: AdminSettingsScreen()),
           ),
           GoRoute(
             path: AdminRoutes.accessDenied,
@@ -461,6 +462,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
 
 abstract final class AdminRoutes {
   static const login = '/login';
+  static const pinLock = '/pin-lock';
   static const dashboard = '/dashboard';
   static const actionCenter = '/action-center';
   static const registrations = '/registrations';
@@ -490,7 +492,8 @@ abstract final class AdminRoutes {
   static const modulesHub = '/modules';
   static const accessDenied = '/access-denied';
 
-  static String systemHealthEventDetail(String id) => '$systemHealth/events/$id';
+  static String systemHealthEventDetail(String id) =>
+      '$systemHealth/events/$id';
 
   static String registrationDetail(String id) => '$registrations/$id';
 
@@ -499,11 +502,14 @@ abstract final class AdminRoutes {
   static String platformCompanyExchangeSettings(String id) =>
       '$companies/$id/exchange-settings';
 
-  static String billingSubscriptionDetail(String id) => '$billing/subscription/$id';
+  static String billingSubscriptionDetail(String id) =>
+      '$billing/subscription/$id';
 
-  static String billingPricingIntakeDetail(String id) => '$billing/pricing-intake/$id';
+  static String billingPricingIntakeDetail(String id) =>
+      '$billing/pricing-intake/$id';
 
-  static String billingQuoteRequestDetail(String id) => '$billing/quote-request/$id';
+  static String billingQuoteRequestDetail(String id) =>
+      '$billing/quote-request/$id';
 
   static String bulkOnboardingJobDetail(String id) => '$bulkOnboarding/$id';
 

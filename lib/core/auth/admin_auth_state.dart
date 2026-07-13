@@ -2,16 +2,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../api/api_client.dart';
 import '../api/api_exception.dart';
+import '../api/auth_token_storage.dart';
+import '../device/admin_device_identity_service.dart';
 import '../localization/localization_keys.dart';
+import '../security/admin_device_pin_service.dart';
 import 'admin_auth_api.dart';
 import 'admin_auth_repository.dart';
 import 'admin_user.dart';
+import 'auth_refresh_coordinator.dart';
 
 class AdminAuthState {
   const AdminAuthState({
     this.user,
     this.isLoading = false,
     this.isRestoringSession = false,
+    this.isPinLocked = false,
+    this.offlineSessionRestorePending = false,
     this.errorMessageKey,
   });
 
@@ -19,20 +25,28 @@ class AdminAuthState {
     : user = null,
       isLoading = false,
       isRestoringSession = false,
+      isPinLocked = false,
+      offlineSessionRestorePending = false,
       errorMessageKey = null;
 
   final AdminUser? user;
   final bool isLoading;
   final bool isRestoringSession;
+  final bool isPinLocked;
+  final bool offlineSessionRestorePending;
   final String? errorMessageKey;
 
   bool get isAuthenticated => user != null;
+
+  bool get requiresPinUnlock => isPinLocked && user != null;
 
   AdminAuthState copyWith({
     AdminUser? user,
     bool clearUser = false,
     bool? isLoading,
     bool? isRestoringSession,
+    bool? isPinLocked,
+    bool? offlineSessionRestorePending,
     String? errorMessageKey,
     bool clearError = false,
   }) {
@@ -40,7 +54,12 @@ class AdminAuthState {
       user: clearUser ? null : (user ?? this.user),
       isLoading: isLoading ?? this.isLoading,
       isRestoringSession: isRestoringSession ?? this.isRestoringSession,
-      errorMessageKey: clearError ? null : (errorMessageKey ?? this.errorMessageKey),
+      isPinLocked: isPinLocked ?? this.isPinLocked,
+      offlineSessionRestorePending:
+          offlineSessionRestorePending ?? this.offlineSessionRestorePending,
+      errorMessageKey: clearError
+          ? null
+          : (errorMessageKey ?? this.errorMessageKey),
     );
   }
 }
@@ -50,6 +69,8 @@ final adminAuthRepositoryProvider = Provider<AdminAuthRepository>((ref) {
     apiClient: ref.watch(apiClientProvider),
     tokenStorage: ref.watch(authTokenStorageProvider),
     authApi: ref.watch(adminAuthApiProvider),
+    deviceIdentity: ref.watch(adminDeviceIdentityServiceProvider),
+    refreshCoordinator: ref.watch(authRefreshCoordinatorProvider),
   );
 });
 
@@ -65,26 +86,51 @@ class AdminAuthNotifier extends Notifier<AdminAuthState> {
 
   Future<void> _restoreSession() async {
     try {
-      final user = await _repository.restoreSession();
-      if (user != null) {
-        state = AdminAuthState(user: user);
-      } else {
-        state = const AdminAuthState.unauthenticated();
+      final result = await _repository.restoreSession();
+      final pinLocked = await _requiresPinLock();
+
+      switch (result.outcome) {
+        case SessionRestoreOutcome.success:
+          state = AdminAuthState(user: result.user, isPinLocked: pinLocked);
+        case SessionRestoreOutcome.networkPending:
+          state = AdminAuthState(
+            user: result.user,
+            isPinLocked: pinLocked,
+            offlineSessionRestorePending: true,
+            errorMessageKey: result.user == null
+                ? LocalizationKeys.authOfflineSessionRestorePending
+                : null,
+          );
+        case SessionRestoreOutcome.authInvalid:
+          state = AdminAuthState(
+            errorMessageKey: LocalizationKeys.authUnableToRestoreSession,
+          );
+        case SessionRestoreOutcome.unauthenticated:
+          state = const AdminAuthState.unauthenticated();
       }
-    } on ApiException catch (error) {
-      state = AdminAuthState(
-        errorMessageKey: error.messageKey,
-      );
     } catch (_) {
       state = const AdminAuthState.unauthenticated();
     }
   }
 
-  Future<void> signIn({required String email, required String password}) async {
+  Future<bool> _requiresPinLock() async {
+    return ref.read(adminDevicePinServiceProvider).hasPin();
+  }
+
+  Future<void> signIn({
+    required String email,
+    required String password,
+    required bool rememberDevice,
+  }) async {
     state = state.copyWith(isLoading: true, clearError: true);
     try {
-      final user = await _repository.signIn(email: email, password: password);
-      state = AdminAuthState(user: user);
+      final user = await _repository.signIn(
+        email: email,
+        password: password,
+        rememberDevice: rememberDevice,
+      );
+      final pinLocked = await _requiresPinLock();
+      state = AdminAuthState(user: user, isPinLocked: pinLocked);
     } on ApiException catch (error) {
       state = state.copyWith(
         isLoading: false,
@@ -96,6 +142,10 @@ class AdminAuthNotifier extends Notifier<AdminAuthState> {
         errorMessageKey: LocalizationKeys.errorGenericBody,
       );
     }
+  }
+
+  Future<void> unlockPin() async {
+    state = state.copyWith(isPinLocked: false);
   }
 
   Future<void> signOut() async {

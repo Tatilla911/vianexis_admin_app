@@ -448,6 +448,45 @@ class AppLocalizationsHu extends AppLocalizations {
       'A munkamenete lejárt. Jelentkezzen be újra a folytatáshoz.';
 
   @override
+  String get authSessionRevoked =>
+      'A munkamenet visszavonásra került. Jelentkezzen be újra.';
+
+  @override
+  String get authUnableToRestoreSession =>
+      'Nem sikerült helyreállítani a munkamenetet. Jelentkezzen be újra.';
+
+  @override
+  String get authOfflineSessionRestorePending =>
+      'A munkamenet helyreállítása offline állapot miatt függőben van.';
+
+  @override
+  String get authRememberDevice => 'Emlékezzen rám ezen az eszközön';
+
+  @override
+  String get authActiveSessions => 'Aktív eszközök';
+
+  @override
+  String get authCurrentDevice => 'Ez az eszköz';
+
+  @override
+  String get authUnknownDevice => 'Ismeretlen eszköz';
+
+  @override
+  String get authLegacySession => 'Korábbi bejelentkezés';
+
+  @override
+  String get authLastActive => 'Utolsó használat';
+
+  @override
+  String get authSessionExpires => 'Lejárat';
+
+  @override
+  String get authRemoveSession => 'Munkamenet megszüntetése';
+
+  @override
+  String get authLogoutAllOtherDevices => 'Kijelentkezés minden más eszközről';
+
+  @override
   String get errorPermissionDeniedTitle => 'Hozzáférés megtagadva';
 
   @override

@@ -3,17 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../api/api_client.dart';
 import '../api/api_exception.dart';
 import '../localization/localization_keys.dart';
+import 'admin_auth_session.dart';
 import 'admin_user.dart';
+import 'auth_token_bundle.dart';
 
 class AuthLoginResult {
-  const AuthLoginResult({
-    required this.accessToken,
-    required this.refreshToken,
-    this.user,
-  });
+  const AuthLoginResult({required this.bundle, this.user});
 
-  final String accessToken;
-  final String refreshToken;
+  final AuthTokenBundle bundle;
   final AdminUser? user;
 }
 
@@ -25,15 +22,24 @@ class AdminAuthApi {
   Future<AuthLoginResult> login({
     required String email,
     required String password,
+    required bool rememberDevice,
+    required String deviceId,
+    required String deviceName,
+    required String platform,
+    required String appType,
   }) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '/auth/login',
       data: {
         'email': email.trim(),
         'password': password,
-        'deviceName': 'ViaNexis Admin',
-        'deviceType': 'mobile_admin',
+        'rememberDevice': rememberDevice,
+        'deviceId': deviceId,
+        'deviceName': deviceName,
+        'platform': platform,
+        'appType': appType,
       },
+      options: ApiClient.skipRefreshOptions,
     );
 
     final data = response.data;
@@ -44,16 +50,7 @@ class AdminAuthApi {
       );
     }
 
-    final accessToken = _readToken(data, 'access_token', 'accessToken');
-    final refreshToken = _readToken(data, 'refresh_token', 'refreshToken');
-
-    if (accessToken == null || refreshToken == null) {
-      throw const ApiException(
-        messageKey: LocalizationKeys.authServerError,
-        kind: ApiExceptionKind.server,
-      );
-    }
-
+    final bundle = AuthTokenBundle.fromResponse(data);
     AdminUser? user;
     final userJson = data['user'];
     if (userJson is Map<String, dynamic>) {
@@ -62,11 +59,34 @@ class AdminAuthApi {
       user = AdminUser.fromAuthJson(Map<String, dynamic>.from(userJson));
     }
 
-    return AuthLoginResult(
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-      user: user,
+    return AuthLoginResult(bundle: bundle, user: user);
+  }
+
+  Future<AuthTokenBundle> refreshTokens({
+    required String refreshToken,
+    String? sessionId,
+    required String platform,
+    required String deviceName,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/auth/refresh',
+      data: {
+        'refresh_token': refreshToken,
+        if (sessionId != null && sessionId.isNotEmpty) 'sessionId': sessionId,
+        'platform': platform,
+        'deviceName': deviceName,
+      },
+      options: ApiClient.skipRefreshOptions,
     );
+
+    final data = response.data;
+    if (data == null) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.authServerError,
+        kind: ApiExceptionKind.server,
+      );
+    }
+    return AuthTokenBundle.fromResponse(data);
   }
 
   Future<AdminUser> fetchCurrentUser() async {
@@ -85,7 +105,32 @@ class AdminAuthApi {
     await _apiClient.post<void>(
       '/auth/logout',
       data: {'refresh_token': refreshToken},
+      options: ApiClient.skipRefreshOptions,
     );
+  }
+
+  Future<void> logoutAllOtherDevices({required String refreshToken}) async {
+    await _apiClient.post<void>(
+      '/auth/logout-all',
+      data: {'keepCurrent': true, 'refresh_token': refreshToken},
+    );
+  }
+
+  Future<List<AdminAuthSession>> listSessions() async {
+    final response = await _apiClient.get<List<dynamic>>('/auth/sessions');
+    final data = response.data;
+    if (data == null) return const [];
+    return data
+        .whereType<Map>()
+        .map(
+          (item) => AdminAuthSession.fromJson(Map<String, dynamic>.from(item)),
+        )
+        .where((session) => session.id.isNotEmpty)
+        .toList(growable: false);
+  }
+
+  Future<void> revokeSession(String sessionId) async {
+    await _apiClient.delete<void>('/auth/sessions/$sessionId');
   }
 
   Future<void> changePassword({
@@ -94,22 +139,8 @@ class AdminAuthApi {
   }) async {
     await _apiClient.patch<void>(
       '/auth/me/password',
-      data: {
-        'currentPassword': currentPassword,
-        'newPassword': newPassword,
-      },
+      data: {'currentPassword': currentPassword, 'newPassword': newPassword},
     );
-  }
-
-  String? _readToken(
-    Map<String, dynamic> json,
-    String snakeCase,
-    String camelCase,
-  ) {
-    final value = json[snakeCase] ?? json[camelCase];
-    if (value == null) return null;
-    final token = value.toString().trim();
-    return token.isEmpty ? null : token;
   }
 }
 

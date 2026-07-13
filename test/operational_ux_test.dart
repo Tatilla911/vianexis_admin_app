@@ -14,6 +14,9 @@ import 'package:vianexis_admin_app/core/auth/admin_auth_api.dart';
 import 'package:vianexis_admin_app/core/auth/admin_auth_repository.dart';
 import 'package:vianexis_admin_app/core/auth/admin_auth_state.dart';
 import 'package:vianexis_admin_app/core/auth/admin_user.dart';
+import 'package:vianexis_admin_app/core/auth/auth_refresh_coordinator.dart';
+import 'package:vianexis_admin_app/core/auth/auth_token_bundle.dart';
+import 'package:vianexis_admin_app/core/device/admin_device_identity_service.dart';
 import 'package:vianexis_admin_app/core/localization/localization_keys.dart';
 import 'package:vianexis_admin_app/core/widgets/backend_mode_banner.dart';
 import 'package:vianexis_admin_app/core/widgets/mock_data_badge.dart';
@@ -37,7 +40,8 @@ class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
   }
 }
 
-class _MockRegistrationRepository implements RegistrationApplicationsRepository {
+class _MockRegistrationRepository
+    implements RegistrationApplicationsRepository {
   @override
   bool get usesMockData => true;
 
@@ -152,11 +156,18 @@ void main() {
       FlutterSecureStorage.setMockInitialValues({});
     });
 
-    test('restoreSession rethrows unauthorized as session expired', () async {
+    test('restoreSession returns authInvalid when refresh is unauthorized', () async {
       final tokenStorage = AuthTokenStorage();
       final dio = Dio(BaseOptions(baseUrl: 'https://api.test.local'));
+      final deviceIdentity = AdminDeviceIdentityService();
+      final refreshCoordinator = AuthRefreshCoordinator(
+        tokenStorage: tokenStorage,
+        deviceIdentity: deviceIdentity,
+        dio: dio,
+      );
       final apiClient = ApiClient(
         tokenStorage: tokenStorage,
+        refreshCoordinator: refreshCoordinator,
         dio: dio,
         enableDebugLogging: false,
       );
@@ -164,11 +175,17 @@ void main() {
         apiClient: apiClient,
         tokenStorage: tokenStorage,
         authApi: AdminAuthApi(apiClient),
+        deviceIdentity: deviceIdentity,
+        refreshCoordinator: refreshCoordinator,
       );
 
-      await tokenStorage.writeTokens(
-        accessToken: 'expired-token',
-        refreshToken: 'refresh-token',
+      await tokenStorage.writeSessionBundle(
+        AuthTokenBundle.fromResponse({
+          'access_token': 'expired-token',
+          'refresh_token': 'refresh-token',
+          'session_id': '11111111-1111-4111-8111-111111111111',
+        }),
+        rememberDevice: true,
       );
 
       dio.interceptors.add(
@@ -181,6 +198,7 @@ void main() {
                 response: Response(
                   requestOptions: options,
                   statusCode: 401,
+                  data: const {'code': 'REFRESH_TOKEN_INVALID'},
                 ),
               ),
             );
@@ -188,24 +206,23 @@ void main() {
         ),
       );
 
-      await expectLater(
-        repository.restoreSession(),
-        throwsA(
-          isA<ApiException>().having(
-            (error) => error.messageKey,
-            'messageKey',
-            LocalizationKeys.authSessionExpired,
-          ),
-        ),
-      );
+      final restored = await repository.restoreSession();
+      expect(restored.outcome.name, 'authInvalid');
       expect(await tokenStorage.readAccessToken(), isNull);
     });
 
     test('signOut clears stored tokens', () async {
       final tokenStorage = AuthTokenStorage();
       final dio = Dio(BaseOptions(baseUrl: 'https://api.test.local'));
+      final deviceIdentity = AdminDeviceIdentityService();
+      final refreshCoordinator = AuthRefreshCoordinator(
+        tokenStorage: tokenStorage,
+        deviceIdentity: deviceIdentity,
+        dio: dio,
+      );
       final apiClient = ApiClient(
         tokenStorage: tokenStorage,
+        refreshCoordinator: refreshCoordinator,
         dio: dio,
         enableDebugLogging: false,
       );
@@ -213,6 +230,8 @@ void main() {
         apiClient: apiClient,
         tokenStorage: tokenStorage,
         authApi: AdminAuthApi(apiClient),
+        deviceIdentity: deviceIdentity,
+        refreshCoordinator: refreshCoordinator,
       );
 
       await tokenStorage.writeTokens(
@@ -227,7 +246,9 @@ void main() {
     });
   });
 
-  testWidgets('mock badge is shown when repository uses mock data', (tester) async {
+  testWidgets('mock badge is shown when repository uses mock data', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -248,7 +269,9 @@ void main() {
     expect(find.text('Mock data'), findsOneWidget);
   });
 
-  testWidgets('backend-not-configured banner is visible without API base URL', (tester) async {
+  testWidgets('backend-not-configured banner is visible without API base URL', (
+    tester,
+  ) async {
     expect(ApiConfig.isConfigured, isFalse);
 
     await tester.pumpWidget(
@@ -268,7 +291,9 @@ void main() {
     );
   });
 
-  testWidgets('offline banner is visible when connectivity is offline', (tester) async {
+  testWidgets('offline banner is visible when connectivity is offline', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -281,7 +306,9 @@ void main() {
     expect(find.byIcon(Icons.wifi_off_outlined), findsOneWidget);
   });
 
-  testWidgets('forbidden deep link shows permission denied screen', (tester) async {
+  testWidgets('forbidden deep link shows permission denied screen', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(400, 800);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(tester.view.resetPhysicalSize);
@@ -353,7 +380,9 @@ void main() {
     expect(find.text('Device PIN'), findsOneWidget);
   });
 
-  testWidgets('resolveApiException maps forbidden to permission denied title', (tester) async {
+  testWidgets('resolveApiException maps forbidden to permission denied title', (
+    tester,
+  ) async {
     late ApiErrorPresentation presentation;
 
     await tester.pumpWidget(

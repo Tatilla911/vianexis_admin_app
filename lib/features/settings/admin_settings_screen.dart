@@ -14,6 +14,7 @@ import '../../core/widgets/vianexis_brand_header.dart';
 import '../../core/widgets/vianexis_confirm_dialog.dart';
 import '../../core/widgets/vianexis_section_header.dart';
 import '../../l10n/app_localizations.dart';
+import 'widgets/admin_active_sessions_section.dart';
 import 'widgets/admin_security_settings_sections.dart';
 
 class AdminSettingsScreen extends ConsumerWidget {
@@ -29,7 +30,7 @@ class AdminSettingsScreen extends ConsumerWidget {
     final envLabel = resolveAppConfigKey(context, config.displayLabelKey);
     final apiHost = config.isApiConfigured
         ? (config.safeApiHostDisplay ??
-            resolveAppConfigKey(context, 'appConfigApiConfigured'))
+              resolveAppConfigKey(context, 'appConfigApiConfigured'))
         : l10n.settingsBackendNotConfiguredValue;
 
     return Scaffold(
@@ -60,6 +61,8 @@ class AdminSettingsScreen extends ConsumerWidget {
           const SizedBox(height: 20),
           const AdminAccountPasswordSection(),
           const SizedBox(height: 20),
+          const AdminActiveSessionsSection(),
+          const SizedBox(height: 20),
           VianexisSectionHeader(title: l10n.brandEnvironmentLabel),
           const SizedBox(height: 12),
           VianexisAdminCard(
@@ -80,7 +83,11 @@ class AdminSettingsScreen extends ConsumerWidget {
                   future: PackageInfo.fromPlatform(),
                   builder: (context, snapshot) {
                     final version = snapshot.data?.version ?? '—';
-                    return _infoRow(context, l10n.settingsVersionLabel, version);
+                    return _infoRow(
+                      context,
+                      l10n.settingsVersionLabel,
+                      version,
+                    );
                   },
                 ),
                 if (config.isProductionMisconfigured) ...[
@@ -130,7 +137,8 @@ class AdminSettingsScreen extends ConsumerWidget {
                 Text(l10n.settingsNotificationsBody),
                 const SizedBox(height: 16),
                 OutlinedButton(
-                  onPressed: () => context.go(AdminRoutes.notificationPreferences),
+                  onPressed: () =>
+                      context.go(AdminRoutes.notificationPreferences),
                   child: Text(l10n.settingsOpenNotificationPreferences),
                 ),
               ],
@@ -159,7 +167,9 @@ class AdminSettingsScreen extends ConsumerWidget {
                             isDestructive: true,
                           );
                           if (confirmed == true && context.mounted) {
-                            await ref.read(adminAuthProvider.notifier).signOut();
+                            await ref
+                                .read(adminAuthProvider.notifier)
+                                .signOut();
                           }
                         },
                   child: Text(l10n.authLogout),
@@ -178,16 +188,10 @@ class AdminSettingsScreen extends ConsumerWidget {
       children: [
         SizedBox(
           width: 132,
-          child: Text(
-            label,
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
+          child: Text(label, style: Theme.of(context).textTheme.labelLarge),
         ),
         Expanded(
-          child: Text(
-            value,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
+          child: Text(value, style: Theme.of(context).textTheme.bodyLarge),
         ),
       ],
     );

@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../auth/auth_refresh_coordinator.dart';
+import '../auth/auth_refresh_result.dart';
 import '../localization/localization_keys.dart';
 import 'api_config.dart';
 import 'api_error_mapping.dart';
@@ -11,13 +13,18 @@ import 'auth_token_storage.dart';
 
 typedef UnauthorizedCallback = Future<void> Function();
 
-/// Configured Dio client with auth header injection and error mapping.
+const _skipRefreshExtraKey = 'skipRefresh';
+const _retriedAfterRefreshExtraKey = 'retriedAfterRefresh';
+
+/// Configured Dio client with auth header injection, refresh retry, and error mapping.
 class ApiClient {
   ApiClient({
     required AuthTokenStorage tokenStorage,
+    AuthRefreshCoordinator? refreshCoordinator,
     Dio? dio,
     bool enableDebugLogging = kDebugMode,
   }) : _tokenStorage = tokenStorage,
+       _refreshCoordinator = refreshCoordinator,
        dio = dio ?? Dio() {
     if (ApiConfig.isConfigured) {
       this.dio.options.baseUrl = ApiConfig.baseUrl;
@@ -37,15 +44,10 @@ class ApiClient {
           handler.next(options);
         },
         onError: (error, handler) async {
-          final statusCode = error.response?.statusCode;
-          if (statusCode == 401 &&
-              !isAuthLoginRequestPath(
-                resolveApiRequestPath(error.requestOptions),
-              ) &&
-              _onUnauthorized != null) {
-            await _onUnauthorized!();
+          final handled = await _handleUnauthorized(error, handler);
+          if (!handled) {
+            handler.next(error);
           }
-          handler.next(error);
         },
       ),
     );
@@ -63,7 +65,12 @@ class ApiClient {
     }
   }
 
+  static final skipRefreshOptions = Options(
+    extra: <String, dynamic>{_skipRefreshExtraKey: true},
+  );
+
   final AuthTokenStorage _tokenStorage;
+  final AuthRefreshCoordinator? _refreshCoordinator;
   UnauthorizedCallback? _onUnauthorized;
   final Dio dio;
 
@@ -171,6 +178,58 @@ class ApiClient {
     }
   }
 
+  Future<bool> _handleUnauthorized(
+    DioException error,
+    ErrorInterceptorHandler handler,
+  ) async {
+    final statusCode = error.response?.statusCode;
+    if (statusCode != 401) return false;
+
+    final path = resolveApiRequestPath(error.requestOptions);
+    if (isAuthExemptFromRefreshRetry(path)) return false;
+
+    final skipRefresh =
+        error.requestOptions.extra[_skipRefreshExtraKey] == true;
+    final retried =
+        error.requestOptions.extra[_retriedAfterRefreshExtraKey] == true;
+    if (skipRefresh || retried) {
+      if (_onUnauthorized != null) {
+        await _onUnauthorized!();
+      }
+      return false;
+    }
+
+    final coordinator = _refreshCoordinator;
+    if (coordinator == null) {
+      if (_onUnauthorized != null) {
+        await _onUnauthorized!();
+      }
+      return false;
+    }
+
+    final refreshResult = await coordinator.refreshOnce();
+    if (refreshResult == AuthRefreshResult.success) {
+      final token = await _tokenStorage.readAccessToken();
+      final requestOptions = error.requestOptions;
+      requestOptions.headers['Authorization'] = 'Bearer $token';
+      requestOptions.extra[_retriedAfterRefreshExtraKey] = true;
+      try {
+        final response = await dio.fetch<dynamic>(requestOptions);
+        handler.resolve(response);
+        return true;
+      } on DioException catch (retryError) {
+        handler.next(retryError);
+        return true;
+      }
+    }
+
+    if (refreshResult == AuthRefreshResult.authInvalid &&
+        _onUnauthorized != null) {
+      await _onUnauthorized!();
+    }
+    return false;
+  }
+
   void _assertConfigured() {
     if (!isConfigured) {
       throw const ApiException(
@@ -250,12 +309,11 @@ String _redactSecrets(Object object) {
       );
 }
 
-final authTokenStorageProvider = Provider<AuthTokenStorage>(
-  (ref) => AuthTokenStorage(),
-);
-
 final apiClientProvider = Provider<ApiClient>((ref) {
-  return ApiClient(tokenStorage: ref.watch(authTokenStorageProvider));
+  return ApiClient(
+    tokenStorage: ref.watch(authTokenStorageProvider),
+    refreshCoordinator: ref.watch(authRefreshCoordinatorProvider),
+  );
 });
 
 final dioProvider = Provider<Dio>((ref) => ref.watch(apiClientProvider).dio);
