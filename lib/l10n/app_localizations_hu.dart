@@ -226,6 +226,14 @@ class AppLocalizationsHu extends AppLocalizations {
   String get registrationsTitle => 'Regisztrációs kérelmek';
 
   @override
+  String get applicationsTitle => 'Jelentkezések';
+
+  @override
+  String applicationDetailTitle(String id) {
+    return 'Jelentkezés #$id';
+  }
+
+  @override
   String get registrationsPlaceholderBody =>
       'A függőben lévő cég onboarding kérelmek itt jelennek meg.';
 

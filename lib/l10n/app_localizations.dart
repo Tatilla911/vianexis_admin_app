@@ -494,6 +494,18 @@ abstract class AppLocalizations {
   /// **'Registration applications'**
   String get registrationsTitle;
 
+  /// No description provided for @applicationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Applications'**
+  String get applicationsTitle;
+
+  /// No description provided for @applicationDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Application #{id}'**
+  String applicationDetailTitle(String id);
+
   /// No description provided for @registrationsPlaceholderBody.
   ///
   /// In en, this message translates to:

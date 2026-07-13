@@ -66,6 +66,15 @@
   "dashboardMetricAuditRisks": "Sikertelen / elutasított audit események",
   "dashboardPlaceholderBody": "Az operatív összesítések és platform mutatók itt jelennek meg.",
   "registrationsTitle": "Regisztrációs kérelmek",
+  "applicationsTitle": "Jelentkezések",
+  "applicationDetailTitle": "Jelentkezés #{id}",
+  "@applicationDetailTitle": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
   "registrationsPlaceholderBody": "A függőben lévő cég onboarding kérelmek itt jelennek meg.",
   "registrationDetailTitle": "Regisztrációs kérelem",
   "registrationDetailPlaceholderBody": "A kérelem metaadatai és felülvizsgálati műveletek itt jelennek meg.",

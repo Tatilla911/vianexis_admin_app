@@ -66,6 +66,15 @@
   "dashboardMetricAuditRisks": "Failed / denied audit events",
   "dashboardPlaceholderBody": "Operational summaries and platform metrics will appear here.",
   "registrationsTitle": "Registration applications",
+  "applicationsTitle": "Applications",
+  "applicationDetailTitle": "Application #{id}",
+  "@applicationDetailTitle": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
   "registrationsPlaceholderBody": "Pending company onboarding applications will appear here.",
   "registrationDetailTitle": "Registration application",
   "registrationDetailPlaceholderBody": "Application metadata and review actions will appear here.",

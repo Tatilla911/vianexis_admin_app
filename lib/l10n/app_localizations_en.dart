@@ -225,6 +225,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registrationsTitle => 'Registration applications';
 
   @override
+  String get applicationsTitle => 'Applications';
+
+  @override
+  String applicationDetailTitle(String id) {
+    return 'Application #$id';
+  }
+
+  @override
   String get registrationsPlaceholderBody =>
       'Pending company onboarding applications will appear here.';
 

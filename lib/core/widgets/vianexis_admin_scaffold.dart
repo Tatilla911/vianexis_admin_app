@@ -10,6 +10,7 @@ import '../auth/admin_auth_state.dart';
 import '../auth/admin_user.dart';
 import '../connectivity/connectivity_status_provider.dart';
 import '../navigation/admin_shell_navigation.dart';
+import 'admin_screen_app_bar.dart';
 import 'backend_mode_banner.dart';
 import 'offline_banner.dart';
 import 'vianexis_admin_background.dart';
@@ -17,13 +18,37 @@ import 'vianexis_metadata_notice.dart';
 import 'vianexis_status_badge.dart';
 
 class VianexisAdminScaffold extends ConsumerWidget {
-  const VianexisAdminScaffold({super.key, required this.child});
+  const VianexisAdminScaffold({
+    super.key,
+    required this.child,
+    this.title,
+    this.appBarActions,
+    this.fallbackRoute,
+  });
 
   final Widget child;
+
+  /// When set, renders a screen-level [Scaffold] with [AdminScreenAppBar] only.
+  /// Used inside the shell route — does not duplicate navigation chrome.
+  final String? title;
+  final List<Widget>? appBarActions;
+  final String? fallbackRoute;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(apiUnauthorizedBindingProvider);
+
+    if (title != null) {
+      return Scaffold(
+        appBar: AdminScreenAppBar(
+          title: title!,
+          actions: appBarActions,
+          fallbackRoute: fallbackRoute ?? AdminRoutes.dashboard,
+        ),
+        body: child,
+      );
+    }
+
     final user = ref.watch(adminAuthProvider).user;
     if (user == null) {
       return child;
@@ -31,7 +56,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
 
     final isOnline = ref.watch(connectivityOnlineProvider);
     final allVisible = _visibleDestinations(user);
-    final location = GoRouterState.of(context).matchedLocation;
+    final location = _resolveLocation(context);
     final isTablet =
         MediaQuery.sizeOf(context).width >= AppTheme.tabletBreakpoint;
 
@@ -40,10 +65,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
         OfflineBanner(isOnline: isOnline),
         const BackendModeBanner(),
         Expanded(
-          child: VianexisAdminBackground(
-            showWatermark: false,
-            child: child,
-          ),
+          child: VianexisAdminBackground(showWatermark: false, child: child),
         ),
       ],
     );
@@ -159,6 +181,11 @@ class VianexisAdminScaffold extends ConsumerWidget {
     context.go(item.route);
   }
 
+  String _resolveLocation(BuildContext context) {
+    final router = GoRouter.maybeOf(context);
+    return router?.state.matchedLocation ?? AdminRoutes.dashboard;
+  }
+
   String _label(BuildContext context, AdminDestination destination) {
     final l10n = AppLocalizations.of(context);
     return switch (destination) {
@@ -171,7 +198,8 @@ class VianexisAdminScaffold extends ConsumerWidget {
       AdminDestination.aiReviews => l10n.navAiReviews,
       AdminDestination.supportTickets => l10n.supportTicketsTitle,
       AdminDestination.supportGrants => l10n.supportGrantsTitle,
-      AdminDestination.customerCommunications => l10n.customerCommunicationsTitle,
+      AdminDestination.customerCommunications =>
+        l10n.customerCommunicationsTitle,
       AdminDestination.publicIntakes => l10n.navPublicIntakes,
       AdminDestination.systemHealth => l10n.navSystemHealth,
       AdminDestination.securityCenter => l10n.navSecurityCenter,
@@ -367,20 +395,14 @@ class AdminFeatureScaffold extends StatelessWidget {
           Card(
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: Text(
-                body,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
+              child: Text(body, style: Theme.of(context).textTheme.bodyLarge),
             ),
           ),
           if (showPrivacyNotice) ...[
             const SizedBox(height: 16),
             VianexisMetadataNotice(message: l10n.privacyNoOperationalContent),
           ],
-          if (footer != null) ...[
-            const SizedBox(height: 16),
-            footer!,
-          ],
+          if (footer != null) ...[const SizedBox(height: 16), footer!],
         ],
       ),
     );
