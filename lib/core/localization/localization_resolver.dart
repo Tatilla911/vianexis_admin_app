@@ -149,6 +149,33 @@ String resolveRegistrationKey(
       l10n.registrationDecisionRequestInfoConfirm,
     'registrationDecisionSuccess' => l10n.registrationDecisionSuccess,
     'registrationDecisionError' => l10n.registrationDecisionError,
+    'registrationApproveSuccess' => l10n.registrationApproveSuccess,
+    'registrationApproveOutcomeTitle' => l10n.registrationApproveOutcomeTitle,
+    'registrationFieldApplicationReference' =>
+      l10n.registrationFieldApplicationReference,
+    'registrationFieldCompanyId' => l10n.registrationFieldCompanyId,
+    'registrationFieldAdminEmail' => l10n.registrationFieldAdminEmail,
+    'registrationFieldInviteStatus' => l10n.registrationFieldInviteStatus,
+    'registrationFieldInviteExpiresAt' => l10n.registrationFieldInviteExpiresAt,
+    'registrationFieldInviteTokenId' => l10n.registrationFieldInviteTokenId,
+    'registrationInviteDeliverySent' => l10n.registrationInviteDeliverySent,
+    'registrationInviteDeliveryPending' =>
+      l10n.registrationInviteDeliveryPending,
+    'registrationInviteDeliveryAccepted' =>
+      l10n.registrationInviteDeliveryAccepted,
+    'registrationInviteDeliveryExpired' =>
+      l10n.registrationInviteDeliveryExpired,
+    'registrationInviteDeliveryRevoked' =>
+      l10n.registrationInviteDeliveryRevoked,
+    'registrationInviteResend' => l10n.registrationInviteResend,
+    'registrationInviteRevoke' => l10n.registrationInviteRevoke,
+    'registrationInviteResendSuccess' => l10n.registrationInviteResendSuccess,
+    'registrationInviteRevokeSuccess' => l10n.registrationInviteRevokeSuccess,
+    'registrationOpenCompany' => l10n.registrationOpenCompany,
+    'registrationPermissionPolicyTitle' =>
+      l10n.registrationPermissionPolicyTitle,
+    'registrationPermissionSuperAdminOnly' =>
+      l10n.registrationPermissionSuperAdminOnly,
     _ => l10n.errorGenericBody,
   };
 }

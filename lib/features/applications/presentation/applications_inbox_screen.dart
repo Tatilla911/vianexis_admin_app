@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/app_router.dart';
+import '../../../core/auth/admin_auth_state.dart';
 import '../../../core/widgets/vianexis_admin_scaffold.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../registrations/presentation/registration_providers.dart';
 import '../data/public_applications_api.dart';
 
 final applicationsListProvider = FutureProvider.autoDispose
@@ -43,6 +45,16 @@ class _ApplicationsInboxScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            MaterialBanner(
+              content: Text(l10n.applicationsCompatBanner),
+              actions: [
+                TextButton(
+                  onPressed: () => context.go(AdminRoutes.registrations),
+                  child: Text(l10n.applicationsOpenRegistrations),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -86,13 +98,19 @@ class _ApplicationsInboxScreenState
                     itemBuilder: (context, index) {
                       final item = items[index] as Map<String, dynamic>;
                       final id = item['id']?.toString() ?? '';
+                      final type = item['applicationType']?.toString();
                       return ListTile(
                         title: Text(item['displayName']?.toString() ?? '—'),
                         subtitle: Text(
                           '${item['applicationType']} · ${item['status']} · ${item['email']}',
                         ),
-                        onTap: () =>
-                            context.push('${AdminRoutes.applications}/$id'),
+                        onTap: () {
+                          if (type == 'company') {
+                            context.go(AdminRoutes.registrations);
+                            return;
+                          }
+                          context.push('${AdminRoutes.applications}/$id');
+                        },
                       );
                     },
                   );
@@ -165,6 +183,12 @@ class _ApplicationDetailScreenState
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final app = _detail?['application'] as Map<String, dynamic>?;
+    final type = app?['applicationType']?.toString();
+    final isCompany = type == 'company';
+    final canDecide =
+        ref.watch(adminAuthProvider).user?.role.canDecideCompanyRegistrations ??
+            false;
+
     return VianexisAdminScaffold(
       title: l10n.applicationDetailTitle(widget.id),
       child: Padding(
@@ -179,19 +203,27 @@ class _ApplicationDetailScreenState
                   Text('${app?['applicationType']} · ${app?['status']}'),
                   Text(app?['email']?.toString() ?? ''),
                   const SizedBox(height: 16),
-                  Wrap(
-                    spacing: 8,
-                    children: [
-                      FilledButton(
-                        onPressed: _approve,
-                        child: const Text('Jóváhagyás'),
-                      ),
-                      OutlinedButton(
-                        onPressed: _reject,
-                        child: const Text('Elutasítás'),
-                      ),
-                    ],
-                  ),
+                  if (isCompany) ...[
+                    Text(l10n.applicationsCompanyUseRegistrations),
+                    const SizedBox(height: 12),
+                    FilledButton(
+                      onPressed: () => context.go(AdminRoutes.registrations),
+                      child: Text(l10n.applicationsOpenRegistrations),
+                    ),
+                  ] else if (canDecide)
+                    Wrap(
+                      spacing: 8,
+                      children: [
+                        FilledButton(
+                          onPressed: _approve,
+                          child: Text(l10n.registrationActionApprove),
+                        ),
+                        OutlinedButton(
+                          onPressed: _reject,
+                          child: Text(l10n.registrationActionReject),
+                        ),
+                      ],
+                    ),
                 ],
               ),
       ),

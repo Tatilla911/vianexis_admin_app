@@ -1543,6 +1543,52 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not save registration decision.'**
   String get registrationDecisionError;
+  /// **'Company applications are decided in Registrations (primary inbox).'**
+  String get applicationsCompanyUseRegistrations;
+  /// **'Open Registrations'**
+  String get applicationsOpenRegistrations;
+  /// **'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.'**
+  String get applicationsCompatBanner;
+  /// **'Company approve/reject requires super_admin. Reviewers can view the queue only.'**
+  String get registrationPermissionSuperAdminOnly;
+  /// **'Approval permission'**
+  String get registrationPermissionPolicyTitle;
+  /// **'Open company'**
+  String get registrationOpenCompany;
+  /// **'Outstanding invite tokens revoked.'**
+  String get registrationInviteRevokeSuccess;
+  /// **'Invite resent (new token issued).'**
+  String get registrationInviteResendSuccess;
+  /// **'Revoke invite'**
+  String get registrationInviteRevoke;
+  /// **'Resend invite'**
+  String get registrationInviteResend;
+  /// **'Revoked'**
+  String get registrationInviteDeliveryRevoked;
+  /// **'Expired'**
+  String get registrationInviteDeliveryExpired;
+  /// **'Accepted'**
+  String get registrationInviteDeliveryAccepted;
+  /// **'Invite created; delivery pending or failed (SMTP)'**
+  String get registrationInviteDeliveryPending;
+  /// **'Sent'**
+  String get registrationInviteDeliverySent;
+  /// **'Invite token ID'**
+  String get registrationFieldInviteTokenId;
+  /// **'Invite expires'**
+  String get registrationFieldInviteExpiresAt;
+  /// **'Invite delivery'**
+  String get registrationFieldInviteStatus;
+  /// **'Company admin email'**
+  String get registrationFieldAdminEmail;
+  /// **'Company ID'**
+  String get registrationFieldCompanyId;
+  /// **'Application reference'**
+  String get registrationFieldApplicationReference;
+  /// **'Approval result'**
+  String get registrationApproveOutcomeTitle;
+  /// **'Company approved. Invite created.'**
+  String get registrationApproveSuccess;
 
   /// No description provided for @systemHealthLoadError.
   ///

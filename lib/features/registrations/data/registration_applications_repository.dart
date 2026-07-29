@@ -5,6 +5,7 @@ import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/registration_application.dart';
 import '../domain/registration_application_status.dart';
+import '../domain/registration_approval_outcome.dart';
 import '../domain/registration_decision_request.dart';
 import '../domain/registration_risk_level.dart';
 import 'registration_applications_api.dart';
@@ -14,10 +15,14 @@ abstract class RegistrationApplicationsRepository {
 
   Future<RegistrationApplication> fetchApplication(String id);
 
-  Future<void> submitDecision({
+  Future<RegistrationApprovalOutcome?> submitDecision({
     required String applicationId,
     required RegistrationDecisionRequest request,
   });
+
+  Future<RegistrationApprovalOutcome> resendInvite(String applicationId);
+
+  Future<void> revokeInvite(String applicationId);
 
   bool get usesMockData;
 }
@@ -43,7 +48,7 @@ class LiveRegistrationApplicationsRepository
   }
 
   @override
-  Future<void> submitDecision({
+  Future<RegistrationApprovalOutcome?> submitDecision({
     required String applicationId,
     required RegistrationDecisionRequest request,
   }) {
@@ -51,6 +56,16 @@ class LiveRegistrationApplicationsRepository
       applicationId: applicationId,
       request: request,
     );
+  }
+
+  @override
+  Future<RegistrationApprovalOutcome> resendInvite(String applicationId) {
+    return _api.resendInvite(applicationId);
+  }
+
+  @override
+  Future<void> revokeInvite(String applicationId) {
+    return _api.revokeInvite(applicationId);
   }
 }
 
@@ -123,7 +138,7 @@ class MockRegistrationApplicationsRepository
   }
 
   @override
-  Future<void> submitDecision({
+  Future<RegistrationApprovalOutcome?> submitDecision({
     required String applicationId,
     required RegistrationDecisionRequest request,
   }) async {
@@ -167,6 +182,39 @@ class MockRegistrationApplicationsRepository
       completenessScore: current.completenessScore,
       riskFlags: current.riskFlags,
     );
+
+    if (request.type != RegistrationDecisionType.approve) {
+      return null;
+    }
+    return RegistrationApprovalOutcome(
+      companyId: '9001',
+      companyName: current.companyName,
+      adminEmail: current.contactEmail,
+      emailInviteSent: false,
+      inviteDeliveryStatus: 'pending_or_failed',
+      inviteExpiresAt: DateTime.now().toUtc().add(const Duration(hours: 24)),
+      inviteTokenId: 'mock-invite-1',
+    );
+  }
+
+  @override
+  Future<RegistrationApprovalOutcome> resendInvite(String applicationId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    final item = await fetchApplication(applicationId);
+    return RegistrationApprovalOutcome(
+      companyId: '9001',
+      companyName: item.companyName,
+      adminEmail: item.contactEmail,
+      emailInviteSent: false,
+      inviteDeliveryStatus: 'pending_or_failed',
+      inviteExpiresAt: DateTime.now().toUtc().add(const Duration(hours: 24)),
+      inviteTokenId: 'mock-invite-resent',
+    );
+  }
+
+  @override
+  Future<void> revokeInvite(String applicationId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
   }
 }
 

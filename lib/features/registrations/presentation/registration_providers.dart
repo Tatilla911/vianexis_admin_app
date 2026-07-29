@@ -5,13 +5,24 @@ import '../../../core/auth/admin_user.dart';
 import '../data/registration_applications_repository.dart';
 import '../domain/registration_application.dart';
 import '../domain/registration_application_status.dart';
+import '../domain/registration_approval_outcome.dart';
 import '../domain/registration_decision_request.dart';
 
 extension AdminRoleRegistrationDecisions on AdminRole {
-  bool get canDecideRegistrations {
+  /// View queue: super_admin and onboarding_reviewer.
+  bool get canViewRegistrations {
     return this == AdminRole.superAdmin ||
         this == AdminRole.onboardingReviewer;
   }
+
+  /// Phase 1: company approve/reject/request-info is super_admin only
+  /// (matches OnboardingService.requireSuperAdmin).
+  bool get canDecideCompanyRegistrations {
+    return this == AdminRole.superAdmin;
+  }
+
+  @Deprecated('Use canDecideCompanyRegistrations — Phase 1 super_admin only')
+  bool get canDecideRegistrations => canDecideCompanyRegistrations;
 }
 
 class RegistrationListQuery {
@@ -103,16 +114,17 @@ Future<void> refreshRegistrationApplicationDetail(
   ref.invalidate(registrationApplicationDetailProvider(applicationId));
 }
 
-Future<void> submitRegistrationDecision({
+Future<RegistrationApprovalOutcome?> submitRegistrationDecision({
   required WidgetRef ref,
   required String applicationId,
   required RegistrationDecisionRequest request,
 }) async {
-  await ref
+  final outcome = await ref
       .read(registrationApplicationsRepositoryProvider)
       .submitDecision(applicationId: applicationId, request: request);
   ref.invalidate(registrationApplicationDetailProvider(applicationId));
   await ref.read(registrationApplicationsProvider.notifier).refresh();
+  return outcome;
 }
 
 String? mapRegistrationApiError(ApiException error) {

@@ -1495,9 +1495,15 @@
   "operationsExchangeMetricsSummary": "{total} rekord · {disputed} vitás · {missing} hiányos",
   "@operationsExchangeMetricsSummary": {
     "placeholders": {
-      "total": {"type": "int"},
-      "disputed": {"type": "int"},
-      "missing": {"type": "int"}
+      "total": {
+        "type": "int"
+      },
+      "disputed": {
+        "type": "int"
+      },
+      "missing": {
+        "type": "int"
+      }
     }
   },
   "operationsExchangeRecordsTitle": "Raklap/göngyöleg rekordok",
@@ -1630,5 +1636,28 @@
   "companyExchangeDeactivatePackagingItem": "Deaktiválás",
   "companyExchangeReactivatePackagingItem": "Újraaktiválás",
   "companyExchangePackagingItemEmpty": "Még nincs rögzített göngyöleg elem ennél a cégnél.",
-  "companyExchangeCancel": "Mégse"
+  "companyExchangeCancel": "Mégse",
+  "registrationApproveSuccess": "Cég jóváhagyva. Meghívó létrehozva.",
+  "registrationApproveOutcomeTitle": "Jóváhagyás eredménye",
+  "registrationFieldApplicationReference": "Jelentkezési azonosító",
+  "registrationFieldCompanyId": "Cég ID",
+  "registrationFieldAdminEmail": "Cégadmin e-mail",
+  "registrationFieldInviteStatus": "Meghívó kézbesítés",
+  "registrationFieldInviteExpiresAt": "Meghívó lejárat",
+  "registrationFieldInviteTokenId": "Meghívó token ID",
+  "registrationInviteDeliverySent": "Elküldve",
+  "registrationInviteDeliveryPending": "Meghívó létrehozva; kézbesítés függőben vagy sikertelen (SMTP)",
+  "registrationInviteDeliveryAccepted": "Elfogadva",
+  "registrationInviteDeliveryExpired": "Lejárt",
+  "registrationInviteDeliveryRevoked": "Visszavonva",
+  "registrationInviteResend": "Meghívó újraküldése",
+  "registrationInviteRevoke": "Meghívó visszavonása",
+  "registrationInviteResendSuccess": "Meghívó újraküldve (új token).",
+  "registrationInviteRevokeSuccess": "A függő meghívó tokenek visszavonva.",
+  "registrationOpenCompany": "Cég megnyitása",
+  "registrationPermissionPolicyTitle": "Jóváhagyási jogosultság",
+  "registrationPermissionSuperAdminOnly": "A céges jóváhagyás/elutasítás csak super_admin. A reviewer csak a sort láthatja.",
+  "applicationsCompatBanner": "Céges onboarding postafiók: Regisztrációk. Ez a Jelentkezések nézet kompatibilitási felület a vegyes public intake-ekhez.",
+  "applicationsOpenRegistrations": "Regisztrációk megnyitása",
+  "applicationsCompanyUseRegistrations": "A céges jelentkezéseket a Regisztrációk (elsődleges postafiók) felületen kell elbírálni."
 }

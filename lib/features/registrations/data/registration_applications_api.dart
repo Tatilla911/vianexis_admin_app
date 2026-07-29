@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/api/api_client.dart';
 import '../domain/registration_application.dart';
 import '../domain/registration_application_status.dart';
+import '../domain/registration_approval_outcome.dart';
 import '../domain/registration_decision_request.dart';
 
 class RegistrationApplicationsApi {
@@ -44,13 +45,30 @@ class RegistrationApplicationsApi {
     return RegistrationApplication.fromDetailResponseJson(data);
   }
 
-  Future<void> submitDecision({
+  Future<RegistrationApprovalOutcome?> submitDecision({
     required String applicationId,
     required RegistrationDecisionRequest request,
   }) async {
-    await _apiClient.patch<Map<String, dynamic>>(
+    final response = await _apiClient.patch<Map<String, dynamic>>(
       '/platform-admin/registration-applications/$applicationId/${request.endpointSuffix()}',
       data: request.toJson(),
+    );
+    if (request.type != RegistrationDecisionType.approve) {
+      return null;
+    }
+    return RegistrationApprovalOutcome.fromJson(response.data);
+  }
+
+  Future<RegistrationApprovalOutcome> resendInvite(String applicationId) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/registration-applications/$applicationId/resend-invite',
+    );
+    return RegistrationApprovalOutcome.fromJson(response.data);
+  }
+
+  Future<void> revokeInvite(String applicationId) async {
+    await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/registration-applications/$applicationId/revoke-invite',
     );
   }
 }

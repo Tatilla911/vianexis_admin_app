@@ -2210,9 +2210,15 @@
   "operationsExchangeMetricsSummary": "{total} records · {disputed} disputed · {missing} missing",
   "@operationsExchangeMetricsSummary": {
     "placeholders": {
-      "total": {"type": "int"},
-      "disputed": {"type": "int"},
-      "missing": {"type": "int"}
+      "total": {
+        "type": "int"
+      },
+      "disputed": {
+        "type": "int"
+      },
+      "missing": {
+        "type": "int"
+      }
     }
   },
   "operationsExchangeRecordsTitle": "Pallet/packaging records",
@@ -2345,5 +2351,28 @@
   "companyExchangeDeactivatePackagingItem": "Deactivate",
   "companyExchangeReactivatePackagingItem": "Reactivate",
   "companyExchangePackagingItemEmpty": "No packaging items have been configured for this company yet.",
-  "companyExchangeCancel": "Cancel"
+  "companyExchangeCancel": "Cancel",
+  "registrationApproveSuccess": "Company approved. Invite created.",
+  "registrationApproveOutcomeTitle": "Approval result",
+  "registrationFieldApplicationReference": "Application reference",
+  "registrationFieldCompanyId": "Company ID",
+  "registrationFieldAdminEmail": "Company admin email",
+  "registrationFieldInviteStatus": "Invite delivery",
+  "registrationFieldInviteExpiresAt": "Invite expires",
+  "registrationFieldInviteTokenId": "Invite token ID",
+  "registrationInviteDeliverySent": "Sent",
+  "registrationInviteDeliveryPending": "Invite created; delivery pending or failed (SMTP)",
+  "registrationInviteDeliveryAccepted": "Accepted",
+  "registrationInviteDeliveryExpired": "Expired",
+  "registrationInviteDeliveryRevoked": "Revoked",
+  "registrationInviteResend": "Resend invite",
+  "registrationInviteRevoke": "Revoke invite",
+  "registrationInviteResendSuccess": "Invite resent (new token issued).",
+  "registrationInviteRevokeSuccess": "Outstanding invite tokens revoked.",
+  "registrationOpenCompany": "Open company",
+  "registrationPermissionPolicyTitle": "Approval permission",
+  "registrationPermissionSuperAdminOnly": "Company approve/reject requires super_admin. Reviewers can view the queue only.",
+  "applicationsCompatBanner": "Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.",
+  "applicationsOpenRegistrations": "Open Registrations",
+  "applicationsCompanyUseRegistrations": "Company applications are decided in Registrations (primary inbox)."
 }

@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vianexis_admin_app/features/registrations/data/registration_applications_repository.dart';
 import 'package:vianexis_admin_app/features/registrations/domain/registration_application.dart';
 import 'package:vianexis_admin_app/features/registrations/domain/registration_application_status.dart';
+import 'package:vianexis_admin_app/features/registrations/domain/registration_approval_outcome.dart';
 import 'package:vianexis_admin_app/features/registrations/domain/registration_decision_request.dart';
 import 'package:vianexis_admin_app/features/registrations/domain/registration_risk_level.dart';
 import 'package:vianexis_admin_app/features/registrations/presentation/registration_applications_screen.dart';
@@ -28,10 +29,18 @@ class _FakeRegistrationRepository implements RegistrationApplicationsRepository 
   }
 
   @override
-  Future<void> submitDecision({
+  Future<RegistrationApprovalOutcome?> submitDecision({
     required String applicationId,
     required RegistrationDecisionRequest request,
-  }) async {}
+  }) async => null;
+
+  @override
+  Future<RegistrationApprovalOutcome> resendInvite(String applicationId) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> revokeInvite(String applicationId) async {}
 }
 
 void main() {

@@ -23,6 +23,7 @@ import 'package:vianexis_admin_app/core/widgets/mock_data_badge.dart';
 import 'package:vianexis_admin_app/core/widgets/offline_banner.dart';
 import 'package:vianexis_admin_app/features/registrations/data/registration_applications_repository.dart';
 import 'package:vianexis_admin_app/features/registrations/domain/registration_application.dart';
+import 'package:vianexis_admin_app/features/registrations/domain/registration_approval_outcome.dart';
 import 'package:vianexis_admin_app/features/registrations/domain/registration_decision_request.dart';
 import 'package:vianexis_admin_app/features/registrations/presentation/registration_applications_screen.dart';
 import 'package:vianexis_admin_app/features/settings/admin_settings_screen.dart';
@@ -54,10 +55,20 @@ class _MockRegistrationRepository
   }
 
   @override
-  Future<void> submitDecision({
+  Future<RegistrationApprovalOutcome?> submitDecision({
     required String applicationId,
     required RegistrationDecisionRequest request,
   }) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<RegistrationApprovalOutcome> resendInvite(String applicationId) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> revokeInvite(String applicationId) {
     throw UnimplementedError();
   }
 }
