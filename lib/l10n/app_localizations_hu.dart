@@ -5317,4 +5317,80 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get companyExchangeCancel => 'Mégse';
+
+  @override
+  String get registrationApproveSuccess =>
+      'Cég jóváhagyva. Meghívó létrehozva.';
+
+  @override
+  String get registrationApproveOutcomeTitle => 'Jóváhagyás eredménye';
+
+  @override
+  String get registrationFieldApplicationReference => 'Jelentkezési azonosító';
+
+  @override
+  String get registrationFieldCompanyId => 'Cég ID';
+
+  @override
+  String get registrationFieldAdminEmail => 'Cégadmin e-mail';
+
+  @override
+  String get registrationFieldInviteStatus => 'Meghívó kézbesítés';
+
+  @override
+  String get registrationFieldInviteExpiresAt => 'Meghívó lejárat';
+
+  @override
+  String get registrationFieldInviteTokenId => 'Meghívó token ID';
+
+  @override
+  String get registrationInviteDeliverySent => 'Elküldve';
+
+  @override
+  String get registrationInviteDeliveryPending =>
+      'Meghívó létrehozva; kézbesítés függőben vagy sikertelen (SMTP)';
+
+  @override
+  String get registrationInviteDeliveryAccepted => 'Elfogadva';
+
+  @override
+  String get registrationInviteDeliveryExpired => 'Lejárt';
+
+  @override
+  String get registrationInviteDeliveryRevoked => 'Visszavonva';
+
+  @override
+  String get registrationInviteResend => 'Meghívó újraküldése';
+
+  @override
+  String get registrationInviteRevoke => 'Meghívó visszavonása';
+
+  @override
+  String get registrationInviteResendSuccess =>
+      'Meghívó újraküldve (új token).';
+
+  @override
+  String get registrationInviteRevokeSuccess =>
+      'A függő meghívó tokenek visszavonva.';
+
+  @override
+  String get registrationOpenCompany => 'Cég megnyitása';
+
+  @override
+  String get registrationPermissionPolicyTitle => 'Jóváhagyási jogosultság';
+
+  @override
+  String get registrationPermissionSuperAdminOnly =>
+      'A céges jóváhagyás/elutasítás csak super_admin. A reviewer csak a sort láthatja.';
+
+  @override
+  String get applicationsCompatBanner =>
+      'Céges onboarding postafiók: Regisztrációk. Ez a Jelentkezések nézet kompatibilitási felület a vegyes public intake-ekhez.';
+
+  @override
+  String get applicationsOpenRegistrations => 'Regisztrációk megnyitása';
+
+  @override
+  String get applicationsCompanyUseRegistrations =>
+      'A céges jelentkezéseket a Regisztrációk (elsődleges postafiók) felületen kell elbírálni.';
 }

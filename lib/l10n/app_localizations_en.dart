@@ -5246,4 +5246,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get companyExchangeCancel => 'Cancel';
+
+  @override
+  String get registrationApproveSuccess => 'Company approved. Invite created.';
+
+  @override
+  String get registrationApproveOutcomeTitle => 'Approval result';
+
+  @override
+  String get registrationFieldApplicationReference => 'Application reference';
+
+  @override
+  String get registrationFieldCompanyId => 'Company ID';
+
+  @override
+  String get registrationFieldAdminEmail => 'Company admin email';
+
+  @override
+  String get registrationFieldInviteStatus => 'Invite delivery';
+
+  @override
+  String get registrationFieldInviteExpiresAt => 'Invite expires';
+
+  @override
+  String get registrationFieldInviteTokenId => 'Invite token ID';
+
+  @override
+  String get registrationInviteDeliverySent => 'Sent';
+
+  @override
+  String get registrationInviteDeliveryPending =>
+      'Invite created; delivery pending or failed (SMTP)';
+
+  @override
+  String get registrationInviteDeliveryAccepted => 'Accepted';
+
+  @override
+  String get registrationInviteDeliveryExpired => 'Expired';
+
+  @override
+  String get registrationInviteDeliveryRevoked => 'Revoked';
+
+  @override
+  String get registrationInviteResend => 'Resend invite';
+
+  @override
+  String get registrationInviteRevoke => 'Revoke invite';
+
+  @override
+  String get registrationInviteResendSuccess =>
+      'Invite resent (new token issued).';
+
+  @override
+  String get registrationInviteRevokeSuccess =>
+      'Outstanding invite tokens revoked.';
+
+  @override
+  String get registrationOpenCompany => 'Open company';
+
+  @override
+  String get registrationPermissionPolicyTitle => 'Approval permission';
+
+  @override
+  String get registrationPermissionSuperAdminOnly =>
+      'Company approve/reject requires super_admin. Reviewers can view the queue only.';
+
+  @override
+  String get applicationsCompatBanner =>
+      'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.';
+
+  @override
+  String get applicationsOpenRegistrations => 'Open Registrations';
+
+  @override
+  String get applicationsCompanyUseRegistrations =>
+      'Company applications are decided in Registrations (primary inbox).';
 }

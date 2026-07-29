@@ -1543,52 +1543,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not save registration decision.'**
   String get registrationDecisionError;
-  /// **'Company applications are decided in Registrations (primary inbox).'**
-  String get applicationsCompanyUseRegistrations;
-  /// **'Open Registrations'**
-  String get applicationsOpenRegistrations;
-  /// **'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.'**
-  String get applicationsCompatBanner;
-  /// **'Company approve/reject requires super_admin. Reviewers can view the queue only.'**
-  String get registrationPermissionSuperAdminOnly;
-  /// **'Approval permission'**
-  String get registrationPermissionPolicyTitle;
-  /// **'Open company'**
-  String get registrationOpenCompany;
-  /// **'Outstanding invite tokens revoked.'**
-  String get registrationInviteRevokeSuccess;
-  /// **'Invite resent (new token issued).'**
-  String get registrationInviteResendSuccess;
-  /// **'Revoke invite'**
-  String get registrationInviteRevoke;
-  /// **'Resend invite'**
-  String get registrationInviteResend;
-  /// **'Revoked'**
-  String get registrationInviteDeliveryRevoked;
-  /// **'Expired'**
-  String get registrationInviteDeliveryExpired;
-  /// **'Accepted'**
-  String get registrationInviteDeliveryAccepted;
-  /// **'Invite created; delivery pending or failed (SMTP)'**
-  String get registrationInviteDeliveryPending;
-  /// **'Sent'**
-  String get registrationInviteDeliverySent;
-  /// **'Invite token ID'**
-  String get registrationFieldInviteTokenId;
-  /// **'Invite expires'**
-  String get registrationFieldInviteExpiresAt;
-  /// **'Invite delivery'**
-  String get registrationFieldInviteStatus;
-  /// **'Company admin email'**
-  String get registrationFieldAdminEmail;
-  /// **'Company ID'**
-  String get registrationFieldCompanyId;
-  /// **'Application reference'**
-  String get registrationFieldApplicationReference;
-  /// **'Approval result'**
-  String get registrationApproveOutcomeTitle;
-  /// **'Company approved. Invite created.'**
-  String get registrationApproveSuccess;
 
   /// No description provided for @systemHealthLoadError.
   ///
@@ -9651,6 +9605,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get companyExchangeCancel;
+
+  /// No description provided for @registrationApproveSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Company approved. Invite created.'**
+  String get registrationApproveSuccess;
+
+  /// No description provided for @registrationApproveOutcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Approval result'**
+  String get registrationApproveOutcomeTitle;
+
+  /// No description provided for @registrationFieldApplicationReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Application reference'**
+  String get registrationFieldApplicationReference;
+
+  /// No description provided for @registrationFieldCompanyId.
+  ///
+  /// In en, this message translates to:
+  /// **'Company ID'**
+  String get registrationFieldCompanyId;
+
+  /// No description provided for @registrationFieldAdminEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Company admin email'**
+  String get registrationFieldAdminEmail;
+
+  /// No description provided for @registrationFieldInviteStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite delivery'**
+  String get registrationFieldInviteStatus;
+
+  /// No description provided for @registrationFieldInviteExpiresAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite expires'**
+  String get registrationFieldInviteExpiresAt;
+
+  /// No description provided for @registrationFieldInviteTokenId.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite token ID'**
+  String get registrationFieldInviteTokenId;
+
+  /// No description provided for @registrationInviteDeliverySent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get registrationInviteDeliverySent;
+
+  /// No description provided for @registrationInviteDeliveryPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite created; delivery pending or failed (SMTP)'**
+  String get registrationInviteDeliveryPending;
+
+  /// No description provided for @registrationInviteDeliveryAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get registrationInviteDeliveryAccepted;
+
+  /// No description provided for @registrationInviteDeliveryExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get registrationInviteDeliveryExpired;
+
+  /// No description provided for @registrationInviteDeliveryRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoked'**
+  String get registrationInviteDeliveryRevoked;
+
+  /// No description provided for @registrationInviteResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend invite'**
+  String get registrationInviteResend;
+
+  /// No description provided for @registrationInviteRevoke.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke invite'**
+  String get registrationInviteRevoke;
+
+  /// No description provided for @registrationInviteResendSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite resent (new token issued).'**
+  String get registrationInviteResendSuccess;
+
+  /// No description provided for @registrationInviteRevokeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Outstanding invite tokens revoked.'**
+  String get registrationInviteRevokeSuccess;
+
+  /// No description provided for @registrationOpenCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Open company'**
+  String get registrationOpenCompany;
+
+  /// No description provided for @registrationPermissionPolicyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Approval permission'**
+  String get registrationPermissionPolicyTitle;
+
+  /// No description provided for @registrationPermissionSuperAdminOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Company approve/reject requires super_admin. Reviewers can view the queue only.'**
+  String get registrationPermissionSuperAdminOnly;
+
+  /// No description provided for @applicationsCompatBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.'**
+  String get applicationsCompatBanner;
+
+  /// No description provided for @applicationsOpenRegistrations.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Registrations'**
+  String get applicationsOpenRegistrations;
+
+  /// No description provided for @applicationsCompanyUseRegistrations.
+  ///
+  /// In en, this message translates to:
+  /// **'Company applications are decided in Registrations (primary inbox).'**
+  String get applicationsCompanyUseRegistrations;
 }
 
 class _AppLocalizationsDelegate
