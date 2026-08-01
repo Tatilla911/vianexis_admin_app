@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vianexis_admin_app/app/vianexis_admin_app.dart';
 import 'package:vianexis_admin_app/core/auth/admin_auth_state.dart';
 import 'package:vianexis_admin_app/core/auth/admin_user.dart';
+import 'package:vianexis_admin_app/core/locale/app_locale_provider.dart';
 
 class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
   _AuthenticatedAdminAuthNotifier(this.initialUser);
@@ -19,18 +20,28 @@ class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
   }
 }
 
+class _FixedLocaleNotifier extends AppLocaleNotifier {
+  _FixedLocaleNotifier(this.locale);
+
+  final Locale locale;
+
+  @override
+  Locale? build() => locale;
+}
+
 const _superAdmin = AdminUser(
   id: '1',
   email: 'admin@vianexis.hu',
   role: AdminRole.superAdmin,
 );
 
-Widget _authenticatedApp() {
+Widget _authenticatedApp({Locale locale = const Locale('hu')}) {
   return ProviderScope(
     overrides: [
       adminAuthProvider.overrideWith(
         () => _AuthenticatedAdminAuthNotifier(_superAdmin),
       ),
+      appLocaleProvider.overrideWith(() => _FixedLocaleNotifier(locale)),
     ],
     child: const VianexisAdminApp(),
   );
@@ -64,7 +75,16 @@ void main() {
   });
 
   testWidgets('login screen renders Hungarian by default', (tester) async {
-    await tester.pumpWidget(const ProviderScope(child: VianexisAdminApp()));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLocaleProvider.overrideWith(
+            () => _FixedLocaleNotifier(const Locale('hu')),
+          ),
+        ],
+        child: const VianexisAdminApp(),
+      ),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('Belépés'), findsWidgets);
@@ -94,7 +114,16 @@ void main() {
   testWidgets('English locale works when selected', (tester) async {
     SharedPreferences.setMockInitialValues({'admin_app_locale_code': 'en'});
 
-    await tester.pumpWidget(const ProviderScope(child: VianexisAdminApp()));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLocaleProvider.overrideWith(
+            () => _FixedLocaleNotifier(const Locale('en')),
+          ),
+        ],
+        child: const VianexisAdminApp(),
+      ),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('Sign in'), findsWidgets);

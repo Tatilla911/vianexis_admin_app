@@ -220,6 +220,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
         l10n.customerCommunicationsTitle,
       AdminDestination.publicIntakes => l10n.navPublicIntakes,
       AdminDestination.systemHealth => l10n.navSystemHealth,
+      AdminDestination.systemMonitoring => l10n.navSystemMonitoring,
       AdminDestination.securityCenter => l10n.navSecurityCenter,
       AdminDestination.auditLogs => l10n.navAuditLogs,
       AdminDestination.notifications => l10n.navNotifications,
@@ -388,7 +389,8 @@ class AdminFeatureScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        leading: Navigator.of(context).canPop() ||
+        leading:
+            Navigator.of(context).canPop() ||
                 (GoRouter.maybeOf(context)?.canPop() ?? false)
             ? BackButton(onPressed: () => handleAdminBack(context))
             : IconButton(

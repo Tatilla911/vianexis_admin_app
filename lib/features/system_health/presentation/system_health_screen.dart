@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/app_router.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
@@ -30,7 +32,10 @@ class SystemHealthScreen extends ConsumerWidget {
         actions: [
           if (usesMock)
             MockDataBadge(
-              label: resolveSystemHealthKey(context, 'systemHealthMockDataBadge'),
+              label: resolveSystemHealthKey(
+                context,
+                'systemHealthMockDataBadge',
+              ),
             ),
         ],
       ),
@@ -39,12 +44,17 @@ class SystemHealthScreen extends ConsumerWidget {
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage: resolveSystemHealthKey(context, 'systemHealthLoadError'),
-          onRetry: () => ref.read(systemHealthSnapshotProvider.notifier).refresh(),
+          fallbackMessage: resolveSystemHealthKey(
+            context,
+            'systemHealthLoadError',
+          ),
+          onRetry: () =>
+              ref.read(systemHealthSnapshotProvider.notifier).refresh(),
         ),
         data: (snapshot) {
           return RefreshIndicator(
-            onRefresh: () => ref.read(systemHealthSnapshotProvider.notifier).refresh(),
+            onRefresh: () =>
+                ref.read(systemHealthSnapshotProvider.notifier).refresh(),
             child: ListView(
               padding: const EdgeInsets.only(bottom: 24),
               children: [
@@ -53,9 +63,29 @@ class SystemHealthScreen extends ConsumerWidget {
                   child: SystemHealthOverviewCard(overview: snapshot.overview),
                 ),
                 Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: FilledButton.tonalIcon(
+                      onPressed: () =>
+                          context.push(AdminRoutes.systemMonitoring),
+                      icon: const Icon(Icons.troubleshoot_outlined),
+                      label: Text(
+                        resolveSystemMonitoringKey(
+                          context,
+                          'systemMonitoringOpenIncidentCenter',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    resolveSystemHealthKey(context, 'systemHealthServicesTitle'),
+                    resolveSystemHealthKey(
+                      context,
+                      'systemHealthServicesTitle',
+                    ),
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
@@ -79,9 +109,10 @@ class SystemHealthScreen extends ConsumerWidget {
                           childAspectRatio: crossAxisCount == 1 ? 2.8 : 1.6,
                         ),
                         itemCount: snapshot.services.length,
-                        itemBuilder: (context, index) => SystemHealthServiceCard(
-                          service: snapshot.services[index],
-                        ),
+                        itemBuilder: (context, index) =>
+                            SystemHealthServiceCard(
+                              service: snapshot.services[index],
+                            ),
                       );
                     },
                   ),
@@ -97,7 +128,9 @@ class SystemHealthScreen extends ConsumerWidget {
                 const SizedBox(height: 8),
                 SystemHealthEventFilterBar(
                   selected: filter.filter,
-                  onSelected: ref.read(systemHealthEventFilterProvider.notifier).setFilter,
+                  onSelected: ref
+                      .read(systemHealthEventFilterProvider.notifier)
+                      .setFilter,
                 ),
                 const SizedBox(height: 8),
                 eventsAsync.when(
@@ -107,14 +140,19 @@ class SystemHealthScreen extends ConsumerWidget {
                   ),
                   error: (error, _) => Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Text(resolveSystemHealthKey(context, 'systemHealthLoadError')),
+                    child: Text(
+                      resolveSystemHealthKey(context, 'systemHealthLoadError'),
+                    ),
                   ),
                   data: (events) {
                     if (events.isEmpty) {
                       return Padding(
                         padding: const EdgeInsets.all(24),
                         child: Text(
-                          resolveSystemHealthKey(context, 'systemHealthEventsEmpty'),
+                          resolveSystemHealthKey(
+                            context,
+                            'systemHealthEventsEmpty',
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       );

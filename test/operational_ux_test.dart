@@ -17,6 +17,7 @@ import 'package:vianexis_admin_app/core/auth/admin_user.dart';
 import 'package:vianexis_admin_app/core/auth/auth_refresh_coordinator.dart';
 import 'package:vianexis_admin_app/core/auth/auth_token_bundle.dart';
 import 'package:vianexis_admin_app/core/device/admin_device_identity_service.dart';
+import 'package:vianexis_admin_app/core/locale/app_locale_provider.dart';
 import 'package:vianexis_admin_app/core/localization/localization_keys.dart';
 import 'package:vianexis_admin_app/core/widgets/backend_mode_banner.dart';
 import 'package:vianexis_admin_app/core/widgets/mock_data_badge.dart';
@@ -28,6 +29,15 @@ import 'package:vianexis_admin_app/features/registrations/domain/registration_de
 import 'package:vianexis_admin_app/features/registrations/presentation/registration_applications_screen.dart';
 import 'package:vianexis_admin_app/features/settings/admin_settings_screen.dart';
 import 'package:vianexis_admin_app/l10n/app_localizations.dart';
+
+class _FixedLocaleNotifier extends AppLocaleNotifier {
+  _FixedLocaleNotifier(this.locale);
+
+  final Locale locale;
+
+  @override
+  Locale? build() => locale;
+}
 
 class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
   _AuthenticatedAdminAuthNotifier(this.initialUser);
@@ -167,60 +177,63 @@ void main() {
       FlutterSecureStorage.setMockInitialValues({});
     });
 
-    test('restoreSession returns authInvalid when refresh is unauthorized', () async {
-      final tokenStorage = AuthTokenStorage();
-      final dio = Dio(BaseOptions(baseUrl: 'https://api.test.local'));
-      final deviceIdentity = AdminDeviceIdentityService();
-      final refreshCoordinator = AuthRefreshCoordinator(
-        tokenStorage: tokenStorage,
-        deviceIdentity: deviceIdentity,
-        dio: dio,
-      );
-      final apiClient = ApiClient(
-        tokenStorage: tokenStorage,
-        refreshCoordinator: refreshCoordinator,
-        dio: dio,
-        enableDebugLogging: false,
-      );
-      final repository = AdminAuthRepository(
-        apiClient: apiClient,
-        tokenStorage: tokenStorage,
-        authApi: AdminAuthApi(apiClient),
-        deviceIdentity: deviceIdentity,
-        refreshCoordinator: refreshCoordinator,
-      );
+    test(
+      'restoreSession returns authInvalid when refresh is unauthorized',
+      () async {
+        final tokenStorage = AuthTokenStorage();
+        final dio = Dio(BaseOptions(baseUrl: 'https://api.test.local'));
+        final deviceIdentity = AdminDeviceIdentityService();
+        final refreshCoordinator = AuthRefreshCoordinator(
+          tokenStorage: tokenStorage,
+          deviceIdentity: deviceIdentity,
+          dio: dio,
+        );
+        final apiClient = ApiClient(
+          tokenStorage: tokenStorage,
+          refreshCoordinator: refreshCoordinator,
+          dio: dio,
+          enableDebugLogging: false,
+        );
+        final repository = AdminAuthRepository(
+          apiClient: apiClient,
+          tokenStorage: tokenStorage,
+          authApi: AdminAuthApi(apiClient),
+          deviceIdentity: deviceIdentity,
+          refreshCoordinator: refreshCoordinator,
+        );
 
-      await tokenStorage.writeSessionBundle(
-        AuthTokenBundle.fromResponse({
-          'access_token': 'expired-token',
-          'refresh_token': 'refresh-token',
-          'session_id': '11111111-1111-4111-8111-111111111111',
-        }),
-        rememberDevice: true,
-      );
+        await tokenStorage.writeSessionBundle(
+          AuthTokenBundle.fromResponse({
+            'access_token': 'expired-token',
+            'refresh_token': 'refresh-token',
+            'session_id': '11111111-1111-4111-8111-111111111111',
+          }),
+          rememberDevice: true,
+        );
 
-      dio.interceptors.add(
-        InterceptorsWrapper(
-          onRequest: (options, handler) {
-            handler.reject(
-              DioException(
-                requestOptions: options,
-                type: DioExceptionType.badResponse,
-                response: Response(
+        dio.interceptors.add(
+          InterceptorsWrapper(
+            onRequest: (options, handler) {
+              handler.reject(
+                DioException(
                   requestOptions: options,
-                  statusCode: 401,
-                  data: const {'code': 'REFRESH_TOKEN_INVALID'},
+                  type: DioExceptionType.badResponse,
+                  response: Response(
+                    requestOptions: options,
+                    statusCode: 401,
+                    data: const {'code': 'REFRESH_TOKEN_INVALID'},
+                  ),
                 ),
-              ),
-            );
-          },
-        ),
-      );
+              );
+            },
+          ),
+        );
 
-      final restored = await repository.restoreSession();
-      expect(restored.outcome.name, 'authInvalid');
-      expect(await tokenStorage.readAccessToken(), isNull);
-    });
+        final restored = await repository.restoreSession();
+        expect(restored.outcome.name, 'authInvalid');
+        expect(await tokenStorage.readAccessToken(), isNull);
+      },
+    );
 
     test('signOut clears stored tokens', () async {
       final tokenStorage = AuthTokenStorage();
@@ -336,6 +349,9 @@ void main() {
                 role: AdminRole.supportAdmin,
               ),
             ),
+          ),
+          appLocaleProvider.overrideWith(
+            () => _FixedLocaleNotifier(const Locale('hu')),
           ),
         ],
         child: const VianexisAdminApp(),

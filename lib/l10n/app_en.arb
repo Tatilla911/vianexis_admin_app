@@ -17,6 +17,7 @@
   "navBulkOnboarding": "Bulk onboarding",
   "navSupport": "Support",
   "navSystemHealth": "System health",
+  "navSystemMonitoring": "System monitoring",
   "navAuditLogs": "Audit logs",
   "navSettings": "Settings",
   "loginTitle": "Sign in",
@@ -2334,9 +2335,15 @@
   "operationsExchangeMetricsSummary": "{total} records · {disputed} disputed · {missing} missing",
   "@operationsExchangeMetricsSummary": {
     "placeholders": {
-      "total": {"type": "int"},
-      "disputed": {"type": "int"},
-      "missing": {"type": "int"}
+      "total": {
+        "type": "int"
+      },
+      "disputed": {
+        "type": "int"
+      },
+      "missing": {
+        "type": "int"
+      }
     }
   },
   "operationsExchangeRecordsTitle": "Pallet/packaging records",
@@ -2469,5 +2476,173 @@
   "companyExchangeDeactivatePackagingItem": "Deactivate",
   "companyExchangeReactivatePackagingItem": "Reactivate",
   "companyExchangePackagingItemEmpty": "No packaging items have been configured for this company yet.",
-  "companyExchangeCancel": "Cancel"
+  "companyExchangeCancel": "Cancel",
+  "systemMonitoringTitle": "System monitoring",
+  "systemMonitoringOpenIncidentCenter": "Open incident center",
+  "systemMonitoringLoadError": "Could not load system monitoring data.",
+  "systemMonitoringActionUnavailable": "This monitoring action is not available on the connected backend yet.",
+  "systemMonitoringMockDataBadge": "Mock data",
+  "systemMonitoringComponentsTitle": "Components",
+  "systemMonitoringComponentsEmpty": "No components match the current filter.",
+  "systemMonitoringActiveIncidentsTitle": "Active incidents",
+  "systemMonitoringViewAllIncidents": "View all incidents",
+  "systemMonitoringIncidentsEmpty": "No incidents match your filters.",
+  "systemMonitoringIncidentsTitle": "Incidents",
+  "systemMonitoringIncidentDetailTitle": "Incident",
+  "systemMonitoringComponentDetailTitle": "Component",
+  "systemMonitoringRefreshAction": "Refresh monitoring",
+  "systemMonitoringPrivacyNotice": "Metadata only — no tenant operational trip, document, or message content is shown.",
+  "systemMonitoringOverallStatusLabel": "Overall status: {status}",
+  "@systemMonitoringOverallStatusLabel": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringLastRefresh": "Last refresh {date}",
+  "@systemMonitoringLastRefresh": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringMetricHealthy": "Healthy",
+  "systemMonitoringMetricDegraded": "Degraded",
+  "systemMonitoringMetricUnhealthy": "Unhealthy",
+  "systemMonitoringMetricUnknown": "Unknown",
+  "systemMonitoringMetricNotConfigured": "Not configured",
+  "systemMonitoringMetricActiveIncidents": "Active incidents",
+  "systemMonitoringMetricCriticalIncidents": "Critical incidents",
+  "systemMonitoringMetricApiErrors": "API errors (1h): {count}",
+  "@systemMonitoringMetricApiErrors": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringMetricFailedNotifications": "Failed notifications: {count}",
+  "@systemMonitoringMetricFailedNotifications": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringMetricDbLatency": "DB latency: {ms} ms",
+  "@systemMonitoringMetricDbLatency": {
+    "placeholders": {
+      "ms": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringMetricRedisConnected": "Redis connected",
+  "systemMonitoringMetricRedisDisconnected": "Redis disconnected",
+  "systemMonitoringStatusHealthy": "Healthy",
+  "systemMonitoringStatusDegraded": "Degraded",
+  "systemMonitoringStatusUnhealthy": "Unhealthy",
+  "systemMonitoringStatusUnknown": "Unknown",
+  "systemMonitoringStatusDisabled": "Disabled",
+  "systemMonitoringStatusNotConfigured": "Not configured",
+  "systemMonitoringFilterAll": "All",
+  "systemMonitoringFilterDegradedUnhealthy": "Degraded / unhealthy",
+  "systemMonitoringFilterOpen": "Open",
+  "systemMonitoringFilterInvestigating": "Investigating",
+  "systemMonitoringFilterMonitoring": "Monitoring",
+  "systemMonitoringFilterResolved": "Resolved",
+  "systemMonitoringFilterDismissed": "Dismissed",
+  "systemMonitoringFilterCritical": "Critical",
+  "systemMonitoringFilterHigh": "High",
+  "systemMonitoringIncidentSeverityInfo": "Info",
+  "systemMonitoringIncidentSeverityWarning": "Warning",
+  "systemMonitoringIncidentSeverityHigh": "High",
+  "systemMonitoringIncidentSeverityCritical": "Critical",
+  "systemMonitoringIncidentSeverityUnknown": "Unknown",
+  "systemMonitoringIncidentStatusOpen": "Open",
+  "systemMonitoringIncidentStatusInvestigating": "Investigating",
+  "systemMonitoringIncidentStatusMonitoring": "Monitoring",
+  "systemMonitoringIncidentStatusResolved": "Resolved",
+  "systemMonitoringIncidentStatusDismissed": "Dismissed",
+  "systemMonitoringIncidentStatusUnknown": "Unknown",
+  "systemMonitoringIncidentSourceAlertRule": "Alert rule",
+  "systemMonitoringIncidentSourceManual": "Manual",
+  "systemMonitoringIncidentSourceHealthCheck": "Health check",
+  "systemMonitoringIncidentSourceRecovery": "Recovery",
+  "systemMonitoringIncidentSourceUnknown": "Unknown source",
+  "systemMonitoringIncidentDetectedAt": "Detected {date}",
+  "@systemMonitoringIncidentDetectedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringIncidentAcknowledgedAt": "Acknowledged {date}",
+  "@systemMonitoringIncidentAcknowledgedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringActiveIncidentsBadge": "{count} active",
+  "@systemMonitoringActiveIncidentsBadge": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringResponseTimeMs": "{ms} ms",
+  "@systemMonitoringResponseTimeMs": {
+    "placeholders": {
+      "ms": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringDependencyCritical": "Critical dependency",
+  "systemMonitoringDependencyOptional": "Optional dependency",
+  "systemMonitoringDependencyColocated": "Colocated",
+  "systemMonitoringDependencyExternal": "External",
+  "systemMonitoringDependencyUnknown": "Unknown dependency",
+  "systemMonitoringFieldCheckedAt": "Checked at",
+  "systemMonitoringFieldDependencyType": "Dependency type",
+  "systemMonitoringFieldResponseTime": "Response time",
+  "systemMonitoringFieldTechnicalCode": "Technical code",
+  "systemMonitoringFieldConfigured": "Configured",
+  "systemMonitoringFieldAffectedCapabilities": "Affected capabilities",
+  "systemMonitoringFieldEvidence": "Evidence",
+  "systemMonitoringFieldComponent": "Component",
+  "systemMonitoringYes": "Yes",
+  "systemMonitoringNo": "No",
+  "systemMonitoringDiagnosticTitle": "Diagnostic suggestion",
+  "systemMonitoringAiDisclaimer": "Advisory only — rule/AI suggestion is not an automatic repair instruction and may be incomplete.",
+  "systemMonitoringDiagnosticPossibleCauses": "Possible causes",
+  "systemMonitoringDiagnosticRecommendedChecks": "Recommended checks",
+  "systemMonitoringDiagnosticMissingEvidence": "Missing evidence",
+  "systemMonitoringDiagnosticAiGenerated": "AI generated",
+  "systemMonitoringDiagnosticRuleBased": "Rule based",
+  "systemMonitoringDiagnosticConfidenceLow": "Confidence: low",
+  "systemMonitoringDiagnosticConfidenceMedium": "Confidence: medium",
+  "systemMonitoringDiagnosticConfidenceHigh": "Confidence: high",
+  "systemMonitoringDiagnosticConfidenceUnknown": "Confidence: unknown",
+  "systemMonitoringDiagnosticUrgencyLow": "Urgency: low",
+  "systemMonitoringDiagnosticUrgencyMedium": "Urgency: medium",
+  "systemMonitoringDiagnosticUrgencyHigh": "Urgency: high",
+  "systemMonitoringDiagnosticUrgencyCritical": "Urgency: critical",
+  "systemMonitoringDiagnosticUrgencyUnknown": "Urgency: unknown",
+  "systemMonitoringTimelineTitle": "Timeline",
+  "systemMonitoringTimelineEmpty": "No timeline events yet.",
+  "systemMonitoringNoteLabel": "Note",
+  "systemMonitoringNoteRequired": "Enter at least 3 characters.",
+  "systemMonitoringActionAcknowledge": "Acknowledge",
+  "systemMonitoringActionAddNote": "Add note",
+  "systemMonitoringActionChangeStatus": "Change status",
+  "systemMonitoringActionSuccess": "Monitoring action saved.",
+  "systemMonitoringActionError": "Could not save monitoring action.",
+  "systemMonitoringActionAuditNotice": "This action will be recorded in the platform audit log."
 }

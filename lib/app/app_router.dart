@@ -55,6 +55,10 @@ import '../features/support/presentation/support_ticket_detail_screen.dart';
 import '../features/support/presentation/support_tickets_screen.dart';
 import '../features/system_health/presentation/system_health_event_detail_screen.dart';
 import '../features/system_health/presentation/system_health_screen.dart';
+import '../features/system_monitoring/presentation/system_monitoring_component_detail_screen.dart';
+import '../features/system_monitoring/presentation/system_monitoring_incident_detail_screen.dart';
+import '../features/system_monitoring/presentation/system_monitoring_incident_list_screen.dart';
+import '../features/system_monitoring/presentation/system_monitoring_screen.dart';
 
 class RouterRefreshNotifier extends ChangeNotifier {
   RouterRefreshNotifier(this._ref) {
@@ -339,6 +343,37 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
           GoRoute(
+            path: AdminRoutes.systemMonitoring,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SystemMonitoringScreen()),
+            routes: [
+              GoRoute(
+                path: 'components/:key',
+                builder: (context, state) =>
+                    SystemMonitoringComponentDetailScreen(
+                      componentKey: Uri.decodeComponent(
+                        state.pathParameters['key'] ?? '',
+                      ),
+                    ),
+              ),
+              GoRoute(
+                path: 'incidents',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: SystemMonitoringIncidentListScreen(),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    builder: (context, state) =>
+                        SystemMonitoringIncidentDetailScreen(
+                          incidentId: state.pathParameters['id'] ?? '',
+                        ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          GoRoute(
             path: AdminRoutes.auditLogs,
             pageBuilder: (context, state) =>
                 const NoTransitionPage(child: AuditLogsScreen()),
@@ -477,6 +512,8 @@ abstract final class AdminRoutes {
   static const customerCommunications = '/customer-communications';
   static const publicIntakes = '/public-intakes';
   static const systemHealth = '/system-health';
+  static const systemMonitoring = '/system-monitoring';
+  static const systemMonitoringIncidents = '/system-monitoring/incidents';
   static const auditLogs = '/audit-logs';
   static const notifications = '/notifications';
   static const notificationPreferences = '/notifications/preferences';
@@ -494,6 +531,12 @@ abstract final class AdminRoutes {
 
   static String systemHealthEventDetail(String id) =>
       '$systemHealth/events/$id';
+
+  static String systemMonitoringComponentDetail(String key) =>
+      '$systemMonitoring/components/${Uri.encodeComponent(key)}';
+
+  static String systemMonitoringIncidentDetail(String id) =>
+      '$systemMonitoringIncidents/$id';
 
   static String registrationDetail(String id) => '$registrations/$id';
 
@@ -587,6 +630,12 @@ abstract final class AdminRoutes {
     if (location.startsWith(customerCommunications)) {
       return AdminDestination.customerCommunications;
     }
+    if (location.startsWith(systemMonitoring)) {
+      return AdminDestination.systemMonitoring;
+    }
+    if (location.startsWith(systemHealth)) {
+      return AdminDestination.systemHealth;
+    }
     if (location.startsWith(auditLogs)) {
       return AdminDestination.auditLogs;
     }
@@ -611,6 +660,7 @@ abstract final class AdminRoutes {
       customerCommunications => AdminDestination.customerCommunications,
       publicIntakes => AdminDestination.publicIntakes,
       systemHealth => AdminDestination.systemHealth,
+      systemMonitoring => AdminDestination.systemMonitoring,
       securityCenter => AdminDestination.securityCenter,
       adminUsers => AdminDestination.adminUsers,
       releaseCenter => AdminDestination.releaseCenter,

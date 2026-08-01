@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// **'System health'**
   String get navSystemHealth;
 
+  /// No description provided for @navSystemMonitoring.
+  ///
+  /// In en, this message translates to:
+  /// **'System monitoring'**
+  String get navSystemMonitoring;
+
   /// No description provided for @navAuditLogs.
   ///
   /// In en, this message translates to:
@@ -10097,6 +10103,636 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get companyExchangeCancel;
+
+  /// No description provided for @systemMonitoringTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'System monitoring'**
+  String get systemMonitoringTitle;
+
+  /// No description provided for @systemMonitoringOpenIncidentCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Open incident center'**
+  String get systemMonitoringOpenIncidentCenter;
+
+  /// No description provided for @systemMonitoringLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load system monitoring data.'**
+  String get systemMonitoringLoadError;
+
+  /// No description provided for @systemMonitoringActionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This monitoring action is not available on the connected backend yet.'**
+  String get systemMonitoringActionUnavailable;
+
+  /// No description provided for @systemMonitoringMockDataBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock data'**
+  String get systemMonitoringMockDataBadge;
+
+  /// No description provided for @systemMonitoringComponentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Components'**
+  String get systemMonitoringComponentsTitle;
+
+  /// No description provided for @systemMonitoringComponentsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No components match the current filter.'**
+  String get systemMonitoringComponentsEmpty;
+
+  /// No description provided for @systemMonitoringActiveIncidentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Active incidents'**
+  String get systemMonitoringActiveIncidentsTitle;
+
+  /// No description provided for @systemMonitoringViewAllIncidents.
+  ///
+  /// In en, this message translates to:
+  /// **'View all incidents'**
+  String get systemMonitoringViewAllIncidents;
+
+  /// No description provided for @systemMonitoringIncidentsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No incidents match your filters.'**
+  String get systemMonitoringIncidentsEmpty;
+
+  /// No description provided for @systemMonitoringIncidentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Incidents'**
+  String get systemMonitoringIncidentsTitle;
+
+  /// No description provided for @systemMonitoringIncidentDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Incident'**
+  String get systemMonitoringIncidentDetailTitle;
+
+  /// No description provided for @systemMonitoringComponentDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Component'**
+  String get systemMonitoringComponentDetailTitle;
+
+  /// No description provided for @systemMonitoringRefreshAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh monitoring'**
+  String get systemMonitoringRefreshAction;
+
+  /// No description provided for @systemMonitoringPrivacyNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only — no tenant operational trip, document, or message content is shown.'**
+  String get systemMonitoringPrivacyNotice;
+
+  /// No description provided for @systemMonitoringOverallStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Overall status: {status}'**
+  String systemMonitoringOverallStatusLabel(String status);
+
+  /// No description provided for @systemMonitoringLastRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Last refresh {date}'**
+  String systemMonitoringLastRefresh(String date);
+
+  /// No description provided for @systemMonitoringMetricHealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy'**
+  String get systemMonitoringMetricHealthy;
+
+  /// No description provided for @systemMonitoringMetricDegraded.
+  ///
+  /// In en, this message translates to:
+  /// **'Degraded'**
+  String get systemMonitoringMetricDegraded;
+
+  /// No description provided for @systemMonitoringMetricUnhealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Unhealthy'**
+  String get systemMonitoringMetricUnhealthy;
+
+  /// No description provided for @systemMonitoringMetricUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get systemMonitoringMetricUnknown;
+
+  /// No description provided for @systemMonitoringMetricNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Not configured'**
+  String get systemMonitoringMetricNotConfigured;
+
+  /// No description provided for @systemMonitoringMetricActiveIncidents.
+  ///
+  /// In en, this message translates to:
+  /// **'Active incidents'**
+  String get systemMonitoringMetricActiveIncidents;
+
+  /// No description provided for @systemMonitoringMetricCriticalIncidents.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical incidents'**
+  String get systemMonitoringMetricCriticalIncidents;
+
+  /// No description provided for @systemMonitoringMetricApiErrors.
+  ///
+  /// In en, this message translates to:
+  /// **'API errors (1h): {count}'**
+  String systemMonitoringMetricApiErrors(String count);
+
+  /// No description provided for @systemMonitoringMetricFailedNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed notifications: {count}'**
+  String systemMonitoringMetricFailedNotifications(String count);
+
+  /// No description provided for @systemMonitoringMetricDbLatency.
+  ///
+  /// In en, this message translates to:
+  /// **'DB latency: {ms} ms'**
+  String systemMonitoringMetricDbLatency(String ms);
+
+  /// No description provided for @systemMonitoringMetricRedisConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Redis connected'**
+  String get systemMonitoringMetricRedisConnected;
+
+  /// No description provided for @systemMonitoringMetricRedisDisconnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Redis disconnected'**
+  String get systemMonitoringMetricRedisDisconnected;
+
+  /// No description provided for @systemMonitoringStatusHealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy'**
+  String get systemMonitoringStatusHealthy;
+
+  /// No description provided for @systemMonitoringStatusDegraded.
+  ///
+  /// In en, this message translates to:
+  /// **'Degraded'**
+  String get systemMonitoringStatusDegraded;
+
+  /// No description provided for @systemMonitoringStatusUnhealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Unhealthy'**
+  String get systemMonitoringStatusUnhealthy;
+
+  /// No description provided for @systemMonitoringStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get systemMonitoringStatusUnknown;
+
+  /// No description provided for @systemMonitoringStatusDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get systemMonitoringStatusDisabled;
+
+  /// No description provided for @systemMonitoringStatusNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Not configured'**
+  String get systemMonitoringStatusNotConfigured;
+
+  /// No description provided for @systemMonitoringFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get systemMonitoringFilterAll;
+
+  /// No description provided for @systemMonitoringFilterDegradedUnhealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Degraded / unhealthy'**
+  String get systemMonitoringFilterDegradedUnhealthy;
+
+  /// No description provided for @systemMonitoringFilterOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get systemMonitoringFilterOpen;
+
+  /// No description provided for @systemMonitoringFilterInvestigating.
+  ///
+  /// In en, this message translates to:
+  /// **'Investigating'**
+  String get systemMonitoringFilterInvestigating;
+
+  /// No description provided for @systemMonitoringFilterMonitoring.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitoring'**
+  String get systemMonitoringFilterMonitoring;
+
+  /// No description provided for @systemMonitoringFilterResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get systemMonitoringFilterResolved;
+
+  /// No description provided for @systemMonitoringFilterDismissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismissed'**
+  String get systemMonitoringFilterDismissed;
+
+  /// No description provided for @systemMonitoringFilterCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get systemMonitoringFilterCritical;
+
+  /// No description provided for @systemMonitoringFilterHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get systemMonitoringFilterHigh;
+
+  /// No description provided for @systemMonitoringIncidentSeverityInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Info'**
+  String get systemMonitoringIncidentSeverityInfo;
+
+  /// No description provided for @systemMonitoringIncidentSeverityWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get systemMonitoringIncidentSeverityWarning;
+
+  /// No description provided for @systemMonitoringIncidentSeverityHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get systemMonitoringIncidentSeverityHigh;
+
+  /// No description provided for @systemMonitoringIncidentSeverityCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get systemMonitoringIncidentSeverityCritical;
+
+  /// No description provided for @systemMonitoringIncidentSeverityUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get systemMonitoringIncidentSeverityUnknown;
+
+  /// No description provided for @systemMonitoringIncidentStatusOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get systemMonitoringIncidentStatusOpen;
+
+  /// No description provided for @systemMonitoringIncidentStatusInvestigating.
+  ///
+  /// In en, this message translates to:
+  /// **'Investigating'**
+  String get systemMonitoringIncidentStatusInvestigating;
+
+  /// No description provided for @systemMonitoringIncidentStatusMonitoring.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitoring'**
+  String get systemMonitoringIncidentStatusMonitoring;
+
+  /// No description provided for @systemMonitoringIncidentStatusResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get systemMonitoringIncidentStatusResolved;
+
+  /// No description provided for @systemMonitoringIncidentStatusDismissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismissed'**
+  String get systemMonitoringIncidentStatusDismissed;
+
+  /// No description provided for @systemMonitoringIncidentStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get systemMonitoringIncidentStatusUnknown;
+
+  /// No description provided for @systemMonitoringIncidentSourceAlertRule.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert rule'**
+  String get systemMonitoringIncidentSourceAlertRule;
+
+  /// No description provided for @systemMonitoringIncidentSourceManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get systemMonitoringIncidentSourceManual;
+
+  /// No description provided for @systemMonitoringIncidentSourceHealthCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Health check'**
+  String get systemMonitoringIncidentSourceHealthCheck;
+
+  /// No description provided for @systemMonitoringIncidentSourceRecovery.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery'**
+  String get systemMonitoringIncidentSourceRecovery;
+
+  /// No description provided for @systemMonitoringIncidentSourceUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown source'**
+  String get systemMonitoringIncidentSourceUnknown;
+
+  /// No description provided for @systemMonitoringIncidentDetectedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Detected {date}'**
+  String systemMonitoringIncidentDetectedAt(String date);
+
+  /// No description provided for @systemMonitoringIncidentAcknowledgedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged {date}'**
+  String systemMonitoringIncidentAcknowledgedAt(String date);
+
+  /// No description provided for @systemMonitoringActiveIncidentsBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} active'**
+  String systemMonitoringActiveIncidentsBadge(String count);
+
+  /// No description provided for @systemMonitoringResponseTimeMs.
+  ///
+  /// In en, this message translates to:
+  /// **'{ms} ms'**
+  String systemMonitoringResponseTimeMs(String ms);
+
+  /// No description provided for @systemMonitoringDependencyCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical dependency'**
+  String get systemMonitoringDependencyCritical;
+
+  /// No description provided for @systemMonitoringDependencyOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional dependency'**
+  String get systemMonitoringDependencyOptional;
+
+  /// No description provided for @systemMonitoringDependencyColocated.
+  ///
+  /// In en, this message translates to:
+  /// **'Colocated'**
+  String get systemMonitoringDependencyColocated;
+
+  /// No description provided for @systemMonitoringDependencyExternal.
+  ///
+  /// In en, this message translates to:
+  /// **'External'**
+  String get systemMonitoringDependencyExternal;
+
+  /// No description provided for @systemMonitoringDependencyUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown dependency'**
+  String get systemMonitoringDependencyUnknown;
+
+  /// No description provided for @systemMonitoringFieldCheckedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked at'**
+  String get systemMonitoringFieldCheckedAt;
+
+  /// No description provided for @systemMonitoringFieldDependencyType.
+  ///
+  /// In en, this message translates to:
+  /// **'Dependency type'**
+  String get systemMonitoringFieldDependencyType;
+
+  /// No description provided for @systemMonitoringFieldResponseTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Response time'**
+  String get systemMonitoringFieldResponseTime;
+
+  /// No description provided for @systemMonitoringFieldTechnicalCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical code'**
+  String get systemMonitoringFieldTechnicalCode;
+
+  /// No description provided for @systemMonitoringFieldConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Configured'**
+  String get systemMonitoringFieldConfigured;
+
+  /// No description provided for @systemMonitoringFieldAffectedCapabilities.
+  ///
+  /// In en, this message translates to:
+  /// **'Affected capabilities'**
+  String get systemMonitoringFieldAffectedCapabilities;
+
+  /// No description provided for @systemMonitoringFieldEvidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence'**
+  String get systemMonitoringFieldEvidence;
+
+  /// No description provided for @systemMonitoringFieldComponent.
+  ///
+  /// In en, this message translates to:
+  /// **'Component'**
+  String get systemMonitoringFieldComponent;
+
+  /// No description provided for @systemMonitoringYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get systemMonitoringYes;
+
+  /// No description provided for @systemMonitoringNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get systemMonitoringNo;
+
+  /// No description provided for @systemMonitoringDiagnosticTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnostic suggestion'**
+  String get systemMonitoringDiagnosticTitle;
+
+  /// No description provided for @systemMonitoringAiDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Advisory only — rule/AI suggestion is not an automatic repair instruction and may be incomplete.'**
+  String get systemMonitoringAiDisclaimer;
+
+  /// No description provided for @systemMonitoringDiagnosticPossibleCauses.
+  ///
+  /// In en, this message translates to:
+  /// **'Possible causes'**
+  String get systemMonitoringDiagnosticPossibleCauses;
+
+  /// No description provided for @systemMonitoringDiagnosticRecommendedChecks.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended checks'**
+  String get systemMonitoringDiagnosticRecommendedChecks;
+
+  /// No description provided for @systemMonitoringDiagnosticMissingEvidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing evidence'**
+  String get systemMonitoringDiagnosticMissingEvidence;
+
+  /// No description provided for @systemMonitoringDiagnosticAiGenerated.
+  ///
+  /// In en, this message translates to:
+  /// **'AI generated'**
+  String get systemMonitoringDiagnosticAiGenerated;
+
+  /// No description provided for @systemMonitoringDiagnosticRuleBased.
+  ///
+  /// In en, this message translates to:
+  /// **'Rule based'**
+  String get systemMonitoringDiagnosticRuleBased;
+
+  /// No description provided for @systemMonitoringDiagnosticConfidenceLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence: low'**
+  String get systemMonitoringDiagnosticConfidenceLow;
+
+  /// No description provided for @systemMonitoringDiagnosticConfidenceMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence: medium'**
+  String get systemMonitoringDiagnosticConfidenceMedium;
+
+  /// No description provided for @systemMonitoringDiagnosticConfidenceHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence: high'**
+  String get systemMonitoringDiagnosticConfidenceHigh;
+
+  /// No description provided for @systemMonitoringDiagnosticConfidenceUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence: unknown'**
+  String get systemMonitoringDiagnosticConfidenceUnknown;
+
+  /// No description provided for @systemMonitoringDiagnosticUrgencyLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgency: low'**
+  String get systemMonitoringDiagnosticUrgencyLow;
+
+  /// No description provided for @systemMonitoringDiagnosticUrgencyMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgency: medium'**
+  String get systemMonitoringDiagnosticUrgencyMedium;
+
+  /// No description provided for @systemMonitoringDiagnosticUrgencyHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgency: high'**
+  String get systemMonitoringDiagnosticUrgencyHigh;
+
+  /// No description provided for @systemMonitoringDiagnosticUrgencyCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgency: critical'**
+  String get systemMonitoringDiagnosticUrgencyCritical;
+
+  /// No description provided for @systemMonitoringDiagnosticUrgencyUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgency: unknown'**
+  String get systemMonitoringDiagnosticUrgencyUnknown;
+
+  /// No description provided for @systemMonitoringTimelineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline'**
+  String get systemMonitoringTimelineTitle;
+
+  /// No description provided for @systemMonitoringTimelineEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No timeline events yet.'**
+  String get systemMonitoringTimelineEmpty;
+
+  /// No description provided for @systemMonitoringNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get systemMonitoringNoteLabel;
+
+  /// No description provided for @systemMonitoringNoteRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least 3 characters.'**
+  String get systemMonitoringNoteRequired;
+
+  /// No description provided for @systemMonitoringActionAcknowledge.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledge'**
+  String get systemMonitoringActionAcknowledge;
+
+  /// No description provided for @systemMonitoringActionAddNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Add note'**
+  String get systemMonitoringActionAddNote;
+
+  /// No description provided for @systemMonitoringActionChangeStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Change status'**
+  String get systemMonitoringActionChangeStatus;
+
+  /// No description provided for @systemMonitoringActionSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitoring action saved.'**
+  String get systemMonitoringActionSuccess;
+
+  /// No description provided for @systemMonitoringActionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save monitoring action.'**
+  String get systemMonitoringActionError;
+
+  /// No description provided for @systemMonitoringActionAuditNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This action will be recorded in the platform audit log.'**
+  String get systemMonitoringActionAuditNotice;
 }
 
 class _AppLocalizationsDelegate

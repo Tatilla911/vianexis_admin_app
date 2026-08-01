@@ -63,6 +63,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get navSystemHealth => 'Rendszerállapot';
 
   @override
+  String get navSystemMonitoring => 'Rendszerfelügyelet';
+
+  @override
   String get navAuditLogs => 'Audit napló';
 
   @override
@@ -5587,4 +5590,353 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get companyExchangeCancel => 'Mégse';
+
+  @override
+  String get systemMonitoringTitle => 'Rendszerfelügyelet';
+
+  @override
+  String get systemMonitoringOpenIncidentCenter => 'Incidensközpont megnyitása';
+
+  @override
+  String get systemMonitoringLoadError =>
+      'A rendszerfelügyeleti adatok betöltése sikertelen.';
+
+  @override
+  String get systemMonitoringActionUnavailable =>
+      'Ez a felügyeleti művelet még nem érhető el a csatlakoztatott backenden.';
+
+  @override
+  String get systemMonitoringMockDataBadge => 'Mintaadat';
+
+  @override
+  String get systemMonitoringComponentsTitle => 'Komponensek';
+
+  @override
+  String get systemMonitoringComponentsEmpty =>
+      'Nincs a szűrőnek megfelelő komponens.';
+
+  @override
+  String get systemMonitoringActiveIncidentsTitle => 'Aktív incidensek';
+
+  @override
+  String get systemMonitoringViewAllIncidents => 'Összes incidens';
+
+  @override
+  String get systemMonitoringIncidentsEmpty =>
+      'Nincs a szűrőnek megfelelő incidens.';
+
+  @override
+  String get systemMonitoringIncidentsTitle => 'Incidensek';
+
+  @override
+  String get systemMonitoringIncidentDetailTitle => 'Incidens';
+
+  @override
+  String get systemMonitoringComponentDetailTitle => 'Komponens';
+
+  @override
+  String get systemMonitoringRefreshAction => 'Felügyelet frissítése';
+
+  @override
+  String get systemMonitoringPrivacyNotice =>
+      'Csak metaadat — nincs bérlői üzemeltetési fuvar-, dokumentum- vagy üzenettartalom.';
+
+  @override
+  String systemMonitoringOverallStatusLabel(String status) {
+    return 'Összesített állapot: $status';
+  }
+
+  @override
+  String systemMonitoringLastRefresh(String date) {
+    return 'Utolsó frissítés: $date';
+  }
+
+  @override
+  String get systemMonitoringMetricHealthy => 'Egészséges';
+
+  @override
+  String get systemMonitoringMetricDegraded => 'Romlott';
+
+  @override
+  String get systemMonitoringMetricUnhealthy => 'Nem egészséges';
+
+  @override
+  String get systemMonitoringMetricUnknown => 'Ismeretlen';
+
+  @override
+  String get systemMonitoringMetricNotConfigured => 'Nincs konfigurálva';
+
+  @override
+  String get systemMonitoringMetricActiveIncidents => 'Aktív incidensek';
+
+  @override
+  String get systemMonitoringMetricCriticalIncidents => 'Kritikus incidensek';
+
+  @override
+  String systemMonitoringMetricApiErrors(String count) {
+    return 'API hibák (1 óra): $count';
+  }
+
+  @override
+  String systemMonitoringMetricFailedNotifications(String count) {
+    return 'Sikertelen értesítések: $count';
+  }
+
+  @override
+  String systemMonitoringMetricDbLatency(String ms) {
+    return 'DB késleltetés: $ms ms';
+  }
+
+  @override
+  String get systemMonitoringMetricRedisConnected => 'Redis csatlakozva';
+
+  @override
+  String get systemMonitoringMetricRedisDisconnected =>
+      'Redis nincs csatlakozva';
+
+  @override
+  String get systemMonitoringStatusHealthy => 'Egészséges';
+
+  @override
+  String get systemMonitoringStatusDegraded => 'Romlott';
+
+  @override
+  String get systemMonitoringStatusUnhealthy => 'Nem egészséges';
+
+  @override
+  String get systemMonitoringStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get systemMonitoringStatusDisabled => 'Kikapcsolva';
+
+  @override
+  String get systemMonitoringStatusNotConfigured => 'Nincs konfigurálva';
+
+  @override
+  String get systemMonitoringFilterAll => 'Összes';
+
+  @override
+  String get systemMonitoringFilterDegradedUnhealthy =>
+      'Romlott / nem egészséges';
+
+  @override
+  String get systemMonitoringFilterOpen => 'Nyitott';
+
+  @override
+  String get systemMonitoringFilterInvestigating => 'Vizsgálat alatt';
+
+  @override
+  String get systemMonitoringFilterMonitoring => 'Megfigyelés alatt';
+
+  @override
+  String get systemMonitoringFilterResolved => 'Megoldott';
+
+  @override
+  String get systemMonitoringFilterDismissed => 'Elvetett';
+
+  @override
+  String get systemMonitoringFilterCritical => 'Kritikus';
+
+  @override
+  String get systemMonitoringFilterHigh => 'Magas';
+
+  @override
+  String get systemMonitoringIncidentSeverityInfo => 'Információ';
+
+  @override
+  String get systemMonitoringIncidentSeverityWarning => 'Figyelmeztetés';
+
+  @override
+  String get systemMonitoringIncidentSeverityHigh => 'Magas';
+
+  @override
+  String get systemMonitoringIncidentSeverityCritical => 'Kritikus';
+
+  @override
+  String get systemMonitoringIncidentSeverityUnknown => 'Ismeretlen';
+
+  @override
+  String get systemMonitoringIncidentStatusOpen => 'Nyitott';
+
+  @override
+  String get systemMonitoringIncidentStatusInvestigating => 'Vizsgálat alatt';
+
+  @override
+  String get systemMonitoringIncidentStatusMonitoring => 'Megfigyelés alatt';
+
+  @override
+  String get systemMonitoringIncidentStatusResolved => 'Megoldott';
+
+  @override
+  String get systemMonitoringIncidentStatusDismissed => 'Elvetett';
+
+  @override
+  String get systemMonitoringIncidentStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get systemMonitoringIncidentSourceAlertRule => 'Riasztási szabály';
+
+  @override
+  String get systemMonitoringIncidentSourceManual => 'Kézi';
+
+  @override
+  String get systemMonitoringIncidentSourceHealthCheck => 'Állapotellenőrzés';
+
+  @override
+  String get systemMonitoringIncidentSourceRecovery => 'Helyreállítás';
+
+  @override
+  String get systemMonitoringIncidentSourceUnknown => 'Ismeretlen forrás';
+
+  @override
+  String systemMonitoringIncidentDetectedAt(String date) {
+    return 'Észlelve: $date';
+  }
+
+  @override
+  String systemMonitoringIncidentAcknowledgedAt(String date) {
+    return 'Nyugtázva: $date';
+  }
+
+  @override
+  String systemMonitoringActiveIncidentsBadge(String count) {
+    return '$count aktív';
+  }
+
+  @override
+  String systemMonitoringResponseTimeMs(String ms) {
+    return '$ms ms';
+  }
+
+  @override
+  String get systemMonitoringDependencyCritical => 'Kritikus függőség';
+
+  @override
+  String get systemMonitoringDependencyOptional => 'Opcionális függőség';
+
+  @override
+  String get systemMonitoringDependencyColocated => 'Együtt telepített';
+
+  @override
+  String get systemMonitoringDependencyExternal => 'Külső';
+
+  @override
+  String get systemMonitoringDependencyUnknown => 'Ismeretlen függőség';
+
+  @override
+  String get systemMonitoringFieldCheckedAt => 'Ellenőrizve';
+
+  @override
+  String get systemMonitoringFieldDependencyType => 'Függőség típusa';
+
+  @override
+  String get systemMonitoringFieldResponseTime => 'Válaszidő';
+
+  @override
+  String get systemMonitoringFieldTechnicalCode => 'Technikai kód';
+
+  @override
+  String get systemMonitoringFieldConfigured => 'Konfigurálva';
+
+  @override
+  String get systemMonitoringFieldAffectedCapabilities => 'Érintett képességek';
+
+  @override
+  String get systemMonitoringFieldEvidence => 'Bizonyíték';
+
+  @override
+  String get systemMonitoringFieldComponent => 'Komponens';
+
+  @override
+  String get systemMonitoringYes => 'Igen';
+
+  @override
+  String get systemMonitoringNo => 'Nem';
+
+  @override
+  String get systemMonitoringDiagnosticTitle => 'Diagnosztikai javaslat';
+
+  @override
+  String get systemMonitoringAiDisclaimer =>
+      'Csak tájékoztató — a szabály-/AI-javaslat nem automatikus javítási utasítás, és hiányos lehet.';
+
+  @override
+  String get systemMonitoringDiagnosticPossibleCauses => 'Lehetséges okok';
+
+  @override
+  String get systemMonitoringDiagnosticRecommendedChecks =>
+      'Ajánlott ellenőrzések';
+
+  @override
+  String get systemMonitoringDiagnosticMissingEvidence => 'Hiányzó bizonyíték';
+
+  @override
+  String get systemMonitoringDiagnosticAiGenerated => 'AI által generált';
+
+  @override
+  String get systemMonitoringDiagnosticRuleBased => 'Szabályalapú';
+
+  @override
+  String get systemMonitoringDiagnosticConfidenceLow =>
+      'Megbízhatóság: alacsony';
+
+  @override
+  String get systemMonitoringDiagnosticConfidenceMedium =>
+      'Megbízhatóság: közepes';
+
+  @override
+  String get systemMonitoringDiagnosticConfidenceHigh => 'Megbízhatóság: magas';
+
+  @override
+  String get systemMonitoringDiagnosticConfidenceUnknown =>
+      'Megbízhatóság: ismeretlen';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyLow => 'Sürgősség: alacsony';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyMedium => 'Sürgősség: közepes';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyHigh => 'Sürgősség: magas';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyCritical => 'Sürgősség: kritikus';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyUnknown =>
+      'Sürgősség: ismeretlen';
+
+  @override
+  String get systemMonitoringTimelineTitle => 'Idővonal';
+
+  @override
+  String get systemMonitoringTimelineEmpty =>
+      'Még nincsenek idővonal-események.';
+
+  @override
+  String get systemMonitoringNoteLabel => 'Megjegyzés';
+
+  @override
+  String get systemMonitoringNoteRequired => 'Legalább 3 karaktert adjon meg.';
+
+  @override
+  String get systemMonitoringActionAcknowledge => 'Nyugtázás';
+
+  @override
+  String get systemMonitoringActionAddNote => 'Megjegyzés hozzáadása';
+
+  @override
+  String get systemMonitoringActionChangeStatus => 'Állapot módosítása';
+
+  @override
+  String get systemMonitoringActionSuccess => 'Felügyeleti művelet mentve.';
+
+  @override
+  String get systemMonitoringActionError =>
+      'A felügyeleti művelet mentése sikertelen.';
+
+  @override
+  String get systemMonitoringActionAuditNotice =>
+      'Ez a művelet rögzítésre kerül a platform audit naplójában.';
 }

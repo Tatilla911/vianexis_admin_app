@@ -50,6 +50,10 @@ abstract final class LocalizationKeys {
   static const systemHealthLoadError = 'systemHealthLoadError';
   static const systemHealthActionUnavailable = 'systemHealthActionUnavailable';
 
+  static const systemMonitoringLoadError = 'systemMonitoringLoadError';
+  static const systemMonitoringActionUnavailable =
+      'systemMonitoringActionUnavailable';
+
   static const supportLoadError = 'supportLoadError';
   static const supportActionUnavailable = 'supportActionUnavailable';
   static const supportActionError = 'supportActionError';

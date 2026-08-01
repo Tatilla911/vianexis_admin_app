@@ -63,6 +63,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navSystemHealth => 'System health';
 
   @override
+  String get navSystemMonitoring => 'System monitoring';
+
+  @override
   String get navAuditLogs => 'Audit logs';
 
   @override
@@ -5517,4 +5520,347 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get companyExchangeCancel => 'Cancel';
+
+  @override
+  String get systemMonitoringTitle => 'System monitoring';
+
+  @override
+  String get systemMonitoringOpenIncidentCenter => 'Open incident center';
+
+  @override
+  String get systemMonitoringLoadError =>
+      'Could not load system monitoring data.';
+
+  @override
+  String get systemMonitoringActionUnavailable =>
+      'This monitoring action is not available on the connected backend yet.';
+
+  @override
+  String get systemMonitoringMockDataBadge => 'Mock data';
+
+  @override
+  String get systemMonitoringComponentsTitle => 'Components';
+
+  @override
+  String get systemMonitoringComponentsEmpty =>
+      'No components match the current filter.';
+
+  @override
+  String get systemMonitoringActiveIncidentsTitle => 'Active incidents';
+
+  @override
+  String get systemMonitoringViewAllIncidents => 'View all incidents';
+
+  @override
+  String get systemMonitoringIncidentsEmpty =>
+      'No incidents match your filters.';
+
+  @override
+  String get systemMonitoringIncidentsTitle => 'Incidents';
+
+  @override
+  String get systemMonitoringIncidentDetailTitle => 'Incident';
+
+  @override
+  String get systemMonitoringComponentDetailTitle => 'Component';
+
+  @override
+  String get systemMonitoringRefreshAction => 'Refresh monitoring';
+
+  @override
+  String get systemMonitoringPrivacyNotice =>
+      'Metadata only — no tenant operational trip, document, or message content is shown.';
+
+  @override
+  String systemMonitoringOverallStatusLabel(String status) {
+    return 'Overall status: $status';
+  }
+
+  @override
+  String systemMonitoringLastRefresh(String date) {
+    return 'Last refresh $date';
+  }
+
+  @override
+  String get systemMonitoringMetricHealthy => 'Healthy';
+
+  @override
+  String get systemMonitoringMetricDegraded => 'Degraded';
+
+  @override
+  String get systemMonitoringMetricUnhealthy => 'Unhealthy';
+
+  @override
+  String get systemMonitoringMetricUnknown => 'Unknown';
+
+  @override
+  String get systemMonitoringMetricNotConfigured => 'Not configured';
+
+  @override
+  String get systemMonitoringMetricActiveIncidents => 'Active incidents';
+
+  @override
+  String get systemMonitoringMetricCriticalIncidents => 'Critical incidents';
+
+  @override
+  String systemMonitoringMetricApiErrors(String count) {
+    return 'API errors (1h): $count';
+  }
+
+  @override
+  String systemMonitoringMetricFailedNotifications(String count) {
+    return 'Failed notifications: $count';
+  }
+
+  @override
+  String systemMonitoringMetricDbLatency(String ms) {
+    return 'DB latency: $ms ms';
+  }
+
+  @override
+  String get systemMonitoringMetricRedisConnected => 'Redis connected';
+
+  @override
+  String get systemMonitoringMetricRedisDisconnected => 'Redis disconnected';
+
+  @override
+  String get systemMonitoringStatusHealthy => 'Healthy';
+
+  @override
+  String get systemMonitoringStatusDegraded => 'Degraded';
+
+  @override
+  String get systemMonitoringStatusUnhealthy => 'Unhealthy';
+
+  @override
+  String get systemMonitoringStatusUnknown => 'Unknown';
+
+  @override
+  String get systemMonitoringStatusDisabled => 'Disabled';
+
+  @override
+  String get systemMonitoringStatusNotConfigured => 'Not configured';
+
+  @override
+  String get systemMonitoringFilterAll => 'All';
+
+  @override
+  String get systemMonitoringFilterDegradedUnhealthy => 'Degraded / unhealthy';
+
+  @override
+  String get systemMonitoringFilterOpen => 'Open';
+
+  @override
+  String get systemMonitoringFilterInvestigating => 'Investigating';
+
+  @override
+  String get systemMonitoringFilterMonitoring => 'Monitoring';
+
+  @override
+  String get systemMonitoringFilterResolved => 'Resolved';
+
+  @override
+  String get systemMonitoringFilterDismissed => 'Dismissed';
+
+  @override
+  String get systemMonitoringFilterCritical => 'Critical';
+
+  @override
+  String get systemMonitoringFilterHigh => 'High';
+
+  @override
+  String get systemMonitoringIncidentSeverityInfo => 'Info';
+
+  @override
+  String get systemMonitoringIncidentSeverityWarning => 'Warning';
+
+  @override
+  String get systemMonitoringIncidentSeverityHigh => 'High';
+
+  @override
+  String get systemMonitoringIncidentSeverityCritical => 'Critical';
+
+  @override
+  String get systemMonitoringIncidentSeverityUnknown => 'Unknown';
+
+  @override
+  String get systemMonitoringIncidentStatusOpen => 'Open';
+
+  @override
+  String get systemMonitoringIncidentStatusInvestigating => 'Investigating';
+
+  @override
+  String get systemMonitoringIncidentStatusMonitoring => 'Monitoring';
+
+  @override
+  String get systemMonitoringIncidentStatusResolved => 'Resolved';
+
+  @override
+  String get systemMonitoringIncidentStatusDismissed => 'Dismissed';
+
+  @override
+  String get systemMonitoringIncidentStatusUnknown => 'Unknown';
+
+  @override
+  String get systemMonitoringIncidentSourceAlertRule => 'Alert rule';
+
+  @override
+  String get systemMonitoringIncidentSourceManual => 'Manual';
+
+  @override
+  String get systemMonitoringIncidentSourceHealthCheck => 'Health check';
+
+  @override
+  String get systemMonitoringIncidentSourceRecovery => 'Recovery';
+
+  @override
+  String get systemMonitoringIncidentSourceUnknown => 'Unknown source';
+
+  @override
+  String systemMonitoringIncidentDetectedAt(String date) {
+    return 'Detected $date';
+  }
+
+  @override
+  String systemMonitoringIncidentAcknowledgedAt(String date) {
+    return 'Acknowledged $date';
+  }
+
+  @override
+  String systemMonitoringActiveIncidentsBadge(String count) {
+    return '$count active';
+  }
+
+  @override
+  String systemMonitoringResponseTimeMs(String ms) {
+    return '$ms ms';
+  }
+
+  @override
+  String get systemMonitoringDependencyCritical => 'Critical dependency';
+
+  @override
+  String get systemMonitoringDependencyOptional => 'Optional dependency';
+
+  @override
+  String get systemMonitoringDependencyColocated => 'Colocated';
+
+  @override
+  String get systemMonitoringDependencyExternal => 'External';
+
+  @override
+  String get systemMonitoringDependencyUnknown => 'Unknown dependency';
+
+  @override
+  String get systemMonitoringFieldCheckedAt => 'Checked at';
+
+  @override
+  String get systemMonitoringFieldDependencyType => 'Dependency type';
+
+  @override
+  String get systemMonitoringFieldResponseTime => 'Response time';
+
+  @override
+  String get systemMonitoringFieldTechnicalCode => 'Technical code';
+
+  @override
+  String get systemMonitoringFieldConfigured => 'Configured';
+
+  @override
+  String get systemMonitoringFieldAffectedCapabilities =>
+      'Affected capabilities';
+
+  @override
+  String get systemMonitoringFieldEvidence => 'Evidence';
+
+  @override
+  String get systemMonitoringFieldComponent => 'Component';
+
+  @override
+  String get systemMonitoringYes => 'Yes';
+
+  @override
+  String get systemMonitoringNo => 'No';
+
+  @override
+  String get systemMonitoringDiagnosticTitle => 'Diagnostic suggestion';
+
+  @override
+  String get systemMonitoringAiDisclaimer =>
+      'Advisory only — rule/AI suggestion is not an automatic repair instruction and may be incomplete.';
+
+  @override
+  String get systemMonitoringDiagnosticPossibleCauses => 'Possible causes';
+
+  @override
+  String get systemMonitoringDiagnosticRecommendedChecks =>
+      'Recommended checks';
+
+  @override
+  String get systemMonitoringDiagnosticMissingEvidence => 'Missing evidence';
+
+  @override
+  String get systemMonitoringDiagnosticAiGenerated => 'AI generated';
+
+  @override
+  String get systemMonitoringDiagnosticRuleBased => 'Rule based';
+
+  @override
+  String get systemMonitoringDiagnosticConfidenceLow => 'Confidence: low';
+
+  @override
+  String get systemMonitoringDiagnosticConfidenceMedium => 'Confidence: medium';
+
+  @override
+  String get systemMonitoringDiagnosticConfidenceHigh => 'Confidence: high';
+
+  @override
+  String get systemMonitoringDiagnosticConfidenceUnknown =>
+      'Confidence: unknown';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyLow => 'Urgency: low';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyMedium => 'Urgency: medium';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyHigh => 'Urgency: high';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyCritical => 'Urgency: critical';
+
+  @override
+  String get systemMonitoringDiagnosticUrgencyUnknown => 'Urgency: unknown';
+
+  @override
+  String get systemMonitoringTimelineTitle => 'Timeline';
+
+  @override
+  String get systemMonitoringTimelineEmpty => 'No timeline events yet.';
+
+  @override
+  String get systemMonitoringNoteLabel => 'Note';
+
+  @override
+  String get systemMonitoringNoteRequired => 'Enter at least 3 characters.';
+
+  @override
+  String get systemMonitoringActionAcknowledge => 'Acknowledge';
+
+  @override
+  String get systemMonitoringActionAddNote => 'Add note';
+
+  @override
+  String get systemMonitoringActionChangeStatus => 'Change status';
+
+  @override
+  String get systemMonitoringActionSuccess => 'Monitoring action saved.';
+
+  @override
+  String get systemMonitoringActionError => 'Could not save monitoring action.';
+
+  @override
+  String get systemMonitoringActionAuditNotice =>
+      'This action will be recorded in the platform audit log.';
 }

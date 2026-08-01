@@ -171,6 +171,12 @@ List<_ModuleTile> get _allModules => [
     labelKey: (c) => AppLocalizations.of(c).navSystemHealth,
   ),
   _ModuleTile(
+    destination: AdminDestination.systemMonitoring,
+    route: AdminRoutes.systemMonitoring,
+    icon: Icons.troubleshoot_outlined,
+    labelKey: (c) => AppLocalizations.of(c).navSystemMonitoring,
+  ),
+  _ModuleTile(
     destination: AdminDestination.securityCenter,
     route: AdminRoutes.securityCenter,
     icon: Icons.security_outlined,

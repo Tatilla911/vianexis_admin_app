@@ -57,6 +57,7 @@ enum AdminDestination {
   customerCommunications,
   publicIntakes,
   systemHealth,
+  systemMonitoring,
   securityCenter,
   auditLogs,
   notifications,
@@ -81,6 +82,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.customerCommunications ||
         AdminDestination.publicIntakes ||
         AdminDestination.systemHealth ||
+        AdminDestination.systemMonitoring ||
         AdminDestination.securityCenter ||
         AdminDestination.auditLogs ||
         AdminDestination.notifications ||

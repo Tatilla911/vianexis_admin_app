@@ -17,6 +17,7 @@
   "navBulkOnboarding": "Tömeges onboarding",
   "navSupport": "Támogatás",
   "navSystemHealth": "Rendszerállapot",
+  "navSystemMonitoring": "Rendszerfelügyelet",
   "navAuditLogs": "Audit napló",
   "navSettings": "Beállítások",
   "loginTitle": "Belépés",
@@ -1619,9 +1620,15 @@
   "operationsExchangeMetricsSummary": "{total} rekord · {disputed} vitás · {missing} hiányos",
   "@operationsExchangeMetricsSummary": {
     "placeholders": {
-      "total": {"type": "int"},
-      "disputed": {"type": "int"},
-      "missing": {"type": "int"}
+      "total": {
+        "type": "int"
+      },
+      "disputed": {
+        "type": "int"
+      },
+      "missing": {
+        "type": "int"
+      }
     }
   },
   "operationsExchangeRecordsTitle": "Raklap/göngyöleg rekordok",
@@ -1754,5 +1761,173 @@
   "companyExchangeDeactivatePackagingItem": "Deaktiválás",
   "companyExchangeReactivatePackagingItem": "Újraaktiválás",
   "companyExchangePackagingItemEmpty": "Még nincs rögzített göngyöleg elem ennél a cégnél.",
-  "companyExchangeCancel": "Mégse"
+  "companyExchangeCancel": "Mégse",
+  "systemMonitoringTitle": "Rendszerfelügyelet",
+  "systemMonitoringOpenIncidentCenter": "Incidensközpont megnyitása",
+  "systemMonitoringLoadError": "A rendszerfelügyeleti adatok betöltése sikertelen.",
+  "systemMonitoringActionUnavailable": "Ez a felügyeleti művelet még nem érhető el a csatlakoztatott backenden.",
+  "systemMonitoringMockDataBadge": "Mintaadat",
+  "systemMonitoringComponentsTitle": "Komponensek",
+  "systemMonitoringComponentsEmpty": "Nincs a szűrőnek megfelelő komponens.",
+  "systemMonitoringActiveIncidentsTitle": "Aktív incidensek",
+  "systemMonitoringViewAllIncidents": "Összes incidens",
+  "systemMonitoringIncidentsEmpty": "Nincs a szűrőnek megfelelő incidens.",
+  "systemMonitoringIncidentsTitle": "Incidensek",
+  "systemMonitoringIncidentDetailTitle": "Incidens",
+  "systemMonitoringComponentDetailTitle": "Komponens",
+  "systemMonitoringRefreshAction": "Felügyelet frissítése",
+  "systemMonitoringPrivacyNotice": "Csak metaadat — nincs bérlői üzemeltetési fuvar-, dokumentum- vagy üzenettartalom.",
+  "systemMonitoringOverallStatusLabel": "Összesített állapot: {status}",
+  "@systemMonitoringOverallStatusLabel": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringLastRefresh": "Utolsó frissítés: {date}",
+  "@systemMonitoringLastRefresh": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringMetricHealthy": "Egészséges",
+  "systemMonitoringMetricDegraded": "Romlott",
+  "systemMonitoringMetricUnhealthy": "Nem egészséges",
+  "systemMonitoringMetricUnknown": "Ismeretlen",
+  "systemMonitoringMetricNotConfigured": "Nincs konfigurálva",
+  "systemMonitoringMetricActiveIncidents": "Aktív incidensek",
+  "systemMonitoringMetricCriticalIncidents": "Kritikus incidensek",
+  "systemMonitoringMetricApiErrors": "API hibák (1 óra): {count}",
+  "@systemMonitoringMetricApiErrors": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringMetricFailedNotifications": "Sikertelen értesítések: {count}",
+  "@systemMonitoringMetricFailedNotifications": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringMetricDbLatency": "DB késleltetés: {ms} ms",
+  "@systemMonitoringMetricDbLatency": {
+    "placeholders": {
+      "ms": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringMetricRedisConnected": "Redis csatlakozva",
+  "systemMonitoringMetricRedisDisconnected": "Redis nincs csatlakozva",
+  "systemMonitoringStatusHealthy": "Egészséges",
+  "systemMonitoringStatusDegraded": "Romlott",
+  "systemMonitoringStatusUnhealthy": "Nem egészséges",
+  "systemMonitoringStatusUnknown": "Ismeretlen",
+  "systemMonitoringStatusDisabled": "Kikapcsolva",
+  "systemMonitoringStatusNotConfigured": "Nincs konfigurálva",
+  "systemMonitoringFilterAll": "Összes",
+  "systemMonitoringFilterDegradedUnhealthy": "Romlott / nem egészséges",
+  "systemMonitoringFilterOpen": "Nyitott",
+  "systemMonitoringFilterInvestigating": "Vizsgálat alatt",
+  "systemMonitoringFilterMonitoring": "Megfigyelés alatt",
+  "systemMonitoringFilterResolved": "Megoldott",
+  "systemMonitoringFilterDismissed": "Elvetett",
+  "systemMonitoringFilterCritical": "Kritikus",
+  "systemMonitoringFilterHigh": "Magas",
+  "systemMonitoringIncidentSeverityInfo": "Információ",
+  "systemMonitoringIncidentSeverityWarning": "Figyelmeztetés",
+  "systemMonitoringIncidentSeverityHigh": "Magas",
+  "systemMonitoringIncidentSeverityCritical": "Kritikus",
+  "systemMonitoringIncidentSeverityUnknown": "Ismeretlen",
+  "systemMonitoringIncidentStatusOpen": "Nyitott",
+  "systemMonitoringIncidentStatusInvestigating": "Vizsgálat alatt",
+  "systemMonitoringIncidentStatusMonitoring": "Megfigyelés alatt",
+  "systemMonitoringIncidentStatusResolved": "Megoldott",
+  "systemMonitoringIncidentStatusDismissed": "Elvetett",
+  "systemMonitoringIncidentStatusUnknown": "Ismeretlen",
+  "systemMonitoringIncidentSourceAlertRule": "Riasztási szabály",
+  "systemMonitoringIncidentSourceManual": "Kézi",
+  "systemMonitoringIncidentSourceHealthCheck": "Állapotellenőrzés",
+  "systemMonitoringIncidentSourceRecovery": "Helyreállítás",
+  "systemMonitoringIncidentSourceUnknown": "Ismeretlen forrás",
+  "systemMonitoringIncidentDetectedAt": "Észlelve: {date}",
+  "@systemMonitoringIncidentDetectedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringIncidentAcknowledgedAt": "Nyugtázva: {date}",
+  "@systemMonitoringIncidentAcknowledgedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringActiveIncidentsBadge": "{count} aktív",
+  "@systemMonitoringActiveIncidentsBadge": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringResponseTimeMs": "{ms} ms",
+  "@systemMonitoringResponseTimeMs": {
+    "placeholders": {
+      "ms": {
+        "type": "String"
+      }
+    }
+  },
+  "systemMonitoringDependencyCritical": "Kritikus függőség",
+  "systemMonitoringDependencyOptional": "Opcionális függőség",
+  "systemMonitoringDependencyColocated": "Együtt telepített",
+  "systemMonitoringDependencyExternal": "Külső",
+  "systemMonitoringDependencyUnknown": "Ismeretlen függőség",
+  "systemMonitoringFieldCheckedAt": "Ellenőrizve",
+  "systemMonitoringFieldDependencyType": "Függőség típusa",
+  "systemMonitoringFieldResponseTime": "Válaszidő",
+  "systemMonitoringFieldTechnicalCode": "Technikai kód",
+  "systemMonitoringFieldConfigured": "Konfigurálva",
+  "systemMonitoringFieldAffectedCapabilities": "Érintett képességek",
+  "systemMonitoringFieldEvidence": "Bizonyíték",
+  "systemMonitoringFieldComponent": "Komponens",
+  "systemMonitoringYes": "Igen",
+  "systemMonitoringNo": "Nem",
+  "systemMonitoringDiagnosticTitle": "Diagnosztikai javaslat",
+  "systemMonitoringAiDisclaimer": "Csak tájékoztató — a szabály-/AI-javaslat nem automatikus javítási utasítás, és hiányos lehet.",
+  "systemMonitoringDiagnosticPossibleCauses": "Lehetséges okok",
+  "systemMonitoringDiagnosticRecommendedChecks": "Ajánlott ellenőrzések",
+  "systemMonitoringDiagnosticMissingEvidence": "Hiányzó bizonyíték",
+  "systemMonitoringDiagnosticAiGenerated": "AI által generált",
+  "systemMonitoringDiagnosticRuleBased": "Szabályalapú",
+  "systemMonitoringDiagnosticConfidenceLow": "Megbízhatóság: alacsony",
+  "systemMonitoringDiagnosticConfidenceMedium": "Megbízhatóság: közepes",
+  "systemMonitoringDiagnosticConfidenceHigh": "Megbízhatóság: magas",
+  "systemMonitoringDiagnosticConfidenceUnknown": "Megbízhatóság: ismeretlen",
+  "systemMonitoringDiagnosticUrgencyLow": "Sürgősség: alacsony",
+  "systemMonitoringDiagnosticUrgencyMedium": "Sürgősség: közepes",
+  "systemMonitoringDiagnosticUrgencyHigh": "Sürgősség: magas",
+  "systemMonitoringDiagnosticUrgencyCritical": "Sürgősség: kritikus",
+  "systemMonitoringDiagnosticUrgencyUnknown": "Sürgősség: ismeretlen",
+  "systemMonitoringTimelineTitle": "Idővonal",
+  "systemMonitoringTimelineEmpty": "Még nincsenek idővonal-események.",
+  "systemMonitoringNoteLabel": "Megjegyzés",
+  "systemMonitoringNoteRequired": "Legalább 3 karaktert adjon meg.",
+  "systemMonitoringActionAcknowledge": "Nyugtázás",
+  "systemMonitoringActionAddNote": "Megjegyzés hozzáadása",
+  "systemMonitoringActionChangeStatus": "Állapot módosítása",
+  "systemMonitoringActionSuccess": "Felügyeleti művelet mentve.",
+  "systemMonitoringActionError": "A felügyeleti művelet mentése sikertelen.",
+  "systemMonitoringActionAuditNotice": "Ez a művelet rögzítésre kerül a platform audit naplójában."
 }

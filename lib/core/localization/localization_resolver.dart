@@ -58,6 +58,10 @@ String resolveLocalizationKey(BuildContext context, String key) {
     LocalizationKeys.systemHealthLoadError => l10n.systemHealthLoadError,
     LocalizationKeys.systemHealthActionUnavailable =>
       l10n.systemHealthActionUnavailable,
+    LocalizationKeys.systemMonitoringLoadError =>
+      l10n.systemMonitoringLoadError,
+    LocalizationKeys.systemMonitoringActionUnavailable =>
+      l10n.systemMonitoringActionUnavailable,
     LocalizationKeys.supportLoadError => l10n.supportLoadError,
     LocalizationKeys.supportActionUnavailable => l10n.supportActionUnavailable,
     LocalizationKeys.supportActionError => l10n.supportActionError,
@@ -385,6 +389,190 @@ String resolveSystemHealthKey(
     'systemHealthFieldResolvedAt' => l10n.systemHealthFieldResolvedAt,
     'systemHealthFieldFailedJobs' => l10n.systemHealthFieldFailedJobs,
     'systemHealthFieldCorrelationId' => l10n.systemHealthFieldCorrelationId,
+    _ => l10n.errorGenericBody,
+  };
+}
+
+String resolveSystemMonitoringKey(
+  BuildContext context,
+  String key, {
+  Map<String, String> params = const {},
+}) {
+  final l10n = AppLocalizations.of(context);
+  return switch (key) {
+    'systemMonitoringLoadError' => l10n.systemMonitoringLoadError,
+    'systemMonitoringActionUnavailable' =>
+      l10n.systemMonitoringActionUnavailable,
+    'systemMonitoringMockDataBadge' => l10n.systemMonitoringMockDataBadge,
+    'systemMonitoringTitle' => l10n.systemMonitoringTitle,
+    'systemMonitoringOpenIncidentCenter' =>
+      l10n.systemMonitoringOpenIncidentCenter,
+    'systemMonitoringComponentsTitle' => l10n.systemMonitoringComponentsTitle,
+    'systemMonitoringComponentsEmpty' => l10n.systemMonitoringComponentsEmpty,
+    'systemMonitoringActiveIncidentsTitle' =>
+      l10n.systemMonitoringActiveIncidentsTitle,
+    'systemMonitoringViewAllIncidents' => l10n.systemMonitoringViewAllIncidents,
+    'systemMonitoringIncidentsEmpty' => l10n.systemMonitoringIncidentsEmpty,
+    'systemMonitoringIncidentsTitle' => l10n.systemMonitoringIncidentsTitle,
+    'systemMonitoringIncidentDetailTitle' =>
+      l10n.systemMonitoringIncidentDetailTitle,
+    'systemMonitoringComponentDetailTitle' =>
+      l10n.systemMonitoringComponentDetailTitle,
+    'systemMonitoringRefreshAction' => l10n.systemMonitoringRefreshAction,
+    'systemMonitoringPrivacyNotice' => l10n.systemMonitoringPrivacyNotice,
+    'systemMonitoringOverallStatusLabel' =>
+      l10n.systemMonitoringOverallStatusLabel(params['status'] ?? ''),
+    'systemMonitoringLastRefresh' => l10n.systemMonitoringLastRefresh(
+      params['date'] ?? '',
+    ),
+    'systemMonitoringMetricHealthy' => l10n.systemMonitoringMetricHealthy,
+    'systemMonitoringMetricDegraded' => l10n.systemMonitoringMetricDegraded,
+    'systemMonitoringMetricUnhealthy' => l10n.systemMonitoringMetricUnhealthy,
+    'systemMonitoringMetricUnknown' => l10n.systemMonitoringMetricUnknown,
+    'systemMonitoringMetricNotConfigured' =>
+      l10n.systemMonitoringMetricNotConfigured,
+    'systemMonitoringMetricActiveIncidents' =>
+      l10n.systemMonitoringMetricActiveIncidents,
+    'systemMonitoringMetricCriticalIncidents' =>
+      l10n.systemMonitoringMetricCriticalIncidents,
+    'systemMonitoringMetricApiErrors' => l10n.systemMonitoringMetricApiErrors(
+      params['count'] ?? '',
+    ),
+    'systemMonitoringMetricFailedNotifications' =>
+      l10n.systemMonitoringMetricFailedNotifications(params['count'] ?? ''),
+    'systemMonitoringMetricDbLatency' => l10n.systemMonitoringMetricDbLatency(
+      params['ms'] ?? '',
+    ),
+    'systemMonitoringMetricRedisConnected' =>
+      l10n.systemMonitoringMetricRedisConnected,
+    'systemMonitoringMetricRedisDisconnected' =>
+      l10n.systemMonitoringMetricRedisDisconnected,
+    'systemMonitoringStatusHealthy' => l10n.systemMonitoringStatusHealthy,
+    'systemMonitoringStatusDegraded' => l10n.systemMonitoringStatusDegraded,
+    'systemMonitoringStatusUnhealthy' => l10n.systemMonitoringStatusUnhealthy,
+    'systemMonitoringStatusUnknown' => l10n.systemMonitoringStatusUnknown,
+    'systemMonitoringStatusDisabled' => l10n.systemMonitoringStatusDisabled,
+    'systemMonitoringStatusNotConfigured' =>
+      l10n.systemMonitoringStatusNotConfigured,
+    'systemMonitoringFilterAll' => l10n.systemMonitoringFilterAll,
+    'systemMonitoringFilterDegradedUnhealthy' =>
+      l10n.systemMonitoringFilterDegradedUnhealthy,
+    'systemMonitoringFilterOpen' => l10n.systemMonitoringFilterOpen,
+    'systemMonitoringFilterInvestigating' =>
+      l10n.systemMonitoringFilterInvestigating,
+    'systemMonitoringFilterMonitoring' => l10n.systemMonitoringFilterMonitoring,
+    'systemMonitoringFilterResolved' => l10n.systemMonitoringFilterResolved,
+    'systemMonitoringFilterDismissed' => l10n.systemMonitoringFilterDismissed,
+    'systemMonitoringFilterCritical' => l10n.systemMonitoringFilterCritical,
+    'systemMonitoringFilterHigh' => l10n.systemMonitoringFilterHigh,
+    'systemMonitoringIncidentSeverityInfo' =>
+      l10n.systemMonitoringIncidentSeverityInfo,
+    'systemMonitoringIncidentSeverityWarning' =>
+      l10n.systemMonitoringIncidentSeverityWarning,
+    'systemMonitoringIncidentSeverityHigh' =>
+      l10n.systemMonitoringIncidentSeverityHigh,
+    'systemMonitoringIncidentSeverityCritical' =>
+      l10n.systemMonitoringIncidentSeverityCritical,
+    'systemMonitoringIncidentSeverityUnknown' =>
+      l10n.systemMonitoringIncidentSeverityUnknown,
+    'systemMonitoringIncidentStatusOpen' =>
+      l10n.systemMonitoringIncidentStatusOpen,
+    'systemMonitoringIncidentStatusInvestigating' =>
+      l10n.systemMonitoringIncidentStatusInvestigating,
+    'systemMonitoringIncidentStatusMonitoring' =>
+      l10n.systemMonitoringIncidentStatusMonitoring,
+    'systemMonitoringIncidentStatusResolved' =>
+      l10n.systemMonitoringIncidentStatusResolved,
+    'systemMonitoringIncidentStatusDismissed' =>
+      l10n.systemMonitoringIncidentStatusDismissed,
+    'systemMonitoringIncidentStatusUnknown' =>
+      l10n.systemMonitoringIncidentStatusUnknown,
+    'systemMonitoringIncidentSourceAlertRule' =>
+      l10n.systemMonitoringIncidentSourceAlertRule,
+    'systemMonitoringIncidentSourceManual' =>
+      l10n.systemMonitoringIncidentSourceManual,
+    'systemMonitoringIncidentSourceHealthCheck' =>
+      l10n.systemMonitoringIncidentSourceHealthCheck,
+    'systemMonitoringIncidentSourceRecovery' =>
+      l10n.systemMonitoringIncidentSourceRecovery,
+    'systemMonitoringIncidentSourceUnknown' =>
+      l10n.systemMonitoringIncidentSourceUnknown,
+    'systemMonitoringIncidentDetectedAt' =>
+      l10n.systemMonitoringIncidentDetectedAt(params['date'] ?? ''),
+    'systemMonitoringIncidentAcknowledgedAt' =>
+      l10n.systemMonitoringIncidentAcknowledgedAt(params['date'] ?? ''),
+    'systemMonitoringActiveIncidentsBadge' =>
+      l10n.systemMonitoringActiveIncidentsBadge(params['count'] ?? ''),
+    'systemMonitoringResponseTimeMs' => l10n.systemMonitoringResponseTimeMs(
+      params['ms'] ?? '',
+    ),
+    'systemMonitoringDependencyCritical' =>
+      l10n.systemMonitoringDependencyCritical,
+    'systemMonitoringDependencyOptional' =>
+      l10n.systemMonitoringDependencyOptional,
+    'systemMonitoringDependencyColocated' =>
+      l10n.systemMonitoringDependencyColocated,
+    'systemMonitoringDependencyExternal' =>
+      l10n.systemMonitoringDependencyExternal,
+    'systemMonitoringDependencyUnknown' =>
+      l10n.systemMonitoringDependencyUnknown,
+    'systemMonitoringFieldCheckedAt' => l10n.systemMonitoringFieldCheckedAt,
+    'systemMonitoringFieldDependencyType' =>
+      l10n.systemMonitoringFieldDependencyType,
+    'systemMonitoringFieldResponseTime' =>
+      l10n.systemMonitoringFieldResponseTime,
+    'systemMonitoringFieldTechnicalCode' =>
+      l10n.systemMonitoringFieldTechnicalCode,
+    'systemMonitoringFieldConfigured' => l10n.systemMonitoringFieldConfigured,
+    'systemMonitoringFieldAffectedCapabilities' =>
+      l10n.systemMonitoringFieldAffectedCapabilities,
+    'systemMonitoringFieldEvidence' => l10n.systemMonitoringFieldEvidence,
+    'systemMonitoringFieldComponent' => l10n.systemMonitoringFieldComponent,
+    'systemMonitoringYes' => l10n.systemMonitoringYes,
+    'systemMonitoringNo' => l10n.systemMonitoringNo,
+    'systemMonitoringDiagnosticTitle' => l10n.systemMonitoringDiagnosticTitle,
+    'systemMonitoringAiDisclaimer' => l10n.systemMonitoringAiDisclaimer,
+    'systemMonitoringDiagnosticPossibleCauses' =>
+      l10n.systemMonitoringDiagnosticPossibleCauses,
+    'systemMonitoringDiagnosticRecommendedChecks' =>
+      l10n.systemMonitoringDiagnosticRecommendedChecks,
+    'systemMonitoringDiagnosticMissingEvidence' =>
+      l10n.systemMonitoringDiagnosticMissingEvidence,
+    'systemMonitoringDiagnosticAiGenerated' =>
+      l10n.systemMonitoringDiagnosticAiGenerated,
+    'systemMonitoringDiagnosticRuleBased' =>
+      l10n.systemMonitoringDiagnosticRuleBased,
+    'systemMonitoringDiagnosticConfidenceLow' =>
+      l10n.systemMonitoringDiagnosticConfidenceLow,
+    'systemMonitoringDiagnosticConfidenceMedium' =>
+      l10n.systemMonitoringDiagnosticConfidenceMedium,
+    'systemMonitoringDiagnosticConfidenceHigh' =>
+      l10n.systemMonitoringDiagnosticConfidenceHigh,
+    'systemMonitoringDiagnosticConfidenceUnknown' =>
+      l10n.systemMonitoringDiagnosticConfidenceUnknown,
+    'systemMonitoringDiagnosticUrgencyLow' =>
+      l10n.systemMonitoringDiagnosticUrgencyLow,
+    'systemMonitoringDiagnosticUrgencyMedium' =>
+      l10n.systemMonitoringDiagnosticUrgencyMedium,
+    'systemMonitoringDiagnosticUrgencyHigh' =>
+      l10n.systemMonitoringDiagnosticUrgencyHigh,
+    'systemMonitoringDiagnosticUrgencyCritical' =>
+      l10n.systemMonitoringDiagnosticUrgencyCritical,
+    'systemMonitoringDiagnosticUrgencyUnknown' =>
+      l10n.systemMonitoringDiagnosticUrgencyUnknown,
+    'systemMonitoringTimelineTitle' => l10n.systemMonitoringTimelineTitle,
+    'systemMonitoringTimelineEmpty' => l10n.systemMonitoringTimelineEmpty,
+    'systemMonitoringNoteLabel' => l10n.systemMonitoringNoteLabel,
+    'systemMonitoringNoteRequired' => l10n.systemMonitoringNoteRequired,
+    'systemMonitoringActionAcknowledge' =>
+      l10n.systemMonitoringActionAcknowledge,
+    'systemMonitoringActionAddNote' => l10n.systemMonitoringActionAddNote,
+    'systemMonitoringActionChangeStatus' =>
+      l10n.systemMonitoringActionChangeStatus,
+    'systemMonitoringActionSuccess' => l10n.systemMonitoringActionSuccess,
+    'systemMonitoringActionError' => l10n.systemMonitoringActionError,
+    'systemMonitoringActionAuditNotice' =>
+      l10n.systemMonitoringActionAuditNotice,
     _ => l10n.errorGenericBody,
   };
 }

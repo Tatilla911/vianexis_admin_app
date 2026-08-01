@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vianexis_admin_app/app/app_router.dart';
 import 'package:vianexis_admin_app/app/vianexis_admin_app.dart';
 import 'package:vianexis_admin_app/core/auth/admin_auth_state.dart';
 import 'package:vianexis_admin_app/core/auth/admin_user.dart';
+import 'package:vianexis_admin_app/core/locale/app_locale_provider.dart';
 import 'package:vianexis_admin_app/l10n/app_localizations.dart';
 
 class _UnauthenticatedAuthNotifier extends AdminAuthNotifier {
@@ -25,8 +27,27 @@ class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
   }
 }
 
+class _FixedLocaleNotifier extends AppLocaleNotifier {
+  _FixedLocaleNotifier(this.locale);
+
+  final Locale locale;
+
+  @override
+  Locale? build() => locale;
+}
+
+List<dynamic> _huLocaleOverrides() => [
+  appLocaleProvider.overrideWith(
+    () => _FixedLocaleNotifier(const Locale('hu')),
+  ),
+];
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
 
   group('AdminRole capabilities', () {
     test('super_admin can access all destinations', () {
@@ -36,8 +57,14 @@ void main() {
     });
 
     test('support_admin has support-focused access', () {
-      expect(AdminRole.supportAdmin.canAccess(AdminDestination.supportTickets), isTrue);
-      expect(AdminRole.supportAdmin.canAccess(AdminDestination.registrations), isFalse);
+      expect(
+        AdminRole.supportAdmin.canAccess(AdminDestination.supportTickets),
+        isTrue,
+      );
+      expect(
+        AdminRole.supportAdmin.canAccess(AdminDestination.registrations),
+        isFalse,
+      );
     });
 
     test('onboarding_reviewer can access registrations', () {
@@ -52,8 +79,14 @@ void main() {
     });
 
     test('billing_admin can access registrations and settings', () {
-      expect(AdminRole.billingAdmin.canAccess(AdminDestination.registrations), isTrue);
-      expect(AdminRole.billingAdmin.canAccess(AdminDestination.auditLogs), isFalse);
+      expect(
+        AdminRole.billingAdmin.canAccess(AdminDestination.registrations),
+        isTrue,
+      );
+      expect(
+        AdminRole.billingAdmin.canAccess(AdminDestination.auditLogs),
+        isFalse,
+      );
     });
   });
 
@@ -62,6 +95,7 @@ void main() {
       ProviderScope(
         overrides: [
           adminAuthProvider.overrideWith(_UnauthenticatedAuthNotifier.new),
+          ..._huLocaleOverrides(),
         ],
         child: const VianexisAdminApp(),
       ),
@@ -72,7 +106,9 @@ void main() {
     expect(find.text('Belépés'), findsWidgets);
   });
 
-  testWidgets('router redirects unauthenticated user away from dashboard', (tester) async {
+  testWidgets('router redirects unauthenticated user away from dashboard', (
+    tester,
+  ) async {
     final router = GoRouter(
       initialLocation: AdminRoutes.dashboard,
       redirect: (context, state) {
@@ -81,11 +117,13 @@ void main() {
       routes: [
         GoRoute(
           path: AdminRoutes.login,
-          builder: (context, state) => const Scaffold(body: Text('login-route')),
+          builder: (context, state) =>
+              const Scaffold(body: Text('login-route')),
         ),
         GoRoute(
           path: AdminRoutes.dashboard,
-          builder: (context, state) => const Scaffold(body: Text('dashboard-route')),
+          builder: (context, state) =>
+              const Scaffold(body: Text('dashboard-route')),
         ),
       ],
     );
@@ -103,7 +141,9 @@ void main() {
     expect(find.text('dashboard-route'), findsNothing);
   });
 
-  testWidgets('authenticated super_admin sees dashboard navigation', (tester) async {
+  testWidgets('authenticated super_admin sees dashboard navigation', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(400, 800);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(tester.view.resetPhysicalSize);
@@ -121,6 +161,7 @@ void main() {
               ),
             ),
           ),
+          ..._huLocaleOverrides(),
         ],
         child: const VianexisAdminApp(),
       ),
@@ -150,6 +191,7 @@ void main() {
               ),
             ),
           ),
+          ..._huLocaleOverrides(),
         ],
         child: const VianexisAdminApp(),
       ),
