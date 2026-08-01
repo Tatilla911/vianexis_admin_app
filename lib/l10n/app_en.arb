@@ -297,6 +297,42 @@
   "registrationDecisionRequestInfoConfirm": "Send request",
   "registrationDecisionSuccess": "Registration decision saved.",
   "registrationDecisionError": "Could not save registration decision.",
+  "registrationApproveSuccess": "Company approved. Invite created.",
+  "registrationApproveOutcomeTitle": "Approval result",
+  "registrationFieldApplicationReference": "Application reference",
+  "registrationFieldCompanyId": "Company ID",
+  "registrationFieldAdminEmail": "Company admin email",
+  "registrationFieldInviteStatus": "Invite delivery",
+  "registrationFieldInviteExpiresAt": "Invite expires",
+  "registrationFieldInviteTokenId": "Invite token ID",
+  "registrationInviteDeliverySent": "Sent",
+  "registrationInviteDeliveryPending": "Invite created; delivery pending or failed (SMTP)",
+  "registrationInviteDeliveryAccepted": "Accepted",
+  "registrationInviteDeliveryExpired": "Expired",
+  "registrationInviteDeliveryRevoked": "Revoked",
+  "registrationInviteResend": "Resend invite",
+  "registrationInviteRevoke": "Revoke invite",
+  "registrationInviteResendSuccess": "Invite resent (new token issued).",
+  "registrationInviteRevokeSuccess": "Outstanding invite tokens revoked.",
+  "registrationOpenCompany": "Open company",
+  "registrationPermissionPolicyTitle": "Approval permission",
+  "registrationPermissionSuperAdminOnly": "Company approve/reject requires super_admin. Reviewers can view the queue only.",
+  "applicationsCompatBanner": "Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.",
+  "applicationsOpenRegistrations": "Open Registrations",
+  "applicationsCompanyUseRegistrations": "Company applications are decided in Registrations (primary inbox).",
+  "applicationsFilterCompany": "Company",
+  "applicationsFilterDriver": "Driver",
+  "applicationsFilterPartner": "Partner",
+  "applicationsFilterNew": "New",
+  "applicationsEmpty": "No applications",
+  "applicationsLoadError": "Error: {error}",
+  "@applicationsLoadError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "systemHealthLoadError": "Could not load system health data.",
   "systemHealthActionUnavailable": "This action is not available on the connected backend yet.",
   "systemHealthMockDataBadge": "Mock data",
@@ -1725,6 +1761,38 @@
   "notificationsInAppOnlyBody": "Push channels are not enabled in this phase.",
   "notificationsDetailTitle": "Notification detail",
   "notificationsNotFound": "Notification not found.",
+  "notificationsLoadError": "Failed: {error}",
+  "@notificationsLoadError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsTypeLabel": "Type: {value}",
+  "@notificationsTypeLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsSeverityLabel": "Severity: {value}",
+  "@notificationsSeverityLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsInAppOnlyLabel": "In-app only: {value}",
+  "@notificationsInAppOnlyLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "notificationsPreferencesTitle": "Notification preferences",
   "notificationsSavePreferences": "Save preferences",
   "notificationsSaved": "Preferences saved.",
@@ -1754,6 +1822,62 @@
   "settingsNotificationsSection": "Notifications",
   "settingsNotificationsBody": "Manage in-app notification preferences.",
   "settingsOpenNotificationPreferences": "Open notification preferences",
+  "settingsOpenSoundSettings": "Sounds and notifications",
+  "settingsSoundTitle": "Sounds and notifications",
+  "settingsSoundDescription": "Choose sounds for admin alerts, messages, and action feedback.",
+  "settingsSoundAlarm": "Critical platform alert",
+  "settingsSoundMessage": "Normal message",
+  "settingsSoundRing": "Incoming support/call signal",
+  "settingsSoundSign": "Successful admin action feedback",
+  "settingsSoundEnabled": "Sounds enabled",
+  "settingsSoundMuted": "Sounds muted",
+  "settingsSoundPreview": "Preview",
+  "settingsSoundStopPreview": "Stop preview",
+  "settingsSoundRestoreDefault": "Restore defaults",
+  "settingsSoundVolume": "Volume",
+  "settingsSoundSystemLimitations": "Foreground playback uses in-app audio. New alerts also raise a system notification with channel sounds while the admin session is active. Full background push still requires FCM/APNS credentials.",
+  "settingsSoundCriticalAlert": "Critical platform alerts may require acknowledgment and can override mute settings when the platform demands it.",
+  "settingsSoundSelectionSaved": "Sound selection saved",
+  "settingsSoundPerEventTitle": "Per-event sounds",
+  "settingsSoundPerEventDescription": "Screen open never plays sound. Critical events stay on the alarm category.",
+  "settingsSoundEventDefault": "Default: {soundId}",
+  "@settingsSoundEventDefault": {
+    "placeholders": {
+      "soundId": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSoundTestAlert": "Send test alert",
+  "settingsSoundTestAlertTitle": "ViaNexis Admin test alert",
+  "settingsSoundTestAlertBody": "If you can see this banner and hear the alarm, alerts are working.",
+  "settingsSoundTestAlertSent": "Test alert sent",
+  "settingsSoundPermissionDenied": "Notification permission is required to show alerts on the lock screen.",
+  "settingsSoundEventCompanyRegistration": "New company registration",
+  "settingsSoundEventDriverRegistration": "New driver registration",
+  "settingsSoundEventSupportTicket": "New support ticket",
+  "settingsSoundEventSupportAccess": "Support access request",
+  "settingsSoundEventSystemCritical": "Critical system state",
+  "settingsSoundEventAuditSecurity": "Audit security event",
+  "settingsSoundEventBilling": "Billing problem",
+  "settingsSoundEventBulkOnboarding": "Bulk onboarding done",
+  "settingsSoundEventApprovalSuccess": "Admin action success",
+  "settingsSoundEventIncomingContact": "Incoming contact request",
+  "settingsSoundAlarm1": "Alarm tone 1",
+  "settingsSoundAlarm2": "Alarm tone 2",
+  "settingsSoundAlarm3": "Alarm tone 3",
+  "settingsSoundMessage1": "Message tone 1",
+  "settingsSoundMessage2": "Message tone 2",
+  "settingsSoundMessage3": "Message tone 3",
+  "settingsSoundMessage4": "Message tone 4",
+  "settingsSoundRing1": "Ring tone 1",
+  "settingsSoundRing2": "Ring tone 2",
+  "settingsSoundRing3": "Ring tone 3",
+  "settingsSoundRing4": "Ring tone 4",
+  "settingsSoundSign1": "Success tone 1",
+  "settingsSoundSign2": "Success tone 2",
+  "settingsSoundSign3": "Success tone 3",
+  "settingsSoundSign4": "Success tone 4",
   "translationPanelTitle": "Translation",
   "translationProviderDisabled": "Translation provider not configured",
   "translationTargetLanguageLabel": "Target language",
@@ -2210,15 +2334,9 @@
   "operationsExchangeMetricsSummary": "{total} records · {disputed} disputed · {missing} missing",
   "@operationsExchangeMetricsSummary": {
     "placeholders": {
-      "total": {
-        "type": "int"
-      },
-      "disputed": {
-        "type": "int"
-      },
-      "missing": {
-        "type": "int"
-      }
+      "total": {"type": "int"},
+      "disputed": {"type": "int"},
+      "missing": {"type": "int"}
     }
   },
   "operationsExchangeRecordsTitle": "Pallet/packaging records",
@@ -2351,28 +2469,5 @@
   "companyExchangeDeactivatePackagingItem": "Deactivate",
   "companyExchangeReactivatePackagingItem": "Reactivate",
   "companyExchangePackagingItemEmpty": "No packaging items have been configured for this company yet.",
-  "companyExchangeCancel": "Cancel",
-  "registrationApproveSuccess": "Company approved. Invite created.",
-  "registrationApproveOutcomeTitle": "Approval result",
-  "registrationFieldApplicationReference": "Application reference",
-  "registrationFieldCompanyId": "Company ID",
-  "registrationFieldAdminEmail": "Company admin email",
-  "registrationFieldInviteStatus": "Invite delivery",
-  "registrationFieldInviteExpiresAt": "Invite expires",
-  "registrationFieldInviteTokenId": "Invite token ID",
-  "registrationInviteDeliverySent": "Sent",
-  "registrationInviteDeliveryPending": "Invite created; delivery pending or failed (SMTP)",
-  "registrationInviteDeliveryAccepted": "Accepted",
-  "registrationInviteDeliveryExpired": "Expired",
-  "registrationInviteDeliveryRevoked": "Revoked",
-  "registrationInviteResend": "Resend invite",
-  "registrationInviteRevoke": "Revoke invite",
-  "registrationInviteResendSuccess": "Invite resent (new token issued).",
-  "registrationInviteRevokeSuccess": "Outstanding invite tokens revoked.",
-  "registrationOpenCompany": "Open company",
-  "registrationPermissionPolicyTitle": "Approval permission",
-  "registrationPermissionSuperAdminOnly": "Company approve/reject requires super_admin. Reviewers can view the queue only.",
-  "applicationsCompatBanner": "Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.",
-  "applicationsOpenRegistrations": "Open Registrations",
-  "applicationsCompanyUseRegistrations": "Company applications are decided in Registrations (primary inbox)."
+  "companyExchangeCancel": "Cancel"
 }

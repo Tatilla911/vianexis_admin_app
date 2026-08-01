@@ -17,7 +17,8 @@ class NotificationDetailScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.notificationsDetailTitle)),
       body: asyncItems.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(child: Text('Failed: $error')),
+        error: (error, _) =>
+            Center(child: Text(l10n.notificationsLoadError('$error'))),
         data: (items) {
           final index = items.indexWhere((e) => e.id == notificationId);
           final item = index < 0 ? null : items[index];
@@ -31,9 +32,13 @@ class NotificationDetailScreen extends ConsumerWidget {
               const SizedBox(height: 12),
               Text(item.body),
               const SizedBox(height: 12),
-              Text('Type: ${item.type.backendValue}'),
-              Text('Severity: ${item.severity.backendValue}'),
-              Text('In-app only: ${item.inAppOnly ? 'yes' : 'no'}'),
+              Text(l10n.notificationsTypeLabel(item.type.backendValue)),
+              Text(l10n.notificationsSeverityLabel(item.severity.backendValue)),
+              Text(
+                l10n.notificationsInAppOnlyLabel(
+                  item.inAppOnly ? l10n.notificationsYes : l10n.notificationsNo,
+                ),
+              ),
               const SizedBox(height: 12),
               if (item.metadata.isNotEmpty)
                 ...item.metadata.entries.map((e) => Text('${e.key}: ${e.value}')),

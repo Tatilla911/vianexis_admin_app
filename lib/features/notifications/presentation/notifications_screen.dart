@@ -57,7 +57,8 @@ class NotificationsScreen extends ConsumerWidget {
                   },
                 );
               },
-              error: (error, _) => Center(child: Text('Failed: $error')),
+              error: (error, _) =>
+                  Center(child: Text(l10n.notificationsLoadError('$error'))),
               loading: () => const Center(child: CircularProgressIndicator()),
             ),
           ),

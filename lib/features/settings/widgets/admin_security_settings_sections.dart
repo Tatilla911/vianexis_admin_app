@@ -441,7 +441,8 @@ class AdminLanguageSettingsSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final locale = ref.watch(appLocaleProvider);
-    final selected = locale.languageCode;
+    final selected =
+        locale?.languageCode ?? Localizations.localeOf(context).languageCode;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

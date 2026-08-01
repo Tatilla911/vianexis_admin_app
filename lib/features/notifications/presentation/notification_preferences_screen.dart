@@ -18,7 +18,8 @@ class NotificationPreferencesScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.notificationsPreferencesTitle)),
       body: asyncValue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(child: Text('Failed: $error')),
+        error: (error, _) =>
+            Center(child: Text(l10n.notificationsLoadError('$error'))),
         data: (value) => ListView(
           padding: const EdgeInsets.all(16),
           children: [

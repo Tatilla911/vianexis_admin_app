@@ -795,6 +795,101 @@ class AppLocalizationsEn extends AppLocalizations {
       'Could not save registration decision.';
 
   @override
+  String get registrationApproveSuccess => 'Company approved. Invite created.';
+
+  @override
+  String get registrationApproveOutcomeTitle => 'Approval result';
+
+  @override
+  String get registrationFieldApplicationReference => 'Application reference';
+
+  @override
+  String get registrationFieldCompanyId => 'Company ID';
+
+  @override
+  String get registrationFieldAdminEmail => 'Company admin email';
+
+  @override
+  String get registrationFieldInviteStatus => 'Invite delivery';
+
+  @override
+  String get registrationFieldInviteExpiresAt => 'Invite expires';
+
+  @override
+  String get registrationFieldInviteTokenId => 'Invite token ID';
+
+  @override
+  String get registrationInviteDeliverySent => 'Sent';
+
+  @override
+  String get registrationInviteDeliveryPending =>
+      'Invite created; delivery pending or failed (SMTP)';
+
+  @override
+  String get registrationInviteDeliveryAccepted => 'Accepted';
+
+  @override
+  String get registrationInviteDeliveryExpired => 'Expired';
+
+  @override
+  String get registrationInviteDeliveryRevoked => 'Revoked';
+
+  @override
+  String get registrationInviteResend => 'Resend invite';
+
+  @override
+  String get registrationInviteRevoke => 'Revoke invite';
+
+  @override
+  String get registrationInviteResendSuccess =>
+      'Invite resent (new token issued).';
+
+  @override
+  String get registrationInviteRevokeSuccess =>
+      'Outstanding invite tokens revoked.';
+
+  @override
+  String get registrationOpenCompany => 'Open company';
+
+  @override
+  String get registrationPermissionPolicyTitle => 'Approval permission';
+
+  @override
+  String get registrationPermissionSuperAdminOnly =>
+      'Company approve/reject requires super_admin. Reviewers can view the queue only.';
+
+  @override
+  String get applicationsCompatBanner =>
+      'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.';
+
+  @override
+  String get applicationsOpenRegistrations => 'Open Registrations';
+
+  @override
+  String get applicationsCompanyUseRegistrations =>
+      'Company applications are decided in Registrations (primary inbox).';
+
+  @override
+  String get applicationsFilterCompany => 'Company';
+
+  @override
+  String get applicationsFilterDriver => 'Driver';
+
+  @override
+  String get applicationsFilterPartner => 'Partner';
+
+  @override
+  String get applicationsFilterNew => 'New';
+
+  @override
+  String get applicationsEmpty => 'No applications';
+
+  @override
+  String applicationsLoadError(String error) {
+    return 'Error: $error';
+  }
+
+  @override
   String get systemHealthLoadError => 'Could not load system health data.';
 
   @override
@@ -3751,6 +3846,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notificationsNotFound => 'Notification not found.';
 
   @override
+  String notificationsLoadError(String error) {
+    return 'Failed: $error';
+  }
+
+  @override
+  String notificationsTypeLabel(String value) {
+    return 'Type: $value';
+  }
+
+  @override
+  String notificationsSeverityLabel(String value) {
+    return 'Severity: $value';
+  }
+
+  @override
+  String notificationsInAppOnlyLabel(String value) {
+    return 'In-app only: $value';
+  }
+
+  @override
   String get notificationsPreferencesTitle => 'Notification preferences';
 
   @override
@@ -3843,6 +3958,162 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsOpenNotificationPreferences =>
       'Open notification preferences';
+
+  @override
+  String get settingsOpenSoundSettings => 'Sounds and notifications';
+
+  @override
+  String get settingsSoundTitle => 'Sounds and notifications';
+
+  @override
+  String get settingsSoundDescription =>
+      'Choose sounds for admin alerts, messages, and action feedback.';
+
+  @override
+  String get settingsSoundAlarm => 'Critical platform alert';
+
+  @override
+  String get settingsSoundMessage => 'Normal message';
+
+  @override
+  String get settingsSoundRing => 'Incoming support/call signal';
+
+  @override
+  String get settingsSoundSign => 'Successful admin action feedback';
+
+  @override
+  String get settingsSoundEnabled => 'Sounds enabled';
+
+  @override
+  String get settingsSoundMuted => 'Sounds muted';
+
+  @override
+  String get settingsSoundPreview => 'Preview';
+
+  @override
+  String get settingsSoundStopPreview => 'Stop preview';
+
+  @override
+  String get settingsSoundRestoreDefault => 'Restore defaults';
+
+  @override
+  String get settingsSoundVolume => 'Volume';
+
+  @override
+  String get settingsSoundSystemLimitations =>
+      'Foreground playback uses in-app audio. New alerts also raise a system notification with channel sounds while the admin session is active. Full background push still requires FCM/APNS credentials.';
+
+  @override
+  String get settingsSoundCriticalAlert =>
+      'Critical platform alerts may require acknowledgment and can override mute settings when the platform demands it.';
+
+  @override
+  String get settingsSoundSelectionSaved => 'Sound selection saved';
+
+  @override
+  String get settingsSoundPerEventTitle => 'Per-event sounds';
+
+  @override
+  String get settingsSoundPerEventDescription =>
+      'Screen open never plays sound. Critical events stay on the alarm category.';
+
+  @override
+  String settingsSoundEventDefault(String soundId) {
+    return 'Default: $soundId';
+  }
+
+  @override
+  String get settingsSoundTestAlert => 'Send test alert';
+
+  @override
+  String get settingsSoundTestAlertTitle => 'ViaNexis Admin test alert';
+
+  @override
+  String get settingsSoundTestAlertBody =>
+      'If you can see this banner and hear the alarm, alerts are working.';
+
+  @override
+  String get settingsSoundTestAlertSent => 'Test alert sent';
+
+  @override
+  String get settingsSoundPermissionDenied =>
+      'Notification permission is required to show alerts on the lock screen.';
+
+  @override
+  String get settingsSoundEventCompanyRegistration =>
+      'New company registration';
+
+  @override
+  String get settingsSoundEventDriverRegistration => 'New driver registration';
+
+  @override
+  String get settingsSoundEventSupportTicket => 'New support ticket';
+
+  @override
+  String get settingsSoundEventSupportAccess => 'Support access request';
+
+  @override
+  String get settingsSoundEventSystemCritical => 'Critical system state';
+
+  @override
+  String get settingsSoundEventAuditSecurity => 'Audit security event';
+
+  @override
+  String get settingsSoundEventBilling => 'Billing problem';
+
+  @override
+  String get settingsSoundEventBulkOnboarding => 'Bulk onboarding done';
+
+  @override
+  String get settingsSoundEventApprovalSuccess => 'Admin action success';
+
+  @override
+  String get settingsSoundEventIncomingContact => 'Incoming contact request';
+
+  @override
+  String get settingsSoundAlarm1 => 'Alarm tone 1';
+
+  @override
+  String get settingsSoundAlarm2 => 'Alarm tone 2';
+
+  @override
+  String get settingsSoundAlarm3 => 'Alarm tone 3';
+
+  @override
+  String get settingsSoundMessage1 => 'Message tone 1';
+
+  @override
+  String get settingsSoundMessage2 => 'Message tone 2';
+
+  @override
+  String get settingsSoundMessage3 => 'Message tone 3';
+
+  @override
+  String get settingsSoundMessage4 => 'Message tone 4';
+
+  @override
+  String get settingsSoundRing1 => 'Ring tone 1';
+
+  @override
+  String get settingsSoundRing2 => 'Ring tone 2';
+
+  @override
+  String get settingsSoundRing3 => 'Ring tone 3';
+
+  @override
+  String get settingsSoundRing4 => 'Ring tone 4';
+
+  @override
+  String get settingsSoundSign1 => 'Success tone 1';
+
+  @override
+  String get settingsSoundSign2 => 'Success tone 2';
+
+  @override
+  String get settingsSoundSign3 => 'Success tone 3';
+
+  @override
+  String get settingsSoundSign4 => 'Success tone 4';
 
   @override
   String get translationPanelTitle => 'Translation';
@@ -5246,79 +5517,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get companyExchangeCancel => 'Cancel';
-
-  @override
-  String get registrationApproveSuccess => 'Company approved. Invite created.';
-
-  @override
-  String get registrationApproveOutcomeTitle => 'Approval result';
-
-  @override
-  String get registrationFieldApplicationReference => 'Application reference';
-
-  @override
-  String get registrationFieldCompanyId => 'Company ID';
-
-  @override
-  String get registrationFieldAdminEmail => 'Company admin email';
-
-  @override
-  String get registrationFieldInviteStatus => 'Invite delivery';
-
-  @override
-  String get registrationFieldInviteExpiresAt => 'Invite expires';
-
-  @override
-  String get registrationFieldInviteTokenId => 'Invite token ID';
-
-  @override
-  String get registrationInviteDeliverySent => 'Sent';
-
-  @override
-  String get registrationInviteDeliveryPending =>
-      'Invite created; delivery pending or failed (SMTP)';
-
-  @override
-  String get registrationInviteDeliveryAccepted => 'Accepted';
-
-  @override
-  String get registrationInviteDeliveryExpired => 'Expired';
-
-  @override
-  String get registrationInviteDeliveryRevoked => 'Revoked';
-
-  @override
-  String get registrationInviteResend => 'Resend invite';
-
-  @override
-  String get registrationInviteRevoke => 'Revoke invite';
-
-  @override
-  String get registrationInviteResendSuccess =>
-      'Invite resent (new token issued).';
-
-  @override
-  String get registrationInviteRevokeSuccess =>
-      'Outstanding invite tokens revoked.';
-
-  @override
-  String get registrationOpenCompany => 'Open company';
-
-  @override
-  String get registrationPermissionPolicyTitle => 'Approval permission';
-
-  @override
-  String get registrationPermissionSuperAdminOnly =>
-      'Company approve/reject requires super_admin. Reviewers can view the queue only.';
-
-  @override
-  String get applicationsCompatBanner =>
-      'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.';
-
-  @override
-  String get applicationsOpenRegistrations => 'Open Registrations';
-
-  @override
-  String get applicationsCompanyUseRegistrations =>
-      'Company applications are decided in Registrations (primary inbox).';
 }

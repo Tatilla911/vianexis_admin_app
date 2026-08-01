@@ -1544,6 +1544,180 @@ abstract class AppLocalizations {
   /// **'Could not save registration decision.'**
   String get registrationDecisionError;
 
+  /// No description provided for @registrationApproveSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Company approved. Invite created.'**
+  String get registrationApproveSuccess;
+
+  /// No description provided for @registrationApproveOutcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Approval result'**
+  String get registrationApproveOutcomeTitle;
+
+  /// No description provided for @registrationFieldApplicationReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Application reference'**
+  String get registrationFieldApplicationReference;
+
+  /// No description provided for @registrationFieldCompanyId.
+  ///
+  /// In en, this message translates to:
+  /// **'Company ID'**
+  String get registrationFieldCompanyId;
+
+  /// No description provided for @registrationFieldAdminEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Company admin email'**
+  String get registrationFieldAdminEmail;
+
+  /// No description provided for @registrationFieldInviteStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite delivery'**
+  String get registrationFieldInviteStatus;
+
+  /// No description provided for @registrationFieldInviteExpiresAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite expires'**
+  String get registrationFieldInviteExpiresAt;
+
+  /// No description provided for @registrationFieldInviteTokenId.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite token ID'**
+  String get registrationFieldInviteTokenId;
+
+  /// No description provided for @registrationInviteDeliverySent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get registrationInviteDeliverySent;
+
+  /// No description provided for @registrationInviteDeliveryPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite created; delivery pending or failed (SMTP)'**
+  String get registrationInviteDeliveryPending;
+
+  /// No description provided for @registrationInviteDeliveryAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get registrationInviteDeliveryAccepted;
+
+  /// No description provided for @registrationInviteDeliveryExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get registrationInviteDeliveryExpired;
+
+  /// No description provided for @registrationInviteDeliveryRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoked'**
+  String get registrationInviteDeliveryRevoked;
+
+  /// No description provided for @registrationInviteResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend invite'**
+  String get registrationInviteResend;
+
+  /// No description provided for @registrationInviteRevoke.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke invite'**
+  String get registrationInviteRevoke;
+
+  /// No description provided for @registrationInviteResendSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite resent (new token issued).'**
+  String get registrationInviteResendSuccess;
+
+  /// No description provided for @registrationInviteRevokeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Outstanding invite tokens revoked.'**
+  String get registrationInviteRevokeSuccess;
+
+  /// No description provided for @registrationOpenCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Open company'**
+  String get registrationOpenCompany;
+
+  /// No description provided for @registrationPermissionPolicyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Approval permission'**
+  String get registrationPermissionPolicyTitle;
+
+  /// No description provided for @registrationPermissionSuperAdminOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Company approve/reject requires super_admin. Reviewers can view the queue only.'**
+  String get registrationPermissionSuperAdminOnly;
+
+  /// No description provided for @applicationsCompatBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.'**
+  String get applicationsCompatBanner;
+
+  /// No description provided for @applicationsOpenRegistrations.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Registrations'**
+  String get applicationsOpenRegistrations;
+
+  /// No description provided for @applicationsCompanyUseRegistrations.
+  ///
+  /// In en, this message translates to:
+  /// **'Company applications are decided in Registrations (primary inbox).'**
+  String get applicationsCompanyUseRegistrations;
+
+  /// No description provided for @applicationsFilterCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get applicationsFilterCompany;
+
+  /// No description provided for @applicationsFilterDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get applicationsFilterDriver;
+
+  /// No description provided for @applicationsFilterPartner.
+  ///
+  /// In en, this message translates to:
+  /// **'Partner'**
+  String get applicationsFilterPartner;
+
+  /// No description provided for @applicationsFilterNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get applicationsFilterNew;
+
+  /// No description provided for @applicationsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No applications'**
+  String get applicationsEmpty;
+
+  /// No description provided for @applicationsLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {error}'**
+  String applicationsLoadError(String error);
+
   /// No description provided for @systemHealthLoadError.
   ///
   /// In en, this message translates to:
@@ -6938,6 +7112,30 @@ abstract class AppLocalizations {
   /// **'Notification not found.'**
   String get notificationsNotFound;
 
+  /// No description provided for @notificationsLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed: {error}'**
+  String notificationsLoadError(String error);
+
+  /// No description provided for @notificationsTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Type: {value}'**
+  String notificationsTypeLabel(String value);
+
+  /// No description provided for @notificationsSeverityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Severity: {value}'**
+  String notificationsSeverityLabel(String value);
+
+  /// No description provided for @notificationsInAppOnlyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'In-app only: {value}'**
+  String notificationsInAppOnlyLabel(String value);
+
   /// No description provided for @notificationsPreferencesTitle.
   ///
   /// In en, this message translates to:
@@ -7111,6 +7309,300 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open notification preferences'**
   String get settingsOpenNotificationPreferences;
+
+  /// No description provided for @settingsOpenSoundSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Sounds and notifications'**
+  String get settingsOpenSoundSettings;
+
+  /// No description provided for @settingsSoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sounds and notifications'**
+  String get settingsSoundTitle;
+
+  /// No description provided for @settingsSoundDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose sounds for admin alerts, messages, and action feedback.'**
+  String get settingsSoundDescription;
+
+  /// No description provided for @settingsSoundAlarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical platform alert'**
+  String get settingsSoundAlarm;
+
+  /// No description provided for @settingsSoundMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Normal message'**
+  String get settingsSoundMessage;
+
+  /// No description provided for @settingsSoundRing.
+  ///
+  /// In en, this message translates to:
+  /// **'Incoming support/call signal'**
+  String get settingsSoundRing;
+
+  /// No description provided for @settingsSoundSign.
+  ///
+  /// In en, this message translates to:
+  /// **'Successful admin action feedback'**
+  String get settingsSoundSign;
+
+  /// No description provided for @settingsSoundEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Sounds enabled'**
+  String get settingsSoundEnabled;
+
+  /// No description provided for @settingsSoundMuted.
+  ///
+  /// In en, this message translates to:
+  /// **'Sounds muted'**
+  String get settingsSoundMuted;
+
+  /// No description provided for @settingsSoundPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get settingsSoundPreview;
+
+  /// No description provided for @settingsSoundStopPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop preview'**
+  String get settingsSoundStopPreview;
+
+  /// No description provided for @settingsSoundRestoreDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore defaults'**
+  String get settingsSoundRestoreDefault;
+
+  /// No description provided for @settingsSoundVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume'**
+  String get settingsSoundVolume;
+
+  /// No description provided for @settingsSoundSystemLimitations.
+  ///
+  /// In en, this message translates to:
+  /// **'Foreground playback uses in-app audio. New alerts also raise a system notification with channel sounds while the admin session is active. Full background push still requires FCM/APNS credentials.'**
+  String get settingsSoundSystemLimitations;
+
+  /// No description provided for @settingsSoundCriticalAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical platform alerts may require acknowledgment and can override mute settings when the platform demands it.'**
+  String get settingsSoundCriticalAlert;
+
+  /// No description provided for @settingsSoundSelectionSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound selection saved'**
+  String get settingsSoundSelectionSaved;
+
+  /// No description provided for @settingsSoundPerEventTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Per-event sounds'**
+  String get settingsSoundPerEventTitle;
+
+  /// No description provided for @settingsSoundPerEventDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Screen open never plays sound. Critical events stay on the alarm category.'**
+  String get settingsSoundPerEventDescription;
+
+  /// No description provided for @settingsSoundEventDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Default: {soundId}'**
+  String settingsSoundEventDefault(String soundId);
+
+  /// No description provided for @settingsSoundTestAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Send test alert'**
+  String get settingsSoundTestAlert;
+
+  /// No description provided for @settingsSoundTestAlertTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'ViaNexis Admin test alert'**
+  String get settingsSoundTestAlertTitle;
+
+  /// No description provided for @settingsSoundTestAlertBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If you can see this banner and hear the alarm, alerts are working.'**
+  String get settingsSoundTestAlertBody;
+
+  /// No description provided for @settingsSoundTestAlertSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Test alert sent'**
+  String get settingsSoundTestAlertSent;
+
+  /// No description provided for @settingsSoundPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification permission is required to show alerts on the lock screen.'**
+  String get settingsSoundPermissionDenied;
+
+  /// No description provided for @settingsSoundEventCompanyRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'New company registration'**
+  String get settingsSoundEventCompanyRegistration;
+
+  /// No description provided for @settingsSoundEventDriverRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'New driver registration'**
+  String get settingsSoundEventDriverRegistration;
+
+  /// No description provided for @settingsSoundEventSupportTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'New support ticket'**
+  String get settingsSoundEventSupportTicket;
+
+  /// No description provided for @settingsSoundEventSupportAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Support access request'**
+  String get settingsSoundEventSupportAccess;
+
+  /// No description provided for @settingsSoundEventSystemCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical system state'**
+  String get settingsSoundEventSystemCritical;
+
+  /// No description provided for @settingsSoundEventAuditSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit security event'**
+  String get settingsSoundEventAuditSecurity;
+
+  /// No description provided for @settingsSoundEventBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing problem'**
+  String get settingsSoundEventBilling;
+
+  /// No description provided for @settingsSoundEventBulkOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk onboarding done'**
+  String get settingsSoundEventBulkOnboarding;
+
+  /// No description provided for @settingsSoundEventApprovalSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin action success'**
+  String get settingsSoundEventApprovalSuccess;
+
+  /// No description provided for @settingsSoundEventIncomingContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Incoming contact request'**
+  String get settingsSoundEventIncomingContact;
+
+  /// No description provided for @settingsSoundAlarm1.
+  ///
+  /// In en, this message translates to:
+  /// **'Alarm tone 1'**
+  String get settingsSoundAlarm1;
+
+  /// No description provided for @settingsSoundAlarm2.
+  ///
+  /// In en, this message translates to:
+  /// **'Alarm tone 2'**
+  String get settingsSoundAlarm2;
+
+  /// No description provided for @settingsSoundAlarm3.
+  ///
+  /// In en, this message translates to:
+  /// **'Alarm tone 3'**
+  String get settingsSoundAlarm3;
+
+  /// No description provided for @settingsSoundMessage1.
+  ///
+  /// In en, this message translates to:
+  /// **'Message tone 1'**
+  String get settingsSoundMessage1;
+
+  /// No description provided for @settingsSoundMessage2.
+  ///
+  /// In en, this message translates to:
+  /// **'Message tone 2'**
+  String get settingsSoundMessage2;
+
+  /// No description provided for @settingsSoundMessage3.
+  ///
+  /// In en, this message translates to:
+  /// **'Message tone 3'**
+  String get settingsSoundMessage3;
+
+  /// No description provided for @settingsSoundMessage4.
+  ///
+  /// In en, this message translates to:
+  /// **'Message tone 4'**
+  String get settingsSoundMessage4;
+
+  /// No description provided for @settingsSoundRing1.
+  ///
+  /// In en, this message translates to:
+  /// **'Ring tone 1'**
+  String get settingsSoundRing1;
+
+  /// No description provided for @settingsSoundRing2.
+  ///
+  /// In en, this message translates to:
+  /// **'Ring tone 2'**
+  String get settingsSoundRing2;
+
+  /// No description provided for @settingsSoundRing3.
+  ///
+  /// In en, this message translates to:
+  /// **'Ring tone 3'**
+  String get settingsSoundRing3;
+
+  /// No description provided for @settingsSoundRing4.
+  ///
+  /// In en, this message translates to:
+  /// **'Ring tone 4'**
+  String get settingsSoundRing4;
+
+  /// No description provided for @settingsSoundSign1.
+  ///
+  /// In en, this message translates to:
+  /// **'Success tone 1'**
+  String get settingsSoundSign1;
+
+  /// No description provided for @settingsSoundSign2.
+  ///
+  /// In en, this message translates to:
+  /// **'Success tone 2'**
+  String get settingsSoundSign2;
+
+  /// No description provided for @settingsSoundSign3.
+  ///
+  /// In en, this message translates to:
+  /// **'Success tone 3'**
+  String get settingsSoundSign3;
+
+  /// No description provided for @settingsSoundSign4.
+  ///
+  /// In en, this message translates to:
+  /// **'Success tone 4'**
+  String get settingsSoundSign4;
 
   /// No description provided for @translationPanelTitle.
   ///
@@ -9605,144 +10097,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get companyExchangeCancel;
-
-  /// No description provided for @registrationApproveSuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Company approved. Invite created.'**
-  String get registrationApproveSuccess;
-
-  /// No description provided for @registrationApproveOutcomeTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Approval result'**
-  String get registrationApproveOutcomeTitle;
-
-  /// No description provided for @registrationFieldApplicationReference.
-  ///
-  /// In en, this message translates to:
-  /// **'Application reference'**
-  String get registrationFieldApplicationReference;
-
-  /// No description provided for @registrationFieldCompanyId.
-  ///
-  /// In en, this message translates to:
-  /// **'Company ID'**
-  String get registrationFieldCompanyId;
-
-  /// No description provided for @registrationFieldAdminEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Company admin email'**
-  String get registrationFieldAdminEmail;
-
-  /// No description provided for @registrationFieldInviteStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Invite delivery'**
-  String get registrationFieldInviteStatus;
-
-  /// No description provided for @registrationFieldInviteExpiresAt.
-  ///
-  /// In en, this message translates to:
-  /// **'Invite expires'**
-  String get registrationFieldInviteExpiresAt;
-
-  /// No description provided for @registrationFieldInviteTokenId.
-  ///
-  /// In en, this message translates to:
-  /// **'Invite token ID'**
-  String get registrationFieldInviteTokenId;
-
-  /// No description provided for @registrationInviteDeliverySent.
-  ///
-  /// In en, this message translates to:
-  /// **'Sent'**
-  String get registrationInviteDeliverySent;
-
-  /// No description provided for @registrationInviteDeliveryPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Invite created; delivery pending or failed (SMTP)'**
-  String get registrationInviteDeliveryPending;
-
-  /// No description provided for @registrationInviteDeliveryAccepted.
-  ///
-  /// In en, this message translates to:
-  /// **'Accepted'**
-  String get registrationInviteDeliveryAccepted;
-
-  /// No description provided for @registrationInviteDeliveryExpired.
-  ///
-  /// In en, this message translates to:
-  /// **'Expired'**
-  String get registrationInviteDeliveryExpired;
-
-  /// No description provided for @registrationInviteDeliveryRevoked.
-  ///
-  /// In en, this message translates to:
-  /// **'Revoked'**
-  String get registrationInviteDeliveryRevoked;
-
-  /// No description provided for @registrationInviteResend.
-  ///
-  /// In en, this message translates to:
-  /// **'Resend invite'**
-  String get registrationInviteResend;
-
-  /// No description provided for @registrationInviteRevoke.
-  ///
-  /// In en, this message translates to:
-  /// **'Revoke invite'**
-  String get registrationInviteRevoke;
-
-  /// No description provided for @registrationInviteResendSuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Invite resent (new token issued).'**
-  String get registrationInviteResendSuccess;
-
-  /// No description provided for @registrationInviteRevokeSuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Outstanding invite tokens revoked.'**
-  String get registrationInviteRevokeSuccess;
-
-  /// No description provided for @registrationOpenCompany.
-  ///
-  /// In en, this message translates to:
-  /// **'Open company'**
-  String get registrationOpenCompany;
-
-  /// No description provided for @registrationPermissionPolicyTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Approval permission'**
-  String get registrationPermissionPolicyTitle;
-
-  /// No description provided for @registrationPermissionSuperAdminOnly.
-  ///
-  /// In en, this message translates to:
-  /// **'Company approve/reject requires super_admin. Reviewers can view the queue only.'**
-  String get registrationPermissionSuperAdminOnly;
-
-  /// No description provided for @applicationsCompatBanner.
-  ///
-  /// In en, this message translates to:
-  /// **'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.'**
-  String get applicationsCompatBanner;
-
-  /// No description provided for @applicationsOpenRegistrations.
-  ///
-  /// In en, this message translates to:
-  /// **'Open Registrations'**
-  String get applicationsOpenRegistrations;
-
-  /// No description provided for @applicationsCompanyUseRegistrations.
-  ///
-  /// In en, this message translates to:
-  /// **'Company applications are decided in Registrations (primary inbox).'**
-  String get applicationsCompanyUseRegistrations;
 }
 
 class _AppLocalizationsDelegate

@@ -10,7 +10,7 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  test('default admin locale is Hungarian', () {
+  test('default admin locale fallback is Hungarian', () {
     expect(kDefaultAdminLocale.languageCode, 'hu');
   });
 

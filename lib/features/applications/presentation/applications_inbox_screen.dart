@@ -60,25 +60,25 @@ class _ApplicationsInboxScreenState
               runSpacing: 8,
               children: [
                 FilterChip(
-                  label: const Text('Cég'),
+                  label: Text(l10n.applicationsFilterCompany),
                   selected: _type == 'company',
                   onSelected: (v) =>
                       setState(() => _type = v ? 'company' : null),
                 ),
                 FilterChip(
-                  label: const Text('Sofőr'),
+                  label: Text(l10n.applicationsFilterDriver),
                   selected: _type == 'driver',
                   onSelected: (v) =>
                       setState(() => _type = v ? 'driver' : null),
                 ),
                 FilterChip(
-                  label: const Text('Partner'),
+                  label: Text(l10n.applicationsFilterPartner),
                   selected: _type == 'partner',
                   onSelected: (v) =>
                       setState(() => _type = v ? 'partner' : null),
                 ),
                 FilterChip(
-                  label: const Text('Új'),
+                  label: Text(l10n.applicationsFilterNew),
                   selected: _status == 'new',
                   onSelected: (v) => setState(() => _status = v ? 'new' : null),
                 ),
@@ -90,7 +90,7 @@ class _ApplicationsInboxScreenState
                 data: (data) {
                   final items = (data['items'] as List<dynamic>? ?? []);
                   if (items.isEmpty) {
-                    return const Center(child: Text('Nincs jelentkezés'));
+                    return Center(child: Text(l10n.applicationsEmpty));
                   }
                   return ListView.separated(
                     itemCount: items.length,
@@ -116,7 +116,8 @@ class _ApplicationsInboxScreenState
                   );
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (e, _) => Center(child: Text('Hiba: $e')),
+                error: (e, _) =>
+                    Center(child: Text(l10n.applicationsLoadError('$e'))),
               ),
             ),
           ],

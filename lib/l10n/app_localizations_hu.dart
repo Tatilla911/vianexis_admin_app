@@ -802,6 +802,102 @@ class AppLocalizationsHu extends AppLocalizations {
       'A regisztrációs döntés mentése sikertelen.';
 
   @override
+  String get registrationApproveSuccess =>
+      'Cég jóváhagyva. Meghívó létrehozva.';
+
+  @override
+  String get registrationApproveOutcomeTitle => 'Jóváhagyás eredménye';
+
+  @override
+  String get registrationFieldApplicationReference => 'Jelentkezési azonosító';
+
+  @override
+  String get registrationFieldCompanyId => 'Cég ID';
+
+  @override
+  String get registrationFieldAdminEmail => 'Cégadmin e-mail';
+
+  @override
+  String get registrationFieldInviteStatus => 'Meghívó kézbesítés';
+
+  @override
+  String get registrationFieldInviteExpiresAt => 'Meghívó lejárat';
+
+  @override
+  String get registrationFieldInviteTokenId => 'Meghívó token ID';
+
+  @override
+  String get registrationInviteDeliverySent => 'Elküldve';
+
+  @override
+  String get registrationInviteDeliveryPending =>
+      'Meghívó létrehozva; kézbesítés függőben vagy sikertelen (SMTP)';
+
+  @override
+  String get registrationInviteDeliveryAccepted => 'Elfogadva';
+
+  @override
+  String get registrationInviteDeliveryExpired => 'Lejárt';
+
+  @override
+  String get registrationInviteDeliveryRevoked => 'Visszavonva';
+
+  @override
+  String get registrationInviteResend => 'Meghívó újraküldése';
+
+  @override
+  String get registrationInviteRevoke => 'Meghívó visszavonása';
+
+  @override
+  String get registrationInviteResendSuccess =>
+      'Meghívó újraküldve (új token).';
+
+  @override
+  String get registrationInviteRevokeSuccess =>
+      'A függő meghívó tokenek visszavonva.';
+
+  @override
+  String get registrationOpenCompany => 'Cég megnyitása';
+
+  @override
+  String get registrationPermissionPolicyTitle => 'Jóváhagyási jogosultság';
+
+  @override
+  String get registrationPermissionSuperAdminOnly =>
+      'A céges jóváhagyás/elutasítás csak super_admin. A reviewer csak a sort láthatja.';
+
+  @override
+  String get applicationsCompatBanner =>
+      'Céges onboarding postafiók: Regisztrációk. Ez a Jelentkezések nézet kompatibilitási felület a vegyes public intake-ekhez.';
+
+  @override
+  String get applicationsOpenRegistrations => 'Regisztrációk megnyitása';
+
+  @override
+  String get applicationsCompanyUseRegistrations =>
+      'A céges jelentkezéseket a Regisztrációk (elsődleges postafiók) felületen kell elbírálni.';
+
+  @override
+  String get applicationsFilterCompany => 'Cég';
+
+  @override
+  String get applicationsFilterDriver => 'Sofőr';
+
+  @override
+  String get applicationsFilterPartner => 'Partner';
+
+  @override
+  String get applicationsFilterNew => 'Új';
+
+  @override
+  String get applicationsEmpty => 'Nincs jelentkezés';
+
+  @override
+  String applicationsLoadError(String error) {
+    return 'Hiba: $error';
+  }
+
+  @override
   String get systemHealthLoadError =>
       'A rendszerállapot adatok betöltése sikertelen.';
 
@@ -3497,7 +3593,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get actionCenterFilterCritical => 'Kritikus/sürgős';
 
   @override
-  String get actionCenterFilterCustomerCommunication => 'Ügyfél kommunikáció';
+  String get actionCenterFilterCustomerCommunication => 'Ügyfélkommunikáció';
 
   @override
   String get actionCenterTypeRegistration => 'Regisztráció';
@@ -3524,7 +3620,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get actionCenterTypeCompany => 'Cég';
 
   @override
-  String get actionCenterTypeCustomerCommunication => 'Ügyfél kommunikáció';
+  String get actionCenterTypeCustomerCommunication => 'Ügyfélkommunikáció';
 
   @override
   String get actionCenterTypeUnknown => 'Ismeretlen';
@@ -3668,22 +3764,22 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get releaseEmailDeliveryAllowlistEnabled =>
-      'Staging allowlist engedelyezve';
+      'Staging allowlist engedélyezve';
 
   @override
   String get releaseEmailDeliveryAllowlistDomains =>
-      'Engedelyezett domainek (szam)';
+      'Engedélyezett domainek (szám)';
 
   @override
   String get releaseEmailDeliveryAllowlistRecipients =>
-      'Engedelyezett címzettek (szam)';
+      'Engedélyezett címzettek (szám)';
 
   @override
-  String get releaseEmailDeliveryLastFailureCode => 'Utolso hibakod';
+  String get releaseEmailDeliveryLastFailureCode => 'Utolsó hibakód';
 
   @override
   String get releaseEmailDeliveryStagingAllowlistMissing =>
-      'Staging kezbesites engedelyezve, de hianyzik az allowlist — kulso kuldes blokkolva.';
+      'Staging kézbesítés engedélyezve, de hiányzik az allowlist — külső küldés blokkolva.';
 
   @override
   String get releaseEmailProviderNoop => 'No-op (kikapcsolva)';
@@ -3775,45 +3871,65 @@ class AppLocalizationsHu extends AppLocalizations {
   String get settingsApiHostLabel => 'API host';
 
   @override
-  String get navNotifications => 'Ertesitesek';
+  String get navNotifications => 'Értesítések';
 
   @override
-  String get notificationsTitle => 'Ertesitesek';
+  String get notificationsTitle => 'Értesítések';
 
   @override
-  String get notificationsPreferences => 'Beallitasok';
+  String get notificationsPreferences => 'Beállítások';
 
   @override
-  String get notificationsMarkAllRead => 'Osszes olvasottra';
+  String get notificationsMarkAllRead => 'Összes olvasottra';
 
   @override
-  String get notificationsEmpty => 'Nincsenek ertesitesek.';
+  String get notificationsEmpty => 'Nincsenek értesítések.';
 
   @override
   String get notificationsInAppOnlyTitle =>
-      'Csak alkalmazason beluli ertesitesek';
+      'Csak alkalmazáson belüli értesítések';
 
   @override
   String get notificationsInAppOnlyBody =>
-      'A push csatornak ebben a fazisban nem aktivak.';
+      'A push csatornák ebben a fázisban nem aktívak.';
 
   @override
-  String get notificationsDetailTitle => 'Ertesites reszletei';
+  String get notificationsDetailTitle => 'Értesítés részletei';
 
   @override
-  String get notificationsNotFound => 'Az ertesites nem talalhato.';
+  String get notificationsNotFound => 'Az értesítés nem található.';
 
   @override
-  String get notificationsPreferencesTitle => 'Ertesitesi beallitasok';
+  String notificationsLoadError(String error) {
+    return 'Hiba: $error';
+  }
 
   @override
-  String get notificationsSavePreferences => 'Beallitasok mentese';
+  String notificationsTypeLabel(String value) {
+    return 'Típus: $value';
+  }
 
   @override
-  String get notificationsSaved => 'Beallitasok mentve.';
+  String notificationsSeverityLabel(String value) {
+    return 'Súlyosság: $value';
+  }
 
   @override
-  String get notificationsPrefSystemHealth => 'Rendszerallapot';
+  String notificationsInAppOnlyLabel(String value) {
+    return 'Csak alkalmazáson belül: $value';
+  }
+
+  @override
+  String get notificationsPreferencesTitle => 'Értesítési beállítások';
+
+  @override
+  String get notificationsSavePreferences => 'Beállítások mentése';
+
+  @override
+  String get notificationsSaved => 'Beállítások mentve.';
+
+  @override
+  String get notificationsPrefSystemHealth => 'Rendszerállapot';
 
   @override
   String get notificationsPrefSecurity => 'Biztonsag';
@@ -3822,25 +3938,25 @@ class AppLocalizationsHu extends AppLocalizations {
   String get notificationsPrefSupport => 'Tamogatas';
 
   @override
-  String get notificationsPrefBilling => 'Szamlazas';
+  String get notificationsPrefBilling => 'Számlázás';
 
   @override
   String get notificationsPrefRelease => 'Kihelyezes';
 
   @override
   String get notificationsPrefInAppOnlyHint =>
-      'Ebben a fazisban csak alkalmazason beluli ertesitesek erhetok el.';
+      'Ebben a fázisban csak alkalmazáson belüli értesítések érhetők el.';
 
   @override
   String get notificationsPrefValidationAtLeastOne =>
-      'Legalabb egy csatorna maradjon engedelyezve.';
+      'Legalább egy csatorna maradjon engedélyezve.';
 
   @override
   String get notificationsPrefValidationInAppOnly =>
-      'Ebben a fazisban csak alkalmazason beluli ertesites tamogatott.';
+      'Ebben a fázisban csak alkalmazáson belüli értesítés támogatott.';
 
   @override
-  String get notificationsInAppChip => 'Csak alkalmazason belul';
+  String get notificationsInAppChip => 'Csak alkalmazáson belül';
 
   @override
   String get notificationsYes => 'Igen';
@@ -3849,36 +3965,36 @@ class AppLocalizationsHu extends AppLocalizations {
   String get notificationsNo => 'Nem';
 
   @override
-  String get notificationsPushProviderTitle => 'Push szolgaltato allapot';
+  String get notificationsPushProviderTitle => 'Push szolgáltató állapot';
 
   @override
-  String get notificationsPushStateInAppOnly => 'Csak alkalmazason belul';
+  String get notificationsPushStateInAppOnly => 'Csak alkalmazáson belül';
 
   @override
   String get notificationsPushStateExternalNotConfigured =>
-      'Kulso push nincs beallitva';
+      'Külső push nincs beállítva';
 
   @override
-  String get notificationsPushStateConfigured => 'Push szolgaltato beallitva';
+  String get notificationsPushStateConfigured => 'Push szolgáltató beállítva';
 
   @override
-  String get notificationsPushProviderField => 'Szolgaltato';
+  String get notificationsPushProviderField => 'Szolgáltató';
 
   @override
-  String get notificationsPushDeliveryEnabled => 'Kezbesites engedelyezve';
+  String get notificationsPushDeliveryEnabled => 'Kézbesítés engedélyezve';
 
   @override
   String get notificationsPushTokenStorage => 'Token tarolasi mod';
 
   @override
-  String get notificationsPushLastFailureCode => 'Utolso hibakod';
+  String get notificationsPushLastFailureCode => 'Utolsó hibakód';
 
   @override
   String get notificationsPushProviderNotice =>
-      'A push szolgaltato allapota csak metaadatot mutat. FCM, APNS vagy hitelesito adatok nem jelennek meg.';
+      'A push szolgáltató állapota csak metaadatot mutat. FCM, APNS vagy hitelesito adatok nem jelennek meg.';
 
   @override
-  String get notificationsPushProviderNone => 'Nincs (csak alkalmazason belul)';
+  String get notificationsPushProviderNone => 'Nincs (csak alkalmazáson belül)';
 
   @override
   String get notificationsPushProviderFcm => 'FCM';
@@ -3887,43 +4003,198 @@ class AppLocalizationsHu extends AppLocalizations {
   String get notificationsPushProviderApns => 'APNS';
 
   @override
-  String get settingsNotificationsSection => 'Ertesitesek';
+  String get settingsNotificationsSection => 'Értesítések';
 
   @override
   String get settingsNotificationsBody =>
-      'Alkalmazason beluli ertesitesi beallitasok kezelese.';
+      'Alkalmazáson belüli értesítési beállítások kezelése.';
 
   @override
   String get settingsOpenNotificationPreferences =>
-      'Ertesitesi beallitasok megnyitasa';
+      'Értesítési beállítások megnyitása';
 
   @override
-  String get translationPanelTitle => 'Forditas';
+  String get settingsOpenSoundSettings => 'Hangok és értesítések';
+
+  @override
+  String get settingsSoundTitle => 'Hangok és értesítések';
+
+  @override
+  String get settingsSoundDescription =>
+      'Válasszon hangokat admin riasztásokhoz, üzenetekhez és visszajelzésekhez.';
+
+  @override
+  String get settingsSoundAlarm => 'Kritikus platform riasztás';
+
+  @override
+  String get settingsSoundMessage => 'Normal üzenet';
+
+  @override
+  String get settingsSoundRing => 'Bejövő support/hivas jel';
+
+  @override
+  String get settingsSoundSign => 'Sikeres admin művelet visszajelzése';
+
+  @override
+  String get settingsSoundEnabled => 'Hangok bekapcsolva';
+
+  @override
+  String get settingsSoundMuted => 'Hangok némítva';
+
+  @override
+  String get settingsSoundPreview => 'Előnézet';
+
+  @override
+  String get settingsSoundStopPreview => 'Előnézet leállítása';
+
+  @override
+  String get settingsSoundRestoreDefault => 'Alapértelmezettek visszaállítása';
+
+  @override
+  String get settingsSoundVolume => 'Hangerő';
+
+  @override
+  String get settingsSoundSystemLimitations =>
+      'Elotérben alkalmazáson belüli hang. Új riasztások rendszerértesítést is mutatnak csatornahanggal, amig az admin session aktiv. Teljes hatter pushhez FCM/APNS kell.';
+
+  @override
+  String get settingsSoundCriticalAlert =>
+      'A kritikus platform riasztások nyugtázást igényelhetnek, és a platform követelményei szerint felülírhatják a némítást.';
+
+  @override
+  String get settingsSoundSelectionSaved => 'Hangválasztás mentve';
+
+  @override
+  String get settingsSoundPerEventTitle => 'Eseményenkénti hangok';
+
+  @override
+  String get settingsSoundPerEventDescription =>
+      'Képernyő megnyitas soha nem ad hangot. A kritikus események az alarm kategorian maradnak.';
+
+  @override
+  String settingsSoundEventDefault(String soundId) {
+    return 'Alapértelmezett: $soundId';
+  }
+
+  @override
+  String get settingsSoundTestAlert => 'Teszt riasztás küldése';
+
+  @override
+  String get settingsSoundTestAlertTitle => 'ViaNexis Admin teszt riasztás';
+
+  @override
+  String get settingsSoundTestAlertBody =>
+      'Ha látja ezt a bannert és hallja a riasztást, az értesítések működnek.';
+
+  @override
+  String get settingsSoundTestAlertSent => 'Teszt riasztás elküldve';
+
+  @override
+  String get settingsSoundPermissionDenied =>
+      'Az értesítési engedély szükséges a zárolóképernyői riasztásokhoz.';
+
+  @override
+  String get settingsSoundEventCompanyRegistration => 'Új cégregisztráció';
+
+  @override
+  String get settingsSoundEventDriverRegistration => 'Új sofőrregisztráció';
+
+  @override
+  String get settingsSoundEventSupportTicket => 'Új support jegy';
+
+  @override
+  String get settingsSoundEventSupportAccess => 'Support hozzáférési keres';
+
+  @override
+  String get settingsSoundEventSystemCritical => 'Kritikus rendszerállás';
+
+  @override
+  String get settingsSoundEventAuditSecurity => 'Audit biztonsagi esemény';
+
+  @override
+  String get settingsSoundEventBilling => 'Számlázási problema';
+
+  @override
+  String get settingsSoundEventBulkOnboarding => 'Tömeges onboarding kész';
+
+  @override
+  String get settingsSoundEventApprovalSuccess => 'Sikeres admin művelet';
+
+  @override
+  String get settingsSoundEventIncomingContact => 'Bejövő kapcsolatkérés';
+
+  @override
+  String get settingsSoundAlarm1 => 'Riasztási hang 1';
+
+  @override
+  String get settingsSoundAlarm2 => 'Riasztási hang 2';
+
+  @override
+  String get settingsSoundAlarm3 => 'Riasztási hang 3';
+
+  @override
+  String get settingsSoundMessage1 => 'Üzenet hang 1';
+
+  @override
+  String get settingsSoundMessage2 => 'Üzenet hang 2';
+
+  @override
+  String get settingsSoundMessage3 => 'Üzenet hang 3';
+
+  @override
+  String get settingsSoundMessage4 => 'Üzenet hang 4';
+
+  @override
+  String get settingsSoundRing1 => 'Csengő hang 1';
+
+  @override
+  String get settingsSoundRing2 => 'Csengő hang 2';
+
+  @override
+  String get settingsSoundRing3 => 'Csengő hang 3';
+
+  @override
+  String get settingsSoundRing4 => 'Csengő hang 4';
+
+  @override
+  String get settingsSoundSign1 => 'Siker hang 1';
+
+  @override
+  String get settingsSoundSign2 => 'Siker hang 2';
+
+  @override
+  String get settingsSoundSign3 => 'Siker hang 3';
+
+  @override
+  String get settingsSoundSign4 => 'Siker hang 4';
+
+  @override
+  String get translationPanelTitle => 'Fordítás';
 
   @override
   String get translationProviderDisabled =>
-      'A fordito szolgaltato nincs beallitva';
+      'A fordító szolgáltató nincs beállítva';
 
   @override
-  String get translationTargetLanguageLabel => 'Celnyelv';
+  String get translationTargetLanguageLabel => 'Célnyelv';
 
   @override
-  String get translationRecipientLanguageLabel => 'Cimzett nyelve';
+  String get translationRecipientLanguageLabel => 'Címzett nyelve';
 
   @override
-  String get translationTranslateAction => 'Forditas';
+  String get translationTranslateAction => 'Fordítás';
 
   @override
-  String get translationTranslating => 'Forditas…';
+  String get translationTranslating => 'Fordítás…';
 
   @override
-  String get translationActionError => 'A forditas sikertelen';
+  String get translationActionError => 'A fordítás sikertelen';
 
   @override
-  String get translationOriginalTitle => 'Eredeti szoveg';
+  String get translationOriginalTitle => 'Eredeti szöveg';
 
   @override
-  String get translationTranslatedTitle => 'Leforditott szoveg';
+  String get translationTranslatedTitle => 'Lefordított szöveg';
 
   @override
   String translationLanguageLabel(String code) {
@@ -3932,112 +4203,111 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get translationMetadataOnlyNotice =>
-      'A leforditott szoveg metaadat-only nezetben rejtve';
+      'A lefordított szöveg metaadat-only nézetben rejtve';
 
   @override
-  String get translationBadgeMachine => 'Gepi forditas';
+  String get translationBadgeMachine => 'Gépi fordítás';
 
   @override
-  String get translationBadgeNeedsReview => 'Felulvizsgalat szukseges';
+  String get translationBadgeNeedsReview => 'Felülvizsgálat szükséges';
 
   @override
-  String get translationBadgeStale => 'Elavult forditas';
+  String get translationBadgeStale => 'Elavult fordítás';
 
   @override
-  String get translationBadgeApproved => 'Jovahagyva';
+  String get translationBadgeApproved => 'Jóváhagyva';
 
   @override
   String get translationHumanConfirmationRequired =>
-      'Emberi jovahagyas szukseges a leforditott szoveg kuldese elott';
+      'Emberi jóváhagyás szükséges a lefordított szöveg küldése előtt';
 
   @override
-  String get translationReplyPreviewTitle => 'Valasz forditas elonezet';
+  String get translationReplyPreviewTitle => 'Válasz fordítás előnézet';
 
   @override
   String get translationReplyPreviewNotice =>
-      'Csak elonezet. Az eredeti piszkozat megmarad, automatikus kuldes nincs.';
+      'Csak előnézet. Az eredeti piszkozat megmarad, automatikus küldés nincs.';
 
   @override
-  String get translationGeneratePreviewAction => 'Elonezet generalasa';
+  String get translationGeneratePreviewAction => 'Előnézet generálása';
 
   @override
   String get translationNoAutoSendNotice =>
-      'A jovahagyas keszre jeloli a forditas. A kuldes kulon explicit lepes marad.';
+      'A jóváhagyás készre jelöli a fordítást. A küldés külön, explicit lépés marad.';
 
   @override
-  String get translationDismissAction => 'Megse';
+  String get translationDismissAction => 'Mégse';
 
   @override
-  String get translationApproveForSendAction => 'Forditas jovahagyasa';
+  String get translationApproveForSendAction => 'Fordítás jóváhagyása';
 
   @override
-  String get translationApproving => 'Jovahagyas…';
+  String get translationApproving => 'Jóváhagyás…';
 
   @override
-  String get translationDraftReplyAction => 'Valasz forditas piszkozata';
+  String get translationDraftReplyAction => 'Válasz fordítás piszkozata';
 
   @override
   String get translationReplyApprovedNotice =>
-      'A forditas jovahagyva. Masolja vagy kuldje a normal tamogatasi folyamaton keresztul.';
+      'A fordítás jóváhagyva. Másolja vagy küldje a normál támogatási folyamaton keresztül.';
 
   @override
-  String get customerCommunicationsTitle => 'Ugyfel kommunikacio';
+  String get customerCommunicationsTitle => 'Ügyfélkommunikáció';
 
   @override
-  String get customerCommunicationDetailTitle => 'Kommunikacios szal';
+  String get customerCommunicationDetailTitle => 'Kommunikációs szál';
 
   @override
-  String get customerCommunicationEvidencePackageTitle => 'Bizonyitek csomag';
+  String get customerCommunicationEvidencePackageTitle => 'Bizonyíték csomag';
 
   @override
   String get customerCommunicationLoadError =>
-      'Az ugyfel kommunikacio betoltese sikertelen.';
+      'Az ügyfélkommunikáció betöltése sikertelen.';
 
   @override
   String get customerCommunicationActionError =>
-      'Az ugyfel kommunikacios muvelet sikertelen.';
+      'Az ügyfél kommunikációs művelet sikertelen.';
 
   @override
   String get customerCommunicationMockDataBadge => 'Mintaadat';
 
   @override
-  String get customerCommunicationOpenModule =>
-      'Ugyfel kommunikacio megnyitasa';
+  String get customerCommunicationOpenModule => 'Ügyfélkommunikáció megnyitása';
 
   @override
   String get customerCommunicationPrivacyNotice =>
-      'A listanezet metaadat-elso. Az uzenettorzs csak jogosult reszletes nezetben jelenik meg.';
+      'A listanezet metaadat-elso. Az üzenettörzs csak jogosult reszletes nézetben jelenik meg.';
 
   @override
   String get customerCommunicationDetailMetadataOnly =>
-      'Az uzenettorzs rejtve a szerepkor vagy a szal scope miatt.';
+      'Az üzenettörzs rejtve a szerepkör vagy a szál scope miatt.';
 
   @override
   String get customerCommunicationSearchHint =>
-      'Kereses nev, domain vagy ceg alapjan';
+      'Keresés név, domain vagy cég alapján';
 
   @override
   String get customerCommunicationListEmpty =>
-      'Nincs egyezo ugyfel kommunikacios szal.';
+      'Nincs egyező ügyfélkommunikációs szál.';
 
   @override
   String get customerCommunicationDisputedBadge => 'Vitatott';
 
   @override
-  String get customerCommunicationBillingRelatedBadge => 'Szamlazasi';
+  String get customerCommunicationBillingRelatedBadge => 'Számlázási';
 
   @override
   String customerCommunicationThreadSubtitle(String domain, String companyId) {
-    return '$domain · ceg $companyId';
+    return '$domain · cég $companyId';
   }
 
   @override
   String customerCommunicationUpdatedAt(String date) {
-    return 'Frissitve: $date';
+    return 'Frissítve: $date';
   }
 
   @override
-  String get customerCommunicationFilterAll => 'Osszes';
+  String get customerCommunicationFilterAll => 'Összes';
 
   @override
   String get customerCommunicationFilterOpen => 'Nyitott';
@@ -4049,7 +4319,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get customerCommunicationFilterClosed => 'Lezart';
 
   @override
-  String get customerCommunicationFilterBillingRelated => 'Szamlazasi';
+  String get customerCommunicationFilterBillingRelated => 'Számlázási';
 
   @override
   String get customerCommunicationStatusOpen => 'Nyitott';
@@ -4091,28 +4361,28 @@ class AppLocalizationsHu extends AppLocalizations {
   String get customerCommunicationSourceUnknown => 'Ismeretlen';
 
   @override
-  String get customerCommunicationDirectionInbound => 'Bejovo';
+  String get customerCommunicationDirectionInbound => 'Bejövő';
 
   @override
-  String get customerCommunicationDirectionOutbound => 'Kimeno';
+  String get customerCommunicationDirectionOutbound => 'Kimenő';
 
   @override
-  String get customerCommunicationDirectionInternalNote => 'Belso jegyzet';
+  String get customerCommunicationDirectionInternalNote => 'Belső jegyzet';
 
   @override
-  String get customerCommunicationDirectionSystemEvent => 'Rendszer esemeny';
+  String get customerCommunicationDirectionSystemEvent => 'Rendszer esemény';
 
   @override
   String get customerCommunicationDirectionUnknown => 'Ismeretlen';
 
   @override
-  String get customerCommunicationSenderCustomer => 'Ugyfel';
+  String get customerCommunicationSenderCustomer => 'Ügyfél';
 
   @override
   String get customerCommunicationSenderPlatformAdmin => 'Platform admin';
 
   @override
-  String get customerCommunicationSenderCompanyAdmin => 'Ceg admin';
+  String get customerCommunicationSenderCompanyAdmin => 'Cég admin';
 
   @override
   String get customerCommunicationSenderSystem => 'Rendszer';
@@ -4121,7 +4391,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get customerCommunicationSenderUnknown => 'Ismeretlen';
 
   @override
-  String get customerCommunicationHumanReviewedBadge => 'Emberi felulvizsgalat';
+  String get customerCommunicationHumanReviewedBadge => 'Emberi felülvizsgálat';
 
   @override
   String customerCommunicationOriginalLabel(String language) {
@@ -4135,26 +4405,26 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get customerCommunicationMessageMetadataOnly =>
-      'Uzenettorzs rejtve (metaadat-only nezet).';
+      'Üzenettorzs rejtve (metaadat-only nezet).';
 
   @override
   String get customerCommunicationMessagesEmpty =>
-      'Meg nincs naplozott uzenet.';
+      'Még nincs naplózott üzenet.';
 
   @override
   String get customerCommunicationTimelineTitle => 'Idovonal';
 
   @override
   String get customerCommunicationAgreementsTitle =>
-      'Megallapodas pillanatkepek';
+      'Megállapodás-pillanatképek';
 
   @override
   String get customerCommunicationEvidencePackagesTitle =>
-      'Bizonyitek csomagok';
+      'Bizonyíték csomagok';
 
   @override
   String get customerCommunicationPackagesEmpty =>
-      'Meg nincs generalva bizonyitek csomag.';
+      'Még nincs generálva bizonyíték csomag.';
 
   @override
   String customerCommunicationAgreementPrice(
@@ -4177,34 +4447,34 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get customerCommunicationPdfPendingNotice =>
-      'PDF generalas fuggoben; strukturalt bizonyitek csomag keszult az audit rekordokbol.';
+      'PDF generálás függőben; strukturált bizonyíték csomag készült az audit rekordokból.';
 
   @override
   String get customerCommunicationPdfReadyNotice =>
-      'A PDF bizonyitek csomag keszen all megosztasra ezen az eszkozon.';
+      'A PDF bizonyíték csomag készen all megosztasra ezen az eszközön.';
 
   @override
   String get customerCommunicationPdfFailedNotice =>
-      'A PDF generalas sikertelen. A strukturalt summaryJson tovabbra is elerheto az audit rekordokbol.';
+      'A PDF generálás sikertelen. A strukturált summaryJson tovabbra is elérhető az audit rekordokból.';
 
   @override
   String get customerCommunicationPdfSourceOfTruthNotice =>
-      'ViaNexis audit rekordokbol generalva. Az adatbazis audit rekordok maradnak a forrasigazsag; ez a PDF csak bemutato export.';
+      'ViaNexis audit rekordokból generálva. Az adatbázis audit rekordok maradnak a forrasigazsag; ez a PDF csak bemutato export.';
 
   @override
-  String get customerCommunicationDownloadPdfAction => 'PDF letoltese';
+  String get customerCommunicationDownloadPdfAction => 'PDF letöltése';
 
   @override
   String customerCommunicationDownloadPdfSuccess(String bytes) {
-    return 'PDF letoltve ($bytes bajt). Kezelje az adatvedelmi es megorezési szabalyzat szerint.';
+    return 'PDF letöltve ($bytes bájt). Kezelje az adatvédelmi és megőrzési szabályzat szerint.';
   }
 
   @override
   String get customerCommunicationDownloadPdfFailed =>
-      'A bizonyitek PDF letoltese sikertelen.';
+      'A bizonyíték PDF letöltése sikertelen.';
 
   @override
-  String get customerCommunicationSharePdfAction => 'PDF megosztasa';
+  String get customerCommunicationSharePdfAction => 'PDF megosztása';
 
   @override
   String get customerCommunicationSharePdfSuccess =>
@@ -4212,33 +4482,33 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get customerCommunicationSharePdfFailed =>
-      'A bizonyitek PDF megosztasa sikertelen.';
+      'A bizonyíték PDF megosztása sikertelen.';
 
   @override
   String get customerCommunicationSharePdfInvalid =>
-      'A bizonyitek PDF ures vagy hibas. Generalja ujra a csomagot, vagy probalja meg ujra.';
+      'A bizonyíték PDF üres vagy hibás. Generálja újra a csomagot, vagy próbálja még újra.';
 
   @override
   String get customerCommunicationSharePdfUnavailable =>
-      'A megosztas nem erheto el ezen az eszkozon. Probalkozzon ujra vagy hasznaljon masik eszkozt.';
+      'A megosztas nem érhető el ezen az eszközön. Próbálkozzon újra vagy használjon másik eszközt.';
 
   @override
   String get customerCommunicationSharePdfNotReady =>
-      'A PDF meg nem all keszen. Varjon a generalasra, vagy generalja ujra a csomagot.';
+      'A PDF még nem all készen. Várjon a generálásra, vagy generálja újra a csomagot.';
 
   @override
   String customerCommunicationGeneratedBy(String userId) {
-    return 'Generalta felhasznalo ID: $userId';
+    return 'Generálta felhasználó ID: $userId';
   }
 
   @override
-  String get customerCommunicationSendReplyTitle => 'Ugyfel valasz kuldese';
+  String get customerCommunicationSendReplyTitle => 'Ügyfél válasz küldése';
 
   @override
-  String get customerCommunicationSendReplyAction => 'Valasz kuldese';
+  String get customerCommunicationSendReplyAction => 'Válasz küldése';
 
   @override
-  String get customerCommunicationSendReplyMessageLabel => 'Valasz uzenet';
+  String get customerCommunicationSendReplyMessageLabel => 'Válasz üzenet';
 
   @override
   String get customerCommunicationSendReplySubjectLabel =>
@@ -4246,38 +4516,38 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get customerCommunicationUseTranslatedTextLabel =>
-      'Jovahagyott forditas hasznalata';
+      'Jóváhagyott fordítás használata';
 
   @override
   String get customerCommunicationHumanConfirmationLabel =>
-      'Megerositem, hogy a valasz kuldheto';
+      'Megerősítem, hogy a válasz küldhető';
 
   @override
-  String get customerCommunicationHumanConfirmedBadge => 'Emberi megerosites';
+  String get customerCommunicationHumanConfirmedBadge => 'Emberi megerősítés';
 
   @override
   String get customerCommunicationTranslationApprovedBadge =>
-      'Forditas jovahagyva';
+      'Fordítás jóváhagyva';
 
   @override
   String get customerCommunicationTranslatedReplyWarning =>
-      'A leforditott valaszok nem kerulnek automatikusan kikuldesre. Ellenorizd es erositsd meg kuldes elott.';
+      'A lefordított válaszok nem kerülnek automatikusan kiküldésre. Ellenőrizd és erősítsd meg küldés előtt.';
 
   @override
   String get customerCommunicationDeliveryProviderDisabledNotice =>
-      'A kuldesi szolgaltato le van tiltva; a valasz naplozva lesz, de nem megy ki kulso csatornara.';
+      'A küldési szolgáltató le van tiltva; a válasz naplózva lesz, de nem megy ki külső csatornára.';
 
   @override
   String get customerCommunicationReplyLoggedSkippedNotice =>
-      'Valasz naplozva, kuldes kihagyva (szolgaltato tiltva).';
+      'Válasz naplózva, küldés kihagyva (szolgáltató tiltva).';
 
   @override
   String get customerCommunicationReplySentSuccess =>
-      'Valasz sikeresen elkuldve.';
+      'Válasz sikeresen elküldve.';
 
   @override
   String get customerCommunicationEvidenceDeliveryNotice =>
-      'A bizonyitek csomagok tartalmazzak a kimenő kuldesi allapotot, ha elerheto.';
+      'A bizonyíték csomagok tartalmazzák a kimenő küldési állapotot, ha elérhető.';
 
   @override
   String get customerCommunicationDeliveryStatusDraft => 'Piszkozat';
@@ -4289,16 +4559,16 @@ class AppLocalizationsHu extends AppLocalizations {
   String get customerCommunicationDeliveryStatusSkipped => 'Kihagyva';
 
   @override
-  String get customerCommunicationDeliveryStatusSent => 'Elkuldve';
+  String get customerCommunicationDeliveryStatusSent => 'Elküldve';
 
   @override
   String get customerCommunicationDeliveryStatusFailed => 'Sikertelen';
 
   @override
-  String get customerCommunicationDeliveryStatusCancelled => 'Megszakitva';
+  String get customerCommunicationDeliveryStatusCancelled => 'Megszakítva';
 
   @override
-  String get customerCommunicationDeliveryStatusUnknown => 'Ismeretlen allapot';
+  String get customerCommunicationDeliveryStatusUnknown => 'Ismeretlen állapot';
 
   @override
   String get customerCommunicationDeliveryChannelEmail => 'Email';
@@ -4307,7 +4577,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get customerCommunicationDeliveryChannelPortal => 'Portal';
 
   @override
-  String get customerCommunicationDeliveryChannelManual => 'Manualis';
+  String get customerCommunicationDeliveryChannelManual => 'Manuális';
 
   @override
   String get customerCommunicationDeliveryChannelNone => 'Nincs';
@@ -4318,14 +4588,14 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get customerCommunicationDeliveryHistoryTitle =>
-      'Kezbesitesi elozmenyek';
+      'Kézbesítési előzmények';
 
   @override
   String get customerCommunicationDeliveryHistoryEmpty =>
-      'Meg nincs kezbesitesi kiserlet.';
+      'Még nincs kézbesítési kísérlet.';
 
   @override
-  String get customerCommunicationDeliveryFilterAll => 'Osszes';
+  String get customerCommunicationDeliveryFilterAll => 'Összes';
 
   @override
   String get customerCommunicationDeliveryFilterSkipped => 'Kihagyva';
@@ -4334,56 +4604,56 @@ class AppLocalizationsHu extends AppLocalizations {
   String get customerCommunicationDeliveryFilterFailed => 'Sikertelen';
 
   @override
-  String get customerCommunicationDeliveryFilterSent => 'Elkuldve';
+  String get customerCommunicationDeliveryFilterSent => 'Elküldve';
 
   @override
-  String get customerCommunicationDeliveryFilterQueued => 'Varolistan';
+  String get customerCommunicationDeliveryFilterQueued => 'Várólistán';
 
   @override
-  String get customerCommunicationResendTitle => 'Kezbesites ujrakuldese';
+  String get customerCommunicationResendTitle => 'Kézbesítés újraküldése';
 
   @override
-  String get customerCommunicationResendAction => 'Ujrakuldes';
+  String get customerCommunicationResendAction => 'Újraküldés';
 
   @override
   String get customerCommunicationResendAuditNotice =>
-      'Az ujrakuldes uj, auditalt kezbesitesi kiserletet hoz letre.';
+      'Az újraküldés új, auditált kézbesítési kísérletet hoz létre.';
 
   @override
   String get customerCommunicationResendTranslationNotice =>
-      'A leforditott valaszok csak jovahagyott forditas utan kuldethetok.';
+      'A lefordított válaszok csak jóváhagyott fordítás után küldhetők.';
 
   @override
   String get customerCommunicationResendSuccess =>
-      'Ujrakuldes sikeresen naplozva.';
+      'Újraküldés sikeresen naplózva.';
 
   @override
   String get customerCommunicationDeliveryMultipleAttempts =>
-      'Tobb kezbesitesi kiserlet — lasd a kezbesitesi elozmenyeket.';
+      'Több kézbesítési kísérlet — lásd a kézbesítési előzményeket.';
 
   @override
   String get customerCommunicationDeliveryResendAttempt =>
-      'Ez a kiserlet egy korabbi kezbesites ujrakuldese.';
+      'Ez a kísérlet egy korábbi kézbesítés újraküldése.';
 
   @override
   String get customerCommunicationDeliveryTemplateLabel => 'E-mail sablon';
 
   @override
   String get customerCommunicationEvidenceRegenerationNotice =>
-      'Az evidence csomagot erdemes ujrageneralni uj kezbesitesi kiserletek utan.';
+      'Az evidence csomagot érdemes újragenerálni új kézbesítési kísérletek után.';
 
   @override
   String get customerCommunicationHumanConfirmRequired =>
-      'Emberi megerosites szukseges.';
+      'Emberi megerősítés szükséges.';
 
   @override
-  String get customerCommunicationDeliveryEventQueued => 'Varolistan';
+  String get customerCommunicationDeliveryEventQueued => 'Várólistán';
 
   @override
-  String get customerCommunicationDeliveryEventSent => 'Elkuldve';
+  String get customerCommunicationDeliveryEventSent => 'Elküldve';
 
   @override
-  String get customerCommunicationDeliveryEventDelivered => 'Kezbesitve';
+  String get customerCommunicationDeliveryEventDelivered => 'Kézbesítve';
 
   @override
   String get customerCommunicationDeliveryEventBounced => 'Visszapattant';
@@ -4402,19 +4672,19 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get customerCommunicationDeliveryEventProviderStatus =>
-      'Szolgaltato statusz';
+      'Szolgáltató státusz';
 
   @override
-  String get customerCommunicationDeliveryEventUnknown => 'Ismeretlen esemeny';
+  String get customerCommunicationDeliveryEventUnknown => 'Ismeretlen esemény';
 
   @override
   String customerCommunicationPackageGeneratedAt(String date) {
-    return 'Generalva: $date';
+    return 'Generálva: $date';
   }
 
   @override
   String get customerCommunicationPackageTypeCommunicationEvidence =>
-      'Kommunikacios bizonyitek';
+      'Kommunikációs bizonyíték';
 
   @override
   String get customerCommunicationPackageTypeSubscriptionDispute =>
@@ -4422,66 +4692,66 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get customerCommunicationPackageTypeRegistrationEvidence =>
-      'Regisztracios bizonyitek';
+      'Regisztrációs bizonyíték';
 
   @override
   String get customerCommunicationPackageTypePricingEvidence =>
-      'Arazasi bizonyitek';
+      'Árazási bizonyíték';
 
   @override
   String get customerCommunicationPackageTypeUnknown =>
       'Ismeretlen csomagtipus';
 
   @override
-  String get customerCommunicationPackageStatusGenerated => 'Generalva';
+  String get customerCommunicationPackageStatusGenerated => 'Generálva';
 
   @override
   String get customerCommunicationPackageStatusFailed => 'Sikertelen';
 
   @override
-  String get customerCommunicationPackageStatusUnknown => 'Ismeretlen allapot';
+  String get customerCommunicationPackageStatusUnknown => 'Ismeretlen állapot';
 
   @override
   String get customerCommunicationGeneratePackageTitle =>
-      'Bizonyitek csomag generalasa';
+      'Bizonyíték csomag generálása';
 
   @override
-  String get customerCommunicationGeneratePackageAction => 'Csomag generalasa';
+  String get customerCommunicationGeneratePackageAction => 'Csomag generálása';
 
   @override
   String get customerCommunicationMarkDisputedTitle =>
-      'Szal vitatottkent jelolese';
+      'Szál vitatottként jelölése';
 
   @override
-  String get customerCommunicationMarkDisputedAction => 'Vitatott jeloles';
+  String get customerCommunicationMarkDisputedAction => 'Vitatott jelölés';
 
   @override
   String get customerCommunicationDisputedSectionTitle => 'Vita';
 
   @override
-  String get customerCommunicationReasonLabel => 'Indoklas (kotelezo)';
+  String get customerCommunicationReasonLabel => 'Indoklás (kötelező)';
 
   @override
   String get customerCommunicationReasonRequired =>
-      'Legalabb 5 karakter szukseges.';
+      'Legalabb 5 karakter szükséges.';
 
   @override
   String get customerCommunicationPackageTypeLabel => 'Csomag tipus';
 
   @override
   String get customerCommunicationExportAuditWarning =>
-      'Az export audit altal naplozott bizonyitek csomagot keszit az adatbazis rekordokbol. Adjon meg indoklast.';
+      'Az export audit által naplózott bizonyíték csomagot készít az adatbázis rekordokból. Adjon meg indoklást.';
 
   @override
-  String get customerCommunicationCancel => 'Megse';
+  String get customerCommunicationCancel => 'Mégse';
 
   @override
   String get customerCommunicationDisputeMarkedSuccess =>
-      'A szal vitatottkent jelolve.';
+      'A szál vitatottként jelölve.';
 
   @override
   String get customerCommunicationPackageGeneratedSuccess =>
-      'Bizonyitek csomag generalva.';
+      'Bizonyíték csomag generálva.';
 
   @override
   String get customerCommunicationSummaryJsonTitle =>
@@ -4489,20 +4759,20 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String customerCommunicationPackageReason(String reason) {
-    return 'Indoklas: $reason';
+    return 'Indoklás: $reason';
   }
 
   @override
   String customerCommunicationFileHash(String hash) {
-    return 'Integritas hash: $hash';
+    return 'Integritás hash: $hash';
   }
 
   @override
   String get customerCommunicationPackageNotFound =>
-      'A bizonyitek csomag nem talalhato.';
+      'A bizonyíték csomag nem található.';
 
   @override
-  String get customerCommunicationSummaryTitle => 'Ugyfel kommunikacio';
+  String get customerCommunicationSummaryTitle => 'Ügyfélkommunikáció';
 
   @override
   String customerCommunicationSummaryDisputed(String count) {
@@ -4516,7 +4786,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String customerCommunicationSummaryTotal(String count) {
-    return 'Osszesen: $count';
+    return 'Összesen: $count';
   }
 
   @override
@@ -5317,80 +5587,4 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get companyExchangeCancel => 'Mégse';
-
-  @override
-  String get registrationApproveSuccess =>
-      'Cég jóváhagyva. Meghívó létrehozva.';
-
-  @override
-  String get registrationApproveOutcomeTitle => 'Jóváhagyás eredménye';
-
-  @override
-  String get registrationFieldApplicationReference => 'Jelentkezési azonosító';
-
-  @override
-  String get registrationFieldCompanyId => 'Cég ID';
-
-  @override
-  String get registrationFieldAdminEmail => 'Cégadmin e-mail';
-
-  @override
-  String get registrationFieldInviteStatus => 'Meghívó kézbesítés';
-
-  @override
-  String get registrationFieldInviteExpiresAt => 'Meghívó lejárat';
-
-  @override
-  String get registrationFieldInviteTokenId => 'Meghívó token ID';
-
-  @override
-  String get registrationInviteDeliverySent => 'Elküldve';
-
-  @override
-  String get registrationInviteDeliveryPending =>
-      'Meghívó létrehozva; kézbesítés függőben vagy sikertelen (SMTP)';
-
-  @override
-  String get registrationInviteDeliveryAccepted => 'Elfogadva';
-
-  @override
-  String get registrationInviteDeliveryExpired => 'Lejárt';
-
-  @override
-  String get registrationInviteDeliveryRevoked => 'Visszavonva';
-
-  @override
-  String get registrationInviteResend => 'Meghívó újraküldése';
-
-  @override
-  String get registrationInviteRevoke => 'Meghívó visszavonása';
-
-  @override
-  String get registrationInviteResendSuccess =>
-      'Meghívó újraküldve (új token).';
-
-  @override
-  String get registrationInviteRevokeSuccess =>
-      'A függő meghívó tokenek visszavonva.';
-
-  @override
-  String get registrationOpenCompany => 'Cég megnyitása';
-
-  @override
-  String get registrationPermissionPolicyTitle => 'Jóváhagyási jogosultság';
-
-  @override
-  String get registrationPermissionSuperAdminOnly =>
-      'A céges jóváhagyás/elutasítás csak super_admin. A reviewer csak a sort láthatja.';
-
-  @override
-  String get applicationsCompatBanner =>
-      'Céges onboarding postafiók: Regisztrációk. Ez a Jelentkezések nézet kompatibilitási felület a vegyes public intake-ekhez.';
-
-  @override
-  String get applicationsOpenRegistrations => 'Regisztrációk megnyitása';
-
-  @override
-  String get applicationsCompanyUseRegistrations =>
-      'A céges jelentkezéseket a Regisztrációk (elsődleges postafiók) felületen kell elbírálni.';
 }

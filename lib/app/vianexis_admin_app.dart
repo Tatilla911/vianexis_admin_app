@@ -23,6 +23,9 @@ class VianexisAdminApp extends ConsumerWidget {
       locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
       localeResolutionCallback: (deviceLocale, supportedLocales) {
+        if (locale != null) {
+          return locale;
+        }
         return resolveAppLocale(deviceLocale, supportedLocales);
       },
       localizationsDelegates: const [
