@@ -6,6 +6,7 @@ import '../../core/localization/localization_resolver.dart';
 import '../../l10n/app_localizations.dart';
 import 'vianexis_admin_card.dart';
 import 'vianexis_logo_mark.dart';
+import 'vianexis_metallic_text.dart';
 
 /// Branded header for dashboard and module landing areas.
 class VianexisBrandHeader extends StatelessWidget {
@@ -33,7 +34,7 @@ class VianexisBrandHeader extends StatelessWidget {
         children: [
           const VianexisLogoMark(compact: true, size: 56),
           const SizedBox(height: VianexisBrand.spaceLg),
-          Text(
+          VianexisMetallicText(
             l10n.brandOperationalControlCenter,
             style: VianexisBrand.sectionTitleStyle(context),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// ViaNexis Admin design tokens — enterprise control center visual system.
 abstract final class VianexisBrand {
@@ -10,12 +11,26 @@ abstract final class VianexisBrand {
 
   static const Color viaNexisBlue = Color(0xFF4FA3E3);
   static const Color accentBlue = Color(0xFF4DA3FF);
-  static const Color accentMuted = Color(0xFF8FA3BF);
+  static const Color accentMuted = Color(0xFFB08F58);
   static const Color goldAccent = Color(0xFFD4AF37);
 
-  static const Color textPrimary = Color(0xFFF4F7FB);
-  static const Color textSecondary = Color(0xFFB8C5D6);
+  /// Champagne metallic ink (replaces flat white on dark chrome).
+  static const Color textPrimary = Color(0xFFF3E9C8);
+  static const Color textSecondary = Color(0xFFD4C49A);
+  static const Color brandInkSoft = Color(0xFFE8D5A3);
+  static const Color brandInkOnGold = Color(0xFF3D2E14);
   static const Color borderSubtle = Color(0xFF2E4059);
+
+  /// Lockup-matching champagne gradient stops.
+  static const List<Color> metallicGoldStops = [
+    Color(0xFFF8F1DC),
+    Color(0xFFEFE0B8),
+    Color(0xFFDCC487),
+    Color(0xFFC4A46A),
+    Color(0xFFA8884E),
+    Color(0xFFE6D4A4),
+    Color(0xFFF3E9C8),
+  ];
 
   // Semantic colors
   static const Color success = Color(0xFF3DDC97);
@@ -49,6 +64,33 @@ abstract final class VianexisBrand {
   static const String backgroundAsset = 'assets/backgrounds/admin_background.png';
   static const String appIconAsset = 'assets/icons/app_icon.png';
 
+  static String get displayFontFamily =>
+      GoogleFonts.playfairDisplay().fontFamily ?? 'serif';
+
+  static TextStyle displayStyle({
+    double fontSize = 18,
+    FontWeight fontWeight = FontWeight.w600,
+    Color? color,
+    double? letterSpacing,
+    double? height,
+  }) {
+    return GoogleFonts.playfairDisplay(
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color ?? textPrimary,
+      letterSpacing: letterSpacing,
+      height: height,
+    );
+  }
+
+  static Shader metallicGoldShader(Rect bounds) {
+    return const LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: metallicGoldStops,
+    ).createShader(bounds);
+  }
+
   static BoxShadow cardShadow(Brightness brightness) {
     return BoxShadow(
       color: Colors.black.withValues(alpha: brightness == Brightness.dark ? 0.35 : 0.12),
@@ -58,16 +100,16 @@ abstract final class VianexisBrand {
   }
 
   static TextStyle sectionTitleStyle(BuildContext context) {
-    return Theme.of(context).textTheme.titleMedium!.copyWith(
-      color: textPrimary,
+    return displayStyle(
+      fontSize: Theme.of(context).textTheme.titleMedium?.fontSize ?? 16,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.2,
     );
   }
 
   static TextStyle metricValueStyle(BuildContext context) {
-    return Theme.of(context).textTheme.titleLarge!.copyWith(
-      color: textPrimary,
+    return displayStyle(
+      fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 22,
       fontWeight: FontWeight.w700,
     );
   }

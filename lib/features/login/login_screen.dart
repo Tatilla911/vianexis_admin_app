@@ -9,7 +9,9 @@ import '../../core/widgets/vianexis_admin_background.dart';
 import '../../core/widgets/vianexis_admin_card.dart';
 import '../../core/widgets/vianexis_loading_view.dart';
 import '../../core/widgets/vianexis_logo_mark.dart';
+import '../../core/widgets/vianexis_metallic_text.dart';
 import '../../core/widgets/vianexis_metadata_notice.dart';
+import '../../app/vianexis_brand.dart';
 import '../../l10n/app_localizations.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -77,9 +79,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Text(
+                            VianexisMetallicText(
                               l10n.loginTitle,
-                              style: Theme.of(context).textTheme.headlineSmall,
+                              style: VianexisBrand.displayStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             const SizedBox(height: 8),
                             Text(l10n.loginSubtitle),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'vianexis_brand.dart';
 
@@ -27,10 +28,14 @@ abstract final class AppTheme {
       brightness: brightness,
       surface: VianexisBrand.panelNavy,
       primary: VianexisBrand.accentBlue,
-      onPrimary: VianexisBrand.backgroundNavy,
+      onPrimary: VianexisBrand.brandInkOnGold,
       onSurface: VianexisBrand.textPrimary,
       error: VianexisBrand.danger,
       tertiary: VianexisBrand.goldAccent,
+    );
+
+    final baseText = GoogleFonts.playfairDisplayTextTheme(
+      ThemeData(brightness: brightness).textTheme,
     );
 
     return ThemeData(
@@ -38,37 +43,48 @@ abstract final class AppTheme {
       brightness: brightness,
       scaffoldBackgroundColor: VianexisBrand.backgroundNavy,
       colorScheme: colorScheme,
-      appBarTheme: const AppBarTheme(
+      fontFamily: VianexisBrand.displayFontFamily,
+      appBarTheme: AppBarTheme(
         backgroundColor: VianexisBrand.backgroundNavy,
         foregroundColor: VianexisBrand.textPrimary,
         elevation: 0,
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
+        titleTextStyle: VianexisBrand.displayStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: VianexisBrand.panelNavy,
         indicatorColor: VianexisBrand.accentBlue.withValues(alpha: 0.24),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
-          return TextStyle(
-            color: selected ? VianexisBrand.accentBlue : VianexisBrand.textSecondary,
+          return GoogleFonts.playfairDisplay(
+            color: selected ? VianexisBrand.goldAccent : VianexisBrand.textSecondary,
             fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+            fontSize: 12,
           );
         }),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
           return IconThemeData(
-            color: selected ? VianexisBrand.accentBlue : VianexisBrand.textSecondary,
+            color: selected ? VianexisBrand.goldAccent : VianexisBrand.textSecondary,
           );
         }),
       ),
-      navigationRailTheme: const NavigationRailThemeData(
+      navigationRailTheme: NavigationRailThemeData(
         backgroundColor: VianexisBrand.panelNavy,
-        indicatorColor: Color(0x3D4DA3FF),
-        selectedIconTheme: IconThemeData(color: VianexisBrand.accentBlue),
-        unselectedIconTheme: IconThemeData(color: VianexisBrand.textSecondary),
-        selectedLabelTextStyle: TextStyle(color: VianexisBrand.accentBlue),
-        unselectedLabelTextStyle: TextStyle(color: VianexisBrand.textSecondary),
+        indicatorColor: const Color(0x3D4DA3FF),
+        selectedIconTheme: const IconThemeData(color: VianexisBrand.goldAccent),
+        unselectedIconTheme: const IconThemeData(color: VianexisBrand.textSecondary),
+        selectedLabelTextStyle: GoogleFonts.playfairDisplay(
+          color: VianexisBrand.goldAccent,
+          fontWeight: FontWeight.w600,
+        ),
+        unselectedLabelTextStyle: GoogleFonts.playfairDisplay(
+          color: VianexisBrand.textSecondary,
+        ),
       ),
       cardTheme: CardThemeData(
         color: VianexisBrand.surfaceElevated,
@@ -93,13 +109,14 @@ abstract final class AppTheme {
           borderRadius: BorderRadius.circular(VianexisBrand.radiusMd),
           borderSide: const BorderSide(color: VianexisBrand.accentBlue, width: 1.5),
         ),
-        labelStyle: const TextStyle(color: VianexisBrand.textSecondary),
-        hintStyle: const TextStyle(color: VianexisBrand.textSecondary),
+        labelStyle: GoogleFonts.playfairDisplay(color: VianexisBrand.textSecondary),
+        hintStyle: GoogleFonts.playfairDisplay(color: VianexisBrand.textSecondary),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          backgroundColor: VianexisBrand.accentBlue,
-          foregroundColor: VianexisBrand.backgroundNavy,
+          backgroundColor: VianexisBrand.goldAccent,
+          foregroundColor: VianexisBrand.brandInkOnGold,
+          textStyle: GoogleFonts.playfairDisplay(fontWeight: FontWeight.w600),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(VianexisBrand.radiusMd),
@@ -108,24 +125,39 @@ abstract final class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: VianexisBrand.accentBlue,
-          side: const BorderSide(color: VianexisBrand.borderSubtle),
+          foregroundColor: VianexisBrand.brandInkSoft,
+          textStyle: GoogleFonts.playfairDisplay(fontWeight: FontWeight.w600),
+          side: const BorderSide(color: VianexisBrand.goldAccent, width: 1.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(VianexisBrand.radiusMd),
           ),
         ),
       ),
-      textTheme: const TextTheme(
-        headlineSmall: TextStyle(
+      textTheme: baseText.copyWith(
+        headlineSmall: VianexisBrand.displayStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+        ),
+        titleLarge: VianexisBrand.displayStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.w700,
+        ),
+        titleMedium: VianexisBrand.displayStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+        bodyMedium: GoogleFonts.playfairDisplay(
+          color: VianexisBrand.textSecondary,
+          fontSize: 14,
+        ),
+        bodySmall: GoogleFonts.playfairDisplay(
+          color: VianexisBrand.textSecondary,
+          fontSize: 12,
+        ),
+        labelLarge: GoogleFonts.playfairDisplay(
           color: VianexisBrand.textPrimary,
           fontWeight: FontWeight.w600,
         ),
-        titleMedium: TextStyle(
-          color: VianexisBrand.textPrimary,
-          fontWeight: FontWeight.w600,
-        ),
-        bodyMedium: TextStyle(color: VianexisBrand.textSecondary),
-        bodySmall: TextStyle(color: VianexisBrand.textSecondary),
       ),
       dividerTheme: DividerThemeData(
         color: VianexisBrand.textSecondary.withValues(alpha: 0.24),

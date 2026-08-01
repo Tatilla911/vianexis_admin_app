@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/vianexis_brand.dart';
 import '../../l10n/app_localizations.dart';
+import 'vianexis_metallic_text.dart';
 
 /// ViaNexis logo/mark with safe asset fallback.
 class VianexisLogoMark extends StatelessWidget {
@@ -41,10 +42,10 @@ class VianexisLogoMark extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                VianexisMetallicText(
                   l10n.brandAppName,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: VianexisBrand.textPrimary,
+                  style: VianexisBrand.displayStyle(
+                    fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
                   maxLines: 1,
@@ -75,10 +76,10 @@ class VianexisLogoMark extends StatelessWidget {
           errorBuilder: (context, error, stackTrace) => mark,
         ),
         const SizedBox(height: VianexisBrand.spaceMd),
-        Text(
+        VianexisMetallicText(
           l10n.brandAppName,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: VianexisBrand.textPrimary,
+          style: VianexisBrand.displayStyle(
+            fontSize: 22,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.4,
           ),
