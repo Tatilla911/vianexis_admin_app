@@ -37,7 +37,7 @@ class EvidencePackageCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.only(bottom: 12),
       child: InkWell(
-        onTap: () => context.go(
+        onTap: () => context.push(
           AdminRoutes.customerCommunicationEvidencePackageDetail(
             threadId,
             package.id,

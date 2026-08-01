@@ -9,6 +9,7 @@ import '../api/api_unauthorized_binding.dart';
 import '../auth/admin_auth_state.dart';
 import '../auth/admin_user.dart';
 import '../connectivity/connectivity_status_provider.dart';
+import '../navigation/admin_back_navigation.dart';
 import '../navigation/admin_shell_navigation.dart';
 import 'admin_screen_app_bar.dart';
 import 'backend_mode_banner.dart';
@@ -72,27 +73,30 @@ class VianexisAdminScaffold extends ConsumerWidget {
 
     if (isTablet) {
       final selectedIndex = _indexForLocation(location, allVisible);
-      return Scaffold(
-        body: Row(
-          children: [
-            NavigationRail(
-              extended: MediaQuery.sizeOf(context).width >= 900,
-              selectedIndex: selectedIndex,
-              onDestinationSelected: (index) =>
-                  _goToDestination(context, allVisible[index]),
-              labelType: NavigationRailLabelType.none,
-              destinations: [
-                for (final item in allVisible)
-                  NavigationRailDestination(
-                    icon: Icon(item.icon),
-                    selectedIcon: Icon(item.selectedIcon),
-                    label: Text(_label(context, item.destination)),
-                  ),
-              ],
-            ),
-            const VerticalDivider(width: 1),
-            Expanded(child: content),
-          ],
+      return _shellBackScope(
+        context,
+        child: Scaffold(
+          body: Row(
+            children: [
+              NavigationRail(
+                extended: MediaQuery.sizeOf(context).width >= 900,
+                selectedIndex: selectedIndex,
+                onDestinationSelected: (index) =>
+                    _goToDestination(context, allVisible[index]),
+                labelType: NavigationRailLabelType.none,
+                destinations: [
+                  for (final item in allVisible)
+                    NavigationRailDestination(
+                      icon: Icon(item.icon),
+                      selectedIcon: Icon(item.selectedIcon),
+                      label: Text(_label(context, item.destination)),
+                    ),
+                ],
+              ),
+              const VerticalDivider(width: 1),
+              Expanded(child: content),
+            ],
+          ),
         ),
       );
     }
@@ -100,22 +104,36 @@ class VianexisAdminScaffold extends ConsumerWidget {
     final mobileItems = _mobileNavItems(user, allVisible);
     final selectedIndex = _mobileIndexForLocation(location, mobileItems);
 
-    return Scaffold(
-      body: content,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: selectedIndex,
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-        onDestinationSelected: (index) =>
-            _goToDestination(context, mobileItems[index]),
-        destinations: [
-          for (final item in mobileItems)
-            NavigationDestination(
-              icon: Icon(item.icon),
-              selectedIcon: Icon(item.selectedIcon),
-              label: _mobileLabel(context, item),
-            ),
-        ],
+    return _shellBackScope(
+      context,
+      child: Scaffold(
+        body: content,
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: selectedIndex,
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          onDestinationSelected: (index) =>
+              _goToDestination(context, mobileItems[index]),
+          destinations: [
+            for (final item in mobileItems)
+              NavigationDestination(
+                icon: Icon(item.icon),
+                selectedIcon: Icon(item.selectedIcon),
+                label: _mobileLabel(context, item),
+              ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _shellBackScope(BuildContext context, {required Widget child}) {
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        invokeAdminSystemBack(context);
+      },
+      child: child,
     );
   }
 
@@ -370,8 +388,9 @@ class AdminFeatureScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        leading: Navigator.of(context).canPop()
-            ? BackButton(onPressed: () => context.pop())
+        leading: Navigator.of(context).canPop() ||
+                (GoRouter.maybeOf(context)?.canPop() ?? false)
+            ? BackButton(onPressed: () => handleAdminBack(context))
             : IconButton(
                 tooltip: l10n.navReturnToDashboard,
                 icon: const Icon(Icons.home_outlined),

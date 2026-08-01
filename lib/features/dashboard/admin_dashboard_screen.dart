@@ -108,7 +108,7 @@ class AdminDashboardScreen extends ConsumerWidget {
         actions: [
           if (showNotifications)
             IconButton(
-              onPressed: () => context.go(AdminRoutes.notifications),
+              onPressed: () => context.push(AdminRoutes.notifications),
               icon: Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -143,7 +143,7 @@ class AdminDashboardScreen extends ConsumerWidget {
           if (showOperations) ...[
             const SizedBox(height: 12),
             OutlinedButton.icon(
-              onPressed: () => context.go(AdminRoutes.operations),
+              onPressed: () => context.push(AdminRoutes.operations),
               icon: const Icon(Icons.dashboard_customize_outlined),
               label: Text(l10n.operationsOpenModule),
             ),
@@ -164,7 +164,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                   ActionCenterNeedsAttentionCard(snapshot: snapshot, compact: true),
                   const SizedBox(height: 12),
                   OutlinedButton(
-                    onPressed: () => context.go(AdminRoutes.actionCenter),
+                    onPressed: () => context.push(AdminRoutes.actionCenter),
                     child: Text(resolveActionCenterKey(context, 'actionCenterOpenModule')),
                   ),
                 ],
@@ -190,7 +190,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                   CustomerCommunicationsSummaryCard(summary: summary, compact: true),
                   const SizedBox(height: 12),
                   OutlinedButton(
-                    onPressed: () => context.go(AdminRoutes.customerCommunications),
+                    onPressed: () => context.push(AdminRoutes.customerCommunications),
                     child: Text(
                       resolveCustomerCommunicationsKey(
                         context,
@@ -262,7 +262,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 12),
                   FilledButton.icon(
-                    onPressed: () => context.go(AdminRoutes.publicIntakes),
+                    onPressed: () => context.push(AdminRoutes.publicIntakes),
                     icon: const Icon(Icons.public_outlined),
                     label: Text(
                       resolvePublicIntakeKey(
@@ -293,7 +293,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton(
-                  onPressed: () => context.go(AdminRoutes.systemHealth),
+                  onPressed: () => context.push(AdminRoutes.systemHealth),
                   child: Text(resolveSystemHealthKey(context, 'systemHealthOpenModule')),
                 ),
               ],
@@ -313,7 +313,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                 SupportSummaryCard(summary: summary, compact: true),
                 const SizedBox(height: 12),
                 OutlinedButton(
-                  onPressed: () => context.go(AdminRoutes.supportTickets),
+                  onPressed: () => context.push(AdminRoutes.supportTickets),
                   child: Text(resolveSupportKey(context, 'supportOpenModule')),
                 ),
               ],
@@ -337,7 +337,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                   PlatformCompanySummaryCard(summary: summary, compact: true),
                   const SizedBox(height: 12),
                   OutlinedButton(
-                    onPressed: () => context.go(AdminRoutes.companies),
+                    onPressed: () => context.push(AdminRoutes.companies),
                     child: Text(
                       resolvePlatformCompanyKey(context, 'platformCompanyOpenModule'),
                     ),
@@ -360,7 +360,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                   BillingOverviewCard(overview: overview, compact: true),
                   const SizedBox(height: 12),
                   OutlinedButton(
-                    onPressed: () => context.go(AdminRoutes.billing),
+                    onPressed: () => context.push(AdminRoutes.billing),
                     child: Text(resolveBillingKey(context, 'billingOpenModule')),
                   ),
                 ],
@@ -382,7 +382,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                   SecurityOverviewCard(overview: overview, compact: true),
                   const SizedBox(height: 12),
                   OutlinedButton(
-                    onPressed: () => context.go(AdminRoutes.securityCenter),
+                    onPressed: () => context.push(AdminRoutes.securityCenter),
                     child: Text(resolveSecurityKey(context, 'securityOpenModule')),
                   ),
                 ],
@@ -405,7 +405,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                   BulkOnboardingSummaryCard(summary: summary, compact: true),
                   const SizedBox(height: 12),
                   OutlinedButton(
-                    onPressed: () => context.go(AdminRoutes.bulkOnboarding),
+                    onPressed: () => context.push(AdminRoutes.bulkOnboarding),
                     child: Text(
                       resolveBulkOnboardingKey(context, 'bulkOnboardingOpenModule'),
                     ),
@@ -428,7 +428,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                   AiReviewSummaryCard(summary: summary, compact: true),
                   const SizedBox(height: 12),
                   OutlinedButton(
-                    onPressed: () => context.go(AdminRoutes.aiReviews),
+                    onPressed: () => context.push(AdminRoutes.aiReviews),
                     child: Text(resolveAiReviewKey(context, 'aiReviewOpenModule')),
                   ),
                 ],
@@ -449,7 +449,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                 AuditLogSummaryCard(summary: summary, compact: true),
                 const SizedBox(height: 12),
                 OutlinedButton(
-                  onPressed: () => context.go(AdminRoutes.auditLogs),
+                  onPressed: () => context.push(AdminRoutes.auditLogs),
                   child: Text(resolveAuditLogKey(context, 'auditLogOpenModule')),
                 ),
               ],

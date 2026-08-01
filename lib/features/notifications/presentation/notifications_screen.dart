@@ -20,7 +20,7 @@ class NotificationsScreen extends ConsumerWidget {
         title: Text(l10n.notificationsTitle),
         actions: [
           TextButton(
-            onPressed: () => context.go(AdminRoutes.notificationPreferences),
+            onPressed: () => context.push(AdminRoutes.notificationPreferences),
             child: Text(l10n.notificationsPreferences),
           ),
           TextButton(
@@ -50,7 +50,7 @@ class NotificationsScreen extends ConsumerWidget {
                     final item = items[index];
                     return NotificationCard(
                       item: item,
-                      onTap: () => context.go(AdminRoutes.notificationDetail(item.id)),
+                      onTap: () => context.push(AdminRoutes.notificationDetail(item.id)),
                       onMarkRead: () =>
                           ref.read(notificationsProvider.notifier).markRead(item.id),
                     );

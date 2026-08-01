@@ -3,8 +3,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/app_router.dart';
 import '../../l10n/app_localizations.dart';
+import '../navigation/admin_back_navigation.dart';
 
-/// App bar with predictable back: pop when possible, else modules hub or dashboard.
+/// App bar with predictable back: pop when possible, else parent/modules/dashboard.
 class AdminScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AdminScreenAppBar({
     super.key,
@@ -23,14 +24,17 @@ class AdminScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final canPop = Navigator.of(context).canPop();
+    final router = GoRouter.maybeOf(context);
+    final canPop =
+        Navigator.of(context).canPop() || (router?.canPop() ?? false);
 
     return AppBar(
       title: Text(title),
       actions: actions,
       leading: canPop
           ? BackButton(
-              onPressed: () => context.pop(),
+              onPressed: () =>
+                  handleAdminBack(context, fallbackRoute: fallbackRoute),
             )
           : IconButton(
               tooltip: l10n.navReturnToDashboard,

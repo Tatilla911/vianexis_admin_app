@@ -116,7 +116,7 @@ class AdminSettingsScreen extends ConsumerWidget {
                   Text(l10n.settingsReleaseCenterBody),
                   const SizedBox(height: 16),
                   OutlinedButton(
-                    onPressed: () => context.go(AdminRoutes.releaseCenter),
+                    onPressed: () => context.push(AdminRoutes.releaseCenter),
                     child: Text(l10n.settingsOpenReleaseCenter),
                   ),
                 ],
@@ -138,7 +138,7 @@ class AdminSettingsScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 OutlinedButton(
                   onPressed: () =>
-                      context.go(AdminRoutes.notificationPreferences),
+                      context.push(AdminRoutes.notificationPreferences),
                   child: Text(l10n.settingsOpenNotificationPreferences),
                 ),
               ],

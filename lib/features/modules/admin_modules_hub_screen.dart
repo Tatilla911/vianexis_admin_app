@@ -49,7 +49,7 @@ class AdminModulesHubScreen extends ConsumerWidget {
             children: [
               for (final module in modules)
                 VianexisAdminCard(
-                  onTap: () => context.go(module.route),
+                  onTap: () => context.push(module.route),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
