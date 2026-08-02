@@ -13,6 +13,8 @@ abstract class QrCodesRepository {
 
   Future<PlatformQrCode> create(CreatePlatformQrRequest request);
 
+  Future<PlatformQrCode> send(int id, SendPlatformQrRequest request);
+
   Future<PlatformQrCode> revoke(int id);
 
   Future<PlatformQrCode> regenerate(int id);
@@ -53,6 +55,12 @@ class LiveQrCodesRepository implements QrCodesRepository {
   }
 
   @override
+  Future<PlatformQrCode> send(int id, SendPlatformQrRequest request) async {
+    final raw = await _api.send(id, request.toJson());
+    return PlatformQrCode.fromJson(raw);
+  }
+
+  @override
   Future<PlatformQrCode> revoke(int id) async {
     final raw = await _api.revoke(id);
     return PlatformQrCode.fromJson(raw);
@@ -89,6 +97,8 @@ class MockQrCodesRepository implements QrCodesRepository {
 
   @override
   Future<PlatformQrCode> create(CreatePlatformQrRequest request) async {
+    final hasEmail =
+        request.notifyEmail != null && request.notifyEmail!.trim().isNotEmpty;
     final created = PlatformQrCode(
       id: _items.length + 1,
       entityType: request.entityType,
@@ -104,9 +114,36 @@ class MockQrCodesRepository implements QrCodesRepository {
       environment: 'staging',
       secure: true,
       createdAt: DateTime.now().toUtc(),
+      emailDelivery: hasEmail
+          ? const QrEmailDelivery(
+              sent: false,
+              skipped: true,
+              status: 'provider_not_configured',
+              statusReason: 'Email provider is not configured in mock mode.',
+            )
+          : null,
     );
     _items.insert(0, created);
     return created;
+  }
+
+  @override
+  Future<PlatformQrCode> send(int id, SendPlatformQrRequest request) async {
+    final index = _items.indexWhere((e) => e.id == id);
+    if (index < 0) {
+      throw StateError('QR not found');
+    }
+    final current = _items[index];
+    final updated = current.copyWith(
+      emailDelivery: const QrEmailDelivery(
+        sent: false,
+        skipped: true,
+        status: 'provider_not_configured',
+        statusReason: 'Email provider is not configured in mock mode.',
+      ),
+    );
+    _items[index] = updated;
+    return updated;
   }
 
   @override
@@ -116,21 +153,9 @@ class MockQrCodesRepository implements QrCodesRepository {
       throw StateError('QR not found');
     }
     final current = _items[index];
-    final updated = PlatformQrCode(
-      id: current.id,
-      entityType: current.entityType,
-      entityId: current.entityId,
-      displayName: current.displayName,
+    final updated = current.copyWith(
       status: 'revoked',
-      purpose: current.purpose,
-      expiresAt: current.expiresAt,
-      maxUses: current.maxUses,
-      usedCount: current.usedCount,
-      resolveUrl: current.resolveUrl,
-      environment: current.environment,
-      secure: current.secure,
       revokedAt: DateTime.now().toUtc(),
-      createdAt: current.createdAt,
     );
     _items[index] = updated;
     return updated;

@@ -17,6 +17,10 @@ class ApiException implements Exception {
     this.kind = ApiExceptionKind.unknown,
     this.statusCode,
     this.errorCode,
+    this.requestId,
+    this.backendMessage,
+    this.messageKeyFromApi,
+    this.endpoint,
     this.cause,
   });
 
@@ -24,10 +28,15 @@ class ApiException implements Exception {
   final ApiExceptionKind kind;
   final int? statusCode;
   final String? errorCode;
+  final String? requestId;
+  final String? backendMessage;
+  final String? messageKeyFromApi;
+  final String? endpoint;
   final Object? cause;
 
   @override
   String toString() =>
       'ApiException(kind: $kind, messageKey: $messageKey, '
-      'statusCode: $statusCode, errorCode: $errorCode)';
+      'statusCode: $statusCode, errorCode: $errorCode, '
+      'requestId: $requestId, endpoint: $endpoint)';
 }

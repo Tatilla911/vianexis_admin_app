@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/auth/admin_user.dart';
 import '../data/platform_companies_repository.dart';
+import '../domain/company_data_amendment.dart';
 import '../domain/platform_company.dart';
 import '../domain/platform_company_status.dart';
 import '../domain/platform_company_status_request.dart';
@@ -9,6 +10,17 @@ import '../domain/platform_company_summary.dart';
 
 extension AdminRolePlatformCompanyDecisions on AdminRole {
   bool get canChangePlatformCompanyStatus => this == AdminRole.superAdmin;
+
+  bool get canInitiateCompanyDataAmendment =>
+      this == AdminRole.superAdmin ||
+      this == AdminRole.onboardingReviewer ||
+      this == AdminRole.supportAdmin ||
+      this == AdminRole.billingAdmin;
+
+  bool get canApproveCompanyDataAmendment => this == AdminRole.superAdmin;
+
+  bool get canApplyCompanyDataAmendment =>
+      this == AdminRole.superAdmin || this == AdminRole.onboardingReviewer;
 }
 
 class PlatformCompanyListQuery {
@@ -34,7 +46,8 @@ class PlatformCompanyListQuery {
     return switch (filter) {
       PlatformCompanyListFilter.all => null,
       PlatformCompanyListFilter.active => PlatformCompanyStatus.active,
-      PlatformCompanyListFilter.pendingReview => PlatformCompanyStatus.pendingReview,
+      PlatformCompanyListFilter.pendingReview =>
+        PlatformCompanyStatus.pendingReview,
       PlatformCompanyListFilter.suspended => PlatformCompanyStatus.suspended,
       PlatformCompanyListFilter.disabled => PlatformCompanyStatus.disabled,
     };
@@ -42,11 +55,13 @@ class PlatformCompanyListQuery {
 }
 
 final platformCompanyListQueryProvider =
-    NotifierProvider<PlatformCompanyListQueryNotifier, PlatformCompanyListQuery>(
-      PlatformCompanyListQueryNotifier.new,
-    );
+    NotifierProvider<
+      PlatformCompanyListQueryNotifier,
+      PlatformCompanyListQuery
+    >(PlatformCompanyListQueryNotifier.new);
 
-class PlatformCompanyListQueryNotifier extends Notifier<PlatformCompanyListQuery> {
+class PlatformCompanyListQueryNotifier
+    extends Notifier<PlatformCompanyListQuery> {
   @override
   PlatformCompanyListQuery build() => const PlatformCompanyListQuery();
 
@@ -97,19 +112,23 @@ final filteredPlatformCompaniesProvider =
       );
     });
 
-final platformCompanyDetailProvider =
-    FutureProvider.autoDispose.family<PlatformCompany, String>((ref, id) {
+final platformCompanyDetailProvider = FutureProvider.autoDispose
+    .family<PlatformCompany, String>((ref, id) {
       return ref.watch(platformCompaniesRepositoryProvider).fetchCompany(id);
     });
 
 final platformCompanyUsersSummaryProvider = FutureProvider.autoDispose
     .family<PlatformCompanyUsersSummary, String>((ref, id) {
-      return ref.watch(platformCompaniesRepositoryProvider).fetchUsersSummary(id);
+      return ref
+          .watch(platformCompaniesRepositoryProvider)
+          .fetchUsersSummary(id);
     });
 
 final platformCompanySystemSummaryProvider = FutureProvider.autoDispose
     .family<PlatformCompanySystemSummary, String>((ref, id) {
-      return ref.watch(platformCompaniesRepositoryProvider).fetchSystemSummary(id);
+      return ref
+          .watch(platformCompaniesRepositoryProvider)
+          .fetchSystemSummary(id);
     });
 
 final platformCompanyOnboardingSummaryProvider = FutureProvider.autoDispose
@@ -119,11 +138,32 @@ final platformCompanyOnboardingSummaryProvider = FutureProvider.autoDispose
           .fetchOnboardingSummary(id);
     });
 
+final platformCompanyRegistrationSnapshotProvider = FutureProvider.autoDispose
+    .family<CompanyRegistrationSnapshot, String>((ref, id) {
+      return ref
+          .watch(platformCompaniesRepositoryProvider)
+          .fetchRegistrationSnapshot(id);
+    });
+
+final platformCompanyAmendmentsProvider = FutureProvider.autoDispose
+    .family<List<CompanyDataAmendment>, String>((ref, id) {
+      return ref
+          .watch(platformCompaniesRepositoryProvider)
+          .fetchAmendments(id);
+    });
+
+final platformCompanyAmendmentFieldsProvider = FutureProvider.autoDispose
+    .family<List<CompanyAmendmentFieldOption>, String>((ref, id) {
+      return ref
+          .watch(platformCompaniesRepositoryProvider)
+          .fetchAmendmentFields(id);
+    });
+
 final platformCompanyDashboardSummaryProvider =
-    AsyncNotifierProvider<PlatformCompanyDashboardSummaryNotifier,
-        PlatformCompanyDashboardSummary>(
-      PlatformCompanyDashboardSummaryNotifier.new,
-    );
+    AsyncNotifierProvider<
+      PlatformCompanyDashboardSummaryNotifier,
+      PlatformCompanyDashboardSummary
+    >(PlatformCompanyDashboardSummaryNotifier.new);
 
 class PlatformCompanyDashboardSummaryNotifier
     extends AsyncNotifier<PlatformCompanyDashboardSummary> {
@@ -131,7 +171,9 @@ class PlatformCompanyDashboardSummaryNotifier
   Future<PlatformCompanyDashboardSummary> build() => _load();
 
   Future<PlatformCompanyDashboardSummary> _load() {
-    return ref.read(platformCompaniesRepositoryProvider).fetchDashboardSummary();
+    return ref
+        .read(platformCompaniesRepositoryProvider)
+        .fetchDashboardSummary();
   }
 
   Future<void> refresh() async {
@@ -145,10 +187,9 @@ Future<PlatformCompany> submitPlatformCompanyStatusChange(
   required String companyId,
   required PlatformCompanyStatusRequest request,
 }) async {
-  final updated = await ref.read(platformCompaniesRepositoryProvider).updateStatus(
-    id: companyId,
-    request: request,
-  );
+  final updated = await ref
+      .read(platformCompaniesRepositoryProvider)
+      .updateStatus(id: companyId, request: request);
   ref.invalidate(platformCompanyDetailProvider(companyId));
   ref.invalidate(platformCompanyUsersSummaryProvider(companyId));
   ref.invalidate(platformCompanySystemSummaryProvider(companyId));

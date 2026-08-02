@@ -1293,6 +1293,116 @@ String resolvePlatformCompanyKey(
     'platformCompanyStatusUnavailable' => l10n.platformCompanyStatusUnavailable,
     'platformCompanyExchangeSettingsAction' =>
       l10n.platformCompanyExchangeSettingsAction,
+    'platformCompanySectionOverview' => l10n.platformCompanySectionOverview,
+    'platformCompanyOverviewHint' => l10n.platformCompanyOverviewHint,
+    'platformCompanySectionRegistration' =>
+      l10n.platformCompanySectionRegistration,
+    'platformCompanyOriginalSubmitted' => l10n.platformCompanyOriginalSubmitted,
+    'platformCompanyCurrentValid' => l10n.platformCompanyCurrentValid,
+    'platformCompanyOriginalCurrentDiff' =>
+      l10n.platformCompanyOriginalCurrentDiff,
+    'platformCompanyRegistrationLoadError' =>
+      l10n.platformCompanyRegistrationLoadError,
+    'platformCompanyRegistrationSubmittedAt' =>
+      l10n.platformCompanyRegistrationSubmittedAt,
+    'platformCompanyRegistrationSubmitter' =>
+      l10n.platformCompanyRegistrationSubmitter,
+    'platformCompanySectionAmendments' => l10n.platformCompanySectionAmendments,
+    'platformCompanyAmendAction' => l10n.platformCompanyAmendAction,
+    'platformCompanyAmendFieldLabel' => l10n.platformCompanyAmendFieldLabel,
+    'platformCompanyAmendFieldRequired' =>
+      l10n.platformCompanyAmendFieldRequired,
+    'platformCompanyAmendCurrentValue' => l10n.platformCompanyAmendCurrentValue,
+    'platformCompanyAmendNewValue' => l10n.platformCompanyAmendNewValue,
+    'platformCompanyAmendOldValue' => l10n.platformCompanyAmendOldValue,
+    'platformCompanyAmendReason' => l10n.platformCompanyAmendReason,
+    'platformCompanyAmendReasonRequired' =>
+      l10n.platformCompanyAmendReasonRequired,
+    'platformCompanyAmendAuthSource' => l10n.platformCompanyAmendAuthSource,
+    'platformCompanyAmendAuthorizedBy' => l10n.platformCompanyAmendAuthorizedBy,
+    'platformCompanyAmendAuthMethod' => l10n.platformCompanyAmendAuthMethod,
+    'platformCompanyAmendAuthReference' =>
+      l10n.platformCompanyAmendAuthReference,
+    'platformCompanyAmendAuthRequired' => l10n.platformCompanyAmendAuthRequired,
+    'platformCompanyAmendAuthCustomerEmail' =>
+      l10n.platformCompanyAmendAuthCustomerEmail,
+    'platformCompanyAmendAuthCustomerPhone' =>
+      l10n.platformCompanyAmendAuthCustomerPhone,
+    'platformCompanyAmendAuthCustomerDocument' =>
+      l10n.platformCompanyAmendAuthCustomerDocument,
+    'platformCompanyAmendAuthInternalApproval' =>
+      l10n.platformCompanyAmendAuthInternalApproval,
+    'platformCompanyAmendAuthContract' => l10n.platformCompanyAmendAuthContract,
+    'platformCompanyAmendAuthOfficialRegistry' =>
+      l10n.platformCompanyAmendAuthOfficialRegistry,
+    'platformCompanyAmendAuthOther' => l10n.platformCompanyAmendAuthOther,
+    'platformCompanyAmendAuthCustomerCall' =>
+      l10n.platformCompanyAmendAuthCustomerCall,
+    'platformCompanyAmendAuthCustomerTicket' =>
+      l10n.platformCompanyAmendAuthCustomerTicket,
+    'platformCompanyAmendAuthInternalPolicy' =>
+      l10n.platformCompanyAmendAuthInternalPolicy,
+    'platformCompanyAmendAuthLegalDocument' =>
+      l10n.platformCompanyAmendAuthLegalDocument,
+    'platformCompanyAmendInternalComment' =>
+      l10n.platformCompanyAmendInternalComment,
+    'platformCompanyAmendCustomerComment' =>
+      l10n.platformCompanyAmendCustomerComment,
+    'platformCompanyAmendSensitiveNotice' =>
+      l10n.platformCompanyAmendSensitiveNotice,
+    'platformCompanyAmendSubmit' => l10n.platformCompanyAmendSubmit,
+    'platformCompanyAmendSubmitSuccess' =>
+      l10n.platformCompanyAmendSubmitSuccess,
+    'platformCompanyAmendSubmitError' => l10n.platformCompanyAmendSubmitError,
+    'platformCompanyAmendLoadError' => l10n.platformCompanyAmendLoadError,
+    'platformCompanyAmendHistoryEmpty' => l10n.platformCompanyAmendHistoryEmpty,
+    'platformCompanyAmendStatus' => l10n.platformCompanyAmendStatus,
+    'platformCompanyAmendStatusDraft' => l10n.platformCompanyAmendStatusDraft,
+    'platformCompanyAmendStatusPending' =>
+      l10n.platformCompanyAmendStatusPending,
+    'platformCompanyAmendStatusApproved' =>
+      l10n.platformCompanyAmendStatusApproved,
+    'platformCompanyAmendStatusRejected' =>
+      l10n.platformCompanyAmendStatusRejected,
+    'platformCompanyAmendStatusApplied' =>
+      l10n.platformCompanyAmendStatusApplied,
+    'platformCompanyAmendStatusReverted' =>
+      l10n.platformCompanyAmendStatusReverted,
+    'platformCompanyAmendStatusCancelled' =>
+      l10n.platformCompanyAmendStatusCancelled,
+    'platformCompanyAmendStatusConflict' =>
+      l10n.platformCompanyAmendStatusConflict,
+    'platformCompanyAmendConflict' => l10n.platformCompanyAmendConflict,
+    'platformCompanyAmendApprove' => l10n.platformCompanyAmendApprove,
+    'platformCompanyAmendReject' => l10n.platformCompanyAmendReject,
+    'platformCompanyAmendApply' => l10n.platformCompanyAmendApply,
+    'platformCompanyAmendFieldLegalName' =>
+      l10n.platformCompanyAmendFieldLegalName,
+    'platformCompanyAmendFieldTradeName' =>
+      l10n.platformCompanyAmendFieldTradeName,
+    'platformCompanyAmendFieldVat' => l10n.platformCompanyAmendFieldVat,
+    'platformCompanyAmendFieldRegistrationNumber' =>
+      l10n.platformCompanyAmendFieldRegistrationNumber,
+    'platformCompanyAmendFieldCountry' => l10n.platformCompanyAmendFieldCountry,
+    'platformCompanyAmendFieldRegisteredAddress' =>
+      l10n.platformCompanyAmendFieldRegisteredAddress,
+    'platformCompanyAmendFieldBillingAddress' =>
+      l10n.platformCompanyAmendFieldBillingAddress,
+    'platformCompanyAmendFieldWebsite' => l10n.platformCompanyAmendFieldWebsite,
+    'platformCompanyAmendFieldPrimaryEmail' =>
+      l10n.platformCompanyAmendFieldPrimaryEmail,
+    'platformCompanyAmendFieldPhone' => l10n.platformCompanyAmendFieldPhone,
+    'platformCompanyAmendFieldPreferredLanguage' =>
+      l10n.platformCompanyAmendFieldPreferredLanguage,
+    'platformCompanyAmendFieldBillingContactEmail' =>
+      l10n.platformCompanyAmendFieldBillingContactEmail,
+    'platformCompanyAmendFieldStatus' => l10n.platformCompanyAmendFieldStatus,
+    'platformCompanyAmendFieldPrimaryContact' =>
+      l10n.platformCompanyAmendFieldPrimaryContact,
+    'platformCompanyAmendFieldBillingContact' =>
+      l10n.platformCompanyAmendFieldBillingContact,
+    'platformCompanyAmendNewValueJsonHint' =>
+      l10n.platformCompanyAmendNewValueJsonHint,
     _ => l10n.errorGenericBody,
   };
 }
@@ -1544,7 +1654,13 @@ String resolveAdminUserKey(
     'adminUserInviteNoteLabel' => l10n.adminUserInviteNoteLabel,
     'adminUserInviteConfirm' => l10n.adminUserInviteConfirm,
     'adminUserInviteSuccess' => l10n.adminUserInviteSuccess,
-    'adminUserFilterAll' => l10n.adminUserFilterAll,
+    'adminUserInviteEmailPending' => l10n.adminUserInviteEmailPending,
+    'adminUserInviteEmailFailed' => l10n.adminUserInviteEmailFailed,
+    'adminUserInviteEmailSkipped' => l10n.adminUserInviteEmailSkipped,
+    'adminUserInviteConsoleOnly' => l10n.adminUserInviteConsoleOnly,
+    'adminUserInviteProviderMissing' => l10n.adminUserInviteProviderMissing,
+    'adminUserInviteAllowlistBlocked' => l10n.adminUserInviteAllowlistBlocked,
+        'adminUserFilterAll' => l10n.adminUserFilterAll,
     'adminUserFilterActive' => l10n.adminUserFilterActive,
     'adminUserFilterInvited' => l10n.adminUserFilterInvited,
     'adminUserFilterSuspended' => l10n.adminUserFilterSuspended,
@@ -2386,6 +2502,16 @@ String resolveQrCodesKey(BuildContext context, String key) {
     'qrCodesRoleDriver' => l10n.qrCodesRoleDriver,
     'qrCodesRoleCompany' => l10n.qrCodesRoleCompany,
     'qrCodesRoleUser' => l10n.qrCodesRoleUser,
+    'qrCodesSendEmail' => l10n.qrCodesSendEmail,
+    'qrCodesDeliveryStatus' => l10n.qrCodesDeliveryStatus,
+    'qrCodesDeliveryDisabled' => l10n.qrCodesDeliveryDisabled,
+    'qrCodesDeliverySent' => l10n.qrCodesDeliverySent,
+    'qrCodesDeliveryFailed' => l10n.qrCodesDeliveryFailed,
+    'qrCodesRecipientEmail' => l10n.qrCodesRecipientEmail,
+    'qrCodesInviteeName' => l10n.qrCodesInviteeName,
+    'qrCodesActivationLink' => l10n.qrCodesActivationLink,
+    'qrCodesSendSuccess' => l10n.qrCodesSendSuccess,
+    'qrCodesSendSkipped' => l10n.qrCodesSendSkipped,
     _ => l10n.errorGenericBody,
   };
 }

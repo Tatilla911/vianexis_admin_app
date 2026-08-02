@@ -75,6 +75,8 @@ class QrCodesManagementDialog extends ConsumerStatefulWidget {
 class _QrCodesManagementDialogState
     extends ConsumerState<QrCodesManagementDialog> {
   final GlobalKey _cardBoundaryKey = GlobalKey();
+  final _inviteeNameController = TextEditingController();
+  final _recipientEmailController = TextEditingController();
   late QrPurpose _purpose;
   bool _loading = true;
   bool _busy = false;
@@ -88,6 +90,13 @@ class _QrCodesManagementDialogState
     super.initState();
     _purpose = widget.allowedPurposes.first;
     _reload();
+  }
+
+  @override
+  void dispose() {
+    _inviteeNameController.dispose();
+    _recipientEmailController.dispose();
+    super.dispose();
   }
 
   String get _roleLabel {
@@ -130,6 +139,16 @@ class _QrCodesManagementDialogState
           }
         }
         autoPreview ??= items.isNotEmpty ? items.first : null;
+      } else {
+        for (final item in items) {
+          if (item.id == autoPreview!.id) {
+            autoPreview = item.copyWith(
+              emailDelivery:
+                  item.emailDelivery ?? autoPreview.emailDelivery,
+            );
+            break;
+          }
+        }
       }
       setState(() {
         _history = items;
@@ -145,9 +164,62 @@ class _QrCodesManagementDialogState
     }
   }
 
+  String _deliveryMessage(QrEmailDelivery? delivery) {
+    if (delivery == null) {
+      return resolveQrCodesKey(context, 'qrCodesDeliveryDisabled');
+    }
+    if (delivery.isSent) {
+      return resolveQrCodesKey(context, 'qrCodesDeliverySent');
+    }
+    if (delivery.isDeliveryDisabled) {
+      return resolveQrCodesKey(context, 'qrCodesDeliveryDisabled');
+    }
+    final status = (delivery.status ?? '').trim().toLowerCase();
+    if (status == 'failed' || status == 'error') {
+      return resolveQrCodesKey(context, 'qrCodesDeliveryFailed');
+    }
+    return resolveQrCodesKey(context, 'qrCodesSendSkipped');
+  }
+
+  void _showCreateDeliveryFeedback(PlatformQrCode created) {
+    final delivery = created.emailDelivery;
+    final messenger = ScaffoldMessenger.of(context);
+    if (delivery == null) {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(resolveQrCodesKey(context, 'qrCodesCreateSuccess')),
+        ),
+      );
+      return;
+    }
+    if (delivery.isSent) {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(resolveQrCodesKey(context, 'qrCodesDeliverySent')),
+        ),
+      );
+      return;
+    }
+    if (delivery.isDeliveryDisabled) {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(resolveQrCodesKey(context, 'qrCodesDeliveryDisabled')),
+        ),
+      );
+      return;
+    }
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(resolveQrCodesKey(context, 'qrCodesSendSkipped')),
+      ),
+    );
+  }
+
   Future<void> _create() async {
     setState(() => _busy = true);
     try {
+      final notifyEmail = _recipientEmailController.text.trim();
+      final inviteeName = _inviteeNameController.text.trim();
       final created = await ref
           .read(qrCodesRepositoryProvider)
           .create(
@@ -158,15 +230,77 @@ class _QrCodesManagementDialogState
               purpose: _purpose.apiValue,
               companyId: widget.companyId,
               locale: Localizations.localeOf(context).languageCode,
+              notifyEmail: notifyEmail.isEmpty ? null : notifyEmail,
+              preferredLanguage: Localizations.localeOf(context).languageCode,
+              inviteeName: inviteeName.isEmpty ? null : inviteeName,
             ),
           );
       if (!mounted) return;
       setState(() => _preview = created);
+      _showCreateDeliveryFeedback(created);
+      await _reload();
+    } catch (error) {
+      if (!mounted) return;
+      if (error is ApiException) {
+        showApiExceptionSnackBar(context, error);
+      } else {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(error.toString())));
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _sendEmail(PlatformQrCode item) async {
+    final email = _recipientEmailController.text.trim();
+    final resolveUrl = item.resolveUrl ?? item.displayPayload;
+    if (email.isEmpty || resolveUrl == null || resolveUrl.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(resolveQrCodesKey(context, 'qrCodesCreateSuccess')),
+          content: Text(resolveQrCodesKey(context, 'qrCodesRecipientEmail')),
         ),
       );
+      return;
+    }
+    setState(() => _busy = true);
+    try {
+      final sent = await ref
+          .read(qrCodesRepositoryProvider)
+          .send(
+            item.id,
+            SendPlatformQrRequest(
+              notifyEmail: email,
+              preferredLanguage: Localizations.localeOf(context).languageCode,
+              resolveUrl: resolveUrl,
+              sendEmail: true,
+            ),
+          );
+      if (!mounted) return;
+      setState(() => _preview = sent);
+      final delivery = sent.emailDelivery;
+      if (delivery?.isSent == true) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(resolveQrCodesKey(context, 'qrCodesSendSuccess')),
+          ),
+        );
+      } else if (delivery?.isDeliveryDisabled == true) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              resolveQrCodesKey(context, 'qrCodesDeliveryDisabled'),
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(resolveQrCodesKey(context, 'qrCodesSendSkipped')),
+          ),
+        );
+      }
       await _reload();
     } catch (error) {
       if (!mounted) return;
@@ -334,225 +468,313 @@ class _QrCodesManagementDialogState
           ? (QrPurpose.tryParse(preview!.purpose)?.l10nKey ?? 'qrCodesTitle')
           : _purpose.l10nKey,
     );
+    final maxHeight = MediaQuery.sizeOf(context).height * 0.75;
 
     return AlertDialog(
       title: Text(resolveQrCodesKey(context, widget.titleKey)),
       content: SizedBox(
         width: 520,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                '${resolveQrCodesKey(context, 'qrCodesTargetSummary')}: ${widget.displayName}',
-              ),
-              const SizedBox(height: 12),
-              DropdownButtonFormField<QrPurpose>(
-                // ignore: deprecated_member_use
-                value: _purpose,
-                decoration: InputDecoration(
-                  labelText: resolveQrCodesKey(context, 'qrCodesPurposeLabel'),
-                ),
-                items: widget.allowedPurposes
-                    .map(
-                      (purpose) => DropdownMenuItem(
-                        value: purpose,
-                        child: Text(
-                          resolveQrCodesKey(context, purpose.l10nKey),
-                        ),
-                      ),
-                    )
-                    .toList(),
-                onChanged: _busy
-                    ? null
-                    : (value) {
-                        if (value != null) setState(() => _purpose = value);
-                      },
-              ),
-              const SizedBox(height: 12),
-              FilledButton(
-                onPressed: _busy ? null : _create,
-                child: Text(resolveQrCodesKey(context, 'qrCodesCreate')),
-              ),
-              if (preview != null && payload != null && payload.isNotEmpty) ...[
-                const SizedBox(height: 16),
-                if (isStaging)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Text(
-                      resolveQrCodesKey(context, 'qrCodesStagingBadge'),
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.error,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: maxHeight),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
                 Text(
-                  resolveQrCodesKey(context, 'qrCodesIdentityCard'),
+                  '${resolveQrCodesKey(context, 'qrCodesTargetSummary')}: ${widget.displayName}',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                const SizedBox(height: 8),
-                RepaintBoundary(
-                  key: _cardBoundaryKey,
-                  child: VianexisQrIdentityCard(
-                    brandTitle: _brandTitle,
-                    displayName: widget.displayName,
-                    subtitle: widget.subtitle,
-                    entityIdLabel: '${widget.entityId}',
-                    roleLabel: _roleLabel,
-                    purposeLabel: purposeLabel,
-                    qrPayload: payload,
-                    photoPath: _photoPath,
-                    nameFieldLabel: resolveQrCodesKey(
+                Text('ID: ${widget.entityId}'),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<QrPurpose>(
+                  // ignore: deprecated_member_use
+                  value: _purpose,
+                  decoration: InputDecoration(
+                    labelText: resolveQrCodesKey(
                       context,
-                      'qrCodesCardFieldName',
+                      'qrCodesPurposeLabel',
                     ),
-                    idFieldLabel: resolveQrCodesKey(
+                    isDense: true,
+                  ),
+                  items: widget.allowedPurposes
+                      .map(
+                        (purpose) => DropdownMenuItem(
+                          value: purpose,
+                          child: Text(
+                            resolveQrCodesKey(context, purpose.l10nKey),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: _busy
+                      ? null
+                      : (value) {
+                          if (value != null) setState(() => _purpose = value);
+                        },
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _inviteeNameController,
+                  enabled: !_busy,
+                  decoration: InputDecoration(
+                    labelText: resolveQrCodesKey(
                       context,
-                      'qrCodesCardFieldId',
+                      'qrCodesInviteeName',
                     ),
-                    roleFieldLabel: resolveQrCodesKey(
-                      context,
-                      'qrCodesCardFieldRole',
-                    ),
-                    purposeFieldLabel: resolveQrCodesKey(
-                      context,
-                      'qrCodesCardFieldPurpose',
-                    ),
-                    detailFieldLabel: resolveQrCodesKey(
-                      context,
-                      'qrCodesCardFieldDetail',
-                    ),
-                    onQrTap: () => _openQr(preview),
+                    isDense: true,
                   ),
                 ),
-                if (preview.expiresAt != null) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    '${resolveQrCodesKey(context, 'qrCodesExpiresLabel')}: ${DateFormat.yMMMd().add_Hm().format(preview.expiresAt!.toLocal())}',
-                    textAlign: TextAlign.center,
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _recipientEmailController,
+                  enabled: !_busy,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    labelText: resolveQrCodesKey(
+                      context,
+                      'qrCodesRecipientEmail',
+                    ),
+                    isDense: true,
                   ),
-                ],
-                Text(
-                  resolveQrCodesKey(context, 'qrCodesSecurityWarning'),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodySmall,
                 ),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    OutlinedButton.icon(
-                      onPressed: _busy ? null : _pickPhoto,
-                      icon: const Icon(Icons.add_a_photo_outlined),
-                      label: Text(
-                        resolveQrCodesKey(
-                          context,
-                          _photoPath == null
-                              ? 'qrCodesAttachPhoto'
-                              : 'qrCodesChangePhoto',
-                        ),
-                      ),
-                    ),
-                    if (_photoPath != null)
-                      OutlinedButton.icon(
-                        onPressed: _busy
-                            ? null
-                            : () => setState(() => _photoPath = null),
-                        icon: const Icon(Icons.hide_image_outlined),
-                        label: Text(
-                          resolveQrCodesKey(context, 'qrCodesRemovePhoto'),
-                        ),
-                      ),
-                    OutlinedButton.icon(
-                      onPressed: _busy ? null : () => _shareCard(preview),
-                      icon: const Icon(Icons.ios_share),
-                      label: Text(
-                        resolveQrCodesKey(context, 'qrCodesShareCard'),
-                      ),
-                    ),
-                    OutlinedButton.icon(
-                      onPressed: _busy ? null : () => _saveCard(preview),
-                      icon: const Icon(Icons.download),
-                      label: Text(
-                        resolveQrCodesKey(context, 'qrCodesSaveCard'),
-                      ),
-                    ),
-                    OutlinedButton.icon(
-                      onPressed: _busy ? null : () => _openQr(preview),
-                      icon: const Icon(Icons.qr_code_2),
-                      label: Text(resolveQrCodesKey(context, 'qrCodesOpenQr')),
-                    ),
-                    OutlinedButton(
-                      onPressed: _busy ? null : () => _copyLink(preview),
+                const SizedBox(height: 12),
+                FilledButton(
+                  onPressed: _busy ? null : _create,
+                  child: Text(resolveQrCodesKey(context, 'qrCodesCreate')),
+                ),
+                if (preview != null &&
+                    payload != null &&
+                    payload.isNotEmpty) ...[
+                  const SizedBox(height: 16),
+                  if (isStaging)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
-                        resolveQrCodesKey(context, 'qrCodesCopyLink'),
+                        resolveQrCodesKey(context, 'qrCodesStagingBadge'),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.error,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
+                    ),
+                  Text(
+                    resolveQrCodesKey(context, 'qrCodesActivationLink'),
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                  SelectableText(payload),
+                  if (preview.expiresAt != null) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      '${resolveQrCodesKey(context, 'qrCodesExpiresLabel')}: ${DateFormat.yMMMd().add_Hm().format(preview.expiresAt!.toLocal())}',
                     ),
                   ],
-                ),
-              ],
-              const SizedBox(height: 16),
-              Text(
-                resolveQrCodesKey(context, 'qrCodesHistory'),
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              if (_loading)
-                const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              else if (_error != null)
-                Text(_error!)
-              else if (_history.isEmpty)
-                Text(resolveQrCodesKey(context, 'qrCodesEmptyHistory'))
-              else
-                ..._history.take(8).map((item) {
-                  final statusKey = switch (item.status) {
-                    'expired' => 'qrCodesStatusExpired',
-                    'consumed' => 'qrCodesStatusConsumed',
-                    'revoked' => 'qrCodesStatusRevoked',
-                    _ => 'qrCodesStatusActive',
-                  };
-                  return ListTile(
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      resolveQrCodesKey(
+                  const SizedBox(height: 8),
+                  Text(
+                    '${resolveQrCodesKey(context, 'qrCodesDeliveryStatus')}: ${_deliveryMessage(preview.emailDelivery)}',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color:
+                          preview.emailDelivery?.isSent == true
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.tertiary,
+                    ),
+                  ),
+                  if (preview.emailDelivery?.statusReason != null &&
+                      preview.emailDelivery!.statusReason!.trim().isNotEmpty)
+                    Text(
+                      preview.emailDelivery!.statusReason!,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  const SizedBox(height: 12),
+                  Text(
+                    resolveQrCodesKey(context, 'qrCodesIdentityCard'),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  const SizedBox(height: 8),
+                  RepaintBoundary(
+                    key: _cardBoundaryKey,
+                    child: VianexisQrIdentityCard(
+                      brandTitle: _brandTitle,
+                      displayName: widget.displayName,
+                      subtitle: widget.subtitle,
+                      entityIdLabel: '${widget.entityId}',
+                      roleLabel: _roleLabel,
+                      purposeLabel: purposeLabel,
+                      qrPayload: payload,
+                      photoPath: _photoPath,
+                      nameFieldLabel: resolveQrCodesKey(
                         context,
-                        QrPurpose.tryParse(item.purpose)?.l10nKey ??
-                            'qrCodesTitle',
+                        'qrCodesCardFieldName',
                       ),
+                      idFieldLabel: resolveQrCodesKey(
+                        context,
+                        'qrCodesCardFieldId',
+                      ),
+                      roleFieldLabel: resolveQrCodesKey(
+                        context,
+                        'qrCodesCardFieldRole',
+                      ),
+                      purposeFieldLabel: resolveQrCodesKey(
+                        context,
+                        'qrCodesCardFieldPurpose',
+                      ),
+                      detailFieldLabel: resolveQrCodesKey(
+                        context,
+                        'qrCodesCardFieldDetail',
+                      ),
+                      onQrTap: () => _openQr(preview),
                     ),
-                    subtitle: Text(
-                      '${resolveQrCodesKey(context, statusKey)} · ${resolveQrCodesKey(context, 'qrCodesUsedCount')}: ${item.usedCount}',
-                    ),
-                    trailing: Wrap(
-                      spacing: 4,
-                      children: [
-                        IconButton(
-                          tooltip: resolveQrCodesKey(
+                  ),
+                  Text(
+                    resolveQrCodesKey(context, 'qrCodesSecurityWarning'),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      FilledButton.tonalIcon(
+                        onPressed: _busy ? null : () => _sendEmail(preview),
+                        icon: const Icon(Icons.email_outlined),
+                        label: Text(
+                          resolveQrCodesKey(context, 'qrCodesSendEmail'),
+                        ),
+                      ),
+                      OutlinedButton(
+                        onPressed: _busy ? null : () => _copyLink(preview),
+                        child: Text(
+                          resolveQrCodesKey(context, 'qrCodesCopyLink'),
+                        ),
+                      ),
+                      OutlinedButton.icon(
+                        onPressed: _busy ? null : () => _shareCard(preview),
+                        icon: const Icon(Icons.ios_share),
+                        label: Text(
+                          resolveQrCodesKey(context, 'qrCodesShareCard'),
+                        ),
+                      ),
+                      OutlinedButton.icon(
+                        onPressed: _busy ? null : () => _saveCard(preview),
+                        icon: const Icon(Icons.download),
+                        label: Text(
+                          resolveQrCodesKey(context, 'qrCodesSaveCard'),
+                        ),
+                      ),
+                      OutlinedButton.icon(
+                        onPressed: _busy ? null : () => _regenerate(preview),
+                        icon: const Icon(Icons.refresh),
+                        label: Text(
+                          resolveQrCodesKey(context, 'qrCodesRegenerate'),
+                        ),
+                      ),
+                      OutlinedButton.icon(
+                        onPressed: _busy || preview.status == 'revoked'
+                            ? null
+                            : () => _revoke(preview),
+                        icon: const Icon(Icons.block),
+                        label: Text(
+                          resolveQrCodesKey(context, 'qrCodesRevoke'),
+                        ),
+                      ),
+                      OutlinedButton.icon(
+                        onPressed: _busy ? null : _pickPhoto,
+                        icon: const Icon(Icons.add_a_photo_outlined),
+                        label: Text(
+                          resolveQrCodesKey(
                             context,
-                            'qrCodesRegenerate',
+                            _photoPath == null
+                                ? 'qrCodesAttachPhoto'
+                                : 'qrCodesChangePhoto',
                           ),
-                          onPressed: _busy ? null : () => _regenerate(item),
-                          icon: const Icon(Icons.refresh),
                         ),
-                        IconButton(
-                          tooltip: resolveQrCodesKey(context, 'qrCodesRevoke'),
-                          onPressed: _busy || item.status == 'revoked'
+                      ),
+                      if (_photoPath != null)
+                        OutlinedButton.icon(
+                          onPressed: _busy
                               ? null
-                              : () => _revoke(item),
-                          icon: const Icon(Icons.block),
+                              : () => setState(() => _photoPath = null),
+                          icon: const Icon(Icons.hide_image_outlined),
+                          label: Text(
+                            resolveQrCodesKey(context, 'qrCodesRemovePhoto'),
+                          ),
                         ),
-                      ],
-                    ),
-                    onTap: () => setState(() => _preview = item),
-                  );
-                }),
-            ],
+                      OutlinedButton.icon(
+                        onPressed: _busy ? null : () => _openQr(preview),
+                        icon: const Icon(Icons.qr_code_2),
+                        label: Text(
+                          resolveQrCodesKey(context, 'qrCodesOpenQr'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+                const SizedBox(height: 16),
+                Text(
+                  resolveQrCodesKey(context, 'qrCodesHistory'),
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                if (_loading)
+                  const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                else if (_error != null)
+                  Text(_error!)
+                else if (_history.isEmpty)
+                  Text(resolveQrCodesKey(context, 'qrCodesEmptyHistory'))
+                else
+                  ..._history.take(8).map((item) {
+                    final statusKey = switch (item.status) {
+                      'expired' => 'qrCodesStatusExpired',
+                      'consumed' => 'qrCodesStatusConsumed',
+                      'revoked' => 'qrCodesStatusRevoked',
+                      _ => 'qrCodesStatusActive',
+                    };
+                    return ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(
+                        resolveQrCodesKey(
+                          context,
+                          QrPurpose.tryParse(item.purpose)?.l10nKey ??
+                              'qrCodesTitle',
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${resolveQrCodesKey(context, statusKey)} · ${resolveQrCodesKey(context, 'qrCodesUsedCount')}: ${item.usedCount}',
+                      ),
+                      trailing: Wrap(
+                        spacing: 4,
+                        children: [
+                          IconButton(
+                            tooltip: resolveQrCodesKey(
+                              context,
+                              'qrCodesRegenerate',
+                            ),
+                            onPressed: _busy
+                                ? null
+                                : () => _regenerate(item),
+                            icon: const Icon(Icons.refresh),
+                          ),
+                          IconButton(
+                            tooltip: resolveQrCodesKey(
+                              context,
+                              'qrCodesRevoke',
+                            ),
+                            onPressed: _busy || item.status == 'revoked'
+                                ? null
+                                : () => _revoke(item),
+                            icon: const Icon(Icons.block),
+                          ),
+                        ],
+                      ),
+                      onTap: () => setState(() => _preview = item),
+                    );
+                  }),
+              ],
+            ),
           ),
         ),
       ),

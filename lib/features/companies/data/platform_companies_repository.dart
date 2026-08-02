@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/app_config.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
+import '../domain/company_data_amendment.dart';
 import '../domain/platform_company.dart';
 import '../domain/platform_company_status.dart';
 import '../domain/platform_company_status_request.dart';
@@ -29,6 +30,34 @@ abstract class PlatformCompaniesRepository {
   });
 
   Future<PlatformCompanyDashboardSummary> fetchDashboardSummary();
+
+  Future<CompanyRegistrationSnapshot> fetchRegistrationSnapshot(String id);
+
+  Future<List<CompanyDataAmendment>> fetchAmendments(String id);
+
+  Future<List<CompanyAmendmentFieldOption>> fetchAmendmentFields(String id);
+
+  Future<CompanyDataAmendment> createAmendment({
+    required String id,
+    required CreateCompanyAmendmentRequest request,
+  });
+
+  Future<CompanyDataAmendment> approveAmendment({
+    required String companyId,
+    required String amendmentId,
+  });
+
+  Future<CompanyDataAmendment> rejectAmendment({
+    required String companyId,
+    required String amendmentId,
+    required String rejectionReason,
+  });
+
+  Future<CompanyDataAmendment> applyAmendment({
+    required String companyId,
+    required String amendmentId,
+    int? expectedDataVersion,
+  });
 
   bool get usesMockData;
 }
@@ -83,6 +112,66 @@ class LivePlatformCompaniesRepository implements PlatformCompaniesRepository {
   @override
   Future<PlatformCompanyDashboardSummary> fetchDashboardSummary() {
     return _api.getDashboardSummary();
+  }
+
+  @override
+  Future<CompanyRegistrationSnapshot> fetchRegistrationSnapshot(String id) {
+    return _api.getRegistrationSnapshot(id);
+  }
+
+  @override
+  Future<List<CompanyDataAmendment>> fetchAmendments(String id) {
+    return _api.listAmendments(id);
+  }
+
+  @override
+  Future<List<CompanyAmendmentFieldOption>> fetchAmendmentFields(String id) {
+    return _api.listAmendmentFields(id);
+  }
+
+  @override
+  Future<CompanyDataAmendment> createAmendment({
+    required String id,
+    required CreateCompanyAmendmentRequest request,
+  }) {
+    return _api.createAmendment(id: id, request: request);
+  }
+
+  @override
+  Future<CompanyDataAmendment> approveAmendment({
+    required String companyId,
+    required String amendmentId,
+  }) {
+    return _api.approveAmendment(
+      companyId: companyId,
+      amendmentId: amendmentId,
+    );
+  }
+
+  @override
+  Future<CompanyDataAmendment> rejectAmendment({
+    required String companyId,
+    required String amendmentId,
+    required String rejectionReason,
+  }) {
+    return _api.rejectAmendment(
+      companyId: companyId,
+      amendmentId: amendmentId,
+      rejectionReason: rejectionReason,
+    );
+  }
+
+  @override
+  Future<CompanyDataAmendment> applyAmendment({
+    required String companyId,
+    required String amendmentId,
+    int? expectedDataVersion,
+  }) {
+    return _api.applyAmendment(
+      companyId: companyId,
+      amendmentId: amendmentId,
+      expectedDataVersion: expectedDataVersion,
+    );
   }
 }
 
@@ -207,7 +296,9 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
   }
 
   @override
-  Future<PlatformCompanyOnboardingSummary> fetchOnboardingSummary(String id) async {
+  Future<PlatformCompanyOnboardingSummary> fetchOnboardingSummary(
+    String id,
+  ) async {
     final company = await fetchCompany(id);
     return PlatformCompanyOnboardingSummary(
       companyId: id,
@@ -236,6 +327,8 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
     final updated = PlatformCompany(
       id: current.id,
       name: current.name,
+      companyName: current.companyName,
+      companyDisplayName: current.companyDisplayName,
       country: current.country,
       vatNumber: current.vatNumber,
       registrationNumber: current.registrationNumber,
@@ -280,15 +373,137 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
           .length,
     );
   }
+
+  @override
+  Future<CompanyRegistrationSnapshot> fetchRegistrationSnapshot(
+    String id,
+  ) async {
+    final company = await fetchCompany(id);
+    return CompanyRegistrationSnapshot(
+      companyId: id,
+      originalSubmitted: {
+        'companyName': company.name,
+        'country': company.country,
+        'vatNumber': company.vatNumber,
+        'registrationNumber': company.registrationNumber,
+      },
+      currentValid: {
+        'companyName': company.name,
+        'country': company.country,
+        'vatNumber': company.vatNumber,
+        'registrationNumber': company.registrationNumber,
+      },
+      differences: const [],
+      registration: CompanyRegistrationMeta(
+        id: 'mock-$id',
+        status: 'approved',
+        createdAt: company.createdAt,
+        contactEmail: 'mock@example.com',
+        requestedAdminEmail: 'admin@example.com',
+      ),
+      dataVersion: 1,
+    );
+  }
+
+  @override
+  Future<List<CompanyDataAmendment>> fetchAmendments(String id) async {
+    await Future<void>.delayed(const Duration(milliseconds: 80));
+    return const [];
+  }
+
+  @override
+  Future<List<CompanyAmendmentFieldOption>> fetchAmendmentFields(
+    String id,
+  ) async {
+    return const [
+      CompanyAmendmentFieldOption(
+        fieldPath: 'company.companyName',
+        fieldLabelKey: 'platformCompanyAmendFieldLegalName',
+        valueType: 'string',
+        sensitive: true,
+      ),
+      CompanyAmendmentFieldOption(
+        fieldPath: 'company.website',
+        fieldLabelKey: 'platformCompanyAmendFieldWebsite',
+        valueType: 'url',
+        sensitive: false,
+      ),
+    ];
+  }
+
+  @override
+  Future<CompanyDataAmendment> createAmendment({
+    required String id,
+    required CreateCompanyAmendmentRequest request,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    return CompanyDataAmendment(
+      id: 'mock-1',
+      companyId: id,
+      fieldPath: request.fieldPath,
+      fieldLabelKey: 'platformCompanyAmendFieldLegalName',
+      oldValueJson: 'Old',
+      newValueJson: request.newValue,
+      reason: request.reason,
+      requestedByUserId: 1,
+      requestedByRole: 'super_admin',
+      requestedAt: DateTime.now().toUtc(),
+      authorizationSource: request.authorizationSource,
+      authorizedByName: request.authorizedByName,
+      authorizationMethod: request.authorizationMethod,
+      authorizationReference: request.authorizationReference,
+      internalComment: request.internalComment,
+      customerVisibleComment: request.customerVisibleComment,
+      status: request.fieldPath.contains('companyName')
+          ? 'pending_approval'
+          : 'applied',
+      requestId: 'mock-req',
+      expectedDataVersion: request.expectedDataVersion,
+    );
+  }
+
+  @override
+  Future<CompanyDataAmendment> approveAmendment({
+    required String companyId,
+    required String amendmentId,
+  }) async {
+    throw const ApiException(
+      messageKey: LocalizationKeys.errorGenericBody,
+      kind: ApiExceptionKind.forbidden,
+    );
+  }
+
+  @override
+  Future<CompanyDataAmendment> rejectAmendment({
+    required String companyId,
+    required String amendmentId,
+    required String rejectionReason,
+  }) async {
+    throw const ApiException(
+      messageKey: LocalizationKeys.errorGenericBody,
+      kind: ApiExceptionKind.forbidden,
+    );
+  }
+
+  @override
+  Future<CompanyDataAmendment> applyAmendment({
+    required String companyId,
+    required String amendmentId,
+    int? expectedDataVersion,
+  }) async {
+    throw const ApiException(
+      messageKey: LocalizationKeys.errorGenericBody,
+      kind: ApiExceptionKind.forbidden,
+    );
+  }
 }
 
-final platformCompaniesRepositoryProvider = Provider<PlatformCompaniesRepository>(
-  (ref) {
-    if (AppConfig.instance.shouldUseLiveRepositories) {
-      return LivePlatformCompaniesRepository(
-        ref.watch(platformCompaniesApiProvider),
-      );
-    }
-    return MockPlatformCompaniesRepository();
-  },
-);
+final platformCompaniesRepositoryProvider =
+    Provider<PlatformCompaniesRepository>((ref) {
+      if (AppConfig.instance.shouldUseLiveRepositories) {
+        return LivePlatformCompaniesRepository(
+          ref.watch(platformCompaniesApiProvider),
+        );
+      }
+      return MockPlatformCompaniesRepository();
+    });

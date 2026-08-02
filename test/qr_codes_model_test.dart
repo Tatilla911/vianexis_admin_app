@@ -39,4 +39,42 @@ void main() {
     expect(body['expiresInSeconds'], 86400);
     expect(body.containsKey('token'), isFalse);
   });
+
+  test('CreatePlatformQrRequest includes notifyEmail when set', () {
+    final body = const CreatePlatformQrRequest(
+      entityType: 'company',
+      entityId: 3,
+      displayName: 'Acme Logistics',
+      purpose: 'company_invite',
+      notifyEmail: 'invitee@example.com',
+      preferredLanguage: 'hu',
+      inviteeName: 'Jane Doe',
+    ).toJson();
+    expect(body['notifyEmail'], 'invitee@example.com');
+    expect(body['preferredLanguage'], 'hu');
+    expect(body['inviteeName'], 'Jane Doe');
+  });
+
+  test('PlatformQrCode.fromJson maps emailDelivery honesty fields', () {
+    final code = PlatformQrCode.fromJson({
+      'id': 12,
+      'entityType': 'company',
+      'entityId': 3,
+      'displayName': 'Acme',
+      'status': 'active',
+      'purpose': 'company_invite',
+      'resolveUrl': 'https://vianexis.eu/q/abc',
+      'emailDelivery': {
+        'sent': false,
+        'skipped': true,
+        'status': 'provider_not_configured',
+        'statusReason': 'No provider',
+      },
+    });
+    expect(code.emailDelivery?.sent, isFalse);
+    expect(code.emailDelivery?.skipped, isTrue);
+    expect(code.emailDelivery?.status, 'provider_not_configured');
+    expect(code.emailDelivery?.isDeliveryDisabled, isTrue);
+    expect(code.emailDelivery?.isSent, isFalse);
+  });
 }

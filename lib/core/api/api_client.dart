@@ -243,6 +243,7 @@ class ApiClient {
 ApiException mapDioException(DioException error) {
   final statusCode = error.response?.statusCode;
   final path = resolveApiRequestPath(error.requestOptions);
+  final responseData = error.response?.data;
 
   if (statusCode != null) {
     return mapHttpStatusException(
@@ -261,6 +262,10 @@ ApiException mapDioException(DioException error) {
               error.type == DioExceptionType.receiveTimeout
           ? ApiExceptionKind.timeout
           : ApiExceptionKind.network,
+      requestId: readApiRequestId(responseData),
+      backendMessage: readApiMessage(responseData),
+      messageKeyFromApi: readApiMessageKey(responseData),
+      endpoint: path,
       cause: error,
     );
   }
@@ -269,6 +274,10 @@ ApiException mapDioException(DioException error) {
     return ApiException(
       messageKey: LocalizationKeys.errorGenericBody,
       kind: ApiExceptionKind.unknown,
+      requestId: readApiRequestId(responseData),
+      backendMessage: readApiMessage(responseData),
+      messageKeyFromApi: readApiMessageKey(responseData),
+      endpoint: path,
       cause: error,
     );
   }
@@ -276,6 +285,10 @@ ApiException mapDioException(DioException error) {
   return ApiException(
     messageKey: LocalizationKeys.authNetworkError,
     kind: ApiExceptionKind.network,
+    requestId: readApiRequestId(responseData),
+    backendMessage: readApiMessage(responseData),
+    messageKeyFromApi: readApiMessageKey(responseData),
+    endpoint: path,
     cause: error,
   );
 }

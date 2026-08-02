@@ -2754,6 +2754,234 @@ class AppLocalizationsEn extends AppLocalizations {
   String get platformCompanyFieldLastAdminActivity => 'Last admin activity';
 
   @override
+  String get platformCompanySectionOverview => 'Overview';
+
+  @override
+  String get platformCompanyOverviewHint =>
+      'Current company identity and operational status.';
+
+  @override
+  String get platformCompanySectionRegistration =>
+      'Registration and original submission';
+
+  @override
+  String get platformCompanyOriginalSubmitted => 'Originally submitted data';
+
+  @override
+  String get platformCompanyCurrentValid => 'Currently valid data';
+
+  @override
+  String get platformCompanyOriginalCurrentDiff =>
+      'Differences between original and current data';
+
+  @override
+  String get platformCompanyRegistrationLoadError =>
+      'Could not load registration snapshot.';
+
+  @override
+  String get platformCompanyRegistrationSubmittedAt => 'Submitted at';
+
+  @override
+  String get platformCompanyRegistrationSubmitter => 'Submitted by';
+
+  @override
+  String get platformCompanySectionAmendments => 'Amendments';
+
+  @override
+  String get platformCompanyAmendAction => 'Edit company data';
+
+  @override
+  String get platformCompanyAmendFieldLabel => 'Field to change';
+
+  @override
+  String get platformCompanyAmendFieldRequired => 'Select a field.';
+
+  @override
+  String get platformCompanyAmendCurrentValue => 'Current value';
+
+  @override
+  String get platformCompanyAmendNewValue => 'New value';
+
+  @override
+  String get platformCompanyAmendOldValue => 'Old value';
+
+  @override
+  String get platformCompanyAmendReason => 'Reason for change';
+
+  @override
+  String get platformCompanyAmendReasonRequired => 'A reason is required.';
+
+  @override
+  String get platformCompanyAmendAuthSource =>
+      'Requested / authorized by source';
+
+  @override
+  String get platformCompanyAmendAuthorizedBy => 'Authorized by';
+
+  @override
+  String get platformCompanyAmendAuthMethod => 'Authorization method';
+
+  @override
+  String get platformCompanyAmendAuthReference =>
+      'Authorization reference (optional)';
+
+  @override
+  String get platformCompanyAmendAuthRequired =>
+      'Authorization fields are required.';
+
+  @override
+  String get platformCompanyAmendAuthCustomerEmail => 'Customer email approval';
+
+  @override
+  String get platformCompanyAmendAuthCustomerPhone => 'Customer phone approval';
+
+  @override
+  String get platformCompanyAmendAuthCustomerDocument =>
+      'Customer-provided document';
+
+  @override
+  String get platformCompanyAmendAuthInternalApproval => 'Internal approval';
+
+  @override
+  String get platformCompanyAmendAuthContract => 'Contract or agreement';
+
+  @override
+  String get platformCompanyAmendAuthOfficialRegistry => 'Official registry';
+
+  @override
+  String get platformCompanyAmendAuthOther => 'Other';
+
+  @override
+  String get platformCompanyAmendAuthCustomerCall => 'Customer phone call';
+
+  @override
+  String get platformCompanyAmendAuthCustomerTicket =>
+      'Customer support ticket';
+
+  @override
+  String get platformCompanyAmendAuthInternalPolicy => 'Internal policy';
+
+  @override
+  String get platformCompanyAmendAuthLegalDocument => 'Legal document';
+
+  @override
+  String get platformCompanyAmendInternalComment => 'Internal comment';
+
+  @override
+  String get platformCompanyAmendCustomerComment =>
+      'Customer-visible comment (optional)';
+
+  @override
+  String get platformCompanyAmendSensitiveNotice =>
+      'Sensitive field: requires approval before apply.';
+
+  @override
+  String get platformCompanyAmendSubmit => 'Submit change';
+
+  @override
+  String get platformCompanyAmendSubmitSuccess => 'Change request saved.';
+
+  @override
+  String get platformCompanyAmendSubmitError =>
+      'Could not save the change request.';
+
+  @override
+  String get platformCompanyAmendLoadError => 'Could not load amendments.';
+
+  @override
+  String get platformCompanyAmendHistoryEmpty => 'No amendment history yet.';
+
+  @override
+  String get platformCompanyAmendStatus => 'Status';
+
+  @override
+  String get platformCompanyAmendStatusDraft => 'Draft';
+
+  @override
+  String get platformCompanyAmendStatusPending => 'Pending approval';
+
+  @override
+  String get platformCompanyAmendStatusApproved => 'Approved';
+
+  @override
+  String get platformCompanyAmendStatusRejected => 'Rejected';
+
+  @override
+  String get platformCompanyAmendStatusApplied => 'Applied';
+
+  @override
+  String get platformCompanyAmendStatusReverted => 'Reverted';
+
+  @override
+  String get platformCompanyAmendStatusCancelled => 'Cancelled';
+
+  @override
+  String get platformCompanyAmendStatusConflict => 'Conflict';
+
+  @override
+  String get platformCompanyAmendConflict =>
+      'Conflict: data changed meanwhile.';
+
+  @override
+  String get platformCompanyAmendApprove => 'Approve';
+
+  @override
+  String get platformCompanyAmendReject => 'Reject';
+
+  @override
+  String get platformCompanyAmendApply => 'Apply';
+
+  @override
+  String get platformCompanyAmendFieldLegalName => 'Legal company name';
+
+  @override
+  String get platformCompanyAmendFieldTradeName => 'Trade name';
+
+  @override
+  String get platformCompanyAmendFieldVat => 'VAT / tax number';
+
+  @override
+  String get platformCompanyAmendFieldRegistrationNumber =>
+      'Company registration number';
+
+  @override
+  String get platformCompanyAmendFieldCountry => 'Country';
+
+  @override
+  String get platformCompanyAmendFieldRegisteredAddress => 'Registered address';
+
+  @override
+  String get platformCompanyAmendFieldBillingAddress => 'Billing address';
+
+  @override
+  String get platformCompanyAmendFieldWebsite => 'Website';
+
+  @override
+  String get platformCompanyAmendFieldPrimaryEmail => 'Primary email';
+
+  @override
+  String get platformCompanyAmendFieldPhone => 'Phone number';
+
+  @override
+  String get platformCompanyAmendFieldPreferredLanguage => 'Preferred language';
+
+  @override
+  String get platformCompanyAmendFieldBillingContactEmail =>
+      'Billing contact email';
+
+  @override
+  String get platformCompanyAmendFieldStatus => 'Company status';
+
+  @override
+  String get platformCompanyAmendFieldPrimaryContact => 'Primary contact';
+
+  @override
+  String get platformCompanyAmendFieldBillingContact => 'Billing contact';
+
+  @override
+  String get platformCompanyAmendNewValueJsonHint => 'Enter valid JSON';
+
+  @override
   String get platformCompanyChangeStatusAction => 'Change status';
 
   @override
@@ -3286,6 +3514,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminUserInviteSuccess => 'Admin user invited.';
+
+  @override
+  String get adminUserInviteEmailPending =>
+      'Admin invited, but the email was not confirmed as sent.';
+
+  @override
+  String get adminUserInviteEmailFailed =>
+      'Admin invited, but the invite email failed.';
+
+  @override
+  String get adminUserInviteEmailSkipped =>
+      'Admin invited, but email delivery is disabled.';
+
+  @override
+  String get adminUserInviteConsoleOnly =>
+      'Admin invited; email only logged to console (not delivered).';
+
+  @override
+  String get adminUserInviteProviderMissing =>
+      'Admin invited, but no email provider is configured.';
+
+  @override
+  String get adminUserInviteAllowlistBlocked =>
+      'Admin invited, but staging allowlist blocked the recipient.';
 
   @override
   String get adminUserFilterAll => 'All';
@@ -6387,4 +6639,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get qrCodesRoleUser => 'User';
+
+  @override
+  String get qrCodesSendEmail => 'Send email';
+
+  @override
+  String get qrCodesDeliveryStatus => 'Email delivery';
+
+  @override
+  String get qrCodesDeliveryDisabled =>
+      'Invite created, but email delivery is not enabled.';
+
+  @override
+  String get qrCodesDeliverySent => 'Invite email sent.';
+
+  @override
+  String get qrCodesDeliveryFailed => 'Invite email could not be sent.';
+
+  @override
+  String get qrCodesRecipientEmail => 'Recipient email';
+
+  @override
+  String get qrCodesInviteeName => 'Invitee name (optional)';
+
+  @override
+  String get qrCodesActivationLink => 'Activation link';
+
+  @override
+  String get qrCodesSendSuccess => 'Invite email sent successfully.';
+
+  @override
+  String get qrCodesSendSkipped =>
+      'Invite created. Email was not sent (delivery skipped).';
 }

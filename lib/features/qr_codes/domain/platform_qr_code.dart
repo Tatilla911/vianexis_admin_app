@@ -51,6 +51,39 @@ enum QrEntityType {
   final String apiValue;
 }
 
+class QrEmailDelivery {
+  const QrEmailDelivery({
+    this.sent,
+    this.skipped,
+    this.status,
+    this.statusReason,
+  });
+
+  final bool? sent;
+  final bool? skipped;
+  final String? status;
+  final String? statusReason;
+
+  bool get isDeliveryDisabled {
+    final normalized = (status ?? '').trim().toLowerCase();
+    return skipped == true ||
+        normalized == 'skipped' ||
+        normalized == 'console' ||
+        normalized == 'provider_not_configured';
+  }
+
+  bool get isSent => sent == true || (status ?? '').trim().toLowerCase() == 'sent';
+
+  factory QrEmailDelivery.fromJson(Map<String, dynamic> json) {
+    return QrEmailDelivery(
+      sent: json['sent'] is bool ? json['sent'] as bool : null,
+      skipped: json['skipped'] is bool ? json['skipped'] as bool : null,
+      status: json['status']?.toString(),
+      statusReason: json['statusReason']?.toString(),
+    );
+  }
+}
+
 class PlatformQrCode {
   const PlatformQrCode({
     required this.id,
@@ -71,6 +104,7 @@ class PlatformQrCode {
     this.revokedAt,
     this.lastUsedAt,
     this.createdAt,
+    this.emailDelivery,
   });
 
   final int id;
@@ -91,13 +125,75 @@ class PlatformQrCode {
   final DateTime? revokedAt;
   final DateTime? lastUsedAt;
   final DateTime? createdAt;
+  final QrEmailDelivery? emailDelivery;
 
   String? get displayPayload => resolveUrl ?? qrPayload;
+
+  PlatformQrCode copyWith({
+    int? id,
+    String? entityType,
+    int? entityId,
+    String? displayName,
+    String? status,
+    String? purpose,
+    DateTime? expiresAt,
+    int? maxUses,
+    int? usedCount,
+    String? resolveUrl,
+    String? opaqueCode,
+    String? qrPayload,
+    String? environment,
+    bool? secure,
+    DateTime? consumedAt,
+    DateTime? revokedAt,
+    DateTime? lastUsedAt,
+    DateTime? createdAt,
+    QrEmailDelivery? emailDelivery,
+  }) {
+    return PlatformQrCode(
+      id: id ?? this.id,
+      entityType: entityType ?? this.entityType,
+      entityId: entityId ?? this.entityId,
+      displayName: displayName ?? this.displayName,
+      status: status ?? this.status,
+      purpose: purpose ?? this.purpose,
+      expiresAt: expiresAt ?? this.expiresAt,
+      maxUses: maxUses ?? this.maxUses,
+      usedCount: usedCount ?? this.usedCount,
+      resolveUrl: resolveUrl ?? this.resolveUrl,
+      opaqueCode: opaqueCode ?? this.opaqueCode,
+      qrPayload: qrPayload ?? this.qrPayload,
+      environment: environment ?? this.environment,
+      secure: secure ?? this.secure,
+      consumedAt: consumedAt ?? this.consumedAt,
+      revokedAt: revokedAt ?? this.revokedAt,
+      lastUsedAt: lastUsedAt ?? this.lastUsedAt,
+      createdAt: createdAt ?? this.createdAt,
+      emailDelivery: emailDelivery ?? this.emailDelivery,
+    );
+  }
 
   factory PlatformQrCode.fromJson(Map<String, dynamic> json) {
     DateTime? parseDate(dynamic value) {
       if (value is! String || value.isEmpty) return null;
       return DateTime.tryParse(value);
+    }
+
+    QrEmailDelivery? emailDelivery;
+    final nested = json['emailDelivery'];
+    if (nested is Map) {
+      emailDelivery = QrEmailDelivery.fromJson(
+        Map<String, dynamic>.from(nested),
+      );
+    } else if (json.containsKey('emailDeliveryStatus') ||
+        json.containsKey('emailSent') ||
+        json.containsKey('emailDeliverySkipped')) {
+      emailDelivery = QrEmailDelivery(
+        sent: json['emailSent'] == true,
+        skipped: json['emailDeliverySkipped'] == true,
+        status: json['emailDeliveryStatus']?.toString(),
+        statusReason: json['emailDeliveryStatusReason']?.toString(),
+      );
     }
 
     return PlatformQrCode(
@@ -119,6 +215,7 @@ class PlatformQrCode {
       revokedAt: parseDate(json['revokedAt']),
       lastUsedAt: parseDate(json['lastUsedAt']),
       createdAt: parseDate(json['createdAt']),
+      emailDelivery: emailDelivery,
     );
   }
 }
@@ -133,6 +230,9 @@ class CreatePlatformQrRequest {
     this.expiresInSeconds,
     this.maxUses,
     this.locale,
+    this.notifyEmail,
+    this.preferredLanguage,
+    this.inviteeName,
   });
 
   final String entityType;
@@ -143,6 +243,9 @@ class CreatePlatformQrRequest {
   final int? expiresInSeconds;
   final int? maxUses;
   final String? locale;
+  final String? notifyEmail;
+  final String? preferredLanguage;
+  final String? inviteeName;
 
   Map<String, dynamic> toJson() => {
     'entityType': entityType,
@@ -153,5 +256,35 @@ class CreatePlatformQrRequest {
     if (expiresInSeconds != null) 'expiresInSeconds': expiresInSeconds,
     if (maxUses != null) 'maxUses': maxUses,
     if (locale != null) 'locale': locale,
+    if (notifyEmail != null && notifyEmail!.trim().isNotEmpty)
+      'notifyEmail': notifyEmail!.trim(),
+    if (preferredLanguage != null && preferredLanguage!.trim().isNotEmpty)
+      'preferredLanguage': preferredLanguage!.trim(),
+    if (inviteeName != null && inviteeName!.trim().isNotEmpty)
+      'inviteeName': inviteeName!.trim(),
+  };
+}
+
+class SendPlatformQrRequest {
+  const SendPlatformQrRequest({
+    this.notifyEmail,
+    this.preferredLanguage,
+    this.resolveUrl,
+    this.sendEmail = true,
+  });
+
+  final String? notifyEmail;
+  final String? preferredLanguage;
+  final String? resolveUrl;
+  final bool sendEmail;
+
+  Map<String, dynamic> toJson() => {
+    if (notifyEmail != null && notifyEmail!.trim().isNotEmpty)
+      'notifyEmail': notifyEmail!.trim(),
+    if (preferredLanguage != null && preferredLanguage!.trim().isNotEmpty)
+      'preferredLanguage': preferredLanguage!.trim(),
+    if (resolveUrl != null && resolveUrl!.trim().isNotEmpty)
+      'resolveUrl': resolveUrl!.trim(),
+    'sendEmail': sendEmail,
   };
 }

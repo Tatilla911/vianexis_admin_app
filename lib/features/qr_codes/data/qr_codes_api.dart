@@ -31,6 +31,14 @@ class QrCodesApi {
     return response.data ?? {};
   }
 
+  Future<Map<String, dynamic>> send(int id, Map<String, dynamic> body) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/qr-codes/$id/send',
+      data: body,
+    );
+    return response.data ?? {};
+  }
+
   Future<Map<String, dynamic>> revoke(int id) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/qr-codes/$id/revoke',

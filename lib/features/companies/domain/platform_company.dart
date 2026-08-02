@@ -4,6 +4,8 @@ class PlatformCompany {
   const PlatformCompany({
     required this.id,
     required this.name,
+    this.companyName,
+    this.companyDisplayName,
     this.country,
     this.vatNumber,
     this.registrationNumber,
@@ -26,6 +28,8 @@ class PlatformCompany {
 
   final String id;
   final String name;
+  final String? companyName;
+  final String? companyDisplayName;
   final String? country;
   final String? vatNumber;
   final String? registrationNumber;
@@ -45,10 +49,19 @@ class PlatformCompany {
   final DateTime? lastAdminActivityAt;
   final bool metadataOnly;
 
+  /// Prefer legal/company name for QR display when present.
+  String get qrDisplayName {
+    final legal = companyName?.trim();
+    if (legal != null && legal.isNotEmpty) return legal;
+    return name;
+  }
+
   factory PlatformCompany.fromJson(Map<String, dynamic> json) {
     return PlatformCompany(
       id: (json['id'] ?? json['companyId'])?.toString() ?? '',
       name: json['name']?.toString() ?? '',
+      companyName: json['companyName']?.toString(),
+      companyDisplayName: json['companyDisplayName']?.toString(),
       country: json['country']?.toString(),
       vatNumber: json['vatNumber']?.toString(),
       registrationNumber: json['registrationNumber']?.toString(),
@@ -86,6 +99,8 @@ class PlatformCompany {
     if (term.isEmpty) return true;
     final haystack = [
       name,
+      companyName,
+      companyDisplayName,
       country,
       vatNumber,
       registrationNumber,

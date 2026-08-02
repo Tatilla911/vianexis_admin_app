@@ -50,12 +50,39 @@ bool isAuthPasswordChangeRequestPath(String path) {
       normalized == '/auth/me/password';
 }
 
+String? _readNonEmptyString(Object? value) {
+  if (value is String && value.trim().isNotEmpty) {
+    return value.trim();
+  }
+  return null;
+}
+
+/// Prefer backend `errorCode`, then legacy `code`.
 String? readApiErrorCode(Object? responseData) {
   if (responseData is Map) {
-    final code = responseData['code'];
-    if (code is String && code.trim().isNotEmpty) {
-      return code.trim();
-    }
+    return _readNonEmptyString(responseData['errorCode']) ??
+        _readNonEmptyString(responseData['code']);
+  }
+  return null;
+}
+
+String? readApiRequestId(Object? responseData) {
+  if (responseData is Map) {
+    return _readNonEmptyString(responseData['requestId']);
+  }
+  return null;
+}
+
+String? readApiMessageKey(Object? responseData) {
+  if (responseData is Map) {
+    return _readNonEmptyString(responseData['messageKey']);
+  }
+  return null;
+}
+
+String? readApiMessage(Object? responseData) {
+  if (responseData is Map) {
+    return _readNonEmptyString(responseData['message']);
   }
   return null;
 }

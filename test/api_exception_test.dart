@@ -102,6 +102,56 @@ void main() {
       );
     });
 
+    test('prefers errorCode over code when reading API errors', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/platform-admin/companies/1'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(
+              path: '/platform-admin/companies/1',
+            ),
+            statusCode: 409,
+            data: const {
+              'errorCode': 'COMPANY_DATA_VERSION_CONFLICT',
+              'code': 'ignored_legacy_code',
+              'message': 'Version conflict',
+              'messageKey': 'company.conflict',
+              'requestId': 'req-abc-123',
+            },
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.conflict);
+      expect(exception.errorCode, 'COMPANY_DATA_VERSION_CONFLICT');
+      expect(exception.requestId, 'req-abc-123');
+      expect(exception.backendMessage, 'Version conflict');
+      expect(exception.messageKeyFromApi, 'company.conflict');
+      expect(exception.endpoint, '/platform-admin/companies/1');
+      expect(exception.statusCode, 409);
+    });
+
+    test('falls back to code when errorCode is absent', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(path: '/auth/me/password'),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(path: '/auth/me/password'),
+            statusCode: 401,
+            data: const {'code': 'weak_password'},
+          ),
+        ),
+      );
+
+      expect(exception.errorCode, 'weak_password');
+      expect(
+        exception.messageKey,
+        LocalizationKeys.authPasswordChangeWeakPassword,
+      );
+    });
+
     test('maps authenticated 401 to session expired', () {
       final exception = mapDioException(
         DioException(

@@ -36,6 +36,21 @@ void main() {
       expect(company.metadataOnly, isTrue);
     });
 
+    test('parses companyName and prefers it for QR display', () {
+      final company = PlatformCompany.fromJson({
+        'id': 7,
+        'name': 'Trade name',
+        'companyName': 'Legal Name Kft.',
+        'companyDisplayName': 'Acme',
+        'status': 'active',
+      });
+
+      expect(company.companyName, 'Legal Name Kft.');
+      expect(company.companyDisplayName, 'Acme');
+      expect(company.qrDisplayName, 'Legal Name Kft.');
+      expect(company.companyName ?? company.name, 'Legal Name Kft.');
+    });
+
     test('parses legacy list fields', () {
       final company = PlatformCompany.fromJson({
         'companyId': 3,

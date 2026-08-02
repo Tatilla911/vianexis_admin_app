@@ -2794,6 +2794,242 @@ class AppLocalizationsHu extends AppLocalizations {
   String get platformCompanyFieldLastAdminActivity => 'Utolsó admin aktivitás';
 
   @override
+  String get platformCompanySectionOverview => 'Áttekintés';
+
+  @override
+  String get platformCompanyOverviewHint =>
+      'A cég jelenlegi azonosítója és működési státusza.';
+
+  @override
+  String get platformCompanySectionRegistration =>
+      'Regisztráció és eredeti beadás';
+
+  @override
+  String get platformCompanyOriginalSubmitted => 'Eredetileg beadott adat';
+
+  @override
+  String get platformCompanyCurrentValid => 'Jelenleg érvényes adat';
+
+  @override
+  String get platformCompanyOriginalCurrentDiff =>
+      'Eltérés az eredeti és a jelenlegi adat között';
+
+  @override
+  String get platformCompanyRegistrationLoadError =>
+      'A regisztrációs pillanatkép nem tölthető be.';
+
+  @override
+  String get platformCompanyRegistrationSubmittedAt => 'Beadás időpontja';
+
+  @override
+  String get platformCompanyRegistrationSubmitter => 'Beadó személy';
+
+  @override
+  String get platformCompanySectionAmendments => 'Módosítások';
+
+  @override
+  String get platformCompanyAmendAction => 'Adatok módosítása';
+
+  @override
+  String get platformCompanyAmendFieldLabel => 'Módosítandó mező';
+
+  @override
+  String get platformCompanyAmendFieldRequired => 'Válasszon mezőt.';
+
+  @override
+  String get platformCompanyAmendCurrentValue => 'Jelenlegi érték';
+
+  @override
+  String get platformCompanyAmendNewValue => 'Új érték';
+
+  @override
+  String get platformCompanyAmendOldValue => 'Régi érték';
+
+  @override
+  String get platformCompanyAmendReason => 'Módosítás indoka';
+
+  @override
+  String get platformCompanyAmendReasonRequired =>
+      'Az indok megadása kötelező.';
+
+  @override
+  String get platformCompanyAmendAuthSource =>
+      'Kinek a kérésére / engedélyével';
+
+  @override
+  String get platformCompanyAmendAuthorizedBy => 'Engedélyezte';
+
+  @override
+  String get platformCompanyAmendAuthMethod => 'Engedélyezés módja';
+
+  @override
+  String get platformCompanyAmendAuthReference =>
+      'Kapcsolódó hivatkozás (opcionális)';
+
+  @override
+  String get platformCompanyAmendAuthRequired =>
+      'Az engedélyezési mezők kötelezőek.';
+
+  @override
+  String get platformCompanyAmendAuthCustomerEmail =>
+      'Ügyfél e-mailes jóváhagyása';
+
+  @override
+  String get platformCompanyAmendAuthCustomerPhone =>
+      'Ügyfél telefonos jóváhagyása';
+
+  @override
+  String get platformCompanyAmendAuthCustomerDocument =>
+      'Ügyfél által küldött dokumentum';
+
+  @override
+  String get platformCompanyAmendAuthInternalApproval => 'Belső jóváhagyás';
+
+  @override
+  String get platformCompanyAmendAuthContract => 'Szerződés vagy megállapodás';
+
+  @override
+  String get platformCompanyAmendAuthOfficialRegistry =>
+      'Hivatalos nyilvántartás alapján';
+
+  @override
+  String get platformCompanyAmendAuthOther => 'Egyéb';
+
+  @override
+  String get platformCompanyAmendAuthCustomerCall => 'Ügyfél telefonhívás';
+
+  @override
+  String get platformCompanyAmendAuthCustomerTicket => 'Ügyfél support jegy';
+
+  @override
+  String get platformCompanyAmendAuthInternalPolicy => 'Belső szabályzat';
+
+  @override
+  String get platformCompanyAmendAuthLegalDocument => 'Jogi dokumentum';
+
+  @override
+  String get platformCompanyAmendInternalComment => 'Belső megjegyzés';
+
+  @override
+  String get platformCompanyAmendCustomerComment =>
+      'Ügyfél számára látható megjegyzés (opcionális)';
+
+  @override
+  String get platformCompanyAmendSensitiveNotice =>
+      'Érzékeny mező: alkalmazás előtt jóváhagyás szükséges.';
+
+  @override
+  String get platformCompanyAmendSubmit => 'Módosítás mentése';
+
+  @override
+  String get platformCompanyAmendSubmitSuccess =>
+      'A módosítási kérelem mentve.';
+
+  @override
+  String get platformCompanyAmendSubmitError =>
+      'A módosítási kérelem mentése sikertelen.';
+
+  @override
+  String get platformCompanyAmendLoadError =>
+      'A módosítások betöltése sikertelen.';
+
+  @override
+  String get platformCompanyAmendHistoryEmpty =>
+      'Még nincs módosítási előzmény.';
+
+  @override
+  String get platformCompanyAmendStatus => 'Státusz';
+
+  @override
+  String get platformCompanyAmendStatusDraft => 'Piszkozat';
+
+  @override
+  String get platformCompanyAmendStatusPending => 'Jóváhagyásra vár';
+
+  @override
+  String get platformCompanyAmendStatusApproved => 'Jóváhagyott';
+
+  @override
+  String get platformCompanyAmendStatusRejected => 'Elutasított';
+
+  @override
+  String get platformCompanyAmendStatusApplied => 'Alkalmazott';
+
+  @override
+  String get platformCompanyAmendStatusReverted => 'Visszavont';
+
+  @override
+  String get platformCompanyAmendStatusCancelled => 'Visszavonva';
+
+  @override
+  String get platformCompanyAmendStatusConflict => 'Ütközés';
+
+  @override
+  String get platformCompanyAmendConflict =>
+      'Ütközés történt: az adat időközben megváltozott.';
+
+  @override
+  String get platformCompanyAmendApprove => 'Jóváhagyás';
+
+  @override
+  String get platformCompanyAmendReject => 'Elutasítás';
+
+  @override
+  String get platformCompanyAmendApply => 'Alkalmazás';
+
+  @override
+  String get platformCompanyAmendFieldLegalName => 'Hivatalos cégnév';
+
+  @override
+  String get platformCompanyAmendFieldTradeName => 'Kereskedelmi név';
+
+  @override
+  String get platformCompanyAmendFieldVat => 'Adószám / VAT';
+
+  @override
+  String get platformCompanyAmendFieldRegistrationNumber => 'Cégjegyzékszám';
+
+  @override
+  String get platformCompanyAmendFieldCountry => 'Ország';
+
+  @override
+  String get platformCompanyAmendFieldRegisteredAddress => 'Székhely';
+
+  @override
+  String get platformCompanyAmendFieldBillingAddress => 'Számlázási cím';
+
+  @override
+  String get platformCompanyAmendFieldWebsite => 'Weboldal';
+
+  @override
+  String get platformCompanyAmendFieldPrimaryEmail => 'Fő e-mail';
+
+  @override
+  String get platformCompanyAmendFieldPhone => 'Telefonszám';
+
+  @override
+  String get platformCompanyAmendFieldPreferredLanguage =>
+      'Kapcsolattartási nyelv';
+
+  @override
+  String get platformCompanyAmendFieldBillingContactEmail =>
+      'Számlázási kapcsolattartó e-mail';
+
+  @override
+  String get platformCompanyAmendFieldStatus => 'Cég státusz';
+
+  @override
+  String get platformCompanyAmendFieldPrimaryContact =>
+      'Elsődleges kapcsolattartó';
+
+  @override
+  String get platformCompanyAmendFieldBillingContact =>
+      'Számlázási kapcsolattartó';
+
+  @override
+  String get platformCompanyAmendNewValueJsonHint => 'Érvényes JSON megadása';
+
+  @override
   String get platformCompanyChangeStatusAction => 'Státusz módosítása';
 
   @override
@@ -3333,6 +3569,30 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get adminUserInviteSuccess => 'Admin felhasználó meghívva.';
+
+  @override
+  String get adminUserInviteEmailPending =>
+      'Admin meghívva, de az e-mail küldése nem igazolt.';
+
+  @override
+  String get adminUserInviteEmailFailed =>
+      'Admin meghívva, de a meghívó e-mail sikertelen.';
+
+  @override
+  String get adminUserInviteEmailSkipped =>
+      'Admin meghívva, de az e-mail küldés ki van kapcsolva.';
+
+  @override
+  String get adminUserInviteConsoleOnly =>
+      'Admin meghívva; az e-mail csak konzolra került (nem kézbesítve).';
+
+  @override
+  String get adminUserInviteProviderMissing =>
+      'Admin meghívva, de nincs beállított e-mail provider.';
+
+  @override
+  String get adminUserInviteAllowlistBlocked =>
+      'Admin meghívva, de a staging allowlist blokkolta a címzettet.';
 
   @override
   String get adminUserFilterAll => 'Összes';
@@ -6471,4 +6731,37 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get qrCodesRoleUser => 'Felhasználó';
+
+  @override
+  String get qrCodesSendEmail => 'E-mail küldése';
+
+  @override
+  String get qrCodesDeliveryStatus => 'E-mail kézbesítés';
+
+  @override
+  String get qrCodesDeliveryDisabled =>
+      'A meghívó létrejött, de az e-mail kézbesítés nincs engedélyezve.';
+
+  @override
+  String get qrCodesDeliverySent => 'Meghívó e-mail elküldve.';
+
+  @override
+  String get qrCodesDeliveryFailed =>
+      'A meghívó e-mailt nem sikerült elküldeni.';
+
+  @override
+  String get qrCodesRecipientEmail => 'Címzett e-mail';
+
+  @override
+  String get qrCodesInviteeName => 'Meghívott neve (opcionális)';
+
+  @override
+  String get qrCodesActivationLink => 'Aktiváló link';
+
+  @override
+  String get qrCodesSendSuccess => 'Meghívó e-mail sikeresen elküldve.';
+
+  @override
+  String get qrCodesSendSkipped =>
+      'Meghívó létrehozva. Az e-mail nem lett elküldve (kihagyva).';
 }

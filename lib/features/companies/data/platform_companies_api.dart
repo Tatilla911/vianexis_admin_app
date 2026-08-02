@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
+import '../domain/company_data_amendment.dart';
 import '../domain/platform_company.dart';
 import '../domain/platform_company_status.dart';
 import '../domain/platform_company_status_request.dart';
@@ -67,7 +68,9 @@ class PlatformCompaniesApi {
     return PlatformCompanySystemSummary.fromJson(data);
   }
 
-  Future<PlatformCompanyOnboardingSummary> getOnboardingSummary(String id) async {
+  Future<PlatformCompanyOnboardingSummary> getOnboardingSummary(
+    String id,
+  ) async {
     final response = await _apiClient.get<Map<String, dynamic>>(
       '/platform-admin/companies/$id/onboarding-summary',
     );
@@ -108,6 +111,111 @@ class PlatformCompaniesApi {
       );
     }
     return PlatformCompanyDashboardSummary.fromJson(data);
+  }
+
+  Future<CompanyRegistrationSnapshot> getRegistrationSnapshot(String id) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/companies/$id/registration',
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty company registration snapshot response');
+    }
+    return CompanyRegistrationSnapshot.fromJson(data);
+  }
+
+  Future<List<CompanyDataAmendment>> listAmendments(String id) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/companies/$id/amendments',
+    );
+    final data = response.data;
+    final items = (data?['items'] as List?) ?? const [];
+    return items
+        .whereType<Map>()
+        .map(
+          (e) => CompanyDataAmendment.fromJson(Map<String, dynamic>.from(e)),
+        )
+        .toList(growable: false);
+  }
+
+  Future<List<CompanyAmendmentFieldOption>> listAmendmentFields(
+    String id,
+  ) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/companies/$id/amendment-fields',
+    );
+    final data = response.data;
+    final items = (data?['fields'] as List?) ?? const [];
+    return items
+        .whereType<Map>()
+        .map(
+          (e) =>
+              CompanyAmendmentFieldOption.fromJson(Map<String, dynamic>.from(e)),
+        )
+        .toList(growable: false);
+  }
+
+  Future<CompanyDataAmendment> createAmendment({
+    required String id,
+    required CreateCompanyAmendmentRequest request,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/companies/$id/amendments',
+      data: request.toJson(),
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty create amendment response');
+    }
+    return CompanyDataAmendment.fromJson(data);
+  }
+
+  Future<CompanyDataAmendment> approveAmendment({
+    required String companyId,
+    required String amendmentId,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/companies/$companyId/amendments/$amendmentId/approve',
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty approve amendment response');
+    }
+    return CompanyDataAmendment.fromJson(data);
+  }
+
+  Future<CompanyDataAmendment> rejectAmendment({
+    required String companyId,
+    required String amendmentId,
+    required String rejectionReason,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/companies/$companyId/amendments/$amendmentId/reject',
+      data: {'rejectionReason': rejectionReason},
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty reject amendment response');
+    }
+    return CompanyDataAmendment.fromJson(data);
+  }
+
+  Future<CompanyDataAmendment> applyAmendment({
+    required String companyId,
+    required String amendmentId,
+    int? expectedDataVersion,
+  }) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/companies/$companyId/amendments/$amendmentId/apply',
+      data: {
+        'expectedDataVersion': ?expectedDataVersion,
+      },
+    );
+    final data = response.data;
+    if (data == null) {
+      throw StateError('Empty apply amendment response');
+    }
+    return CompanyDataAmendment.fromJson(data);
   }
 }
 

@@ -5084,6 +5084,432 @@ abstract class AppLocalizations {
   /// **'Last admin activity'**
   String get platformCompanyFieldLastAdminActivity;
 
+  /// No description provided for @platformCompanySectionOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get platformCompanySectionOverview;
+
+  /// No description provided for @platformCompanyOverviewHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Current company identity and operational status.'**
+  String get platformCompanyOverviewHint;
+
+  /// No description provided for @platformCompanySectionRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration and original submission'**
+  String get platformCompanySectionRegistration;
+
+  /// No description provided for @platformCompanyOriginalSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Originally submitted data'**
+  String get platformCompanyOriginalSubmitted;
+
+  /// No description provided for @platformCompanyCurrentValid.
+  ///
+  /// In en, this message translates to:
+  /// **'Currently valid data'**
+  String get platformCompanyCurrentValid;
+
+  /// No description provided for @platformCompanyOriginalCurrentDiff.
+  ///
+  /// In en, this message translates to:
+  /// **'Differences between original and current data'**
+  String get platformCompanyOriginalCurrentDiff;
+
+  /// No description provided for @platformCompanyRegistrationLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load registration snapshot.'**
+  String get platformCompanyRegistrationLoadError;
+
+  /// No description provided for @platformCompanyRegistrationSubmittedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted at'**
+  String get platformCompanyRegistrationSubmittedAt;
+
+  /// No description provided for @platformCompanyRegistrationSubmitter.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted by'**
+  String get platformCompanyRegistrationSubmitter;
+
+  /// No description provided for @platformCompanySectionAmendments.
+  ///
+  /// In en, this message translates to:
+  /// **'Amendments'**
+  String get platformCompanySectionAmendments;
+
+  /// No description provided for @platformCompanyAmendAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit company data'**
+  String get platformCompanyAmendAction;
+
+  /// No description provided for @platformCompanyAmendFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to change'**
+  String get platformCompanyAmendFieldLabel;
+
+  /// No description provided for @platformCompanyAmendFieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a field.'**
+  String get platformCompanyAmendFieldRequired;
+
+  /// No description provided for @platformCompanyAmendCurrentValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Current value'**
+  String get platformCompanyAmendCurrentValue;
+
+  /// No description provided for @platformCompanyAmendNewValue.
+  ///
+  /// In en, this message translates to:
+  /// **'New value'**
+  String get platformCompanyAmendNewValue;
+
+  /// No description provided for @platformCompanyAmendOldValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Old value'**
+  String get platformCompanyAmendOldValue;
+
+  /// No description provided for @platformCompanyAmendReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason for change'**
+  String get platformCompanyAmendReason;
+
+  /// No description provided for @platformCompanyAmendReasonRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'A reason is required.'**
+  String get platformCompanyAmendReasonRequired;
+
+  /// No description provided for @platformCompanyAmendAuthSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested / authorized by source'**
+  String get platformCompanyAmendAuthSource;
+
+  /// No description provided for @platformCompanyAmendAuthorizedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorized by'**
+  String get platformCompanyAmendAuthorizedBy;
+
+  /// No description provided for @platformCompanyAmendAuthMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorization method'**
+  String get platformCompanyAmendAuthMethod;
+
+  /// No description provided for @platformCompanyAmendAuthReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorization reference (optional)'**
+  String get platformCompanyAmendAuthReference;
+
+  /// No description provided for @platformCompanyAmendAuthRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorization fields are required.'**
+  String get platformCompanyAmendAuthRequired;
+
+  /// No description provided for @platformCompanyAmendAuthCustomerEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer email approval'**
+  String get platformCompanyAmendAuthCustomerEmail;
+
+  /// No description provided for @platformCompanyAmendAuthCustomerPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer phone approval'**
+  String get platformCompanyAmendAuthCustomerPhone;
+
+  /// No description provided for @platformCompanyAmendAuthCustomerDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer-provided document'**
+  String get platformCompanyAmendAuthCustomerDocument;
+
+  /// No description provided for @platformCompanyAmendAuthInternalApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal approval'**
+  String get platformCompanyAmendAuthInternalApproval;
+
+  /// No description provided for @platformCompanyAmendAuthContract.
+  ///
+  /// In en, this message translates to:
+  /// **'Contract or agreement'**
+  String get platformCompanyAmendAuthContract;
+
+  /// No description provided for @platformCompanyAmendAuthOfficialRegistry.
+  ///
+  /// In en, this message translates to:
+  /// **'Official registry'**
+  String get platformCompanyAmendAuthOfficialRegistry;
+
+  /// No description provided for @platformCompanyAmendAuthOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get platformCompanyAmendAuthOther;
+
+  /// No description provided for @platformCompanyAmendAuthCustomerCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer phone call'**
+  String get platformCompanyAmendAuthCustomerCall;
+
+  /// No description provided for @platformCompanyAmendAuthCustomerTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer support ticket'**
+  String get platformCompanyAmendAuthCustomerTicket;
+
+  /// No description provided for @platformCompanyAmendAuthInternalPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal policy'**
+  String get platformCompanyAmendAuthInternalPolicy;
+
+  /// No description provided for @platformCompanyAmendAuthLegalDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal document'**
+  String get platformCompanyAmendAuthLegalDocument;
+
+  /// No description provided for @platformCompanyAmendInternalComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal comment'**
+  String get platformCompanyAmendInternalComment;
+
+  /// No description provided for @platformCompanyAmendCustomerComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer-visible comment (optional)'**
+  String get platformCompanyAmendCustomerComment;
+
+  /// No description provided for @platformCompanyAmendSensitiveNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Sensitive field: requires approval before apply.'**
+  String get platformCompanyAmendSensitiveNotice;
+
+  /// No description provided for @platformCompanyAmendSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit change'**
+  String get platformCompanyAmendSubmit;
+
+  /// No description provided for @platformCompanyAmendSubmitSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Change request saved.'**
+  String get platformCompanyAmendSubmitSuccess;
+
+  /// No description provided for @platformCompanyAmendSubmitError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save the change request.'**
+  String get platformCompanyAmendSubmitError;
+
+  /// No description provided for @platformCompanyAmendLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load amendments.'**
+  String get platformCompanyAmendLoadError;
+
+  /// No description provided for @platformCompanyAmendHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No amendment history yet.'**
+  String get platformCompanyAmendHistoryEmpty;
+
+  /// No description provided for @platformCompanyAmendStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get platformCompanyAmendStatus;
+
+  /// No description provided for @platformCompanyAmendStatusDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get platformCompanyAmendStatusDraft;
+
+  /// No description provided for @platformCompanyAmendStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending approval'**
+  String get platformCompanyAmendStatusPending;
+
+  /// No description provided for @platformCompanyAmendStatusApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get platformCompanyAmendStatusApproved;
+
+  /// No description provided for @platformCompanyAmendStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get platformCompanyAmendStatusRejected;
+
+  /// No description provided for @platformCompanyAmendStatusApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Applied'**
+  String get platformCompanyAmendStatusApplied;
+
+  /// No description provided for @platformCompanyAmendStatusReverted.
+  ///
+  /// In en, this message translates to:
+  /// **'Reverted'**
+  String get platformCompanyAmendStatusReverted;
+
+  /// No description provided for @platformCompanyAmendStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get platformCompanyAmendStatusCancelled;
+
+  /// No description provided for @platformCompanyAmendStatusConflict.
+  ///
+  /// In en, this message translates to:
+  /// **'Conflict'**
+  String get platformCompanyAmendStatusConflict;
+
+  /// No description provided for @platformCompanyAmendConflict.
+  ///
+  /// In en, this message translates to:
+  /// **'Conflict: data changed meanwhile.'**
+  String get platformCompanyAmendConflict;
+
+  /// No description provided for @platformCompanyAmendApprove.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get platformCompanyAmendApprove;
+
+  /// No description provided for @platformCompanyAmendReject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get platformCompanyAmendReject;
+
+  /// No description provided for @platformCompanyAmendApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get platformCompanyAmendApply;
+
+  /// No description provided for @platformCompanyAmendFieldLegalName.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal company name'**
+  String get platformCompanyAmendFieldLegalName;
+
+  /// No description provided for @platformCompanyAmendFieldTradeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Trade name'**
+  String get platformCompanyAmendFieldTradeName;
+
+  /// No description provided for @platformCompanyAmendFieldVat.
+  ///
+  /// In en, this message translates to:
+  /// **'VAT / tax number'**
+  String get platformCompanyAmendFieldVat;
+
+  /// No description provided for @platformCompanyAmendFieldRegistrationNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Company registration number'**
+  String get platformCompanyAmendFieldRegistrationNumber;
+
+  /// No description provided for @platformCompanyAmendFieldCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get platformCompanyAmendFieldCountry;
+
+  /// No description provided for @platformCompanyAmendFieldRegisteredAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Registered address'**
+  String get platformCompanyAmendFieldRegisteredAddress;
+
+  /// No description provided for @platformCompanyAmendFieldBillingAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing address'**
+  String get platformCompanyAmendFieldBillingAddress;
+
+  /// No description provided for @platformCompanyAmendFieldWebsite.
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get platformCompanyAmendFieldWebsite;
+
+  /// No description provided for @platformCompanyAmendFieldPrimaryEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary email'**
+  String get platformCompanyAmendFieldPrimaryEmail;
+
+  /// No description provided for @platformCompanyAmendFieldPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get platformCompanyAmendFieldPhone;
+
+  /// No description provided for @platformCompanyAmendFieldPreferredLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred language'**
+  String get platformCompanyAmendFieldPreferredLanguage;
+
+  /// No description provided for @platformCompanyAmendFieldBillingContactEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing contact email'**
+  String get platformCompanyAmendFieldBillingContactEmail;
+
+  /// No description provided for @platformCompanyAmendFieldStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Company status'**
+  String get platformCompanyAmendFieldStatus;
+
+  /// No description provided for @platformCompanyAmendFieldPrimaryContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary contact'**
+  String get platformCompanyAmendFieldPrimaryContact;
+
+  /// No description provided for @platformCompanyAmendFieldBillingContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing contact'**
+  String get platformCompanyAmendFieldBillingContact;
+
+  /// No description provided for @platformCompanyAmendNewValueJsonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter valid JSON'**
+  String get platformCompanyAmendNewValueJsonHint;
+
   /// No description provided for @platformCompanyChangeStatusAction.
   ///
   /// In en, this message translates to:
@@ -6049,6 +6475,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Admin user invited.'**
   String get adminUserInviteSuccess;
+
+  /// No description provided for @adminUserInviteEmailPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin invited, but the email was not confirmed as sent.'**
+  String get adminUserInviteEmailPending;
+
+  /// No description provided for @adminUserInviteEmailFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin invited, but the invite email failed.'**
+  String get adminUserInviteEmailFailed;
+
+  /// No description provided for @adminUserInviteEmailSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin invited, but email delivery is disabled.'**
+  String get adminUserInviteEmailSkipped;
+
+  /// No description provided for @adminUserInviteConsoleOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin invited; email only logged to console (not delivered).'**
+  String get adminUserInviteConsoleOnly;
+
+  /// No description provided for @adminUserInviteProviderMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin invited, but no email provider is configured.'**
+  String get adminUserInviteProviderMissing;
+
+  /// No description provided for @adminUserInviteAllowlistBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin invited, but staging allowlist blocked the recipient.'**
+  String get adminUserInviteAllowlistBlocked;
 
   /// No description provided for @adminUserFilterAll.
   ///
@@ -11675,6 +12137,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'User'**
   String get qrCodesRoleUser;
+
+  /// No description provided for @qrCodesSendEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Send email'**
+  String get qrCodesSendEmail;
+
+  /// No description provided for @qrCodesDeliveryStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Email delivery'**
+  String get qrCodesDeliveryStatus;
+
+  /// No description provided for @qrCodesDeliveryDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite created, but email delivery is not enabled.'**
+  String get qrCodesDeliveryDisabled;
+
+  /// No description provided for @qrCodesDeliverySent.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite email sent.'**
+  String get qrCodesDeliverySent;
+
+  /// No description provided for @qrCodesDeliveryFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite email could not be sent.'**
+  String get qrCodesDeliveryFailed;
+
+  /// No description provided for @qrCodesRecipientEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient email'**
+  String get qrCodesRecipientEmail;
+
+  /// No description provided for @qrCodesInviteeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitee name (optional)'**
+  String get qrCodesInviteeName;
+
+  /// No description provided for @qrCodesActivationLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Activation link'**
+  String get qrCodesActivationLink;
+
+  /// No description provided for @qrCodesSendSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite email sent successfully.'**
+  String get qrCodesSendSuccess;
+
+  /// No description provided for @qrCodesSendSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite created. Email was not sent (delivery skipped).'**
+  String get qrCodesSendSkipped;
 }
 
 class _AppLocalizationsDelegate

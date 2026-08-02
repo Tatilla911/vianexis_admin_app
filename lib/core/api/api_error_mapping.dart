@@ -56,62 +56,45 @@ ApiException mapHttpStatusException({
   required String path,
   required DioException error,
 }) {
+  final responseData = error.response?.data;
   final messageKey = apiExceptionMessageKeyForStatus(
     statusCode: statusCode,
     path: path,
-    responseData: error.response?.data,
+    responseData: responseData,
   );
+  final errorCode = readApiErrorCode(responseData);
+  final requestId = readApiRequestId(responseData);
+  final backendMessage = readApiMessage(responseData);
+  final messageKeyFromApi = readApiMessageKey(responseData);
+
+  ApiException build(ApiExceptionKind kind, {String? overrideMessageKey}) {
+    return ApiException(
+      messageKey: overrideMessageKey ?? messageKey,
+      kind: kind,
+      statusCode: statusCode,
+      errorCode: errorCode,
+      requestId: requestId,
+      backendMessage: backendMessage,
+      messageKeyFromApi: messageKeyFromApi,
+      endpoint: path,
+      cause: error,
+    );
+  }
 
   return switch (statusCode) {
-    400 => ApiException(
-      messageKey: messageKey,
-      kind: ApiExceptionKind.validation,
-      statusCode: statusCode,
-      errorCode: readApiErrorCode(error.response?.data),
-      cause: error,
+    400 => build(ApiExceptionKind.validation),
+    401 => build(ApiExceptionKind.unauthorized),
+    403 => build(ApiExceptionKind.forbidden),
+    404 => build(ApiExceptionKind.notFound),
+    409 => build(
+      ApiExceptionKind.conflict,
+      overrideMessageKey: LocalizationKeys.errorGenericBody,
     ),
-    401 => ApiException(
-      messageKey: messageKey,
-      kind: ApiExceptionKind.unauthorized,
-      statusCode: statusCode,
-      errorCode: readApiErrorCode(error.response?.data),
-      cause: error,
+    500 || 502 || 503 || 504 => build(
+      ApiExceptionKind.server,
+      overrideMessageKey: LocalizationKeys.authServerError,
     ),
-    403 => ApiException(
-      messageKey: messageKey,
-      kind: ApiExceptionKind.forbidden,
-      statusCode: statusCode,
-      errorCode: readApiErrorCode(error.response?.data),
-      cause: error,
-    ),
-    404 => ApiException(
-      messageKey: messageKey,
-      kind: ApiExceptionKind.notFound,
-      statusCode: statusCode,
-      errorCode: readApiErrorCode(error.response?.data),
-      cause: error,
-    ),
-    409 => ApiException(
-      messageKey: LocalizationKeys.errorGenericBody,
-      kind: ApiExceptionKind.conflict,
-      statusCode: statusCode,
-      errorCode: readApiErrorCode(error.response?.data),
-      cause: error,
-    ),
-    500 || 502 || 503 || 504 => ApiException(
-      messageKey: LocalizationKeys.authServerError,
-      kind: ApiExceptionKind.server,
-      statusCode: statusCode,
-      errorCode: readApiErrorCode(error.response?.data),
-      cause: error,
-    ),
-    _ => ApiException(
-      messageKey: messageKey,
-      kind: ApiExceptionKind.unknown,
-      statusCode: statusCode,
-      errorCode: readApiErrorCode(error.response?.data),
-      cause: error,
-    ),
+    _ => build(ApiExceptionKind.unknown),
   };
 }
 
