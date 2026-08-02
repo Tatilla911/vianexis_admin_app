@@ -6306,4 +6306,64 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get qrCodesUsedCount => 'Használatok';
+
+  @override
+  String get qrCodesIdentityCard => 'Azonosító kártya';
+
+  @override
+  String get qrCodesShareCard => 'Kártya megosztása';
+
+  @override
+  String get qrCodesSaveCard => 'Kártya mentése';
+
+  @override
+  String get qrCodesCardSaved => 'Azonosító kártya mentésre kész';
+
+  @override
+  String get qrCodesOpenQr => 'QR megnyitása';
+
+  @override
+  String get qrCodesQrSaved => 'QR kép mentésre kész';
+
+  @override
+  String get qrCodesAttachPhoto => 'Fénykép csatolása';
+
+  @override
+  String get qrCodesChangePhoto => 'Fénykép cseréje';
+
+  @override
+  String get qrCodesRemovePhoto => 'Fénykép eltávolítása';
+
+  @override
+  String get qrCodesCardBrandDriver => 'ViaNexis Sofőr ID';
+
+  @override
+  String get qrCodesCardBrandCompany => 'ViaNexis Cég ID';
+
+  @override
+  String get qrCodesCardBrandUser => 'ViaNexis Felhasználó ID';
+
+  @override
+  String get qrCodesCardFieldName => 'Név';
+
+  @override
+  String get qrCodesCardFieldId => 'Azonosító';
+
+  @override
+  String get qrCodesCardFieldRole => 'Szerep';
+
+  @override
+  String get qrCodesCardFieldPurpose => 'Cél';
+
+  @override
+  String get qrCodesCardFieldDetail => 'Részlet';
+
+  @override
+  String get qrCodesRoleDriver => 'Sofőr';
+
+  @override
+  String get qrCodesRoleCompany => 'Cég';
+
+  @override
+  String get qrCodesRoleUser => 'Felhasználó';
 }

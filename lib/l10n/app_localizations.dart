@@ -11405,6 +11405,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Uses'**
   String get qrCodesUsedCount;
+
+  /// No description provided for @qrCodesIdentityCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity card'**
+  String get qrCodesIdentityCard;
+
+  /// No description provided for @qrCodesShareCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Share card'**
+  String get qrCodesShareCard;
+
+  /// No description provided for @qrCodesSaveCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Save card'**
+  String get qrCodesSaveCard;
+
+  /// No description provided for @qrCodesCardSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity card ready to save'**
+  String get qrCodesCardSaved;
+
+  /// No description provided for @qrCodesOpenQr.
+  ///
+  /// In en, this message translates to:
+  /// **'Open QR'**
+  String get qrCodesOpenQr;
+
+  /// No description provided for @qrCodesQrSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'QR image ready to save'**
+  String get qrCodesQrSaved;
+
+  /// No description provided for @qrCodesAttachPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach photo'**
+  String get qrCodesAttachPhoto;
+
+  /// No description provided for @qrCodesChangePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Change photo'**
+  String get qrCodesChangePhoto;
+
+  /// No description provided for @qrCodesRemovePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove photo'**
+  String get qrCodesRemovePhoto;
+
+  /// No description provided for @qrCodesCardBrandDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'ViaNexis Driver ID'**
+  String get qrCodesCardBrandDriver;
+
+  /// No description provided for @qrCodesCardBrandCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'ViaNexis Company ID'**
+  String get qrCodesCardBrandCompany;
+
+  /// No description provided for @qrCodesCardBrandUser.
+  ///
+  /// In en, this message translates to:
+  /// **'ViaNexis User ID'**
+  String get qrCodesCardBrandUser;
+
+  /// No description provided for @qrCodesCardFieldName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get qrCodesCardFieldName;
+
+  /// No description provided for @qrCodesCardFieldId.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get qrCodesCardFieldId;
+
+  /// No description provided for @qrCodesCardFieldRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get qrCodesCardFieldRole;
+
+  /// No description provided for @qrCodesCardFieldPurpose.
+  ///
+  /// In en, this message translates to:
+  /// **'Purpose'**
+  String get qrCodesCardFieldPurpose;
+
+  /// No description provided for @qrCodesCardFieldDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Detail'**
+  String get qrCodesCardFieldDetail;
+
+  /// No description provided for @qrCodesRoleDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get qrCodesRoleDriver;
+
+  /// No description provided for @qrCodesRoleCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get qrCodesRoleCompany;
+
+  /// No description provided for @qrCodesRoleUser.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get qrCodesRoleUser;
 }
 
 class _AppLocalizationsDelegate

@@ -6222,4 +6222,64 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get qrCodesUsedCount => 'Uses';
+
+  @override
+  String get qrCodesIdentityCard => 'Identity card';
+
+  @override
+  String get qrCodesShareCard => 'Share card';
+
+  @override
+  String get qrCodesSaveCard => 'Save card';
+
+  @override
+  String get qrCodesCardSaved => 'Identity card ready to save';
+
+  @override
+  String get qrCodesOpenQr => 'Open QR';
+
+  @override
+  String get qrCodesQrSaved => 'QR image ready to save';
+
+  @override
+  String get qrCodesAttachPhoto => 'Attach photo';
+
+  @override
+  String get qrCodesChangePhoto => 'Change photo';
+
+  @override
+  String get qrCodesRemovePhoto => 'Remove photo';
+
+  @override
+  String get qrCodesCardBrandDriver => 'ViaNexis Driver ID';
+
+  @override
+  String get qrCodesCardBrandCompany => 'ViaNexis Company ID';
+
+  @override
+  String get qrCodesCardBrandUser => 'ViaNexis User ID';
+
+  @override
+  String get qrCodesCardFieldName => 'Name';
+
+  @override
+  String get qrCodesCardFieldId => 'ID';
+
+  @override
+  String get qrCodesCardFieldRole => 'Role';
+
+  @override
+  String get qrCodesCardFieldPurpose => 'Purpose';
+
+  @override
+  String get qrCodesCardFieldDetail => 'Detail';
+
+  @override
+  String get qrCodesRoleDriver => 'Driver';
+
+  @override
+  String get qrCodesRoleCompany => 'Company';
+
+  @override
+  String get qrCodesRoleUser => 'User';
 }

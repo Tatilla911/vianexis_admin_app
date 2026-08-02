@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -13,9 +14,10 @@ import 'package:vianexis_admin_app/core/api/api_exception.dart';
 import 'package:vianexis_admin_app/core/api/api_exception_feedback.dart';
 import 'package:vianexis_admin_app/core/localization/localization_resolver.dart';
 import 'package:vianexis_admin_app/core/widgets/vianexis_confirm_dialog.dart';
-import 'package:vianexis_admin_app/core/widgets/vianexis_qr_code_view.dart';
 import 'package:vianexis_admin_app/features/qr_codes/data/qr_codes_repository.dart';
 import 'package:vianexis_admin_app/features/qr_codes/domain/platform_qr_code.dart';
+import 'package:vianexis_admin_app/features/qr_codes/presentation/widgets/qr_code_preview_sheet.dart';
+import 'package:vianexis_admin_app/features/qr_codes/presentation/widgets/vianexis_qr_identity_card.dart';
 
 Future<void> showQrCodesManagementDialog(
   BuildContext context, {
@@ -25,6 +27,8 @@ Future<void> showQrCodesManagementDialog(
   required List<QrPurpose> allowedPurposes,
   int? companyId,
   String? titleKey,
+  String? subtitle,
+  String? roleLabel,
 }) {
   return showDialog<void>(
     context: context,
@@ -35,6 +39,8 @@ Future<void> showQrCodesManagementDialog(
       allowedPurposes: allowedPurposes,
       companyId: companyId,
       titleKey: titleKey ?? 'qrCodesTitle',
+      subtitle: subtitle,
+      roleLabel: roleLabel,
     ),
   );
 }
@@ -48,6 +54,8 @@ class QrCodesManagementDialog extends ConsumerStatefulWidget {
     required this.allowedPurposes,
     this.companyId,
     this.titleKey = 'qrCodesTitle',
+    this.subtitle,
+    this.roleLabel,
   });
 
   final String entityType;
@@ -56,6 +64,8 @@ class QrCodesManagementDialog extends ConsumerStatefulWidget {
   final List<QrPurpose> allowedPurposes;
   final int? companyId;
   final String titleKey;
+  final String? subtitle;
+  final String? roleLabel;
 
   @override
   ConsumerState<QrCodesManagementDialog> createState() =>
@@ -64,19 +74,40 @@ class QrCodesManagementDialog extends ConsumerStatefulWidget {
 
 class _QrCodesManagementDialogState
     extends ConsumerState<QrCodesManagementDialog> {
-  final GlobalKey _qrBoundaryKey = GlobalKey();
+  final GlobalKey _cardBoundaryKey = GlobalKey();
   late QrPurpose _purpose;
   bool _loading = true;
   bool _busy = false;
   String? _error;
   List<PlatformQrCode> _history = const [];
   PlatformQrCode? _preview;
+  String? _photoPath;
 
   @override
   void initState() {
     super.initState();
     _purpose = widget.allowedPurposes.first;
     _reload();
+  }
+
+  String get _roleLabel {
+    if (widget.roleLabel != null && widget.roleLabel!.trim().isNotEmpty) {
+      return widget.roleLabel!.trim();
+    }
+    return switch (widget.entityType) {
+      'driver' => resolveQrCodesKey(context, 'qrCodesRoleDriver'),
+      'company' => resolveQrCodesKey(context, 'qrCodesRoleCompany'),
+      'user' || 'company_admin' => resolveQrCodesKey(context, 'qrCodesRoleUser'),
+      _ => widget.entityType,
+    };
+  }
+
+  String get _brandTitle {
+    return switch (widget.entityType) {
+      'driver' => resolveQrCodesKey(context, 'qrCodesCardBrandDriver'),
+      'company' => resolveQrCodesKey(context, 'qrCodesCardBrandCompany'),
+      _ => resolveQrCodesKey(context, 'qrCodesCardBrandUser'),
+    };
   }
 
   Future<void> _reload() async {
@@ -89,9 +120,21 @@ class _QrCodesManagementDialogState
           .read(qrCodesRepositoryProvider)
           .list(entityType: widget.entityType, entityId: widget.entityId);
       if (!mounted) return;
+      PlatformQrCode? autoPreview = _preview;
+      if (autoPreview == null) {
+        for (final item in items) {
+          if (item.status == 'active' &&
+              (item.displayPayload?.isNotEmpty ?? false)) {
+            autoPreview = item;
+            break;
+          }
+        }
+        autoPreview ??= items.isNotEmpty ? items.first : null;
+      }
       setState(() {
         _history = items;
         _loading = false;
+        _preview = autoPreview;
       });
     } catch (error) {
       if (!mounted) return;
@@ -120,7 +163,9 @@ class _QrCodesManagementDialogState
       if (!mounted) return;
       setState(() => _preview = created);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveQrCodesKey(context, 'qrCodesCreateSuccess'))),
+        SnackBar(
+          content: Text(resolveQrCodesKey(context, 'qrCodesCreateSuccess')),
+        ),
       );
       await _reload();
     } catch (error) {
@@ -150,7 +195,9 @@ class _QrCodesManagementDialogState
       await ref.read(qrCodesRepositoryProvider).revoke(item.id);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveQrCodesKey(context, 'qrCodesRevokeSuccess'))),
+        SnackBar(
+          content: Text(resolveQrCodesKey(context, 'qrCodesRevokeSuccess')),
+        ),
       );
       if (_preview?.id == item.id) setState(() => _preview = null);
       await _reload();
@@ -198,35 +245,99 @@ class _QrCodesManagementDialogState
     );
   }
 
-  Future<void> _sharePng(PlatformQrCode item) async {
-    final link = item.displayPayload;
-    if (link == null) return;
+  Future<void> _pickPhoto() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+      withData: false,
+    );
+    final path = result?.files.single.path;
+    if (path == null || path.isEmpty) return;
+    setState(() => _photoPath = path);
+  }
+
+  Future<File?> _captureCardPng(PlatformQrCode item) async {
     final boundary =
-        _qrBoundaryKey.currentContext?.findRenderObject()
+        _cardBoundaryKey.currentContext?.findRenderObject()
             as RenderRepaintBoundary?;
-    if (boundary == null) {
-      await Share.share(link, subject: item.displayName);
-      return;
-    }
+    if (boundary == null) return null;
     final image = await boundary.toImage(pixelRatio: 3);
     final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-    if (bytes == null) return;
+    image.dispose();
+    if (bytes == null) return null;
     final dir = await getTemporaryDirectory();
-    final file = File('${dir.path}/vianexis-qr-${item.id}.png');
-    await file.writeAsBytes(bytes.buffer.asUint8List());
-    await Share.shareXFiles([
-      XFile(file.path),
-    ], text: '${item.displayName}\n$link');
+    final file = File('${dir.path}/vianexis-id-card-${item.id}.png');
+    await file.writeAsBytes(bytes.buffer.asUint8List(), flush: true);
+    return file;
+  }
+
+  Future<void> _shareCard(PlatformQrCode item) async {
+    setState(() => _busy = true);
+    try {
+      final link = item.displayPayload ?? '';
+      final file = await _captureCardPng(item);
+      if (file == null) {
+        if (link.isNotEmpty) {
+          await Share.share(link, subject: item.displayName);
+        }
+        return;
+      }
+      final subject = resolveQrCodesKey(context, 'qrCodesShareCard');
+      await Share.shareXFiles(
+        [XFile(file.path, mimeType: 'image/png')],
+        text: '${item.displayName}\n$link',
+        subject: subject,
+      );
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _saveCard(PlatformQrCode item) async {
+    setState(() => _busy = true);
+    try {
+      final file = await _captureCardPng(item);
+      if (file == null || !mounted) return;
+      await Share.shareXFiles(
+        [XFile(file.path, mimeType: 'image/png')],
+        subject: resolveQrCodesKey(context, 'qrCodesSaveCard'),
+      );
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(resolveQrCodesKey(context, 'qrCodesCardSaved'))),
+      );
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _openQr(PlatformQrCode item) async {
+    final payload = item.displayPayload;
+    if (payload == null || payload.isEmpty) return;
+    await showQrCodePreviewSheet(
+      context,
+      qrPayload: payload,
+      displayName: item.displayName,
+      qrId: item.id,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final preview = _preview;
+    final payload = preview?.displayPayload;
     final isStaging = preview?.environment == 'staging';
+    final purposeLabel = resolveQrCodesKey(
+      context,
+      preview?.purpose != null
+          ? (QrPurpose.tryParse(preview!.purpose)?.l10nKey ?? 'qrCodesTitle')
+          : _purpose.l10nKey,
+    );
+
     return AlertDialog(
       title: Text(resolveQrCodesKey(context, widget.titleKey)),
       content: SizedBox(
-        width: 460,
+        width: 520,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -262,7 +373,7 @@ class _QrCodesManagementDialogState
                 onPressed: _busy ? null : _create,
                 child: Text(resolveQrCodesKey(context, 'qrCodesCreate')),
               ),
-              if (preview?.displayPayload != null) ...[
+              if (preview != null && payload != null && payload.isNotEmpty) ...[
                 const SizedBox(height: 16),
                 if (isStaging)
                   Padding(
@@ -275,28 +386,52 @@ class _QrCodesManagementDialogState
                       ),
                     ),
                   ),
-                Center(
-                  child: RepaintBoundary(
-                    key: _qrBoundaryKey,
-                    child: VianexisQrCodeView(
-                      data: preview!.displayPayload!,
-                      size: 220,
-                    ),
-                  ),
+                Text(
+                  resolveQrCodesKey(context, 'qrCodesIdentityCard'),
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  resolveQrCodesKey(context, preview.purpose != null
-                      ? (QrPurpose.tryParse(preview.purpose)?.l10nKey ??
-                            'qrCodesTitle')
-                      : 'qrCodesTitle'),
-                  textAlign: TextAlign.center,
+                RepaintBoundary(
+                  key: _cardBoundaryKey,
+                  child: VianexisQrIdentityCard(
+                    brandTitle: _brandTitle,
+                    displayName: widget.displayName,
+                    subtitle: widget.subtitle,
+                    entityIdLabel: '${widget.entityId}',
+                    roleLabel: _roleLabel,
+                    purposeLabel: purposeLabel,
+                    qrPayload: payload,
+                    photoPath: _photoPath,
+                    nameFieldLabel: resolveQrCodesKey(
+                      context,
+                      'qrCodesCardFieldName',
+                    ),
+                    idFieldLabel: resolveQrCodesKey(
+                      context,
+                      'qrCodesCardFieldId',
+                    ),
+                    roleFieldLabel: resolveQrCodesKey(
+                      context,
+                      'qrCodesCardFieldRole',
+                    ),
+                    purposeFieldLabel: resolveQrCodesKey(
+                      context,
+                      'qrCodesCardFieldPurpose',
+                    ),
+                    detailFieldLabel: resolveQrCodesKey(
+                      context,
+                      'qrCodesCardFieldDetail',
+                    ),
+                    onQrTap: () => _openQr(preview),
+                  ),
                 ),
-                if (preview.expiresAt != null)
+                if (preview.expiresAt != null) ...[
+                  const SizedBox(height: 8),
                   Text(
                     '${resolveQrCodesKey(context, 'qrCodesExpiresLabel')}: ${DateFormat.yMMMd().add_Hm().format(preview.expiresAt!.toLocal())}',
                     textAlign: TextAlign.center,
                   ),
+                ],
                 Text(
                   resolveQrCodesKey(context, 'qrCodesSecurityWarning'),
                   textAlign: TextAlign.center,
@@ -308,19 +443,52 @@ class _QrCodesManagementDialogState
                   runSpacing: 8,
                   alignment: WrapAlignment.center,
                   children: [
+                    OutlinedButton.icon(
+                      onPressed: _busy ? null : _pickPhoto,
+                      icon: const Icon(Icons.add_a_photo_outlined),
+                      label: Text(
+                        resolveQrCodesKey(
+                          context,
+                          _photoPath == null
+                              ? 'qrCodesAttachPhoto'
+                              : 'qrCodesChangePhoto',
+                        ),
+                      ),
+                    ),
+                    if (_photoPath != null)
+                      OutlinedButton.icon(
+                        onPressed: _busy
+                            ? null
+                            : () => setState(() => _photoPath = null),
+                        icon: const Icon(Icons.hide_image_outlined),
+                        label: Text(
+                          resolveQrCodesKey(context, 'qrCodesRemovePhoto'),
+                        ),
+                      ),
+                    OutlinedButton.icon(
+                      onPressed: _busy ? null : () => _shareCard(preview),
+                      icon: const Icon(Icons.ios_share),
+                      label: Text(
+                        resolveQrCodesKey(context, 'qrCodesShareCard'),
+                      ),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: _busy ? null : () => _saveCard(preview),
+                      icon: const Icon(Icons.download),
+                      label: Text(
+                        resolveQrCodesKey(context, 'qrCodesSaveCard'),
+                      ),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: _busy ? null : () => _openQr(preview),
+                      icon: const Icon(Icons.qr_code_2),
+                      label: Text(resolveQrCodesKey(context, 'qrCodesOpenQr')),
+                    ),
                     OutlinedButton(
                       onPressed: _busy ? null : () => _copyLink(preview),
                       child: Text(
                         resolveQrCodesKey(context, 'qrCodesCopyLink'),
                       ),
-                    ),
-                    OutlinedButton(
-                      onPressed: _busy ? null : () => _sharePng(preview),
-                      child: Text(resolveQrCodesKey(context, 'qrCodesShare')),
-                    ),
-                    OutlinedButton(
-                      onPressed: _busy ? null : () => _sharePng(preview),
-                      child: Text(resolveQrCodesKey(context, 'qrCodesSave')),
                     ),
                   ],
                 ),
@@ -364,7 +532,10 @@ class _QrCodesManagementDialogState
                       spacing: 4,
                       children: [
                         IconButton(
-                          tooltip: resolveQrCodesKey(context, 'qrCodesRegenerate'),
+                          tooltip: resolveQrCodesKey(
+                            context,
+                            'qrCodesRegenerate',
+                          ),
                           onPressed: _busy ? null : () => _regenerate(item),
                           icon: const Icon(Icons.refresh),
                         ),

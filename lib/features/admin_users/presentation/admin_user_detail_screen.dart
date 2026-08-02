@@ -117,7 +117,8 @@ class AdminUserDetailScreen extends ConsumerWidget {
                     context,
                     entityType: QrEntityType.user.apiValue,
                     entityId: int.tryParse(user.id) ?? 0,
-                    displayName: user.email,
+                    displayName: user.displayName,
+                    subtitle: user.email,
                     titleKey: 'qrCodesUserTitle',
                     allowedPurposes: const [
                       QrPurpose.userInvite,
