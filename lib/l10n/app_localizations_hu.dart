@@ -449,6 +449,42 @@ class AppLocalizationsHu extends AppLocalizations {
   String get errorGenericBody => 'Váratlan hiba történt. Próbálja újra.';
 
   @override
+  String get driverApprovalInvalidRequest =>
+      'A jelentkezés adatai hiányosak vagy érvénytelenek.';
+
+  @override
+  String get driverApprovalForbidden =>
+      'Nincs jogosultságod a sofőrjelentkezés jóváhagyásához.';
+
+  @override
+  String get driverApprovalNotFound =>
+      'A sofőrjelentkezés vagy a jóváhagyási végpont nem található.';
+
+  @override
+  String get driverApprovalConflict =>
+      'A jelentkezés állapota időközben megváltozott, vagy már feldolgozták.';
+
+  @override
+  String get driverApprovalMissingFields =>
+      'A sofőrjelentkezés kötelező adatai hiányoznak.';
+
+  @override
+  String get driverApprovalServerError =>
+      'A szerver nem tudta befejezni a jóváhagyást.';
+
+  @override
+  String get driverApprovalAlreadyRegistered =>
+      'Ehhez az e-mail címhez már létezik fiók.';
+
+  @override
+  String get driverApprovalEmailProviderDisabled =>
+      'A sofőr jóváhagyása megtörtént, de az aktiváló e-mail nem küldhető ezen a környezeten.';
+
+  @override
+  String get driverApprovalEmailSendFailed =>
+      'A sofőr jóváhagyása megtörtént, de az aktiváló e-mail küldése sikertelen.';
+
+  @override
   String get errorRetryButton => 'Újra';
 
   @override
@@ -3605,6 +3641,117 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get adminUserDetailTitle => 'Admin felhasználó részletei';
+
+  @override
+  String get adminUserAccessSectionTitle => 'Szerepkörök és hozzáférések';
+
+  @override
+  String get adminUserAccessSectionSubtitle =>
+      'A pipák a backend aktuális grantjeit mutatják. Mentéskor auditált módosítási kérdéssor nyílik.';
+
+  @override
+  String get adminUserAccessRolesHeading => 'Szerepkörök';
+
+  @override
+  String get adminUserAccessAppsHeading => 'Alkalmazás-hozzáférések';
+
+  @override
+  String get adminUserAccessPendingHeading => 'Jóváhagyásra váró változások';
+
+  @override
+  String get adminUserAccessSaveChanges => 'Módosítások mentése';
+
+  @override
+  String get adminUserAccessReset => 'Minden visszaállítása';
+
+  @override
+  String get adminUserAccessSaving => 'Mentés…';
+
+  @override
+  String get adminUserAccessLoadError =>
+      'A szerepkörök és hozzáférések betöltése sikertelen.';
+
+  @override
+  String get adminUserAccessChangeTitle => 'Hozzáférés módosítása';
+
+  @override
+  String get adminUserAccessChangeIntro =>
+      'Minden szerepkör- vagy app-hozzáférés-változást indokolni és engedélyeztetni kell az alkalmazás előtt.';
+
+  @override
+  String get adminUserAccessActive => 'Aktív';
+
+  @override
+  String get adminUserAccessInactive => 'Nem aktív';
+
+  @override
+  String get adminUserAccessReason => 'Módosítás indoka';
+
+  @override
+  String get adminUserAccessRequestedBy => 'Ki kérte';
+
+  @override
+  String get adminUserAccessAuthorizedBy => 'Ki hagyta jóvá';
+
+  @override
+  String get adminUserAccessAuthMethod => 'Jóváhagyás módja';
+
+  @override
+  String get adminUserAccessAuthReference => 'Kapcsolódó hivatkozás';
+
+  @override
+  String get adminUserAccessInternalComment => 'Belső megjegyzés';
+
+  @override
+  String get adminUserAccessUserComment =>
+      'Felhasználó számára látható megjegyzés';
+
+  @override
+  String get adminUserAccessApplyMode => 'Hatálybalépés';
+
+  @override
+  String get adminUserAccessRequireApproval => 'Jóváhagyásra küldés';
+
+  @override
+  String get adminUserAccessApplyImmediate =>
+      'Azonnali alkalmazás (super admin)';
+
+  @override
+  String get adminUserAccessSensitive => 'Érzékeny';
+
+  @override
+  String get adminUserAccessPendingBadge => 'Függő módosítás';
+
+  @override
+  String get adminUserAccessDependencyWarning =>
+      'Kapcsolódó app-hozzáférés hiányzik';
+
+  @override
+  String get adminUserAccessRoleCompanyAdmin => 'Cégadminisztrátor';
+
+  @override
+  String get adminUserAccessRoleDispatcher => 'Diszpécser';
+
+  @override
+  String get adminUserAccessRoleDriver => 'Sofőr';
+
+  @override
+  String get adminUserAccessRoleWorkshop => 'Műhely';
+
+  @override
+  String get adminUserAccessRoleDocumentation => 'Dokumentációs munkatárs';
+
+  @override
+  String get adminUserAccessRoleClaims => 'Kárügyintéző';
+
+  @override
+  String get adminUserAccessAppDriver => 'Sofőr alkalmazás';
+
+  @override
+  String get adminUserAccessAppPortal => 'Céges operációs portál';
+
+  @override
+  String get adminUserAccessAppPlatform => 'Platform Admin alkalmazás';
 
   @override
   String get adminUserLoadError =>

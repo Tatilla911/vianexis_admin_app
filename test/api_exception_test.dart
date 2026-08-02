@@ -318,6 +318,81 @@ void main() {
       );
     });
 
+    test('maps driver approval already_registered 409 specifically', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(
+            path: '/platform-admin/driver-registration-requests/12/approve',
+          ),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(
+              path: '/platform-admin/driver-registration-requests/12/approve',
+            ),
+            statusCode: 409,
+            data: const {
+              'code': 'already_registered',
+              'errorCode': 'already_registered',
+              'message': 'An account already exists with this email.',
+              'requestId': 'req-drv-1',
+            },
+          ),
+        ),
+      );
+
+      expect(exception.kind, ApiExceptionKind.conflict);
+      expect(
+        exception.messageKey,
+        LocalizationKeys.driverApprovalAlreadyRegistered,
+      );
+      expect(exception.requestId, 'req-drv-1');
+    });
+
+    test('maps driver approval HTTP statuses to specific keys', () {
+      ApiException mapStatus(int status) {
+        return mapDioException(
+          DioException(
+            requestOptions: RequestOptions(
+              path: '/platform-admin/driver-registration-requests/3/approve',
+            ),
+            type: DioExceptionType.badResponse,
+            response: Response(
+              requestOptions: RequestOptions(
+                path: '/platform-admin/driver-registration-requests/3/approve',
+              ),
+              statusCode: status,
+              data: const {'requestId': 'req-drv-status'},
+            ),
+          ),
+        );
+      }
+
+      expect(
+        mapStatus(400).messageKey,
+        LocalizationKeys.driverApprovalInvalidRequest,
+      );
+      expect(
+        mapStatus(403).messageKey,
+        LocalizationKeys.driverApprovalForbidden,
+      );
+      expect(
+        mapStatus(404).messageKey,
+        LocalizationKeys.driverApprovalNotFound,
+      );
+      expect(
+        mapStatus(409).messageKey,
+        LocalizationKeys.driverApprovalConflict,
+      );
+      expect(
+        mapStatus(422).messageKey,
+        LocalizationKeys.driverApprovalMissingFields,
+      );
+      expect(
+        mapStatus(500).messageKey,
+        LocalizationKeys.driverApprovalServerError,
+      );
+    });
+
     test('maps 409 to conflict', () {
       final exception = mapDioException(
         DioException(

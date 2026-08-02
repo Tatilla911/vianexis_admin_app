@@ -17,7 +17,9 @@ String apiExceptionMessageKeyForStatus({
   if (errorCode == 'EMAIL_PROVIDER_DISABLED' ||
       errorCode == 'provider_not_configured' ||
       errorCode == 'provider_disabled') {
-    return LocalizationKeys.emailProviderDisabled;
+    return isDriverApprovalRelatedPath(path)
+        ? LocalizationKeys.driverApprovalEmailProviderDisabled
+        : LocalizationKeys.emailProviderDisabled;
   }
   if (errorCode == 'EMAIL_RECIPIENT_NOT_ALLOWED' ||
       errorCode == 'blocked_by_staging_allowlist' ||
@@ -25,7 +27,24 @@ String apiExceptionMessageKeyForStatus({
     return LocalizationKeys.emailRecipientNotAllowed;
   }
   if (errorCode == 'EMAIL_SEND_FAILED') {
-    return LocalizationKeys.emailSendFailed;
+    return isDriverApprovalRelatedPath(path)
+        ? LocalizationKeys.driverApprovalEmailSendFailed
+        : LocalizationKeys.emailSendFailed;
+  }
+  if (errorCode == 'already_registered' ||
+      errorCode == 'EMAIL_ALREADY_HAS_ACTIVE_ACCOUNT') {
+    return LocalizationKeys.driverApprovalAlreadyRegistered;
+  }
+  if (errorCode == 'ACCOUNT_ACTIVATION_REQUIRED' ||
+      errorCode == 'ACCOUNT_PENDING_ACTIVATION') {
+    return LocalizationKeys.driverApprovalConflict;
+  }
+  if (errorCode == 'MEMBERSHIP_ALREADY_EXISTS') {
+    return LocalizationKeys.driverApprovalConflict;
+  }
+  if (errorCode == 'invalid_company_id' ||
+      errorCode == 'invalid_registration_status') {
+    return LocalizationKeys.driverApprovalInvalidRequest;
   }
   if (errorCode == 'invalid_current_password') {
     return LocalizationKeys.authPasswordChangeInvalidCurrent;
@@ -55,6 +74,7 @@ String apiExceptionMessageKeyForStatus({
 
   final backendMessage = readApiMessage(responseData)?.toLowerCase() ?? '';
   final isAmendmentPath = isCompanyAmendmentRequestPath(path);
+  final isDriverApprovalPath = isDriverApprovalRelatedPath(path);
   final looksLikeMissingRelation =
       backendMessage.contains('does not exist') ||
       (backendMessage.contains('relation') &&
@@ -66,10 +86,18 @@ String apiExceptionMessageKeyForStatus({
     return LocalizationKeys.platformCompanyAmendErrorMigrationMissing;
   }
 
+  if (backendMessage.contains('already exists with this email') ||
+      backendMessage.contains('account already exists')) {
+    return LocalizationKeys.driverApprovalAlreadyRegistered;
+  }
+
   if (statusCode == 401) {
     return LocalizationKeys.authSessionExpired;
   }
   if (statusCode == 403) {
+    if (isDriverApprovalPath) {
+      return LocalizationKeys.driverApprovalForbidden;
+    }
     return isAmendmentPath
         ? LocalizationKeys.platformCompanyAmendErrorForbidden
         : LocalizationKeys.authForbiddenRole;
@@ -78,15 +106,31 @@ String apiExceptionMessageKeyForStatus({
     return LocalizationKeys.authLoginServiceUnavailable;
   }
   if (statusCode == 404) {
+    if (isDriverApprovalPath) {
+      return LocalizationKeys.driverApprovalNotFound;
+    }
     return isAmendmentPath
         ? LocalizationKeys.platformCompanyAmendErrorNotFound
         : LocalizationKeys.errorActionUnavailable;
   }
-  if (statusCode == 400 && isAmendmentPath) {
-    return LocalizationKeys.platformCompanyAmendErrorValidation;
+  if (statusCode == 400) {
+    if (isDriverApprovalPath) {
+      return LocalizationKeys.driverApprovalInvalidRequest;
+    }
+    if (isAmendmentPath) {
+      return LocalizationKeys.platformCompanyAmendErrorValidation;
+    }
   }
-  if (statusCode == 409 && isAmendmentPath) {
-    return LocalizationKeys.platformCompanyAmendErrorConflict;
+  if (statusCode == 422) {
+    return LocalizationKeys.driverApprovalMissingFields;
+  }
+  if (statusCode == 409) {
+    if (isDriverApprovalPath) {
+      return LocalizationKeys.driverApprovalConflict;
+    }
+    if (isAmendmentPath) {
+      return LocalizationKeys.platformCompanyAmendErrorConflict;
+    }
   }
   if ((statusCode == 500 ||
           statusCode == 502 ||
@@ -94,6 +138,13 @@ String apiExceptionMessageKeyForStatus({
           statusCode == 504) &&
       isAmendmentPath) {
     return LocalizationKeys.platformCompanyAmendErrorServer;
+  }
+  if ((statusCode == 500 ||
+          statusCode == 502 ||
+          statusCode == 503 ||
+          statusCode == 504) &&
+      isDriverApprovalPath) {
+    return LocalizationKeys.driverApprovalServerError;
   }
   return LocalizationKeys.errorGenericBody;
 }
@@ -132,6 +183,7 @@ ApiException mapHttpStatusException({
   final intakeRequired =
       messageKey == LocalizationKeys.applicationDetailedIntakeRequired ||
       errorCode == 'APPLICATION_DETAILED_INTAKE_REQUIRED';
+  final hasSpecificMessage = messageKey != LocalizationKeys.errorGenericBody;
 
   return switch (statusCode) {
     400 => build(ApiExceptionKind.validation),
@@ -142,14 +194,19 @@ ApiException mapHttpStatusException({
       ApiExceptionKind.conflict,
       overrideMessageKey: intakeRequired
           ? LocalizationKeys.applicationDetailedIntakeRequired
+          : hasSpecificMessage
+          ? messageKey
           : isAmendmentPath
           ? LocalizationKeys.platformCompanyAmendErrorConflict
           : LocalizationKeys.errorGenericBody,
     ),
+    422 => build(ApiExceptionKind.validation),
     500 || 502 || 503 || 504 => build(
       ApiExceptionKind.server,
-      overrideMessageKey: isAmendmentPath
+      overrideMessageKey: hasSpecificMessage
           ? messageKey
+          : isAmendmentPath
+          ? LocalizationKeys.platformCompanyAmendErrorServer
           : LocalizationKeys.authServerError,
     ),
     _ => build(ApiExceptionKind.unknown),

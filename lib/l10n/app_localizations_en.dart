@@ -445,6 +445,42 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorGenericBody => 'An unexpected error occurred. Try again.';
 
   @override
+  String get driverApprovalInvalidRequest =>
+      'The application data is incomplete or invalid.';
+
+  @override
+  String get driverApprovalForbidden =>
+      'You are not allowed to approve driver registrations.';
+
+  @override
+  String get driverApprovalNotFound =>
+      'The driver application or approval endpoint was not found.';
+
+  @override
+  String get driverApprovalConflict =>
+      'The application state changed, or it was already processed.';
+
+  @override
+  String get driverApprovalMissingFields =>
+      'Required driver application fields are missing.';
+
+  @override
+  String get driverApprovalServerError =>
+      'The server could not complete the approval.';
+
+  @override
+  String get driverApprovalAlreadyRegistered =>
+      'An account already exists for this email.';
+
+  @override
+  String get driverApprovalEmailProviderDisabled =>
+      'Driver approval succeeded, but activation email cannot be sent in this environment.';
+
+  @override
+  String get driverApprovalEmailSendFailed =>
+      'Driver approval succeeded, but activation email delivery failed.';
+
+  @override
   String get errorRetryButton => 'Retry';
 
   @override
@@ -3554,6 +3590,113 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminUserDetailTitle => 'Admin user detail';
+
+  @override
+  String get adminUserAccessSectionTitle => 'Roles and access';
+
+  @override
+  String get adminUserAccessSectionSubtitle =>
+      'Checkbox state reflects backend grants. Saving opens an audited change request.';
+
+  @override
+  String get adminUserAccessRolesHeading => 'Roles';
+
+  @override
+  String get adminUserAccessAppsHeading => 'Application access';
+
+  @override
+  String get adminUserAccessPendingHeading => 'Pending change requests';
+
+  @override
+  String get adminUserAccessSaveChanges => 'Save changes';
+
+  @override
+  String get adminUserAccessReset => 'Reset all';
+
+  @override
+  String get adminUserAccessSaving => 'Saving…';
+
+  @override
+  String get adminUserAccessLoadError => 'Could not load roles and access.';
+
+  @override
+  String get adminUserAccessChangeTitle => 'Access modification';
+
+  @override
+  String get adminUserAccessChangeIntro =>
+      'Describe and authorize every role or app-access change before it is applied.';
+
+  @override
+  String get adminUserAccessActive => 'Active';
+
+  @override
+  String get adminUserAccessInactive => 'Inactive';
+
+  @override
+  String get adminUserAccessReason => 'Reason';
+
+  @override
+  String get adminUserAccessRequestedBy => 'Requested by';
+
+  @override
+  String get adminUserAccessAuthorizedBy => 'Authorized by';
+
+  @override
+  String get adminUserAccessAuthMethod => 'Authorization method';
+
+  @override
+  String get adminUserAccessAuthReference => 'Authorization reference';
+
+  @override
+  String get adminUserAccessInternalComment => 'Internal comment';
+
+  @override
+  String get adminUserAccessUserComment => 'User-visible comment';
+
+  @override
+  String get adminUserAccessApplyMode => 'Apply mode';
+
+  @override
+  String get adminUserAccessRequireApproval => 'Send for approval';
+
+  @override
+  String get adminUserAccessApplyImmediate => 'Apply immediately (super admin)';
+
+  @override
+  String get adminUserAccessSensitive => 'Sensitive';
+
+  @override
+  String get adminUserAccessPendingBadge => 'Pending change';
+
+  @override
+  String get adminUserAccessDependencyWarning => 'Missing related app access';
+
+  @override
+  String get adminUserAccessRoleCompanyAdmin => 'Company administrator';
+
+  @override
+  String get adminUserAccessRoleDispatcher => 'Dispatcher';
+
+  @override
+  String get adminUserAccessRoleDriver => 'Driver';
+
+  @override
+  String get adminUserAccessRoleWorkshop => 'Workshop';
+
+  @override
+  String get adminUserAccessRoleDocumentation => 'Documentation staff';
+
+  @override
+  String get adminUserAccessRoleClaims => 'Claims / insurance';
+
+  @override
+  String get adminUserAccessAppDriver => 'Driver app';
+
+  @override
+  String get adminUserAccessAppPortal => 'Company operations portal';
+
+  @override
+  String get adminUserAccessAppPlatform => 'Platform Admin app';
 
   @override
   String get adminUserLoadError => 'Could not load admin users.';

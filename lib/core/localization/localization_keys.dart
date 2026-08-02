@@ -59,6 +59,19 @@ abstract final class LocalizationKeys {
   static const emailProviderDisabled = 'emailProviderDisabled';
   static const emailRecipientNotAllowed = 'emailRecipientNotAllowed';
   static const emailSendFailed = 'emailSendFailed';
+
+  static const driverApprovalInvalidRequest = 'driverApprovalInvalidRequest';
+  static const driverApprovalForbidden = 'driverApprovalForbidden';
+  static const driverApprovalNotFound = 'driverApprovalNotFound';
+  static const driverApprovalConflict = 'driverApprovalConflict';
+  static const driverApprovalMissingFields = 'driverApprovalMissingFields';
+  static const driverApprovalServerError = 'driverApprovalServerError';
+  static const driverApprovalAlreadyRegistered =
+      'driverApprovalAlreadyRegistered';
+  static const driverApprovalEmailProviderDisabled =
+      'driverApprovalEmailProviderDisabled';
+  static const driverApprovalEmailSendFailed = 'driverApprovalEmailSendFailed';
+
   static const roleSuperAdmin = 'roleSuperAdmin';
   static const roleSupportAdmin = 'roleSupportAdmin';
   static const roleOnboardingReviewer = 'roleOnboardingReviewer';

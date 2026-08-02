@@ -32,6 +32,28 @@ bool isCompanyAmendmentRequestPath(String path) {
       normalized.contains('/amendment-fields');
 }
 
+bool isDriverRegistrationApprovePath(String path) {
+  final normalized = resolveApiRequestPath(
+    RequestOptions(path: path),
+  ).trim().toLowerCase();
+  return normalized.contains('/driver-registration-requests/') &&
+      normalized.endsWith('/approve');
+}
+
+bool isPublicApplicationApprovePath(String path) {
+  final normalized = resolveApiRequestPath(
+    RequestOptions(path: path),
+  ).trim().toLowerCase();
+  return RegExp(r'/platform-admin/applications/\d+/approve$').hasMatch(
+    normalized,
+  );
+}
+
+bool isDriverApprovalRelatedPath(String path) {
+  return isDriverRegistrationApprovePath(path) ||
+      isPublicApplicationApprovePath(path);
+}
+
 bool isAuthLoginRequestPath(String path) {
   final normalized = resolveApiRequestPath(
     RequestOptions(path: path),

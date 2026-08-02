@@ -40,4 +40,40 @@ void main() {
 
     expect(message, 'You do not have permission to access this interface.');
   });
+
+  testWidgets('apiExceptionMessage appends requestId when present', (
+    tester,
+  ) async {
+    late String message;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Builder(
+          builder: (context) {
+            message = apiExceptionMessage(
+              context,
+              const ApiException(
+                messageKey: LocalizationKeys.driverApprovalConflict,
+                kind: ApiExceptionKind.conflict,
+                requestId: 'req-42',
+              ),
+            );
+            return const SizedBox.shrink();
+          },
+        ),
+      ),
+    );
+
+    expect(
+      message,
+      'The application state changed, or it was already processed. (requestId: req-42)',
+    );
+  });
 }

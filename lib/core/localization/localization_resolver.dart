@@ -69,6 +69,21 @@ String resolveLocalizationKey(BuildContext context, String key) {
     LocalizationKeys.emailRecipientNotAllowed =>
       l10n.emailRecipientNotAllowed,
     LocalizationKeys.emailSendFailed => l10n.emailSendFailed,
+    LocalizationKeys.driverApprovalInvalidRequest =>
+      l10n.driverApprovalInvalidRequest,
+    LocalizationKeys.driverApprovalForbidden => l10n.driverApprovalForbidden,
+    LocalizationKeys.driverApprovalNotFound => l10n.driverApprovalNotFound,
+    LocalizationKeys.driverApprovalConflict => l10n.driverApprovalConflict,
+    LocalizationKeys.driverApprovalMissingFields =>
+      l10n.driverApprovalMissingFields,
+    LocalizationKeys.driverApprovalServerError =>
+      l10n.driverApprovalServerError,
+    LocalizationKeys.driverApprovalAlreadyRegistered =>
+      l10n.driverApprovalAlreadyRegistered,
+    LocalizationKeys.driverApprovalEmailProviderDisabled =>
+      l10n.driverApprovalEmailProviderDisabled,
+    LocalizationKeys.driverApprovalEmailSendFailed =>
+      l10n.driverApprovalEmailSendFailed,
     LocalizationKeys.roleSuperAdmin => l10n.roleSuperAdmin,
     LocalizationKeys.roleSupportAdmin => l10n.roleSupportAdmin,
     LocalizationKeys.roleOnboardingReviewer => l10n.roleOnboardingReviewer,

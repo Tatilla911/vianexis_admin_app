@@ -33,7 +33,11 @@ class _FakePendingRepository implements DriverRegistrationRequestsRepository {
   }
 
   @override
-  Future<void> approve(String requestId, {int? companyId}) async {
+  Future<void> approve(
+    String requestId, {
+    int? companyId,
+    String? reviewNotes,
+  }) async {
     approveCalls++;
   }
 

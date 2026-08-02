@@ -890,6 +890,60 @@ abstract class AppLocalizations {
   /// **'An unexpected error occurred. Try again.'**
   String get errorGenericBody;
 
+  /// No description provided for @driverApprovalInvalidRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'The application data is incomplete or invalid.'**
+  String get driverApprovalInvalidRequest;
+
+  /// No description provided for @driverApprovalForbidden.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not allowed to approve driver registrations.'**
+  String get driverApprovalForbidden;
+
+  /// No description provided for @driverApprovalNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'The driver application or approval endpoint was not found.'**
+  String get driverApprovalNotFound;
+
+  /// No description provided for @driverApprovalConflict.
+  ///
+  /// In en, this message translates to:
+  /// **'The application state changed, or it was already processed.'**
+  String get driverApprovalConflict;
+
+  /// No description provided for @driverApprovalMissingFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Required driver application fields are missing.'**
+  String get driverApprovalMissingFields;
+
+  /// No description provided for @driverApprovalServerError.
+  ///
+  /// In en, this message translates to:
+  /// **'The server could not complete the approval.'**
+  String get driverApprovalServerError;
+
+  /// No description provided for @driverApprovalAlreadyRegistered.
+  ///
+  /// In en, this message translates to:
+  /// **'An account already exists for this email.'**
+  String get driverApprovalAlreadyRegistered;
+
+  /// No description provided for @driverApprovalEmailProviderDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver approval succeeded, but activation email cannot be sent in this environment.'**
+  String get driverApprovalEmailProviderDisabled;
+
+  /// No description provided for @driverApprovalEmailSendFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver approval succeeded, but activation email delivery failed.'**
+  String get driverApprovalEmailSendFailed;
+
   /// No description provided for @errorRetryButton.
   ///
   /// In en, this message translates to:
@@ -6523,6 +6577,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Admin user detail'**
   String get adminUserDetailTitle;
+
+  /// No description provided for @adminUserAccessSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Roles and access'**
+  String get adminUserAccessSectionTitle;
+
+  /// No description provided for @adminUserAccessSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkbox state reflects backend grants. Saving opens an audited change request.'**
+  String get adminUserAccessSectionSubtitle;
+
+  /// No description provided for @adminUserAccessRolesHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Roles'**
+  String get adminUserAccessRolesHeading;
+
+  /// No description provided for @adminUserAccessAppsHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Application access'**
+  String get adminUserAccessAppsHeading;
+
+  /// No description provided for @adminUserAccessPendingHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending change requests'**
+  String get adminUserAccessPendingHeading;
+
+  /// No description provided for @adminUserAccessSaveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get adminUserAccessSaveChanges;
+
+  /// No description provided for @adminUserAccessReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all'**
+  String get adminUserAccessReset;
+
+  /// No description provided for @adminUserAccessSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving…'**
+  String get adminUserAccessSaving;
+
+  /// No description provided for @adminUserAccessLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load roles and access.'**
+  String get adminUserAccessLoadError;
+
+  /// No description provided for @adminUserAccessChangeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Access modification'**
+  String get adminUserAccessChangeTitle;
+
+  /// No description provided for @adminUserAccessChangeIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe and authorize every role or app-access change before it is applied.'**
+  String get adminUserAccessChangeIntro;
+
+  /// No description provided for @adminUserAccessActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get adminUserAccessActive;
+
+  /// No description provided for @adminUserAccessInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get adminUserAccessInactive;
+
+  /// No description provided for @adminUserAccessReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get adminUserAccessReason;
+
+  /// No description provided for @adminUserAccessRequestedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested by'**
+  String get adminUserAccessRequestedBy;
+
+  /// No description provided for @adminUserAccessAuthorizedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorized by'**
+  String get adminUserAccessAuthorizedBy;
+
+  /// No description provided for @adminUserAccessAuthMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorization method'**
+  String get adminUserAccessAuthMethod;
+
+  /// No description provided for @adminUserAccessAuthReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorization reference'**
+  String get adminUserAccessAuthReference;
+
+  /// No description provided for @adminUserAccessInternalComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal comment'**
+  String get adminUserAccessInternalComment;
+
+  /// No description provided for @adminUserAccessUserComment.
+  ///
+  /// In en, this message translates to:
+  /// **'User-visible comment'**
+  String get adminUserAccessUserComment;
+
+  /// No description provided for @adminUserAccessApplyMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply mode'**
+  String get adminUserAccessApplyMode;
+
+  /// No description provided for @adminUserAccessRequireApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Send for approval'**
+  String get adminUserAccessRequireApproval;
+
+  /// No description provided for @adminUserAccessApplyImmediate.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply immediately (super admin)'**
+  String get adminUserAccessApplyImmediate;
+
+  /// No description provided for @adminUserAccessSensitive.
+  ///
+  /// In en, this message translates to:
+  /// **'Sensitive'**
+  String get adminUserAccessSensitive;
+
+  /// No description provided for @adminUserAccessPendingBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending change'**
+  String get adminUserAccessPendingBadge;
+
+  /// No description provided for @adminUserAccessDependencyWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing related app access'**
+  String get adminUserAccessDependencyWarning;
+
+  /// No description provided for @adminUserAccessRoleCompanyAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Company administrator'**
+  String get adminUserAccessRoleCompanyAdmin;
+
+  /// No description provided for @adminUserAccessRoleDispatcher.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispatcher'**
+  String get adminUserAccessRoleDispatcher;
+
+  /// No description provided for @adminUserAccessRoleDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get adminUserAccessRoleDriver;
+
+  /// No description provided for @adminUserAccessRoleWorkshop.
+  ///
+  /// In en, this message translates to:
+  /// **'Workshop'**
+  String get adminUserAccessRoleWorkshop;
+
+  /// No description provided for @adminUserAccessRoleDocumentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Documentation staff'**
+  String get adminUserAccessRoleDocumentation;
+
+  /// No description provided for @adminUserAccessRoleClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims / insurance'**
+  String get adminUserAccessRoleClaims;
+
+  /// No description provided for @adminUserAccessAppDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver app'**
+  String get adminUserAccessAppDriver;
+
+  /// No description provided for @adminUserAccessAppPortal.
+  ///
+  /// In en, this message translates to:
+  /// **'Company operations portal'**
+  String get adminUserAccessAppPortal;
+
+  /// No description provided for @adminUserAccessAppPlatform.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform Admin app'**
+  String get adminUserAccessAppPlatform;
 
   /// No description provided for @adminUserLoadError.
   ///

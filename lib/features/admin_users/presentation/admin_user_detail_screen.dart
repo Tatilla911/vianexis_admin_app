@@ -19,6 +19,7 @@ import 'widgets/admin_user_role_badge.dart';
 import 'widgets/admin_user_role_dialog.dart';
 import 'widgets/admin_user_status_badge.dart';
 import 'widgets/admin_user_status_dialog.dart';
+import 'widgets/user_access_roles_section.dart';
 
 class AdminUserDetailScreen extends ConsumerWidget {
   const AdminUserDetailScreen({super.key, required this.userId});
@@ -95,6 +96,11 @@ class AdminUserDetailScreen extends ConsumerWidget {
                 context,
                 'adminUserFieldFailedLoginCount',
                 '${user.failedLoginCount}',
+              ),
+              const SizedBox(height: 24),
+              UserAccessRolesSection(
+                userId: user.id,
+                canManage: canManage,
               ),
               if (canManage) ...[
                 const SizedBox(height: 24),
