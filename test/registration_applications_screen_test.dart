@@ -12,7 +12,8 @@ import 'package:vianexis_admin_app/features/registrations/presentation/registrat
 import 'package:vianexis_admin_app/features/registrations/presentation/registration_providers.dart';
 import 'package:vianexis_admin_app/l10n/app_localizations.dart';
 
-class _FakeRegistrationRepository implements RegistrationApplicationsRepository {
+class _FakeRegistrationRepository
+    implements RegistrationApplicationsRepository {
   _FakeRegistrationRepository(this.items);
 
   final List<RegistrationApplication> items;
@@ -37,6 +38,16 @@ class _FakeRegistrationRepository implements RegistrationApplicationsRepository 
   @override
   Future<RegistrationApprovalOutcome> resendInvite(String applicationId) async {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> sendPasswordSetup(String applicationId) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getInviteStatus(String applicationId) async {
+    return {'status': 'none'};
   }
 
   @override
@@ -99,7 +110,10 @@ void main() {
     );
 
     await tester.pumpAndSettle();
-    expect(find.text('Could not load registration applications.'), findsOneWidget);
+    expect(
+      find.text('Could not load registration applications.'),
+      findsOneWidget,
+    );
     expect(find.text('Retry'), findsOneWidget);
   });
 

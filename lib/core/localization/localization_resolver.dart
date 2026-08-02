@@ -178,6 +178,10 @@ String resolveRegistrationKey(
     'registrationInviteRevoke' => l10n.registrationInviteRevoke,
     'registrationInviteResendSuccess' => l10n.registrationInviteResendSuccess,
     'registrationInviteRevokeSuccess' => l10n.registrationInviteRevokeSuccess,
+    'registrationPasswordSetupSend' => l10n.registrationPasswordSetupSend,
+    'registrationPasswordSetupSent' => l10n.registrationPasswordSetupSent,
+    'registrationPasswordSetupQueued' => l10n.registrationPasswordSetupQueued,
+    'registrationInviteManageHint' => l10n.registrationInviteManageHint,
     'registrationOpenCompany' => l10n.registrationOpenCompany,
     'registrationPermissionPolicyTitle' =>
       l10n.registrationPermissionPolicyTitle,

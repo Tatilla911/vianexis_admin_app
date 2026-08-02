@@ -1652,6 +1652,30 @@ abstract class AppLocalizations {
   /// **'Outstanding invite tokens revoked.'**
   String get registrationInviteRevokeSuccess;
 
+  /// No description provided for @registrationPasswordSetupSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send secure password-setup link'**
+  String get registrationPasswordSetupSend;
+
+  /// No description provided for @registrationPasswordSetupSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Password-setup / reset email sent.'**
+  String get registrationPasswordSetupSent;
+
+  /// No description provided for @registrationPasswordSetupQueued.
+  ///
+  /// In en, this message translates to:
+  /// **'Password-setup link created; email delivery pending or failed (SMTP).'**
+  String get registrationPasswordSetupQueued;
+
+  /// No description provided for @registrationInviteManageHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Application approved. Resend invite or send a password-setup link (never a plaintext password).'**
+  String get registrationInviteManageHint;
+
   /// No description provided for @registrationOpenCompany.
   ///
   /// In en, this message translates to:

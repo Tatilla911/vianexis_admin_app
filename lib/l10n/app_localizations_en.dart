@@ -852,6 +852,22 @@ class AppLocalizationsEn extends AppLocalizations {
       'Outstanding invite tokens revoked.';
 
   @override
+  String get registrationPasswordSetupSend =>
+      'Send secure password-setup link';
+
+  @override
+  String get registrationPasswordSetupSent =>
+      'Password-setup / reset email sent.';
+
+  @override
+  String get registrationPasswordSetupQueued =>
+      'Password-setup link created; email delivery pending or failed (SMTP).';
+
+  @override
+  String get registrationInviteManageHint =>
+      'Application approved. Resend invite or send a password-setup link (never a plaintext password).';
+
+  @override
   String get registrationOpenCompany => 'Open company';
 
   @override

@@ -22,6 +22,10 @@ abstract class RegistrationApplicationsRepository {
 
   Future<RegistrationApprovalOutcome> resendInvite(String applicationId);
 
+  Future<Map<String, dynamic>> sendPasswordSetup(String applicationId);
+
+  Future<Map<String, dynamic>> getInviteStatus(String applicationId);
+
   Future<void> revokeInvite(String applicationId);
 
   bool get usesMockData;
@@ -58,6 +62,16 @@ class LiveRegistrationApplicationsRepository
   @override
   Future<RegistrationApprovalOutcome> resendInvite(String applicationId) {
     return _api.resendInvite(applicationId);
+  }
+
+  @override
+  Future<Map<String, dynamic>> sendPasswordSetup(String applicationId) {
+    return _api.sendPasswordSetup(applicationId);
+  }
+
+  @override
+  Future<Map<String, dynamic>> getInviteStatus(String applicationId) {
+    return _api.getInviteStatus(applicationId);
   }
 
   @override
@@ -211,6 +225,31 @@ class MockRegistrationApplicationsRepository
       inviteExpiresAt: DateTime.now().toUtc().add(const Duration(hours: 24)),
       inviteTokenId: 'mock-invite-resent',
     );
+  }
+
+  @override
+  Future<Map<String, dynamic>> sendPasswordSetup(String applicationId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    return {
+      'mode': 'invite',
+      'emailSent': false,
+      'emailDeliveryStatus': 'pending_or_failed',
+      'adminEmail': (await fetchApplication(applicationId)).contactEmail,
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> getInviteStatus(String applicationId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 50));
+    return {
+      'status': 'pending_or_failed',
+      'tokenId': 'mock-invite-1',
+      'expiresAt': DateTime.now()
+          .toUtc()
+          .add(const Duration(hours: 24))
+          .toIso8601String(),
+      'emailInviteSent': false,
+    };
   }
 
   @override

@@ -66,6 +66,20 @@ class RegistrationApplicationsApi {
     return RegistrationApprovalOutcome.fromJson(response.data);
   }
 
+  Future<Map<String, dynamic>> sendPasswordSetup(String applicationId) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/registration-applications/$applicationId/send-password-setup',
+    );
+    return response.data ?? <String, dynamic>{};
+  }
+
+  Future<Map<String, dynamic>> getInviteStatus(String applicationId) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/registration-applications/$applicationId/invite-status',
+    );
+    return response.data ?? <String, dynamic>{};
+  }
+
   Future<void> revokeInvite(String applicationId) async {
     await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/registration-applications/$applicationId/revoke-invite',
@@ -73,6 +87,7 @@ class RegistrationApplicationsApi {
   }
 }
 
-final registrationApplicationsApiProvider = Provider<RegistrationApplicationsApi>(
-  (ref) => RegistrationApplicationsApi(ref.watch(apiClientProvider)),
-);
+final registrationApplicationsApiProvider =
+    Provider<RegistrationApplicationsApi>(
+      (ref) => RegistrationApplicationsApi(ref.watch(apiClientProvider)),
+    );

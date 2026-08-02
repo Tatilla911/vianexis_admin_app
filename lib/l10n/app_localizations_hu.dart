@@ -860,6 +860,22 @@ class AppLocalizationsHu extends AppLocalizations {
       'A függő meghívó tokenek visszavonva.';
 
   @override
+  String get registrationPasswordSetupSend =>
+      'Biztonságos jelszóbeállító link küldése';
+
+  @override
+  String get registrationPasswordSetupSent =>
+      'Jelszóbeállító / visszaállító e-mail elküldve.';
+
+  @override
+  String get registrationPasswordSetupQueued =>
+      'Jelszóbeállító link létrehozva; e-mail kézbesítés függőben vagy sikertelen (SMTP).';
+
+  @override
+  String get registrationInviteManageHint =>
+      'A jelentkezés jóváhagyva. Meghívó újraküldése vagy jelszóbeállító link küldése (soha nem plaintext jelszó).';
+
+  @override
   String get registrationOpenCompany => 'Cég megnyitása';
 
   @override

@@ -70,6 +70,8 @@ class _RegistrationApplicationDetailScreenState
           approvalOutcome: _approvalOutcome,
           onDecision: (type) => _handleDecision(context, type),
           onResendInvite: canDecide ? () => _handleResend(context) : null,
+          onSendPasswordSetup:
+              canDecide ? () => _handleSendPasswordSetup(context) : null,
           onRevokeInvite: canDecide ? () => _handleRevoke(context) : null,
         ),
       ),
@@ -88,6 +90,46 @@ class _RegistrationApplicationDetailScreenState
         SnackBar(
           content: Text(
             resolveRegistrationKey(context, 'registrationInviteResendSuccess'),
+          ),
+        ),
+      );
+    } on ApiException catch (error) {
+      if (!context.mounted) return;
+      showApiExceptionSnackBar(context, error);
+    } catch (_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            resolveRegistrationKey(context, 'registrationDecisionError'),
+          ),
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _decisionLoading = false);
+    }
+  }
+
+  Future<void> _handleSendPasswordSetup(BuildContext context) async {
+    setState(() => _decisionLoading = true);
+    try {
+      final result = await ref
+          .read(registrationApplicationsRepositoryProvider)
+          .sendPasswordSetup(widget.applicationId);
+      if (!context.mounted) return;
+      final sent = result['emailSent'] == true;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            sent
+                ? resolveRegistrationKey(
+                    context,
+                    'registrationPasswordSetupSent',
+                  )
+                : resolveRegistrationKey(
+                    context,
+                    'registrationPasswordSetupQueued',
+                  ),
           ),
         ),
       );
@@ -203,6 +245,7 @@ class _DetailBody extends StatelessWidget {
     required this.approvalOutcome,
     required this.onDecision,
     this.onResendInvite,
+    this.onSendPasswordSetup,
     this.onRevokeInvite,
   });
 
@@ -213,6 +256,7 @@ class _DetailBody extends StatelessWidget {
   final RegistrationApprovalOutcome? approvalOutcome;
   final ValueChanged<RegistrationDecisionType> onDecision;
   final VoidCallback? onResendInvite;
+  final VoidCallback? onSendPasswordSetup;
   final VoidCallback? onRevokeInvite;
 
   @override
@@ -247,7 +291,46 @@ class _DetailBody extends StatelessWidget {
             canManageInvite: canDecide,
             inviteBusy: decisionLoading,
             onResend: onResendInvite,
+            onSendPasswordSetup: onSendPasswordSetup,
             onRevoke: onRevokeInvite,
+          ),
+        if (approvalOutcome == null &&
+            application.status.isApproved &&
+            canDecide)
+          _SectionCard(
+            title: resolveRegistrationKey(
+              context,
+              'registrationApproveOutcomeTitle',
+            ),
+            children: [
+              Text(
+                resolveRegistrationKey(
+                  context,
+                  'registrationInviteManageHint',
+                ),
+              ),
+              if (onResendInvite != null) ...[
+                const SizedBox(height: 8),
+                OutlinedButton(
+                  onPressed: decisionLoading ? null : onResendInvite,
+                  child: Text(
+                    resolveRegistrationKey(context, 'registrationInviteResend'),
+                  ),
+                ),
+              ],
+              if (onSendPasswordSetup != null) ...[
+                const SizedBox(height: 8),
+                OutlinedButton(
+                  onPressed: decisionLoading ? null : onSendPasswordSetup,
+                  child: Text(
+                    resolveRegistrationKey(
+                      context,
+                      'registrationPasswordSetupSend',
+                    ),
+                  ),
+                ),
+              ],
+            ],
           ),
         _SectionCard(
           title: resolveRegistrationKey(context, 'registrationSectionCompany'),
@@ -523,6 +606,7 @@ class _ApprovalOutcomeCard extends StatelessWidget {
     required this.canManageInvite,
     required this.inviteBusy,
     this.onResend,
+    this.onSendPasswordSetup,
     this.onRevoke,
   });
 
@@ -530,6 +614,7 @@ class _ApprovalOutcomeCard extends StatelessWidget {
   final bool canManageInvite;
   final bool inviteBusy;
   final VoidCallback? onResend;
+  final VoidCallback? onSendPasswordSetup;
   final VoidCallback? onRevoke;
 
   @override
@@ -621,6 +706,18 @@ class _ApprovalOutcomeCard extends StatelessWidget {
             onPressed: inviteBusy ? null : onResend,
             child: Text(
               resolveRegistrationKey(context, 'registrationInviteResend'),
+            ),
+          ),
+        ],
+        if (canManageInvite && onSendPasswordSetup != null) ...[
+          const SizedBox(height: 8),
+          OutlinedButton(
+            onPressed: inviteBusy ? null : onSendPasswordSetup,
+            child: Text(
+              resolveRegistrationKey(
+                context,
+                'registrationPasswordSetupSend',
+              ),
             ),
           ),
         ],
