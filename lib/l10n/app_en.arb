@@ -2671,7 +2671,7 @@
   "systemMonitoringActionSuccess": "Monitoring action saved.",
   "systemMonitoringActionError": "Could not save monitoring action.",
   "systemMonitoringActionAuditNotice": "This action will be recorded in the platform audit log.",
-"eventLogPdfArchiveTitle": "Event log PDF archive",
+  "eventLogPdfArchiveTitle": "Event log PDF archive",
   "eventLogPdfArchiveBody": "Store filtered event-log snapshots as ViaNexis-styled PDFs. Open to zoom, download, or share. Accented characters use Unicode fonts.",
   "eventLogPdfArchiveEmpty": "No stored event-log PDFs yet.",
   "eventLogPdfArchiveLoadFailed": "Could not load the PDF archive.",
@@ -2680,7 +2680,9 @@
   "eventLogPdfGeneratedAt": "Generated: {when}",
   "@eventLogPdfGeneratedAt": {
     "placeholders": {
-      "when": { "type": "String" }
+      "when": {
+        "type": "String"
+      }
     }
   },
   "eventLogPdfEmpty": "No events matched the current filters.",
@@ -2694,7 +2696,9 @@
   "eventLogPdfDeleteBody": "Delete {fileName} from the archive?",
   "@eventLogPdfDeleteBody": {
     "placeholders": {
-      "fileName": { "type": "String" }
+      "fileName": {
+        "type": "String"
+      }
     }
   },
   "eventLogPdfDeleteAllTitle": "Delete activity PDFs",
@@ -2704,7 +2708,9 @@
   "eventLogPdfEntryCount": "{count} events",
   "@eventLogPdfEntryCount": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "notificationsDeleteMenu": "Delete notifications / activities",
@@ -2722,11 +2728,64 @@
   "systemHealthNotifyCompanyBody": "Send an automatic acknowledgement to {company} (user: {user}) that we detected the issue, are investigating, will fix it ASAP, and will notify them when status changes?",
   "@systemHealthNotifyCompanyBody": {
     "placeholders": {
-      "company": { "type": "String" },
-      "user": { "type": "String" }
+      "company": {
+        "type": "String"
+      },
+      "user": {
+        "type": "String"
+      }
     }
   },
   "systemHealthNotifyCompanyConfirm": "Send acknowledgement",
   "systemHealthNotifyCompanySuccess": "Acknowledgement email sent.",
-  "systemHealthNotifyCompanyFailed": "Could not send the acknowledgement email."
+  "systemHealthNotifyCompanyFailed": "Could not send the acknowledgement email.",
+  "qrCodesTitle": "QR codes",
+  "qrCodesGenerateAction": "Generate QR code",
+  "qrCodesUserTitle": "User QR",
+  "qrCodesDriverTitle": "Driver QR",
+  "qrCodesCompanyTitle": "Company QR",
+  "qrCodesPurposeLabel": "Purpose",
+  "qrCodesPurposeUserInvite": "Invite QR",
+  "qrCodesPurposeUserActivation": "Activation QR",
+  "qrCodesPurposePasswordSetup": "Password-setup QR",
+  "qrCodesPurposeDriverAppLink": "Driver App link QR",
+  "qrCodesPurposeDriverProfile": "Driver profile QR",
+  "qrCodesPurposeCompanyProfile": "Company profile QR",
+  "qrCodesPurposeCompanyInvite": "Company invite QR",
+  "qrCodesPurposeCompanyPortalLogin": "Portal access QR",
+  "qrCodesPurposeCompanyOnboarding": "Onboarding QR",
+  "qrCodesPurposeSupportReference": "Support reference QR",
+  "qrCodesPurposeInternalAdmin": "Internal admin record QR",
+  "qrCodesPurposePublicCompany": "Public company info QR",
+  "qrCodesPurposePublicDriver": "Public driver ID QR",
+  "qrCodesExpiresLabel": "Expires",
+  "qrCodesSingleUse": "Single use",
+  "qrCodesMultiUse": "Multi use",
+  "qrCodesUsageLimit": "Usage limit",
+  "qrCodesStatusActive": "Active",
+  "qrCodesStatusExpired": "Expired",
+  "qrCodesStatusConsumed": "Consumed",
+  "qrCodesStatusRevoked": "Revoked",
+  "qrCodesShare": "Share QR",
+  "qrCodesSave": "Save QR",
+  "qrCodesCopyLink": "Copy link",
+  "qrCodesRegenerate": "Regenerate",
+  "qrCodesRevoke": "Revoke",
+  "qrCodesHistory": "QR history",
+  "qrCodesSecurityWarning": "Open only in the official ViaNexis app or website. Never share passwords.",
+  "qrCodesInvalid": "Invalid QR",
+  "qrCodesExpired": "Expired QR",
+  "qrCodesConsumed": "Already used QR",
+  "qrCodesAccessDenied": "Access denied",
+  "qrCodesStagingBadge": "STAGING / TEST — not production",
+  "qrCodesProductionBadge": "Production QR",
+  "qrCodesCreateSuccess": "QR code created",
+  "qrCodesRevokeSuccess": "QR code revoked",
+  "qrCodesRegenerateSuccess": "QR code regenerated",
+  "qrCodesLinkCopied": "Safe link copied",
+  "qrCodesEmptyHistory": "No QR codes yet",
+  "qrCodesCreate": "Create",
+  "qrCodesClose": "Close",
+  "qrCodesTargetSummary": "Target",
+  "qrCodesUsedCount": "Uses"
 }

@@ -10,6 +10,8 @@ import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../core/widgets/vianexis_metadata_notice.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../qr_codes/domain/platform_qr_code.dart';
+import '../../qr_codes/presentation/widgets/qr_codes_management_dialog.dart';
 import '../domain/platform_admin_user_role.dart';
 import '../domain/platform_admin_user_status.dart';
 import 'admin_users_providers.dart';
@@ -45,7 +47,10 @@ class AdminUserDetailScreen extends ConsumerWidget {
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Text(user.displayName, style: Theme.of(context).textTheme.headlineSmall),
+              Text(
+                user.displayName,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
               const SizedBox(height: 8),
               Text(user.email),
               const SizedBox(height: 12),
@@ -74,13 +79,17 @@ class AdminUserDetailScreen extends ConsumerWidget {
                 _field(
                   context,
                   'adminUserFieldCreatedAt',
-                  DateFormat.yMMMd(locale).add_Hm().format(user.createdAt!.toLocal()),
+                  DateFormat.yMMMd(
+                    locale,
+                  ).add_Hm().format(user.createdAt!.toLocal()),
                 ),
               if (user.lastLoginAt != null)
                 _field(
                   context,
                   'adminUserFieldLastLoginAt',
-                  DateFormat.yMMMd(locale).add_Hm().format(user.lastLoginAt!.toLocal()),
+                  DateFormat.yMMMd(
+                    locale,
+                  ).add_Hm().format(user.lastLoginAt!.toLocal()),
                 ),
               _field(
                 context,
@@ -91,12 +100,34 @@ class AdminUserDetailScreen extends ConsumerWidget {
                 const SizedBox(height: 24),
                 FilledButton.tonal(
                   onPressed: () => _changeRole(context, ref, user.role),
-                  child: Text(resolveAdminUserKey(context, 'adminUserChangeRoleAction')),
+                  child: Text(
+                    resolveAdminUserKey(context, 'adminUserChangeRoleAction'),
+                  ),
                 ),
                 const SizedBox(height: 8),
                 FilledButton.tonal(
                   onPressed: () => _changeStatus(context, ref, user.status),
-                  child: Text(resolveAdminUserKey(context, 'adminUserChangeStatusAction')),
+                  child: Text(
+                    resolveAdminUserKey(context, 'adminUserChangeStatusAction'),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton.icon(
+                  onPressed: () => showQrCodesManagementDialog(
+                    context,
+                    entityType: QrEntityType.user.apiValue,
+                    entityId: int.tryParse(user.id) ?? 0,
+                    displayName: user.email,
+                    titleKey: 'qrCodesUserTitle',
+                    allowedPurposes: const [
+                      QrPurpose.userInvite,
+                      QrPurpose.userActivation,
+                      QrPurpose.passwordSetup,
+                      QrPurpose.supportReference,
+                    ],
+                  ),
+                  icon: const Icon(Icons.qr_code_2),
+                  label: Text(resolveQrCodesKey(context, 'qrCodesGenerateAction')),
                 ),
               ],
               const SizedBox(height: 16),
@@ -143,7 +174,9 @@ class AdminUserDetailScreen extends ConsumerWidget {
       await submitAdminUserRoleChange(ref, userId: userId, request: request);
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveAdminUserKey(context, 'adminUserRoleSuccess'))),
+        SnackBar(
+          content: Text(resolveAdminUserKey(context, 'adminUserRoleSuccess')),
+        ),
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;
@@ -151,7 +184,9 @@ class AdminUserDetailScreen extends ConsumerWidget {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveAdminUserKey(context, 'adminUserActionError'))),
+        SnackBar(
+          content: Text(resolveAdminUserKey(context, 'adminUserActionError')),
+        ),
       );
     }
   }
@@ -170,7 +205,9 @@ class AdminUserDetailScreen extends ConsumerWidget {
       await submitAdminUserStatusChange(ref, userId: userId, request: request);
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveAdminUserKey(context, 'adminUserStatusSuccess'))),
+        SnackBar(
+          content: Text(resolveAdminUserKey(context, 'adminUserStatusSuccess')),
+        ),
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;
@@ -178,7 +215,9 @@ class AdminUserDetailScreen extends ConsumerWidget {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveAdminUserKey(context, 'adminUserActionError'))),
+        SnackBar(
+          content: Text(resolveAdminUserKey(context, 'adminUserActionError')),
+        ),
       );
     }
   }

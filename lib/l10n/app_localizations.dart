@@ -11111,6 +11111,300 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not send the acknowledgement email.'**
   String get systemHealthNotifyCompanyFailed;
+
+  /// No description provided for @qrCodesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'QR codes'**
+  String get qrCodesTitle;
+
+  /// No description provided for @qrCodesGenerateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate QR code'**
+  String get qrCodesGenerateAction;
+
+  /// No description provided for @qrCodesUserTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'User QR'**
+  String get qrCodesUserTitle;
+
+  /// No description provided for @qrCodesDriverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver QR'**
+  String get qrCodesDriverTitle;
+
+  /// No description provided for @qrCodesCompanyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Company QR'**
+  String get qrCodesCompanyTitle;
+
+  /// No description provided for @qrCodesPurposeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Purpose'**
+  String get qrCodesPurposeLabel;
+
+  /// No description provided for @qrCodesPurposeUserInvite.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite QR'**
+  String get qrCodesPurposeUserInvite;
+
+  /// No description provided for @qrCodesPurposeUserActivation.
+  ///
+  /// In en, this message translates to:
+  /// **'Activation QR'**
+  String get qrCodesPurposeUserActivation;
+
+  /// No description provided for @qrCodesPurposePasswordSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'Password-setup QR'**
+  String get qrCodesPurposePasswordSetup;
+
+  /// No description provided for @qrCodesPurposeDriverAppLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver App link QR'**
+  String get qrCodesPurposeDriverAppLink;
+
+  /// No description provided for @qrCodesPurposeDriverProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver profile QR'**
+  String get qrCodesPurposeDriverProfile;
+
+  /// No description provided for @qrCodesPurposeCompanyProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Company profile QR'**
+  String get qrCodesPurposeCompanyProfile;
+
+  /// No description provided for @qrCodesPurposeCompanyInvite.
+  ///
+  /// In en, this message translates to:
+  /// **'Company invite QR'**
+  String get qrCodesPurposeCompanyInvite;
+
+  /// No description provided for @qrCodesPurposeCompanyPortalLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Portal access QR'**
+  String get qrCodesPurposeCompanyPortalLogin;
+
+  /// No description provided for @qrCodesPurposeCompanyOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Onboarding QR'**
+  String get qrCodesPurposeCompanyOnboarding;
+
+  /// No description provided for @qrCodesPurposeSupportReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Support reference QR'**
+  String get qrCodesPurposeSupportReference;
+
+  /// No description provided for @qrCodesPurposeInternalAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal admin record QR'**
+  String get qrCodesPurposeInternalAdmin;
+
+  /// No description provided for @qrCodesPurposePublicCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Public company info QR'**
+  String get qrCodesPurposePublicCompany;
+
+  /// No description provided for @qrCodesPurposePublicDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Public driver ID QR'**
+  String get qrCodesPurposePublicDriver;
+
+  /// No description provided for @qrCodesExpiresLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires'**
+  String get qrCodesExpiresLabel;
+
+  /// No description provided for @qrCodesSingleUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Single use'**
+  String get qrCodesSingleUse;
+
+  /// No description provided for @qrCodesMultiUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Multi use'**
+  String get qrCodesMultiUse;
+
+  /// No description provided for @qrCodesUsageLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage limit'**
+  String get qrCodesUsageLimit;
+
+  /// No description provided for @qrCodesStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get qrCodesStatusActive;
+
+  /// No description provided for @qrCodesStatusExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get qrCodesStatusExpired;
+
+  /// No description provided for @qrCodesStatusConsumed.
+  ///
+  /// In en, this message translates to:
+  /// **'Consumed'**
+  String get qrCodesStatusConsumed;
+
+  /// No description provided for @qrCodesStatusRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoked'**
+  String get qrCodesStatusRevoked;
+
+  /// No description provided for @qrCodesShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share QR'**
+  String get qrCodesShare;
+
+  /// No description provided for @qrCodesSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save QR'**
+  String get qrCodesSave;
+
+  /// No description provided for @qrCodesCopyLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy link'**
+  String get qrCodesCopyLink;
+
+  /// No description provided for @qrCodesRegenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerate'**
+  String get qrCodesRegenerate;
+
+  /// No description provided for @qrCodesRevoke.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke'**
+  String get qrCodesRevoke;
+
+  /// No description provided for @qrCodesHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'QR history'**
+  String get qrCodesHistory;
+
+  /// No description provided for @qrCodesSecurityWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Open only in the official ViaNexis app or website. Never share passwords.'**
+  String get qrCodesSecurityWarning;
+
+  /// No description provided for @qrCodesInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid QR'**
+  String get qrCodesInvalid;
+
+  /// No description provided for @qrCodesExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired QR'**
+  String get qrCodesExpired;
+
+  /// No description provided for @qrCodesConsumed.
+  ///
+  /// In en, this message translates to:
+  /// **'Already used QR'**
+  String get qrCodesConsumed;
+
+  /// No description provided for @qrCodesAccessDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Access denied'**
+  String get qrCodesAccessDenied;
+
+  /// No description provided for @qrCodesStagingBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'STAGING / TEST — not production'**
+  String get qrCodesStagingBadge;
+
+  /// No description provided for @qrCodesProductionBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Production QR'**
+  String get qrCodesProductionBadge;
+
+  /// No description provided for @qrCodesCreateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'QR code created'**
+  String get qrCodesCreateSuccess;
+
+  /// No description provided for @qrCodesRevokeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'QR code revoked'**
+  String get qrCodesRevokeSuccess;
+
+  /// No description provided for @qrCodesRegenerateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'QR code regenerated'**
+  String get qrCodesRegenerateSuccess;
+
+  /// No description provided for @qrCodesLinkCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Safe link copied'**
+  String get qrCodesLinkCopied;
+
+  /// No description provided for @qrCodesEmptyHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'No QR codes yet'**
+  String get qrCodesEmptyHistory;
+
+  /// No description provided for @qrCodesCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get qrCodesCreate;
+
+  /// No description provided for @qrCodesClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get qrCodesClose;
+
+  /// No description provided for @qrCodesTargetSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Target'**
+  String get qrCodesTargetSummary;
+
+  /// No description provided for @qrCodesUsedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Uses'**
+  String get qrCodesUsedCount;
 }
 
 class _AppLocalizationsDelegate

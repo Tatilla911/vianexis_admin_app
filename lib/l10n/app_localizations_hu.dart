@@ -6158,4 +6158,152 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get systemHealthNotifyCompanyFailed =>
       'Nem sikerült elküldeni a visszajelző e-mailt.';
+
+  @override
+  String get qrCodesTitle => 'QR-kódok';
+
+  @override
+  String get qrCodesGenerateAction => 'QR-kód generálása';
+
+  @override
+  String get qrCodesUserTitle => 'Felhasználói QR';
+
+  @override
+  String get qrCodesDriverTitle => 'Sofőr QR';
+
+  @override
+  String get qrCodesCompanyTitle => 'Céges QR';
+
+  @override
+  String get qrCodesPurposeLabel => 'Cél';
+
+  @override
+  String get qrCodesPurposeUserInvite => 'Meghívó QR';
+
+  @override
+  String get qrCodesPurposeUserActivation => 'Aktiválási QR';
+
+  @override
+  String get qrCodesPurposePasswordSetup => 'Jelszóbeállító QR';
+
+  @override
+  String get qrCodesPurposeDriverAppLink => 'Driver App összekapcsoló QR';
+
+  @override
+  String get qrCodesPurposeDriverProfile => 'Sofőr profil QR';
+
+  @override
+  String get qrCodesPurposeCompanyProfile => 'Céges adatlap QR';
+
+  @override
+  String get qrCodesPurposeCompanyInvite => 'Céges meghívó QR';
+
+  @override
+  String get qrCodesPurposeCompanyPortalLogin => 'Portál hozzáférési QR';
+
+  @override
+  String get qrCodesPurposeCompanyOnboarding => 'Onboarding QR';
+
+  @override
+  String get qrCodesPurposeSupportReference => 'Support referencia QR';
+
+  @override
+  String get qrCodesPurposeInternalAdmin => 'Belső admin rekord QR';
+
+  @override
+  String get qrCodesPurposePublicCompany => 'Nyilvános céges info QR';
+
+  @override
+  String get qrCodesPurposePublicDriver => 'Nyilvános sofőr ID QR';
+
+  @override
+  String get qrCodesExpiresLabel => 'Lejárat';
+
+  @override
+  String get qrCodesSingleUse => 'Egyszer használható';
+
+  @override
+  String get qrCodesMultiUse => 'Többször használható';
+
+  @override
+  String get qrCodesUsageLimit => 'Felhasználási limit';
+
+  @override
+  String get qrCodesStatusActive => 'Aktív';
+
+  @override
+  String get qrCodesStatusExpired => 'Lejárt';
+
+  @override
+  String get qrCodesStatusConsumed => 'Felhasznált';
+
+  @override
+  String get qrCodesStatusRevoked => 'Visszavont';
+
+  @override
+  String get qrCodesShare => 'QR megosztása';
+
+  @override
+  String get qrCodesSave => 'QR mentése';
+
+  @override
+  String get qrCodesCopyLink => 'Link másolása';
+
+  @override
+  String get qrCodesRegenerate => 'Újragenerálás';
+
+  @override
+  String get qrCodesRevoke => 'Visszavonás';
+
+  @override
+  String get qrCodesHistory => 'QR előzmények';
+
+  @override
+  String get qrCodesSecurityWarning =>
+      'Csak hivatalos ViaNexis alkalmazásban vagy oldalon nyissa meg. Soha ne osszon meg jelszót.';
+
+  @override
+  String get qrCodesInvalid => 'Érvénytelen QR';
+
+  @override
+  String get qrCodesExpired => 'Lejárt QR';
+
+  @override
+  String get qrCodesConsumed => 'Már felhasznált QR';
+
+  @override
+  String get qrCodesAccessDenied => 'Hozzáférés megtagadva';
+
+  @override
+  String get qrCodesStagingBadge => 'STAGING / TESZT — nem éles';
+
+  @override
+  String get qrCodesProductionBadge => 'Éles QR';
+
+  @override
+  String get qrCodesCreateSuccess => 'QR-kód létrehozva';
+
+  @override
+  String get qrCodesRevokeSuccess => 'QR-kód visszavonva';
+
+  @override
+  String get qrCodesRegenerateSuccess => 'QR-kód újragenerálva';
+
+  @override
+  String get qrCodesLinkCopied => 'Biztonságos link bemásolva';
+
+  @override
+  String get qrCodesEmptyHistory => 'Még nincs QR-kód';
+
+  @override
+  String get qrCodesCreate => 'Létrehozás';
+
+  @override
+  String get qrCodesClose => 'Bezárás';
+
+  @override
+  String get qrCodesTargetSummary => 'Célrekord';
+
+  @override
+  String get qrCodesUsedCount => 'Használatok';
 }

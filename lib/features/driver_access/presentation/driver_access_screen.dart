@@ -9,6 +9,8 @@ import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../core/widgets/vianexis_metadata_notice.dart';
+import '../../qr_codes/domain/platform_qr_code.dart';
+import '../../qr_codes/presentation/widgets/qr_codes_management_dialog.dart';
 import '../data/driver_registration_requests_repository.dart';
 import '../data/driver_access_repository.dart';
 import '../domain/driver_access_profile.dart';
@@ -603,6 +605,25 @@ class _DriverAccessDetailScreenState
                     ),
                   );
                 },
+              ),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                onPressed: () => showQrCodesManagementDialog(
+                  context,
+                  entityType: QrEntityType.driver.apiValue,
+                  entityId: int.tryParse(driver.id) ?? 0,
+                  displayName: driver.displayName,
+                  titleKey: 'qrCodesDriverTitle',
+                  allowedPurposes: const [
+                    QrPurpose.driverAppLink,
+                    QrPurpose.driverProfile,
+                    QrPurpose.publicDriverId,
+                    QrPurpose.passwordSetup,
+                    QrPurpose.supportReference,
+                  ],
+                ),
+                icon: const Icon(Icons.qr_code_2),
+                label: Text(resolveQrCodesKey(context, 'qrCodesGenerateAction')),
               ),
               const SizedBox(height: 12),
               if (canChangeStatus) ...[

@@ -852,8 +852,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Outstanding invite tokens revoked.';
 
   @override
-  String get registrationPasswordSetupSend =>
-      'Send secure password-setup link';
+  String get registrationPasswordSetupSend => 'Send secure password-setup link';
 
   @override
   String get registrationPasswordSetupSent =>
@@ -6075,4 +6074,152 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get systemHealthNotifyCompanyFailed =>
       'Could not send the acknowledgement email.';
+
+  @override
+  String get qrCodesTitle => 'QR codes';
+
+  @override
+  String get qrCodesGenerateAction => 'Generate QR code';
+
+  @override
+  String get qrCodesUserTitle => 'User QR';
+
+  @override
+  String get qrCodesDriverTitle => 'Driver QR';
+
+  @override
+  String get qrCodesCompanyTitle => 'Company QR';
+
+  @override
+  String get qrCodesPurposeLabel => 'Purpose';
+
+  @override
+  String get qrCodesPurposeUserInvite => 'Invite QR';
+
+  @override
+  String get qrCodesPurposeUserActivation => 'Activation QR';
+
+  @override
+  String get qrCodesPurposePasswordSetup => 'Password-setup QR';
+
+  @override
+  String get qrCodesPurposeDriverAppLink => 'Driver App link QR';
+
+  @override
+  String get qrCodesPurposeDriverProfile => 'Driver profile QR';
+
+  @override
+  String get qrCodesPurposeCompanyProfile => 'Company profile QR';
+
+  @override
+  String get qrCodesPurposeCompanyInvite => 'Company invite QR';
+
+  @override
+  String get qrCodesPurposeCompanyPortalLogin => 'Portal access QR';
+
+  @override
+  String get qrCodesPurposeCompanyOnboarding => 'Onboarding QR';
+
+  @override
+  String get qrCodesPurposeSupportReference => 'Support reference QR';
+
+  @override
+  String get qrCodesPurposeInternalAdmin => 'Internal admin record QR';
+
+  @override
+  String get qrCodesPurposePublicCompany => 'Public company info QR';
+
+  @override
+  String get qrCodesPurposePublicDriver => 'Public driver ID QR';
+
+  @override
+  String get qrCodesExpiresLabel => 'Expires';
+
+  @override
+  String get qrCodesSingleUse => 'Single use';
+
+  @override
+  String get qrCodesMultiUse => 'Multi use';
+
+  @override
+  String get qrCodesUsageLimit => 'Usage limit';
+
+  @override
+  String get qrCodesStatusActive => 'Active';
+
+  @override
+  String get qrCodesStatusExpired => 'Expired';
+
+  @override
+  String get qrCodesStatusConsumed => 'Consumed';
+
+  @override
+  String get qrCodesStatusRevoked => 'Revoked';
+
+  @override
+  String get qrCodesShare => 'Share QR';
+
+  @override
+  String get qrCodesSave => 'Save QR';
+
+  @override
+  String get qrCodesCopyLink => 'Copy link';
+
+  @override
+  String get qrCodesRegenerate => 'Regenerate';
+
+  @override
+  String get qrCodesRevoke => 'Revoke';
+
+  @override
+  String get qrCodesHistory => 'QR history';
+
+  @override
+  String get qrCodesSecurityWarning =>
+      'Open only in the official ViaNexis app or website. Never share passwords.';
+
+  @override
+  String get qrCodesInvalid => 'Invalid QR';
+
+  @override
+  String get qrCodesExpired => 'Expired QR';
+
+  @override
+  String get qrCodesConsumed => 'Already used QR';
+
+  @override
+  String get qrCodesAccessDenied => 'Access denied';
+
+  @override
+  String get qrCodesStagingBadge => 'STAGING / TEST — not production';
+
+  @override
+  String get qrCodesProductionBadge => 'Production QR';
+
+  @override
+  String get qrCodesCreateSuccess => 'QR code created';
+
+  @override
+  String get qrCodesRevokeSuccess => 'QR code revoked';
+
+  @override
+  String get qrCodesRegenerateSuccess => 'QR code regenerated';
+
+  @override
+  String get qrCodesLinkCopied => 'Safe link copied';
+
+  @override
+  String get qrCodesEmptyHistory => 'No QR codes yet';
+
+  @override
+  String get qrCodesCreate => 'Create';
+
+  @override
+  String get qrCodesClose => 'Close';
+
+  @override
+  String get qrCodesTargetSummary => 'Target';
+
+  @override
+  String get qrCodesUsedCount => 'Uses';
 }

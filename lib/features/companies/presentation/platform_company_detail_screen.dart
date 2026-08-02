@@ -10,6 +10,8 @@ import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../qr_codes/domain/platform_qr_code.dart';
+import '../../qr_codes/presentation/widgets/qr_codes_management_dialog.dart';
 import '../domain/platform_company_status.dart';
 import 'platform_companies_providers.dart';
 import 'widgets/platform_company_status_badge.dart';
@@ -24,11 +26,22 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final companyAsync = ref.watch(platformCompanyDetailProvider(companyId));
-    final usersAsync = ref.watch(platformCompanyUsersSummaryProvider(companyId));
-    final systemAsync = ref.watch(platformCompanySystemSummaryProvider(companyId));
-    final onboardingAsync = ref.watch(platformCompanyOnboardingSummaryProvider(companyId));
+    final usersAsync = ref.watch(
+      platformCompanyUsersSummaryProvider(companyId),
+    );
+    final systemAsync = ref.watch(
+      platformCompanySystemSummaryProvider(companyId),
+    );
+    final onboardingAsync = ref.watch(
+      platformCompanyOnboardingSummaryProvider(companyId),
+    );
     final canChangeStatus =
-        ref.watch(adminAuthProvider).user?.role.canChangePlatformCompanyStatus ?? false;
+        ref
+            .watch(adminAuthProvider)
+            .user
+            ?.role
+            .canChangePlatformCompanyStatus ??
+        false;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.platformCompanyDetailTitle)),
@@ -37,21 +50,35 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage:
-              resolvePlatformCompanyKey(context, 'platformCompanyDetailError'),
-          onRetry: () => ref.invalidate(platformCompanyDetailProvider(companyId)),
+          fallbackMessage: resolvePlatformCompanyKey(
+            context,
+            'platformCompanyDetailError',
+          ),
+          onRetry: () =>
+              ref.invalidate(platformCompanyDetailProvider(companyId)),
         ),
         data: (company) {
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Text(company.name, style: Theme.of(context).textTheme.headlineSmall),
+              Text(
+                company.name,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
               const SizedBox(height: 8),
               PlatformCompanyStatusBadge(status: company.status),
               const SizedBox(height: 16),
               _sectionTitle(context, 'platformCompanySectionMetadata'),
-              _field(context, 'platformCompanyFieldCountry', company.country ?? '—'),
-              _field(context, 'platformCompanyFieldVat', company.vatNumber ?? '—'),
+              _field(
+                context,
+                'platformCompanyFieldCountry',
+                company.country ?? '—',
+              ),
+              _field(
+                context,
+                'platformCompanyFieldVat',
+                company.vatNumber ?? '—',
+              ),
               _field(
                 context,
                 'platformCompanyFieldRegistrationNumber',
@@ -77,91 +104,99 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
               usersAsync.when(
                 loading: () => const LinearProgressIndicator(),
                 error: (error, stackTrace) => Text(
-                  resolvePlatformCompanyKey(context, 'platformCompanySummaryError'),
+                  resolvePlatformCompanyKey(
+                    context,
+                    'platformCompanySummaryError',
+                  ),
                 ),
-                data: (summary) => _summaryCard(
-                  context,
-                  'platformCompanySectionUsers',
-                  [
-                    resolvePlatformCompanyKey(
-                      context,
-                      'platformCompanyMetricActiveUsers',
-                      params: {'count': '${summary.activeUsersCount}'},
-                    ),
-                    resolvePlatformCompanyKey(
-                      context,
-                      'platformCompanyMetricDrivers',
-                      params: {'count': '${summary.driversCount}'},
-                    ),
-                    resolvePlatformCompanyKey(
-                      context,
-                      'platformCompanyMetricTotalUsers',
-                      params: {'count': '${summary.totalUsersCount}'},
-                    ),
-                  ],
-                ),
+                data: (summary) =>
+                    _summaryCard(context, 'platformCompanySectionUsers', [
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricActiveUsers',
+                        params: {'count': '${summary.activeUsersCount}'},
+                      ),
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricDrivers',
+                        params: {'count': '${summary.driversCount}'},
+                      ),
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricTotalUsers',
+                        params: {'count': '${summary.totalUsersCount}'},
+                      ),
+                    ]),
               ),
               const SizedBox(height: 12),
               systemAsync.when(
                 loading: () => const LinearProgressIndicator(),
                 error: (error, stackTrace) => Text(
-                  resolvePlatformCompanyKey(context, 'platformCompanySummaryError'),
+                  resolvePlatformCompanyKey(
+                    context,
+                    'platformCompanySummaryError',
+                  ),
                 ),
-                data: (summary) => _summaryCard(
-                  context,
-                  'platformCompanySectionSupport',
-                  [
-                    resolvePlatformCompanyKey(
-                      context,
-                      'platformCompanyMetricOpenSupport',
-                      params: {'count': '${summary.openSupportTicketsCount}'},
-                    ),
-                    resolvePlatformCompanyKey(
-                      context,
-                      'platformCompanyMetricActiveGrants',
-                      params: {'count': '${summary.activeSupportAccessGrantsCount}'},
-                    ),
-                    resolvePlatformCompanyKey(
-                      context,
-                      'platformCompanyMetricVehicles',
-                      params: {'count': '${summary.vehiclesCount}'},
-                    ),
-                    resolvePlatformCompanyKey(
-                      context,
-                      'platformCompanyMetricTrailers',
-                      params: {'count': '${summary.trailersCount}'},
-                    ),
-                  ],
-                ),
+                data: (summary) =>
+                    _summaryCard(context, 'platformCompanySectionSupport', [
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricOpenSupport',
+                        params: {'count': '${summary.openSupportTicketsCount}'},
+                      ),
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricActiveGrants',
+                        params: {
+                          'count': '${summary.activeSupportAccessGrantsCount}',
+                        },
+                      ),
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricVehicles',
+                        params: {'count': '${summary.vehiclesCount}'},
+                      ),
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricTrailers',
+                        params: {'count': '${summary.trailersCount}'},
+                      ),
+                    ]),
               ),
               const SizedBox(height: 12),
               onboardingAsync.when(
                 loading: () => const LinearProgressIndicator(),
                 error: (error, stackTrace) => Text(
-                  resolvePlatformCompanyKey(context, 'platformCompanySummaryError'),
+                  resolvePlatformCompanyKey(
+                    context,
+                    'platformCompanySummaryError',
+                  ),
                 ),
-                data: (summary) => _summaryCard(
-                  context,
-                  'platformCompanySectionOnboarding',
-                  [
-                    resolvePlatformCompanyKey(
-                      context,
-                      'platformCompanyMetricPendingRegistrations',
-                      params: {
-                        'count': '${summary.pendingRegistrationApplicationsCount}',
-                      },
-                    ),
-                    resolvePlatformCompanyKey(
-                      context,
-                      'platformCompanyMetricPendingBulkJobs',
-                      params: {'count': '${summary.pendingBulkOnboardingJobsCount}'},
-                    ),
-                  ],
-                ),
+                data: (summary) =>
+                    _summaryCard(context, 'platformCompanySectionOnboarding', [
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricPendingRegistrations',
+                        params: {
+                          'count':
+                              '${summary.pendingRegistrationApplicationsCount}',
+                        },
+                      ),
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricPendingBulkJobs',
+                        params: {
+                          'count': '${summary.pendingBulkOnboardingJobsCount}',
+                        },
+                      ),
+                    ]),
               ),
               const SizedBox(height: 12),
               Text(
-                resolvePlatformCompanyKey(context, 'platformCompanyPrivacyNotice'),
+                resolvePlatformCompanyKey(
+                  context,
+                  'platformCompanyPrivacyNotice',
+                ),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: 12),
@@ -177,12 +212,35 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 8),
+              OutlinedButton.icon(
+                onPressed: () => showQrCodesManagementDialog(
+                  context,
+                  entityType: QrEntityType.company.apiValue,
+                  entityId: int.tryParse(company.id) ?? 0,
+                  displayName: company.name,
+                  companyId: int.tryParse(company.id),
+                  titleKey: 'qrCodesCompanyTitle',
+                  allowedPurposes: const [
+                    QrPurpose.companyInvite,
+                    QrPurpose.companyOnboarding,
+                    QrPurpose.companyProfile,
+                    QrPurpose.publicCompanyInfo,
+                    QrPurpose.supportReference,
+                  ],
+                ),
+                icon: const Icon(Icons.qr_code_2),
+                label: Text(resolveQrCodesKey(context, 'qrCodesGenerateAction')),
+              ),
               if (canChangeStatus) ...[
                 const SizedBox(height: 20),
                 OutlinedButton(
                   onPressed: () => _changeStatus(context, ref, company.status),
                   child: Text(
-                    resolvePlatformCompanyKey(context, 'platformCompanyChangeStatusAction'),
+                    resolvePlatformCompanyKey(
+                      context,
+                      'platformCompanyChangeStatusAction',
+                    ),
                   ),
                 ),
               ],
@@ -211,7 +269,11 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
     );
   }
 
-  Widget _summaryCard(BuildContext context, String titleKey, List<String> lines) {
+  Widget _summaryCard(
+    BuildContext context,
+    String titleKey,
+    List<String> lines,
+  ) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -231,9 +293,9 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
   }
 
   String _formatDate(BuildContext context, DateTime value) {
-    return DateFormat.yMMMd(Localizations.localeOf(context).toString())
-        .add_Hm()
-        .format(value.toLocal());
+    return DateFormat.yMMMd(
+      Localizations.localeOf(context).toString(),
+    ).add_Hm().format(value.toLocal());
   }
 
   Future<void> _changeStatus(
@@ -266,7 +328,10 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            resolvePlatformCompanyKey(context, 'platformCompanyStatusUnavailable'),
+            resolvePlatformCompanyKey(
+              context,
+              'platformCompanyStatusUnavailable',
+            ),
           ),
         ),
       );

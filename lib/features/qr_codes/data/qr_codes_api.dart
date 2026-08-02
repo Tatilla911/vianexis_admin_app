@@ -7,12 +7,17 @@ class QrCodesApi {
 
   final ApiClient _apiClient;
 
-  Future<Map<String, dynamic>> list({String? entityType, int? entityId}) async {
+  Future<Map<String, dynamic>> list({
+    String? entityType,
+    int? entityId,
+    String? purpose,
+  }) async {
     final response = await _apiClient.get<Map<String, dynamic>>(
       '/platform-admin/qr-codes',
       queryParameters: {
         if (entityType != null) 'entityType': entityType,
         if (entityId != null) 'entityId': entityId,
+        if (purpose != null) 'purpose': purpose,
       },
     );
     return response.data ?? {'items': []};
@@ -29,6 +34,7 @@ class QrCodesApi {
   Future<Map<String, dynamic>> revoke(int id) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/qr-codes/$id/revoke',
+      data: const <String, dynamic>{},
     );
     return response.data ?? {};
   }
@@ -36,8 +42,16 @@ class QrCodesApi {
   Future<Map<String, dynamic>> regenerate(int id) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/qr-codes/$id/regenerate',
+      data: const <String, dynamic>{},
     );
     return response.data ?? {};
+  }
+
+  Future<Map<String, dynamic>> purposePolicies() async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/qr-codes/purpose-policies',
+    );
+    return response.data ?? {'items': []};
   }
 }
 

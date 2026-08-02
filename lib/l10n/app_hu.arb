@@ -1956,7 +1956,7 @@
   "systemMonitoringActionSuccess": "Felügyeleti művelet mentve.",
   "systemMonitoringActionError": "A felügyeleti művelet mentése sikertelen.",
   "systemMonitoringActionAuditNotice": "Ez a művelet rögzítésre kerül a platform audit naplójában.",
-"eventLogPdfArchiveTitle": "Eseménynapló PDF archívum",
+  "eventLogPdfArchiveTitle": "Eseménynapló PDF archívum",
   "eventLogPdfArchiveBody": "A szűrt eseménynapló pillanatképeket ViaNexis stílusú PDF-ként tárolhatod. Megnyitáskor nagyítható, letölthető és megosztható. Az ékezetes betűk Unicode betűtípussal jelennek meg.",
   "eventLogPdfArchiveEmpty": "Még nincs tárolt eseménynapló PDF.",
   "eventLogPdfArchiveLoadFailed": "Nem sikerült betölteni a PDF archívumot.",
@@ -1965,7 +1965,9 @@
   "eventLogPdfGeneratedAt": "Generálva: {when}",
   "@eventLogPdfGeneratedAt": {
     "placeholders": {
-      "when": { "type": "String" }
+      "when": {
+        "type": "String"
+      }
     }
   },
   "eventLogPdfEmpty": "Nincs a jelenlegi szűrőknek megfelelő esemény.",
@@ -1979,7 +1981,9 @@
   "eventLogPdfDeleteBody": "Töröljük a(z) {fileName} fájlt az archívumból?",
   "@eventLogPdfDeleteBody": {
     "placeholders": {
-      "fileName": { "type": "String" }
+      "fileName": {
+        "type": "String"
+      }
     }
   },
   "eventLogPdfDeleteAllTitle": "Tevékenység-PDF-ek törlése",
@@ -1989,7 +1993,9 @@
   "eventLogPdfEntryCount": "{count} esemény",
   "@eventLogPdfEntryCount": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "notificationsDeleteMenu": "Értesítések / tevékenységek törlése",
@@ -2007,11 +2013,64 @@
   "systemHealthNotifyCompanyBody": "Küldjünk autómatikus visszajelzést a(z) {company} cégnek (felhasználó: {user}), hogy észleltük a hibát, utánanézünk, amint lehet javítjuk, és értesítjük, amint változás állt be?",
   "@systemHealthNotifyCompanyBody": {
     "placeholders": {
-      "company": { "type": "String" },
-      "user": { "type": "String" }
+      "company": {
+        "type": "String"
+      },
+      "user": {
+        "type": "String"
+      }
     }
   },
   "systemHealthNotifyCompanyConfirm": "Visszajelzés küldése",
   "systemHealthNotifyCompanySuccess": "A visszajelző e-mail elküldve.",
-  "systemHealthNotifyCompanyFailed": "Nem sikerült elküldeni a visszajelző e-mailt."
+  "systemHealthNotifyCompanyFailed": "Nem sikerült elküldeni a visszajelző e-mailt.",
+  "qrCodesTitle": "QR-kódok",
+  "qrCodesGenerateAction": "QR-kód generálása",
+  "qrCodesUserTitle": "Felhasználói QR",
+  "qrCodesDriverTitle": "Sofőr QR",
+  "qrCodesCompanyTitle": "Céges QR",
+  "qrCodesPurposeLabel": "Cél",
+  "qrCodesPurposeUserInvite": "Meghívó QR",
+  "qrCodesPurposeUserActivation": "Aktiválási QR",
+  "qrCodesPurposePasswordSetup": "Jelszóbeállító QR",
+  "qrCodesPurposeDriverAppLink": "Driver App összekapcsoló QR",
+  "qrCodesPurposeDriverProfile": "Sofőr profil QR",
+  "qrCodesPurposeCompanyProfile": "Céges adatlap QR",
+  "qrCodesPurposeCompanyInvite": "Céges meghívó QR",
+  "qrCodesPurposeCompanyPortalLogin": "Portál hozzáférési QR",
+  "qrCodesPurposeCompanyOnboarding": "Onboarding QR",
+  "qrCodesPurposeSupportReference": "Support referencia QR",
+  "qrCodesPurposeInternalAdmin": "Belső admin rekord QR",
+  "qrCodesPurposePublicCompany": "Nyilvános céges info QR",
+  "qrCodesPurposePublicDriver": "Nyilvános sofőr ID QR",
+  "qrCodesExpiresLabel": "Lejárat",
+  "qrCodesSingleUse": "Egyszer használható",
+  "qrCodesMultiUse": "Többször használható",
+  "qrCodesUsageLimit": "Felhasználási limit",
+  "qrCodesStatusActive": "Aktív",
+  "qrCodesStatusExpired": "Lejárt",
+  "qrCodesStatusConsumed": "Felhasznált",
+  "qrCodesStatusRevoked": "Visszavont",
+  "qrCodesShare": "QR megosztása",
+  "qrCodesSave": "QR mentése",
+  "qrCodesCopyLink": "Link másolása",
+  "qrCodesRegenerate": "Újragenerálás",
+  "qrCodesRevoke": "Visszavonás",
+  "qrCodesHistory": "QR előzmények",
+  "qrCodesSecurityWarning": "Csak hivatalos ViaNexis alkalmazásban vagy oldalon nyissa meg. Soha ne osszon meg jelszót.",
+  "qrCodesInvalid": "Érvénytelen QR",
+  "qrCodesExpired": "Lejárt QR",
+  "qrCodesConsumed": "Már felhasznált QR",
+  "qrCodesAccessDenied": "Hozzáférés megtagadva",
+  "qrCodesStagingBadge": "STAGING / TESZT — nem éles",
+  "qrCodesProductionBadge": "Éles QR",
+  "qrCodesCreateSuccess": "QR-kód létrehozva",
+  "qrCodesRevokeSuccess": "QR-kód visszavonva",
+  "qrCodesRegenerateSuccess": "QR-kód újragenerálva",
+  "qrCodesLinkCopied": "Biztonságos link bemásolva",
+  "qrCodesEmptyHistory": "Még nincs QR-kód",
+  "qrCodesCreate": "Létrehozás",
+  "qrCodesClose": "Bezárás",
+  "qrCodesTargetSummary": "Célrekord",
+  "qrCodesUsedCount": "Használatok"
 }
