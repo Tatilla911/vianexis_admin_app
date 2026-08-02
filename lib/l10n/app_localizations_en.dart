@@ -2622,6 +2622,111 @@ class AppLocalizationsEn extends AppLocalizations {
   String get platformCompanySectionMetadata => 'Company metadata';
 
   @override
+  String get platformCompanySectionBasics => 'Basics';
+
+  @override
+  String get platformCompanySectionContacts => 'Contacts';
+
+  @override
+  String get platformCompanySectionAssessment => 'Needs assessment';
+
+  @override
+  String get platformCompanySectionPricing => 'Pricing and quote';
+
+  @override
+  String get platformCompanySectionSubscription => 'Subscription';
+
+  @override
+  String get platformCompanySectionDocuments => 'Documents';
+
+  @override
+  String get platformCompanySectionAudit => 'Audit';
+
+  @override
+  String get platformCompanyAssessmentEmpty =>
+      'No company needs assessment linked yet.';
+
+  @override
+  String get platformCompanyPricingEmpty => 'No pricing suggestion yet.';
+
+  @override
+  String get platformCompanyPricingNotFinal =>
+      'Automatic recommendation only — not a final price.';
+
+  @override
+  String get platformCompanyPricingHasOverride => 'Admin override saved.';
+
+  @override
+  String platformCompanyAssessmentStatus(String status) {
+    return 'Status: $status';
+  }
+
+  @override
+  String platformCompanyAssessmentVersion(String version) {
+    return 'Version: $version';
+  }
+
+  @override
+  String platformCompanyAssessmentLastSaved(String value) {
+    return 'Last saved: $value';
+  }
+
+  @override
+  String platformCompanyAssessmentSubmittedAt(String value) {
+    return 'Submitted: $value';
+  }
+
+  @override
+  String platformCompanyAssessmentDrivers(String count) {
+    return 'Drivers: $count';
+  }
+
+  @override
+  String platformCompanyAssessmentMonthlyTrips(String count) {
+    return 'Monthly trips: $count';
+  }
+
+  @override
+  String platformCompanyAssessmentModules(String value) {
+    return 'Modules: $value';
+  }
+
+  @override
+  String platformCompanyPricingSuggestedPackage(String value) {
+    return 'Suggested package: $value';
+  }
+
+  @override
+  String platformCompanyPricingMonthlyNet(String value) {
+    return 'Suggested monthly net: $value';
+  }
+
+  @override
+  String platformCompanyPricingOneTimeNet(String value) {
+    return 'Suggested one-time net: $value';
+  }
+
+  @override
+  String platformCompanyMetricContacts(String count) {
+    return 'Contact cards: $count';
+  }
+
+  @override
+  String platformCompanyMetricDepartments(String count) {
+    return 'Departments: $count';
+  }
+
+  @override
+  String platformCompanyMetricDocuments(String count) {
+    return 'Documents: $count';
+  }
+
+  @override
+  String platformCompanyMetricPackages(String count) {
+    return 'Document packages: $count';
+  }
+
+  @override
   String get platformCompanySectionUsers => 'Users summary';
 
   @override

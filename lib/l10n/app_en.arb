@@ -1138,7 +1138,130 @@
     }
   },
   "platformCompanySectionMetadata": "Company metadata",
-  "platformCompanySectionUsers": "Users summary",
+  "platformCompanySectionBasics": "Basics",
+  "platformCompanySectionContacts": "Contacts",
+  "platformCompanySectionAssessment": "Needs assessment",
+  "platformCompanySectionPricing": "Pricing and quote",
+  "platformCompanySectionSubscription": "Subscription",
+  "platformCompanySectionDocuments": "Documents",
+  "platformCompanySectionAudit": "Audit",
+  "platformCompanyAssessmentEmpty": "No company needs assessment linked yet.",
+  "platformCompanyPricingEmpty": "No pricing suggestion yet.",
+  "platformCompanyPricingNotFinal": "Automatic recommendation only — not a final price.",
+  "platformCompanyPricingHasOverride": "Admin override saved.",
+  "platformCompanyAssessmentStatus": "Status: {status}",
+  "@platformCompanyAssessmentStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentVersion": "Version: {version}",
+  "@platformCompanyAssessmentVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentLastSaved": "Last saved: {value}",
+  "@platformCompanyAssessmentLastSaved": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentSubmittedAt": "Submitted: {value}",
+  "@platformCompanyAssessmentSubmittedAt": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentDrivers": "Drivers: {count}",
+  "@platformCompanyAssessmentDrivers": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentMonthlyTrips": "Monthly trips: {count}",
+  "@platformCompanyAssessmentMonthlyTrips": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentModules": "Modules: {value}",
+  "@platformCompanyAssessmentModules": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyPricingSuggestedPackage": "Suggested package: {value}",
+  "@platformCompanyPricingSuggestedPackage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyPricingMonthlyNet": "Suggested monthly net: {value}",
+  "@platformCompanyPricingMonthlyNet": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyPricingOneTimeNet": "Suggested one-time net: {value}",
+  "@platformCompanyPricingOneTimeNet": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMetricContacts": "Contact cards: {count}",
+  "@platformCompanyMetricContacts": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMetricDepartments": "Departments: {count}",
+  "@platformCompanyMetricDepartments": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMetricDocuments": "Documents: {count}",
+  "@platformCompanyMetricDocuments": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMetricPackages": "Document packages: {count}",
+  "@platformCompanyMetricPackages": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+    "platformCompanySectionUsers": "Users summary",
   "platformCompanySectionSupport": "Support & fleet summary",
   "platformCompanySectionOnboarding": "Onboarding summary",
   "platformCompanyFieldCountry": "Country",

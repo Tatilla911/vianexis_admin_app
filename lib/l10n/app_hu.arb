@@ -837,7 +837,130 @@
   "platformCompanyMetricPendingRegistrations": "Függő regisztrációk: {count}",
   "platformCompanyMetricPendingBulkJobs": "Függő bulk munkák: {count}",
   "platformCompanySectionMetadata": "Cég metaadatok",
-  "platformCompanySectionUsers": "Felhasználó összegzés",
+  "platformCompanySectionBasics": "Alapadatok",
+  "platformCompanySectionContacts": "Kapcsolattartók",
+  "platformCompanySectionAssessment": "Igényfelmérés",
+  "platformCompanySectionPricing": "Árazás és ajánlat",
+  "platformCompanySectionSubscription": "Előfizetés",
+  "platformCompanySectionDocuments": "Dokumentumok",
+  "platformCompanySectionAudit": "Audit",
+  "platformCompanyAssessmentEmpty": "Még nincs kapcsolt céges igényfelmérés.",
+  "platformCompanyPricingEmpty": "Még nincs árazási javaslat.",
+  "platformCompanyPricingNotFinal": "Csak automatikus javaslat — nem végleges ár.",
+  "platformCompanyPricingHasOverride": "Admin felülbírálás mentve.",
+  "platformCompanyAssessmentStatus": "Státusz: {status}",
+  "@platformCompanyAssessmentStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentVersion": "Verzió: {version}",
+  "@platformCompanyAssessmentVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentLastSaved": "Utolsó mentés: {value}",
+  "@platformCompanyAssessmentLastSaved": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentSubmittedAt": "Beküldve: {value}",
+  "@platformCompanyAssessmentSubmittedAt": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentDrivers": "Sofőrök: {count}",
+  "@platformCompanyAssessmentDrivers": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentMonthlyTrips": "Havi fuvarok: {count}",
+  "@platformCompanyAssessmentMonthlyTrips": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyAssessmentModules": "Modulok: {value}",
+  "@platformCompanyAssessmentModules": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyPricingSuggestedPackage": "Ajánlott csomag: {value}",
+  "@platformCompanyPricingSuggestedPackage": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyPricingMonthlyNet": "Javasolt havi nettó: {value}",
+  "@platformCompanyPricingMonthlyNet": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyPricingOneTimeNet": "Javasolt egyszeri nettó: {value}",
+  "@platformCompanyPricingOneTimeNet": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMetricContacts": "Kapcsolattartó kártyák: {count}",
+  "@platformCompanyMetricContacts": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMetricDepartments": "Részlegek: {count}",
+  "@platformCompanyMetricDepartments": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMetricDocuments": "Dokumentumok: {count}",
+  "@platformCompanyMetricDocuments": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMetricPackages": "Dokumentumcsomagok: {count}",
+  "@platformCompanyMetricPackages": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+    "platformCompanySectionUsers": "Felhasználó összegzés",
   "platformCompanySectionSupport": "Support és flotta összegzés",
   "platformCompanySectionOnboarding": "Onboarding összegzés",
   "platformCompanyFieldCountry": "Ország",

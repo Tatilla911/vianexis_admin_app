@@ -2662,6 +2662,111 @@ class AppLocalizationsHu extends AppLocalizations {
   String get platformCompanySectionMetadata => 'Cég metaadatok';
 
   @override
+  String get platformCompanySectionBasics => 'Alapadatok';
+
+  @override
+  String get platformCompanySectionContacts => 'Kapcsolattartók';
+
+  @override
+  String get platformCompanySectionAssessment => 'Igényfelmérés';
+
+  @override
+  String get platformCompanySectionPricing => 'Árazás és ajánlat';
+
+  @override
+  String get platformCompanySectionSubscription => 'Előfizetés';
+
+  @override
+  String get platformCompanySectionDocuments => 'Dokumentumok';
+
+  @override
+  String get platformCompanySectionAudit => 'Audit';
+
+  @override
+  String get platformCompanyAssessmentEmpty =>
+      'Még nincs kapcsolt céges igényfelmérés.';
+
+  @override
+  String get platformCompanyPricingEmpty => 'Még nincs árazási javaslat.';
+
+  @override
+  String get platformCompanyPricingNotFinal =>
+      'Csak automatikus javaslat — nem végleges ár.';
+
+  @override
+  String get platformCompanyPricingHasOverride => 'Admin felülbírálás mentve.';
+
+  @override
+  String platformCompanyAssessmentStatus(String status) {
+    return 'Státusz: $status';
+  }
+
+  @override
+  String platformCompanyAssessmentVersion(String version) {
+    return 'Verzió: $version';
+  }
+
+  @override
+  String platformCompanyAssessmentLastSaved(String value) {
+    return 'Utolsó mentés: $value';
+  }
+
+  @override
+  String platformCompanyAssessmentSubmittedAt(String value) {
+    return 'Beküldve: $value';
+  }
+
+  @override
+  String platformCompanyAssessmentDrivers(String count) {
+    return 'Sofőrök: $count';
+  }
+
+  @override
+  String platformCompanyAssessmentMonthlyTrips(String count) {
+    return 'Havi fuvarok: $count';
+  }
+
+  @override
+  String platformCompanyAssessmentModules(String value) {
+    return 'Modulok: $value';
+  }
+
+  @override
+  String platformCompanyPricingSuggestedPackage(String value) {
+    return 'Ajánlott csomag: $value';
+  }
+
+  @override
+  String platformCompanyPricingMonthlyNet(String value) {
+    return 'Javasolt havi nettó: $value';
+  }
+
+  @override
+  String platformCompanyPricingOneTimeNet(String value) {
+    return 'Javasolt egyszeri nettó: $value';
+  }
+
+  @override
+  String platformCompanyMetricContacts(String count) {
+    return 'Kapcsolattartó kártyák: $count';
+  }
+
+  @override
+  String platformCompanyMetricDepartments(String count) {
+    return 'Részlegek: $count';
+  }
+
+  @override
+  String platformCompanyMetricDocuments(String count) {
+    return 'Dokumentumok: $count';
+  }
+
+  @override
+  String platformCompanyMetricPackages(String count) {
+    return 'Dokumentumcsomagok: $count';
+  }
+
+  @override
   String get platformCompanySectionUsers => 'Felhasználó összegzés';
 
   @override

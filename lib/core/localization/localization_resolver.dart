@@ -1225,7 +1225,47 @@ String resolvePlatformCompanyKey(
     'platformCompanyMetricPendingBulkJobs' =>
       l10n.platformCompanyMetricPendingBulkJobs(params['count'] ?? '0'),
     'platformCompanySectionMetadata' => l10n.platformCompanySectionMetadata,
-    'platformCompanySectionUsers' => l10n.platformCompanySectionUsers,
+    'platformCompanySectionBasics' => l10n.platformCompanySectionBasics,
+    'platformCompanySectionContacts' => l10n.platformCompanySectionContacts,
+    'platformCompanySectionAssessment' => l10n.platformCompanySectionAssessment,
+    'platformCompanySectionPricing' => l10n.platformCompanySectionPricing,
+    'platformCompanySectionSubscription' =>
+      l10n.platformCompanySectionSubscription,
+    'platformCompanySectionDocuments' => l10n.platformCompanySectionDocuments,
+    'platformCompanySectionAudit' => l10n.platformCompanySectionAudit,
+    'platformCompanyAssessmentEmpty' => l10n.platformCompanyAssessmentEmpty,
+    'platformCompanyPricingEmpty' => l10n.platformCompanyPricingEmpty,
+    'platformCompanyPricingNotFinal' => l10n.platformCompanyPricingNotFinal,
+    'platformCompanyPricingHasOverride' => l10n.platformCompanyPricingHasOverride,
+    'platformCompanyAssessmentStatus' =>
+      l10n.platformCompanyAssessmentStatus(params['status'] ?? '—'),
+    'platformCompanyAssessmentVersion' =>
+      l10n.platformCompanyAssessmentVersion(params['version'] ?? '—'),
+    'platformCompanyAssessmentLastSaved' =>
+      l10n.platformCompanyAssessmentLastSaved(params['value'] ?? '—'),
+    'platformCompanyAssessmentSubmittedAt' =>
+      l10n.platformCompanyAssessmentSubmittedAt(params['value'] ?? '—'),
+    'platformCompanyAssessmentDrivers' =>
+      l10n.platformCompanyAssessmentDrivers(params['count'] ?? '0'),
+    'platformCompanyAssessmentMonthlyTrips' =>
+      l10n.platformCompanyAssessmentMonthlyTrips(params['count'] ?? '0'),
+    'platformCompanyAssessmentModules' =>
+      l10n.platformCompanyAssessmentModules(params['value'] ?? '—'),
+    'platformCompanyPricingSuggestedPackage' =>
+      l10n.platformCompanyPricingSuggestedPackage(params['value'] ?? '—'),
+    'platformCompanyPricingMonthlyNet' =>
+      l10n.platformCompanyPricingMonthlyNet(params['value'] ?? '—'),
+    'platformCompanyPricingOneTimeNet' =>
+      l10n.platformCompanyPricingOneTimeNet(params['value'] ?? '—'),
+    'platformCompanyMetricContacts' =>
+      l10n.platformCompanyMetricContacts(params['count'] ?? '0'),
+    'platformCompanyMetricDepartments' =>
+      l10n.platformCompanyMetricDepartments(params['count'] ?? '0'),
+    'platformCompanyMetricDocuments' =>
+      l10n.platformCompanyMetricDocuments(params['count'] ?? '0'),
+    'platformCompanyMetricPackages' =>
+      l10n.platformCompanyMetricPackages(params['count'] ?? '0'),
+        'platformCompanySectionUsers' => l10n.platformCompanySectionUsers,
     'platformCompanySectionSupport' => l10n.platformCompanySectionSupport,
     'platformCompanySectionOnboarding' => l10n.platformCompanySectionOnboarding,
     'platformCompanyFieldCountry' => l10n.platformCompanyFieldCountry,

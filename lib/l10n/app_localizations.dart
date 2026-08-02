@@ -4880,6 +4880,156 @@ abstract class AppLocalizations {
   /// **'Company metadata'**
   String get platformCompanySectionMetadata;
 
+  /// No description provided for @platformCompanySectionBasics.
+  ///
+  /// In en, this message translates to:
+  /// **'Basics'**
+  String get platformCompanySectionBasics;
+
+  /// No description provided for @platformCompanySectionContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Contacts'**
+  String get platformCompanySectionContacts;
+
+  /// No description provided for @platformCompanySectionAssessment.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs assessment'**
+  String get platformCompanySectionAssessment;
+
+  /// No description provided for @platformCompanySectionPricing.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing and quote'**
+  String get platformCompanySectionPricing;
+
+  /// No description provided for @platformCompanySectionSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get platformCompanySectionSubscription;
+
+  /// No description provided for @platformCompanySectionDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents'**
+  String get platformCompanySectionDocuments;
+
+  /// No description provided for @platformCompanySectionAudit.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit'**
+  String get platformCompanySectionAudit;
+
+  /// No description provided for @platformCompanyAssessmentEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No company needs assessment linked yet.'**
+  String get platformCompanyAssessmentEmpty;
+
+  /// No description provided for @platformCompanyPricingEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No pricing suggestion yet.'**
+  String get platformCompanyPricingEmpty;
+
+  /// No description provided for @platformCompanyPricingNotFinal.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic recommendation only — not a final price.'**
+  String get platformCompanyPricingNotFinal;
+
+  /// No description provided for @platformCompanyPricingHasOverride.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin override saved.'**
+  String get platformCompanyPricingHasOverride;
+
+  /// No description provided for @platformCompanyAssessmentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status: {status}'**
+  String platformCompanyAssessmentStatus(String status);
+
+  /// No description provided for @platformCompanyAssessmentVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version: {version}'**
+  String platformCompanyAssessmentVersion(String version);
+
+  /// No description provided for @platformCompanyAssessmentLastSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Last saved: {value}'**
+  String platformCompanyAssessmentLastSaved(String value);
+
+  /// No description provided for @platformCompanyAssessmentSubmittedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted: {value}'**
+  String platformCompanyAssessmentSubmittedAt(String value);
+
+  /// No description provided for @platformCompanyAssessmentDrivers.
+  ///
+  /// In en, this message translates to:
+  /// **'Drivers: {count}'**
+  String platformCompanyAssessmentDrivers(String count);
+
+  /// No description provided for @platformCompanyAssessmentMonthlyTrips.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly trips: {count}'**
+  String platformCompanyAssessmentMonthlyTrips(String count);
+
+  /// No description provided for @platformCompanyAssessmentModules.
+  ///
+  /// In en, this message translates to:
+  /// **'Modules: {value}'**
+  String platformCompanyAssessmentModules(String value);
+
+  /// No description provided for @platformCompanyPricingSuggestedPackage.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested package: {value}'**
+  String platformCompanyPricingSuggestedPackage(String value);
+
+  /// No description provided for @platformCompanyPricingMonthlyNet.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested monthly net: {value}'**
+  String platformCompanyPricingMonthlyNet(String value);
+
+  /// No description provided for @platformCompanyPricingOneTimeNet.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested one-time net: {value}'**
+  String platformCompanyPricingOneTimeNet(String value);
+
+  /// No description provided for @platformCompanyMetricContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact cards: {count}'**
+  String platformCompanyMetricContacts(String count);
+
+  /// No description provided for @platformCompanyMetricDepartments.
+  ///
+  /// In en, this message translates to:
+  /// **'Departments: {count}'**
+  String platformCompanyMetricDepartments(String count);
+
+  /// No description provided for @platformCompanyMetricDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents: {count}'**
+  String platformCompanyMetricDocuments(String count);
+
+  /// No description provided for @platformCompanyMetricPackages.
+  ///
+  /// In en, this message translates to:
+  /// **'Document packages: {count}'**
+  String platformCompanyMetricPackages(String count);
+
   /// No description provided for @platformCompanySectionUsers.
   ///
   /// In en, this message translates to:

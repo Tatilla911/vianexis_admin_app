@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-
-import '../../../app/app_router.dart';
 
 import '../../../core/auth/admin_auth_state.dart';
 import '../../../core/localization/localization_resolver.dart';
@@ -12,6 +9,7 @@ import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../qr_codes/domain/platform_qr_code.dart';
 import '../../qr_codes/presentation/widgets/qr_codes_management_dialog.dart';
+import '../data/company_assessments_api.dart';
 import '../domain/platform_company_status.dart';
 import 'platform_companies_providers.dart';
 import 'widgets/platform_company_status_badge.dart';
@@ -68,7 +66,7 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
               const SizedBox(height: 8),
               PlatformCompanyStatusBadge(status: company.status),
               const SizedBox(height: 16),
-              _sectionTitle(context, 'platformCompanySectionMetadata'),
+              _sectionTitle(context, 'platformCompanySectionBasics'),
               _field(
                 context,
                 'platformCompanyFieldCountry',
@@ -84,6 +82,170 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                 'platformCompanyFieldRegistrationNumber',
                 company.registrationNumber ?? '—',
               ),
+              const SizedBox(height: 12),
+              _sectionTitle(context, 'platformCompanySectionContacts'),
+              systemAsync.when(
+                loading: () => const LinearProgressIndicator(),
+                error: (_, __) => Text(
+                  resolvePlatformCompanyKey(
+                    context,
+                    'platformCompanySummaryError',
+                  ),
+                ),
+                data: (summary) => _summaryCard(
+                  context,
+                  'platformCompanySectionContacts',
+                  [
+                    resolvePlatformCompanyKey(
+                      context,
+                      'platformCompanyMetricContacts',
+                      params: {'count': '${summary.contactCardsCount}'},
+                    ),
+                    resolvePlatformCompanyKey(
+                      context,
+                      'platformCompanyMetricDepartments',
+                      params: {'count': '${summary.departmentsCount}'},
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              _sectionTitle(context, 'platformCompanySectionAssessment'),
+              ref.watch(companyAssessmentsForCompanyProvider(companyId)).when(
+                    loading: () => const LinearProgressIndicator(),
+                    error: (_, _) => Text(
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyAssessmentEmpty',
+                      ),
+                    ),
+                    data: (items) {
+                      if (items.isEmpty) {
+                        return Text(
+                          resolvePlatformCompanyKey(
+                            context,
+                            'platformCompanyAssessmentEmpty',
+                          ),
+                        );
+                      }
+                      final a = items.first;
+                      final size =
+                          (a.submittedSnapshot?['companySize']
+                              as Map?)?['driversCount'];
+                      final trips =
+                          (a.submittedSnapshot?['operations']
+                              as Map?)?['monthlyTrips'];
+                      final modules =
+                          (a.submittedSnapshot?['modules'] as List?)
+                              ?.join(', ');
+                      return _summaryCard(
+                        context,
+                        'platformCompanySectionAssessment',
+                        [
+                          resolvePlatformCompanyKey(
+                            context,
+                            'platformCompanyAssessmentStatus',
+                            params: {'status': a.status},
+                          ),
+                          resolvePlatformCompanyKey(
+                            context,
+                            'platformCompanyAssessmentVersion',
+                            params: {'version': '${a.version}'},
+                          ),
+                          if (a.lastSavedAt != null)
+                            resolvePlatformCompanyKey(
+                              context,
+                              'platformCompanyAssessmentLastSaved',
+                              params: {'value': a.lastSavedAt!},
+                            ),
+                          if (a.submittedAt != null)
+                            resolvePlatformCompanyKey(
+                              context,
+                              'platformCompanyAssessmentSubmittedAt',
+                              params: {'value': a.submittedAt!},
+                            ),
+                          if (size != null)
+                            resolvePlatformCompanyKey(
+                              context,
+                              'platformCompanyAssessmentDrivers',
+                              params: {'count': '$size'},
+                            ),
+                          if (trips != null)
+                            resolvePlatformCompanyKey(
+                              context,
+                              'platformCompanyAssessmentMonthlyTrips',
+                              params: {'count': '$trips'},
+                            ),
+                          if (modules != null && modules.isNotEmpty)
+                            resolvePlatformCompanyKey(
+                              context,
+                              'platformCompanyAssessmentModules',
+                              params: {'value': modules},
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+              const SizedBox(height: 12),
+              _sectionTitle(context, 'platformCompanySectionPricing'),
+              ref.watch(companyAssessmentsForCompanyProvider(companyId)).when(
+                    loading: () => const SizedBox.shrink(),
+                    error: (_, __) => const SizedBox.shrink(),
+                    data: (items) {
+                      if (items.isEmpty) {
+                        return Text(
+                          resolvePlatformCompanyKey(
+                            context,
+                            'platformCompanyPricingEmpty',
+                          ),
+                        );
+                      }
+                      final a = items.first;
+                      final suggestion = a.pricingSuggestion;
+                      final monthly =
+                          (suggestion?['monthly'] as Map?)?['net'];
+                      final oneTime =
+                          (suggestion?['oneTime'] as Map?)?['net'];
+                      final pack = suggestion?['suggestedPackage'];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _summaryCard(
+                            context,
+                            'platformCompanySectionPricing',
+                            [
+                              resolvePlatformCompanyKey(
+                                context,
+                                'platformCompanyPricingSuggestedPackage',
+                                params: {'value': '${pack ?? '—'}'},
+                              ),
+                              resolvePlatformCompanyKey(
+                                context,
+                                'platformCompanyPricingMonthlyNet',
+                                params: {'value': '${monthly ?? '—'}'},
+                              ),
+                              resolvePlatformCompanyKey(
+                                context,
+                                'platformCompanyPricingOneTimeNet',
+                                params: {'value': '${oneTime ?? '—'}'},
+                              ),
+                              resolvePlatformCompanyKey(
+                                context,
+                                'platformCompanyPricingNotFinal',
+                              ),
+                              if (a.adminOverride != null)
+                                resolvePlatformCompanyKey(
+                                  context,
+                                  'platformCompanyPricingHasOverride',
+                                ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+              const SizedBox(height: 12),
+              _sectionTitle(context, 'platformCompanySectionSubscription'),
               _field(
                 context,
                 'platformCompanyFieldPlan',
@@ -137,18 +299,36 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                     'platformCompanySummaryError',
                   ),
                 ),
-                data: (summary) =>
+                data: (summary) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _summaryCard(context, 'platformCompanySectionDocuments', [
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricDocuments',
+                        params: {'count': '${summary.documentsCount}'},
+                      ),
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanyMetricPackages',
+                        params: {'count': '${summary.packagesCount}'},
+                      ),
+                    ]),
+                    const SizedBox(height: 12),
                     _summaryCard(context, 'platformCompanySectionSupport', [
                       resolvePlatformCompanyKey(
                         context,
                         'platformCompanyMetricOpenSupport',
-                        params: {'count': '${summary.openSupportTicketsCount}'},
+                        params: {
+                          'count': '${summary.openSupportTicketsCount}',
+                        },
                       ),
                       resolvePlatformCompanyKey(
                         context,
                         'platformCompanyMetricActiveGrants',
                         params: {
-                          'count': '${summary.activeSupportAccessGrantsCount}',
+                          'count':
+                              '${summary.activeSupportAccessGrantsCount}',
                         },
                       ),
                       resolvePlatformCompanyKey(
@@ -162,6 +342,8 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                         params: {'count': '${summary.trailersCount}'},
                       ),
                     ]),
+                  ],
+                ),
               ),
               const SizedBox(height: 12),
               onboardingAsync.when(
@@ -173,7 +355,7 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                   ),
                 ),
                 data: (summary) =>
-                    _summaryCard(context, 'platformCompanySectionOnboarding', [
+                    _summaryCard(context, 'platformCompanySectionAudit', [
                       resolvePlatformCompanyKey(
                         context,
                         'platformCompanyMetricPendingRegistrations',
@@ -189,6 +371,14 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                           'count': '${summary.pendingBulkOnboardingJobsCount}',
                         },
                       ),
+                      if (summary.latestPricingIntakeStatus != null)
+                        resolvePlatformCompanyKey(
+                          context,
+                          'platformCompanyAssessmentStatus',
+                          params: {
+                            'status': summary.latestPricingIntakeStatus!,
+                          },
+                        ),
                     ]),
               ),
               const SizedBox(height: 12),
@@ -200,19 +390,6 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: 12),
-              OutlinedButton.icon(
-                onPressed: () => context.push(
-                  AdminRoutes.platformCompanyExchangeSettings(companyId),
-                ),
-                icon: const Icon(Icons.swap_horiz_outlined),
-                label: Text(
-                  resolvePlatformCompanyKey(
-                    context,
-                    'platformCompanyExchangeSettingsAction',
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
               OutlinedButton.icon(
                 onPressed: () => showQrCodesManagementDialog(
                   context,
