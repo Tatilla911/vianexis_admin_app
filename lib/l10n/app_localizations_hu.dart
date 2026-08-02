@@ -861,7 +861,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get registrationPasswordSetupSend =>
-      'Biztonságos jelszóbeállító link küldése';
+      'Aktiváló meghívó / jelszóbeállító link küldése';
 
   @override
   String get registrationPasswordSetupSent =>
@@ -887,14 +887,51 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get applicationsCompatBanner =>
-      'Céges onboarding postafiók: Regisztrációk. Ez a Jelentkezések nézet kompatibilitási felület a vegyes public intake-ekhez.';
+      'A public jelentkezések (APP-*) és a Regisztrációk ugyanazt a staging céges intake-et használják. Az APP tétel a beadott adatokat mutatja; a Regisztrációk párhuzamos postafiókként elérhető.';
 
   @override
   String get applicationsOpenRegistrations => 'Regisztrációk megnyitása';
 
   @override
   String get applicationsCompanyUseRegistrations =>
-      'A céges jelentkezéseket a Regisztrációk (elsődleges postafiók) felületen kell elbírálni.';
+      'A céges jelentkezés itt (APP-*) vagy a Regisztrációkban is elbírálható a legacy szinkron után.';
+
+  @override
+  String get applicationsCorrectionTitle => 'Beadott jelentkezési adatok';
+
+  @override
+  String get applicationsCompanyPendingNoAmendment =>
+      'Még nincs Company rekord. A cégadatok módosítása csak jóváhagyás után érhető el.';
+
+  @override
+  String get applicationsCompanyDecisionHint =>
+      'Dönts erről a public jelentkezésről itt, vagy nyisd meg a Regisztrációkat a szinkronizált rekordhoz.';
+
+  @override
+  String get applicationsOpenCompany => 'Cég megnyitása (módosítások)';
+
+  @override
+  String get applicationDetailedIntakeRequired =>
+      'A jelentkezés csak a részletes adatbekérő beküldése után hagyható jóvá.';
+
+  @override
+  String get applicationAwaitingDetailedIntake =>
+      'A részletes adatbekérő még nincs beküldve.';
+
+  @override
+  String get applicationResendIntakeLink => 'Adatbekérő újraküldése';
+
+  @override
+  String get emailProviderDisabled =>
+      'A meghívó létrejött, de az e-mail-szolgáltató nincs konfigurálva.';
+
+  @override
+  String get emailRecipientNotAllowed =>
+      'A staging környezetben ez a címzett nincs engedélyezve.';
+
+  @override
+  String get emailSendFailed =>
+      'A meghívó létrejött, de az e-mail-küldés sikertelen.';
 
   @override
   String get applicationsFilterCompany => 'Cég';
@@ -2926,8 +2963,51 @@ class AppLocalizationsHu extends AppLocalizations {
       'A módosítási kérelem mentve.';
 
   @override
+  String get platformCompanyAmendSubmitSuccessPending =>
+      'A módosítási kérelem mentve, jóváhagyásra vár.';
+
+  @override
+  String get platformCompanyAmendSubmitSuccessApplied =>
+      'A módosítás mentve és alkalmazva.';
+
+  @override
   String get platformCompanyAmendSubmitError =>
       'A módosítási kérelem mentése sikertelen.';
+
+  @override
+  String get platformCompanyAmendErrorValidation =>
+      'A megadott adatok hiányosak vagy érvénytelenek.';
+
+  @override
+  String get platformCompanyAmendErrorForbidden =>
+      'Nincs jogosultságod ennek az adatnak a módosításához.';
+
+  @override
+  String get platformCompanyAmendErrorNotFound =>
+      'A cég vagy a módosítási végpont nem található. Frissítsd az alkalmazást.';
+
+  @override
+  String get platformCompanyAmendErrorConflict =>
+      'Az adat időközben megváltozott. Töltsd újra és próbáld újra.';
+
+  @override
+  String get platformCompanyAmendErrorServer =>
+      'A szerver nem tudta elmenteni a módosítást.';
+
+  @override
+  String get platformCompanyAmendErrorMigrationMissing =>
+      'A staging adatbázis még nincs frissítve ehhez a funkcióhoz.';
+
+  @override
+  String platformCompanyAmendRequestId(String requestId) {
+    return 'Kérelem azonosító: $requestId';
+  }
+
+  @override
+  String get platformCompanyAmendRetry => 'Újrapróbálás';
+
+  @override
+  String get platformCompanyAmendDevDetails => 'Részletek (fejlesztői)';
 
   @override
   String get platformCompanyAmendLoadError =>
@@ -2976,6 +3056,9 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get platformCompanyAmendApply => 'Alkalmazás';
+
+  @override
+  String get platformCompanyAmendSaveAndApply => 'Mentés és alkalmazás';
 
   @override
   String get platformCompanyAmendFieldLegalName => 'Hivatalos cégnév';

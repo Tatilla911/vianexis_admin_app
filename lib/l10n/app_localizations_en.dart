@@ -852,7 +852,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'Outstanding invite tokens revoked.';
 
   @override
-  String get registrationPasswordSetupSend => 'Send secure password-setup link';
+  String get registrationPasswordSetupSend =>
+      'Send activation invite / password-setup link';
 
   @override
   String get registrationPasswordSetupSent =>
@@ -878,14 +879,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get applicationsCompatBanner =>
-      'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.';
+      'Public applications (APP-*) and Registrations share the same staging company intake. Open an APP item for submitted data; Registrations remains available as the parallel inbox.';
 
   @override
   String get applicationsOpenRegistrations => 'Open Registrations';
 
   @override
   String get applicationsCompanyUseRegistrations =>
-      'Company applications are decided in Registrations (primary inbox).';
+      'Company applications can be decided here (APP-*) or in Registrations after legacy sync.';
+
+  @override
+  String get applicationsCorrectionTitle => 'Submitted application data';
+
+  @override
+  String get applicationsCompanyPendingNoAmendment =>
+      'No Company record yet. Company data amendments are available only after approval creates a company.';
+
+  @override
+  String get applicationsCompanyDecisionHint =>
+      'Decide this public application here, or open Registrations for the synced registration record.';
+
+  @override
+  String get applicationsOpenCompany => 'Open company (amendments)';
+
+  @override
+  String get applicationDetailedIntakeRequired =>
+      'The application can only be approved after the detailed intake is submitted.';
+
+  @override
+  String get applicationAwaitingDetailedIntake =>
+      'Detailed intake not submitted yet.';
+
+  @override
+  String get applicationResendIntakeLink => 'Resend intake link';
+
+  @override
+  String get emailProviderDisabled =>
+      'The invite was created, but email delivery is not configured.';
+
+  @override
+  String get emailRecipientNotAllowed =>
+      'This recipient is not allowed in the staging environment.';
+
+  @override
+  String get emailSendFailed =>
+      'The invite was created, but email delivery failed.';
 
   @override
   String get applicationsFilterCompany => 'Company';
@@ -2882,8 +2920,51 @@ class AppLocalizationsEn extends AppLocalizations {
   String get platformCompanyAmendSubmitSuccess => 'Change request saved.';
 
   @override
+  String get platformCompanyAmendSubmitSuccessPending =>
+      'Change request saved and waiting for approval.';
+
+  @override
+  String get platformCompanyAmendSubmitSuccessApplied =>
+      'Change saved and applied.';
+
+  @override
   String get platformCompanyAmendSubmitError =>
       'Could not save the change request.';
+
+  @override
+  String get platformCompanyAmendErrorValidation =>
+      'The provided data is incomplete or invalid.';
+
+  @override
+  String get platformCompanyAmendErrorForbidden =>
+      'You do not have permission to change this data.';
+
+  @override
+  String get platformCompanyAmendErrorNotFound =>
+      'The company or amendment endpoint was not found. Update the app.';
+
+  @override
+  String get platformCompanyAmendErrorConflict =>
+      'The data changed meanwhile. Reload and try again.';
+
+  @override
+  String get platformCompanyAmendErrorServer =>
+      'The server could not save the change.';
+
+  @override
+  String get platformCompanyAmendErrorMigrationMissing =>
+      'The staging database is not updated for this feature yet.';
+
+  @override
+  String platformCompanyAmendRequestId(String requestId) {
+    return 'Request ID: $requestId';
+  }
+
+  @override
+  String get platformCompanyAmendRetry => 'Retry';
+
+  @override
+  String get platformCompanyAmendDevDetails => 'Details (developer)';
 
   @override
   String get platformCompanyAmendLoadError => 'Could not load amendments.';
@@ -2930,6 +3011,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get platformCompanyAmendApply => 'Apply';
+
+  @override
+  String get platformCompanyAmendSaveAndApply => 'Save and apply';
 
   @override
   String get platformCompanyAmendFieldLegalName => 'Legal company name';

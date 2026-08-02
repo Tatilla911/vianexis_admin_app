@@ -42,6 +42,23 @@ abstract final class LocalizationKeys {
 
   static const loginBackendNotConfigured = 'authBackendNotConfigured';
   static const errorGenericBody = 'errorGenericBody';
+  static const platformCompanyAmendErrorValidation =
+      'platformCompanyAmendErrorValidation';
+  static const platformCompanyAmendErrorForbidden =
+      'platformCompanyAmendErrorForbidden';
+  static const platformCompanyAmendErrorNotFound =
+      'platformCompanyAmendErrorNotFound';
+  static const platformCompanyAmendErrorConflict =
+      'platformCompanyAmendErrorConflict';
+  static const platformCompanyAmendErrorServer =
+      'platformCompanyAmendErrorServer';
+  static const platformCompanyAmendErrorMigrationMissing =
+      'platformCompanyAmendErrorMigrationMissing';
+  static const applicationDetailedIntakeRequired =
+      'applicationDetailedIntakeRequired';
+  static const emailProviderDisabled = 'emailProviderDisabled';
+  static const emailRecipientNotAllowed = 'emailRecipientNotAllowed';
+  static const emailSendFailed = 'emailSendFailed';
   static const roleSuperAdmin = 'roleSuperAdmin';
   static const roleSupportAdmin = 'roleSupportAdmin';
   static const roleOnboardingReviewer = 'roleOnboardingReviewer';

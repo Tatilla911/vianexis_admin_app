@@ -8,7 +8,11 @@ import 'driver_registration_requests_api.dart';
 abstract class DriverRegistrationRequestsRepository {
   Future<DriverRegistrationRequestsPage> listPending();
   Future<DriverRegistrationRequestsPage> listRejected();
-  Future<void> approve(String requestId, {int? companyId});
+  Future<void> approve(
+    String requestId, {
+    int? companyId,
+    String? reviewNotes,
+  });
   Future<void> reject(String requestId, {required String reviewNotes});
   bool get usesMockData;
 }
@@ -57,11 +61,13 @@ class LiveDriverRegistrationRequestsRepository
   }
 
   @override
-  Future<void> approve(String requestId, {int? companyId}) {
+  Future<void> approve(String requestId, {int? companyId, String? reviewNotes}) {
     return _api.approve(
       requestId: requestId,
       companyId: companyId,
-      reviewNotes: 'Approved from admin app staging UAT',
+      reviewNotes: reviewNotes?.trim().isNotEmpty == true
+          ? reviewNotes!.trim()
+          : null,
     );
   }
 
@@ -113,7 +119,11 @@ class MockDriverRegistrationRequestsRepository
   }
 
   @override
-  Future<void> approve(String requestId, {int? companyId}) async {}
+  Future<void> approve(
+    String requestId, {
+    int? companyId,
+    String? reviewNotes,
+  }) async {}
 
   @override
   Future<void> reject(String requestId, {required String reviewNotes}) async {}

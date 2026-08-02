@@ -10,6 +10,23 @@ String apiExceptionMessageKeyForStatus({
   Object? responseData,
 }) {
   final errorCode = readApiErrorCode(responseData);
+  if (errorCode == 'APPLICATION_DETAILED_INTAKE_REQUIRED' ||
+      errorCode == 'application.detailedIntakeRequired') {
+    return LocalizationKeys.applicationDetailedIntakeRequired;
+  }
+  if (errorCode == 'EMAIL_PROVIDER_DISABLED' ||
+      errorCode == 'provider_not_configured' ||
+      errorCode == 'provider_disabled') {
+    return LocalizationKeys.emailProviderDisabled;
+  }
+  if (errorCode == 'EMAIL_RECIPIENT_NOT_ALLOWED' ||
+      errorCode == 'blocked_by_staging_allowlist' ||
+      errorCode == 'staging_allowlist_missing') {
+    return LocalizationKeys.emailRecipientNotAllowed;
+  }
+  if (errorCode == 'EMAIL_SEND_FAILED') {
+    return LocalizationKeys.emailSendFailed;
+  }
   if (errorCode == 'invalid_current_password') {
     return LocalizationKeys.authPasswordChangeInvalidCurrent;
   }
@@ -36,17 +53,47 @@ String apiExceptionMessageKeyForStatus({
     return LocalizationKeys.authInvalidCredentials;
   }
 
+  final backendMessage = readApiMessage(responseData)?.toLowerCase() ?? '';
+  final isAmendmentPath = isCompanyAmendmentRequestPath(path);
+  final looksLikeMissingRelation =
+      backendMessage.contains('does not exist') ||
+      (backendMessage.contains('relation') &&
+          backendMessage.contains('company_data_amendments')) ||
+      errorCode == 'COMPANY_DATA_AMENDMENT_TABLE_MISSING' ||
+      errorCode == '42P01';
+
+  if (isAmendmentPath && looksLikeMissingRelation) {
+    return LocalizationKeys.platformCompanyAmendErrorMigrationMissing;
+  }
+
   if (statusCode == 401) {
     return LocalizationKeys.authSessionExpired;
   }
   if (statusCode == 403) {
-    return LocalizationKeys.authForbiddenRole;
+    return isAmendmentPath
+        ? LocalizationKeys.platformCompanyAmendErrorForbidden
+        : LocalizationKeys.authForbiddenRole;
   }
   if (statusCode == 404 && isAuthLoginRequestPath(path)) {
     return LocalizationKeys.authLoginServiceUnavailable;
   }
   if (statusCode == 404) {
-    return LocalizationKeys.errorActionUnavailable;
+    return isAmendmentPath
+        ? LocalizationKeys.platformCompanyAmendErrorNotFound
+        : LocalizationKeys.errorActionUnavailable;
+  }
+  if (statusCode == 400 && isAmendmentPath) {
+    return LocalizationKeys.platformCompanyAmendErrorValidation;
+  }
+  if (statusCode == 409 && isAmendmentPath) {
+    return LocalizationKeys.platformCompanyAmendErrorConflict;
+  }
+  if ((statusCode == 500 ||
+          statusCode == 502 ||
+          statusCode == 503 ||
+          statusCode == 504) &&
+      isAmendmentPath) {
+    return LocalizationKeys.platformCompanyAmendErrorServer;
   }
   return LocalizationKeys.errorGenericBody;
 }
@@ -81,6 +128,11 @@ ApiException mapHttpStatusException({
     );
   }
 
+  final isAmendmentPath = isCompanyAmendmentRequestPath(path);
+  final intakeRequired =
+      messageKey == LocalizationKeys.applicationDetailedIntakeRequired ||
+      errorCode == 'APPLICATION_DETAILED_INTAKE_REQUIRED';
+
   return switch (statusCode) {
     400 => build(ApiExceptionKind.validation),
     401 => build(ApiExceptionKind.unauthorized),
@@ -88,11 +140,17 @@ ApiException mapHttpStatusException({
     404 => build(ApiExceptionKind.notFound),
     409 => build(
       ApiExceptionKind.conflict,
-      overrideMessageKey: LocalizationKeys.errorGenericBody,
+      overrideMessageKey: intakeRequired
+          ? LocalizationKeys.applicationDetailedIntakeRequired
+          : isAmendmentPath
+          ? LocalizationKeys.platformCompanyAmendErrorConflict
+          : LocalizationKeys.errorGenericBody,
     ),
     500 || 502 || 503 || 504 => build(
       ApiExceptionKind.server,
-      overrideMessageKey: LocalizationKeys.authServerError,
+      overrideMessageKey: isAmendmentPath
+          ? messageKey
+          : LocalizationKeys.authServerError,
     ),
     _ => build(ApiExceptionKind.unknown),
   };

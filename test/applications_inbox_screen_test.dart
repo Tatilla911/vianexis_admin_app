@@ -39,9 +39,25 @@ class _FakePublicApplicationsApi extends PublicApplicationsApi {
   Future<Map<String, dynamic>> getApplication(int id) async {
     return {
       'application': {
+        'id': id,
+        'applicationReference': 'APP-$id',
         'applicationType': 'company',
         'status': 'new',
         'email': 'ops@acme.example',
+        'displayName': 'Acme Logistics',
+        'companyName': 'Acme Logistics',
+        'source': {
+          'companyName': 'Acme Logistics',
+          'contactName': 'Ops Lead',
+          'contactEmail': 'ops@acme.example',
+        },
+      },
+      'assessment': {
+        'id': 9,
+        'status': 'link_sent',
+        'submittedAt': null,
+        'approvalReady': false,
+        'blockingReason': 'APPLICATION_DETAILED_INTAKE_REQUIRED',
       },
     };
   }
@@ -95,6 +111,49 @@ void main() {
     expect(find.text('Application #42'), findsOneWidget);
     expect(find.text('company · new'), findsOneWidget);
     expect(find.byType(AppBar), findsOneWidget);
+  });
+
+  testWidgets('company application opens detail instead of registrations', (
+    tester,
+  ) async {
+    String? pushed;
+    final router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const ApplicationsInboxScreen(),
+          routes: [
+            GoRoute(
+              path: 'applications/:id',
+              builder: (context, state) {
+                pushed = state.pathParameters['id'];
+                return ApplicationDetailScreen(id: pushed ?? '');
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: '/registrations',
+          builder: (context, state) =>
+              const Scaffold(body: Text('Registrations redirected')),
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(_buildApp(home: const SizedBox(), router: router));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Acme Logistics'));
+    await tester.pumpAndSettle();
+
+    expect(pushed, '42');
+    expect(find.text('Application #42'), findsOneWidget);
+    expect(find.text('Registrations redirected'), findsNothing);
+    expect(find.textContaining('No Company record yet'), findsOneWidget);
+    expect(
+      find.textContaining('only be approved after the detailed intake'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('application detail back navigation returns to inbox', (

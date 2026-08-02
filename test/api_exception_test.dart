@@ -219,6 +219,105 @@ void main() {
       expect(exception.messageKey, LocalizationKeys.errorActionUnavailable);
     });
 
+    test('maps APPLICATION_DETAILED_INTAKE_REQUIRED error code', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(
+            path: '/platform-admin/applications/4/approve',
+          ),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(
+              path: '/platform-admin/applications/4/approve',
+            ),
+            statusCode: 409,
+            data: const {
+              'errorCode': 'APPLICATION_DETAILED_INTAKE_REQUIRED',
+              'code': 'APPLICATION_DETAILED_INTAKE_REQUIRED',
+              'requestId': 'req-intake',
+            },
+          ),
+        ),
+      );
+
+      expect(
+        exception.messageKey,
+        LocalizationKeys.applicationDetailedIntakeRequired,
+      );
+      expect(exception.errorCode, 'APPLICATION_DETAILED_INTAKE_REQUIRED');
+    });
+
+    test('maps amendment 400/403/404/409/500 to specific keys', () {
+      ApiException mapStatus(int status) {
+        return mapDioException(
+          DioException(
+            requestOptions: RequestOptions(
+              path: '/platform-admin/companies/9/amendments',
+            ),
+            type: DioExceptionType.badResponse,
+            response: Response(
+              requestOptions: RequestOptions(
+                path: '/platform-admin/companies/9/amendments',
+              ),
+              statusCode: status,
+              data: const {
+                'requestId': 'req-amend-1',
+                'message': 'failed',
+              },
+            ),
+          ),
+        );
+      }
+
+      expect(
+        mapStatus(400).messageKey,
+        LocalizationKeys.platformCompanyAmendErrorValidation,
+      );
+      expect(
+        mapStatus(403).messageKey,
+        LocalizationKeys.platformCompanyAmendErrorForbidden,
+      );
+      expect(
+        mapStatus(404).messageKey,
+        LocalizationKeys.platformCompanyAmendErrorNotFound,
+      );
+      expect(
+        mapStatus(409).messageKey,
+        LocalizationKeys.platformCompanyAmendErrorConflict,
+      );
+      expect(
+        mapStatus(500).messageKey,
+        LocalizationKeys.platformCompanyAmendErrorServer,
+      );
+    });
+
+    test('maps missing amendment relation 500 to migration key', () {
+      final exception = mapDioException(
+        DioException(
+          requestOptions: RequestOptions(
+            path: '/platform-admin/companies/1/amendments',
+          ),
+          type: DioExceptionType.badResponse,
+          response: Response(
+            requestOptions: RequestOptions(
+              path: '/platform-admin/companies/1/amendments',
+            ),
+            statusCode: 500,
+            data: const {
+              'message':
+                  'relation "company_data_amendments" does not exist',
+              'requestId': 'req-mig',
+            },
+          ),
+        ),
+      );
+
+      expect(
+        exception.messageKey,
+        LocalizationKeys.platformCompanyAmendErrorMigrationMissing,
+      );
+    });
+
     test('maps 409 to conflict', () {
       final exception = mapDioException(
         DioException(

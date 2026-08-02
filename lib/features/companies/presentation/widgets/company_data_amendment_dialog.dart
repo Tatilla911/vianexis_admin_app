@@ -4,18 +4,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/api/api_exception.dart';
 import '../../../../core/api/api_exception_feedback.dart';
 import '../../../../core/localization/localization_resolver.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../data/platform_companies_repository.dart';
 import '../../domain/authorization_method_l10n.dart';
 import '../../domain/company_data_amendment.dart';
 import '../platform_companies_providers.dart';
 
-Future<bool> showCompanyDataAmendmentDialog({
+Future<CompanyDataAmendment?> showCompanyDataAmendmentDialog({
   required BuildContext context,
   required WidgetRef ref,
   required String companyId,
   int? expectedDataVersion,
 }) async {
-  final result = await showDialog<bool>(
+  final result = await showDialog<CompanyDataAmendment>(
     context: context,
     builder: (dialogContext) => _CompanyDataAmendmentDialog(
       companyId: companyId,
@@ -23,7 +24,7 @@ Future<bool> showCompanyDataAmendmentDialog({
       parentRef: ref,
     ),
   );
-  return result == true;
+  return result;
 }
 
 class _CompanyDataAmendmentDialog extends ConsumerStatefulWidget {
@@ -402,7 +403,14 @@ class _CompanyDataAmendmentDialogState
     });
 
     try {
-      await widget.parentRef
+      debugPrint(
+        'company amendment submit endpoint=/platform-admin/companies/${widget.companyId}/amendments '
+        'companyId=${widget.companyId} fieldPath=${field.fieldPath} '
+        'authorizationMethod=$_authMethod '
+        'reasonPresent=${_reasonController.text.trim().isNotEmpty} '
+        'expectedDataVersion=${widget.expectedDataVersion}',
+      );
+      final created = await widget.parentRef
           .read(platformCompaniesRepositoryProvider)
           .createAmendment(
             id: widget.companyId,
@@ -434,17 +442,20 @@ class _CompanyDataAmendmentDialogState
       widget.parentRef.invalidate(
         platformCompanyDetailProvider(widget.companyId),
       );
-      if (mounted) Navigator.of(context).pop(true);
+      await widget.parentRef
+          .read(platformCompaniesProvider.notifier)
+          .refresh();
+      if (mounted) Navigator.of(context).pop(created);
     } on ApiException catch (error) {
       debugPrint(
         'company amendment failed status=${error.statusCode} '
         'errorCode=${error.errorCode} requestId=${error.requestId} '
-        'endpoint=${error.endpoint}',
+        'endpoint=${error.endpoint} messageKey=${error.messageKey}',
       );
       if (mounted) {
         setState(() {
           _submitting = false;
-          _errorText = apiExceptionMessage(context, error);
+          _errorText = _formatAmendmentError(context, error);
         });
       }
     } catch (_) {
@@ -458,6 +469,30 @@ class _CompanyDataAmendmentDialogState
         });
       }
     }
+  }
+
+  String _formatAmendmentError(BuildContext context, ApiException error) {
+    final l10n = AppLocalizations.of(context);
+    final base = apiExceptionMessage(context, error);
+    final parts = <String>[base];
+    final requestId = error.requestId?.trim();
+    if (requestId != null && requestId.isNotEmpty) {
+      parts.add(l10n.platformCompanyAmendRequestId(requestId));
+    }
+    assert(() {
+      final details = [
+        if (error.statusCode != null) 'HTTP ${error.statusCode}',
+        if (error.errorCode != null && error.errorCode!.isNotEmpty)
+          error.errorCode!,
+        if (error.endpoint != null && error.endpoint!.isNotEmpty)
+          error.endpoint!,
+      ].join(' · ');
+      if (details.isNotEmpty) {
+        parts.add('${l10n.platformCompanyAmendDevDetails}: $details');
+      }
+      return true;
+    }());
+    return parts.join('\n');
   }
 
   Object? _resolveNewValue(CompanyAmendmentFieldOption field) {

@@ -1655,7 +1655,7 @@ abstract class AppLocalizations {
   /// No description provided for @registrationPasswordSetupSend.
   ///
   /// In en, this message translates to:
-  /// **'Send secure password-setup link'**
+  /// **'Send activation invite / password-setup link'**
   String get registrationPasswordSetupSend;
 
   /// No description provided for @registrationPasswordSetupSent.
@@ -1697,7 +1697,7 @@ abstract class AppLocalizations {
   /// No description provided for @applicationsCompatBanner.
   ///
   /// In en, this message translates to:
-  /// **'Company onboarding inbox: Registrations. This Applications view is compatibility for mixed public intakes.'**
+  /// **'Public applications (APP-*) and Registrations share the same staging company intake. Open an APP item for submitted data; Registrations remains available as the parallel inbox.'**
   String get applicationsCompatBanner;
 
   /// No description provided for @applicationsOpenRegistrations.
@@ -1709,8 +1709,68 @@ abstract class AppLocalizations {
   /// No description provided for @applicationsCompanyUseRegistrations.
   ///
   /// In en, this message translates to:
-  /// **'Company applications are decided in Registrations (primary inbox).'**
+  /// **'Company applications can be decided here (APP-*) or in Registrations after legacy sync.'**
   String get applicationsCompanyUseRegistrations;
+
+  /// No description provided for @applicationsCorrectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted application data'**
+  String get applicationsCorrectionTitle;
+
+  /// No description provided for @applicationsCompanyPendingNoAmendment.
+  ///
+  /// In en, this message translates to:
+  /// **'No Company record yet. Company data amendments are available only after approval creates a company.'**
+  String get applicationsCompanyPendingNoAmendment;
+
+  /// No description provided for @applicationsCompanyDecisionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Decide this public application here, or open Registrations for the synced registration record.'**
+  String get applicationsCompanyDecisionHint;
+
+  /// No description provided for @applicationsOpenCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Open company (amendments)'**
+  String get applicationsOpenCompany;
+
+  /// No description provided for @applicationDetailedIntakeRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'The application can only be approved after the detailed intake is submitted.'**
+  String get applicationDetailedIntakeRequired;
+
+  /// No description provided for @applicationAwaitingDetailedIntake.
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed intake not submitted yet.'**
+  String get applicationAwaitingDetailedIntake;
+
+  /// No description provided for @applicationResendIntakeLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend intake link'**
+  String get applicationResendIntakeLink;
+
+  /// No description provided for @emailProviderDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'The invite was created, but email delivery is not configured.'**
+  String get emailProviderDisabled;
+
+  /// No description provided for @emailRecipientNotAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'This recipient is not allowed in the staging environment.'**
+  String get emailRecipientNotAllowed;
+
+  /// No description provided for @emailSendFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The invite was created, but email delivery failed.'**
+  String get emailSendFailed;
 
   /// No description provided for @applicationsFilterCompany.
   ///
@@ -5318,11 +5378,77 @@ abstract class AppLocalizations {
   /// **'Change request saved.'**
   String get platformCompanyAmendSubmitSuccess;
 
+  /// No description provided for @platformCompanyAmendSubmitSuccessPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Change request saved and waiting for approval.'**
+  String get platformCompanyAmendSubmitSuccessPending;
+
+  /// No description provided for @platformCompanyAmendSubmitSuccessApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Change saved and applied.'**
+  String get platformCompanyAmendSubmitSuccessApplied;
+
   /// No description provided for @platformCompanyAmendSubmitError.
   ///
   /// In en, this message translates to:
   /// **'Could not save the change request.'**
   String get platformCompanyAmendSubmitError;
+
+  /// No description provided for @platformCompanyAmendErrorValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'The provided data is incomplete or invalid.'**
+  String get platformCompanyAmendErrorValidation;
+
+  /// No description provided for @platformCompanyAmendErrorForbidden.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to change this data.'**
+  String get platformCompanyAmendErrorForbidden;
+
+  /// No description provided for @platformCompanyAmendErrorNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'The company or amendment endpoint was not found. Update the app.'**
+  String get platformCompanyAmendErrorNotFound;
+
+  /// No description provided for @platformCompanyAmendErrorConflict.
+  ///
+  /// In en, this message translates to:
+  /// **'The data changed meanwhile. Reload and try again.'**
+  String get platformCompanyAmendErrorConflict;
+
+  /// No description provided for @platformCompanyAmendErrorServer.
+  ///
+  /// In en, this message translates to:
+  /// **'The server could not save the change.'**
+  String get platformCompanyAmendErrorServer;
+
+  /// No description provided for @platformCompanyAmendErrorMigrationMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'The staging database is not updated for this feature yet.'**
+  String get platformCompanyAmendErrorMigrationMissing;
+
+  /// No description provided for @platformCompanyAmendRequestId.
+  ///
+  /// In en, this message translates to:
+  /// **'Request ID: {requestId}'**
+  String platformCompanyAmendRequestId(String requestId);
+
+  /// No description provided for @platformCompanyAmendRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get platformCompanyAmendRetry;
+
+  /// No description provided for @platformCompanyAmendDevDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details (developer)'**
+  String get platformCompanyAmendDevDetails;
 
   /// No description provided for @platformCompanyAmendLoadError.
   ///
@@ -5413,6 +5539,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Apply'**
   String get platformCompanyAmendApply;
+
+  /// No description provided for @platformCompanyAmendSaveAndApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Save and apply'**
+  String get platformCompanyAmendSaveAndApply;
 
   /// No description provided for @platformCompanyAmendFieldLegalName.
   ///

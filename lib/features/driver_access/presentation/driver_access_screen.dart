@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/app_router.dart';
+import '../../../core/api/api_exception.dart';
+import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/backend_dependency_card.dart';
 import '../../../core/widgets/mock_data_badge.dart';
@@ -260,6 +262,9 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
           ),
         ),
       );
+    } on ApiException catch (error) {
+      if (!context.mounted) return;
+      showApiExceptionSnackBar(context, error);
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(

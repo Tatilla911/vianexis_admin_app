@@ -24,6 +24,14 @@ String resolveApiRequestPath(RequestOptions options) {
   return '';
 }
 
+bool isCompanyAmendmentRequestPath(String path) {
+  final normalized = resolveApiRequestPath(
+    RequestOptions(path: path),
+  ).trim().toLowerCase();
+  return normalized.contains('/amendments') ||
+      normalized.contains('/amendment-fields');
+}
+
 bool isAuthLoginRequestPath(String path) {
   final normalized = resolveApiRequestPath(
     RequestOptions(path: path),

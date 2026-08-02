@@ -91,21 +91,25 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                 const SizedBox(height: 12),
                 FilledButton.icon(
                   onPressed: () async {
-                    final ok = await showCompanyDataAmendmentDialog(
+                    final created = await showCompanyDataAmendmentDialog(
                       context: context,
                       ref: ref,
                       companyId: companyId,
                       expectedDataVersion:
                           registrationAsync.asData?.value.dataVersion,
                     );
-                    if (ok && context.mounted) {
+                    if (created != null && context.mounted) {
+                      final status = created.status.toLowerCase();
+                      final successKey =
+                          status == 'pending_approval' || status == 'pending'
+                          ? 'platformCompanyAmendSubmitSuccessPending'
+                          : status == 'applied'
+                          ? 'platformCompanyAmendSubmitSuccessApplied'
+                          : 'platformCompanyAmendSubmitSuccess';
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            resolvePlatformCompanyKey(
-                              context,
-                              'platformCompanyAmendSubmitSuccess',
-                            ),
+                            resolvePlatformCompanyKey(context, successKey),
                           ),
                         ),
                       );

@@ -51,6 +51,24 @@ String resolveLocalizationKey(BuildContext context, String key) {
     LocalizationKeys.settingsPasswordMismatchValidation =>
       l10n.settingsPasswordMismatchValidation,
     LocalizationKeys.errorGenericBody => l10n.errorGenericBody,
+    LocalizationKeys.platformCompanyAmendErrorValidation =>
+      l10n.platformCompanyAmendErrorValidation,
+    LocalizationKeys.platformCompanyAmendErrorForbidden =>
+      l10n.platformCompanyAmendErrorForbidden,
+    LocalizationKeys.platformCompanyAmendErrorNotFound =>
+      l10n.platformCompanyAmendErrorNotFound,
+    LocalizationKeys.platformCompanyAmendErrorConflict =>
+      l10n.platformCompanyAmendErrorConflict,
+    LocalizationKeys.platformCompanyAmendErrorServer =>
+      l10n.platformCompanyAmendErrorServer,
+    LocalizationKeys.platformCompanyAmendErrorMigrationMissing =>
+      l10n.platformCompanyAmendErrorMigrationMissing,
+    LocalizationKeys.applicationDetailedIntakeRequired =>
+      l10n.applicationDetailedIntakeRequired,
+    LocalizationKeys.emailProviderDisabled => l10n.emailProviderDisabled,
+    LocalizationKeys.emailRecipientNotAllowed =>
+      l10n.emailRecipientNotAllowed,
+    LocalizationKeys.emailSendFailed => l10n.emailSendFailed,
     LocalizationKeys.roleSuperAdmin => l10n.roleSuperAdmin,
     LocalizationKeys.roleSupportAdmin => l10n.roleSupportAdmin,
     LocalizationKeys.roleOnboardingReviewer => l10n.roleOnboardingReviewer,
@@ -1353,7 +1371,25 @@ String resolvePlatformCompanyKey(
     'platformCompanyAmendSubmit' => l10n.platformCompanyAmendSubmit,
     'platformCompanyAmendSubmitSuccess' =>
       l10n.platformCompanyAmendSubmitSuccess,
+    'platformCompanyAmendSubmitSuccessPending' =>
+      l10n.platformCompanyAmendSubmitSuccessPending,
+    'platformCompanyAmendSubmitSuccessApplied' =>
+      l10n.platformCompanyAmendSubmitSuccessApplied,
     'platformCompanyAmendSubmitError' => l10n.platformCompanyAmendSubmitError,
+    'platformCompanyAmendErrorValidation' =>
+      l10n.platformCompanyAmendErrorValidation,
+    'platformCompanyAmendErrorForbidden' =>
+      l10n.platformCompanyAmendErrorForbidden,
+    'platformCompanyAmendErrorNotFound' =>
+      l10n.platformCompanyAmendErrorNotFound,
+    'platformCompanyAmendErrorConflict' =>
+      l10n.platformCompanyAmendErrorConflict,
+    'platformCompanyAmendErrorServer' => l10n.platformCompanyAmendErrorServer,
+    'platformCompanyAmendErrorMigrationMissing' =>
+      l10n.platformCompanyAmendErrorMigrationMissing,
+    'platformCompanyAmendRetry' => l10n.platformCompanyAmendRetry,
+    'platformCompanyAmendDevDetails' => l10n.platformCompanyAmendDevDetails,
+    'platformCompanyAmendSaveAndApply' => l10n.platformCompanyAmendSaveAndApply,
     'platformCompanyAmendLoadError' => l10n.platformCompanyAmendLoadError,
     'platformCompanyAmendHistoryEmpty' => l10n.platformCompanyAmendHistoryEmpty,
     'platformCompanyAmendStatus' => l10n.platformCompanyAmendStatus,
