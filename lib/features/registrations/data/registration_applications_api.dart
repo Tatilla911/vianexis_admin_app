@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
+import '../../../core/api/api_exception.dart';
+import '../../applications/data/activation_invite_diagnostics.dart';
 import '../domain/registration_application.dart';
 import '../domain/registration_application_status.dart';
 import '../domain/registration_approval_outcome.dart';
@@ -60,17 +62,89 @@ class RegistrationApplicationsApi {
   }
 
   Future<RegistrationApprovalOutcome> resendInvite(String applicationId) async {
-    final response = await _apiClient.post<Map<String, dynamic>>(
-      '/platform-admin/registration-applications/$applicationId/resend-invite',
+    const method = 'POST';
+    final endpoint =
+        '/platform-admin/registration-applications/$applicationId/resend-invite';
+    logActivationInviteAction(
+      action: 'activation_invite_send',
+      method: method,
+      endpoint: endpoint,
+      applicationId: applicationId,
+      usedMockRepository: false,
     );
-    return RegistrationApprovalOutcome.fromJson(response.data);
+    try {
+      final response = await _apiClient.post<Map<String, dynamic>>(
+        endpoint,
+        data: const <String, dynamic>{},
+      );
+      final outcome = RegistrationApprovalOutcome.fromJson(response.data);
+      logActivationInviteAction(
+        action: 'activation_invite_send',
+        method: method,
+        endpoint: endpoint,
+        applicationId: applicationId,
+        companyId: outcome.companyId,
+        inviteId: outcome.inviteTokenId,
+        httpStatus: response.statusCode,
+        deliveryStatus: outcome.inviteDeliveryStatus,
+        usedMockRepository: false,
+      );
+      return outcome;
+    } on ApiException catch (error) {
+      logActivationInviteApiException(
+        action: 'activation_invite_send',
+        method: method,
+        endpoint: endpoint,
+        error: error,
+        applicationId: applicationId,
+      );
+      rethrow;
+    }
   }
 
   Future<Map<String, dynamic>> sendPasswordSetup(String applicationId) async {
-    final response = await _apiClient.post<Map<String, dynamic>>(
-      '/platform-admin/registration-applications/$applicationId/send-password-setup',
+    const method = 'POST';
+    final endpoint =
+        '/platform-admin/registration-applications/$applicationId/send-password-setup';
+    logActivationInviteAction(
+      action: 'activation_invite_send',
+      method: method,
+      endpoint: endpoint,
+      applicationId: applicationId,
+      usedMockRepository: false,
     );
-    return response.data ?? <String, dynamic>{};
+    try {
+      final response = await _apiClient.post<Map<String, dynamic>>(
+        endpoint,
+        data: const <String, dynamic>{},
+      );
+      final data = response.data ?? <String, dynamic>{};
+      logActivationInviteAction(
+        action: 'activation_invite_send',
+        method: method,
+        endpoint: endpoint,
+        applicationId: applicationId,
+        companyId: data['companyId']?.toString(),
+        inviteId: data['invite'] is Map
+            ? (data['invite'] as Map)['tokenId']?.toString()
+            : data['inviteId']?.toString(),
+        httpStatus: response.statusCode,
+        deliveryStatus:
+            data['emailDeliveryStatus']?.toString() ??
+            data['emailInviteDeliveryStatus']?.toString(),
+        usedMockRepository: false,
+      );
+      return data;
+    } on ApiException catch (error) {
+      logActivationInviteApiException(
+        action: 'activation_invite_send',
+        method: method,
+        endpoint: endpoint,
+        error: error,
+        applicationId: applicationId,
+      );
+      rethrow;
+    }
   }
 
   Future<Map<String, dynamic>> getInviteStatus(String applicationId) async {
@@ -83,6 +157,7 @@ class RegistrationApplicationsApi {
   Future<void> revokeInvite(String applicationId) async {
     await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/registration-applications/$applicationId/revoke-invite',
+      data: const <String, dynamic>{},
     );
   }
 }

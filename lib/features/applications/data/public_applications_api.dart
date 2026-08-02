@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
+import '../../../core/api/api_exception.dart';
+import 'activation_invite_diagnostics.dart';
 
 class PublicApplicationsApi {
   PublicApplicationsApi(this._apiClient);
@@ -77,11 +79,46 @@ class PublicApplicationsApi {
   }
 
   Future<Map<String, dynamic>> resendActivationInvite(int id) async {
-    final response = await _apiClient.post<Map<String, dynamic>>(
-      '/platform-admin/applications/$id/resend-activation-invite',
-      data: const {},
+    const method = 'POST';
+    final endpoint = '/platform-admin/applications/$id/resend-activation-invite';
+    logActivationInviteAction(
+      action: 'activation_invite_send',
+      method: method,
+      endpoint: endpoint,
+      applicationId: '$id',
+      usedMockRepository: false,
     );
-    return response.data ?? {};
+    try {
+      final response = await _apiClient.post<Map<String, dynamic>>(
+        endpoint,
+        data: const <String, dynamic>{},
+      );
+      final data = response.data ?? <String, dynamic>{};
+      logActivationInviteAction(
+        action: 'activation_invite_send',
+        method: method,
+        endpoint: endpoint,
+        applicationId: '$id',
+        companyId: data['companyId']?.toString(),
+        inviteId: data['inviteId']?.toString(),
+        httpStatus: response.statusCode,
+        deliveryStatus:
+            data['deliveryStatus']?.toString() ??
+            data['emailInviteDeliveryStatus']?.toString(),
+        requestId: data['requestId']?.toString(),
+        usedMockRepository: false,
+      );
+      return data;
+    } on ApiException catch (error) {
+      logActivationInviteApiException(
+        action: 'activation_invite_send',
+        method: method,
+        endpoint: endpoint,
+        error: error,
+        applicationId: '$id',
+      );
+      rethrow;
+    }
   }
 }
 

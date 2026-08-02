@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
@@ -214,6 +215,17 @@ class MockRegistrationApplicationsRepository
 
   @override
   Future<RegistrationApprovalOutcome> resendInvite(String applicationId) async {
+    if (AppConfig.instance.environment.isStaging ||
+        AppConfig.instance.environment.isProduction ||
+        !kDebugMode) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.authBackendNotConfigured,
+        kind: ApiExceptionKind.notConfigured,
+        errorCode: 'MOCK_INVITE_SEND_FORBIDDEN',
+        backendMessage:
+            'Mock registration repository cannot send activation invites.',
+      );
+    }
     await Future<void>.delayed(const Duration(milliseconds: 100));
     final item = await fetchApplication(applicationId);
     return RegistrationApprovalOutcome(
@@ -229,6 +241,17 @@ class MockRegistrationApplicationsRepository
 
   @override
   Future<Map<String, dynamic>> sendPasswordSetup(String applicationId) async {
+    if (AppConfig.instance.environment.isStaging ||
+        AppConfig.instance.environment.isProduction ||
+        !kDebugMode) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.authBackendNotConfigured,
+        kind: ApiExceptionKind.notConfigured,
+        errorCode: 'MOCK_INVITE_SEND_FORBIDDEN',
+        backendMessage:
+            'Mock registration repository cannot send activation invites.',
+      );
+    }
     await Future<void>.delayed(const Duration(milliseconds: 100));
     return {
       'mode': 'invite',
@@ -260,7 +283,14 @@ class MockRegistrationApplicationsRepository
 
 final registrationApplicationsRepositoryProvider =
     Provider<RegistrationApplicationsRepository>((ref) {
-      if (AppConfig.instance.shouldUseLiveRepositories) {
+      final config = AppConfig.instance;
+      // Staging/production must never silently fall back to mock — invite
+      // send/resend would show a local success without any HTTP request.
+      final forceLive =
+          config.environment.isStaging ||
+          config.environment.isProduction ||
+          config.shouldUseLiveRepositories;
+      if (forceLive) {
         return LiveRegistrationApplicationsRepository(
           ref.watch(registrationApplicationsApiProvider),
         );

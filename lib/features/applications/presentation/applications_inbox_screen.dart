@@ -206,27 +206,57 @@ class _ApplicationDetailScreenState
     });
     try {
       final api = ref.read(publicApplicationsApiProvider);
-      final data = await api.getApplication(int.parse(widget.id));
+      final id = int.parse(widget.id);
+      final data = await api.getApplication(id);
       if (!mounted) return;
+
       RegistrationApprovalOutcome? fromDetail;
-      final invite = data['activationInvite'];
-      if (invite is Map) {
+      final app = data['application'];
+      final appMap = app is Map ? Map<String, dynamic>.from(app) : null;
+      final status = appMap?['status']?.toString().toLowerCase() ?? '';
+      final type = appMap?['applicationType']?.toString();
+      final isConvertedCompany =
+          type == 'company' &&
+          (status == 'converted' || status == 'approved');
+
+      Map<String, dynamic>? invite;
+      final embedded = data['activationInvite'];
+      if (embedded is Map) {
+        invite = Map<String, dynamic>.from(embedded);
+      } else if (isConvertedCompany) {
+        try {
+          invite = await api.getActivationInvite(id);
+        } catch (_) {
+          invite = null;
+        }
+      }
+
+      if (invite != null) {
         fromDetail = RegistrationApprovalOutcome.fromJson({
-          ...Map<String, dynamic>.from(invite),
+          ...invite,
           'companyId':
               invite['companyId'] ??
-              data['application']?['companyId'] ??
-              (data['application'] is Map
-                  ? (data['application'] as Map)['companyId']
+              appMap?['companyId'] ??
+              (appMap?['source'] is Map
+                  ? (appMap!['source'] as Map)['approvedCompanyId']
                   : null),
         });
       }
+
       setState(() {
         _detail = data;
-        if (fromDetail != null &&
-            (fromDetail.inviteTokenId != null ||
-                fromDetail.inviteDeliveryStatus != 'not_requested')) {
-          _approvalOutcome ??= fromDetail;
+        if (fromDetail != null) {
+          _approvalOutcome = fromDetail;
+        } else if (isConvertedCompany) {
+          // Still allow send/resend even when invite status cannot be loaded.
+          _approvalOutcome ??= RegistrationApprovalOutcome(
+            companyId: appMap?['companyId']?.toString(),
+            companyName: null,
+            adminEmail: appMap?['email']?.toString(),
+            emailInviteSent: false,
+            inviteDeliveryStatus: 'not_requested',
+            retryAllowed: true,
+          );
         }
       });
     } catch (e) {
@@ -316,20 +346,39 @@ class _ApplicationDetailScreenState
     setState(() => _acting = true);
     try {
       final api = ref.read(publicApplicationsApiProvider);
-      final result = await api.resendActivationInvite(int.parse(widget.id));
+      final applicationId = int.parse(widget.id);
+      final result = await api.resendActivationInvite(applicationId);
       if (!mounted) return;
       final outcome = RegistrationApprovalOutcome.fromJson(result);
       setState(() => _approvalOutcome = outcome);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            AppLocalizations.of(context).registrationInviteResendSuccess,
-          ),
-        ),
-      );
+      await _load();
+      if (!mounted) return;
+      final l10n = AppLocalizations.of(context);
+      final delivery = outcome.inviteDeliveryStatus;
+      final message = switch (delivery) {
+        'sent' || 'accepted_by_provider' || 'queued' =>
+          l10n.registrationInviteResendSuccess,
+        'provider_disabled' || 'skipped' =>
+          l10n.registrationInviteDeliveryProviderDisabled,
+        'provider_not_configured' =>
+          l10n.registrationInviteDeliveryProviderNotConfigured,
+        'blocked_by_staging_allowlist' || 'staging_allowlist_missing' =>
+          l10n.registrationInviteDeliveryAllowlistBlocked,
+        'failed' || 'pending_or_failed' =>
+          l10n.registrationInviteDeliveryFailed,
+        _ => l10n.registrationInviteResendSuccess,
+      };
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     } on ApiException catch (error) {
       if (!mounted) return;
       showApiExceptionSnackBar(context, error);
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
     } finally {
       if (mounted) setState(() => _acting = false);
     }
@@ -545,31 +594,35 @@ class _ApplicationDetailScreenState
                         child: Text(l10n.applicationsOpenCompany),
                       ),
                     ],
-                    if (isCompany && _approvalOutcome != null) ...[
+                    if (isCompany && (isConverted || _approvalOutcome != null)) ...[
                       const SizedBox(height: 16),
                       Text(
                         l10n.applicationActivationInviteTitle,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       const SizedBox(height: 8),
-                      if (_approvalOutcome!.userCreated == true)
+                      if (_approvalOutcome?.userCreated == true)
                         Text(l10n.applicationActivationUserCreated),
-                      if (_approvalOutcome!.userResolved == true)
+                      if (_approvalOutcome?.userResolved == true)
                         Text(l10n.applicationActivationUserResolved),
-                      if (_approvalOutcome!.inviteTokenId != null)
+                      if (_approvalOutcome?.inviteTokenId != null)
                         Text(
                           '${l10n.applicationActivationInviteCreated} (#${_approvalOutcome!.inviteTokenId})',
+                        )
+                      else if (_approvalOutcome?.inviteDeliveryStatus ==
+                          'not_requested')
+                        Text(l10n.registrationInviteNoLink),
+                      if (_approvalOutcome != null)
+                        Text(
+                          '${l10n.applicationActivationEmailStatus}: ${_activationDeliveryLabel(l10n, _approvalOutcome!.inviteDeliveryStatus)}',
                         ),
-                      Text(
-                        '${l10n.applicationActivationEmailStatus}: ${_activationDeliveryLabel(l10n, _approvalOutcome!.inviteDeliveryStatus)}',
-                      ),
-                      if ((_approvalOutcome!.recipientEmailMasked ??
-                              _approvalOutcome!.adminEmail) !=
+                      if ((_approvalOutcome?.recipientEmailMasked ??
+                              _approvalOutcome?.adminEmail) !=
                           null)
                         Text(
                           '${l10n.applicationActivationRecipient}: ${_approvalOutcome!.recipientEmailMasked ?? _approvalOutcome!.adminEmail}',
                         ),
-                      if (_approvalOutcome!.activationUrlHost != null)
+                      if (_approvalOutcome?.activationUrlHost != null)
                         Text(
                           '${l10n.registrationFieldInviteStatus}: ${_approvalOutcome!.activationUrlHost}',
                         ),
@@ -581,17 +634,20 @@ class _ApplicationDetailScreenState
                           OutlinedButton(
                             onPressed: _acting
                                 ? null
-                                : () => _copyActivationLink(
-                                      _approvalOutcome!.activationUrl,
-                                    ),
+                                : () {
+                                    _copyActivationLink(
+                                      _approvalOutcome?.activationUrl,
+                                    );
+                                  },
                             child: Text(l10n.registrationInviteCopyLink),
                           ),
-                          if (canDecide &&
-                              _approvalOutcome!.retryAllowed) ...[
-                            OutlinedButton(
+                          if (canDecide) ...[
+                            FilledButton(
                               onPressed: _acting
                                   ? null
-                                  : _resendActivationInvite,
+                                  : () {
+                                      _resendActivationInvite();
+                                    },
                               child: Text(l10n.applicationActivationResend),
                             ),
                           ],

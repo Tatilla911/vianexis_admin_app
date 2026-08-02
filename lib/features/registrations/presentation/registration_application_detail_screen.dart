@@ -8,6 +8,7 @@ import '../../../app/app_router.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/auth/admin_auth_state.dart';
+import '../../../core/localization/localization_keys.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
@@ -80,20 +81,46 @@ class _RegistrationApplicationDetailScreenState
   }
 
   Future<void> _handleResend(BuildContext context) async {
+    if (_decisionLoading) return;
     setState(() => _decisionLoading = true);
     try {
-      final outcome = await ref
-          .read(registrationApplicationsRepositoryProvider)
-          .resendInvite(widget.applicationId);
+      final repo = ref.read(registrationApplicationsRepositoryProvider);
+      if (repo.usesMockData) {
+        throw const ApiException(
+          messageKey: LocalizationKeys.authBackendNotConfigured,
+          kind: ApiExceptionKind.notConfigured,
+          errorCode: 'MOCK_INVITE_SEND_FORBIDDEN',
+          backendMessage:
+              'Mock repository is active — activation invite was not sent.',
+        );
+      }
+      final outcome = await repo.resendInvite(widget.applicationId);
       if (!context.mounted) return;
       setState(() => _approvalOutcome = outcome);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            resolveRegistrationKey(context, 'registrationInviteResendSuccess'),
-          ),
-        ),
-      );
+      await refreshRegistrationApplicationDetail(ref, widget.applicationId);
+      if (!context.mounted) return;
+      final delivery = outcome.inviteDeliveryStatus;
+      final message = switch (delivery) {
+        'sent' || 'accepted_by_provider' || 'queued' =>
+          resolveRegistrationKey(context, 'registrationInviteResendSuccess'),
+        'provider_disabled' || 'skipped' => AppLocalizations.of(
+          context,
+        ).registrationInviteDeliveryProviderDisabled,
+        'provider_not_configured' => AppLocalizations.of(
+          context,
+        ).registrationInviteDeliveryProviderNotConfigured,
+        'blocked_by_staging_allowlist' || 'staging_allowlist_missing' =>
+          AppLocalizations.of(
+            context,
+          ).registrationInviteDeliveryAllowlistBlocked,
+        'failed' || 'pending_or_failed' => AppLocalizations.of(
+          context,
+        ).registrationInviteDeliveryFailed,
+        _ => resolveRegistrationKey(context, 'registrationInviteResendSuccess'),
+      };
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     } on ApiException catch (error) {
       if (!context.mounted) return;
       showApiExceptionSnackBar(context, error);
@@ -112,28 +139,64 @@ class _RegistrationApplicationDetailScreenState
   }
 
   Future<void> _handleSendPasswordSetup(BuildContext context) async {
+    if (_decisionLoading) return;
     setState(() => _decisionLoading = true);
     try {
-      final result = await ref
-          .read(registrationApplicationsRepositoryProvider)
-          .sendPasswordSetup(widget.applicationId);
+      final repo = ref.read(registrationApplicationsRepositoryProvider);
+      if (repo.usesMockData) {
+        throw const ApiException(
+          messageKey: LocalizationKeys.authBackendNotConfigured,
+          kind: ApiExceptionKind.notConfigured,
+          errorCode: 'MOCK_INVITE_SEND_FORBIDDEN',
+          backendMessage:
+              'Mock repository is active — activation invite was not sent.',
+        );
+      }
+      final result = await repo.sendPasswordSetup(widget.applicationId);
       if (!context.mounted) return;
-      final sent = result['emailSent'] == true;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            sent
-                ? resolveRegistrationKey(
-                    context,
-                    'registrationPasswordSetupSent',
-                  )
-                : resolveRegistrationKey(
-                    context,
-                    'registrationPasswordSetupQueued',
-                  ),
-          ),
-        ),
-      );
+      final delivery =
+          result['emailDeliveryStatus']?.toString() ??
+          result['emailInviteDeliveryStatus']?.toString() ??
+          '';
+      final sent = result['emailSent'] == true || delivery == 'sent';
+      setState(() {
+        _approvalOutcome = RegistrationApprovalOutcome.fromJson({
+          ...result,
+          'emailInviteSent': sent,
+          'emailInviteDeliveryStatus': delivery.isEmpty
+              ? (sent ? 'sent' : 'pending_or_failed')
+              : delivery,
+          'companyId':
+              result['companyId']?.toString() ?? _approvalOutcome?.companyId,
+          'adminEmail':
+              result['adminEmail']?.toString() ?? _approvalOutcome?.adminEmail,
+        });
+      });
+      await refreshRegistrationApplicationDetail(ref, widget.applicationId);
+      if (!context.mounted) return;
+      final message = switch (delivery) {
+        'sent' || 'accepted_by_provider' || 'queued' =>
+          resolveRegistrationKey(context, 'registrationPasswordSetupSent'),
+        'provider_disabled' || 'skipped' => AppLocalizations.of(
+          context,
+        ).registrationInviteDeliveryProviderDisabled,
+        'provider_not_configured' => AppLocalizations.of(
+          context,
+        ).registrationInviteDeliveryProviderNotConfigured,
+        'blocked_by_staging_allowlist' || 'staging_allowlist_missing' =>
+          AppLocalizations.of(
+            context,
+          ).registrationInviteDeliveryAllowlistBlocked,
+        'failed' || 'pending_or_failed' => AppLocalizations.of(
+          context,
+        ).registrationInviteDeliveryFailed,
+        _ when sent =>
+          resolveRegistrationKey(context, 'registrationPasswordSetupSent'),
+        _ => resolveRegistrationKey(context, 'registrationPasswordSetupQueued'),
+      };
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     } on ApiException catch (error) {
       if (!context.mounted) return;
       showApiExceptionSnackBar(context, error);
@@ -313,7 +376,11 @@ class _DetailBody extends StatelessWidget {
               if (onResendInvite != null) ...[
                 const SizedBox(height: 8),
                 OutlinedButton(
-                  onPressed: decisionLoading ? null : onResendInvite,
+                  onPressed: decisionLoading
+                      ? null
+                      : () {
+                          onResendInvite!();
+                        },
                   child: Text(
                     resolveRegistrationKey(context, 'registrationInviteResend'),
                   ),
@@ -321,8 +388,12 @@ class _DetailBody extends StatelessWidget {
               ],
               if (onSendPasswordSetup != null) ...[
                 const SizedBox(height: 8),
-                OutlinedButton(
-                  onPressed: decisionLoading ? null : onSendPasswordSetup,
+                FilledButton(
+                  onPressed: decisionLoading
+                      ? null
+                      : () {
+                          onSendPasswordSetup!();
+                        },
                   child: Text(
                     resolveRegistrationKey(
                       context,
@@ -749,7 +820,11 @@ class _ApprovalOutcomeCard extends StatelessWidget {
         if (canManageInvite && onResend != null) ...[
           const SizedBox(height: 8),
           OutlinedButton(
-            onPressed: inviteBusy ? null : onResend,
+            onPressed: inviteBusy
+                ? null
+                : () {
+                    onResend!();
+                  },
             child: Text(
               resolveRegistrationKey(context, 'registrationInviteResend'),
             ),
@@ -757,8 +832,12 @@ class _ApprovalOutcomeCard extends StatelessWidget {
         ],
         if (canManageInvite && onSendPasswordSetup != null) ...[
           const SizedBox(height: 8),
-          OutlinedButton(
-            onPressed: inviteBusy ? null : onSendPasswordSetup,
+          FilledButton(
+            onPressed: inviteBusy
+                ? null
+                : () {
+                    onSendPasswordSetup!();
+                  },
             child: Text(
               resolveRegistrationKey(
                 context,
@@ -770,7 +849,11 @@ class _ApprovalOutcomeCard extends StatelessWidget {
         if (canManageInvite && onRevoke != null) ...[
           const SizedBox(height: 8),
           TextButton(
-            onPressed: inviteBusy ? null : onRevoke,
+            onPressed: inviteBusy
+                ? null
+                : () {
+                    onRevoke!();
+                  },
             child: Text(
               resolveRegistrationKey(context, 'registrationInviteRevoke'),
             ),
