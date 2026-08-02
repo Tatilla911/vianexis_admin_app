@@ -17,9 +17,9 @@ class AuditLogCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).toString();
-    final timestampLabel = DateFormat.yMMMd(locale)
-        .add_Hm()
-        .format(log.timestamp.toLocal());
+    final timestampLabel = DateFormat.yMMMd(
+      locale,
+    ).add_Hm().format(log.timestamp.toLocal());
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
@@ -36,7 +36,11 @@ class AuditLogCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      log.targetLabel ?? resolveAuditLogKey(context, log.actionType.localizationKey()),
+                      log.targetLabel ??
+                          resolveAuditLogKey(
+                            context,
+                            log.actionType.localizationKey(),
+                          ),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
@@ -96,9 +100,13 @@ class AuditLogSummaryCard extends StatelessWidget {
         : '—';
 
     final lastCritical = summary.lastCriticalEvent;
-    final lastCriticalLabel = lastCritical?.targetLabel ??
+    final lastCriticalLabel =
+        lastCritical?.targetLabel ??
         (lastCritical != null
-            ? resolveAuditLogKey(context, lastCritical.actionType.localizationKey())
+            ? resolveAuditLogKey(
+                context,
+                lastCritical.actionType.localizationKey(),
+              )
             : resolveAuditLogKey(context, 'auditLogSummaryNoCritical'));
 
     return Card(
@@ -122,11 +130,17 @@ class AuditLogSummaryCard extends StatelessWidget {
               runSpacing: 12,
               children: [
                 _MetricChip(
-                  label: resolveAuditLogKey(context, 'auditLogSummaryFailedDenied'),
+                  label: resolveAuditLogKey(
+                    context,
+                    'auditLogSummaryFailedDenied',
+                  ),
                   value: '${summary.failedDeniedCount}',
                 ),
                 _MetricChip(
-                  label: resolveAuditLogKey(context, 'auditLogSummaryRecentActions'),
+                  label: resolveAuditLogKey(
+                    context,
+                    'auditLogSummaryRecentActions',
+                  ),
                   value: '${summary.recentPlatformActionsCount}',
                 ),
               ],

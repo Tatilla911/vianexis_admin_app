@@ -56,9 +56,7 @@ class _ResendCustomerReplyDialogState extends State<ResendCustomerReplyDialog> {
                   context,
                   'customerCommunicationDeliveryProviderDisabledNotice',
                 ),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.error,
-                ),
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
             ],
             if (widget.translationApproved) ...[
@@ -140,11 +138,8 @@ class _ResendCustomerReplyDialogState extends State<ResendCustomerReplyDialog> {
       });
       return;
     }
-    Navigator.of(context).pop(
-      ResendCustomerReplyRequest(
-        reason: reason,
-        humanConfirmed: true,
-      ),
-    );
+    Navigator.of(
+      context,
+    ).pop(ResendCustomerReplyRequest(reason: reason, humanConfirmed: true));
   }
 }

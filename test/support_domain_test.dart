@@ -9,18 +9,35 @@ import 'package:vianexis_admin_app/features/support/domain/support_ticket_status
 void main() {
   group('SupportTicketStatus', () {
     test('parses backend values', () {
-      expect(SupportTicketStatus.fromBackendValue('open'), SupportTicketStatus.open);
-      expect(SupportTicketStatus.fromBackendValue('in_progress'), SupportTicketStatus.investigating);
-      expect(SupportTicketStatus.fromBackendValue('waiting_on_customer'),
-          SupportTicketStatus.waitingForCustomer);
-      expect(SupportTicketStatus.fromBackendValue('closed'), SupportTicketStatus.closed);
+      expect(
+        SupportTicketStatus.fromBackendValue('open'),
+        SupportTicketStatus.open,
+      );
+      expect(
+        SupportTicketStatus.fromBackendValue('in_progress'),
+        SupportTicketStatus.investigating,
+      );
+      expect(
+        SupportTicketStatus.fromBackendValue('waiting_on_customer'),
+        SupportTicketStatus.waitingForCustomer,
+      );
+      expect(
+        SupportTicketStatus.fromBackendValue('closed'),
+        SupportTicketStatus.closed,
+      );
     });
   });
 
   group('SupportTicketPriority', () {
     test('parses backend values', () {
-      expect(SupportTicketPriority.fromBackendValue('urgent'), SupportTicketPriority.urgent);
-      expect(SupportTicketPriority.fromBackendValue('critical'), SupportTicketPriority.critical);
+      expect(
+        SupportTicketPriority.fromBackendValue('urgent'),
+        SupportTicketPriority.urgent,
+      );
+      expect(
+        SupportTicketPriority.fromBackendValue('critical'),
+        SupportTicketPriority.critical,
+      );
     });
   });
 
@@ -94,7 +111,10 @@ void main() {
         'scope': ['portal_dashboard', 'audit'],
         'documentsAllowed': false,
         'reason': 'Investigate health metadata',
-        'expiresAt': DateTime.now().toUtc().add(const Duration(hours: 2)).toIso8601String(),
+        'expiresAt': DateTime.now()
+            .toUtc()
+            .add(const Duration(hours: 2))
+            .toIso8601String(),
         'createdAt': '2026-06-18T08:00:00.000Z',
         'isActive': true,
         'metadata': {'scopeType': 'system_health_issue', 'scopeId': '501'},

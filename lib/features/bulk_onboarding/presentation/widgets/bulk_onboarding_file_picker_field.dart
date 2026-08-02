@@ -25,21 +25,27 @@ class BulkOnboardingFilePickerField extends StatelessWidget {
         OutlinedButton.icon(
           onPressed: onPick,
           icon: const Icon(Icons.upload_file),
-          label: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingChooseFile')),
+          label: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingChooseFile'),
+          ),
         ),
         if (fileName != null) ...[
           const SizedBox(height: 8),
           Text(
-            resolveBulkOnboardingKey(context, 'bulkOnboardingSelectedFile', params: {
-              'name': fileName!,
-            }),
+            resolveBulkOnboardingKey(
+              context,
+              'bulkOnboardingSelectedFile',
+              params: {'name': fileName!},
+            ),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           if (fileSizeBytes != null)
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingFileSize', params: {
-                'size': _formatBytes(fileSizeBytes!),
-              }),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingFileSize',
+                params: {'size': _formatBytes(fileSizeBytes!)},
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
         ],

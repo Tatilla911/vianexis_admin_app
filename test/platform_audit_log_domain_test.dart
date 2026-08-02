@@ -9,11 +9,15 @@ void main() {
   group('PlatformAuditActionType', () {
     test('parses backend event types', () {
       expect(
-        PlatformAuditActionType.fromBackendValue('platform.registration.approved'),
+        PlatformAuditActionType.fromBackendValue(
+          'platform.registration.approved',
+        ),
         PlatformAuditActionType.registrationApproved,
       );
       expect(
-        PlatformAuditActionType.fromBackendValue('platform.support_grant.created'),
+        PlatformAuditActionType.fromBackendValue(
+          'platform.support_grant.created',
+        ),
         PlatformAuditActionType.supportAccessGranted,
       );
       expect(
@@ -25,15 +29,27 @@ void main() {
 
   group('PlatformAuditResult', () {
     test('parses backend values', () {
-      expect(PlatformAuditResult.fromBackendValue('success'), PlatformAuditResult.success);
-      expect(PlatformAuditResult.fromBackendValue('denied'), PlatformAuditResult.denied);
+      expect(
+        PlatformAuditResult.fromBackendValue('success'),
+        PlatformAuditResult.success,
+      );
+      expect(
+        PlatformAuditResult.fromBackendValue('denied'),
+        PlatformAuditResult.denied,
+      );
     });
   });
 
   group('PlatformAuditSeverity', () {
     test('parses backend values', () {
-      expect(PlatformAuditSeverity.fromBackendValue('critical'), PlatformAuditSeverity.critical);
-      expect(PlatformAuditSeverity.fromBackendValue('warning'), PlatformAuditSeverity.warning);
+      expect(
+        PlatformAuditSeverity.fromBackendValue('critical'),
+        PlatformAuditSeverity.critical,
+      );
+      expect(
+        PlatformAuditSeverity.fromBackendValue('warning'),
+        PlatformAuditSeverity.warning,
+      );
     });
   });
 

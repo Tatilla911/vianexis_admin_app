@@ -26,8 +26,12 @@ class AuditLogDateRangeButton extends StatelessWidget {
             context,
             'auditLogDateRangeSelected',
             params: {
-              'from': query.dateFrom != null ? formatter.format(query.dateFrom!.toLocal()) : '…',
-              'to': query.dateTo != null ? formatter.format(query.dateTo!.toLocal()) : '…',
+              'from': query.dateFrom != null
+                  ? formatter.format(query.dateFrom!.toLocal())
+                  : '…',
+              'to': query.dateTo != null
+                  ? formatter.format(query.dateTo!.toLocal())
+                  : '…',
             },
           )
         : resolveAuditLogKey(context, 'auditLogDateRangeLabel');

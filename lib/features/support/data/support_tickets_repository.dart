@@ -221,7 +221,8 @@ class MockSupportTicketsRepository implements SupportTicketsRepository {
         requestedByName: 'Anna Kovács',
         requestedByEmail: 'anna@nordtrans.example',
         title: 'Upload queue stalled',
-        summary: 'Document upload metadata checks failing. No file content included.',
+        summary:
+            'Document upload metadata checks failing. No file content included.',
         status: SupportTicketStatus.open,
         priority: SupportTicketPriority.urgent,
         category: SupportTicketCategory.uploadIssue,
@@ -258,7 +259,8 @@ class MockSupportTicketsRepository implements SupportTicketsRepository {
         requestedByName: 'Marko Tamm',
         requestedByEmail: 'marko@baltic.example',
         title: 'Billing entitlement mismatch',
-        summary: 'Subscription metadata does not match portal entitlement flags.',
+        summary:
+            'Subscription metadata does not match portal entitlement flags.',
         status: SupportTicketStatus.waitingForCustomer,
         priority: SupportTicketPriority.normal,
         category: SupportTicketCategory.billing,
@@ -270,8 +272,9 @@ class MockSupportTicketsRepository implements SupportTicketsRepository {
   }
 }
 
-final supportTicketsRepositoryProvider = Provider<SupportTicketsRepository>((ref) {
-
+final supportTicketsRepositoryProvider = Provider<SupportTicketsRepository>((
+  ref,
+) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveSupportTicketsRepository(
       ref.watch(supportApiProvider),

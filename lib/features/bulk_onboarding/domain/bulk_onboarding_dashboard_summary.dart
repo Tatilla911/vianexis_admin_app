@@ -15,7 +15,9 @@ class BulkOnboardingDashboardSummary {
   final int invalidRows;
   final int processingJobs;
 
-  factory BulkOnboardingDashboardSummary.fromJobs(List<BulkOnboardingJob> jobs) {
+  factory BulkOnboardingDashboardSummary.fromJobs(
+    List<BulkOnboardingJob> jobs,
+  ) {
     var waiting = 0;
     var highRisk = 0;
     var invalidRows = 0;

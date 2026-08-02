@@ -19,10 +19,7 @@ void main() {
         reviewNotes: 'Incomplete documentation',
       );
 
-      expect(
-        request.toJson(),
-        {'reviewNotes': 'Incomplete documentation'},
-      );
+      expect(request.toJson(), {'reviewNotes': 'Incomplete documentation'});
       expect(request.endpointSuffix(), 'reject');
     });
 
@@ -33,13 +30,10 @@ void main() {
         aiReviewSummary: 'Applicant missing VAT proof',
       );
 
-      expect(
-        request.toJson(),
-        {
-          'reviewNotes': 'Need VAT certificate',
-          'aiReviewSummary': 'Applicant missing VAT proof',
-        },
-      );
+      expect(request.toJson(), {
+        'reviewNotes': 'Need VAT certificate',
+        'aiReviewSummary': 'Applicant missing VAT proof',
+      });
       expect(request.endpointSuffix(), 'request-info');
     });
   });

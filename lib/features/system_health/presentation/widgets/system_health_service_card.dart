@@ -5,10 +5,7 @@ import '../../domain/system_health_service_status.dart';
 import 'system_health_severity_badge.dart';
 
 class SystemHealthServiceCard extends StatelessWidget {
-  const SystemHealthServiceCard({
-    super.key,
-    required this.service,
-  });
+  const SystemHealthServiceCard({super.key, required this.service});
 
   final SystemHealthServiceStatus service;
 

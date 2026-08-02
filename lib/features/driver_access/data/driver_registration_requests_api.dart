@@ -46,7 +46,7 @@ class DriverRegistrationRequestsApi {
     await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/driver-registration-requests/$requestId/approve',
       data: {
-        if (companyId != null) 'companyId': companyId,
+        'companyId': ?companyId,
         if (reviewNotes != null && reviewNotes.trim().isNotEmpty)
           'reviewNotes': reviewNotes.trim(),
       },

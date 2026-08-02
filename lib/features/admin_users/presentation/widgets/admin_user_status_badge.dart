@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vianexis_admin_app/core/theme/admin_status_colors.dart';
 
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/platform_admin_user_status.dart';
@@ -15,7 +16,7 @@ class AdminUserStatusBadge extends StatelessWidget {
       PlatformAdminUserStatus.invited => Colors.blue,
       PlatformAdminUserStatus.suspended => Colors.orange,
       PlatformAdminUserStatus.disabled => Colors.red,
-      PlatformAdminUserStatus.unknown => Colors.black54,
+      PlatformAdminUserStatus.unknown => AdminStatusColors.muted,
     };
 
     return Chip(

@@ -12,7 +12,9 @@ enum AiReviewRecommendation {
   final String backendValue;
 
   static AiReviewRecommendation fromBackendValue(String? raw) {
-    if (raw == null || raw.trim().isEmpty) return AiReviewRecommendation.unknown;
+    if (raw == null || raw.trim().isEmpty) {
+      return AiReviewRecommendation.unknown;
+    }
     final normalized = raw.trim().toLowerCase();
     return AiReviewRecommendation.values.firstWhere(
       (value) => value.backendValue == normalized,
@@ -23,10 +25,13 @@ enum AiReviewRecommendation {
   String localizationKey() => switch (this) {
     AiReviewRecommendation.review => 'aiReviewRecommendationReview',
     AiReviewRecommendation.requestInfo => 'aiReviewRecommendationRequestInfo',
-    AiReviewRecommendation.approveCandidate => 'aiReviewRecommendationApproveCandidate',
-    AiReviewRecommendation.rejectCandidate => 'aiReviewRecommendationRejectCandidate',
+    AiReviewRecommendation.approveCandidate =>
+      'aiReviewRecommendationApproveCandidate',
+    AiReviewRecommendation.rejectCandidate =>
+      'aiReviewRecommendationRejectCandidate',
     AiReviewRecommendation.escalate => 'aiReviewRecommendationEscalate',
-    AiReviewRecommendation.cannotApproveYet => 'aiReviewRecommendationCannotApproveYet',
+    AiReviewRecommendation.cannotApproveYet =>
+      'aiReviewRecommendationCannotApproveYet',
     AiReviewRecommendation.unknown => 'aiReviewRecommendationUnknown',
   };
 }

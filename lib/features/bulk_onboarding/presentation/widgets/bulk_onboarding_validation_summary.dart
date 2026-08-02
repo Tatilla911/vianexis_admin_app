@@ -17,7 +17,10 @@ class BulkOnboardingValidationSummary extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingValidationSummaryTitle'),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingValidationSummaryTitle',
+              ),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
@@ -25,12 +28,32 @@ class BulkOnboardingValidationSummary extends StatelessWidget {
               spacing: 12,
               runSpacing: 8,
               children: [
-                _countChip(context, 'bulkOnboardingMetricValidRows', job.validRows),
-                _countChip(context, 'bulkOnboardingMetricWarningRows', job.warningRows),
-                _countChip(context, 'bulkOnboardingMetricInvalidRows', job.invalidRows),
-                _countChip(context, 'bulkOnboardingMetricDuplicateRows', job.duplicateRows),
+                _countChip(
+                  context,
+                  'bulkOnboardingMetricValidRows',
+                  job.validRows,
+                ),
+                _countChip(
+                  context,
+                  'bulkOnboardingMetricWarningRows',
+                  job.warningRows,
+                ),
+                _countChip(
+                  context,
+                  'bulkOnboardingMetricInvalidRows',
+                  job.invalidRows,
+                ),
+                _countChip(
+                  context,
+                  'bulkOnboardingMetricDuplicateRows',
+                  job.duplicateRows,
+                ),
                 if (job.skippedRows > 0)
-                  _countChip(context, 'bulkOnboardingMetricSkippedRows', job.skippedRows),
+                  _countChip(
+                    context,
+                    'bulkOnboardingMetricSkippedRows',
+                    job.skippedRows,
+                  ),
               ],
             ),
           ],

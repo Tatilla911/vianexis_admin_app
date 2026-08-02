@@ -30,8 +30,8 @@ class DashboardOperationalOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final systemHealthy = systemOverview?.overallStatus ==
-        SystemHealthOverallStatus.healthy;
+    final systemHealthy =
+        systemOverview?.overallStatus == SystemHealthOverallStatus.healthy;
     final systemLabel = systemOverview == null
         ? '—'
         : resolveDashboardKey(
@@ -95,20 +95,29 @@ class DashboardOperationalOverview extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           VianexisSectionHeader(
-            title: resolveDashboardKey(context, 'dashboardOperationalOverviewTitle'),
-            subtitle: resolveDashboardKey(context, 'dashboardOperationalOverviewBody'),
+            title: resolveDashboardKey(
+              context,
+              'dashboardOperationalOverviewTitle',
+            ),
+            subtitle: resolveDashboardKey(
+              context,
+              'dashboardOperationalOverviewBody',
+            ),
           ),
           const SizedBox(height: VianexisBrand.spaceLg),
           LayoutBuilder(
             builder: (context, constraints) {
-              final isWide = constraints.maxWidth >= VianexisBrand.tabletBreakpoint;
+              final isWide =
+                  constraints.maxWidth >= VianexisBrand.tabletBreakpoint;
               return Wrap(
                 spacing: VianexisBrand.spaceMd,
                 runSpacing: VianexisBrand.spaceMd,
                 children: [
                   for (final (label, value, tone, icon) in metrics)
                     SizedBox(
-                      width: isWide ? (constraints.maxWidth - VianexisBrand.spaceMd) / 2 : double.infinity,
+                      width: isWide
+                          ? (constraints.maxWidth - VianexisBrand.spaceMd) / 2
+                          : double.infinity,
                       child: VianexisMetricTile(
                         label: label,
                         value: value,

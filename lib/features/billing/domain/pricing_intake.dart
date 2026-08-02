@@ -49,11 +49,13 @@ class PricingIntake {
     return PricingIntake(
       id: json['id']?.toString() ?? '',
       companyId: json['companyId']?.toString() ?? '',
-      companyName: json['companyName']?.toString() ??
+      companyName:
+          json['companyName']?.toString() ??
           payloadMap?['companyDisplayName']?.toString(),
       contactName: json['contactName']?.toString(),
       contactEmail: json['contactEmail']?.toString(),
-      country: json['country']?.toString() ?? payloadMap?['country']?.toString(),
+      country:
+          json['country']?.toString() ?? payloadMap?['country']?.toString(),
       fleetSize: _parseNullableInt(
         json['fleetSize'] ?? payloadMap?['estimatedOwnedTrucks'],
       ),
@@ -93,11 +95,15 @@ class PricingIntake {
   bool matchesFilter(PricingIntakeListFilter filter) {
     return switch (filter) {
       PricingIntakeListFilter.all => true,
-      PricingIntakeListFilter.newIntake => status == PricingIntakeStatus.newIntake,
-      PricingIntakeListFilter.reviewing => status == PricingIntakeStatus.reviewing,
+      PricingIntakeListFilter.newIntake =>
+        status == PricingIntakeStatus.newIntake,
+      PricingIntakeListFilter.reviewing =>
+        status == PricingIntakeStatus.reviewing,
       PricingIntakeListFilter.quoted => status == PricingIntakeStatus.quoted,
-      PricingIntakeListFilter.accepted => status == PricingIntakeStatus.accepted,
-      PricingIntakeListFilter.rejected => status == PricingIntakeStatus.rejected,
+      PricingIntakeListFilter.accepted =>
+        status == PricingIntakeStatus.accepted,
+      PricingIntakeListFilter.rejected =>
+        status == PricingIntakeStatus.rejected,
     };
   }
 }
@@ -117,9 +123,9 @@ class PricingIntakesPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(PricingIntake.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(PricingIntake.fromJson)
+              .toList(growable: false)
         : const <PricingIntake>[];
     return PricingIntakesPage(
       items: items,

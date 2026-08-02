@@ -73,12 +73,7 @@ void main() {
 
   testWidgets('delivery history empty state renders', (tester) async {
     await tester.pumpWidget(
-      _wrap(
-        const DeliveryHistorySection(
-          threadId: '10',
-          deliveries: [],
-        ),
-      ),
+      _wrap(const DeliveryHistorySection(threadId: '10', deliveries: [])),
     );
     await tester.pumpAndSettle();
     expect(find.textContaining('No delivery attempts'), findsOneWidget);

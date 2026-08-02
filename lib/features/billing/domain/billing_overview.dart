@@ -20,7 +20,10 @@ class BillingOverview {
   final bool metadataOnly;
 
   int get attentionCount =>
-      pastDueSubscriptions + suspendedSubscriptions + pricingIntakesNew + quoteRequestsPending;
+      pastDueSubscriptions +
+      suspendedSubscriptions +
+      pricingIntakesNew +
+      quoteRequestsPending;
 
   factory BillingOverview.fromJson(Map<String, dynamic> json) {
     return BillingOverview(

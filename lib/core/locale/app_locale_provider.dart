@@ -8,8 +8,9 @@ const Locale kDefaultAdminLocale = Locale('hu');
 const String _storageKey = 'admin_app_locale_code';
 
 /// `null` means follow the device locale via [resolveAppLocale].
-final appLocaleProvider =
-    NotifierProvider<AppLocaleNotifier, Locale?>(AppLocaleNotifier.new);
+final appLocaleProvider = NotifierProvider<AppLocaleNotifier, Locale?>(
+  AppLocaleNotifier.new,
+);
 
 class AppLocaleNotifier extends Notifier<Locale?> {
   @override

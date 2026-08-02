@@ -15,7 +15,7 @@ class AppEnvironmentBadge extends StatelessWidget {
     final envLabel = resolveAppConfigKey(context, config.displayLabelKey);
     final apiLabel = config.isApiConfigured
         ? (config.safeApiHostDisplay ??
-            resolveAppConfigKey(context, 'appConfigApiConfigured'))
+              resolveAppConfigKey(context, 'appConfigApiConfigured'))
         : resolveAppConfigKey(context, 'appConfigApiNotConfigured');
 
     return Wrap(
@@ -23,13 +23,15 @@ class AppEnvironmentBadge extends StatelessWidget {
       runSpacing: VianexisBrand.spaceSm,
       children: [
         VianexisStatusBadge(
-          label: '${resolveAppConfigKey(context, 'appConfigEnvironmentLabel')}: $envLabel',
+          label:
+              '${resolveAppConfigKey(context, 'appConfigEnvironmentLabel')}: $envLabel',
           tone: config.isProduction
               ? VianexisStatusTone.degraded
               : VianexisStatusTone.unknown,
         ),
         VianexisStatusBadge(
-          label: '${resolveAppConfigKey(context, 'appConfigApiStatusLabel')}: $apiLabel',
+          label:
+              '${resolveAppConfigKey(context, 'appConfigApiStatusLabel')}: $apiLabel',
           tone: config.isApiConfigured
               ? VianexisStatusTone.healthy
               : VianexisStatusTone.degraded,

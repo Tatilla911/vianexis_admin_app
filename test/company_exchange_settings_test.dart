@@ -31,9 +31,7 @@ void main() {
     });
 
     test('patch serializes only set fields', () {
-      const patch = CompanyExchangeSettingsPatch(
-        palletExchangeEnabled: false,
-      );
+      const patch = CompanyExchangeSettingsPatch(palletExchangeEnabled: false);
       expect(patch.toJson(), {'palletExchangeEnabled': false});
     });
   });

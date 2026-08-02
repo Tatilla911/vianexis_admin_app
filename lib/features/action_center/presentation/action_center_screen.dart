@@ -47,7 +47,12 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
         title: Text(l10n.actionCenterTitle),
         actions: [
           if (usesMock)
-            MockDataBadge(label: resolveActionCenterKey(context, 'actionCenterMockDataBadge')),
+            MockDataBadge(
+              label: resolveActionCenterKey(
+                context,
+                'actionCenterMockDataBadge',
+              ),
+            ),
         ],
       ),
       body: itemsAsync.when(
@@ -55,7 +60,10 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage: resolveActionCenterKey(context, 'actionCenterLoadError'),
+          fallbackMessage: resolveActionCenterKey(
+            context,
+            'actionCenterLoadError',
+          ),
           onRetry: () => ref.read(actionCenterProvider.notifier).refresh(),
         ),
         data: (items) {
@@ -80,8 +88,12 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                     child: snapshotAsync.when(
                       loading: () => const LinearProgressIndicator(),
-                      error: (_, _) =>
-                          Text(resolveActionCenterKey(context, 'actionCenterLoadError')),
+                      error: (_, _) => Text(
+                        resolveActionCenterKey(
+                          context,
+                          'actionCenterLoadError',
+                        ),
+                      ),
                       data: (snapshot) => ActionCenterNeedsAttentionCard(
                         snapshot: snapshot,
                         compact: true,
@@ -112,23 +124,27 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
-                      children: ActionCenterFilter.values.map((filter) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: FilterChip(
-                            label: Text(
-                              resolveActionCenterKey(
-                                context,
-                                filter.localizationKey(),
+                      children: ActionCenterFilter.values
+                          .map((filter) {
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: FilterChip(
+                                label: Text(
+                                  resolveActionCenterKey(
+                                    context,
+                                    filter.localizationKey(),
+                                  ),
+                                ),
+                                selected: query.filter == filter,
+                                onSelected: (_) => ref
+                                    .read(
+                                      actionCenterListQueryProvider.notifier,
+                                    )
+                                    .setFilter(filter),
                               ),
-                            ),
-                            selected: query.filter == filter,
-                            onSelected: (_) => ref
-                                .read(actionCenterListQueryProvider.notifier)
-                                .setFilter(filter),
-                          ),
-                        );
-                      }).toList(growable: false),
+                            );
+                          })
+                          .toList(growable: false),
                     ),
                   ),
                 ),
@@ -167,19 +183,16 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                     sliver: SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          final item = items[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 12),
-                            child: ActionCenterItemCard(
-                              item: item,
-                              onTap: () => _openItem(item.actionRouteHint),
-                            ),
-                          );
-                        },
-                        childCount: items.length,
-                      ),
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final item = items[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: ActionCenterItemCard(
+                            item: item,
+                            onTap: () => _openItem(item.actionRouteHint),
+                          ),
+                        );
+                      }, childCount: items.length),
                     ),
                   ),
                 SliverToBoxAdapter(

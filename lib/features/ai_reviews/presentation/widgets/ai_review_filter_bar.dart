@@ -23,7 +23,9 @@ class AiReviewFilterBar extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: FilterChip(
-              label: Text(resolveAiReviewKey(context, filter.localizationKey())),
+              label: Text(
+                resolveAiReviewKey(context, filter.localizationKey()),
+              ),
               selected: selected == filter,
               onSelected: (_) => onSelected(filter),
             ),

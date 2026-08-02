@@ -26,9 +26,11 @@ enum SupportAccessScopeType {
     return switch (this) {
       SupportAccessScopeType.companyMetadata => 'supportScopeCompanyMetadata',
       SupportAccessScopeType.specificTrip => 'supportScopeSpecificTrip',
-      SupportAccessScopeType.specificDocumentIssue => 'supportScopeSpecificDocumentIssue',
+      SupportAccessScopeType.specificDocumentIssue =>
+        'supportScopeSpecificDocumentIssue',
       SupportAccessScopeType.uploadQueueIssue => 'supportScopeUploadQueueIssue',
-      SupportAccessScopeType.systemHealthIssue => 'supportScopeSystemHealthIssue',
+      SupportAccessScopeType.systemHealthIssue =>
+        'supportScopeSystemHealthIssue',
       SupportAccessScopeType.integrationIssue => 'supportScopeIntegrationIssue',
       SupportAccessScopeType.billingIssue => 'supportScopeBillingIssue',
       SupportAccessScopeType.unknown => 'supportScopeUnknown',
@@ -58,7 +60,9 @@ enum SupportAccessScopeType {
 
   List<String> backendScopes({required bool documentsAllowed}) {
     if (documentsAllowed) {
-      throw ArgumentError('documentsAllowed must remain false for scoped grants');
+      throw ArgumentError(
+        'documentsAllowed must remain false for scoped grants',
+      );
     }
     return switch (this) {
       SupportAccessScopeType.companyMetadata => const [
@@ -68,7 +72,10 @@ enum SupportAccessScopeType {
       SupportAccessScopeType.specificTrip => const ['trip_groups'],
       SupportAccessScopeType.specificDocumentIssue => const ['workshop'],
       SupportAccessScopeType.uploadQueueIssue => const ['workshop'],
-      SupportAccessScopeType.systemHealthIssue => const ['portal_dashboard', 'audit'],
+      SupportAccessScopeType.systemHealthIssue => const [
+        'portal_dashboard',
+        'audit',
+      ],
       SupportAccessScopeType.integrationIssue => const ['organization'],
       SupportAccessScopeType.billingIssue => const ['company_settings'],
       SupportAccessScopeType.unknown => const ['portal_dashboard'],

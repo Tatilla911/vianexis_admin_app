@@ -21,17 +21,16 @@ import 'widgets/generate_evidence_package_dialog.dart';
 import 'widgets/send_customer_reply_dialog.dart';
 
 class CustomerCommunicationDetailScreen extends ConsumerWidget {
-  const CustomerCommunicationDetailScreen({
-    super.key,
-    required this.threadId,
-  });
+  const CustomerCommunicationDetailScreen({super.key, required this.threadId});
 
   final String threadId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final detailAsync = ref.watch(customerCommunicationDetailProvider(threadId));
+    final detailAsync = ref.watch(
+      customerCommunicationDetailProvider(threadId),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -204,14 +203,14 @@ class CustomerCommunicationDetailScreen extends ConsumerWidget {
   Future<void> _sendReply(BuildContext context, WidgetRef ref) async {
     final emailStatusAsync = ref.read(emailDeliveryStatusProvider);
     final emailStatus = emailStatusAsync.asData?.value;
-    final providerDisabled = emailStatus == null ||
+    final providerDisabled =
+        emailStatus == null ||
         !emailStatus.deliveryEnabled ||
         emailStatus.noopMode;
     final request = await showDialog<SendCustomerReplyRequest>(
       context: context,
-      builder: (context) => SendCustomerReplyDialog(
-        providerDisabled: providerDisabled,
-      ),
+      builder: (context) =>
+          SendCustomerReplyDialog(providerDisabled: providerDisabled),
     );
     if (request == null) return;
 

@@ -152,8 +152,9 @@ class MockReleaseCenterRepository implements ReleaseCenterRepository {
   }
 }
 
-final releaseCenterRepositoryProvider = Provider<ReleaseCenterRepository>((ref) {
-
+final releaseCenterRepositoryProvider = Provider<ReleaseCenterRepository>((
+  ref,
+) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveReleaseCenterRepository(ref.watch(releaseCenterApiProvider));
   }

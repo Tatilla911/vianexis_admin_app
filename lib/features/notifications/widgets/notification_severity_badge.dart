@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vianexis_admin_app/core/theme/admin_status_colors.dart';
 
 import '../domain/notification_severity.dart';
 
@@ -13,7 +14,7 @@ class NotificationSeverityBadge extends StatelessWidget {
       NotificationSeverity.info => ('Info', Colors.blue),
       NotificationSeverity.warning => ('Warning', Colors.orange),
       NotificationSeverity.critical => ('Critical', Colors.red),
-      NotificationSeverity.unknown => ('Unknown', Colors.grey),
+      NotificationSeverity.unknown => ('Unknown', AdminStatusColors.neutral),
     };
     return Chip(
       label: Text(label),

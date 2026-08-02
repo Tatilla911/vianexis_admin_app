@@ -87,8 +87,7 @@ class _EvidencePackageDetailScreenState
     } on EvidencePdfShareFailure catch (failure) {
       if (!mounted) return;
       final key = switch (failure) {
-        EvidencePdfShareFailure.empty ||
-        EvidencePdfShareFailure.invalid =>
+        EvidencePdfShareFailure.empty || EvidencePdfShareFailure.invalid =>
           'customerCommunicationSharePdfInvalid',
         EvidencePdfShareFailure.shareUnavailable =>
           'customerCommunicationSharePdfUnavailable',
@@ -121,11 +120,14 @@ class _EvidencePackageDetailScreenState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final detailAsync =
-        ref.watch(customerCommunicationDetailProvider(widget.threadId));
+    final detailAsync = ref.watch(
+      customerCommunicationDetailProvider(widget.threadId),
+    );
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.customerCommunicationEvidencePackageTitle)),
+      appBar: AppBar(
+        title: Text(l10n.customerCommunicationEvidencePackageTitle),
+      ),
       body: detailAsync.when(
         loading: () => const VianexisLoadingView(),
         error: (error, _) => VianexisErrorView.fromError(

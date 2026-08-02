@@ -66,10 +66,7 @@ class BulkOnboardingRowSkipRequest {
 }
 
 class BulkOnboardingRowActionResult {
-  const BulkOnboardingRowActionResult({
-    required this.row,
-    required this.job,
-  });
+  const BulkOnboardingRowActionResult({required this.row, required this.job});
 
   factory BulkOnboardingRowActionResult.fromJson(Map<String, dynamic> json) {
     return BulkOnboardingRowActionResult(

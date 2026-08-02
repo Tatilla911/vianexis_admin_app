@@ -282,6 +282,7 @@ class _QrCodesManagementDialogState
         }
         return;
       }
+      if (!mounted) return;
       final subject = resolveQrCodesKey(context, 'qrCodesShareCard');
       await Share.shareXFiles(
         [XFile(file.path, mimeType: 'image/png')],

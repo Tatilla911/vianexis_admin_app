@@ -18,15 +18,18 @@ class PushProviderStatusCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              resolveNotificationsKey(context, 'notificationsPushProviderTitle'),
+              resolveNotificationsKey(
+                context,
+                'notificationsPushProviderTitle',
+              ),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             Text(
               _stateLabel(context),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
             _row(
@@ -54,7 +57,10 @@ class PushProviderStatusCard extends StatelessWidget {
               ),
             const SizedBox(height: 12),
             VianexisMetadataNotice(
-              message: resolveNotificationsKey(context, 'notificationsPushProviderNotice'),
+              message: resolveNotificationsKey(
+                context,
+                'notificationsPushProviderNotice',
+              ),
             ),
           ],
         ),
@@ -64,22 +70,32 @@ class PushProviderStatusCard extends StatelessWidget {
 
   String _stateLabel(BuildContext context) {
     return switch (status.uiState) {
-      PushProviderUiState.inAppOnly =>
-        resolveNotificationsKey(context, 'notificationsPushStateInAppOnly'),
+      PushProviderUiState.inAppOnly => resolveNotificationsKey(
+        context,
+        'notificationsPushStateInAppOnly',
+      ),
       PushProviderUiState.externalNotConfigured => resolveNotificationsKey(
         context,
         'notificationsPushStateExternalNotConfigured',
       ),
-      PushProviderUiState.configured =>
-        resolveNotificationsKey(context, 'notificationsPushStateConfigured'),
+      PushProviderUiState.configured => resolveNotificationsKey(
+        context,
+        'notificationsPushStateConfigured',
+      ),
     };
   }
 
   String _providerLabel(BuildContext context, String provider) {
     return switch (provider) {
-      'none' => resolveNotificationsKey(context, 'notificationsPushProviderNone'),
+      'none' => resolveNotificationsKey(
+        context,
+        'notificationsPushProviderNone',
+      ),
       'fcm' => resolveNotificationsKey(context, 'notificationsPushProviderFcm'),
-      'apns' => resolveNotificationsKey(context, 'notificationsPushProviderApns'),
+      'apns' => resolveNotificationsKey(
+        context,
+        'notificationsPushProviderApns',
+      ),
       _ => provider,
     };
   }

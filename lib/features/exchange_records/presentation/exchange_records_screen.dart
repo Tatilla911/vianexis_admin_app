@@ -32,7 +32,10 @@ class _ExchangeRecordsScreenState extends ConsumerState<ExchangeRecordsScreen> {
         actions: [
           if (usesMock)
             MockDataBadge(
-              label: resolveExchangeRecordsKey(context, 'exchangeRecordsMockBadge'),
+              label: resolveExchangeRecordsKey(
+                context,
+                'exchangeRecordsMockBadge',
+              ),
             ),
         ],
       ),
@@ -41,8 +44,10 @@ class _ExchangeRecordsScreenState extends ConsumerState<ExchangeRecordsScreen> {
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage:
-              resolveExchangeRecordsKey(context, 'exchangeRecordsLoadFailed'),
+          fallbackMessage: resolveExchangeRecordsKey(
+            context,
+            'exchangeRecordsLoadFailed',
+          ),
           onRetry: () => ref.invalidate(exchangeRecordsListProvider),
         ),
         data: (result) {
@@ -66,7 +71,8 @@ class _ExchangeRecordsScreenState extends ConsumerState<ExchangeRecordsScreen> {
                     context,
                     'exchangeRecordsBackendMessage',
                   ),
-                  endpointHint: 'GET /platform-admin/exchange-records (planned)',
+                  endpointHint:
+                      'GET /platform-admin/exchange-records (planned)',
                 ),
               ],
             );
@@ -93,7 +99,10 @@ class _ExchangeRecordsScreenState extends ConsumerState<ExchangeRecordsScreen> {
                         padding: const EdgeInsets.only(right: 8),
                         child: FilterChip(
                           label: Text(
-                            resolveExchangeRecordsKey(context, filter.localizationKey),
+                            resolveExchangeRecordsKey(
+                              context,
+                              filter.localizationKey,
+                            ),
                           ),
                           selected: _filter == filter,
                           onSelected: (_) => setState(() => _filter = filter),
@@ -104,7 +113,12 @@ class _ExchangeRecordsScreenState extends ConsumerState<ExchangeRecordsScreen> {
               ),
               const SizedBox(height: 12),
               if (filtered.isEmpty)
-                Text(resolveExchangeRecordsKey(context, 'exchangeRecordsListEmpty'))
+                Text(
+                  resolveExchangeRecordsKey(
+                    context,
+                    'exchangeRecordsListEmpty',
+                  ),
+                )
               else
                 for (final record in filtered)
                   Card(
@@ -133,25 +147,36 @@ class _ExchangeRecordsScreenState extends ConsumerState<ExchangeRecordsScreen> {
   ) {
     return switch (_filter) {
       ExchangeRecordStatusFilter.all => items,
-      ExchangeRecordStatusFilter.disputed => items
-          .where((item) => item.status.toLowerCase() == 'disputed')
-          .toList(growable: false),
-      ExchangeRecordStatusFilter.damaged => items
-          .where((item) => item.damagedQuantity > 0)
-          .toList(growable: false),
-      ExchangeRecordStatusFilter.missing => items
-          .where((item) => item.missingQuantity > 0)
-          .toList(growable: false),
+      ExchangeRecordStatusFilter.disputed =>
+        items
+            .where((item) => item.status.toLowerCase() == 'disputed')
+            .toList(growable: false),
+      ExchangeRecordStatusFilter.damaged =>
+        items.where((item) => item.damagedQuantity > 0).toList(growable: false),
+      ExchangeRecordStatusFilter.missing =>
+        items.where((item) => item.missingQuantity > 0).toList(growable: false),
     };
   }
 }
 
 String resolveExchangeRecordStatus(BuildContext context, String raw) {
   return switch (raw.toLowerCase()) {
-    'completed' => resolveExchangeRecordsKey(context, 'exchangeRecordsStatusCompleted'),
-    'disputed' => resolveExchangeRecordsKey(context, 'exchangeRecordsStatusDisputed'),
-    'damaged' => resolveExchangeRecordsKey(context, 'exchangeRecordsStatusDamaged'),
-    'missing' => resolveExchangeRecordsKey(context, 'exchangeRecordsStatusMissing'),
+    'completed' => resolveExchangeRecordsKey(
+      context,
+      'exchangeRecordsStatusCompleted',
+    ),
+    'disputed' => resolveExchangeRecordsKey(
+      context,
+      'exchangeRecordsStatusDisputed',
+    ),
+    'damaged' => resolveExchangeRecordsKey(
+      context,
+      'exchangeRecordsStatusDamaged',
+    ),
+    'missing' => resolveExchangeRecordsKey(
+      context,
+      'exchangeRecordsStatusMissing',
+    ),
     _ => resolveExchangeRecordsKey(context, 'exchangeRecordsStatusUnknown'),
   };
 }

@@ -20,7 +20,8 @@ class SupportAccessGrantsScreen extends ConsumerStatefulWidget {
       _SupportAccessGrantsScreenState();
 }
 
-class _SupportAccessGrantsScreenState extends ConsumerState<SupportAccessGrantsScreen> {
+class _SupportAccessGrantsScreenState
+    extends ConsumerState<SupportAccessGrantsScreen> {
   final _searchController = TextEditingController();
 
   @override
@@ -34,7 +35,9 @@ class _SupportAccessGrantsScreenState extends ConsumerState<SupportAccessGrantsS
     final l10n = AppLocalizations.of(context);
     final query = ref.watch(supportAccessGrantListQueryProvider);
     final grantsAsync = ref.watch(filteredSupportAccessGrantsProvider);
-    final usesMock = ref.watch(supportAccessGrantsRepositoryProvider).usesMockData;
+    final usesMock = ref
+        .watch(supportAccessGrantsRepositoryProvider)
+        .usesMockData;
 
     return Scaffold(
       appBar: AppBar(
@@ -60,13 +63,16 @@ class _SupportAccessGrantsScreenState extends ConsumerState<SupportAccessGrantsS
                 prefixIcon: const Icon(Icons.search),
                 hintText: resolveSupportKey(context, 'supportGrantSearchHint'),
               ),
-              onChanged: (value) =>
-                  ref.read(supportAccessGrantListQueryProvider.notifier).setSearch(value),
+              onChanged: (value) => ref
+                  .read(supportAccessGrantListQueryProvider.notifier)
+                  .setSearch(value),
             ),
           ),
           SupportAccessGrantFilterBar(
             selected: query.filter,
-            onSelected: ref.read(supportAccessGrantListQueryProvider.notifier).setFilter,
+            onSelected: ref
+                .read(supportAccessGrantListQueryProvider.notifier)
+                .setFilter,
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -76,7 +82,8 @@ class _SupportAccessGrantsScreenState extends ConsumerState<SupportAccessGrantsS
                 context,
                 error,
                 fallbackMessage: resolveSupportKey(context, 'supportLoadError'),
-                onRetry: () => ref.read(supportAccessGrantsProvider.notifier).refresh(),
+                onRetry: () =>
+                    ref.read(supportAccessGrantsProvider.notifier).refresh(),
               ),
               data: (items) {
                 if (items.isEmpty) {
@@ -92,7 +99,8 @@ class _SupportAccessGrantsScreenState extends ConsumerState<SupportAccessGrantsS
                 }
 
                 return RefreshIndicator(
-                  onRefresh: () => ref.read(supportAccessGrantsProvider.notifier).refresh(),
+                  onRefresh: () =>
+                      ref.read(supportAccessGrantsProvider.notifier).refresh(),
                   child: ListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                     itemCount: items.length,

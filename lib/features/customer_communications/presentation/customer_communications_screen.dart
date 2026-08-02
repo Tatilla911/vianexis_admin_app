@@ -35,7 +35,9 @@ class _CustomerCommunicationsScreenState
     final l10n = AppLocalizations.of(context);
     final query = ref.watch(customerCommunicationListQueryProvider);
     final threadsAsync = ref.watch(filteredCustomerCommunicationsProvider);
-    final usesMock = ref.watch(customerCommunicationsRepositoryProvider).usesMockData;
+    final usesMock = ref
+        .watch(customerCommunicationsRepositoryProvider)
+        .usesMockData;
 
     return Scaffold(
       appBar: AppBar(
@@ -79,8 +81,9 @@ class _CustomerCommunicationsScreenState
           ),
           CustomerCommunicationsFilterBar(
             selected: query.filter,
-            onSelected:
-                ref.read(customerCommunicationListQueryProvider.notifier).setFilter,
+            onSelected: ref
+                .read(customerCommunicationListQueryProvider.notifier)
+                .setFilter,
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -113,8 +116,9 @@ class _CustomerCommunicationsScreenState
                 }
 
                 return RefreshIndicator(
-                  onRefresh: () =>
-                      ref.read(customerCommunicationsProvider.notifier).refresh(),
+                  onRefresh: () => ref
+                      .read(customerCommunicationsProvider.notifier)
+                      .refresh(),
                   child: ListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                     itemCount: items.length,

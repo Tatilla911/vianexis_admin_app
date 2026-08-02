@@ -25,7 +25,10 @@ class AiDiagnosticSummaryCard extends StatelessWidget {
                 const Icon(Icons.auto_awesome_outlined, size: 20),
                 const SizedBox(width: 8),
                 Text(
-                  resolveSystemHealthKey(context, 'systemHealthAiDiagnosticTitle'),
+                  resolveSystemHealthKey(
+                    context,
+                    'systemHealthAiDiagnosticTitle',
+                  ),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],
@@ -40,7 +43,10 @@ class AiDiagnosticSummaryCard extends StatelessWidget {
             if (recommendedAction != null && recommendedAction!.isNotEmpty) ...[
               const SizedBox(height: 12),
               Text(
-                resolveSystemHealthKey(context, 'systemHealthRecommendedAction'),
+                resolveSystemHealthKey(
+                  context,
+                  'systemHealthRecommendedAction',
+                ),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(height: 4),

@@ -10,9 +10,8 @@ Future<PlatformCompanyStatusRequest?> showPlatformCompanyStatusDialog({
 }) {
   return showDialog<PlatformCompanyStatusRequest>(
     context: context,
-    builder: (dialogContext) => _PlatformCompanyStatusDialog(
-      currentStatus: currentStatus,
-    ),
+    builder: (dialogContext) =>
+        _PlatformCompanyStatusDialog(currentStatus: currentStatus),
   );
 }
 
@@ -26,7 +25,8 @@ class _PlatformCompanyStatusDialog extends StatefulWidget {
       _PlatformCompanyStatusDialogState();
 }
 
-class _PlatformCompanyStatusDialogState extends State<_PlatformCompanyStatusDialog> {
+class _PlatformCompanyStatusDialogState
+    extends State<_PlatformCompanyStatusDialog> {
   final _formKey = GlobalKey<FormState>();
   final _reasonController = TextEditingController();
   late PlatformCompanyStatus _selectedStatus;
@@ -52,7 +52,9 @@ class _PlatformCompanyStatusDialogState extends State<_PlatformCompanyStatusDial
     final validationError = request.validate();
     if (validationError != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolvePlatformCompanyKey(context, validationError))),
+        SnackBar(
+          content: Text(resolvePlatformCompanyKey(context, validationError)),
+        ),
       );
       return;
     }
@@ -70,7 +72,9 @@ class _PlatformCompanyStatusDialogState extends State<_PlatformCompanyStatusDial
     ];
 
     return AlertDialog(
-      title: Text(resolvePlatformCompanyKey(context, 'platformCompanyStatusDialogTitle')),
+      title: Text(
+        resolvePlatformCompanyKey(context, 'platformCompanyStatusDialogTitle'),
+      ),
       content: Form(
         key: _formKey,
         child: Column(
@@ -78,7 +82,10 @@ class _PlatformCompanyStatusDialogState extends State<_PlatformCompanyStatusDial
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              resolvePlatformCompanyKey(context, 'platformCompanyStatusDialogNotice'),
+              resolvePlatformCompanyKey(
+                context,
+                'platformCompanyStatusDialogNotice',
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -95,7 +102,10 @@ class _PlatformCompanyStatusDialogState extends State<_PlatformCompanyStatusDial
                   DropdownMenuItem(
                     value: status,
                     child: Text(
-                      resolvePlatformCompanyKey(context, status.localizationKey()),
+                      resolvePlatformCompanyKey(
+                        context,
+                        status.localizationKey(),
+                      ),
                     ),
                   ),
               ],
@@ -126,7 +136,10 @@ class _PlatformCompanyStatusDialogState extends State<_PlatformCompanyStatusDial
             ),
             const SizedBox(height: 8),
             Text(
-              resolvePlatformCompanyKey(context, 'platformCompanyStatusAuditNotice'),
+              resolvePlatformCompanyKey(
+                context,
+                'platformCompanyStatusAuditNotice',
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
@@ -135,11 +148,15 @@ class _PlatformCompanyStatusDialogState extends State<_PlatformCompanyStatusDial
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(resolvePlatformCompanyKey(context, 'platformCompanyStatusDismiss')),
+          child: Text(
+            resolvePlatformCompanyKey(context, 'platformCompanyStatusDismiss'),
+          ),
         ),
         FilledButton(
           onPressed: _submit,
-          child: Text(resolvePlatformCompanyKey(context, 'platformCompanyStatusConfirm')),
+          child: Text(
+            resolvePlatformCompanyKey(context, 'platformCompanyStatusConfirm'),
+          ),
         ),
       ],
     );

@@ -5,11 +5,7 @@ import '../../domain/quote_request.dart';
 import '../../domain/quote_request_status.dart';
 
 class QuoteRequestCard extends StatelessWidget {
-  const QuoteRequestCard({
-    super.key,
-    required this.quoteRequest,
-    this.onTap,
-  });
+  const QuoteRequestCard({super.key, required this.quoteRequest, this.onTap});
 
   final QuoteRequest quoteRequest;
   final VoidCallback? onTap;

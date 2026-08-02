@@ -57,7 +57,9 @@ void main() {
     test('filters by severity critical', () {
       final filtered = filteredSecurityEvents(
         items: events,
-        query: const SecurityEventListQuery(filter: SecurityEventFilter.critical),
+        query: const SecurityEventListQuery(
+          filter: SecurityEventFilter.critical,
+        ),
       );
       expect(filtered, hasLength(1));
       expect(filtered.first.id, '2');
@@ -66,7 +68,9 @@ void main() {
     test('filters by type failed login', () {
       final filtered = filteredSecurityEvents(
         items: events,
-        query: const SecurityEventListQuery(filter: SecurityEventFilter.failedLogin),
+        query: const SecurityEventListQuery(
+          filter: SecurityEventFilter.failedLogin,
+        ),
       );
       expect(filtered, hasLength(1));
       expect(filtered.first.type, SecurityEventType.failedLogin);
@@ -84,7 +88,12 @@ void main() {
       final events = await repo.fetchEvents(
         type: SecurityEventType.adminRoleChange,
       );
-      expect(events.every((event) => event.type == SecurityEventType.adminRoleChange), isTrue);
+      expect(
+        events.every(
+          (event) => event.type == SecurityEventType.adminRoleChange,
+        ),
+        isTrue,
+      );
     });
   });
 

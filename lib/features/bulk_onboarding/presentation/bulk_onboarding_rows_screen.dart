@@ -22,7 +22,8 @@ class BulkOnboardingRowsScreen extends ConsumerStatefulWidget {
       _BulkOnboardingRowsScreenState();
 }
 
-class _BulkOnboardingRowsScreenState extends ConsumerState<BulkOnboardingRowsScreen> {
+class _BulkOnboardingRowsScreenState
+    extends ConsumerState<BulkOnboardingRowsScreen> {
   BulkOnboardingRowListFilter _filter = BulkOnboardingRowListFilter.all;
   final _searchController = TextEditingController();
   String _search = '';
@@ -33,14 +34,18 @@ class _BulkOnboardingRowsScreenState extends ConsumerState<BulkOnboardingRowsScr
     super.dispose();
   }
 
-  BulkOnboardingRowStatus? _statusForFilter(BulkOnboardingRowListFilter filter) {
+  BulkOnboardingRowStatus? _statusForFilter(
+    BulkOnboardingRowListFilter filter,
+  ) {
     return switch (filter) {
       BulkOnboardingRowListFilter.all => null,
       BulkOnboardingRowListFilter.valid => BulkOnboardingRowStatus.valid,
       BulkOnboardingRowListFilter.invalid => BulkOnboardingRowStatus.invalid,
       BulkOnboardingRowListFilter.warning => BulkOnboardingRowStatus.warning,
-      BulkOnboardingRowListFilter.duplicate => BulkOnboardingRowStatus.duplicate,
-      BulkOnboardingRowListFilter.processed => BulkOnboardingRowStatus.processed,
+      BulkOnboardingRowListFilter.duplicate =>
+        BulkOnboardingRowStatus.duplicate,
+      BulkOnboardingRowListFilter.processed =>
+        BulkOnboardingRowStatus.processed,
       BulkOnboardingRowListFilter.failed => BulkOnboardingRowStatus.failed,
       BulkOnboardingRowListFilter.skipped => BulkOnboardingRowStatus.skipped,
     };
@@ -99,8 +104,10 @@ class _BulkOnboardingRowsScreenState extends ConsumerState<BulkOnboardingRowsScr
               error: (error, _) => VianexisErrorView.fromError(
                 context,
                 error,
-                fallbackMessage:
-                    resolveBulkOnboardingKey(context, 'bulkOnboardingRowsError'),
+                fallbackMessage: resolveBulkOnboardingKey(
+                  context,
+                  'bulkOnboardingRowsError',
+                ),
                 onRetry: () => ref.invalidate(
                   bulkOnboardingRowsProvider((
                     jobId: widget.jobId,
@@ -113,7 +120,10 @@ class _BulkOnboardingRowsScreenState extends ConsumerState<BulkOnboardingRowsScr
                 if (rows.isEmpty) {
                   return Center(
                     child: Text(
-                      resolveBulkOnboardingKey(context, 'bulkOnboardingRowsEmpty'),
+                      resolveBulkOnboardingKey(
+                        context,
+                        'bulkOnboardingRowsEmpty',
+                      ),
                     ),
                   );
                 }
@@ -141,24 +151,43 @@ class _BulkOnboardingRowsScreenState extends ConsumerState<BulkOnboardingRowsScr
     );
   }
 
-  String _rowFilterLabel(BuildContext context, BulkOnboardingRowListFilter filter) {
+  String _rowFilterLabel(
+    BuildContext context,
+    BulkOnboardingRowListFilter filter,
+  ) {
     return switch (filter) {
-      BulkOnboardingRowListFilter.all =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterAll'),
-      BulkOnboardingRowListFilter.valid =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterValid'),
-      BulkOnboardingRowListFilter.invalid =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterInvalid'),
-      BulkOnboardingRowListFilter.warning =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterWarning'),
-      BulkOnboardingRowListFilter.duplicate =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterDuplicate'),
-      BulkOnboardingRowListFilter.processed =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterProcessed'),
-      BulkOnboardingRowListFilter.failed =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterFailed'),
-      BulkOnboardingRowListFilter.skipped =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingRowFilterSkipped'),
+      BulkOnboardingRowListFilter.all => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingRowFilterAll',
+      ),
+      BulkOnboardingRowListFilter.valid => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingRowFilterValid',
+      ),
+      BulkOnboardingRowListFilter.invalid => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingRowFilterInvalid',
+      ),
+      BulkOnboardingRowListFilter.warning => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingRowFilterWarning',
+      ),
+      BulkOnboardingRowListFilter.duplicate => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingRowFilterDuplicate',
+      ),
+      BulkOnboardingRowListFilter.processed => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingRowFilterProcessed',
+      ),
+      BulkOnboardingRowListFilter.failed => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingRowFilterFailed',
+      ),
+      BulkOnboardingRowListFilter.skipped => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingRowFilterSkipped',
+      ),
     };
   }
 }

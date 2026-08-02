@@ -4,11 +4,7 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/platform_company.dart';
 
 class PlatformCompanyCard extends StatelessWidget {
-  const PlatformCompanyCard({
-    super.key,
-    required this.company,
-    this.onTap,
-  });
+  const PlatformCompanyCard({super.key, required this.company, this.onTap});
 
   final PlatformCompany company;
   final VoidCallback? onTap;
@@ -67,11 +63,7 @@ class PlatformCompanyCard extends StatelessWidget {
 
   Widget _metric(BuildContext context, String key, String value) {
     return Text(
-      resolvePlatformCompanyKey(
-        context,
-        key,
-        params: {'count': value},
-      ),
+      resolvePlatformCompanyKey(context, key, params: {'count': value}),
       style: Theme.of(context).textTheme.bodySmall,
     );
   }

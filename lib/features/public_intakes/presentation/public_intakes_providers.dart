@@ -61,21 +61,24 @@ List<PublicIntake> filteredPublicIntakes({
       .toList(growable: false);
 }
 
-final filteredPublicIntakesProvider =
-    Provider<AsyncValue<List<PublicIntake>>>((ref) {
-      final query = ref.watch(publicIntakeListQueryProvider);
-      final intakes = ref.watch(publicIntakesProvider);
-      return intakes.whenData(
-        (items) => filteredPublicIntakes(items: items, query: query),
-      );
-    });
+final filteredPublicIntakesProvider = Provider<AsyncValue<List<PublicIntake>>>((
+  ref,
+) {
+  final query = ref.watch(publicIntakeListQueryProvider);
+  final intakes = ref.watch(publicIntakesProvider);
+  return intakes.whenData(
+    (items) => filteredPublicIntakes(items: items, query: query),
+  );
+});
 
-final publicIntakeDetailProvider =
-    FutureProvider.autoDispose.family<PublicIntake, String>((ref, id) {
+final publicIntakeDetailProvider = FutureProvider.autoDispose
+    .family<PublicIntake, String>((ref, id) {
       return ref.watch(publicIntakesRepositoryProvider).fetchIntake(id);
     });
 
-final publicIntakeSummaryProvider = Provider<AsyncValue<PublicIntakeSummary>>((ref) {
+final publicIntakeSummaryProvider = Provider<AsyncValue<PublicIntakeSummary>>((
+  ref,
+) {
   return ref.watch(publicIntakesProvider).whenData((items) {
     final newCount = items
         .where((item) => item.status == PublicIntakeStatus.newStatus)
@@ -87,7 +90,10 @@ final publicIntakeSummaryProvider = Provider<AsyncValue<PublicIntakeSummary>>((r
               item.type.isHighPriority,
         )
         .length;
-    return PublicIntakeSummary(newCount: newCount, highPriorityCount: highPriority);
+    return PublicIntakeSummary(
+      newCount: newCount,
+      highPriorityCount: highPriority,
+    );
   });
 });
 

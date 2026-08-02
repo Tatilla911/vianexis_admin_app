@@ -53,9 +53,7 @@ class _AdminUserInviteDialogState extends State<_AdminUserInviteDialog> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: l10n.authEmail,
-                ),
+                decoration: InputDecoration(labelText: l10n.authEmail),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -72,7 +70,10 @@ class _AdminUserInviteDialogState extends State<_AdminUserInviteDialog> {
                 ),
                 validator: (value) {
                   if (value == null || value.trim().length < 2) {
-                    return resolveAdminUserKey(context, 'adminUserNameRequired');
+                    return resolveAdminUserKey(
+                      context,
+                      'adminUserNameRequired',
+                    );
                   }
                   return null;
                 },
@@ -99,7 +100,10 @@ class _AdminUserInviteDialogState extends State<_AdminUserInviteDialog> {
               TextFormField(
                 controller: _noteController,
                 decoration: InputDecoration(
-                  labelText: resolveAdminUserKey(context, 'adminUserInviteNoteLabel'),
+                  labelText: resolveAdminUserKey(
+                    context,
+                    'adminUserInviteNoteLabel',
+                  ),
                 ),
                 maxLines: 2,
               ),

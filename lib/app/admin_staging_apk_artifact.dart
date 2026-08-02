@@ -54,8 +54,7 @@ StagingApkArtifactPlan buildStagingApkArtifactPlan(
   bool copyToArtifacts = false,
 }) {
   final versionLabel = _readPubspecVersion(root);
-  final artifactFileName =
-      'ViaNexisAdmin-staging-v$versionLabel.apk';
+  final artifactFileName = 'ViaNexisAdmin-staging-v$versionLabel.apk';
 
   final buildCommand = [
     'flutter',
@@ -88,8 +87,10 @@ String _readPubspecVersion(Directory root) {
   if (!pubspec.existsSync()) {
     return '0.0.0+0';
   }
-  final match =
-      RegExp(r'^version:\s*(\S+)', multiLine: true).firstMatch(pubspec.readAsStringSync());
+  final match = RegExp(
+    r'^version:\s*(\S+)',
+    multiLine: true,
+  ).firstMatch(pubspec.readAsStringSync());
   return match?.group(1) ?? '0.0.0+0';
 }
 

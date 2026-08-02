@@ -4,10 +4,7 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/public_intake_status.dart';
 
 class PublicIntakeStatusDialogResult {
-  const PublicIntakeStatusDialogResult({
-    required this.status,
-    this.reason,
-  });
+  const PublicIntakeStatusDialogResult({required this.status, this.reason});
 
   final PublicIntakeStatus status;
   final String? reason;
@@ -19,7 +16,8 @@ Future<PublicIntakeStatusDialogResult?> showPublicIntakeStatusDialog({
 }) {
   return showDialog<PublicIntakeStatusDialogResult>(
     context: context,
-    builder: (context) => _PublicIntakeStatusDialog(initialStatus: initialStatus),
+    builder: (context) =>
+        _PublicIntakeStatusDialog(initialStatus: initialStatus),
   );
 }
 
@@ -55,7 +53,9 @@ class _PublicIntakeStatusDialogState extends State<_PublicIntakeStatusDialog> {
     ];
 
     return AlertDialog(
-      title: Text(resolvePublicIntakeKey(context, 'publicIntakeStatusDialogTitle')),
+      title: Text(
+        resolvePublicIntakeKey(context, 'publicIntakeStatusDialogTitle'),
+      ),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -64,14 +64,20 @@ class _PublicIntakeStatusDialogState extends State<_PublicIntakeStatusDialog> {
             DropdownButtonFormField<PublicIntakeStatus>(
               initialValue: _status,
               decoration: InputDecoration(
-                labelText: resolvePublicIntakeKey(context, 'publicIntakeFieldStatus'),
+                labelText: resolvePublicIntakeKey(
+                  context,
+                  'publicIntakeFieldStatus',
+                ),
               ),
               items: statuses
                   .map(
                     (status) => DropdownMenuItem(
                       value: status,
                       child: Text(
-                        resolvePublicIntakeKey(context, status.localizationKey()),
+                        resolvePublicIntakeKey(
+                          context,
+                          status.localizationKey(),
+                        ),
                       ),
                     ),
                   )
@@ -84,9 +90,15 @@ class _PublicIntakeStatusDialogState extends State<_PublicIntakeStatusDialog> {
             TextField(
               controller: _reasonController,
               decoration: InputDecoration(
-                labelText: resolvePublicIntakeKey(context, 'publicIntakeReasonLabel'),
+                labelText: resolvePublicIntakeKey(
+                  context,
+                  'publicIntakeReasonLabel',
+                ),
                 helperText: _status.requiresReasonOnClose
-                    ? resolvePublicIntakeKey(context, 'publicIntakeReasonRequired')
+                    ? resolvePublicIntakeKey(
+                        context,
+                        'publicIntakeReasonRequired',
+                      )
                     : null,
               ),
               minLines: 2,
@@ -120,7 +132,9 @@ class _PublicIntakeStatusDialogState extends State<_PublicIntakeStatusDialog> {
               PublicIntakeStatusDialogResult(status: _status, reason: reason),
             );
           },
-          child: Text(resolvePublicIntakeKey(context, 'publicIntakeStatusConfirm')),
+          child: Text(
+            resolvePublicIntakeKey(context, 'publicIntakeStatusConfirm'),
+          ),
         ),
       ],
     );

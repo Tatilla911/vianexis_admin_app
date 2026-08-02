@@ -21,7 +21,8 @@ class PlatformCompaniesScreen extends ConsumerStatefulWidget {
       _PlatformCompaniesScreenState();
 }
 
-class _PlatformCompaniesScreenState extends ConsumerState<PlatformCompaniesScreen> {
+class _PlatformCompaniesScreenState
+    extends ConsumerState<PlatformCompaniesScreen> {
   final _searchController = TextEditingController();
 
   @override
@@ -35,7 +36,9 @@ class _PlatformCompaniesScreenState extends ConsumerState<PlatformCompaniesScree
     final l10n = AppLocalizations.of(context);
     final query = ref.watch(platformCompanyListQueryProvider);
     final companiesAsync = ref.watch(filteredPlatformCompaniesProvider);
-    final usesMock = ref.watch(platformCompaniesRepositoryProvider).usesMockData;
+    final usesMock = ref
+        .watch(platformCompaniesRepositoryProvider)
+        .usesMockData;
 
     return Scaffold(
       appBar: AppBar(
@@ -43,13 +46,19 @@ class _PlatformCompaniesScreenState extends ConsumerState<PlatformCompaniesScree
         actions: [
           if (usesMock)
             MockDataBadge(
-              label: resolvePlatformCompanyKey(context, 'platformCompanyMockDataBadge'),
+              label: resolvePlatformCompanyKey(
+                context,
+                'platformCompanyMockDataBadge',
+              ),
             ),
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: Center(
               child: Text(
-                resolvePlatformCompanyKey(context, 'platformCompanyMetadataBadge'),
+                resolvePlatformCompanyKey(
+                  context,
+                  'platformCompanyMetadataBadge',
+                ),
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
@@ -71,13 +80,16 @@ class _PlatformCompaniesScreenState extends ConsumerState<PlatformCompaniesScree
                     'platformCompanySearchHint',
                   ),
                 ),
-                onChanged: (value) =>
-                    ref.read(platformCompanyListQueryProvider.notifier).setSearch(value),
+                onChanged: (value) => ref
+                    .read(platformCompanyListQueryProvider.notifier)
+                    .setSearch(value),
               ),
             ),
             PlatformCompanyFilterBar(
               selected: query.filter,
-              onSelected: ref.read(platformCompanyListQueryProvider.notifier).setFilter,
+              onSelected: ref
+                  .read(platformCompanyListQueryProvider.notifier)
+                  .setFilter,
             ),
             const SizedBox(height: 8),
             Expanded(
@@ -86,8 +98,10 @@ class _PlatformCompaniesScreenState extends ConsumerState<PlatformCompaniesScree
                 error: (error, _) => VianexisErrorView.fromError(
                   context,
                   error,
-                  fallbackMessage:
-                      resolvePlatformCompanyKey(context, 'platformCompanyListError'),
+                  fallbackMessage: resolvePlatformCompanyKey(
+                    context,
+                    'platformCompanyListError',
+                  ),
                   onRetry: () =>
                       ref.read(platformCompaniesProvider.notifier).refresh(),
                 ),

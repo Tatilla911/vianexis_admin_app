@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vianexis_admin_app/core/theme/admin_status_colors.dart';
 
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/bulk_onboarding_status.dart';
@@ -18,8 +19,8 @@ class BulkOnboardingStatusBadge extends StatelessWidget {
       BulkOnboardingJobStatus.partiallyCompleted => Colors.green,
       BulkOnboardingJobStatus.processing ||
       BulkOnboardingJobStatus.approvedForProcessing => Colors.blue,
-      BulkOnboardingJobStatus.cancelled => Colors.grey,
-      _ => Colors.blueGrey,
+      BulkOnboardingJobStatus.cancelled => AdminStatusColors.neutral,
+      _ => AdminStatusColors.muted,
     };
 
     return Container(

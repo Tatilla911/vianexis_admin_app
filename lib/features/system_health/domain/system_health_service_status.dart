@@ -30,10 +30,13 @@ enum SystemHealthServiceKey {
     return switch (this) {
       SystemHealthServiceKey.backendApi => 'systemHealthServiceBackendApi',
       SystemHealthServiceKey.database => 'systemHealthServiceDatabase',
-      SystemHealthServiceKey.documentStorage => 'systemHealthServiceDocumentStorage',
-      SystemHealthServiceKey.backgroundWorkers => 'systemHealthServiceBackgroundWorkers',
+      SystemHealthServiceKey.documentStorage =>
+        'systemHealthServiceDocumentStorage',
+      SystemHealthServiceKey.backgroundWorkers =>
+        'systemHealthServiceBackgroundWorkers',
       SystemHealthServiceKey.aiOcrWorkers => 'systemHealthServiceAiOcrWorkers',
-      SystemHealthServiceKey.translationService => 'systemHealthServiceTranslationService',
+      SystemHealthServiceKey.translationService =>
+        'systemHealthServiceTranslationService',
       SystemHealthServiceKey.emailService => 'systemHealthServiceEmailService',
       SystemHealthServiceKey.pushNotificationService =>
         'systemHealthServicePushNotificationService',
@@ -71,7 +74,9 @@ class SystemHealthServiceStatus {
 
     return SystemHealthServiceStatus(
       serviceKey: serviceKey,
-      severity: SystemHealthSeverity.fromBackendValue(json['severity']?.toString()),
+      severity: SystemHealthSeverity.fromBackendValue(
+        json['severity']?.toString(),
+      ),
       summary: json['detailSummary']?.toString(),
       messageKey: json['messageKey']?.toString(),
       lastCheckedAt: _parseDate(json['lastEventAt'] ?? json['lastCheckedAt']),

@@ -21,8 +21,8 @@ class AuditLogResultBadge extends StatelessWidget {
     return switch (result) {
       PlatformAuditResult.success => VianexisStatusTone.healthy,
       PlatformAuditResult.partial => VianexisStatusTone.degraded,
-      PlatformAuditResult.failure || PlatformAuditResult.denied =>
-        VianexisStatusTone.degraded,
+      PlatformAuditResult.failure ||
+      PlatformAuditResult.denied => VianexisStatusTone.degraded,
       PlatformAuditResult.unknown => VianexisStatusTone.unknown,
     };
   }

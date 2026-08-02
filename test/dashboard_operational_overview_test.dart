@@ -5,7 +5,9 @@ import 'package:vianexis_admin_app/features/dashboard/widgets/dashboard_operatio
 import 'package:vianexis_admin_app/l10n/app_localizations.dart';
 
 void main() {
-  testWidgets('dashboard overview shows operational title not placeholder', (tester) async {
+  testWidgets('dashboard overview shows operational title not placeholder', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: const [

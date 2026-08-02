@@ -27,10 +27,7 @@ void main() {
 
   test('invalid PIN length throws', () async {
     final service = AdminDevicePinService();
-    expect(
-      () => service.setPin('12'),
-      throwsA(isA<AdminDevicePinException>()),
-    );
+    expect(() => service.setPin('12'), throwsA(isA<AdminDevicePinException>()));
   });
 
   test('change PIN rejects wrong current PIN', () async {

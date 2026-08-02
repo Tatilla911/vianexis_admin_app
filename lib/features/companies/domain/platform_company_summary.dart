@@ -108,7 +108,9 @@ class PlatformCompanyOnboardingSummary {
         json['pendingBulkOnboardingJobsCount'],
       ),
       pendingPricingIntakeCount: _parseInt(json['pendingPricingIntakeCount']),
-      pricingIntakesNeedingReview: _parseInt(json['pricingIntakesNeedingReview']),
+      pricingIntakesNeedingReview: _parseInt(
+        json['pricingIntakesNeedingReview'],
+      ),
       latestPricingIntakeStatus: json['latestPricingIntakeStatus']?.toString(),
       metadataOnly: json['metadataOnly'] != false,
     );
@@ -139,8 +141,12 @@ class PlatformCompanyDashboardSummary {
       activeCompanies: _parseInt(companies['active']),
       pendingReviewCompanies: _parseInt(companies['pendingReview']),
       suspendedCompanies: _parseInt(companies['suspended']),
-      companiesWithOpenSupportIssues: _parseInt(companies['withOpenSupportIssues']),
-      companiesWithPendingOnboarding: _parseInt(companies['withPendingOnboarding']),
+      companiesWithOpenSupportIssues: _parseInt(
+        companies['withOpenSupportIssues'],
+      ),
+      companiesWithPendingOnboarding: _parseInt(
+        companies['withPendingOnboarding'],
+      ),
     );
   }
 
@@ -158,7 +164,5 @@ int _parseInt(Object? raw) {
 
 Map<String, int> _parseCountMap(Object? raw) {
   if (raw is! Map) return const {};
-  return raw.map(
-    (key, value) => MapEntry(key.toString(), _parseInt(value)),
-  );
+  return raw.map((key, value) => MapEntry(key.toString(), _parseInt(value)));
 }

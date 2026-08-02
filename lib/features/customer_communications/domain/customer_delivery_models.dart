@@ -26,9 +26,11 @@ class CustomerDeliveryDetail {
     if (raw is! List) return const [];
     return raw
         .whereType<Map>()
-        .map((item) => CustomerMessageDeliveryEvent.fromJson(
-              Map<String, dynamic>.from(item),
-            ))
+        .map(
+          (item) => CustomerMessageDeliveryEvent.fromJson(
+            Map<String, dynamic>.from(item),
+          ),
+        )
         .toList(growable: false);
   }
 }
@@ -49,13 +51,16 @@ class CustomerDeliveryListResult {
     return CustomerDeliveryListResult(
       items: rawItems is List
           ? rawItems
-              .whereType<Map>()
-              .map((item) => CustomerMessageDelivery.fromJson(
+                .whereType<Map>()
+                .map(
+                  (item) => CustomerMessageDelivery.fromJson(
                     Map<String, dynamic>.from(item),
-                  ))
-              .toList(growable: false)
+                  ),
+                )
+                .toList(growable: false)
           : const [],
-      total: int.tryParse(json['total']?.toString() ?? '') ??
+      total:
+          int.tryParse(json['total']?.toString() ?? '') ??
           (rawItems is List ? rawItems.length : 0),
       metadataOnly: json['metadataOnly'] != false,
     );

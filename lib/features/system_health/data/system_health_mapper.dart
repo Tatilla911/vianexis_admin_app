@@ -24,7 +24,9 @@ abstract final class SystemHealthMapper {
     final services = _ensureAllServices(serviceMap);
     final events = recentEvents
         .whereType<Map>()
-        .map((item) => SystemHealthEvent.fromJson(Map<String, dynamic>.from(item)))
+        .map(
+          (item) => SystemHealthEvent.fromJson(Map<String, dynamic>.from(item)),
+        )
         .toList(growable: false);
 
     final failedJobsCount =
@@ -56,7 +58,9 @@ abstract final class SystemHealthMapper {
 
     final events = items
         .whereType<Map>()
-        .map((item) => SystemHealthEvent.fromJson(Map<String, dynamic>.from(item)))
+        .map(
+          (item) => SystemHealthEvent.fromJson(Map<String, dynamic>.from(item)),
+        )
         .toList(growable: false);
 
     return SystemHealthSnapshot(
@@ -89,23 +93,25 @@ abstract final class SystemHealthMapper {
       lastCheckedAt: DateTime.now().toUtc(),
     );
 
-    serviceMap[SystemHealthServiceKey.backgroundWorkers] = SystemHealthServiceStatus(
-      serviceKey: SystemHealthServiceKey.backgroundWorkers,
-      severity: escalation['lastError'] != null
-          ? SystemHealthSeverity.warning
-          : SystemHealthSeverity.info,
-      summary: escalation['lastRunAt']?.toString() ?? 'worker idle',
-      lastCheckedAt: SystemHealthEvent.parseDate(escalation['lastRunAt']),
-    );
+    serviceMap[SystemHealthServiceKey.backgroundWorkers] =
+        SystemHealthServiceStatus(
+          serviceKey: SystemHealthServiceKey.backgroundWorkers,
+          severity: escalation['lastError'] != null
+              ? SystemHealthSeverity.warning
+              : SystemHealthSeverity.info,
+          summary: escalation['lastRunAt']?.toString() ?? 'worker idle',
+          lastCheckedAt: SystemHealthEvent.parseDate(escalation['lastRunAt']),
+        );
 
-    serviceMap[SystemHealthServiceKey.pushNotificationService] = SystemHealthServiceStatus(
-      serviceKey: SystemHealthServiceKey.pushNotificationService,
-      severity: infra['websocketEnabled'] == false
-          ? SystemHealthSeverity.warning
-          : SystemHealthSeverity.info,
-      summary: 'ws=${infra['websocketMode'] ?? 'unknown'}',
-      lastCheckedAt: DateTime.now().toUtc(),
-    );
+    serviceMap[SystemHealthServiceKey.pushNotificationService] =
+        SystemHealthServiceStatus(
+          serviceKey: SystemHealthServiceKey.pushNotificationService,
+          severity: infra['websocketEnabled'] == false
+              ? SystemHealthSeverity.warning
+              : SystemHealthSeverity.info,
+          summary: 'ws=${infra['websocketMode'] ?? 'unknown'}',
+          lastCheckedAt: DateTime.now().toUtc(),
+        );
 
     serviceMap.putIfAbsent(
       SystemHealthServiceKey.authService,
@@ -144,15 +150,17 @@ abstract final class SystemHealthMapper {
         .toList(growable: false);
   }
 
-  static SystemHealthSeverity _severityFromConnected(Object? connected, Object? enabled) {
+  static SystemHealthSeverity _severityFromConnected(
+    Object? connected,
+    Object? enabled,
+  ) {
     if (enabled == false) return SystemHealthSeverity.info;
     if (connected == true) return SystemHealthSeverity.info;
     if (connected == false) return SystemHealthSeverity.critical;
     return SystemHealthSeverity.warning;
   }
 
-  static List<dynamic> _asList(Object? raw) =>
-      raw is List ? raw : const [];
+  static List<dynamic> _asList(Object? raw) => raw is List ? raw : const [];
 
   static Map<String, dynamic> _asMap(Object? raw) {
     if (raw is Map<String, dynamic>) return raw;

@@ -43,11 +43,13 @@ class ReleaseOverview {
           json['databaseMigrationStatus']?.toString() ?? 'unknown',
       latestAdminAppVersion: json['latestAdminAppVersion']?.toString(),
       latestDriverAppVersion: json['latestDriverAppVersion']?.toString(),
-      minimumSupportedDriverAppVersion:
-          json['minimumSupportedDriverAppVersion']?.toString(),
-      minimumSupportedAdminAppVersion:
-          json['minimumSupportedAdminAppVersion']?.toString(),
-      activeDriverAppVersions: _parseVersionMap(json['activeDriverAppVersions']),
+      minimumSupportedDriverAppVersion: json['minimumSupportedDriverAppVersion']
+          ?.toString(),
+      minimumSupportedAdminAppVersion: json['minimumSupportedAdminAppVersion']
+          ?.toString(),
+      activeDriverAppVersions: _parseVersionMap(
+        json['activeDriverAppVersions'],
+      ),
       activeAdminAppVersions: _parseVersionMap(json['activeAdminAppVersions']),
       lastDeploymentAt: _parseDate(json['lastDeploymentAt']),
       maintenanceMode: json['maintenanceMode'] == true,
@@ -80,11 +82,13 @@ class ReleaseAppVersions {
     return ReleaseAppVersions(
       latestAdminAppVersion: json['latestAdminAppVersion']?.toString(),
       latestDriverAppVersion: json['latestDriverAppVersion']?.toString(),
-      minimumSupportedDriverAppVersion:
-          json['minimumSupportedDriverAppVersion']?.toString(),
-      minimumSupportedAdminAppVersion:
-          json['minimumSupportedAdminAppVersion']?.toString(),
-      activeDriverAppVersions: _parseVersionMap(json['activeDriverAppVersions']),
+      minimumSupportedDriverAppVersion: json['minimumSupportedDriverAppVersion']
+          ?.toString(),
+      minimumSupportedAdminAppVersion: json['minimumSupportedAdminAppVersion']
+          ?.toString(),
+      activeDriverAppVersions: _parseVersionMap(
+        json['activeDriverAppVersions'],
+      ),
       activeAdminAppVersions: _parseVersionMap(json['activeAdminAppVersions']),
       metadataOnly: json['metadataOnly'] != false,
     );

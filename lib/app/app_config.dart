@@ -12,9 +12,12 @@ class AppConfig {
 
   factory AppConfig.fromEnvironment() {
     const envRaw = String.fromEnvironment(AppEnvironment.dartDefineKey);
-    const apiRaw = String.fromEnvironment(AppEnvironmentConfig.apiBaseUrlDefine);
-    const mockRaw =
-        String.fromEnvironment(AppEnvironmentConfig.allowMockFallbackDefine);
+    const apiRaw = String.fromEnvironment(
+      AppEnvironmentConfig.apiBaseUrlDefine,
+    );
+    const mockRaw = String.fromEnvironment(
+      AppEnvironmentConfig.allowMockFallbackDefine,
+    );
 
     return AppConfig._(
       environment: AppEnvironment.fromDefine(envRaw),
@@ -51,11 +54,11 @@ class AppConfig {
 
   /// Localization key for the environment display label (EN/HU via l10n).
   String get displayLabelKey => switch (environment) {
-        AppEnvironment.local => 'appEnvLocal',
-        AppEnvironment.dev => 'appEnvDev',
-        AppEnvironment.staging => 'appEnvStaging',
-        AppEnvironment.production => 'appEnvProduction',
-      };
+    AppEnvironment.local => 'appEnvLocal',
+    AppEnvironment.dev => 'appEnvDev',
+    AppEnvironment.staging => 'appEnvStaging',
+    AppEnvironment.production => 'appEnvProduction',
+  };
 
   /// Safe API summary for UI — host only, never tokens or full secrets.
   String? get safeApiHostDisplay {

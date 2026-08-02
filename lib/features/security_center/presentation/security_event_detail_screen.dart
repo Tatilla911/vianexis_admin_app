@@ -37,7 +37,9 @@ class SecurityEventDetailScreen extends ConsumerWidget {
           }
           if (event == null) {
             return Center(
-              child: Text(resolveSecurityKey(context, 'securityEventDetailError')),
+              child: Text(
+                resolveSecurityKey(context, 'securityEventDetailError'),
+              ),
             );
           }
           return _SecurityEventDetailBody(event: event);
@@ -85,7 +87,11 @@ class _SecurityEventDetailBody extends StatelessWidget {
         if (event.companyName != null)
           _field(context, 'securityEventFieldCompany', event.companyName!),
         if (event.correlationId != null)
-          _field(context, 'securityEventFieldCorrelationId', event.correlationId!),
+          _field(
+            context,
+            'securityEventFieldCorrelationId',
+            event.correlationId!,
+          ),
         _field(context, 'securityEventFieldCreatedAt', createdLabel),
         const SizedBox(height: 16),
         VianexisMetadataNotice(

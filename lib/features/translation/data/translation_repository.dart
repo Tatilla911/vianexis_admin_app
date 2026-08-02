@@ -58,7 +58,9 @@ class LiveTranslationRepository implements TranslationRepository {
   }
 
   @override
-  Future<TranslationOperationResult> translate(TranslationRequest request) async {
+  Future<TranslationOperationResult> translate(
+    TranslationRequest request,
+  ) async {
     return _api.translate(request);
   }
 
@@ -102,7 +104,9 @@ class MockTranslationRepository implements TranslationRepository {
   }
 
   @override
-  Future<TranslationOperationResult> translate(TranslationRequest request) async {
+  Future<TranslationOperationResult> translate(
+    TranslationRequest request,
+  ) async {
     await Future<void>.delayed(const Duration(milliseconds: 120));
     throw const ApiException(messageKey: 'translationProviderDisabled');
   }

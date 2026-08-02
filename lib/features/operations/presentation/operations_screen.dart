@@ -31,7 +31,9 @@ class OperationsScreen extends ConsumerWidget {
         title: Text(resolveOperationsKey(context, 'operationsTitle')),
         actions: [
           if (usesMock)
-            MockDataBadge(label: resolveOperationsKey(context, 'operationsMockBadge')),
+            MockDataBadge(
+              label: resolveOperationsKey(context, 'operationsMockBadge'),
+            ),
         ],
       ),
       body: snapshotAsync.when(
@@ -39,7 +41,10 @@ class OperationsScreen extends ConsumerWidget {
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage: resolveOperationsKey(context, 'operationsLoadFailed'),
+          fallbackMessage: resolveOperationsKey(
+            context,
+            'operationsLoadFailed',
+          ),
           onRetry: () => ref.invalidate(platformOperationsSnapshotProvider),
         ),
         data: (snapshot) {
@@ -48,20 +53,19 @@ class OperationsScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             children: [
               VianexisMetadataNotice(
-                message: resolveOperationsKey(context, 'operationsPrivacyNotice'),
+                message: resolveOperationsKey(
+                  context,
+                  'operationsPrivacyNotice',
+                ),
               ),
               const SizedBox(height: 12),
-              _metricsGrid(
-              context,
-              snapshot,
-              metricsAsync.asData?.value,
-            ),
+              _metricsGrid(context, snapshot, metricsAsync.asData?.value),
               const SizedBox(height: 16),
               _moduleLinks(context, snapshot),
               const SizedBox(height: 16),
               metricsAsync.when(
                 loading: () => const SizedBox.shrink(),
-                error: (_, __) => BackendDependencyCard(
+                error: (_, _) => BackendDependencyCard(
                   title: resolveOperationsKey(
                     context,
                     'operationsPendingSyncTitle',
@@ -89,7 +93,9 @@ class OperationsScreen extends ConsumerWidget {
                             ),
                           ),
                           subtitle: Text(
-                            AppLocalizations.of(context).operationsExchangeMetricsSummary(
+                            AppLocalizations.of(
+                              context,
+                            ).operationsExchangeMetricsSummary(
                               metrics.exchangeRecordsTotal,
                               metrics.exchangeDisputed,
                               metrics.exchangeMissing,
@@ -230,7 +236,10 @@ class OperationsScreen extends ConsumerWidget {
     ];
   }
 
-  Widget _moduleLinks(BuildContext context, PlatformOperationsSnapshot snapshot) {
+  Widget _moduleLinks(
+    BuildContext context,
+    PlatformOperationsSnapshot snapshot,
+  ) {
     final links = [
       (
         resolveOperationsKey(context, 'operationsLinkDriverAccess'),

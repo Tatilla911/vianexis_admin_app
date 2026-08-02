@@ -40,7 +40,10 @@ class BulkOnboardingTemplateCard extends StatelessWidget {
                     )
                   : const Icon(Icons.download),
               label: Text(
-                resolveBulkOnboardingKey(context, 'bulkOnboardingDownloadTemplate'),
+                resolveBulkOnboardingKey(
+                  context,
+                  'bulkOnboardingDownloadTemplate',
+                ),
               ),
             ),
           ],

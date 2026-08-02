@@ -5,11 +5,7 @@ import '../../domain/platform_subscription.dart';
 import 'subscription_status_badge.dart';
 
 class SubscriptionCard extends StatelessWidget {
-  const SubscriptionCard({
-    super.key,
-    required this.subscription,
-    this.onTap,
-  });
+  const SubscriptionCard({super.key, required this.subscription, this.onTap});
 
   final PlatformSubscription subscription;
   final VoidCallback? onTap;
@@ -45,7 +41,8 @@ class SubscriptionCard extends StatelessWidget {
               Text(
                 [
                   if (subscription.planName != null) subscription.planName,
-                  if (subscription.billingCycle != null) subscription.billingCycle,
+                  if (subscription.billingCycle != null)
+                    subscription.billingCycle,
                 ].join(' · '),
               ),
               const SizedBox(height: 8),
@@ -53,7 +50,8 @@ class SubscriptionCard extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 4,
                 children: [
-                  if (subscription.seatsUsed != null && subscription.seatsIncluded != null)
+                  if (subscription.seatsUsed != null &&
+                      subscription.seatsIncluded != null)
                     Text(
                       resolveBillingKey(
                         context,

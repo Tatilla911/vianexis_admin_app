@@ -49,9 +49,9 @@ class AiReviewDetailScreen extends ConsumerWidget {
           onRetry: () => ref.invalidate(aiReviewDetailProvider(reviewId)),
         ),
         data: (review) {
-          final updatedLabel = DateFormat.yMMMd(locale)
-              .add_Hm()
-              .format(review.updatedAt.toLocal());
+          final updatedLabel = DateFormat.yMMMd(
+            locale,
+          ).add_Hm().format(review.updatedAt.toLocal());
 
           return ListView(
             padding: const EdgeInsets.all(20),
@@ -106,7 +106,9 @@ class AiReviewDetailScreen extends ConsumerWidget {
                             context,
                             'aiReviewFieldConfidenceScore',
                             params: {
-                              'score': review.confidenceScore!.toStringAsFixed(2),
+                              'score': review.confidenceScore!.toStringAsFixed(
+                                2,
+                              ),
                             },
                           ),
                         ),
@@ -144,7 +146,9 @@ class AiReviewDetailScreen extends ConsumerWidget {
                       const Icon(Icons.info_outline, size: 20),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: Text(resolveAiReviewKey(context, 'aiReviewAdvisoryNotice')),
+                        child: Text(
+                          resolveAiReviewKey(context, 'aiReviewAdvisoryNotice'),
+                        ),
                       ),
                     ],
                   ),
@@ -159,9 +163,7 @@ class AiReviewDetailScreen extends ConsumerWidget {
                     children: [
                       const Icon(Icons.shield_outlined, size: 20),
                       const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(l10n.privacyNoOperationalContent),
-                      ),
+                      Expanded(child: Text(l10n.privacyNoOperationalContent)),
                     ],
                   ),
                 ),

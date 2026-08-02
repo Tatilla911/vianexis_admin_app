@@ -23,7 +23,9 @@ class SubscriptionDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final subscriptionAsync = ref.watch(subscriptionDetailProvider(subscriptionId));
+    final subscriptionAsync = ref.watch(
+      subscriptionDetailProvider(subscriptionId),
+    );
     final canChangeStatus =
         ref.watch(adminAuthProvider).user?.role.canChangeBillingStatus ?? false;
 
@@ -35,7 +37,8 @@ class SubscriptionDetailScreen extends ConsumerWidget {
           context,
           error,
           fallbackMessage: resolveBillingKey(context, 'billingDetailError'),
-          onRetry: () => ref.invalidate(subscriptionDetailProvider(subscriptionId)),
+          onRetry: () =>
+              ref.invalidate(subscriptionDetailProvider(subscriptionId)),
         ),
         data: (subscription) => ListView(
           padding: const EdgeInsets.all(16),
@@ -54,8 +57,16 @@ class SubscriptionDetailScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             _sectionTitle(context, 'billingSectionPlan'),
             _field(context, 'billingFieldPlan', subscription.planName ?? '—'),
-            _field(context, 'billingFieldBillingCycle', subscription.billingCycle ?? '—'),
-            _field(context, 'billingFieldCurrency', subscription.currency ?? '—'),
+            _field(
+              context,
+              'billingFieldBillingCycle',
+              subscription.billingCycle ?? '—',
+            ),
+            _field(
+              context,
+              'billingFieldCurrency',
+              subscription.currency ?? '—',
+            ),
             _field(
               context,
               'billingFieldPricingSource',
@@ -68,7 +79,8 @@ class SubscriptionDetailScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             _sectionTitle(context, 'billingSectionUsage'),
-            if (subscription.seatsIncluded != null && subscription.seatsUsed != null)
+            if (subscription.seatsIncluded != null &&
+                subscription.seatsUsed != null)
               _field(
                 context,
                 'billingMetricSeats',
@@ -131,8 +143,11 @@ class SubscriptionDetailScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             if (canChangeStatus)
               FilledButton(
-                onPressed: () => _handleStatusChange(context, ref, subscription),
-                child: Text(resolveBillingKey(context, 'billingChangeStatusAction')),
+                onPressed: () =>
+                    _handleStatusChange(context, ref, subscription),
+                child: Text(
+                  resolveBillingKey(context, 'billingChangeStatusAction'),
+                ),
               ),
             const SizedBox(height: 16),
             VianexisMetadataNotice(
@@ -177,7 +192,9 @@ class SubscriptionDetailScreen extends ConsumerWidget {
       );
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveBillingKey(context, 'billingActionSuccess'))),
+        SnackBar(
+          content: Text(resolveBillingKey(context, 'billingActionSuccess')),
+        ),
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;
@@ -185,7 +202,9 @@ class SubscriptionDetailScreen extends ConsumerWidget {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveBillingKey(context, 'billingActionError'))),
+        SnackBar(
+          content: Text(resolveBillingKey(context, 'billingActionError')),
+        ),
       );
     }
   }

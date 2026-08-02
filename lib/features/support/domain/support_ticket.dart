@@ -59,7 +59,8 @@ extension SupportTicketListFilterX on SupportTicketListFilter {
       SupportTicketListFilter.urgent => 'supportTicketFilterUrgent',
       SupportTicketListFilter.critical => 'supportTicketFilterCritical',
       SupportTicketListFilter.systemHealth => 'supportTicketFilterSystemHealth',
-      SupportTicketListFilter.waitingForCustomer => 'supportTicketFilterWaitingForCustomer',
+      SupportTicketListFilter.waitingForCustomer =>
+        'supportTicketFilterWaitingForCustomer',
       SupportTicketListFilter.resolved => 'supportTicketFilterResolved',
     };
   }
@@ -109,26 +110,26 @@ class SupportTicket {
   bool matchesSearch(String query) {
     final normalized = query.trim().toLowerCase();
     if (normalized.isEmpty) return true;
-    return [
-      companyName,
-      title,
-      requestedByEmail,
-      requestedByName,
-    ].whereType<String>().any((value) => value.toLowerCase().contains(normalized));
+    return [companyName, title, requestedByEmail, requestedByName]
+        .whereType<String>()
+        .any((value) => value.toLowerCase().contains(normalized));
   }
 
   bool matchesFilter(SupportTicketListFilter filter) {
     return switch (filter) {
       SupportTicketListFilter.all => true,
       SupportTicketListFilter.open => status.isOpenLike,
-      SupportTicketListFilter.urgent => priority == SupportTicketPriority.urgent,
-      SupportTicketListFilter.critical => priority == SupportTicketPriority.critical,
+      SupportTicketListFilter.urgent =>
+        priority == SupportTicketPriority.urgent,
+      SupportTicketListFilter.critical =>
+        priority == SupportTicketPriority.critical,
       SupportTicketListFilter.systemHealth =>
         category == SupportTicketCategory.systemHealth,
       SupportTicketListFilter.waitingForCustomer =>
         status == SupportTicketStatus.waitingForCustomer,
       SupportTicketListFilter.resolved =>
-        status == SupportTicketStatus.resolved || status == SupportTicketStatus.closed,
+        status == SupportTicketStatus.resolved ||
+            status == SupportTicketStatus.closed,
     };
   }
 
@@ -139,26 +140,34 @@ class SupportTicket {
       id: json['id']?.toString() ?? '',
       companyId: json['companyId']?.toString(),
       companyName: json['companyName']?.toString(),
-      requestedByUserId: (json['requestedByUserId'] ?? json['reporterUserId'])?.toString(),
+      requestedByUserId: (json['requestedByUserId'] ?? json['reporterUserId'])
+          ?.toString(),
       requestedByName: json['requestedByName']?.toString(),
       requestedByEmail: json['requestedByEmail']?.toString(),
       title: json['title']?.toString() ?? json['subject']?.toString() ?? '—',
-      summary: json['summary']?.toString() ??
+      summary:
+          json['summary']?.toString() ??
           json['descriptionSummary']?.toString() ??
           '—',
       status: SupportTicketStatus.fromBackendValue(json['status']?.toString()),
-      priority: SupportTicketPriority.fromBackendValue(json['priority']?.toString()),
-      category: SupportTicketCategory.fromBackendValue(json['category']?.toString()),
+      priority: SupportTicketPriority.fromBackendValue(
+        json['priority']?.toString(),
+      ),
+      category: SupportTicketCategory.fromBackendValue(
+        json['category']?.toString(),
+      ),
       createdAt: _parseDate(json['createdAt']),
       updatedAt: _parseDate(json['updatedAt']),
       lastActivityAt: _parseDate(
         json['lastActivityAt'] ?? json['updatedAt'] ?? json['createdAt'],
       ),
-      linkedSystemHealthEventId: (json['linkedSystemHealthEventId'] ??
-              metadata['linkedSystemHealthEventId'])
-          ?.toString(),
+      linkedSystemHealthEventId:
+          (json['linkedSystemHealthEventId'] ??
+                  metadata['linkedSystemHealthEventId'])
+              ?.toString(),
       metadataOnly: metadata,
-      hasSupportAccessGrant: json['hasSupportAccessGrant'] == true ||
+      hasSupportAccessGrant:
+          json['hasSupportAccessGrant'] == true ||
           json['supportAccessGrantId'] != null,
       supportAccessGrantId: json['supportAccessGrantId']?.toString(),
     );
@@ -188,7 +197,8 @@ class SupportTicket {
       lastActivityAt: lastActivityAt ?? this.lastActivityAt,
       linkedSystemHealthEventId: linkedSystemHealthEventId,
       metadataOnly: metadataOnly,
-      hasSupportAccessGrant: hasSupportAccessGrant ?? this.hasSupportAccessGrant,
+      hasSupportAccessGrant:
+          hasSupportAccessGrant ?? this.hasSupportAccessGrant,
       supportAccessGrantId: supportAccessGrantId ?? this.supportAccessGrantId,
     );
   }

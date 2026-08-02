@@ -10,13 +10,13 @@ List<String> runAdminStagingBuildChecks(
   String appEnv = 'staging',
   String apiBaseUrl = '',
 }) {
-  final issues = <String>[
-    ...runAdminAppSmokeChecks(root),
-  ];
+  final issues = <String>[...runAdminAppSmokeChecks(root)];
 
   final normalizedEnv = appEnv.trim().toLowerCase();
   if (normalizedEnv != 'staging') {
-    issues.add('APP_ENV must be staging for staging build check (got: $appEnv)');
+    issues.add(
+      'APP_ENV must be staging for staging build check (got: $appEnv)',
+    );
   }
 
   if (apiBaseUrl.trim().isEmpty) {
@@ -109,7 +109,9 @@ void _validateStagingMockFallbackPolicy(Directory root, List<String> issues) {
     issues.add('app_environment.dart should define mock fallback policy');
     return;
   }
-  if (!text.contains('this == AppEnvironment.local || this == AppEnvironment.dev')) {
+  if (!text.contains(
+    'this == AppEnvironment.local || this == AppEnvironment.dev',
+  )) {
     issues.add('Mock fallback should be limited to local/dev by default');
   }
 }
@@ -119,15 +121,21 @@ void _validateAppVersion(Directory root, List<String> issues) {
   if (!pubspec.existsSync()) {
     return;
   }
-  final match = RegExp(r'^version:\s*(\S+)', multiLine: true)
-      .firstMatch(pubspec.readAsStringSync());
+  final match = RegExp(
+    r'^version:\s*(\S+)',
+    multiLine: true,
+  ).firstMatch(pubspec.readAsStringSync());
   if (match == null) {
-    issues.add('pubspec.yaml should declare version for staging artifact tracking');
+    issues.add(
+      'pubspec.yaml should declare version for staging artifact tracking',
+    );
     return;
   }
   final version = match.group(1)!;
   if (!version.contains('+')) {
-    issues.add('pubspec.yaml version should include build number (e.g. 1.0.0+1)');
+    issues.add(
+      'pubspec.yaml version should include build number (e.g. 1.0.0+1)',
+    );
   }
 }
 

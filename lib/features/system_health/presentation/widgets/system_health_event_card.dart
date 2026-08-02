@@ -8,10 +8,7 @@ import '../../domain/system_health_event.dart';
 import 'system_health_severity_badge.dart';
 
 class SystemHealthEventCard extends StatelessWidget {
-  const SystemHealthEventCard({
-    super.key,
-    required this.event,
-  });
+  const SystemHealthEventCard({super.key, required this.event});
 
   final SystemHealthEvent event;
 
@@ -27,7 +24,8 @@ class SystemHealthEventCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () => context.push(AdminRoutes.systemHealthEventDetail(event.id)),
+        onTap: () =>
+            context.push(AdminRoutes.systemHealthEventDetail(event.id)),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -51,7 +49,10 @@ class SystemHealthEventCard extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: 8),
-              Text(event.summary, style: Theme.of(context).textTheme.bodyMedium),
+              Text(
+                event.summary,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               const SizedBox(height: 8),
               Text(
                 resolveSystemHealthKey(

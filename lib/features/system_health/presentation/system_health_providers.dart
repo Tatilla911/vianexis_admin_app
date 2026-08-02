@@ -6,9 +6,7 @@ import '../domain/system_health_event.dart';
 import '../domain/system_health_overview.dart';
 
 class SystemHealthEventListQuery {
-  const SystemHealthEventListQuery({
-    this.filter = SystemHealthEventFilter.all,
-  });
+  const SystemHealthEventListQuery({this.filter = SystemHealthEventFilter.all});
 
   final SystemHealthEventFilter filter;
 
@@ -18,11 +16,13 @@ class SystemHealthEventListQuery {
 }
 
 final systemHealthEventFilterProvider =
-    NotifierProvider<SystemHealthEventFilterNotifier, SystemHealthEventListQuery>(
-      SystemHealthEventFilterNotifier.new,
-    );
+    NotifierProvider<
+      SystemHealthEventFilterNotifier,
+      SystemHealthEventListQuery
+    >(SystemHealthEventFilterNotifier.new);
 
-class SystemHealthEventFilterNotifier extends Notifier<SystemHealthEventListQuery> {
+class SystemHealthEventFilterNotifier
+    extends Notifier<SystemHealthEventListQuery> {
   @override
   SystemHealthEventListQuery build() => const SystemHealthEventListQuery();
 
@@ -61,12 +61,15 @@ final filteredSystemHealthEventsProvider =
       );
     });
 
-final systemHealthEventDetailProvider =
-    FutureProvider.autoDispose.family<SystemHealthEvent, String>((ref, id) {
+final systemHealthEventDetailProvider = FutureProvider.autoDispose
+    .family<SystemHealthEvent, String>((ref, id) {
       return ref.watch(systemHealthRepositoryProvider).fetchEvent(id);
     });
 
-Future<void> refreshSystemHealthEventDetail(WidgetRef ref, String eventId) async {
+Future<void> refreshSystemHealthEventDetail(
+  WidgetRef ref,
+  String eventId,
+) async {
   ref.invalidate(systemHealthEventDetailProvider(eventId));
 }
 

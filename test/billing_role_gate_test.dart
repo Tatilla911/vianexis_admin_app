@@ -6,11 +6,17 @@ void main() {
   group('AdminRole billing destination access', () {
     test('super_admin and billing_admin can access billing', () {
       expect(AdminRole.superAdmin.canAccess(AdminDestination.billing), isTrue);
-      expect(AdminRole.billingAdmin.canAccess(AdminDestination.billing), isTrue);
+      expect(
+        AdminRole.billingAdmin.canAccess(AdminDestination.billing),
+        isTrue,
+      );
     });
 
     test('support_admin has read-only billing module access', () {
-      expect(AdminRole.supportAdmin.canAccess(AdminDestination.billing), isTrue);
+      expect(
+        AdminRole.supportAdmin.canAccess(AdminDestination.billing),
+        isTrue,
+      );
     });
 
     test('onboarding_reviewer cannot access billing', () {

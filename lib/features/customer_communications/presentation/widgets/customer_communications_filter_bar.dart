@@ -19,21 +19,23 @@ class CustomerCommunicationsFilterBar extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
-        children: CustomerCommunicationListFilter.values.map((filter) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: FilterChip(
-              selected: selected == filter,
-              label: Text(
-                resolveCustomerCommunicationsKey(
-                  context,
-                  filter.localizationKey(),
+        children: CustomerCommunicationListFilter.values
+            .map((filter) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: FilterChip(
+                  selected: selected == filter,
+                  label: Text(
+                    resolveCustomerCommunicationsKey(
+                      context,
+                      filter.localizationKey(),
+                    ),
+                  ),
+                  onSelected: (_) => onSelected(filter),
                 ),
-              ),
-              onSelected: (_) => onSelected(filter),
-            ),
-          );
-        }).toList(growable: false),
+              );
+            })
+            .toList(growable: false),
       ),
     );
   }

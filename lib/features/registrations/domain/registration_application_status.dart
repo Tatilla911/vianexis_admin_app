@@ -31,7 +31,8 @@ enum RegistrationApplicationStatus {
   String localizationKey() {
     return switch (this) {
       RegistrationApplicationStatus.pending => 'registrationStatusPending',
-      RegistrationApplicationStatus.needsMoreInfo => 'registrationStatusNeedsInfo',
+      RegistrationApplicationStatus.needsMoreInfo =>
+        'registrationStatusNeedsInfo',
       RegistrationApplicationStatus.approved => 'registrationStatusApproved',
       RegistrationApplicationStatus.rejected => 'registrationStatusRejected',
       RegistrationApplicationStatus.cancelled => 'registrationStatusCancelled',

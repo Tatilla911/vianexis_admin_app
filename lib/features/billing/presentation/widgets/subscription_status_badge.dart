@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vianexis_admin_app/core/theme/admin_status_colors.dart';
 
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/subscription_status.dart';
@@ -15,9 +16,9 @@ class SubscriptionStatusBadge extends StatelessWidget {
       SubscriptionStatus.trial => Colors.blue,
       SubscriptionStatus.pastDue => Colors.orange,
       SubscriptionStatus.suspended => Colors.red,
-      SubscriptionStatus.cancelled => Colors.grey,
+      SubscriptionStatus.cancelled => AdminStatusColors.neutral,
       SubscriptionStatus.customQuotePending => Colors.deepPurple,
-      SubscriptionStatus.unknown => Colors.black54,
+      SubscriptionStatus.unknown => AdminStatusColors.muted,
     };
 
     return Chip(

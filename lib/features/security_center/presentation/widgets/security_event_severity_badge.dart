@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vianexis_admin_app/core/theme/admin_status_colors.dart';
 
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/security_event_severity.dart';
@@ -14,7 +15,7 @@ class SecurityEventSeverityBadge extends StatelessWidget {
       SecurityEventSeverity.info => Colors.blue,
       SecurityEventSeverity.warning => Colors.orange,
       SecurityEventSeverity.critical => Colors.red,
-      SecurityEventSeverity.unknown => Colors.black54,
+      SecurityEventSeverity.unknown => AdminStatusColors.muted,
     };
 
     return Chip(

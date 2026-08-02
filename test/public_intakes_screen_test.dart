@@ -21,7 +21,9 @@ class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
 }
 
 void main() {
-  testWidgets('PublicIntakesScreen renders list from mock repository', (tester) async {
+  testWidgets('PublicIntakesScreen renders list from mock repository', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [

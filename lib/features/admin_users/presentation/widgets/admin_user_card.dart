@@ -7,11 +7,7 @@ import 'admin_user_role_badge.dart';
 import 'admin_user_status_badge.dart';
 
 class AdminUserCard extends StatelessWidget {
-  const AdminUserCard({
-    super.key,
-    required this.user,
-    this.onTap,
-  });
+  const AdminUserCard({super.key, required this.user, this.onTap});
 
   final PlatformAdminUser user;
   final VoidCallback? onTap;

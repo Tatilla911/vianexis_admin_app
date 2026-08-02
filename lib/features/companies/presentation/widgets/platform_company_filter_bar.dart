@@ -36,16 +36,26 @@ class PlatformCompanyFilterBar extends StatelessWidget {
 
   String _label(BuildContext context, PlatformCompanyListFilter filter) {
     return switch (filter) {
-      PlatformCompanyListFilter.all =>
-        resolvePlatformCompanyKey(context, 'platformCompanyFilterAll'),
-      PlatformCompanyListFilter.active =>
-        resolvePlatformCompanyKey(context, 'platformCompanyFilterActive'),
-      PlatformCompanyListFilter.pendingReview =>
-        resolvePlatformCompanyKey(context, 'platformCompanyFilterPendingReview'),
-      PlatformCompanyListFilter.suspended =>
-        resolvePlatformCompanyKey(context, 'platformCompanyFilterSuspended'),
-      PlatformCompanyListFilter.disabled =>
-        resolvePlatformCompanyKey(context, 'platformCompanyFilterDisabled'),
+      PlatformCompanyListFilter.all => resolvePlatformCompanyKey(
+        context,
+        'platformCompanyFilterAll',
+      ),
+      PlatformCompanyListFilter.active => resolvePlatformCompanyKey(
+        context,
+        'platformCompanyFilterActive',
+      ),
+      PlatformCompanyListFilter.pendingReview => resolvePlatformCompanyKey(
+        context,
+        'platformCompanyFilterPendingReview',
+      ),
+      PlatformCompanyListFilter.suspended => resolvePlatformCompanyKey(
+        context,
+        'platformCompanyFilterSuspended',
+      ),
+      PlatformCompanyListFilter.disabled => resolvePlatformCompanyKey(
+        context,
+        'platformCompanyFilterDisabled',
+      ),
     };
   }
 }

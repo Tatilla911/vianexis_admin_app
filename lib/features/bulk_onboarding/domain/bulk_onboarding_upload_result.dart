@@ -16,9 +16,10 @@ class BulkOnboardingUploadResult {
   factory BulkOnboardingUploadResult.fromJson(Map<String, dynamic> json) {
     final summaryRaw = json['summary'];
     return BulkOnboardingUploadResult(
-      job: BulkOnboardingJob.fromDetailResponseJson(
-        {'job': json['job'], 'metadataOnly': json['metadataOnly']},
-      ),
+      job: BulkOnboardingJob.fromDetailResponseJson({
+        'job': json['job'],
+        'metadataOnly': json['metadataOnly'],
+      }),
       summary: summaryRaw is Map<String, dynamic>
           ? BulkOnboardingValidationCounts.fromJson(summaryRaw)
           : const BulkOnboardingValidationCounts(),

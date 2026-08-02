@@ -5,11 +5,7 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/action_center_item.dart';
 
 class ActionCenterItemCard extends StatelessWidget {
-  const ActionCenterItemCard({
-    super.key,
-    required this.item,
-    this.onTap,
-  });
+  const ActionCenterItemCard({super.key, required this.item, this.onTap});
 
   final ActionCenterItem item;
   final VoidCallback? onTap;
@@ -40,13 +36,28 @@ class ActionCenterItemCard extends StatelessWidget {
                 runSpacing: 8,
                 children: [
                   Chip(
-                    label: Text(resolveActionCenterKey(context, item.type.localizationKey())),
+                    label: Text(
+                      resolveActionCenterKey(
+                        context,
+                        item.type.localizationKey(),
+                      ),
+                    ),
                   ),
                   Chip(
-                    label: Text(resolveActionCenterKey(context, item.priority.localizationKey())),
+                    label: Text(
+                      resolveActionCenterKey(
+                        context,
+                        item.priority.localizationKey(),
+                      ),
+                    ),
                   ),
                   Chip(
-                    label: Text(resolveActionCenterKey(context, item.status.localizationKey())),
+                    label: Text(
+                      resolveActionCenterKey(
+                        context,
+                        item.status.localizationKey(),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -97,7 +108,10 @@ class ActionCenterNeedsAttentionCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              resolveActionCenterKey(context, 'actionCenterNeedsAttentionTitle'),
+              resolveActionCenterKey(
+                context,
+                'actionCenterNeedsAttentionTitle',
+              ),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),

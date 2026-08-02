@@ -102,7 +102,10 @@ void main() {
       );
 
       expect(company.matchesSearch('de123'), isTrue);
-      expect(company.matchesFilter(PlatformCompanyListFilter.pendingReview), isTrue);
+      expect(
+        company.matchesFilter(PlatformCompanyListFilter.pendingReview),
+        isTrue,
+      );
       expect(company.matchesFilter(PlatformCompanyListFilter.active), isFalse);
     });
 

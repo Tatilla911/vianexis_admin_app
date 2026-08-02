@@ -21,10 +21,7 @@ class AdminUserListQuery {
   final String search;
   final AdminUserListFilter filter;
 
-  AdminUserListQuery copyWith({
-    String? search,
-    AdminUserListFilter? filter,
-  }) {
+  AdminUserListQuery copyWith({String? search, AdminUserListFilter? filter}) {
     return AdminUserListQuery(
       search: search ?? this.search,
       filter: filter ?? this.filter,
@@ -88,16 +85,18 @@ final filteredAdminUsersProvider =
       );
     });
 
-final adminUserDetailProvider =
-    FutureProvider.autoDispose.family<PlatformAdminUser, String>((ref, id) {
+final adminUserDetailProvider = FutureProvider.autoDispose
+    .family<PlatformAdminUser, String>((ref, id) {
       return ref.watch(adminUsersRepositoryProvider).fetchAdminUser(id);
     });
 
-Future<PlatformAdminUser> submitAdminUserInvite(
+Future<AdminUserInviteResponse> submitAdminUserInvite(
   WidgetRef ref, {
   required AdminUserInviteRequest request,
 }) async {
-  final created = await ref.read(adminUsersRepositoryProvider).inviteAdminUser(request);
+  final created = await ref
+      .read(adminUsersRepositoryProvider)
+      .inviteAdminUser(request);
   await ref.read(adminUsersProvider.notifier).refresh();
   return created;
 }
@@ -107,10 +106,9 @@ Future<PlatformAdminUser> submitAdminUserRoleChange(
   required String userId,
   required AdminUserRoleUpdateRequest request,
 }) async {
-  final updated = await ref.read(adminUsersRepositoryProvider).updateAdminUserRole(
-    id: userId,
-    request: request,
-  );
+  final updated = await ref
+      .read(adminUsersRepositoryProvider)
+      .updateAdminUserRole(id: userId, request: request);
   ref.invalidate(adminUserDetailProvider(userId));
   await ref.read(adminUsersProvider.notifier).refresh();
   return updated;
@@ -121,10 +119,9 @@ Future<PlatformAdminUser> submitAdminUserStatusChange(
   required String userId,
   required AdminUserStatusUpdateRequest request,
 }) async {
-  final updated = await ref.read(adminUsersRepositoryProvider).updateAdminUserStatus(
-    id: userId,
-    request: request,
-  );
+  final updated = await ref
+      .read(adminUsersRepositoryProvider)
+      .updateAdminUserStatus(id: userId, request: request);
   ref.invalidate(adminUserDetailProvider(userId));
   await ref.read(adminUsersProvider.notifier).refresh();
   return updated;

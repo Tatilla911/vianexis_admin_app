@@ -18,8 +18,7 @@ enum PublicIntakeType {
     return unknown;
   }
 
-  bool get isHighPriority =>
-      this == demoRequest || this == quoteRequest;
+  bool get isHighPriority => this == demoRequest || this == quoteRequest;
 
   String localizationKey() {
     return switch (this) {

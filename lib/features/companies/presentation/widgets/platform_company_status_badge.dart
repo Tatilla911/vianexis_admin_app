@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vianexis_admin_app/core/theme/admin_status_colors.dart';
 
 import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/platform_company_status.dart';
@@ -14,9 +15,10 @@ class PlatformCompanyStatusBadge extends StatelessWidget {
       PlatformCompanyStatus.active => Colors.green,
       PlatformCompanyStatus.pendingReview => Colors.orange,
       PlatformCompanyStatus.suspended => Colors.red,
-      PlatformCompanyStatus.disabled || PlatformCompanyStatus.inactive => Colors.grey,
-      PlatformCompanyStatus.archived => Colors.blueGrey,
-      PlatformCompanyStatus.unknown => Colors.black54,
+      PlatformCompanyStatus.disabled ||
+      PlatformCompanyStatus.inactive => AdminStatusColors.neutral,
+      PlatformCompanyStatus.archived => AdminStatusColors.muted,
+      PlatformCompanyStatus.unknown => AdminStatusColors.muted,
     };
 
     return Chip(

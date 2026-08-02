@@ -22,7 +22,8 @@ class BulkOnboardingJobsScreen extends ConsumerStatefulWidget {
       _BulkOnboardingJobsScreenState();
 }
 
-class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScreen> {
+class _BulkOnboardingJobsScreenState
+    extends ConsumerState<BulkOnboardingJobsScreen> {
   final _searchController = TextEditingController();
 
   @override
@@ -38,7 +39,8 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
     final jobsAsync = ref.watch(filteredBulkOnboardingJobsProvider);
     final usesMock = ref.watch(bulkOnboardingRepositoryProvider).usesMockData;
     final canUpload =
-        ref.watch(adminAuthProvider).user?.role.canUploadBulkOnboarding ?? false;
+        ref.watch(adminAuthProvider).user?.role.canUploadBulkOnboarding ??
+        false;
 
     return Scaffold(
       appBar: AppBar(
@@ -46,13 +48,19 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
         actions: [
           if (canUpload)
             IconButton(
-              tooltip: resolveBulkOnboardingKey(context, 'bulkOnboardingUploadCsv'),
+              tooltip: resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingUploadCsv',
+              ),
               onPressed: () => context.push(AdminRoutes.bulkOnboardingUpload),
               icon: const Icon(Icons.upload_file),
             ),
           if (usesMock)
             MockDataBadge(
-              label: resolveBulkOnboardingKey(context, 'bulkOnboardingMockDataBadge'),
+              label: resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingMockDataBadge',
+              ),
             ),
         ],
       ),
@@ -64,15 +72,21 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
               controller: _searchController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                hintText: resolveBulkOnboardingKey(context, 'bulkOnboardingSearchHint'),
+                hintText: resolveBulkOnboardingKey(
+                  context,
+                  'bulkOnboardingSearchHint',
+                ),
               ),
-              onChanged: (value) =>
-                  ref.read(bulkOnboardingListQueryProvider.notifier).setSearch(value),
+              onChanged: (value) => ref
+                  .read(bulkOnboardingListQueryProvider.notifier)
+                  .setSearch(value),
             ),
           ),
           BulkOnboardingFilterBar(
             selected: query.filter,
-            onSelected: ref.read(bulkOnboardingListQueryProvider.notifier).setFilter,
+            onSelected: ref
+                .read(bulkOnboardingListQueryProvider.notifier)
+                .setFilter,
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -81,9 +95,12 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
               error: (error, _) => VianexisErrorView.fromError(
                 context,
                 error,
-                fallbackMessage:
-                    resolveBulkOnboardingKey(context, 'bulkOnboardingListError'),
-                onRetry: () => ref.read(bulkOnboardingJobsProvider.notifier).refresh(),
+                fallbackMessage: resolveBulkOnboardingKey(
+                  context,
+                  'bulkOnboardingListError',
+                ),
+                onRetry: () =>
+                    ref.read(bulkOnboardingJobsProvider.notifier).refresh(),
               ),
               data: (items) {
                 if (items.isEmpty) {
@@ -91,7 +108,10 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
                     child: Padding(
                       padding: const EdgeInsets.all(24),
                       child: Text(
-                        resolveBulkOnboardingKey(context, 'bulkOnboardingListEmpty'),
+                        resolveBulkOnboardingKey(
+                          context,
+                          'bulkOnboardingListEmpty',
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -109,7 +129,10 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
                         return Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Text(
-                            resolveBulkOnboardingKey(context, 'bulkOnboardingPrivacyNotice'),
+                            resolveBulkOnboardingKey(
+                              context,
+                              'bulkOnboardingPrivacyNotice',
+                            ),
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         );
@@ -124,7 +147,9 @@ class _BulkOnboardingJobsScreenState extends ConsumerState<BulkOnboardingJobsScr
                           totalRows: job.totalRows,
                           invalidRows: job.invalidRows,
                           riskLevelKey: job.riskLevel.localizationKey(),
-                          onTap: () => context.push(AdminRoutes.bulkOnboardingJobDetail(job.id)),
+                          onTap: () => context.push(
+                            AdminRoutes.bulkOnboardingJobDetail(job.id),
+                          ),
                         ),
                       );
                     },

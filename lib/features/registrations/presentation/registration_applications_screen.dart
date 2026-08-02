@@ -33,8 +33,12 @@ class _RegistrationApplicationsScreenState
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final query = ref.watch(registrationListQueryProvider);
-    final applicationsAsync = ref.watch(filteredRegistrationApplicationsProvider);
-    final usesMock = ref.watch(registrationApplicationsRepositoryProvider).usesMockData;
+    final applicationsAsync = ref.watch(
+      filteredRegistrationApplicationsProvider,
+    );
+    final usesMock = ref
+        .watch(registrationApplicationsRepositoryProvider)
+        .usesMockData;
 
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +46,10 @@ class _RegistrationApplicationsScreenState
         actions: [
           if (usesMock)
             MockDataBadge(
-              label: resolveRegistrationKey(context, 'registrationMockDataBadge'),
+              label: resolveRegistrationKey(
+                context,
+                'registrationMockDataBadge',
+              ),
             ),
         ],
       ),
@@ -54,15 +61,21 @@ class _RegistrationApplicationsScreenState
               controller: _searchController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                hintText: resolveRegistrationKey(context, 'registrationSearchHint'),
+                hintText: resolveRegistrationKey(
+                  context,
+                  'registrationSearchHint',
+                ),
               ),
-              onChanged: (value) =>
-                  ref.read(registrationListQueryProvider.notifier).setSearch(value),
+              onChanged: (value) => ref
+                  .read(registrationListQueryProvider.notifier)
+                  .setSearch(value),
             ),
           ),
           RegistrationStatusFilterBar(
             selected: query.filter,
-            onSelected: ref.read(registrationListQueryProvider.notifier).setFilter,
+            onSelected: ref
+                .read(registrationListQueryProvider.notifier)
+                .setFilter,
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -71,10 +84,13 @@ class _RegistrationApplicationsScreenState
               error: (error, _) => VianexisErrorView.fromError(
                 context,
                 error,
-                fallbackMessage:
-                    resolveRegistrationKey(context, 'registrationListError'),
-                onRetry: () =>
-                    ref.read(registrationApplicationsProvider.notifier).refresh(),
+                fallbackMessage: resolveRegistrationKey(
+                  context,
+                  'registrationListError',
+                ),
+                onRetry: () => ref
+                    .read(registrationApplicationsProvider.notifier)
+                    .refresh(),
               ),
               data: (items) {
                 if (items.isEmpty) {
@@ -82,7 +98,10 @@ class _RegistrationApplicationsScreenState
                     child: Padding(
                       padding: const EdgeInsets.all(24),
                       child: Text(
-                        resolveRegistrationKey(context, 'registrationListEmpty'),
+                        resolveRegistrationKey(
+                          context,
+                          'registrationListEmpty',
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -90,8 +109,9 @@ class _RegistrationApplicationsScreenState
                 }
 
                 return RefreshIndicator(
-                  onRefresh: () =>
-                      ref.read(registrationApplicationsProvider.notifier).refresh(),
+                  onRefresh: () => ref
+                      .read(registrationApplicationsProvider.notifier)
+                      .refresh(),
                   child: ListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                     itemCount: items.length,

@@ -5,10 +5,7 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/registration_risk_level.dart';
 
 class AiRiskBadge extends StatelessWidget {
-  const AiRiskBadge({
-    super.key,
-    required this.riskLevel,
-  });
+  const AiRiskBadge({super.key, required this.riskLevel});
 
   final RegistrationRiskLevel riskLevel;
 

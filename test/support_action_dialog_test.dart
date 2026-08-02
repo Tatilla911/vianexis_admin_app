@@ -50,14 +50,23 @@ void main() {
     await tester.pump();
 
     expect(find.text('Enter at least 3 characters.'), findsOneWidget);
-    expect(find.text('Scope ID is required for this scope type.'), findsOneWidget);
+    expect(
+      find.text('Scope ID is required for this scope type.'),
+      findsOneWidget,
+    );
 
     await tester.enterText(find.byType(TextFormField).at(0), 'trip-42');
-    await tester.enterText(find.byType(TextFormField).at(1), 'Need scoped trip metadata');
+    await tester.enterText(
+      find.byType(TextFormField).at(1),
+      'Need scoped trip metadata',
+    );
     await tester.tap(find.text('Create grant'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Scope ID is required for this scope type.'), findsNothing);
+    expect(
+      find.text('Scope ID is required for this scope type.'),
+      findsNothing,
+    );
   });
 
   testWidgets('revoke dialog requires note before confirm', (tester) async {

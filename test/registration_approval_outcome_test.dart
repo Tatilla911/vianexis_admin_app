@@ -38,7 +38,10 @@ void main() {
   group('AdminRole company decide policy', () {
     test('only super_admin can decide company registrations', () {
       expect(AdminRole.superAdmin.canDecideCompanyRegistrations, isTrue);
-      expect(AdminRole.onboardingReviewer.canDecideCompanyRegistrations, isFalse);
+      expect(
+        AdminRole.onboardingReviewer.canDecideCompanyRegistrations,
+        isFalse,
+      );
       expect(AdminRole.supportAdmin.canDecideCompanyRegistrations, isFalse);
       expect(AdminRole.onboardingReviewer.canViewRegistrations, isTrue);
     });

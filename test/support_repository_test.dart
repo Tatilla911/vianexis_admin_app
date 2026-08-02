@@ -419,7 +419,9 @@ void main() {
     test('mock revoke updates grant status', () async {
       final grantsRepo = MockSupportAccessGrantsRepository();
       final grants = await grantsRepo.fetchGrants();
-      final active = grants.firstWhere((g) => g.status == SupportAccessGrantStatus.active);
+      final active = grants.firstWhere(
+        (g) => g.status == SupportAccessGrantStatus.active,
+      );
 
       final revoked = await grantsRepo.revokeGrant(
         grantId: active.id,

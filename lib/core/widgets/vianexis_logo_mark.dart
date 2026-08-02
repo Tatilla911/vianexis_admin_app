@@ -88,9 +88,9 @@ class VianexisLogoMark extends StatelessWidget {
         const SizedBox(height: VianexisBrand.spaceXs),
         Text(
           l10n.brandControlCenterSubtitle,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: VianexisBrand.accentMuted,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: VianexisBrand.accentMuted),
           textAlign: TextAlign.center,
         ),
       ],
@@ -133,7 +133,9 @@ class _TextMark extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [VianexisBrand.viaNexisBlue, Color(0xFF1E6091)],
         ),
-        border: Border.all(color: VianexisBrand.goldAccent.withValues(alpha: 0.35)),
+        border: Border.all(
+          color: VianexisBrand.goldAccent.withValues(alpha: 0.35),
+        ),
       ),
       alignment: Alignment.center,
       child: Text(

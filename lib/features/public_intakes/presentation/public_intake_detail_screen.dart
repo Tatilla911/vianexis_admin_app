@@ -32,7 +32,8 @@ class PublicIntakeDetailScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final intakeAsync = ref.watch(publicIntakeDetailProvider(intakeId));
     final canChangeStatus =
-        ref.watch(adminAuthProvider).user?.role.canChangePublicIntakeStatus ?? false;
+        ref.watch(adminAuthProvider).user?.role.canChangePublicIntakeStatus ??
+        false;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.publicIntakeDetailTitle)),
@@ -41,7 +42,10 @@ class PublicIntakeDetailScreen extends ConsumerWidget {
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage: resolvePublicIntakeKey(context, 'publicIntakeDetailError'),
+          fallbackMessage: resolvePublicIntakeKey(
+            context,
+            'publicIntakeDetailError',
+          ),
           onRetry: () => refreshPublicIntakeDetail(ref, intakeId),
         ),
         data: (intake) => ListView(
@@ -51,7 +55,10 @@ class PublicIntakeDetailScreen extends ConsumerWidget {
               intake.companyName ??
                   intake.customerName ??
                   intake.customerEmailDomain ??
-                  resolvePublicIntakeKey(context, 'publicIntakeUnknownCustomer'),
+                  resolvePublicIntakeKey(
+                    context,
+                    'publicIntakeUnknownCustomer',
+                  ),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
@@ -89,11 +96,19 @@ class PublicIntakeDetailScreen extends ConsumerWidget {
             if (canChangeStatus)
               FilledButton(
                 onPressed: () => _handleStatusChange(context, ref, intake),
-                child: Text(resolvePublicIntakeKey(context, 'publicIntakeChangeStatusAction')),
+                child: Text(
+                  resolvePublicIntakeKey(
+                    context,
+                    'publicIntakeChangeStatusAction',
+                  ),
+                ),
               ),
             const SizedBox(height: 16),
             VianexisMetadataNotice(
-              message: resolvePublicIntakeKey(context, 'publicIntakeEvidenceNotice'),
+              message: resolvePublicIntakeKey(
+                context,
+                'publicIntakeEvidenceNotice',
+              ),
             ),
           ],
         ),
@@ -122,7 +137,9 @@ class PublicIntakeDetailScreen extends ConsumerWidget {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(resolvePublicIntakeKey(context, 'publicIntakeStatusSuccess')),
+          content: Text(
+            resolvePublicIntakeKey(context, 'publicIntakeStatusSuccess'),
+          ),
         ),
       );
     } on ApiException catch (error) {
@@ -132,7 +149,9 @@ class PublicIntakeDetailScreen extends ConsumerWidget {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(resolvePublicIntakeKey(context, 'publicIntakeStatusError')),
+          content: Text(
+            resolvePublicIntakeKey(context, 'publicIntakeStatusError'),
+          ),
         ),
       );
     }
@@ -222,7 +241,9 @@ class _QuoteMetadataSection extends StatelessWidget {
             ],
             if (intake.requestedAiFeatures.isNotEmpty) ...[
               const SizedBox(height: 8),
-              Text(resolvePublicIntakeKey(context, 'publicIntakeFieldAiFeatures')),
+              Text(
+                resolvePublicIntakeKey(context, 'publicIntakeFieldAiFeatures'),
+              ),
               ...intake.requestedAiFeatures.map((f) => Text('• $f')),
             ],
           ],

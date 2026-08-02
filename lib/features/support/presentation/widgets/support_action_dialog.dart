@@ -33,14 +33,16 @@ class _SupportActionDialogState extends State<_SupportActionDialog> {
 
   String _titleKey() {
     return switch (widget.type) {
-      SupportTicketActionType.acknowledge => 'supportTicketActionAcknowledgeTitle',
+      SupportTicketActionType.acknowledge =>
+        'supportTicketActionAcknowledgeTitle',
       SupportTicketActionType.close => 'supportTicketActionCloseTitle',
     };
   }
 
   String _confirmKey() {
     return switch (widget.type) {
-      SupportTicketActionType.acknowledge => 'supportTicketActionAcknowledgeConfirm',
+      SupportTicketActionType.acknowledge =>
+        'supportTicketActionAcknowledgeConfirm',
       SupportTicketActionType.close => 'supportTicketActionCloseConfirm',
     };
   }
@@ -80,19 +82,30 @@ class _SupportActionDialogState extends State<_SupportActionDialog> {
                 controller: _noteController,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  labelText: resolveSupportKey(context, 'supportActionNoteLabel'),
+                  labelText: resolveSupportKey(
+                    context,
+                    'supportActionNoteLabel',
+                  ),
                 ),
                 validator: (value) {
                   if (!_requiresNote) return null;
                   if (value == null || value.trim().length < 3) {
-                    return resolveSupportKey(context, 'supportActionNoteRequired');
+                    return resolveSupportKey(
+                      context,
+                      'supportActionNoteRequired',
+                    );
                   }
                   return null;
                 },
               ),
             ] else ...[
               const SizedBox(height: 12),
-              Text(resolveSupportKey(context, 'supportTicketActionAcknowledgeBody')),
+              Text(
+                resolveSupportKey(
+                  context,
+                  'supportTicketActionAcknowledgeBody',
+                ),
+              ),
             ],
           ],
         ),
@@ -172,11 +185,17 @@ class _SupportRevokeDialogState extends State<_SupportRevokeDialog> {
               controller: _noteController,
               maxLines: 4,
               decoration: InputDecoration(
-                labelText: resolveSupportKey(context, 'supportGrantRevokeNoteLabel'),
+                labelText: resolveSupportKey(
+                  context,
+                  'supportGrantRevokeNoteLabel',
+                ),
               ),
               validator: (value) {
                 if (value == null || value.trim().length < 3) {
-                  return resolveSupportKey(context, 'supportGrantReasonRequired');
+                  return resolveSupportKey(
+                    context,
+                    'supportGrantReasonRequired',
+                  );
                 }
                 return null;
               },

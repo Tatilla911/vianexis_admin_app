@@ -1,8 +1,4 @@
-enum RegistrationDecisionType {
-  approve,
-  reject,
-  requestInfo,
-}
+enum RegistrationDecisionType { approve, reject, requestInfo }
 
 class RegistrationDecisionRequest {
   const RegistrationDecisionRequest({

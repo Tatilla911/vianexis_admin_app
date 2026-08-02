@@ -20,11 +20,11 @@ class SupportTicketStatusBadge extends StatelessWidget {
   VianexisStatusTone _tone(SupportTicketStatus status) {
     return switch (status) {
       SupportTicketStatus.open => VianexisStatusTone.degraded,
-      SupportTicketStatus.acknowledged || SupportTicketStatus.investigating =>
-        VianexisStatusTone.unknown,
+      SupportTicketStatus.acknowledged ||
+      SupportTicketStatus.investigating => VianexisStatusTone.unknown,
       SupportTicketStatus.waitingForCustomer => VianexisStatusTone.unknown,
-      SupportTicketStatus.resolved || SupportTicketStatus.closed =>
-        VianexisStatusTone.healthy,
+      SupportTicketStatus.resolved ||
+      SupportTicketStatus.closed => VianexisStatusTone.healthy,
       SupportTicketStatus.unknown => VianexisStatusTone.unknown,
     };
   }

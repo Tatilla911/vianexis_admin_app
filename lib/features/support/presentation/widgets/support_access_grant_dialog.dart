@@ -61,7 +61,9 @@ class _SupportAccessGrantDialogState extends State<_SupportAccessGrantDialog> {
   DateTime _expiresAt() {
     final now = DateTime.now().toUtc();
     return switch (_expiryPreset) {
-      _ExpiryPreset.twoHours => now.add(SupportAccessGrantRequest.defaultShortExpiry),
+      _ExpiryPreset.twoHours => now.add(
+        SupportAccessGrantRequest.defaultShortExpiry,
+      ),
       _ExpiryPreset.twentyFourHours => now.add(const Duration(hours: 24)),
     };
   }
@@ -131,14 +133,19 @@ class _SupportAccessGrantDialogState extends State<_SupportAccessGrantDialog> {
               DropdownButtonFormField<SupportAccessScopeType>(
                 initialValue: _scopeType,
                 decoration: InputDecoration(
-                  labelText: resolveSupportKey(context, 'supportGrantScopeTypeLabel'),
+                  labelText: resolveSupportKey(
+                    context,
+                    'supportGrantScopeTypeLabel',
+                  ),
                 ),
                 items: SupportAccessScopeType.values
                     .where((type) => type != SupportAccessScopeType.unknown)
                     .map(
                       (type) => DropdownMenuItem(
                         value: type,
-                        child: Text(resolveSupportKey(context, type.localizationKey())),
+                        child: Text(
+                          resolveSupportKey(context, type.localizationKey()),
+                        ),
                       ),
                     )
                     .toList(),
@@ -152,12 +159,18 @@ class _SupportAccessGrantDialogState extends State<_SupportAccessGrantDialog> {
                 TextFormField(
                   controller: _scopeIdController,
                   decoration: InputDecoration(
-                    labelText: resolveSupportKey(context, 'supportGrantScopeIdFieldLabel'),
+                    labelText: resolveSupportKey(
+                      context,
+                      'supportGrantScopeIdFieldLabel',
+                    ),
                   ),
                   validator: (value) {
                     if (!requiresScopeId) return null;
                     if (value == null || value.trim().isEmpty) {
-                      return resolveSupportKey(context, 'supportGrantScopeIdRequired');
+                      return resolveSupportKey(
+                        context,
+                        'supportGrantScopeIdRequired',
+                      );
                     }
                     return null;
                   },
@@ -168,11 +181,17 @@ class _SupportAccessGrantDialogState extends State<_SupportAccessGrantDialog> {
                 controller: _reasonController,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  labelText: resolveSupportKey(context, 'supportGrantReasonLabel'),
+                  labelText: resolveSupportKey(
+                    context,
+                    'supportGrantReasonLabel',
+                  ),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().length < 3) {
-                    return resolveSupportKey(context, 'supportGrantReasonRequired');
+                    return resolveSupportKey(
+                      context,
+                      'supportGrantReasonRequired',
+                    );
                   }
                   return null;
                 },
@@ -181,16 +200,26 @@ class _SupportAccessGrantDialogState extends State<_SupportAccessGrantDialog> {
               DropdownButtonFormField<_ExpiryPreset>(
                 initialValue: _expiryPreset,
                 decoration: InputDecoration(
-                  labelText: resolveSupportKey(context, 'supportGrantExpiryLabel'),
+                  labelText: resolveSupportKey(
+                    context,
+                    'supportGrantExpiryLabel',
+                  ),
                 ),
                 items: [
                   DropdownMenuItem(
                     value: _ExpiryPreset.twoHours,
-                    child: Text(resolveSupportKey(context, 'supportGrantExpiryTwoHours')),
+                    child: Text(
+                      resolveSupportKey(context, 'supportGrantExpiryTwoHours'),
+                    ),
                   ),
                   DropdownMenuItem(
                     value: _ExpiryPreset.twentyFourHours,
-                    child: Text(resolveSupportKey(context, 'supportGrantExpiryTwentyFourHours')),
+                    child: Text(
+                      resolveSupportKey(
+                        context,
+                        'supportGrantExpiryTwentyFourHours',
+                      ),
+                    ),
                   ),
                 ],
                 onChanged: (value) {
@@ -216,7 +245,4 @@ class _SupportAccessGrantDialogState extends State<_SupportAccessGrantDialog> {
   }
 }
 
-enum _ExpiryPreset {
-  twoHours,
-  twentyFourHours,
-}
+enum _ExpiryPreset { twoHours, twentyFourHours }

@@ -4,10 +4,7 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/customer_message_delivery.dart';
 
 class DeliveryStatusBadge extends StatelessWidget {
-  const DeliveryStatusBadge({
-    super.key,
-    required this.delivery,
-  });
+  const DeliveryStatusBadge({super.key, required this.delivery});
 
   final CustomerMessageDelivery delivery;
 
@@ -53,9 +50,7 @@ class DeliveryStatusBadge extends StatelessWidget {
             ),
           ),
         ),
-        Chip(
-          label: Text(delivery.deliveryProvider),
-        ),
+        Chip(label: Text(delivery.deliveryProvider)),
         if (delivery.humanConfirmed)
           Chip(
             label: Text(

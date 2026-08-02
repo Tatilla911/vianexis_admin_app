@@ -56,10 +56,10 @@ class EmailDeliveryStatus {
 
   /// Values rendered in the release center email delivery card.
   List<String> get safeDisplayValues => [
-        provider,
-        deliveryEnabled ? 'yes' : 'no',
-        ?lastDeliveryStatus,
-      ];
+    provider,
+    deliveryEnabled ? 'yes' : 'no',
+    ?lastDeliveryStatus,
+  ];
 }
 
 class EmailDeliveryLog {
@@ -100,7 +100,9 @@ class EmailDeliveryLog {
       status: json['status']?.toString() ?? 'unknown',
       provider: json['provider']?.toString() ?? 'noop',
       errorCode: json['errorCode']?.toString(),
-      createdAt: _parseDate(json['createdAt']) ?? DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
+      createdAt:
+          _parseDate(json['createdAt']) ??
+          DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
       sentAt: _parseDate(json['sentAt']),
       relatedUserId: _parseOptionalInt(json['relatedUserId']),
       relatedCompanyId: _parseOptionalInt(json['relatedCompanyId']),
@@ -125,9 +127,9 @@ class EmailDeliveryLogsPage {
     return EmailDeliveryLogsPage(
       items: rawItems is List
           ? rawItems
-              .whereType<Map<String, dynamic>>()
-              .map(EmailDeliveryLog.fromJson)
-              .toList(growable: false)
+                .whereType<Map<String, dynamic>>()
+                .map(EmailDeliveryLog.fromJson)
+                .toList(growable: false)
           : const [],
       total: _parseInt(json['total']),
       metadataOnly: json['metadataOnly'] != false,

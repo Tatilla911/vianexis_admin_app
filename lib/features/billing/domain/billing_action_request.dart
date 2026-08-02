@@ -22,7 +22,8 @@ class BillingSubscriptionStatusRequest {
   }
 
   String? validate() {
-    if (status.requiresReason && (reason == null || reason!.trim().length < 3)) {
+    if (status.requiresReason &&
+        (reason == null || reason!.trim().length < 3)) {
       return 'billingActionReasonRequired';
     }
     return null;
@@ -30,10 +31,7 @@ class BillingSubscriptionStatusRequest {
 }
 
 class BillingPricingIntakeStatusRequest {
-  const BillingPricingIntakeStatusRequest({
-    required this.status,
-    this.reason,
-  });
+  const BillingPricingIntakeStatusRequest({required this.status, this.reason});
 
   final PricingIntakeStatus status;
   final String? reason;
@@ -46,7 +44,8 @@ class BillingPricingIntakeStatusRequest {
   }
 
   String? validate() {
-    if (status.requiresReason && (reason == null || reason!.trim().length < 3)) {
+    if (status.requiresReason &&
+        (reason == null || reason!.trim().length < 3)) {
       return 'billingActionReasonRequired';
     }
     return null;
@@ -54,10 +53,7 @@ class BillingPricingIntakeStatusRequest {
 }
 
 class BillingQuoteRequestStatusRequest {
-  const BillingQuoteRequestStatusRequest({
-    required this.status,
-    this.reason,
-  });
+  const BillingQuoteRequestStatusRequest({required this.status, this.reason});
 
   final QuoteRequestStatus status;
   final String? reason;
@@ -70,7 +66,8 @@ class BillingQuoteRequestStatusRequest {
   }
 
   String? validate() {
-    if (status.requiresReason && (reason == null || reason!.trim().length < 3)) {
+    if (status.requiresReason &&
+        (reason == null || reason!.trim().length < 3)) {
       return 'billingActionReasonRequired';
     }
     return null;

@@ -31,13 +31,7 @@ enum PlatformAdminUserStatus {
   bool get requiresReason => this == suspended || this == disabled;
 }
 
-enum AdminUserListFilter {
-  all,
-  active,
-  invited,
-  suspended,
-  disabled,
-}
+enum AdminUserListFilter { all, active, invited, suspended, disabled }
 
 extension PlatformAdminUserStatusFilter on PlatformAdminUserStatus {
   bool matchesFilter(AdminUserListFilter filter) {
@@ -45,7 +39,8 @@ extension PlatformAdminUserStatusFilter on PlatformAdminUserStatus {
       AdminUserListFilter.all => true,
       AdminUserListFilter.active => this == PlatformAdminUserStatus.active,
       AdminUserListFilter.invited => this == PlatformAdminUserStatus.invited,
-      AdminUserListFilter.suspended => this == PlatformAdminUserStatus.suspended,
+      AdminUserListFilter.suspended =>
+        this == PlatformAdminUserStatus.suspended,
       AdminUserListFilter.disabled => this == PlatformAdminUserStatus.disabled,
     };
   }

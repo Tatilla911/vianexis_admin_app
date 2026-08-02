@@ -47,7 +47,9 @@ class AdminNotification {
       title: json['title']?.toString() ?? '',
       body: json['body']?.toString() ?? '',
       type: NotificationType.fromBackendValue(json['type']?.toString()),
-      severity: NotificationSeverity.fromBackendValue(json['severity']?.toString()),
+      severity: NotificationSeverity.fromBackendValue(
+        json['severity']?.toString(),
+      ),
       createdAt:
           DateTime.tryParse(json['createdAt']?.toString() ?? '') ??
           DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),

@@ -153,7 +153,7 @@ class VianexisQrIdentityCard extends StatelessWidget {
       imageChild = Image.file(
         File(photoPath!),
         fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => _defaultPhoto(size),
+        errorBuilder: (_, _, _) => _defaultPhoto(size),
       );
     } else {
       imageChild = _defaultPhoto(size);

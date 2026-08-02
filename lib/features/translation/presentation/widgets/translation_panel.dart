@@ -53,7 +53,9 @@ class _TranslationPanelState extends ConsumerState<TranslationPanel> {
       _errorKey = null;
     });
     try {
-      final status = await ref.read(translationRepositoryProvider).fetchProviderStatus();
+      final status = await ref
+          .read(translationRepositoryProvider)
+          .fetchProviderStatus();
       if (!mounted) return;
       setState(() {
         _status = status;
@@ -75,9 +77,9 @@ class _TranslationPanelState extends ConsumerState<TranslationPanel> {
   Future<void> _translate() async {
     final l10n = AppLocalizations.of(context);
     if (_status?.enabled != true) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.translationProviderDisabled)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.translationProviderDisabled)));
       return;
     }
 
@@ -87,16 +89,18 @@ class _TranslationPanelState extends ConsumerState<TranslationPanel> {
     });
 
     try {
-      final result = await ref.read(translationRepositoryProvider).translate(
-        TranslationRequest(
-          sourceType: widget.sourceType,
-          sourceId: widget.sourceId,
-          sourceField: widget.sourceField,
-          text: widget.originalText,
-          targetLanguage: _targetLanguage,
-          companyId: widget.companyId,
-        ),
-      );
+      final result = await ref
+          .read(translationRepositoryProvider)
+          .translate(
+            TranslationRequest(
+              sourceType: widget.sourceType,
+              sourceId: widget.sourceId,
+              sourceField: widget.sourceField,
+              text: widget.originalText,
+              targetLanguage: _targetLanguage,
+              companyId: widget.companyId,
+            ),
+          );
       if (!mounted) return;
       setState(() {
         _lastResult = ReplyTranslationPreview(
@@ -138,7 +142,10 @@ class _TranslationPanelState extends ConsumerState<TranslationPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(l10n.translationPanelTitle, style: Theme.of(context).textTheme.titleMedium),
+        Text(
+          l10n.translationPanelTitle,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
         const SizedBox(height: 8),
         if (!enabled)
           Card(
@@ -161,7 +168,10 @@ class _TranslationPanelState extends ConsumerState<TranslationPanel> {
         ),
         if (_errorKey != null) ...[
           const SizedBox(height: 8),
-          Text(l10n.translationActionError, style: TextStyle(color: Theme.of(context).colorScheme.error)),
+          Text(
+            l10n.translationActionError,
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
         ],
         const SizedBox(height: 12),
         OriginalTextCard(text: widget.originalText),

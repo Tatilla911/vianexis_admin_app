@@ -47,10 +47,12 @@ class PlatformSubscription {
 
   factory PlatformSubscription.fromJson(Map<String, dynamic> json) {
     final plan = json['plan'];
-    final planName = json['planName']?.toString() ??
+    final planName =
+        json['planName']?.toString() ??
         (plan is Map ? plan['name']?.toString() : null);
-    final planTier =
-        plan is Map ? plan['tier']?.toString() : json['planTier']?.toString();
+    final planTier = plan is Map
+        ? plan['tier']?.toString()
+        : json['planTier']?.toString();
 
     return PlatformSubscription(
       id: (json['id'] ?? json['subscriptionId'])?.toString() ?? '',
@@ -65,7 +67,9 @@ class PlatformSubscription {
       seatsUsed: _parseNullableInt(json['seatsUsed']),
       driverAppsIncluded: _parseNullableInt(json['driverAppsIncluded']),
       driverAppsUsed: _parseNullableInt(json['driverAppsUsed']),
-      aiAddOnEnabled: json['aiAddOnEnabled'] is bool ? json['aiAddOnEnabled'] as bool : null,
+      aiAddOnEnabled: json['aiAddOnEnabled'] is bool
+          ? json['aiAddOnEnabled'] as bool
+          : null,
       startedAt: _parseDate(json['startedAt'] ?? json['startsAt']),
       renewsAt: _parseDate(json['renewsAt']),
       cancelledAt: _parseDate(json['cancelledAt'] ?? json['endsAt']),
@@ -94,8 +98,10 @@ class PlatformSubscription {
       SubscriptionListFilter.active => status == SubscriptionStatus.active,
       SubscriptionListFilter.trial => status == SubscriptionStatus.trial,
       SubscriptionListFilter.pastDue => status == SubscriptionStatus.pastDue,
-      SubscriptionListFilter.suspended => status == SubscriptionStatus.suspended,
-      SubscriptionListFilter.cancelled => status == SubscriptionStatus.cancelled,
+      SubscriptionListFilter.suspended =>
+        status == SubscriptionStatus.suspended,
+      SubscriptionListFilter.cancelled =>
+        status == SubscriptionStatus.cancelled,
     };
   }
 }
@@ -115,9 +121,9 @@ class PlatformSubscriptionsPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(PlatformSubscription.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(PlatformSubscription.fromJson)
+              .toList(growable: false)
         : const <PlatformSubscription>[];
     return PlatformSubscriptionsPage(
       items: items,

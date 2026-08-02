@@ -50,7 +50,9 @@ class SecurityEvent {
     return SecurityEvent(
       id: json['id']?.toString() ?? '',
       type: SecurityEventType.fromBackendValue(json['type']?.toString()),
-      severity: SecurityEventSeverity.fromBackendValue(json['severity']?.toString()),
+      severity: SecurityEventSeverity.fromBackendValue(
+        json['severity']?.toString(),
+      ),
       title: json['title']?.toString() ?? '',
       summary: json['summary']?.toString() ?? '',
       actorUserId: json['actorUserId']?.toString(),
@@ -82,9 +84,9 @@ class SecurityEventsPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(SecurityEvent.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(SecurityEvent.fromJson)
+              .toList(growable: false)
         : const <SecurityEvent>[];
     return SecurityEventsPage(
       items: items,

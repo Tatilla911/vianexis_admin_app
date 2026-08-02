@@ -18,7 +18,8 @@ class VianexisWatermarkBackground extends StatelessWidget {
             VianexisBrand.watermarkAsset,
             width: 320,
             fit: BoxFit.contain,
-            errorBuilder: (context, error, stackTrace) => _FallbackWatermark(opacity: opacity),
+            errorBuilder: (context, error, stackTrace) =>
+                _FallbackWatermark(opacity: opacity),
           ),
         ),
       ),
@@ -40,7 +41,9 @@ class _FallbackWatermark extends StatelessWidget {
         height: 220,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: VianexisBrand.viaNexisBlue.withValues(alpha: 0.25)),
+          border: Border.all(
+            color: VianexisBrand.viaNexisBlue.withValues(alpha: 0.25),
+          ),
         ),
         alignment: Alignment.center,
         child: Text(

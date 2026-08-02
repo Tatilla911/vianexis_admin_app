@@ -15,9 +15,9 @@ class QrCodesApi {
     final response = await _apiClient.get<Map<String, dynamic>>(
       '/platform-admin/qr-codes',
       queryParameters: {
-        if (entityType != null) 'entityType': entityType,
-        if (entityId != null) 'entityId': entityId,
-        if (purpose != null) 'purpose': purpose,
+        'entityType': ?entityType,
+        'entityId': ?entityId,
+        'purpose': ?purpose,
       },
     );
     return response.data ?? {'items': []};

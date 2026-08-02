@@ -17,7 +17,8 @@ void main() {
       expect(
         File(relative).existsSync(),
         isTrue,
-        reason: 'Missing $relative — run python tool/generate_admin_branding.py',
+        reason:
+            'Missing $relative — run python tool/generate_admin_branding.py',
       );
     }
   });

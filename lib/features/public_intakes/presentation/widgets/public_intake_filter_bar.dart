@@ -19,16 +19,20 @@ class PublicIntakeFilterBar extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
-        children: PublicIntakeListFilter.values.map((filter) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: FilterChip(
-              label: Text(resolvePublicIntakeKey(context, filter.localizationKey())),
-              selected: selected == filter,
-              onSelected: (_) => onSelected(filter),
-            ),
-          );
-        }).toList(growable: false),
+        children: PublicIntakeListFilter.values
+            .map((filter) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: FilterChip(
+                  label: Text(
+                    resolvePublicIntakeKey(context, filter.localizationKey()),
+                  ),
+                  selected: selected == filter,
+                  onSelected: (_) => onSelected(filter),
+                ),
+              );
+            })
+            .toList(growable: false),
       ),
     );
   }

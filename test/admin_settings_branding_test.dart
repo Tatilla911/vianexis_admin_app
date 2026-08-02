@@ -22,7 +22,9 @@ class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
 }
 
 void main() {
-  testWidgets('permission denied screen uses localized message', (tester) async {
+  testWidgets('permission denied screen uses localized message', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: const [
@@ -43,7 +45,9 @@ void main() {
     );
   });
 
-  testWidgets('settings screen shows admin metadata with branded card', (tester) async {
+  testWidgets('settings screen shows admin metadata with branded card', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [

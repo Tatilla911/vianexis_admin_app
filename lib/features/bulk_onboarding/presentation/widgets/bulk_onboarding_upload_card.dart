@@ -49,7 +49,10 @@ class BulkOnboardingUploadCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingUploadPreviewTitle'),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingUploadPreviewTitle',
+              ),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
@@ -57,7 +60,10 @@ class BulkOnboardingUploadCard extends StatelessWidget {
               key: ValueKey(selectedType),
               initialValue: selectedType,
               decoration: InputDecoration(
-                labelText: resolveBulkOnboardingKey(context, 'bulkOnboardingUploadTypeLabel'),
+                labelText: resolveBulkOnboardingKey(
+                  context,
+                  'bulkOnboardingUploadTypeLabel',
+                ),
               ),
               items: BulkOnboardingJobType.values
                   .where((type) => type != BulkOnboardingJobType.unknown)
@@ -65,7 +71,10 @@ class BulkOnboardingUploadCard extends StatelessWidget {
                     (type) => DropdownMenuItem(
                       value: type,
                       child: Text(
-                        resolveBulkOnboardingKey(context, type.localizationKey()),
+                        resolveBulkOnboardingKey(
+                          context,
+                          type.localizationKey(),
+                        ),
                       ),
                     ),
                   )
@@ -105,7 +114,10 @@ class BulkOnboardingUploadCard extends StatelessWidget {
               enabled: !isUploading,
               maxLines: 2,
               decoration: InputDecoration(
-                labelText: resolveBulkOnboardingKey(context, 'bulkOnboardingUploadNoteLabel'),
+                labelText: resolveBulkOnboardingKey(
+                  context,
+                  'bulkOnboardingUploadNoteLabel',
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -122,17 +134,26 @@ class BulkOnboardingUploadCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingNoRealProvisioningNotice'),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingNoRealProvisioningNotice',
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 8),
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingHumanApprovalNotice'),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingHumanApprovalNotice',
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 8),
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingAiAdvisoryNotice'),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingAiAdvisoryNotice',
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 16),
@@ -149,7 +170,9 @@ class BulkOnboardingUploadCard extends StatelessWidget {
             FilledButton.icon(
               onPressed: isUploading ? null : onSubmit,
               icon: const Icon(Icons.cloud_upload),
-              label: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingUploadCsv')),
+              label: Text(
+                resolveBulkOnboardingKey(context, 'bulkOnboardingUploadCsv'),
+              ),
             ),
           ],
         ),

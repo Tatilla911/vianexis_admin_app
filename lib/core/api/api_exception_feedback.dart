@@ -5,9 +5,9 @@ import '../api/api_exception.dart';
 
 void showApiExceptionSnackBar(BuildContext context, ApiException error) {
   final presentation = resolveApiException(context, error);
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text(presentation.message)),
-  );
+  ScaffoldMessenger.of(
+    context,
+  ).showSnackBar(SnackBar(content: Text(presentation.message)));
 }
 
 String apiExceptionMessage(BuildContext context, ApiException error) {

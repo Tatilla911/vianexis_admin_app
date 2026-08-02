@@ -25,7 +25,8 @@ enum SupportTicketStatus {
       SupportTicketStatus.open => 'supportTicketStatusOpen',
       SupportTicketStatus.acknowledged => 'supportTicketStatusAcknowledged',
       SupportTicketStatus.investigating => 'supportTicketStatusInvestigating',
-      SupportTicketStatus.waitingForCustomer => 'supportTicketStatusWaitingForCustomer',
+      SupportTicketStatus.waitingForCustomer =>
+        'supportTicketStatusWaitingForCustomer',
       SupportTicketStatus.resolved => 'supportTicketStatusResolved',
       SupportTicketStatus.closed => 'supportTicketStatusClosed',
       SupportTicketStatus.unknown => 'supportTicketStatusUnknown',

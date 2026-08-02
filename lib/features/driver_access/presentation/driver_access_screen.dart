@@ -122,7 +122,7 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
         padding: EdgeInsets.only(bottom: 12),
         child: LinearProgressIndicator(),
       ),
-      error: (_, __) => Padding(
+      error: (_, _) => Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: BackendDependencyCard(
           title: resolveDriverAccessKey(context, 'driverAccessPendingTitle'),
@@ -363,7 +363,7 @@ class _RejectedDriverRegistrationsSection extends ConsumerWidget {
         padding: EdgeInsets.only(bottom: 12),
         child: LinearProgressIndicator(),
       ),
-      error: (_, __) => Padding(
+      error: (_, _) => Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: Text(
           resolveDriverAccessKey(context, 'driverAccessRejectedLoadFailed'),
@@ -551,7 +551,7 @@ class _DriverAccessDetailScreenState
               const SizedBox(height: 12),
               deviceStatusAsync.when(
                 loading: () => const SizedBox.shrink(),
-                error: (_, __) => BackendDependencyCard(
+                error: (_, _) => BackendDependencyCard(
                   title: resolveDriverAccessKey(
                     context,
                     'driverAccessDeviceNotificationTitle',

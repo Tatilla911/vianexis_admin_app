@@ -19,11 +19,13 @@ extension SecurityEventFilterX on SecurityEventFilter {
     return switch (this) {
       SecurityEventFilter.all => 'securityEventFilterAll',
       SecurityEventFilter.failedLogin => 'securityEventFilterFailedLogin',
-      SecurityEventFilter.permissionDenied => 'securityEventFilterPermissionDenied',
+      SecurityEventFilter.permissionDenied =>
+        'securityEventFilterPermissionDenied',
       SecurityEventFilter.supportAccess => 'securityEventFilterSupportAccess',
       SecurityEventFilter.highRiskAi => 'securityEventFilterHighRiskAi',
       SecurityEventFilter.criticalSystem => 'securityEventFilterCriticalSystem',
-      SecurityEventFilter.adminRoleChange => 'securityEventFilterAdminRoleChange',
+      SecurityEventFilter.adminRoleChange =>
+        'securityEventFilterAdminRoleChange',
       SecurityEventFilter.suspiciousBulkOnboarding =>
         'securityEventFilterSuspiciousBulkOnboarding',
       SecurityEventFilter.critical => 'securityEventFilterCritical',
@@ -37,7 +39,8 @@ extension SecurityEventFilterX on SecurityEventFilter {
       SecurityEventFilter.critical ||
       SecurityEventFilter.warning => null,
       SecurityEventFilter.failedLogin => SecurityEventType.failedLogin,
-      SecurityEventFilter.permissionDenied => SecurityEventType.permissionDenied,
+      SecurityEventFilter.permissionDenied =>
+        SecurityEventType.permissionDenied,
       SecurityEventFilter.supportAccess => SecurityEventType.supportAccess,
       SecurityEventFilter.highRiskAi => SecurityEventType.highRiskAi,
       SecurityEventFilter.criticalSystem => SecurityEventType.criticalSystem,

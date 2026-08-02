@@ -9,9 +9,7 @@ void main() {
   testWidgets('branded background renders without error', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
-        home: VianexisAdminBackground(
-          child: SizedBox.expand(),
-        ),
+        home: VianexisAdminBackground(child: SizedBox.expand()),
       ),
     );
 
@@ -19,7 +17,9 @@ void main() {
     expect(find.byType(ColoredBox), findsWidgets);
   });
 
-  testWidgets('logo fallback does not crash when asset missing', (tester) async {
+  testWidgets('logo fallback does not crash when asset missing', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: const [

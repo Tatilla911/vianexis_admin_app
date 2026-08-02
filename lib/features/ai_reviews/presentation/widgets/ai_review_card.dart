@@ -17,9 +17,9 @@ class AiReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).toString();
-    final updatedLabel = DateFormat.yMMMd(locale)
-        .add_Hm()
-        .format(review.updatedAt.toLocal());
+    final updatedLabel = DateFormat.yMMMd(
+      locale,
+    ).add_Hm().format(review.updatedAt.toLocal());
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
@@ -62,7 +62,9 @@ class AiReviewCard extends StatelessWidget {
                 runSpacing: 8,
                 children: [
                   AiReviewSourceBadge(sourceType: review.sourceType),
-                  AiReviewRecommendationBadge(recommendation: review.recommendation),
+                  AiReviewRecommendationBadge(
+                    recommendation: review.recommendation,
+                  ),
                 ],
               ),
               const SizedBox(height: 12),

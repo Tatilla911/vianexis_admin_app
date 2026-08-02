@@ -17,10 +17,7 @@ import 'widgets/support_access_warning_card.dart';
 import 'widgets/support_action_dialog.dart';
 
 class SupportAccessGrantDetailScreen extends ConsumerWidget {
-  const SupportAccessGrantDetailScreen({
-    super.key,
-    required this.grantId,
-  });
+  const SupportAccessGrantDetailScreen({super.key, required this.grantId});
 
   final String grantId;
 
@@ -59,7 +56,11 @@ class SupportAccessGrantDetailScreen extends ConsumerWidget {
       );
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveSupportKey(context, 'supportGrantRevokeSuccess'))),
+        SnackBar(
+          content: Text(
+            resolveSupportKey(context, 'supportGrantRevokeSuccess'),
+          ),
+        ),
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;
@@ -67,31 +68,31 @@ class SupportAccessGrantDetailScreen extends ConsumerWidget {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveSupportKey(context, 'supportActionError'))),
+        SnackBar(
+          content: Text(resolveSupportKey(context, 'supportActionError')),
+        ),
       );
     }
   }
 }
 
 class _DetailBody extends StatelessWidget {
-  const _DetailBody({
-    required this.grant,
-    required this.onRevoke,
-  });
+  const _DetailBody({required this.grant, required this.onRevoke});
 
   final SupportAccessGrant grant;
   final VoidCallback onRevoke;
 
   String _formatDate(BuildContext context, DateTime? value) {
     if (value == null) return '—';
-    return DateFormat.yMMMd(Localizations.localeOf(context).toString())
-        .add_Hm()
-        .format(value.toLocal());
+    return DateFormat.yMMMd(
+      Localizations.localeOf(context).toString(),
+    ).add_Hm().format(value.toLocal());
   }
 
   @override
   Widget build(BuildContext context) {
-    final canRevoke = grant.status == SupportAccessGrantStatus.active ||
+    final canRevoke =
+        grant.status == SupportAccessGrantStatus.active ||
         grant.status == SupportAccessGrantStatus.pending;
 
     return ListView(
@@ -132,11 +133,17 @@ class _DetailBody extends StatelessWidget {
           value: grant.reason,
         ),
         _InfoRow(
-          label: resolveSupportKey(context, 'supportGrantFieldAllowedCategories'),
+          label: resolveSupportKey(
+            context,
+            'supportGrantFieldAllowedCategories',
+          ),
           value: grant.allowedDataCategories.join(', '),
         ),
         _InfoRow(
-          label: resolveSupportKey(context, 'supportGrantFieldExcludesDocuments'),
+          label: resolveSupportKey(
+            context,
+            'supportGrantFieldExcludesDocuments',
+          ),
           value: grant.excludesSensitiveDocuments
               ? resolveSupportKey(context, 'supportGrantYes')
               : resolveSupportKey(context, 'supportGrantNo'),
@@ -174,7 +181,9 @@ class _DetailBody extends StatelessWidget {
                 const Icon(Icons.shield_outlined, size: 20),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(resolveSupportKey(context, 'supportPrivacyNotice')),
+                  child: Text(
+                    resolveSupportKey(context, 'supportPrivacyNotice'),
+                  ),
                 ),
               ],
             ),

@@ -35,7 +35,9 @@ class LivePlatformAuditLogsRepository implements PlatformAuditLogsRepository {
   bool get exportAvailable => true;
 
   @override
-  Future<List<PlatformAuditLog>> fetchLogs({PlatformAuditLogListQuery? query}) async {
+  Future<List<PlatformAuditLog>> fetchLogs({
+    PlatformAuditLogListQuery? query,
+  }) async {
     final logs = await _api.listLogs(query: query);
     _cachedLogs = logs;
     return logs;
@@ -76,12 +78,16 @@ class MockPlatformAuditLogsRepository implements PlatformAuditLogsRepository {
   bool get exportAvailable => true;
 
   @override
-  Future<List<PlatformAuditLog>> fetchLogs({PlatformAuditLogListQuery? query}) async {
+  Future<List<PlatformAuditLog>> fetchLogs({
+    PlatformAuditLogListQuery? query,
+  }) async {
     await Future<void>.delayed(const Duration(milliseconds: 250));
     final queryValue = query ?? const PlatformAuditLogListQuery();
     return _logs
         .where((log) => log.matchesFilter(queryValue.filter))
-        .where((log) => log.matchesDateRange(queryValue.dateFrom, queryValue.dateTo))
+        .where(
+          (log) => log.matchesDateRange(queryValue.dateFrom, queryValue.dateTo),
+        )
         .toList(growable: false);
   }
 
@@ -108,19 +114,21 @@ class MockPlatformAuditLogsRepository implements PlatformAuditLogsRepository {
     ];
     final buffer = StringBuffer('${headers.join(',')}\n');
     for (final log in logs) {
-      buffer.writeln([
-        log.timestamp.toUtc().toIso8601String(),
-        _csvCell(log.actorEmail),
-        _csvCell(log.actorRole),
-        _csvCell(log.actionType.name),
-        _csvCell(log.result.name),
-        _csvCell(log.severity.name),
-        _csvCell(log.targetType),
-        _csvCell(log.targetId),
-        _csvCell(log.companyName),
-        _csvCell(log.reason),
-        _csvCell(log.correlationId),
-      ].join(','));
+      buffer.writeln(
+        [
+          log.timestamp.toUtc().toIso8601String(),
+          _csvCell(log.actorEmail),
+          _csvCell(log.actorRole),
+          _csvCell(log.actionType.name),
+          _csvCell(log.result.name),
+          _csvCell(log.severity.name),
+          _csvCell(log.targetType),
+          _csvCell(log.targetId),
+          _csvCell(log.companyName),
+          _csvCell(log.reason),
+          _csvCell(log.correlationId),
+        ].join(','),
+      );
     }
     return buffer.toString();
   }
@@ -245,13 +253,15 @@ class MockPlatformAuditLogsRepository implements PlatformAuditLogsRepository {
   }
 }
 
-final platformAuditLogsRepositoryProvider = Provider<PlatformAuditLogsRepository>((ref) {
-
-  if (AppConfig.instance.shouldUseLiveRepositories) {
-    return LivePlatformAuditLogsRepository(ref.watch(platformAuditLogsApiProvider));
-  }
-  return MockPlatformAuditLogsRepository();
-});
+final platformAuditLogsRepositoryProvider =
+    Provider<PlatformAuditLogsRepository>((ref) {
+      if (AppConfig.instance.shouldUseLiveRepositories) {
+        return LivePlatformAuditLogsRepository(
+          ref.watch(platformAuditLogsApiProvider),
+        );
+      }
+      return MockPlatformAuditLogsRepository();
+    });
 
 final platformAuditLogsExportAvailableProvider = Provider<bool>((ref) {
   return ref.watch(platformAuditLogsRepositoryProvider).exportAvailable;

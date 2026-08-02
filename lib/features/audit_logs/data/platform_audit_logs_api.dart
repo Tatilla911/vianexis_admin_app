@@ -30,7 +30,9 @@ class PlatformAuditLogsApi {
 
     return items
         .whereType<Map>()
-        .map((item) => PlatformAuditLog.fromJson(Map<String, dynamic>.from(item)))
+        .map(
+          (item) => PlatformAuditLog.fromJson(Map<String, dynamic>.from(item)),
+        )
         .toList(growable: false);
   }
 

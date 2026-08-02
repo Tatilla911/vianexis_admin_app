@@ -46,7 +46,9 @@ class ActionCenterItem {
     return ActionCenterItem(
       id: json['id']?.toString() ?? '',
       type: ActionCenterItemType.fromBackendValue(json['type']?.toString()),
-      priority: ActionCenterPriority.fromBackendValue(json['priority']?.toString()),
+      priority: ActionCenterPriority.fromBackendValue(
+        json['priority']?.toString(),
+      ),
       title: json['title']?.toString() ?? '',
       summary: json['summary']?.toString() ?? '',
       sourceType: json['sourceType']?.toString() ?? '',
@@ -88,9 +90,9 @@ class ActionCenterSnapshot {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(ActionCenterItem.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(ActionCenterItem.fromJson)
+              .toList(growable: false)
         : const <ActionCenterItem>[];
     return ActionCenterSnapshot(
       items: items,

@@ -52,7 +52,9 @@ void main() {
     expect(find.text('Enter at least 3 characters.'), findsNothing);
   });
 
-  testWidgets('request-info dialog requires note before confirm', (tester) async {
+  testWidgets('request-info dialog requires note before confirm', (
+    tester,
+  ) async {
     await pumpDialog(tester, RegistrationDecisionType.requestInfo);
 
     await tester.tap(find.text('Send request'));

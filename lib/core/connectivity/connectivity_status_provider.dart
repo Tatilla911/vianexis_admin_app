@@ -11,7 +11,9 @@ class ConnectivityStatusNotifier extends Notifier<bool> {
     ref.onDispose(() {
       _subscription?.cancel();
     });
-    _subscription = Connectivity().onConnectivityChanged.listen(_updateFromResults);
+    _subscription = Connectivity().onConnectivityChanged.listen(
+      _updateFromResults,
+    );
     unawaited(_refresh());
     return true;
   }

@@ -36,7 +36,8 @@ void main() {
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
-            if (options.path == '/platform-admin/audit-logs' && options.method == 'GET') {
+            if (options.path == '/platform-admin/audit-logs' &&
+                options.method == 'GET') {
               handler.resolve(
                 Response<Map<String, dynamic>>(
                   requestOptions: options,
@@ -132,15 +133,16 @@ void main() {
       final logs = await repository.fetchLogs();
       expect(logs, hasLength(2));
       expect(logs.first.id, '1001');
-      expect(logs.first.actionType, PlatformAuditActionType.registrationApproved);
+      expect(
+        logs.first.actionType,
+        PlatformAuditActionType.registrationApproved,
+      );
       expect(repository.usesMockData, isFalse);
     });
 
     test('exportCsv hits export endpoint', () async {
       final csv = await repository.exportCsv(
-        query: PlatformAuditLogListQuery(
-          dateFrom: DateTime.utc(2026, 6, 1),
-        ),
+        query: PlatformAuditLogListQuery(dateFrom: DateTime.utc(2026, 6, 1)),
       );
       expect(csv, contains('timestamp,actorEmail,actorRole'));
     });
@@ -148,16 +150,22 @@ void main() {
     test('fetchLog loads live detail endpoint', () async {
       final detail = await repository.fetchLog('1001');
       expect(detail.id, '1001');
-      expect(detail.actionType, PlatformAuditActionType.supportTicketAcknowledged);
+      expect(
+        detail.actionType,
+        PlatformAuditActionType.supportTicketAcknowledged,
+      );
       expect(detail.metadataOnly, isNotEmpty);
     });
 
-    test('fetchLog falls back to cached list item when detail missing', () async {
-      await repository.fetchLogs();
-      final detail = await repository.fetchLog('1002');
-      expect(detail.id, '1002');
-      expect(detail.actionType, PlatformAuditActionType.supportAccessRevoked);
-    });
+    test(
+      'fetchLog falls back to cached list item when detail missing',
+      () async {
+        await repository.fetchLogs();
+        final detail = await repository.fetchLog('1002');
+        expect(detail.id, '1002');
+        expect(detail.actionType, PlatformAuditActionType.supportAccessRevoked);
+      },
+    );
 
     test('fetchLog throws when id not in cache and detail missing', () async {
       await repository.fetchLogs();

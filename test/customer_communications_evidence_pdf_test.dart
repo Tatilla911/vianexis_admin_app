@@ -81,7 +81,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.textContaining('PDF evidence package is ready'), findsOneWidget);
+      expect(
+        find.textContaining('PDF evidence package is ready'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('does not crash when fileUrl is null', (tester) async {

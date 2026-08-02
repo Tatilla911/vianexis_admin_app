@@ -24,7 +24,9 @@ class TripsOverviewScreen extends ConsumerWidget {
         title: Text(resolveTripsOverviewKey(context, 'tripsOverviewTitle')),
         actions: [
           if (usesMock)
-            MockDataBadge(label: resolveTripsOverviewKey(context, 'tripsOverviewMockBadge')),
+            MockDataBadge(
+              label: resolveTripsOverviewKey(context, 'tripsOverviewMockBadge'),
+            ),
         ],
       ),
       body: snapshotAsync.when(
@@ -32,7 +34,10 @@ class TripsOverviewScreen extends ConsumerWidget {
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage: resolveTripsOverviewKey(context, 'tripsOverviewLoadFailed'),
+          fallbackMessage: resolveTripsOverviewKey(
+            context,
+            'tripsOverviewLoadFailed',
+          ),
           onRetry: () {
             ref.invalidate(platformOperationsSnapshotProvider);
             ref.invalidate(tripOverviewListProvider);
@@ -43,7 +48,10 @@ class TripsOverviewScreen extends ConsumerWidget {
           error: (error, _) => VianexisErrorView.fromError(
             context,
             error,
-            fallbackMessage: resolveTripsOverviewKey(context, 'tripsOverviewLoadFailed'),
+            fallbackMessage: resolveTripsOverviewKey(
+              context,
+              'tripsOverviewLoadFailed',
+            ),
             onRetry: () => ref.invalidate(tripOverviewListProvider),
           ),
           data: (result) {
@@ -51,7 +59,10 @@ class TripsOverviewScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(16),
               children: [
                 VianexisMetadataNotice(
-                  message: resolveTripsOverviewKey(context, 'tripsOverviewPrivacyNotice'),
+                  message: resolveTripsOverviewKey(
+                    context,
+                    'tripsOverviewPrivacyNotice',
+                  ),
                 ),
                 const SizedBox(height: 12),
                 _summaryRow(
@@ -61,7 +72,10 @@ class TripsOverviewScreen extends ConsumerWidget {
                 ),
                 _summaryRow(
                   context,
-                  resolveTripsOverviewKey(context, 'tripsOverviewCompletedCount'),
+                  resolveTripsOverviewKey(
+                    context,
+                    'tripsOverviewCompletedCount',
+                  ),
                   '${snapshot.tripsCompleted}',
                 ),
                 _summaryRow(
@@ -72,8 +86,14 @@ class TripsOverviewScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 if (!result.listEndpointReady)
                   BackendDependencyCard(
-                    title: resolveTripsOverviewKey(context, 'tripsOverviewBackendTitle'),
-                    message: resolveTripsOverviewKey(context, 'tripsOverviewBackendMessage'),
+                    title: resolveTripsOverviewKey(
+                      context,
+                      'tripsOverviewBackendTitle',
+                    ),
+                    message: resolveTripsOverviewKey(
+                      context,
+                      'tripsOverviewBackendMessage',
+                    ),
                     endpointHint: 'GET /platform-admin/trips (planned)',
                   )
                 else ...[

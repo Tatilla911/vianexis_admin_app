@@ -15,8 +15,4 @@ abstract final class EvidencePdfBytes {
   }
 }
 
-enum EvidencePdfShareFailure {
-  empty,
-  invalid,
-  shareUnavailable,
-}
+enum EvidencePdfShareFailure { empty, invalid, shareUnavailable }

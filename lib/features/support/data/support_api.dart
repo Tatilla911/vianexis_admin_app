@@ -76,7 +76,10 @@ class SupportApi {
 
     return items
         .whereType<Map>()
-        .map((item) => SupportAccessGrant.fromJson(Map<String, dynamic>.from(item)))
+        .map(
+          (item) =>
+              SupportAccessGrant.fromJson(Map<String, dynamic>.from(item)),
+        )
         .toList(growable: false);
   }
 
@@ -99,7 +102,9 @@ class SupportApi {
     throw const ApiException(messageKey: LocalizationKeys.supportLoadError);
   }
 
-  Future<SupportAccessGrant> createGrant(SupportAccessGrantRequest request) async {
+  Future<SupportAccessGrant> createGrant(
+    SupportAccessGrantRequest request,
+  ) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/support-access-grants',
       data: request.toJson(),

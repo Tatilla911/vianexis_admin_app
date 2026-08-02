@@ -10,7 +10,8 @@ Future<AdminUserStatusUpdateRequest?> showAdminUserStatusDialog({
 }) {
   return showDialog<AdminUserStatusUpdateRequest>(
     context: context,
-    builder: (dialogContext) => _AdminUserStatusDialog(currentStatus: currentStatus),
+    builder: (dialogContext) =>
+        _AdminUserStatusDialog(currentStatus: currentStatus),
   );
 }
 
@@ -62,19 +63,25 @@ class _AdminUserStatusDialogState extends State<_AdminUserStatusDialog> {
               decoration: InputDecoration(
                 labelText: resolveAdminUserKey(context, 'adminUserFieldStatus'),
               ),
-              items: [
-                PlatformAdminUserStatus.active,
-                PlatformAdminUserStatus.invited,
-                PlatformAdminUserStatus.suspended,
-                PlatformAdminUserStatus.disabled,
-              ]
-                  .map(
-                    (status) => DropdownMenuItem(
-                      value: status,
-                      child: Text(resolveAdminUserKey(context, status.localizationKey())),
-                    ),
-                  )
-                  .toList(growable: false),
+              items:
+                  [
+                        PlatformAdminUserStatus.active,
+                        PlatformAdminUserStatus.invited,
+                        PlatformAdminUserStatus.suspended,
+                        PlatformAdminUserStatus.disabled,
+                      ]
+                      .map(
+                        (status) => DropdownMenuItem(
+                          value: status,
+                          child: Text(
+                            resolveAdminUserKey(
+                              context,
+                              status.localizationKey(),
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(growable: false),
               onChanged: (value) {
                 if (value != null) setState(() => _status = value);
               },
@@ -89,7 +96,10 @@ class _AdminUserStatusDialogState extends State<_AdminUserStatusDialog> {
               validator: (value) {
                 if (_status.requiresReason &&
                     (value == null || value.trim().length < 3)) {
-                  return resolveAdminUserKey(context, 'adminUserReasonRequired');
+                  return resolveAdminUserKey(
+                    context,
+                    'adminUserReasonRequired',
+                  );
                 }
                 return null;
               },

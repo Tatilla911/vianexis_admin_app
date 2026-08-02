@@ -32,11 +32,11 @@ class SendCustomerReplyRequest {
       'targetLanguage': recipientLanguage,
       'recipientLanguage': recipientLanguage,
       if (translationRecordId != null)
-        'translationRecordId': int.tryParse(translationRecordId!) ??
-            translationRecordId,
+        'translationRecordId':
+            int.tryParse(translationRecordId!) ?? translationRecordId,
       if (translationRecordId != null)
-        'approvedTranslationRecordId': int.tryParse(translationRecordId!) ??
-            translationRecordId,
+        'approvedTranslationRecordId':
+            int.tryParse(translationRecordId!) ?? translationRecordId,
       'useTranslatedText': useTranslatedText,
       'humanConfirmed': humanConfirmed,
       'deliveryChannel': deliveryChannel,
@@ -56,9 +56,9 @@ class ResendCustomerReplyRequest {
   final bool humanConfirmed;
 
   Map<String, dynamic> toJson() => {
-        'reason': reason,
-        'humanConfirmed': humanConfirmed,
-      };
+    'reason': reason,
+    'humanConfirmed': humanConfirmed,
+  };
 }
 
 class SendCustomerReplyResult {

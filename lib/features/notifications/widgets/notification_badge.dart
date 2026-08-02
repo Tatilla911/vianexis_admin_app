@@ -19,9 +19,9 @@ class NotificationBadge extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: Theme.of(
-          context,
-        ).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onError),
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+          color: Theme.of(context).colorScheme.onError,
+        ),
       ),
     );
   }

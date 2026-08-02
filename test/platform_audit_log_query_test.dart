@@ -10,21 +10,17 @@ void main() {
       dateTo: DateTime.utc(2026, 6, 18),
     );
 
-    expect(
-      query.toApiQuery(limit: 100),
-      {
-        'limit': 100,
-        'dateFrom': '2026-06-01',
-        'dateTo': '2026-06-18',
-        'severity': 'critical',
-      },
-    );
+    expect(query.toApiQuery(limit: 100), {
+      'limit': 100,
+      'dateFrom': '2026-06-01',
+      'dateTo': '2026-06-18',
+      'severity': 'critical',
+    });
   });
 
   test('apiQueryParams maps denied filter to result', () {
-    expect(
-      PlatformAuditLogFilter.denied.apiQueryParams(),
-      {'result': 'denied'},
-    );
+    expect(PlatformAuditLogFilter.denied.apiQueryParams(), {
+      'result': 'denied',
+    });
   });
 }

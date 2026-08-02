@@ -78,6 +78,16 @@ class _MockRegistrationRepository
   }
 
   @override
+  Future<Map<String, dynamic>> sendPasswordSetup(String applicationId) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getInviteStatus(String applicationId) async {
+    return {'status': 'none'};
+  }
+
+  @override
   Future<void> revokeInvite(String applicationId) {
     throw UnimplementedError();
   }

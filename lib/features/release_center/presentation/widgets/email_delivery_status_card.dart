@@ -87,7 +87,10 @@ class EmailDeliveryStatusCard extends StatelessWidget {
             ],
             const SizedBox(height: 12),
             VianexisMetadataNotice(
-              message: resolveReleaseCenterKey(context, 'releaseEmailDeliveryNotice'),
+              message: resolveReleaseCenterKey(
+                context,
+                'releaseEmailDeliveryNotice',
+              ),
             ),
           ],
         ),
@@ -99,8 +102,10 @@ class EmailDeliveryStatusCard extends StatelessWidget {
     return switch (provider) {
       'noop' => resolveReleaseCenterKey(context, 'releaseEmailProviderNoop'),
       'smtp' => resolveReleaseCenterKey(context, 'releaseEmailProviderSmtp'),
-      'provider_placeholder' =>
-        resolveReleaseCenterKey(context, 'releaseEmailProviderPlaceholder'),
+      'provider_placeholder' => resolveReleaseCenterKey(
+        context,
+        'releaseEmailProviderPlaceholder',
+      ),
       _ => provider,
     };
   }

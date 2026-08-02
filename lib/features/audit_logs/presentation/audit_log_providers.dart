@@ -6,11 +6,13 @@ import '../domain/platform_audit_log_query.dart';
 import '../domain/platform_audit_log.dart';
 
 final platformAuditLogListQueryProvider =
-    NotifierProvider<PlatformAuditLogListQueryNotifier, PlatformAuditLogListQuery>(
-      PlatformAuditLogListQueryNotifier.new,
-    );
+    NotifierProvider<
+      PlatformAuditLogListQueryNotifier,
+      PlatformAuditLogListQuery
+    >(PlatformAuditLogListQueryNotifier.new);
 
-class PlatformAuditLogListQueryNotifier extends Notifier<PlatformAuditLogListQuery> {
+class PlatformAuditLogListQueryNotifier
+    extends Notifier<PlatformAuditLogListQuery> {
   @override
   PlatformAuditLogListQuery build() => const PlatformAuditLogListQuery();
 
@@ -43,7 +45,9 @@ class PlatformAuditLogsNotifier extends AsyncNotifier<List<PlatformAuditLog>> {
 
   Future<List<PlatformAuditLog>> _load() {
     final query = ref.read(platformAuditLogListQueryProvider);
-    return ref.read(platformAuditLogsRepositoryProvider).fetchLogs(query: query);
+    return ref
+        .read(platformAuditLogsRepositoryProvider)
+        .fetchLogs(query: query);
   }
 
   Future<void> refresh() async {
@@ -72,22 +76,26 @@ final filteredPlatformAuditLogsProvider =
       );
     });
 
-final platformAuditLogDetailProvider =
-    FutureProvider.autoDispose.family<PlatformAuditLog, String>((ref, id) {
+final platformAuditLogDetailProvider = FutureProvider.autoDispose
+    .family<PlatformAuditLog, String>((ref, id) {
       return ref.read(platformAuditLogsRepositoryProvider).fetchLog(id);
     });
 
 final platformAuditLogSummaryProvider =
-    AsyncNotifierProvider<PlatformAuditLogSummaryNotifier, PlatformAuditLogSummary>(
-      PlatformAuditLogSummaryNotifier.new,
-    );
+    AsyncNotifierProvider<
+      PlatformAuditLogSummaryNotifier,
+      PlatformAuditLogSummary
+    >(PlatformAuditLogSummaryNotifier.new);
 
-class PlatformAuditLogSummaryNotifier extends AsyncNotifier<PlatformAuditLogSummary> {
+class PlatformAuditLogSummaryNotifier
+    extends AsyncNotifier<PlatformAuditLogSummary> {
   @override
   Future<PlatformAuditLogSummary> build() => _load();
 
   Future<PlatformAuditLogSummary> _load() async {
-    final logs = await ref.read(platformAuditLogsRepositoryProvider).fetchLogs();
+    final logs = await ref
+        .read(platformAuditLogsRepositoryProvider)
+        .fetchLogs();
     return PlatformAuditLogSummary.fromLogs(logs);
   }
 

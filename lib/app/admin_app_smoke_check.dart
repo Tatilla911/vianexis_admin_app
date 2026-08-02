@@ -4,9 +4,7 @@ import 'release_readiness.dart';
 
 /// Local project smoke checks — no live API login required.
 List<String> runAdminAppSmokeChecks(Directory root) {
-  final issues = <String>[
-    ...runReleaseReadinessChecks(root),
-  ];
+  final issues = <String>[...runReleaseReadinessChecks(root)];
 
   for (final relative in _requiredL10nFiles) {
     if (!File('${root.path}${Platform.pathSeparator}$relative').existsSync()) {
@@ -69,6 +67,4 @@ const _requiredL10nFiles = [
   'lib/l10n/app_localizations.dart',
 ];
 
-const _smokeDocs = [
-  'docs/ADMIN_APP_SMOKE_TESTS.md',
-];
+const _smokeDocs = ['docs/ADMIN_APP_SMOKE_TESTS.md'];

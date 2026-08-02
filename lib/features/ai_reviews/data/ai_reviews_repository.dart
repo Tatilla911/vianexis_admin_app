@@ -124,9 +124,11 @@ class MockAiReviewsRepository implements AiReviewsRepository {
         sourceLabel: 'Worker backlog',
         riskLevel: AiReviewRiskLevel.high,
         recommendation: AiReviewRecommendation.escalate,
-        summary:
-            'Advisory: review worker metadata only. Do not auto-repair.',
-        checksPerformed: const ['component_health_scan', 'severity_classification'],
+        summary: 'Advisory: review worker metadata only. Do not auto-repair.',
+        checksPerformed: const [
+          'component_health_scan',
+          'severity_classification',
+        ],
         createdAt: DateTime.utc(2026, 6, 13, 7, 45),
         updatedAt: DateTime.utc(2026, 6, 13, 8, 0),
         status: 'open',
@@ -136,7 +138,6 @@ class MockAiReviewsRepository implements AiReviewsRepository {
 }
 
 final aiReviewsRepositoryProvider = Provider<AiReviewsRepository>((ref) {
-
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveAiReviewsRepository(ref.watch(aiReviewsApiProvider));
   }

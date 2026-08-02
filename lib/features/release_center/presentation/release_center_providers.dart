@@ -36,12 +36,16 @@ final releaseEnvironmentProvider =
 
 final emailDeliveryStatusProvider =
     FutureProvider.autoDispose<EmailDeliveryStatus>((ref) {
-      return ref.watch(releaseCenterRepositoryProvider).fetchEmailDeliveryStatus();
+      return ref
+          .watch(releaseCenterRepositoryProvider)
+          .fetchEmailDeliveryStatus();
     });
 
 final observabilityStatusProvider =
     FutureProvider.autoDispose<ObservabilityStatus>((ref) {
-      return ref.watch(releaseCenterRepositoryProvider).fetchObservabilityStatus();
+      return ref
+          .watch(releaseCenterRepositoryProvider)
+          .fetchObservabilityStatus();
     });
 
 Future<void> refreshReleaseCenter(WidgetRef ref) async {

@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/localization/localization_resolver.dart';
 
 class BulkOnboardingUploadProgress extends StatelessWidget {
-  const BulkOnboardingUploadProgress({
-    super.key,
-    required this.progress,
-  });
+  const BulkOnboardingUploadProgress({super.key, required this.progress});
 
   final double? progress;
 

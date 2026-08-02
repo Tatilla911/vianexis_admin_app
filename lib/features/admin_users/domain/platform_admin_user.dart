@@ -28,7 +28,8 @@ class PlatformAdminUser {
   final DateTime? lastFailedLoginAt;
   final bool metadataOnly;
 
-  String get displayName => name?.trim().isNotEmpty == true ? name!.trim() : email;
+  String get displayName =>
+      name?.trim().isNotEmpty == true ? name!.trim() : email;
 
   bool matchesSearch(String rawQuery) {
     final query = rawQuery.trim().toLowerCase();
@@ -39,7 +40,8 @@ class PlatformAdminUser {
         status.backendValue.contains(query);
   }
 
-  bool matchesFilter(AdminUserListFilter filter) => status.matchesFilter(filter);
+  bool matchesFilter(AdminUserListFilter filter) =>
+      status.matchesFilter(filter);
 
   factory PlatformAdminUser.fromJson(Map<String, dynamic> json) {
     return PlatformAdminUser(
@@ -47,7 +49,9 @@ class PlatformAdminUser {
       email: json['email']?.toString() ?? '',
       name: json['name']?.toString(),
       role: PlatformAdminUserRole.fromBackendValue(json['role']?.toString()),
-      status: PlatformAdminUserStatus.fromBackendValue(json['status']?.toString()),
+      status: PlatformAdminUserStatus.fromBackendValue(
+        json['status']?.toString(),
+      ),
       createdAt: _parseDate(json['createdAt']),
       updatedAt: _parseDate(json['updatedAt']),
       lastLoginAt: _parseDate(json['lastLoginAt']),
@@ -59,10 +63,7 @@ class PlatformAdminUser {
 }
 
 class PlatformAdminUsersPage {
-  const PlatformAdminUsersPage({
-    required this.items,
-    this.metadataOnly = true,
-  });
+  const PlatformAdminUsersPage({required this.items, this.metadataOnly = true});
 
   final List<PlatformAdminUser> items;
   final bool metadataOnly;
@@ -71,9 +72,9 @@ class PlatformAdminUsersPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(PlatformAdminUser.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(PlatformAdminUser.fromJson)
+              .toList(growable: false)
         : const <PlatformAdminUser>[];
     return PlatformAdminUsersPage(
       items: items,

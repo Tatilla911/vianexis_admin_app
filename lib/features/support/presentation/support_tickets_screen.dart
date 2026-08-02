@@ -15,7 +15,8 @@ class SupportTicketsScreen extends ConsumerStatefulWidget {
   const SupportTicketsScreen({super.key});
 
   @override
-  ConsumerState<SupportTicketsScreen> createState() => _SupportTicketsScreenState();
+  ConsumerState<SupportTicketsScreen> createState() =>
+      _SupportTicketsScreenState();
 }
 
 class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
@@ -54,13 +55,16 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
                 prefixIcon: const Icon(Icons.search),
                 hintText: resolveSupportKey(context, 'supportTicketSearchHint'),
               ),
-              onChanged: (value) =>
-                  ref.read(supportTicketListQueryProvider.notifier).setSearch(value),
+              onChanged: (value) => ref
+                  .read(supportTicketListQueryProvider.notifier)
+                  .setSearch(value),
             ),
           ),
           SupportTicketFilterBar(
             selected: query.filter,
-            onSelected: ref.read(supportTicketListQueryProvider.notifier).setFilter,
+            onSelected: ref
+                .read(supportTicketListQueryProvider.notifier)
+                .setFilter,
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -70,7 +74,8 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
                 context,
                 error,
                 fallbackMessage: resolveSupportKey(context, 'supportLoadError'),
-                onRetry: () => ref.read(supportTicketsProvider.notifier).refresh(),
+                onRetry: () =>
+                    ref.read(supportTicketsProvider.notifier).refresh(),
               ),
               data: (items) {
                 if (items.isEmpty) {
@@ -86,7 +91,8 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
                 }
 
                 return RefreshIndicator(
-                  onRefresh: () => ref.read(supportTicketsProvider.notifier).refresh(),
+                  onRefresh: () =>
+                      ref.read(supportTicketsProvider.notifier).refresh(),
                   child: ListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                     itemCount: items.length,

@@ -15,7 +15,8 @@ class PublicIntakesScreen extends ConsumerStatefulWidget {
   const PublicIntakesScreen({super.key});
 
   @override
-  ConsumerState<PublicIntakesScreen> createState() => _PublicIntakesScreenState();
+  ConsumerState<PublicIntakesScreen> createState() =>
+      _PublicIntakesScreenState();
 }
 
 class _PublicIntakesScreenState extends ConsumerState<PublicIntakesScreen> {
@@ -40,7 +41,10 @@ class _PublicIntakesScreenState extends ConsumerState<PublicIntakesScreen> {
         actions: [
           if (usesMock)
             MockDataBadge(
-              label: resolvePublicIntakeKey(context, 'publicIntakeMockDataBadge'),
+              label: resolvePublicIntakeKey(
+                context,
+                'publicIntakeMockDataBadge',
+              ),
             ),
         ],
       ),
@@ -52,15 +56,21 @@ class _PublicIntakesScreenState extends ConsumerState<PublicIntakesScreen> {
               controller: _searchController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                hintText: resolvePublicIntakeKey(context, 'publicIntakeSearchHint'),
+                hintText: resolvePublicIntakeKey(
+                  context,
+                  'publicIntakeSearchHint',
+                ),
               ),
-              onChanged: (value) =>
-                  ref.read(publicIntakeListQueryProvider.notifier).setSearch(value),
+              onChanged: (value) => ref
+                  .read(publicIntakeListQueryProvider.notifier)
+                  .setSearch(value),
             ),
           ),
           PublicIntakeFilterBar(
             selected: query.filter,
-            onSelected: ref.read(publicIntakeListQueryProvider.notifier).setFilter,
+            onSelected: ref
+                .read(publicIntakeListQueryProvider.notifier)
+                .setFilter,
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -69,8 +79,12 @@ class _PublicIntakesScreenState extends ConsumerState<PublicIntakesScreen> {
               error: (error, _) => VianexisErrorView.fromError(
                 context,
                 error,
-                fallbackMessage: resolvePublicIntakeKey(context, 'publicIntakeListError'),
-                onRetry: () => ref.read(publicIntakesProvider.notifier).refresh(),
+                fallbackMessage: resolvePublicIntakeKey(
+                  context,
+                  'publicIntakeListError',
+                ),
+                onRetry: () =>
+                    ref.read(publicIntakesProvider.notifier).refresh(),
               ),
               data: (items) {
                 if (items.isEmpty) {
@@ -78,7 +92,10 @@ class _PublicIntakesScreenState extends ConsumerState<PublicIntakesScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(24),
                       child: Text(
-                        resolvePublicIntakeKey(context, 'publicIntakeListEmpty'),
+                        resolvePublicIntakeKey(
+                          context,
+                          'publicIntakeListEmpty',
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -86,7 +103,8 @@ class _PublicIntakesScreenState extends ConsumerState<PublicIntakesScreen> {
                 }
 
                 return RefreshIndicator(
-                  onRefresh: () => ref.read(publicIntakesProvider.notifier).refresh(),
+                  onRefresh: () =>
+                      ref.read(publicIntakesProvider.notifier).refresh(),
                   child: ListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                     itemCount: items.length,

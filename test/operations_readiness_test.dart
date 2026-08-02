@@ -84,7 +84,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('Operations readiness', () {
-    testWidgets('operations dashboard renders metrics and dependency cards', (tester) async {
+    testWidgets('operations dashboard renders metrics and dependency cards', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
@@ -114,7 +116,9 @@ void main() {
       expect(find.text('Operations modules'), findsOneWidget);
     });
 
-    testWidgets('driver access live mode shows backend dependency', (tester) async {
+    testWidgets('driver access live mode shows backend dependency', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
@@ -143,7 +147,9 @@ void main() {
       expect(find.textContaining('platform-admin/drivers'), findsOneWidget);
     });
 
-    testWidgets('driver access mock mode renders list without raw tokens', (tester) async {
+    testWidgets('driver access mock mode renders list without raw tokens', (
+      tester,
+    ) async {
       await tester.pumpWidget(_app(const DriverAccessScreen()));
 
       await tester.pumpAndSettle();
@@ -162,7 +168,9 @@ void main() {
       expect(find.textContaining('Exchange attention'), findsOneWidget);
     });
 
-    testWidgets('exchange records live mode shows backend dependency', (tester) async {
+    testWidgets('exchange records live mode shows backend dependency', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
@@ -225,35 +233,38 @@ void main() {
       expect(find.textContaining('eyJ'), findsNothing);
     });
 
-    testWidgets('operations screen has no horizontal overflow on narrow width', (tester) async {
-      tester.view.physicalSize = const Size(360, 800);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
+    testWidgets(
+      'operations screen has no horizontal overflow on narrow width',
+      (tester) async {
+        tester.view.physicalSize = const Size(360, 800);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            operationsRepositoryProvider.overrideWith(
-              (ref) => const _FixedOperationsRepository(_sampleSnapshot),
-            ),
-          ],
-          child: MaterialApp(
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              operationsRepositoryProvider.overrideWith(
+                (ref) => const _FixedOperationsRepository(_sampleSnapshot),
+              ),
             ],
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: const Locale('en'),
-            home: const OperationsScreen(),
+            child: MaterialApp(
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: const Locale('en'),
+              home: const OperationsScreen(),
+            ),
           ),
-        ),
-      );
+        );
 
-      await tester.pumpAndSettle();
-      expect(tester.takeException(), isNull);
-    });
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+      },
+    );
 
     test('HU and EN localization keys exist for operations modules', () {
       expect(AppLocalizations.supportedLocales.length, greaterThanOrEqualTo(2));

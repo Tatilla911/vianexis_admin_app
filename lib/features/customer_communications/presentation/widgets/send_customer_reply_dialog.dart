@@ -4,15 +4,13 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/send_reply_request.dart';
 
 class SendCustomerReplyDialog extends StatefulWidget {
-  const SendCustomerReplyDialog({
-    super.key,
-    this.providerDisabled = true,
-  });
+  const SendCustomerReplyDialog({super.key, this.providerDisabled = true});
 
   final bool providerDisabled;
 
   @override
-  State<SendCustomerReplyDialog> createState() => _SendCustomerReplyDialogState();
+  State<SendCustomerReplyDialog> createState() =>
+      _SendCustomerReplyDialogState();
 }
 
 class _SendCustomerReplyDialogState extends State<SendCustomerReplyDialog> {
@@ -57,8 +55,8 @@ class _SendCustomerReplyDialogState extends State<SendCustomerReplyDialog> {
                   'customerCommunicationDeliveryProviderDisabledNotice',
                 ),
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ],
             const SizedBox(height: 12),

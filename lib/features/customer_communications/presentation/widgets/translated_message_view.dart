@@ -4,10 +4,7 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/customer_communication_message.dart';
 
 class TranslatedMessageView extends StatelessWidget {
-  const TranslatedMessageView({
-    super.key,
-    required this.message,
-  });
+  const TranslatedMessageView({super.key, required this.message});
 
   final CustomerCommunicationMessage message;
 

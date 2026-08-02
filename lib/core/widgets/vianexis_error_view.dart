@@ -65,7 +65,8 @@ class VianexisErrorView extends StatelessWidget {
     final presentation = _apiException == null
         ? null
         : resolveApiException(context, _apiException);
-    final resolvedTitle = title ?? presentation?.title ?? l10n.errorGenericTitle;
+    final resolvedTitle =
+        title ?? presentation?.title ?? l10n.errorGenericTitle;
     final resolvedMessage =
         message ?? presentation?.message ?? l10n.errorGenericBody;
     final resolvedIcon = icon ?? presentation?.icon ?? Icons.error_outline;

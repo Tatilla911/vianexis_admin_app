@@ -37,14 +37,42 @@ class SecurityOverviewCard extends StatelessWidget {
               spacing: 12,
               runSpacing: 8,
               children: [
-                _chip(context, 'securityOverviewFailedLogins', overview.failedLoginCount),
-                _chip(context, 'securityOverviewDeniedActions', overview.permissionDeniedCount),
-                _chip(context, 'securityOverviewActiveGrants', overview.activeSupportGrantsCount),
-                _chip(context, 'securityOverviewCriticalEvents', overview.criticalSecurityEventsCount),
+                _chip(
+                  context,
+                  'securityOverviewFailedLogins',
+                  overview.failedLoginCount,
+                ),
+                _chip(
+                  context,
+                  'securityOverviewDeniedActions',
+                  overview.permissionDeniedCount,
+                ),
+                _chip(
+                  context,
+                  'securityOverviewActiveGrants',
+                  overview.activeSupportGrantsCount,
+                ),
+                _chip(
+                  context,
+                  'securityOverviewCriticalEvents',
+                  overview.criticalSecurityEventsCount,
+                ),
                 if (!compact) ...[
-                  _chip(context, 'securityOverviewExpiringGrants', overview.expiringSupportGrantsCount),
-                  _chip(context, 'securityOverviewHighRiskAi', overview.highRiskAiReviewsCount),
-                  _chip(context, 'securityOverviewSuspiciousBulk', overview.suspiciousBulkOnboardingJobsCount),
+                  _chip(
+                    context,
+                    'securityOverviewExpiringGrants',
+                    overview.expiringSupportGrantsCount,
+                  ),
+                  _chip(
+                    context,
+                    'securityOverviewHighRiskAi',
+                    overview.highRiskAiReviewsCount,
+                  ),
+                  _chip(
+                    context,
+                    'securityOverviewSuspiciousBulk',
+                    overview.suspiciousBulkOnboardingJobsCount,
+                  ),
                 ],
               ],
             ),
@@ -67,7 +95,9 @@ class SecurityOverviewCard extends StatelessWidget {
 
   Widget _chip(BuildContext context, String key, int count) {
     return Chip(
-      label: Text(resolveSecurityKey(context, key, params: {'count': '$count'})),
+      label: Text(
+        resolveSecurityKey(context, key, params: {'count': '$count'}),
+      ),
     );
   }
 }

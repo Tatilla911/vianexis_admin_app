@@ -27,7 +27,8 @@ class DeliveryHistorySection extends ConsumerStatefulWidget {
       _DeliveryHistorySectionState();
 }
 
-class _DeliveryHistorySectionState extends ConsumerState<DeliveryHistorySection> {
+class _DeliveryHistorySectionState
+    extends ConsumerState<DeliveryHistorySection> {
   CustomerDeliveryHistoryFilter _filter = CustomerDeliveryHistoryFilter.all;
 
   List<CustomerMessageDelivery> get _filteredItems {
@@ -52,7 +53,9 @@ class _DeliveryHistorySectionState extends ConsumerState<DeliveryHistorySection>
     final emailStatusAsync = ref.watch(emailDeliveryStatusProvider);
     final emailStatus = emailStatusAsync.asData?.value;
     final providerDisabled =
-        emailStatus == null || !emailStatus.deliveryEnabled || emailStatus.noopMode;
+        emailStatus == null ||
+        !emailStatus.deliveryEnabled ||
+        emailStatus.noopMode;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,16 +63,21 @@ class _DeliveryHistorySectionState extends ConsumerState<DeliveryHistorySection>
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: CustomerDeliveryHistoryFilter.values.map((filter) {
-            final selected = _filter == filter;
-            return FilterChip(
-              label: Text(
-                resolveCustomerCommunicationsKey(context, filter.localizationKey()),
-              ),
-              selected: selected,
-              onSelected: (_) => setState(() => _filter = filter),
-            );
-          }).toList(growable: false),
+          children: CustomerDeliveryHistoryFilter.values
+              .map((filter) {
+                final selected = _filter == filter;
+                return FilterChip(
+                  label: Text(
+                    resolveCustomerCommunicationsKey(
+                      context,
+                      filter.localizationKey(),
+                    ),
+                  ),
+                  selected: selected,
+                  onSelected: (_) => setState(() => _filter = filter),
+                );
+              })
+              .toList(growable: false),
         ),
         const SizedBox(height: 12),
         for (final delivery in _filteredItems)
@@ -112,7 +120,8 @@ class _DeliveryHistorySectionState extends ConsumerState<DeliveryHistorySection>
                     ],
                     const SizedBox(height: 12),
                     OutlinedButton.icon(
-                      onPressed: () => _resend(context, delivery, providerDisabled),
+                      onPressed: () =>
+                          _resend(context, delivery, providerDisabled),
                       icon: const Icon(Icons.refresh_outlined),
                       label: Text(
                         resolveCustomerCommunicationsKey(

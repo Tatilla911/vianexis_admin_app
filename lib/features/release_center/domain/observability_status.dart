@@ -31,12 +31,12 @@ class ObservabilityStatus {
 
   /// Values rendered in the release center observability card.
   List<String> get safeDisplayValues => [
-        logLevel,
-        metricsEnabled ? 'yes' : 'no',
-        sentryConfigured ? 'yes' : 'no',
-        otelConfigured ? 'yes' : 'no',
-        correlationIdEnabled ? 'yes' : 'no',
-      ];
+    logLevel,
+    metricsEnabled ? 'yes' : 'no',
+    sentryConfigured ? 'yes' : 'no',
+    otelConfigured ? 'yes' : 'no',
+    correlationIdEnabled ? 'yes' : 'no',
+  ];
 }
 
 DateTime? _parseDate(Object? raw) {

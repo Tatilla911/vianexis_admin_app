@@ -24,7 +24,9 @@ class SecurityOverview {
   final bool metadataOnly;
 
   int get criticalSecurityEventsCount =>
-      criticalSystemHealthEventsCount + adminRoleChangesCount + highRiskAiReviewsCount;
+      criticalSystemHealthEventsCount +
+      adminRoleChangesCount +
+      highRiskAiReviewsCount;
 
   factory SecurityOverview.fromJson(Map<String, dynamic> json) {
     return SecurityOverview(
@@ -33,12 +35,16 @@ class SecurityOverview {
       activeSupportGrantsCount: _parseInt(json['activeSupportGrantsCount']),
       expiringSupportGrantsCount: _parseInt(json['expiringSupportGrantsCount']),
       highRiskAiReviewsCount: _parseInt(json['highRiskAiReviewsCount']),
-      criticalSystemHealthEventsCount:
-          _parseInt(json['criticalSystemHealthEventsCount']),
-      suspiciousBulkOnboardingJobsCount:
-          _parseInt(json['suspiciousBulkOnboardingJobsCount']),
+      criticalSystemHealthEventsCount: _parseInt(
+        json['criticalSystemHealthEventsCount'],
+      ),
+      suspiciousBulkOnboardingJobsCount: _parseInt(
+        json['suspiciousBulkOnboardingJobsCount'],
+      ),
       adminRoleChangesCount: _parseInt(json['adminRoleChangesCount']),
-      lastCriticalSecurityEventAt: _parseDate(json['lastCriticalSecurityEventAt']),
+      lastCriticalSecurityEventAt: _parseDate(
+        json['lastCriticalSecurityEventAt'],
+      ),
       metadataOnly: json['metadataOnly'] != false,
     );
   }

@@ -12,7 +12,10 @@ void main() {
     test('parses known profiles', () {
       expect(AppEnvironment.fromDefine('dev'), AppEnvironment.dev);
       expect(AppEnvironment.fromDefine('staging'), AppEnvironment.staging);
-      expect(AppEnvironment.fromDefine('production'), AppEnvironment.production);
+      expect(
+        AppEnvironment.fromDefine('production'),
+        AppEnvironment.production,
+      );
       expect(AppEnvironment.fromDefine('local'), AppEnvironment.local);
     });
 

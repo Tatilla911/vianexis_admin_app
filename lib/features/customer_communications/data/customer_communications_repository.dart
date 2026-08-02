@@ -337,8 +337,8 @@ class MockCustomerCommunicationsRepository
     final filtered = status == null
         ? items
         : items
-            .where((item) => item.deliveryStatus.name == status)
-            .toList(growable: false);
+              .where((item) => item.deliveryStatus.name == status)
+              .toList(growable: false);
     return CustomerDeliveryListResult(items: filtered, total: filtered.length);
   }
 
@@ -367,11 +367,7 @@ class MockCustomerCommunicationsRepository
     required String deliveryId,
     required ResendCustomerReplyRequest request,
   }) {
-    return resendReply(
-      threadId: threadId,
-      messageId: '801',
-      request: request,
-    );
+    return resendReply(threadId: threadId, messageId: '801', request: request);
   }
 
   @override
@@ -529,10 +525,10 @@ class MockCustomerCommunicationsRepository
 
 final customerCommunicationsRepositoryProvider =
     Provider<CustomerCommunicationsRepository>((ref) {
-  if (AppConfig.instance.shouldUseLiveRepositories) {
-    return LiveCustomerCommunicationsRepository(
-      ref.watch(customerCommunicationsApiProvider),
-    );
-  }
-  return MockCustomerCommunicationsRepository();
-});
+      if (AppConfig.instance.shouldUseLiveRepositories) {
+        return LiveCustomerCommunicationsRepository(
+          ref.watch(customerCommunicationsApiProvider),
+        );
+      }
+      return MockCustomerCommunicationsRepository();
+    });

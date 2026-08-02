@@ -137,10 +137,10 @@ class CustomerCommunicationMessage {
               json['delivery'] as Map<String, dynamic>,
             )
           : json['delivery'] is Map
-              ? CustomerMessageDelivery.fromJson(
-                  Map<String, dynamic>.from(json['delivery'] as Map),
-                )
-              : null,
+          ? CustomerMessageDelivery.fromJson(
+              Map<String, dynamic>.from(json['delivery'] as Map),
+            )
+          : null,
     );
   }
 

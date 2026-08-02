@@ -32,18 +32,25 @@ class PublicApplicationsApi {
     return response.data ?? {};
   }
 
-  Future<Map<String, dynamic>> approve(int id, {String? reviewNotes, int? companyId}) async {
+  Future<Map<String, dynamic>> approve(
+    int id, {
+    String? reviewNotes,
+    int? companyId,
+  }) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/applications/$id/approve',
       data: {
-        if (reviewNotes != null) 'reviewNotes': reviewNotes,
-        if (companyId != null) 'companyId': companyId,
+        'reviewNotes': ?reviewNotes,
+        'companyId': ?companyId,
       },
     );
     return response.data ?? {};
   }
 
-  Future<Map<String, dynamic>> reject(int id, {required String reviewNotes}) async {
+  Future<Map<String, dynamic>> reject(
+    int id, {
+    required String reviewNotes,
+  }) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/applications/$id/reject',
       data: {'reviewNotes': reviewNotes},
@@ -51,7 +58,10 @@ class PublicApplicationsApi {
     return response.data ?? {};
   }
 
-  Future<Map<String, dynamic>> requestMoreInfo(int id, {required String reviewNotes}) async {
+  Future<Map<String, dynamic>> requestMoreInfo(
+    int id, {
+    required String reviewNotes,
+  }) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/applications/$id/request-more-info',
       data: {'reviewNotes': reviewNotes},

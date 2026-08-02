@@ -21,8 +21,16 @@ class PublicIntakeConsentCard extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-            _consentRow(context, 'publicIntakeConsentPrivacy', intake.consentPrivacy),
-            _consentRow(context, 'publicIntakeConsentTerms', intake.consentTerms),
+            _consentRow(
+              context,
+              'publicIntakeConsentPrivacy',
+              intake.consentPrivacy,
+            ),
+            _consentRow(
+              context,
+              'publicIntakeConsentTerms',
+              intake.consentTerms,
+            ),
             _consentRow(
               context,
               'publicIntakeConsentMarketing',

@@ -68,7 +68,8 @@ class _ReplyTranslationDialog extends ConsumerStatefulWidget {
       _ReplyTranslationDialogState();
 }
 
-class _ReplyTranslationDialogState extends ConsumerState<_ReplyTranslationDialog> {
+class _ReplyTranslationDialogState
+    extends ConsumerState<_ReplyTranslationDialog> {
   late String _targetLanguage = widget.initialTargetLanguage;
   ReplyTranslationPreview? _preview;
   bool _loading = false;
@@ -77,14 +78,16 @@ class _ReplyTranslationDialogState extends ConsumerState<_ReplyTranslationDialog
   Future<void> _generatePreview() async {
     setState(() => _loading = true);
     try {
-      final preview = await ref.read(translationRepositoryProvider).previewReply(
-        sourceType: widget.sourceType,
-        sourceId: widget.sourceId,
-        draftText: widget.draftText,
-        draftLanguage: widget.draftLanguage,
-        targetLanguage: _targetLanguage,
-        companyId: widget.companyId,
-      );
+      final preview = await ref
+          .read(translationRepositoryProvider)
+          .previewReply(
+            sourceType: widget.sourceType,
+            sourceId: widget.sourceId,
+            draftText: widget.draftText,
+            draftLanguage: widget.draftLanguage,
+            targetLanguage: _targetLanguage,
+            companyId: widget.companyId,
+          );
       if (!mounted) return;
       setState(() {
         _preview = preview;
@@ -98,7 +101,9 @@ class _ReplyTranslationDialogState extends ConsumerState<_ReplyTranslationDialog
       if (!mounted) return;
       setState(() => _loading = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).translationActionError)),
+        SnackBar(
+          content: Text(AppLocalizations.of(context).translationActionError),
+        ),
       );
     }
   }

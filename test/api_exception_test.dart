@@ -96,7 +96,10 @@ void main() {
         ),
       );
 
-      expect(exception.messageKey, LocalizationKeys.authPasswordChangeInvalidCurrent);
+      expect(
+        exception.messageKey,
+        LocalizationKeys.authPasswordChangeInvalidCurrent,
+      );
     });
 
     test('maps authenticated 401 to session expired', () {

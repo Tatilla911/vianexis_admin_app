@@ -33,7 +33,11 @@ class ReleaseOverviewCard extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
-            _row(context, 'releaseFieldBackendVersion', overview.backendVersion),
+            _row(
+              context,
+              'releaseFieldBackendVersion',
+              overview.backendVersion,
+            ),
             _row(context, 'releaseFieldEnvironment', overview.environment),
             _row(context, 'releaseFieldNodeEnv', overview.nodeEnv),
             _row(
@@ -45,9 +49,17 @@ class ReleaseOverviewCard extends StatelessWidget {
             ),
             if (!compact) ...[
               if (overview.latestAdminAppVersion != null)
-                _row(context, 'releaseFieldLatestAdminApp', overview.latestAdminAppVersion!),
+                _row(
+                  context,
+                  'releaseFieldLatestAdminApp',
+                  overview.latestAdminAppVersion!,
+                ),
               if (overview.latestDriverAppVersion != null)
-                _row(context, 'releaseFieldLatestDriverApp', overview.latestDriverAppVersion!),
+                _row(
+                  context,
+                  'releaseFieldLatestDriverApp',
+                  overview.latestDriverAppVersion!,
+                ),
               const SizedBox(height: 8),
               Text(
                 resolveReleaseCenterKey(
@@ -103,9 +115,17 @@ class ReleaseAppVersionsCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             if (versions.latestAdminAppVersion != null)
-              _row(context, 'releaseFieldLatestAdminApp', versions.latestAdminAppVersion!),
+              _row(
+                context,
+                'releaseFieldLatestAdminApp',
+                versions.latestAdminAppVersion!,
+              ),
             if (versions.latestDriverAppVersion != null)
-              _row(context, 'releaseFieldLatestDriverApp', versions.latestDriverAppVersion!),
+              _row(
+                context,
+                'releaseFieldLatestDriverApp',
+                versions.latestDriverAppVersion!,
+              ),
             if (versions.minimumSupportedAdminAppVersion != null)
               _row(
                 context,
@@ -120,10 +140,18 @@ class ReleaseAppVersionsCard extends StatelessWidget {
               ),
             const SizedBox(height: 12),
             if (versions.activeAdminAppVersions != null)
-              _versionMap(context, 'releaseActiveAdminVersions', versions.activeAdminAppVersions!),
+              _versionMap(
+                context,
+                'releaseActiveAdminVersions',
+                versions.activeAdminAppVersions!,
+              ),
             if (versions.activeDriverAppVersions != null) ...[
               const SizedBox(height: 8),
-              _versionMap(context, 'releaseActiveDriverVersions', versions.activeDriverAppVersions!),
+              _versionMap(
+                context,
+                'releaseActiveDriverVersions',
+                versions.activeDriverAppVersions!,
+              ),
             ],
           ],
         ),
@@ -146,14 +174,17 @@ class ReleaseAppVersionsCard extends StatelessWidget {
     );
   }
 
-  Widget _versionMap(BuildContext context, String titleKey, Map<String, int> map) {
+  Widget _versionMap(
+    BuildContext context,
+    String titleKey,
+    Map<String, int> map,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(resolveReleaseCenterKey(context, titleKey)),
         const SizedBox(height: 4),
-        for (final entry in map.entries)
-          Text('${entry.key}: ${entry.value}'),
+        for (final entry in map.entries) Text('${entry.key}: ${entry.value}'),
       ],
     );
   }
@@ -179,7 +210,11 @@ class ReleaseEnvironmentCard extends StatelessWidget {
             const SizedBox(height: 12),
             _row(context, 'releaseFieldEnvironment', environment.environment),
             _row(context, 'releaseFieldNodeEnv', environment.nodeEnv),
-            _row(context, 'releaseFieldMigrationStatus', environment.databaseMigrationStatus),
+            _row(
+              context,
+              'releaseFieldMigrationStatus',
+              environment.databaseMigrationStatus,
+            ),
             _row(
               context,
               'releaseFieldDeploymentReady',
@@ -188,10 +223,16 @@ class ReleaseEnvironmentCard extends StatelessWidget {
                   : resolveReleaseCenterKey(context, 'releaseNo'),
             ),
             if (environment.apiBaseUrlPublicName != null)
-              _row(context, 'releaseFieldApiPublicName', environment.apiBaseUrlPublicName!),
+              _row(
+                context,
+                'releaseFieldApiPublicName',
+                environment.apiBaseUrlPublicName!,
+              ),
             if (environment.deploymentWarnings.isNotEmpty) ...[
               const SizedBox(height: 12),
-              Text(resolveReleaseCenterKey(context, 'releaseDeploymentWarnings')),
+              Text(
+                resolveReleaseCenterKey(context, 'releaseDeploymentWarnings'),
+              ),
               for (final warning in environment.deploymentWarnings)
                 Text('• $warning'),
             ],

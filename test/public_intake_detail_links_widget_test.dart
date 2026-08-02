@@ -26,8 +26,7 @@ class _NoLinksPublicIntakesRepository implements PublicIntakesRepository {
     required String intakeId,
     required PublicIntakeStatus status,
     String? reason,
-  }) async =>
-      intake;
+  }) async => intake;
 
   static const intake = PublicIntake(
     id: '99',
@@ -57,7 +56,9 @@ class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
 }
 
 void main() {
-  testWidgets('shows no linked records when intake has no links', (tester) async {
+  testWidgets('shows no linked records when intake has no links', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [

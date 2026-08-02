@@ -41,7 +41,9 @@ class NotificationDetailScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 12),
               if (item.metadata.isNotEmpty)
-                ...item.metadata.entries.map((e) => Text('${e.key}: ${e.value}')),
+                ...item.metadata.entries.map(
+                  (e) => Text('${e.key}: ${e.value}'),
+                ),
             ],
           );
         },

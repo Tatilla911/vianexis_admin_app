@@ -16,9 +16,9 @@ class BulkOnboardingRowsPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(BulkOnboardingRow.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(BulkOnboardingRow.fromJson)
+              .toList(growable: false)
         : const <BulkOnboardingRow>[];
     return BulkOnboardingRowsPage(
       items: items,
@@ -105,7 +105,9 @@ class BulkOnboardingRow {
       jobId: json['jobId']?.toString() ?? '',
       rowIndex: _parseInt(json['rowIndex']),
       type: json['type']?.toString() ?? 'unknown',
-      status: BulkOnboardingRowStatus.fromBackendValue(json['status']?.toString()),
+      status: BulkOnboardingRowStatus.fromBackendValue(
+        json['status']?.toString(),
+      ),
       displayLabel: json['displayLabel']?.toString(),
       name: json['name']?.toString(),
       email: json['email']?.toString(),

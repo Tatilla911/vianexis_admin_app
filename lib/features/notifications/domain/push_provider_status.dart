@@ -1,8 +1,4 @@
-enum PushProviderUiState {
-  inAppOnly,
-  externalNotConfigured,
-  configured,
-}
+enum PushProviderUiState { inAppOnly, externalNotConfigured, configured }
 
 class PushProviderStatus {
   const PushProviderStatus({
@@ -46,12 +42,12 @@ class PushProviderStatus {
 
   /// Values rendered in notification preferences push status card.
   List<String> get safeDisplayValues => [
-        provider,
-        deliveryEnabled ? 'yes' : 'no',
-        configured ? 'yes' : 'no',
-        tokenStorageMode,
-        ?lastFailureCode,
-      ];
+    provider,
+    deliveryEnabled ? 'yes' : 'no',
+    configured ? 'yes' : 'no',
+    tokenStorageMode,
+    ?lastFailureCode,
+  ];
 }
 
 DateTime? _parseDate(Object? raw) {

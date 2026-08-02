@@ -139,7 +139,9 @@ class MockPublicIntakesRepository implements PublicIntakesRepository {
   }
 }
 
-final publicIntakesRepositoryProvider = Provider<PublicIntakesRepository>((ref) {
+final publicIntakesRepositoryProvider = Provider<PublicIntakesRepository>((
+  ref,
+) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LivePublicIntakesRepository(ref.watch(publicIntakesApiProvider));
   }

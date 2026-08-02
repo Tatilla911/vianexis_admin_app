@@ -5,10 +5,7 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/customer_agreement_snapshot.dart';
 
 class AgreementSnapshotCard extends StatelessWidget {
-  const AgreementSnapshotCard({
-    super.key,
-    required this.snapshot,
-  });
+  const AgreementSnapshotCard({super.key, required this.snapshot});
 
   final CustomerAgreementSnapshot snapshot;
 

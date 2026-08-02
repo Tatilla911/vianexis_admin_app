@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../l10n/app_localizations.dart';
 
 class OriginalTextCard extends StatelessWidget {
-  const OriginalTextCard({
-    super.key,
-    required this.text,
-    this.languageCode,
-  });
+  const OriginalTextCard({super.key, required this.text, this.languageCode});
 
   final String text;
   final String? languageCode;

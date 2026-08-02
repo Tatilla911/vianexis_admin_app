@@ -5,7 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 /// Does not replace backend authentication.
 class AdminDevicePinService {
   AdminDevicePinService({FlutterSecureStorage? storage})
-      : _storage = storage ?? const FlutterSecureStorage();
+    : _storage = storage ?? const FlutterSecureStorage();
 
   static const minPinLength = 4;
   static const maxPinLength = 8;

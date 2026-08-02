@@ -145,9 +145,9 @@ class PublicIntakesPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(PublicIntake.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(PublicIntake.fromJson)
+              .toList(growable: false)
         : const <PublicIntake>[];
     return PublicIntakesPage(
       items: items,

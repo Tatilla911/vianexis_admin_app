@@ -101,7 +101,7 @@ class _ApplicationsInboxScreenState
                   }
                   return ListView.separated(
                     itemCount: items.length,
-                    separatorBuilder: (_, __) => const Divider(height: 1),
+                    separatorBuilder: (_, _) => const Divider(height: 1),
                     itemBuilder: (context, index) {
                       final item = items[index] as Map<String, dynamic>;
                       final id = item['id']?.toString() ?? '';

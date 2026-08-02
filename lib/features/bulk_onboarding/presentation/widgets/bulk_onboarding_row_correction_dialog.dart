@@ -4,7 +4,8 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/bulk_onboarding_row.dart';
 import '../../domain/bulk_onboarding_row_action.dart';
 
-Future<BulkOnboardingRowCorrectionRequest?> showBulkOnboardingRowCorrectionDialog({
+Future<BulkOnboardingRowCorrectionRequest?>
+showBulkOnboardingRowCorrectionDialog({
   required BuildContext context,
   required BulkOnboardingRow row,
 }) {
@@ -44,11 +45,15 @@ class _BulkOnboardingRowCorrectionDialogState
     _phoneController = TextEditingController(text: widget.row.phone ?? '');
     _countryController = TextEditingController(text: widget.row.country ?? '');
     _roleController = TextEditingController(text: widget.row.role ?? '');
-    _vehiclePlateController =
-        TextEditingController(text: widget.row.vehiclePlate ?? '');
-    _trailerPlateController =
-        TextEditingController(text: widget.row.trailerPlate ?? '');
-    _noteController = TextEditingController(text: widget.row.correctionNote ?? '');
+    _vehiclePlateController = TextEditingController(
+      text: widget.row.vehiclePlate ?? '',
+    );
+    _trailerPlateController = TextEditingController(
+      text: widget.row.trailerPlate ?? '',
+    );
+    _noteController = TextEditingController(
+      text: widget.row.correctionNote ?? '',
+    );
   }
 
   @override
@@ -79,7 +84,9 @@ class _BulkOnboardingRowCorrectionDialogState
     final validationError = request.validate();
     if (validationError != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveBulkOnboardingKey(context, validationError))),
+        SnackBar(
+          content: Text(resolveBulkOnboardingKey(context, validationError)),
+        ),
       );
       return;
     }
@@ -89,7 +96,9 @@ class _BulkOnboardingRowCorrectionDialogState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingRowCorrectionTitle')),
+      title: Text(
+        resolveBulkOnboardingKey(context, 'bulkOnboardingRowCorrectionTitle'),
+      ),
       content: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -97,7 +106,10 @@ class _BulkOnboardingRowCorrectionDialogState
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                resolveBulkOnboardingKey(context, 'bulkOnboardingRowCorrectionNotice'),
+                resolveBulkOnboardingKey(
+                  context,
+                  'bulkOnboardingRowCorrectionNotice',
+                ),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: 12),
@@ -106,8 +118,14 @@ class _BulkOnboardingRowCorrectionDialogState
               _field(_phoneController, 'bulkOnboardingRowFieldPhone'),
               _field(_countryController, 'bulkOnboardingRowFieldCountry'),
               _field(_roleController, 'bulkOnboardingRowFieldRole'),
-              _field(_vehiclePlateController, 'bulkOnboardingRowFieldVehiclePlate'),
-              _field(_trailerPlateController, 'bulkOnboardingRowFieldTrailerPlate'),
+              _field(
+                _vehiclePlateController,
+                'bulkOnboardingRowFieldVehiclePlate',
+              ),
+              _field(
+                _trailerPlateController,
+                'bulkOnboardingRowFieldTrailerPlate',
+              ),
               _field(
                 _noteController,
                 'bulkOnboardingRowCorrectionNoteLabel',
@@ -115,7 +133,10 @@ class _BulkOnboardingRowCorrectionDialogState
               ),
               const SizedBox(height: 8),
               Text(
-                resolveBulkOnboardingKey(context, 'bulkOnboardingRowActionAuditNotice'),
+                resolveBulkOnboardingKey(
+                  context,
+                  'bulkOnboardingRowActionAuditNotice',
+                ),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
@@ -125,11 +146,18 @@ class _BulkOnboardingRowCorrectionDialogState
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingActionDismiss')),
+          child: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingActionDismiss'),
+          ),
         ),
         FilledButton(
           onPressed: _submit,
-          child: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingRowCorrectionConfirm')),
+          child: Text(
+            resolveBulkOnboardingKey(
+              context,
+              'bulkOnboardingRowCorrectionConfirm',
+            ),
+          ),
         ),
       ],
     );

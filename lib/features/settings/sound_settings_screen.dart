@@ -354,32 +354,36 @@ class _SoundSettingsScreenState extends State<SoundSettingsScreen> {
                   }
                 : null,
           ),
-          for (final sound in sounds)
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text(_soundLabel(l10n, sound.localizationKey)),
-              subtitle: Text(sound.id),
-              leading: Radio<String>(
-                value: sound.id,
-                groupValue: selected,
-                onChanged: enabled
-                    ? (value) {
-                        if (value != null) _select(category, value);
-                      }
-                    : null,
-              ),
-              trailing: IconButton(
-                tooltip: _audio.previewSoundId == sound.id
-                    ? l10n.settingsSoundStopPreview
-                    : l10n.settingsSoundPreview,
-                onPressed: enabled ? () => _preview(sound.id) : null,
-                icon: Icon(
-                  _audio.previewSoundId == sound.id
-                      ? Icons.stop_circle_outlined
-                      : Icons.play_circle_outline,
-                ),
-              ),
+          RadioGroup<String>(
+            groupValue: selected,
+            onChanged: enabled
+                ? (value) {
+                    if (value != null) _select(category, value);
+                  }
+                : (_) {},
+            child: Column(
+              children: [
+                for (final sound in sounds)
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(_soundLabel(l10n, sound.localizationKey)),
+                    subtitle: Text(sound.id),
+                    leading: Radio<String>(value: sound.id),
+                    trailing: IconButton(
+                      tooltip: _audio.previewSoundId == sound.id
+                          ? l10n.settingsSoundStopPreview
+                          : l10n.settingsSoundPreview,
+                      onPressed: enabled ? () => _preview(sound.id) : null,
+                      icon: Icon(
+                        _audio.previewSoundId == sound.id
+                            ? Icons.stop_circle_outlined
+                            : Icons.play_circle_outline,
+                      ),
+                    ),
+                  ),
+              ],
             ),
+          ),
         ],
       ),
     );

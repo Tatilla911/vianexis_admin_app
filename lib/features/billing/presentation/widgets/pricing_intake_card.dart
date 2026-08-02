@@ -5,11 +5,7 @@ import '../../domain/pricing_intake.dart';
 import '../../domain/pricing_intake_status.dart';
 
 class PricingIntakeCard extends StatelessWidget {
-  const PricingIntakeCard({
-    super.key,
-    required this.intake,
-    this.onTap,
-  });
+  const PricingIntakeCard({super.key, required this.intake, this.onTap});
 
   final PricingIntake intake;
   final VoidCallback? onTap;
@@ -70,7 +66,10 @@ class PricingIntakeCard extends StatelessWidget {
                     ),
                   if (intake.needsHumanReview)
                     Text(
-                      resolveBillingKey(context, 'billingPricingIntakeNeedsReview'),
+                      resolveBillingKey(
+                        context,
+                        'billingPricingIntakeNeedsReview',
+                      ),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).colorScheme.error,
                       ),

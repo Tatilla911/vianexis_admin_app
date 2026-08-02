@@ -19,10 +19,11 @@ class SupportTicketPriorityBadge extends StatelessWidget {
 
   VianexisStatusTone _tone(SupportTicketPriority priority) {
     return switch (priority) {
-      SupportTicketPriority.low || SupportTicketPriority.normal => VianexisStatusTone.healthy,
+      SupportTicketPriority.low ||
+      SupportTicketPriority.normal => VianexisStatusTone.healthy,
       SupportTicketPriority.high => VianexisStatusTone.degraded,
-      SupportTicketPriority.urgent || SupportTicketPriority.critical =>
-        VianexisStatusTone.degraded,
+      SupportTicketPriority.urgent ||
+      SupportTicketPriority.critical => VianexisStatusTone.degraded,
       SupportTicketPriority.unknown => VianexisStatusTone.unknown,
     };
   }

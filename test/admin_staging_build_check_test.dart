@@ -19,10 +19,7 @@ void main() {
       appEnv: 'staging',
       apiBaseUrl: '',
     );
-    expect(
-      issues.any((i) => i.contains('API_BASE_URL is required')),
-      isTrue,
-    );
+    expect(issues.any((i) => i.contains('API_BASE_URL is required')), isTrue);
   });
 
   test('staging build checker rejects localhost API URL', () {
@@ -31,10 +28,7 @@ void main() {
       appEnv: 'staging',
       apiBaseUrl: 'http://localhost:3000',
     );
-    expect(
-      issues.any((i) => i.contains('localhost')),
-      isTrue,
-    );
+    expect(issues.any((i) => i.contains('localhost')), isTrue);
   });
 
   test('staging build checker requires release INTERNET permission', () {

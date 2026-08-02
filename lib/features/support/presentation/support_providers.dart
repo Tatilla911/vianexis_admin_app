@@ -64,11 +64,13 @@ class SupportTicketListQueryNotifier extends Notifier<SupportTicketListQuery> {
 }
 
 final supportAccessGrantListQueryProvider =
-    NotifierProvider<SupportAccessGrantListQueryNotifier, SupportAccessGrantListQuery>(
-      SupportAccessGrantListQueryNotifier.new,
-    );
+    NotifierProvider<
+      SupportAccessGrantListQueryNotifier,
+      SupportAccessGrantListQuery
+    >(SupportAccessGrantListQueryNotifier.new);
 
-class SupportAccessGrantListQueryNotifier extends Notifier<SupportAccessGrantListQuery> {
+class SupportAccessGrantListQueryNotifier
+    extends Notifier<SupportAccessGrantListQuery> {
   @override
   SupportAccessGrantListQuery build() => const SupportAccessGrantListQuery();
 
@@ -98,11 +100,13 @@ class SupportTicketsNotifier extends AsyncNotifier<List<SupportTicket>> {
 }
 
 final supportAccessGrantsProvider =
-    AsyncNotifierProvider<SupportAccessGrantsNotifier, List<SupportAccessGrant>>(
-      SupportAccessGrantsNotifier.new,
-    );
+    AsyncNotifierProvider<
+      SupportAccessGrantsNotifier,
+      List<SupportAccessGrant>
+    >(SupportAccessGrantsNotifier.new);
 
-class SupportAccessGrantsNotifier extends AsyncNotifier<List<SupportAccessGrant>> {
+class SupportAccessGrantsNotifier
+    extends AsyncNotifier<List<SupportAccessGrant>> {
   @override
   Future<List<SupportAccessGrant>> build() => _load();
 
@@ -154,13 +158,13 @@ final filteredSupportAccessGrantsProvider =
       );
     });
 
-final supportTicketDetailProvider =
-    FutureProvider.autoDispose.family<SupportTicket, String>((ref, id) {
+final supportTicketDetailProvider = FutureProvider.autoDispose
+    .family<SupportTicket, String>((ref, id) {
       return ref.watch(supportTicketsRepositoryProvider).fetchTicket(id);
     });
 
-final supportAccessGrantDetailProvider =
-    FutureProvider.autoDispose.family<SupportAccessGrant, String>((ref, id) {
+final supportAccessGrantDetailProvider = FutureProvider.autoDispose
+    .family<SupportAccessGrant, String>((ref, id) {
       return ref.watch(supportAccessGrantsRepositoryProvider).fetchGrant(id);
     });
 
@@ -174,9 +178,16 @@ class SupportSummaryNotifier extends AsyncNotifier<SupportSummary> {
   Future<SupportSummary> build() => _load();
 
   Future<SupportSummary> _load() async {
-    final tickets = await ref.read(supportTicketsRepositoryProvider).fetchTickets();
-    final grants = await ref.read(supportAccessGrantsRepositoryProvider).fetchGrants();
-    return SupportSummary.fromTicketsAndGrants(tickets: tickets, grants: grants);
+    final tickets = await ref
+        .read(supportTicketsRepositoryProvider)
+        .fetchTickets();
+    final grants = await ref
+        .read(supportAccessGrantsRepositoryProvider)
+        .fetchGrants();
+    return SupportSummary.fromTicketsAndGrants(
+      tickets: tickets,
+      grants: grants,
+    );
   }
 
   Future<void> refresh() async {
@@ -189,7 +200,10 @@ Future<void> refreshSupportTicketDetail(WidgetRef ref, String ticketId) async {
   ref.invalidate(supportTicketDetailProvider(ticketId));
 }
 
-Future<void> refreshSupportAccessGrantDetail(WidgetRef ref, String grantId) async {
+Future<void> refreshSupportAccessGrantDetail(
+  WidgetRef ref,
+  String grantId,
+) async {
   ref.invalidate(supportAccessGrantDetailProvider(grantId));
 }
 

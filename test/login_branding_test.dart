@@ -34,9 +34,6 @@ void main() {
 
     expect(find.text('ViaNexis Admin'), findsWidgets);
     expect(find.text('Sign in'), findsWidgets);
-    expect(
-      find.textContaining('Platform admin access only'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('Platform admin access only'), findsOneWidget);
   });
 }

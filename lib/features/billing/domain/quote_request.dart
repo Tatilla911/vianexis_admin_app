@@ -55,8 +55,10 @@ class QuoteRequest {
   bool matchesFilter(QuoteRequestListFilter filter) {
     return switch (filter) {
       QuoteRequestListFilter.all => true,
-      QuoteRequestListFilter.submitted => status == QuoteRequestStatus.submitted,
-      QuoteRequestListFilter.underReview => status == QuoteRequestStatus.underReview,
+      QuoteRequestListFilter.submitted =>
+        status == QuoteRequestStatus.submitted,
+      QuoteRequestListFilter.underReview =>
+        status == QuoteRequestStatus.underReview,
       QuoteRequestListFilter.quoted => status == QuoteRequestStatus.quoted,
       QuoteRequestListFilter.accepted => status == QuoteRequestStatus.accepted,
       QuoteRequestListFilter.rejected => status == QuoteRequestStatus.rejected,

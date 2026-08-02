@@ -1,10 +1,7 @@
 import 'platform_company_status.dart';
 
 class PlatformCompanyStatusRequest {
-  const PlatformCompanyStatusRequest({
-    required this.status,
-    this.reason,
-  });
+  const PlatformCompanyStatusRequest({required this.status, this.reason});
 
   final PlatformCompanyStatus status;
   final String? reason;

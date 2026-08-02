@@ -1,10 +1,4 @@
-enum BulkOnboardingActionKind {
-  validate,
-  approve,
-  reject,
-  cancel,
-  process,
-}
+enum BulkOnboardingActionKind { validate, approve, reject, cancel, process }
 
 class BulkOnboardingActionRequest {
   const BulkOnboardingActionRequest({
@@ -42,9 +36,7 @@ class BulkOnboardingActionRequest {
         if (note != null && note!.trim().isNotEmpty) 'note': note!.trim(),
       },
       BulkOnboardingActionKind.reject ||
-      BulkOnboardingActionKind.cancel => {
-        'reason': note!.trim(),
-      },
+      BulkOnboardingActionKind.cancel => {'reason': note!.trim()},
       BulkOnboardingActionKind.process => {'confirm': confirm},
       BulkOnboardingActionKind.validate => const {},
     };

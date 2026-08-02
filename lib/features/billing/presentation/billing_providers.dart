@@ -265,27 +265,28 @@ List<QuoteRequest> filteredQuoteRequests({
       .toList(growable: false);
 }
 
-final filteredQuoteRequestsProvider =
-    Provider<AsyncValue<List<QuoteRequest>>>((ref) {
-      final query = ref.watch(quoteRequestListQueryProvider);
-      final requests = ref.watch(quoteRequestsProvider);
-      return requests.whenData(
-        (items) => filteredQuoteRequests(items: items, query: query),
-      );
-    });
+final filteredQuoteRequestsProvider = Provider<AsyncValue<List<QuoteRequest>>>((
+  ref,
+) {
+  final query = ref.watch(quoteRequestListQueryProvider);
+  final requests = ref.watch(quoteRequestsProvider);
+  return requests.whenData(
+    (items) => filteredQuoteRequests(items: items, query: query),
+  );
+});
 
-final subscriptionDetailProvider =
-    FutureProvider.autoDispose.family<PlatformSubscription, String>((ref, id) {
+final subscriptionDetailProvider = FutureProvider.autoDispose
+    .family<PlatformSubscription, String>((ref, id) {
       return ref.watch(billingRepositoryProvider).fetchSubscription(id);
     });
 
-final pricingIntakeDetailProvider =
-    FutureProvider.autoDispose.family<PricingIntake, String>((ref, id) {
+final pricingIntakeDetailProvider = FutureProvider.autoDispose
+    .family<PricingIntake, String>((ref, id) {
       return ref.watch(billingRepositoryProvider).fetchPricingIntake(id);
     });
 
-final quoteRequestDetailProvider =
-    FutureProvider.autoDispose.family<QuoteRequest, String>((ref, id) {
+final quoteRequestDetailProvider = FutureProvider.autoDispose
+    .family<QuoteRequest, String>((ref, id) {
       return ref.watch(billingRepositoryProvider).fetchQuoteRequest(id);
     });
 
@@ -294,10 +295,9 @@ Future<PlatformSubscription> submitSubscriptionStatusChange(
   required String subscriptionId,
   required BillingSubscriptionStatusRequest request,
 }) async {
-  final updated = await ref.read(billingRepositoryProvider).updateSubscriptionStatus(
-    id: subscriptionId,
-    request: request,
-  );
+  final updated = await ref
+      .read(billingRepositoryProvider)
+      .updateSubscriptionStatus(id: subscriptionId, request: request);
   ref.invalidate(subscriptionDetailProvider(subscriptionId));
   await ref.read(subscriptionsProvider.notifier).refresh();
   await ref.read(billingOverviewProvider.notifier).refresh();
@@ -309,10 +309,9 @@ Future<PricingIntake> submitPricingIntakeStatusChange(
   required String intakeId,
   required BillingPricingIntakeStatusRequest request,
 }) async {
-  final updated = await ref.read(billingRepositoryProvider).updatePricingIntakeStatus(
-    id: intakeId,
-    request: request,
-  );
+  final updated = await ref
+      .read(billingRepositoryProvider)
+      .updatePricingIntakeStatus(id: intakeId, request: request);
   ref.invalidate(pricingIntakeDetailProvider(intakeId));
   await ref.read(pricingIntakesProvider.notifier).refresh();
   await ref.read(billingOverviewProvider.notifier).refresh();
@@ -324,10 +323,9 @@ Future<QuoteRequest> submitQuoteRequestStatusChange(
   required String quoteRequestId,
   required BillingQuoteRequestStatusRequest request,
 }) async {
-  final updated = await ref.read(billingRepositoryProvider).updateQuoteRequestStatus(
-    id: quoteRequestId,
-    request: request,
-  );
+  final updated = await ref
+      .read(billingRepositoryProvider)
+      .updateQuoteRequestStatus(id: quoteRequestId, request: request);
   ref.invalidate(quoteRequestDetailProvider(quoteRequestId));
   await ref.read(quoteRequestsProvider.notifier).refresh();
   await ref.read(billingOverviewProvider.notifier).refresh();

@@ -31,22 +31,16 @@ class BackendDependencyCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
+                  Text(title, style: Theme.of(context).textTheme.titleSmall),
                   const SizedBox(height: 6),
-                  Text(
-                    message,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
+                  Text(message, style: Theme.of(context).textTheme.bodySmall),
                   if (endpointHint != null && endpointHint!.isNotEmpty) ...[
                     const SizedBox(height: 8),
                     Text(
                       endpointHint!,
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            fontFamily: 'monospace',
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.labelSmall?.copyWith(fontFamily: 'monospace'),
                     ),
                   ],
                 ],

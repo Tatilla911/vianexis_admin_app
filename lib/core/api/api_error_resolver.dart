@@ -48,7 +48,8 @@ ApiErrorPresentation resolveApiException(
       message: l10n.errorActionUnavailableBody,
       icon: Icons.search_off_outlined,
     ),
-    ApiExceptionKind.network || ApiExceptionKind.timeout => ApiErrorPresentation(
+    ApiExceptionKind.network ||
+    ApiExceptionKind.timeout => ApiErrorPresentation(
       title: l10n.errorNetworkTitle,
       message: message,
       showRetry: true,

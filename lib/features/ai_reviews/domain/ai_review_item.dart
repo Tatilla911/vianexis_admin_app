@@ -42,16 +42,27 @@ class AiReviewSummary {
   factory AiReviewSummary.fromItems(List<AiReviewItem> items) {
     return AiReviewSummary(
       totalCount: items.length,
-      highRiskCount: items.where((item) => item.riskLevel == AiReviewRiskLevel.high).length,
-      needsHumanReviewCount: items.where((item) => item.needsHumanReview).length,
+      highRiskCount: items
+          .where((item) => item.riskLevel == AiReviewRiskLevel.high)
+          .length,
+      needsHumanReviewCount: items
+          .where((item) => item.needsHumanReview)
+          .length,
       registrationCount: items
-          .where((item) => item.sourceType == AiReviewSourceType.registrationApplication)
+          .where(
+            (item) =>
+                item.sourceType == AiReviewSourceType.registrationApplication,
+          )
           .length,
       bulkOnboardingCount: items
-          .where((item) => item.sourceType == AiReviewSourceType.bulkOnboardingJob)
+          .where(
+            (item) => item.sourceType == AiReviewSourceType.bulkOnboardingJob,
+          )
           .length,
       systemHealthCount: items
-          .where((item) => item.sourceType == AiReviewSourceType.systemHealthEvent)
+          .where(
+            (item) => item.sourceType == AiReviewSourceType.systemHealthEvent,
+          )
           .length,
     );
   }
@@ -106,12 +117,9 @@ class AiReviewItem {
   bool matchesSearch(String query) {
     final normalized = query.trim().toLowerCase();
     if (normalized.isEmpty) return true;
-    return [
-      sourceLabel,
-      companyName,
-      summary,
-      sourceType.backendValue,
-    ].whereType<String>().any((value) => value.toLowerCase().contains(normalized));
+    return [sourceLabel, companyName, summary, sourceType.backendValue]
+        .whereType<String>()
+        .any((value) => value.toLowerCase().contains(normalized));
   }
 
   bool matchesFilter(AiReviewFilter filter) {
@@ -131,12 +139,16 @@ class AiReviewItem {
   factory AiReviewItem.fromJson(Map<String, dynamic> json) {
     return AiReviewItem(
       id: json['id']?.toString() ?? '',
-      sourceType: AiReviewSourceType.fromBackendValue(json['sourceType']?.toString()),
+      sourceType: AiReviewSourceType.fromBackendValue(
+        json['sourceType']?.toString(),
+      ),
       sourceId: json['sourceId']?.toString() ?? '',
       sourceLabel: json['sourceLabel']?.toString() ?? '',
       companyId: json['companyId']?.toString(),
       companyName: json['companyName']?.toString(),
-      riskLevel: AiReviewRiskLevel.fromBackendValue(json['riskLevel']?.toString()),
+      riskLevel: AiReviewRiskLevel.fromBackendValue(
+        json['riskLevel']?.toString(),
+      ),
       recommendation: AiReviewRecommendation.fromBackendValue(
         json['recommendation']?.toString(),
       ),
@@ -145,9 +157,11 @@ class AiReviewItem {
       checksPerformed: _readStringList(json['checksPerformed']),
       missingInformation: _readStringList(json['missingInformation']),
       duplicateWarnings: _readStringList(json['duplicateWarnings']),
-      createdAt: DateTime.tryParse(json['createdAt']?.toString() ?? '') ??
+      createdAt:
+          DateTime.tryParse(json['createdAt']?.toString() ?? '') ??
           DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
-      updatedAt: DateTime.tryParse(json['updatedAt']?.toString() ?? '') ??
+      updatedAt:
+          DateTime.tryParse(json['updatedAt']?.toString() ?? '') ??
           DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
       status: json['status']?.toString() ?? 'unknown',
       metadataOnly: json['metadataOnly'] == true,
@@ -163,5 +177,8 @@ double? _readDouble(Object? value) {
 
 List<String> _readStringList(Object? value) {
   if (value is! List) return const [];
-  return value.map((entry) => entry.toString()).where((entry) => entry.isNotEmpty).toList();
+  return value
+      .map((entry) => entry.toString())
+      .where((entry) => entry.isNotEmpty)
+      .toList();
 }

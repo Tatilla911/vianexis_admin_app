@@ -8,12 +8,18 @@ void main() {
   group('AdminRole', () {
     test('parses all platform admin roles', () {
       expect(AdminRole.fromBackendValue('super_admin'), AdminRole.superAdmin);
-      expect(AdminRole.fromBackendValue('support_admin'), AdminRole.supportAdmin);
+      expect(
+        AdminRole.fromBackendValue('support_admin'),
+        AdminRole.supportAdmin,
+      );
       expect(
         AdminRole.fromBackendValue('onboarding_reviewer'),
         AdminRole.onboardingReviewer,
       );
-      expect(AdminRole.fromBackendValue('billing_admin'), AdminRole.billingAdmin);
+      expect(
+        AdminRole.fromBackendValue('billing_admin'),
+        AdminRole.billingAdmin,
+      );
     });
 
     test('rejects forbidden tenant and field roles', () {
@@ -64,8 +70,16 @@ void main() {
         }),
         throwsA(
           isA<ApiException>()
-              .having((error) => error.messageKey, 'messageKey', LocalizationKeys.authForbiddenRole)
-              .having((error) => error.kind, 'kind', ApiExceptionKind.forbidden),
+              .having(
+                (error) => error.messageKey,
+                'messageKey',
+                LocalizationKeys.authForbiddenRole,
+              )
+              .having(
+                (error) => error.kind,
+                'kind',
+                ApiExceptionKind.forbidden,
+              ),
         ),
       );
     });
@@ -108,13 +122,22 @@ void main() {
 
   group('AdminRole companies access', () {
     test('platform roles can read companies module', () {
-      expect(AdminRole.superAdmin.canAccess(AdminDestination.companies), isTrue);
-      expect(AdminRole.supportAdmin.canAccess(AdminDestination.companies), isTrue);
+      expect(
+        AdminRole.superAdmin.canAccess(AdminDestination.companies),
+        isTrue,
+      );
+      expect(
+        AdminRole.supportAdmin.canAccess(AdminDestination.companies),
+        isTrue,
+      );
       expect(
         AdminRole.onboardingReviewer.canAccess(AdminDestination.companies),
         isTrue,
       );
-      expect(AdminRole.billingAdmin.canAccess(AdminDestination.companies), isTrue);
+      expect(
+        AdminRole.billingAdmin.canAccess(AdminDestination.companies),
+        isTrue,
+      );
     });
 
     test('only super_admin can change company status', () {

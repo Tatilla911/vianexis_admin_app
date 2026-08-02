@@ -11,8 +11,7 @@ import '../domain/registration_decision_request.dart';
 extension AdminRoleRegistrationDecisions on AdminRole {
   /// View queue: super_admin and onboarding_reviewer.
   bool get canViewRegistrations {
-    return this == AdminRole.superAdmin ||
-        this == AdminRole.onboardingReviewer;
+    return this == AdminRole.superAdmin || this == AdminRole.onboardingReviewer;
   }
 
   /// Phase 1: company approve/reject/request-info is super_admin only
@@ -64,9 +63,10 @@ class RegistrationListQueryNotifier extends Notifier<RegistrationListQuery> {
 }
 
 final registrationApplicationsProvider =
-    AsyncNotifierProvider<RegistrationApplicationsNotifier, List<RegistrationApplication>>(
-      RegistrationApplicationsNotifier.new,
-    );
+    AsyncNotifierProvider<
+      RegistrationApplicationsNotifier,
+      List<RegistrationApplication>
+    >(RegistrationApplicationsNotifier.new);
 
 class RegistrationApplicationsNotifier
     extends AsyncNotifier<List<RegistrationApplication>> {
@@ -74,7 +74,9 @@ class RegistrationApplicationsNotifier
   Future<List<RegistrationApplication>> build() => _load();
 
   Future<List<RegistrationApplication>> _load() {
-    return ref.read(registrationApplicationsRepositoryProvider).fetchApplications();
+    return ref
+        .read(registrationApplicationsRepositoryProvider)
+        .fetchApplications();
   }
 
   Future<void> refresh() async {
@@ -102,9 +104,11 @@ final filteredRegistrationApplicationsProvider =
       );
     });
 
-final registrationApplicationDetailProvider =
-    FutureProvider.autoDispose.family<RegistrationApplication, String>((ref, id) {
-      return ref.watch(registrationApplicationsRepositoryProvider).fetchApplication(id);
+final registrationApplicationDetailProvider = FutureProvider.autoDispose
+    .family<RegistrationApplication, String>((ref, id) {
+      return ref
+          .watch(registrationApplicationsRepositoryProvider)
+          .fetchApplication(id);
     });
 
 Future<void> refreshRegistrationApplicationDetail(

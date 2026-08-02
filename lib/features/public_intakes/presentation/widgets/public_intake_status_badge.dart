@@ -20,10 +20,10 @@ class PublicIntakeStatusBadge extends StatelessWidget {
   VianexisStatusTone _tone(PublicIntakeStatus status) {
     return switch (status) {
       PublicIntakeStatus.converted => VianexisStatusTone.healthy,
-      PublicIntakeStatus.rejected || PublicIntakeStatus.closed =>
-        VianexisStatusTone.degraded,
-      PublicIntakeStatus.quoted || PublicIntakeStatus.contacted =>
-        VianexisStatusTone.unknown,
+      PublicIntakeStatus.rejected ||
+      PublicIntakeStatus.closed => VianexisStatusTone.degraded,
+      PublicIntakeStatus.quoted ||
+      PublicIntakeStatus.contacted => VianexisStatusTone.unknown,
       _ => VianexisStatusTone.unknown,
     };
   }

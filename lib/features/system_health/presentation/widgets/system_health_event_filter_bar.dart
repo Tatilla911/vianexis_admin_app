@@ -34,7 +34,9 @@ class SystemHealthEventFilterBar extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 8),
               child: FilterChip(
-                label: Text(resolveSystemHealthKey(context, filter.localizationKey())),
+                label: Text(
+                  resolveSystemHealthKey(context, filter.localizationKey()),
+                ),
                 selected: selected == filter,
                 onSelected: (_) => onSelected(filter),
               ),

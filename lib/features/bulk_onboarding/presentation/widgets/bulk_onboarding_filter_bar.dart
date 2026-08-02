@@ -36,19 +36,34 @@ class BulkOnboardingFilterBar extends StatelessWidget {
 
   String _label(BuildContext context, BulkOnboardingListFilter filter) {
     return switch (filter) {
-      BulkOnboardingListFilter.all => resolveBulkOnboardingKey(context, 'bulkOnboardingFilterAll'),
-      BulkOnboardingListFilter.readyForReview =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingFilterReadyForReview'),
-      BulkOnboardingListFilter.validationFailed =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingFilterValidationFailed'),
-      BulkOnboardingListFilter.processing =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingFilterProcessing'),
-      BulkOnboardingListFilter.completed =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingFilterCompleted'),
-      BulkOnboardingListFilter.rejected =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingFilterRejected'),
-      BulkOnboardingListFilter.highRisk =>
-        resolveBulkOnboardingKey(context, 'bulkOnboardingFilterHighRisk'),
+      BulkOnboardingListFilter.all => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingFilterAll',
+      ),
+      BulkOnboardingListFilter.readyForReview => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingFilterReadyForReview',
+      ),
+      BulkOnboardingListFilter.validationFailed => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingFilterValidationFailed',
+      ),
+      BulkOnboardingListFilter.processing => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingFilterProcessing',
+      ),
+      BulkOnboardingListFilter.completed => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingFilterCompleted',
+      ),
+      BulkOnboardingListFilter.rejected => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingFilterRejected',
+      ),
+      BulkOnboardingListFilter.highRisk => resolveBulkOnboardingKey(
+        context,
+        'bulkOnboardingFilterHighRisk',
+      ),
     };
   }
 }

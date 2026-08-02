@@ -37,12 +37,36 @@ class BillingOverviewCard extends StatelessWidget {
               spacing: 12,
               runSpacing: 8,
               children: [
-                _chip(context, 'billingOverviewActive', overview.activeSubscriptions),
-                _chip(context, 'billingOverviewTrial', overview.trialSubscriptions),
-                _chip(context, 'billingOverviewPastDue', overview.pastDueSubscriptions),
-                _chip(context, 'billingOverviewSuspended', overview.suspendedSubscriptions),
-                _chip(context, 'billingOverviewPricingNew', overview.pricingIntakesNew),
-                _chip(context, 'billingOverviewQuotesPending', overview.quoteRequestsPending),
+                _chip(
+                  context,
+                  'billingOverviewActive',
+                  overview.activeSubscriptions,
+                ),
+                _chip(
+                  context,
+                  'billingOverviewTrial',
+                  overview.trialSubscriptions,
+                ),
+                _chip(
+                  context,
+                  'billingOverviewPastDue',
+                  overview.pastDueSubscriptions,
+                ),
+                _chip(
+                  context,
+                  'billingOverviewSuspended',
+                  overview.suspendedSubscriptions,
+                ),
+                _chip(
+                  context,
+                  'billingOverviewPricingNew',
+                  overview.pricingIntakesNew,
+                ),
+                _chip(
+                  context,
+                  'billingOverviewQuotesPending',
+                  overview.quoteRequestsPending,
+                ),
               ],
             ),
             if (!compact) ...[
@@ -64,9 +88,7 @@ class BillingOverviewCard extends StatelessWidget {
 
   Widget _chip(BuildContext context, String key, int count) {
     return Chip(
-      label: Text(
-        resolveBillingKey(context, key, params: {'count': '$count'}),
-      ),
+      label: Text(resolveBillingKey(context, key, params: {'count': '$count'})),
     );
   }
 }

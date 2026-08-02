@@ -79,7 +79,7 @@ class CompanyAssessmentsApi {
       '/platform-admin/company-assessments/$assessmentId/pricing-override',
       data: {
         'override': override,
-        if (internalNotes != null) 'internalNotes': internalNotes,
+        'internalNotes': ?internalNotes,
       },
     );
     final data = response.data;

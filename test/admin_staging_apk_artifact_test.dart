@@ -21,10 +21,7 @@ void main() {
       appEnv: 'staging',
       apiBaseUrl: '',
     );
-    expect(
-      issues.any((i) => i.contains('API_BASE_URL is required')),
-      isTrue,
-    );
+    expect(issues.any((i) => i.contains('API_BASE_URL is required')), isTrue);
   });
 
   test('staging env accepted', () {

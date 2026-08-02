@@ -7,11 +7,7 @@ import 'security_event_severity_badge.dart';
 import 'security_event_type_badge.dart';
 
 class SecurityEventCard extends StatelessWidget {
-  const SecurityEventCard({
-    super.key,
-    required this.event,
-    this.onTap,
-  });
+  const SecurityEventCard({super.key, required this.event, this.onTap});
 
   final SecurityEvent event;
   final VoidCallback? onTap;
@@ -35,7 +31,10 @@ class SecurityEventCard extends StatelessWidget {
             children: [
               Text(event.title, style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: 4),
-              Text(event.summary, style: Theme.of(context).textTheme.bodyMedium),
+              Text(
+                event.summary,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               const SizedBox(height: 12),
               Wrap(
                 spacing: 8,

@@ -53,7 +53,10 @@ class ObservabilityStatusCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             VianexisMetadataNotice(
-              message: resolveReleaseCenterKey(context, 'releaseObservabilityNotice'),
+              message: resolveReleaseCenterKey(
+                context,
+                'releaseObservabilityNotice',
+              ),
             ),
           ],
         ),

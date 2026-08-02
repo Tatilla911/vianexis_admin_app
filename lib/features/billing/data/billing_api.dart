@@ -87,10 +87,7 @@ class BillingApi {
   }) async {
     final response = await _apiClient.get<Map<String, dynamic>>(
       '/platform-admin/pricing-intakes',
-      queryParameters: {
-        'limit': limit,
-        'offset': offset,
-      },
+      queryParameters: {'limit': limit, 'offset': offset},
     );
     final data = response.data;
     if (data == null) {

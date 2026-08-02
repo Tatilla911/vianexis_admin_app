@@ -27,15 +27,17 @@ class CustomerCommunicationListQuery {
   }
 }
 
-final customerCommunicationListQueryProvider = NotifierProvider<
-    CustomerCommunicationListQueryNotifier, CustomerCommunicationListQuery>(
-  CustomerCommunicationListQueryNotifier.new,
-);
+final customerCommunicationListQueryProvider =
+    NotifierProvider<
+      CustomerCommunicationListQueryNotifier,
+      CustomerCommunicationListQuery
+    >(CustomerCommunicationListQueryNotifier.new);
 
 class CustomerCommunicationListQueryNotifier
     extends Notifier<CustomerCommunicationListQuery> {
   @override
-  CustomerCommunicationListQuery build() => const CustomerCommunicationListQuery();
+  CustomerCommunicationListQuery build() =>
+      const CustomerCommunicationListQuery();
 
   void setSearch(String value) => state = state.copyWith(search: value);
 
@@ -43,10 +45,11 @@ class CustomerCommunicationListQueryNotifier
       state = state.copyWith(filter: filter);
 }
 
-final customerCommunicationsProvider = AsyncNotifierProvider<
-    CustomerCommunicationsNotifier, List<CustomerCommunicationThread>>(
-  CustomerCommunicationsNotifier.new,
-);
+final customerCommunicationsProvider =
+    AsyncNotifierProvider<
+      CustomerCommunicationsNotifier,
+      List<CustomerCommunicationThread>
+    >(CustomerCommunicationsNotifier.new);
 
 class CustomerCommunicationsNotifier
     extends AsyncNotifier<List<CustomerCommunicationThread>> {
@@ -75,22 +78,25 @@ List<CustomerCommunicationThread> filteredCustomerCommunications({
 
 final filteredCustomerCommunicationsProvider =
     Provider<AsyncValue<List<CustomerCommunicationThread>>>((ref) {
-  final query = ref.watch(customerCommunicationListQueryProvider);
-  final threads = ref.watch(customerCommunicationsProvider);
-  return threads.whenData(
-    (items) => filteredCustomerCommunications(items: items, query: query),
-  );
-});
+      final query = ref.watch(customerCommunicationListQueryProvider);
+      final threads = ref.watch(customerCommunicationsProvider);
+      return threads.whenData(
+        (items) => filteredCustomerCommunications(items: items, query: query),
+      );
+    });
 
 final customerCommunicationDetailProvider = FutureProvider.autoDispose
     .family<CustomerCommunicationThreadDetail, String>((ref, id) {
-  return ref.read(customerCommunicationsRepositoryProvider).fetchThreadDetail(id);
-});
+      return ref
+          .read(customerCommunicationsRepositoryProvider)
+          .fetchThreadDetail(id);
+    });
 
-final customerCommunicationSummaryProvider = AsyncNotifierProvider<
-    CustomerCommunicationSummaryNotifier, CustomerCommunicationSummary>(
-  CustomerCommunicationSummaryNotifier.new,
-);
+final customerCommunicationSummaryProvider =
+    AsyncNotifierProvider<
+      CustomerCommunicationSummaryNotifier,
+      CustomerCommunicationSummary
+    >(CustomerCommunicationSummaryNotifier.new);
 
 class CustomerCommunicationSummaryNotifier
     extends AsyncNotifier<CustomerCommunicationSummary> {
@@ -98,8 +104,9 @@ class CustomerCommunicationSummaryNotifier
   Future<CustomerCommunicationSummary> build() => _load();
 
   Future<CustomerCommunicationSummary> _load() async {
-    final threads =
-        await ref.read(customerCommunicationsRepositoryProvider).fetchThreads();
+    final threads = await ref
+        .read(customerCommunicationsRepositoryProvider)
+        .fetchThreads();
     return CustomerCommunicationSummary.fromThreads(threads);
   }
 
@@ -109,7 +116,10 @@ class CustomerCommunicationSummaryNotifier
   }
 }
 
-Future<void> refreshCustomerCommunicationDetail(WidgetRef ref, String id) async {
+Future<void> refreshCustomerCommunicationDetail(
+  WidgetRef ref,
+  String id,
+) async {
   ref.invalidate(customerCommunicationDetailProvider(id));
 }
 

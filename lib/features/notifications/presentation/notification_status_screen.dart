@@ -19,7 +19,9 @@ class NotificationStatusScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(resolveNotificationStatusKey(context, 'notificationStatusTitle')),
+        title: Text(
+          resolveNotificationStatusKey(context, 'notificationStatusTitle'),
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -33,7 +35,10 @@ class NotificationStatusScreen extends ConsumerWidget {
           const SizedBox(height: 12),
           Card(
             child: ListTile(
-              leading: const Icon(Icons.check_circle_outline, color: Colors.green),
+              leading: const Icon(
+                Icons.check_circle_outline,
+                color: Colors.green,
+              ),
               title: Text(
                 resolveNotificationStatusKey(
                   context,

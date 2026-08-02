@@ -92,8 +92,8 @@ final filteredSecurityEventsProvider =
       );
     });
 
-final securityEventDetailProvider =
-    Provider.autoDispose.family<SecurityEvent?, String>((ref, eventId) {
+final securityEventDetailProvider = Provider.autoDispose
+    .family<SecurityEvent?, String>((ref, eventId) {
       final events = ref.watch(securityEventsProvider);
       return events.maybeWhen(
         data: (items) {

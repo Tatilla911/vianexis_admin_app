@@ -7,12 +7,30 @@ import 'package:vianexis_admin_app/features/system_health/domain/system_health_s
 void main() {
   group('SystemHealthSeverity', () {
     test('parses backend values', () {
-      expect(SystemHealthSeverity.fromBackendValue('ok'), SystemHealthSeverity.info);
-      expect(SystemHealthSeverity.fromBackendValue('info'), SystemHealthSeverity.info);
-      expect(SystemHealthSeverity.fromBackendValue('warning'), SystemHealthSeverity.warning);
-      expect(SystemHealthSeverity.fromBackendValue('error'), SystemHealthSeverity.critical);
-      expect(SystemHealthSeverity.fromBackendValue('critical'), SystemHealthSeverity.critical);
-      expect(SystemHealthSeverity.fromBackendValue(null), SystemHealthSeverity.unknown);
+      expect(
+        SystemHealthSeverity.fromBackendValue('ok'),
+        SystemHealthSeverity.info,
+      );
+      expect(
+        SystemHealthSeverity.fromBackendValue('info'),
+        SystemHealthSeverity.info,
+      );
+      expect(
+        SystemHealthSeverity.fromBackendValue('warning'),
+        SystemHealthSeverity.warning,
+      );
+      expect(
+        SystemHealthSeverity.fromBackendValue('error'),
+        SystemHealthSeverity.critical,
+      );
+      expect(
+        SystemHealthSeverity.fromBackendValue('critical'),
+        SystemHealthSeverity.critical,
+      );
+      expect(
+        SystemHealthSeverity.fromBackendValue(null),
+        SystemHealthSeverity.unknown,
+      );
     });
   });
 
@@ -57,7 +75,10 @@ void main() {
       expect(event.severity, SystemHealthSeverity.critical);
       expect(event.serviceName, 'queue');
       expect(event.status, SystemHealthEventStatus.open);
-      expect(event.tenantImpactLevel, SystemHealthTenantImpactLevel.platformWide);
+      expect(
+        event.tenantImpactLevel,
+        SystemHealthTenantImpactLevel.platformWide,
+      );
       expect(event.affectedCompanyName, 'NordTrans Kft.');
       expect(event.failedJobsCount, 14);
       expect(event.aiDiagnosticSummary, 'Advisory summary');
@@ -78,7 +99,10 @@ void main() {
 
       expect(event.matchesFilter(SystemHealthEventFilter.warning), isTrue);
       expect(event.matchesFilter(SystemHealthEventFilter.critical), isFalse);
-      expect(event.matchesFilter(SystemHealthEventFilter.tenantImpacting), isTrue);
+      expect(
+        event.matchesFilter(SystemHealthEventFilter.tenantImpacting),
+        isTrue,
+      );
     });
   });
 

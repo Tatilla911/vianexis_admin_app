@@ -5,10 +5,7 @@ import '../../domain/bulk_onboarding_upload_result.dart';
 import 'bulk_onboarding_validation_summary.dart';
 
 class BulkOnboardingUploadResultCard extends StatelessWidget {
-  const BulkOnboardingUploadResultCard({
-    super.key,
-    required this.result,
-  });
+  const BulkOnboardingUploadResultCard({super.key, required this.result});
 
   final BulkOnboardingUploadResult result;
 
@@ -21,12 +18,18 @@ class BulkOnboardingUploadResultCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingUploadSuccessful'),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingUploadSuccessful',
+              ),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingValidationCompleted'),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingValidationCompleted',
+              ),
             ),
             const SizedBox(height: 12),
             BulkOnboardingValidationSummary(job: result.job),

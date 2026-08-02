@@ -55,7 +55,10 @@ class _AdminUserRoleDialogState extends State<_AdminUserRoleDialog> {
                 context,
                 'adminUserActionCurrentRole',
                 params: {
-                  'role': roleLabel(context, widget.currentRole.localizationKey()),
+                  'role': roleLabel(
+                    context,
+                    widget.currentRole.localizationKey(),
+                  ),
                 },
               ),
             ),
@@ -86,7 +89,10 @@ class _AdminUserRoleDialogState extends State<_AdminUserRoleDialog> {
               maxLines: 3,
               validator: (value) {
                 if (value == null || value.trim().length < 3) {
-                  return resolveAdminUserKey(context, 'adminUserReasonRequired');
+                  return resolveAdminUserKey(
+                    context,
+                    'adminUserReasonRequired',
+                  );
                 }
                 return null;
               },

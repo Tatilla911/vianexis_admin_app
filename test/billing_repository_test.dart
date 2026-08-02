@@ -196,8 +196,13 @@ void main() {
       );
       expect(updated.status, SubscriptionStatus.suspended);
 
-      final filtered = await repo.fetchSubscriptions(status: SubscriptionStatus.active);
-      expect(filtered.every((item) => item.status == SubscriptionStatus.active), isTrue);
+      final filtered = await repo.fetchSubscriptions(
+        status: SubscriptionStatus.active,
+      );
+      expect(
+        filtered.every((item) => item.status == SubscriptionStatus.active),
+        isTrue,
+      );
     });
 
     test('mock pricing intake status update works', () async {

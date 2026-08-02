@@ -54,9 +54,11 @@ class CustomerCommunicationsApi {
 
     return items
         .whereType<Map>()
-        .map((item) => CustomerCommunicationThread.fromJson(
-              Map<String, dynamic>.from(item),
-            ))
+        .map(
+          (item) => CustomerCommunicationThread.fromJson(
+            Map<String, dynamic>.from(item),
+          ),
+        )
         .toList(growable: false);
   }
 
@@ -106,7 +108,8 @@ class CustomerCommunicationsApi {
       queryParameters: {
         if (filter.backendStatusValue() != null)
           'status': filter.backendStatusValue(),
-        if (channel != null && channel.trim().isNotEmpty) 'channel': channel.trim(),
+        if (channel != null && channel.trim().isNotEmpty)
+          'channel': channel.trim(),
         if (messageId != null && messageId.trim().isNotEmpty)
           'messageId': messageId.trim(),
       },
@@ -262,9 +265,11 @@ class CustomerCommunicationsApi {
     if (raw is! List) return const [];
     return raw
         .whereType<Map>()
-        .map((item) => CustomerCommunicationMessage.fromJson(
-              Map<String, dynamic>.from(item),
-            ))
+        .map(
+          (item) => CustomerCommunicationMessage.fromJson(
+            Map<String, dynamic>.from(item),
+          ),
+        )
         .toList(growable: false);
   }
 
@@ -272,9 +277,11 @@ class CustomerCommunicationsApi {
     if (raw is! List) return const [];
     return raw
         .whereType<Map>()
-        .map((item) => CustomerAgreementSnapshot.fromJson(
-              Map<String, dynamic>.from(item),
-            ))
+        .map(
+          (item) => CustomerAgreementSnapshot.fromJson(
+            Map<String, dynamic>.from(item),
+          ),
+        )
         .toList(growable: false);
   }
 
@@ -282,9 +289,10 @@ class CustomerCommunicationsApi {
     if (raw is! List) return const [];
     return raw
         .whereType<Map>()
-        .map((item) => CustomerEvidencePackage.fromJson(
-              Map<String, dynamic>.from(item),
-            ))
+        .map(
+          (item) =>
+              CustomerEvidencePackage.fromJson(Map<String, dynamic>.from(item)),
+        )
         .toList(growable: false);
   }
 
@@ -292,9 +300,10 @@ class CustomerCommunicationsApi {
     if (raw is! List) return const [];
     return raw
         .whereType<Map>()
-        .map((item) => CustomerMessageDelivery.fromJson(
-              Map<String, dynamic>.from(item),
-            ))
+        .map(
+          (item) =>
+              CustomerMessageDelivery.fromJson(Map<String, dynamic>.from(item)),
+        )
         .toList(growable: false);
   }
 }

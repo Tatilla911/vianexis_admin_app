@@ -154,7 +154,9 @@ class CustomerCommunicationThread {
       customerEmailHash,
       companyId,
       disputeReason,
-    ].whereType<String>().any((value) => value.toLowerCase().contains(normalized));
+    ].whereType<String>().any(
+      (value) => value.toLowerCase().contains(normalized),
+    );
   }
 
   bool matchesFilter(CustomerCommunicationListFilter filter) {
@@ -166,7 +168,7 @@ class CustomerCommunicationThread {
         status == CustomerCommunicationThreadStatus.disputed || disputed,
       CustomerCommunicationListFilter.closed =>
         status == CustomerCommunicationThreadStatus.closed ||
-        status == CustomerCommunicationThreadStatus.archived,
+            status == CustomerCommunicationThreadStatus.archived,
       CustomerCommunicationListFilter.billingRelated => isBillingRelated,
     };
   }
@@ -188,8 +190,8 @@ class CustomerCommunicationThread {
       source: CustomerCommunicationSource.fromBackendValue(
         json['source']?.toString(),
       ),
-      disputed: json['disputed'] == true ||
-          json['status']?.toString() == 'disputed',
+      disputed:
+          json['disputed'] == true || json['status']?.toString() == 'disputed',
       disputeReason: json['disputeReason']?.toString(),
       disputedAt: _parseDate(json['disputedAt']),
       disputedByUserId: json['disputedByUserId']?.toString(),

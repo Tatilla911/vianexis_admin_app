@@ -50,11 +50,17 @@ class PricingIntakeDetailScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 8),
             Chip(
-              label: Text(resolveBillingKey(context, intake.status.localizationKey())),
+              label: Text(
+                resolveBillingKey(context, intake.status.localizationKey()),
+              ),
             ),
             const SizedBox(height: 16),
             _sectionTitle(context, 'billingSectionContact'),
-            _field(context, 'billingFieldContactEmail', intake.contactEmail ?? '—'),
+            _field(
+              context,
+              'billingFieldContactEmail',
+              intake.contactEmail ?? '—',
+            ),
             _field(context, 'billingFieldCountry', intake.country ?? '—'),
             const SizedBox(height: 12),
             _sectionTitle(context, 'billingSectionFleet'),
@@ -131,7 +137,9 @@ class PricingIntakeDetailScreen extends ConsumerWidget {
             if (canChangeStatus)
               FilledButton(
                 onPressed: () => _handleStatusChange(context, ref, intake),
-                child: Text(resolveBillingKey(context, 'billingChangeStatusAction')),
+                child: Text(
+                  resolveBillingKey(context, 'billingChangeStatusAction'),
+                ),
               ),
             const SizedBox(height: 16),
             VianexisMetadataNotice(
@@ -176,7 +184,9 @@ class PricingIntakeDetailScreen extends ConsumerWidget {
       );
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveBillingKey(context, 'billingActionSuccess'))),
+        SnackBar(
+          content: Text(resolveBillingKey(context, 'billingActionSuccess')),
+        ),
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;
@@ -184,7 +194,9 @@ class PricingIntakeDetailScreen extends ConsumerWidget {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveBillingKey(context, 'billingActionError'))),
+        SnackBar(
+          content: Text(resolveBillingKey(context, 'billingActionError')),
+        ),
       );
     }
   }

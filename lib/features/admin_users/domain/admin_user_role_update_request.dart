@@ -3,19 +3,13 @@ import 'platform_admin_user_role.dart';
 import 'platform_admin_user_status.dart';
 
 class AdminUserRoleUpdateRequest {
-  const AdminUserRoleUpdateRequest({
-    required this.role,
-    required this.reason,
-  });
+  const AdminUserRoleUpdateRequest({required this.role, required this.reason});
 
   final PlatformAdminUserRole role;
   final String reason;
 
   Map<String, dynamic> toJson() {
-    return {
-      'role': role.backendValue,
-      'reason': reason.trim(),
-    };
+    return {'role': role.backendValue, 'reason': reason.trim()};
   }
 }
 

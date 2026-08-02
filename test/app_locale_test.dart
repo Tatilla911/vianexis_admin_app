@@ -14,18 +14,25 @@ void main() {
     expect(kDefaultAdminLocale.languageCode, 'hu');
   });
 
-  test('resolveAppLocale falls back to Hungarian for unsupported device locale', () {
-    expect(
-      resolveAppLocale(const Locale('de'), const [Locale('en'), Locale('hu')])
-          .languageCode,
-      'hu',
-    );
-  });
+  test(
+    'resolveAppLocale falls back to Hungarian for unsupported device locale',
+    () {
+      expect(
+        resolveAppLocale(const Locale('de'), const [
+          Locale('en'),
+          Locale('hu'),
+        ]).languageCode,
+        'hu',
+      );
+    },
+  );
 
   test('resolveAppLocale respects supported English device locale', () {
     expect(
-      resolveAppLocale(const Locale('en', 'US'), const [Locale('en'), Locale('hu')])
-          .languageCode,
+      resolveAppLocale(const Locale('en', 'US'), const [
+        Locale('en'),
+        Locale('hu'),
+      ]).languageCode,
       'en',
     );
   });

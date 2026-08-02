@@ -91,7 +91,9 @@ void main() {
       const request = MarkCustomerDisputeRequest(
         reason: 'Customer disputed billing metadata',
       );
-      expect(request.toJson(), {'reason': 'Customer disputed billing metadata'});
+      expect(request.toJson(), {
+        'reason': 'Customer disputed billing metadata',
+      });
     });
 
     test('evidence package serializes packageType and reason', () {
@@ -136,10 +138,7 @@ void main() {
         status: QuoteRequestStatus.rejected,
         reason: 'Not a fit',
       );
-      expect(request.toJson(), {
-        'status': 'rejected',
-        'reason': 'Not a fit',
-      });
+      expect(request.toJson(), {'status': 'rejected', 'reason': 'Not a fit'});
     });
   });
 

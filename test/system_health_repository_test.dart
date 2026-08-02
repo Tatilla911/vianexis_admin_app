@@ -65,9 +65,15 @@ void main() {
                       },
                     ],
                     'infra': {
-                      'redis': {'connected': true, 'enabled': true, 'status': 'ok'},
+                      'redis': {
+                        'connected': true,
+                        'enabled': true,
+                        'status': 'ok',
+                      },
                       'worker': {
-                        'messageEscalation': {'lastRunAt': '2026-06-18T08:00:00.000Z'},
+                        'messageEscalation': {
+                          'lastRunAt': '2026-06-18T08:00:00.000Z',
+                        },
                       },
                       'notificationFailures': 3,
                     },
@@ -158,10 +164,7 @@ void main() {
               DioException(
                 requestOptions: options,
                 type: DioExceptionType.badResponse,
-                response: Response(
-                  requestOptions: options,
-                  statusCode: 404,
-                ),
+                response: Response(requestOptions: options, statusCode: 404),
               ),
             );
           },
@@ -228,7 +231,10 @@ void main() {
       final snapshot = await repository.fetchSnapshot();
       expect(snapshot.services, hasLength(10));
       expect(snapshot.events, isNotEmpty);
-      expect(snapshot.overview.overallStatus, SystemHealthOverallStatus.critical);
+      expect(
+        snapshot.overview.overallStatus,
+        SystemHealthOverallStatus.critical,
+      );
     });
 
     test('submitAction acknowledge updates cached event', () async {

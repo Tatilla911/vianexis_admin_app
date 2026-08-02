@@ -34,7 +34,8 @@ class QuoteRequestDetailScreen extends ConsumerWidget {
           context,
           error,
           fallbackMessage: resolveBillingKey(context, 'billingDetailError'),
-          onRetry: () => ref.invalidate(quoteRequestDetailProvider(quoteRequestId)),
+          onRetry: () =>
+              ref.invalidate(quoteRequestDetailProvider(quoteRequestId)),
         ),
         data: (quoteRequest) => ListView(
           padding: const EdgeInsets.all(16),
@@ -46,12 +47,19 @@ class QuoteRequestDetailScreen extends ConsumerWidget {
             const SizedBox(height: 8),
             Chip(
               label: Text(
-                resolveBillingKey(context, quoteRequest.status.localizationKey()),
+                resolveBillingKey(
+                  context,
+                  quoteRequest.status.localizationKey(),
+                ),
               ),
             ),
             const SizedBox(height: 16),
             _sectionTitle(context, 'billingSectionContact'),
-            _field(context, 'billingFieldContactEmail', quoteRequest.contactEmail),
+            _field(
+              context,
+              'billingFieldContactEmail',
+              quoteRequest.contactEmail,
+            ),
             if (quoteRequest.companyId != null)
               _field(
                 context,
@@ -105,8 +113,11 @@ class QuoteRequestDetailScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             if (canChangeStatus)
               FilledButton(
-                onPressed: () => _handleStatusChange(context, ref, quoteRequest),
-                child: Text(resolveBillingKey(context, 'billingChangeStatusAction')),
+                onPressed: () =>
+                    _handleStatusChange(context, ref, quoteRequest),
+                child: Text(
+                  resolveBillingKey(context, 'billingChangeStatusAction'),
+                ),
               ),
             const SizedBox(height: 16),
             VianexisMetadataNotice(
@@ -151,7 +162,9 @@ class QuoteRequestDetailScreen extends ConsumerWidget {
       );
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveBillingKey(context, 'billingActionSuccess'))),
+        SnackBar(
+          content: Text(resolveBillingKey(context, 'billingActionSuccess')),
+        ),
       );
     } on ApiException catch (error) {
       if (!context.mounted) return;
@@ -159,7 +172,9 @@ class QuoteRequestDetailScreen extends ConsumerWidget {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveBillingKey(context, 'billingActionError'))),
+        SnackBar(
+          content: Text(resolveBillingKey(context, 'billingActionError')),
+        ),
       );
     }
   }

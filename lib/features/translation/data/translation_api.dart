@@ -11,11 +11,15 @@ class TranslationApi {
   final ApiClient _apiClient;
 
   Future<Map<String, dynamic>> fetchStatus() async {
-    final response = await _apiClient.get<Map<String, dynamic>>('/translations/status');
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/translations/status',
+    );
     return response.data ?? const {};
   }
 
-  Future<TranslationOperationResult> translate(TranslationRequest request) async {
+  Future<TranslationOperationResult> translate(
+    TranslationRequest request,
+  ) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '/translations/translate',
       data: request.toJson(),
@@ -43,7 +47,8 @@ class TranslationApi {
         'draftText': draftText,
         'draftLanguage': draftLanguage,
         'targetLanguage': targetLanguage,
-        if (companyId != null) 'companyId': int.tryParse(companyId) ?? companyId,
+        if (companyId != null)
+          'companyId': int.tryParse(companyId) ?? companyId,
       },
     );
     final data = response.data;

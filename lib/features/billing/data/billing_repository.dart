@@ -516,7 +516,6 @@ class MockBillingRepository implements BillingRepository {
 }
 
 final billingRepositoryProvider = Provider<BillingRepository>((ref) {
-
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveBillingRepository(ref.watch(billingApiProvider));
   }

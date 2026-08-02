@@ -7,10 +7,7 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/customer_communication_thread.dart';
 
 class CommunicationThreadCard extends StatelessWidget {
-  const CommunicationThreadCard({
-    super.key,
-    required this.thread,
-  });
+  const CommunicationThreadCard({super.key, required this.thread});
 
   final CustomerCommunicationThread thread;
 
@@ -26,9 +23,8 @@ class CommunicationThreadCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.only(bottom: 12),
       child: InkWell(
-        onTap: () => context.push(
-          AdminRoutes.customerCommunicationDetail(thread.id),
-        ),
+        onTap: () =>
+            context.push(AdminRoutes.customerCommunicationDetail(thread.id)),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -45,7 +41,8 @@ class CommunicationThreadCard extends StatelessWidget {
                     ),
                   ),
                   if (thread.disputed ||
-                      thread.status == CustomerCommunicationThreadStatus.disputed)
+                      thread.status ==
+                          CustomerCommunicationThreadStatus.disputed)
                     Chip(
                       label: Text(
                         resolveCustomerCommunicationsKey(

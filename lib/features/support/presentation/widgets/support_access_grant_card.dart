@@ -42,7 +42,10 @@ class SupportAccessGrantCard extends StatelessWidget {
                     ),
                   ),
                   VianexisStatusBadge(
-                    label: resolveSupportKey(context, grant.status.localizationKey()),
+                    label: resolveSupportKey(
+                      context,
+                      grant.status.localizationKey(),
+                    ),
                     tone: _tone(grant.status),
                   ),
                 ],
@@ -91,9 +94,9 @@ class SupportAccessGrantCard extends StatelessWidget {
     return switch (status) {
       SupportAccessGrantStatus.active => VianexisStatusTone.healthy,
       SupportAccessGrantStatus.pending => VianexisStatusTone.unknown,
-      SupportAccessGrantStatus.expired || SupportAccessGrantStatus.revoked ||
-      SupportAccessGrantStatus.denied =>
-        VianexisStatusTone.degraded,
+      SupportAccessGrantStatus.expired ||
+      SupportAccessGrantStatus.revoked ||
+      SupportAccessGrantStatus.denied => VianexisStatusTone.degraded,
       SupportAccessGrantStatus.unknown => VianexisStatusTone.unknown,
     };
   }

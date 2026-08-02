@@ -82,10 +82,10 @@ final operationsRepositoryProvider = Provider<OperationsRepository>((ref) {
 
 final platformOperationsSnapshotProvider =
     FutureProvider.autoDispose<PlatformOperationsSnapshot>((ref) {
-  return ref.watch(operationsRepositoryProvider).fetchSnapshot();
-});
+      return ref.watch(operationsRepositoryProvider).fetchSnapshot();
+    });
 
 final operationalMetricsProvider =
     FutureProvider.autoDispose<OperationalMetricsSnapshot?>((ref) {
-  return ref.watch(operationsRepositoryProvider).fetchOperationalMetrics();
-});
+      return ref.watch(operationsRepositoryProvider).fetchOperationalMetrics();
+    });

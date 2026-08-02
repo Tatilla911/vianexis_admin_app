@@ -38,15 +38,24 @@ class SupportSummaryCard extends StatelessWidget {
               runSpacing: 12,
               children: [
                 _MetricChip(
-                  label: resolveSupportKey(context, 'supportSummaryOpenTickets'),
+                  label: resolveSupportKey(
+                    context,
+                    'supportSummaryOpenTickets',
+                  ),
                   value: '${summary.openTicketsCount}',
                 ),
                 _MetricChip(
-                  label: resolveSupportKey(context, 'supportSummaryUrgentCritical'),
+                  label: resolveSupportKey(
+                    context,
+                    'supportSummaryUrgentCritical',
+                  ),
                   value: '${summary.urgentCriticalTicketsCount}',
                 ),
                 _MetricChip(
-                  label: resolveSupportKey(context, 'supportSummaryActiveGrants'),
+                  label: resolveSupportKey(
+                    context,
+                    'supportSummaryActiveGrants',
+                  ),
                   value: '${summary.activeSupportAccessGrantsCount}',
                 ),
               ],

@@ -128,7 +128,8 @@ void main() {
               );
               return;
             }
-            if (options.path == '/platform-admin/notification-devices/register') {
+            if (options.path ==
+                '/platform-admin/notification-devices/register') {
               expect(options.data, isA<Map<String, dynamic>>());
               handler.resolve(
                 Response<Map<String, dynamic>>(

@@ -1,9 +1,6 @@
 import 'support_access_scope_type.dart';
 
-enum SupportAccessGrantActionType {
-  create,
-  revoke,
-}
+enum SupportAccessGrantActionType { create, revoke }
 
 class SupportAccessGrantRequest {
   SupportAccessGrantRequest({
@@ -66,15 +63,14 @@ class SupportAccessGrantRequest {
         'expiresAt': expiresAt.toUtc().toIso8601String(),
         'metadata': {
           'scopeType': scopeType.backendValue(),
-          if (scopeId != null && scopeId!.trim().isNotEmpty) 'scopeId': scopeId!.trim(),
+          if (scopeId != null && scopeId!.trim().isNotEmpty)
+            'scopeId': scopeId!.trim(),
           if (linkedTicketId != null) 'linkedTicketId': linkedTicketId,
           if (linkedSystemHealthEventId != null)
             'linkedSystemHealthEventId': linkedSystemHealthEventId,
         },
       },
-      SupportAccessGrantActionType.revoke => {
-        'reason': reason.trim(),
-      },
+      SupportAccessGrantActionType.revoke => {'reason': reason.trim()},
     };
   }
 

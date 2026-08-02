@@ -60,6 +60,8 @@ final filteredActionCenterItemsProvider =
       );
     });
 
-final actionCenterSummaryProvider = Provider<AsyncValue<ActionCenterSnapshot>>((ref) {
+final actionCenterSummaryProvider = Provider<AsyncValue<ActionCenterSnapshot>>((
+  ref,
+) {
   return ref.watch(actionCenterProvider);
 });

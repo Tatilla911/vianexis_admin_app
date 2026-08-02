@@ -21,10 +21,7 @@ import '../../translation/presentation/widgets/reply_translation_dialog.dart';
 import '../../translation/presentation/widgets/translation_panel.dart';
 
 class SupportTicketDetailScreen extends ConsumerWidget {
-  const SupportTicketDetailScreen({
-    super.key,
-    required this.ticketId,
-  });
+  const SupportTicketDetailScreen({super.key, required this.ticketId});
 
   final String ticketId;
 
@@ -69,7 +66,8 @@ class SupportTicketDetailScreen extends ConsumerWidget {
       );
       if (!context.mounted) return;
       final successKey = switch (type) {
-        SupportTicketActionType.acknowledge => 'supportTicketAcknowledgedSuccess',
+        SupportTicketActionType.acknowledge =>
+          'supportTicketAcknowledgedSuccess',
         SupportTicketActionType.close => 'supportTicketClosedSuccess',
       };
       ScaffoldMessenger.of(context).showSnackBar(
@@ -81,7 +79,9 @@ class SupportTicketDetailScreen extends ConsumerWidget {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveSupportKey(context, 'supportActionError'))),
+        SnackBar(
+          content: Text(resolveSupportKey(context, 'supportActionError')),
+        ),
       );
     }
   }
@@ -108,7 +108,11 @@ class SupportTicketDetailScreen extends ConsumerWidget {
       final grant = await createSupportAccessGrant(ref: ref, request: request);
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveSupportKey(context, 'supportGrantCreateSuccess'))),
+        SnackBar(
+          content: Text(
+            resolveSupportKey(context, 'supportGrantCreateSuccess'),
+          ),
+        ),
       );
       context.push(AdminRoutes.supportGrantDetail(grant.id));
     } on ApiException catch (error) {
@@ -117,7 +121,9 @@ class SupportTicketDetailScreen extends ConsumerWidget {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveSupportKey(context, 'supportActionError'))),
+        SnackBar(
+          content: Text(resolveSupportKey(context, 'supportActionError')),
+        ),
       );
     }
   }
@@ -138,9 +144,9 @@ class _DetailBody extends ConsumerWidget {
 
   String _formatDate(BuildContext context, DateTime? value) {
     if (value == null) return '—';
-    return DateFormat.yMMMd(Localizations.localeOf(context).toString())
-        .add_Hm()
-        .format(value.toLocal());
+    return DateFormat.yMMMd(
+      Localizations.localeOf(context).toString(),
+    ).add_Hm().format(value.toLocal());
   }
 
   @override
@@ -196,7 +202,10 @@ class _DetailBody extends ConsumerWidget {
         ),
         if (ticket.linkedSystemHealthEventId != null)
           _InfoRow(
-            label: resolveSupportKey(context, 'supportTicketFieldLinkedHealthEvent'),
+            label: resolveSupportKey(
+              context,
+              'supportTicketFieldLinkedHealthEvent',
+            ),
             value: ticket.linkedSystemHealthEventId!,
           ),
         if (ticket.hasSupportAccessGrant)
@@ -242,7 +251,9 @@ class _DetailBody extends ConsumerWidget {
                 const Icon(Icons.shield_outlined, size: 20),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(resolveSupportKey(context, 'supportPrivacyNotice')),
+                  child: Text(
+                    resolveSupportKey(context, 'supportPrivacyNotice'),
+                  ),
                 ),
               ],
             ),
@@ -252,7 +263,9 @@ class _DetailBody extends ConsumerWidget {
           const SizedBox(height: 16),
           FilledButton(
             onPressed: () => onAction(SupportTicketActionType.acknowledge),
-            child: Text(resolveSupportKey(context, 'supportTicketActionAcknowledge')),
+            child: Text(
+              resolveSupportKey(context, 'supportTicketActionAcknowledge'),
+            ),
           ),
           const SizedBox(height: 8),
           OutlinedButton(
@@ -263,7 +276,9 @@ class _DetailBody extends ConsumerWidget {
         const SizedBox(height: 8),
         OutlinedButton(
           onPressed: ticket.companyId != null ? onCreateGrant : null,
-          child: Text(resolveSupportKey(context, 'supportTicketActionCreateGrant')),
+          child: Text(
+            resolveSupportKey(context, 'supportTicketActionCreateGrant'),
+          ),
         ),
       ],
     );

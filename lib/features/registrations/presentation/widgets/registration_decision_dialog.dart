@@ -24,7 +24,8 @@ class _RegistrationDecisionDialog extends StatefulWidget {
       _RegistrationDecisionDialogState();
 }
 
-class _RegistrationDecisionDialogState extends State<_RegistrationDecisionDialog> {
+class _RegistrationDecisionDialogState
+    extends State<_RegistrationDecisionDialog> {
   final _formKey = GlobalKey<FormState>();
   final _notesController = TextEditingController();
 
@@ -42,7 +43,8 @@ class _RegistrationDecisionDialogState extends State<_RegistrationDecisionDialog
     return switch (widget.type) {
       RegistrationDecisionType.approve => 'registrationDecisionApproveTitle',
       RegistrationDecisionType.reject => 'registrationDecisionRejectTitle',
-      RegistrationDecisionType.requestInfo => 'registrationDecisionRequestInfoTitle',
+      RegistrationDecisionType.requestInfo =>
+        'registrationDecisionRequestInfoTitle',
     };
   }
 
@@ -77,7 +79,12 @@ class _RegistrationDecisionDialogState extends State<_RegistrationDecisionDialog
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(resolveRegistrationKey(context, 'registrationDecisionAuditNotice')),
+            Text(
+              resolveRegistrationKey(
+                context,
+                'registrationDecisionAuditNotice',
+              ),
+            ),
             if (_requiresNotes) ...[
               const SizedBox(height: 16),
               TextFormField(
@@ -102,7 +109,12 @@ class _RegistrationDecisionDialogState extends State<_RegistrationDecisionDialog
               ),
             ] else ...[
               const SizedBox(height: 12),
-              Text(resolveRegistrationKey(context, 'registrationDecisionApproveBody')),
+              Text(
+                resolveRegistrationKey(
+                  context,
+                  'registrationDecisionApproveBody',
+                ),
+              ),
             ],
           ],
         ),

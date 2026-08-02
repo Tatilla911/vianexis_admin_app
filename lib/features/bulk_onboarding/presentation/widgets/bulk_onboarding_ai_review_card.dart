@@ -22,7 +22,10 @@ class BulkOnboardingAiReviewCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingAiAdvisoryNotice'),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingAiAdvisoryNotice',
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),

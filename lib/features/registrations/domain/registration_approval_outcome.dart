@@ -38,7 +38,8 @@ class RegistrationApprovalOutcome {
     final invite = json['invite'];
     final inviteMap = invite is Map ? Map<String, dynamic>.from(invite) : null;
     final emailInviteSent = json['emailInviteSent'] == true;
-    final delivery = json['emailInviteDeliveryStatus']?.toString() ??
+    final delivery =
+        json['emailInviteDeliveryStatus']?.toString() ??
         (emailInviteSent ? 'sent' : 'pending_or_failed');
 
     DateTime? expiresAt;

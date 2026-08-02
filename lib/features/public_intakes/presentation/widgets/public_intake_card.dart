@@ -18,7 +18,9 @@ class PublicIntakeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final created = intake.createdAt;
     final dateLabel = created != null
-        ? DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(created)
+        ? DateFormat.yMMMd(
+            Localizations.localeOf(context).toString(),
+          ).format(created)
         : '—';
 
     return Card(
@@ -39,7 +41,10 @@ class PublicIntakeCard extends StatelessWidget {
                       intake.companyName ??
                           intake.customerName ??
                           intake.customerEmailDomain ??
-                          resolvePublicIntakeKey(context, 'publicIntakeUnknownCustomer'),
+                          resolvePublicIntakeKey(
+                            context,
+                            'publicIntakeUnknownCustomer',
+                          ),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),

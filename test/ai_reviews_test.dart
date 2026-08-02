@@ -41,7 +41,10 @@ void main() {
         AiReviewSourceType.fromBackendValue('registration_application'),
         AiReviewSourceType.registrationApplication,
       );
-      expect(AiReviewRiskLevel.fromBackendValue('medium'), AiReviewRiskLevel.medium);
+      expect(
+        AiReviewRiskLevel.fromBackendValue('medium'),
+        AiReviewRiskLevel.medium,
+      );
       expect(
         AiReviewRecommendation.fromBackendValue('cannot_approve_yet'),
         AiReviewRecommendation.cannotApproveYet,
@@ -91,7 +94,9 @@ void main() {
         ),
       ];
 
-      final highRisk = items.where((item) => item.matchesFilter(AiReviewFilter.highRisk));
+      final highRisk = items.where(
+        (item) => item.matchesFilter(AiReviewFilter.highRisk),
+      );
       expect(highRisk, hasLength(1));
 
       final alphaSearch = items.where((item) => item.matchesSearch('alpha'));

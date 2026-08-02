@@ -81,7 +81,8 @@ class CustomerMessageDeliveryEvent {
         json['eventType']?.toString(),
       ),
       provider: json['provider']?.toString() ?? 'unknown',
-      eventAt: DateTime.tryParse(json['eventAt']?.toString() ?? '') ??
+      eventAt:
+          DateTime.tryParse(json['eventAt']?.toString() ?? '') ??
           DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
       failureCode: json['failureCode']?.toString(),
       failureMessageSafe: json['failureMessageSafe']?.toString(),

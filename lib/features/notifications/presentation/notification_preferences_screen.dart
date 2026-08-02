@@ -32,7 +32,9 @@ class NotificationPreferencesScreen extends ConsumerWidget {
             NotificationPreferencesForm(
               initialValue: value,
               onSave: (next) async {
-                await ref.read(notificationPreferencesProvider.notifier).save(next);
+                await ref
+                    .read(notificationPreferencesProvider.notifier)
+                    .save(next);
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(l10n.notificationsSaved)),

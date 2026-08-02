@@ -1,13 +1,7 @@
-enum SupportTicketActionType {
-  acknowledge,
-  close,
-}
+enum SupportTicketActionType { acknowledge, close }
 
 class SupportTicketActionRequest {
-  const SupportTicketActionRequest({
-    required this.type,
-    this.note,
-  });
+  const SupportTicketActionRequest({required this.type, this.note});
 
   final SupportTicketActionType type;
   final String? note;
@@ -17,9 +11,7 @@ class SupportTicketActionRequest {
       SupportTicketActionType.acknowledge => {
         if (note != null && note!.trim().isNotEmpty) 'note': note!.trim(),
       },
-      SupportTicketActionType.close => {
-        'note': note!.trim(),
-      },
+      SupportTicketActionType.close => {'note': note!.trim()},
     };
   }
 

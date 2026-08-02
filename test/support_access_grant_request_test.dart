@@ -72,7 +72,10 @@ void main() {
         expiresAt: DateTime.now().toUtc().add(const Duration(hours: 2)),
         documentsAllowed: true,
       );
-      expect(broadAccess.validationErrorKey(), 'supportGrantBroadAccessRejected');
+      expect(
+        broadAccess.validationErrorKey(),
+        'supportGrantBroadAccessRejected',
+      );
     });
   });
 }

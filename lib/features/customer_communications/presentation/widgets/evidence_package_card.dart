@@ -67,10 +67,10 @@ class EvidencePackageCard extends StatelessWidget {
                 Text(
                   resolveCustomerCommunicationsKey(context, statusNoticeKey),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: package.isPdfFailed
-                            ? Theme.of(context).colorScheme.error
-                            : Theme.of(context).colorScheme.primary,
-                      ),
+                    color: package.isPdfFailed
+                        ? Theme.of(context).colorScheme.error
+                        : Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ],
               if (package.fileHash != null) ...[

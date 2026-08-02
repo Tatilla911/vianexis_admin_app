@@ -24,7 +24,8 @@ abstract class SupportAccessGrantsRepository {
   bool get usesMockData;
 }
 
-class LiveSupportAccessGrantsRepository implements SupportAccessGrantsRepository {
+class LiveSupportAccessGrantsRepository
+    implements SupportAccessGrantsRepository {
   LiveSupportAccessGrantsRepository(this._api);
 
   final SupportApi _api;
@@ -58,7 +59,9 @@ class LiveSupportAccessGrantsRepository implements SupportAccessGrantsRepository
   }
 
   @override
-  Future<SupportAccessGrant> createGrant(SupportAccessGrantRequest request) async {
+  Future<SupportAccessGrant> createGrant(
+    SupportAccessGrantRequest request,
+  ) async {
     final validationKey = request.validationErrorKey();
     if (validationKey != null) {
       throw ApiException(messageKey: validationKey);
@@ -95,7 +98,8 @@ class LiveSupportAccessGrantsRepository implements SupportAccessGrantsRepository
   }
 }
 
-class MockSupportAccessGrantsRepository implements SupportAccessGrantsRepository {
+class MockSupportAccessGrantsRepository
+    implements SupportAccessGrantsRepository {
   MockSupportAccessGrantsRepository();
 
   late List<SupportAccessGrant> _grants = _buildGrants();
@@ -122,7 +126,9 @@ class MockSupportAccessGrantsRepository implements SupportAccessGrantsRepository
   }
 
   @override
-  Future<SupportAccessGrant> createGrant(SupportAccessGrantRequest request) async {
+  Future<SupportAccessGrant> createGrant(
+    SupportAccessGrantRequest request,
+  ) async {
     await Future<void>.delayed(const Duration(milliseconds: 200));
     final validationKey = request.validationErrorKey();
     if (validationKey != null) {
@@ -137,13 +143,16 @@ class MockSupportAccessGrantsRepository implements SupportAccessGrantsRepository
       scopeId: request.scopeId,
       reason: request.reason.trim(),
       status: SupportAccessGrantStatus.active,
-      allowedDataCategories: request.scopeType.backendScopes(documentsAllowed: false),
+      allowedDataCategories: request.scopeType.backendScopes(
+        documentsAllowed: false,
+      ),
       excludesSensitiveDocuments: true,
       createdAt: DateTime.now().toUtc(),
       expiresAt: request.expiresAt.toUtc(),
       auditLogId: 'audit-${910 + _grants.length}',
       metadataOnly: {
-        if (request.linkedTicketId != null) 'linkedTicketId': request.linkedTicketId,
+        if (request.linkedTicketId != null)
+          'linkedTicketId': request.linkedTicketId,
         if (request.linkedSystemHealthEventId != null)
           'linkedSystemHealthEventId': request.linkedSystemHealthEventId,
       },

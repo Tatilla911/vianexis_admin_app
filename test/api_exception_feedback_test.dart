@@ -9,7 +9,9 @@ import 'package:vianexis_admin_app/l10n/app_localizations.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('apiExceptionMessage resolves localized forbidden text', (tester) async {
+  testWidgets('apiExceptionMessage resolves localized forbidden text', (
+    tester,
+  ) async {
     late String message;
 
     await tester.pumpWidget(
@@ -36,9 +38,6 @@ void main() {
       ),
     );
 
-    expect(
-      message,
-      'You do not have permission to access this interface.',
-    );
+    expect(message, 'You do not have permission to access this interface.');
   });
 }

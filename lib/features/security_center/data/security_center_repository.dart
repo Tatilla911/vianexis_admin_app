@@ -162,8 +162,9 @@ class MockSecurityCenterRepository implements SecurityCenterRepository {
   }
 }
 
-final securityCenterRepositoryProvider = Provider<SecurityCenterRepository>((ref) {
-
+final securityCenterRepositoryProvider = Provider<SecurityCenterRepository>((
+  ref,
+) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveSecurityCenterRepository(ref.watch(securityCenterApiProvider));
   }

@@ -4,10 +4,7 @@ import '../data/ai_reviews_repository.dart';
 import '../domain/ai_review_item.dart';
 
 class AiReviewListQuery {
-  const AiReviewListQuery({
-    this.search = '',
-    this.filter = AiReviewFilter.all,
-  });
+  const AiReviewListQuery({this.search = '', this.filter = AiReviewFilter.all});
 
   final String search;
   final AiReviewFilter filter;
@@ -67,7 +64,9 @@ List<AiReviewItem> filteredAiReviews({
       .toList(growable: false);
 }
 
-final filteredAiReviewsProvider = Provider<AsyncValue<List<AiReviewItem>>>((ref) {
+final filteredAiReviewsProvider = Provider<AsyncValue<List<AiReviewItem>>>((
+  ref,
+) {
   final query = ref.watch(aiReviewListQueryProvider);
   final reviews = ref.watch(aiReviewsProvider);
   return reviews.whenData(
@@ -75,8 +74,8 @@ final filteredAiReviewsProvider = Provider<AsyncValue<List<AiReviewItem>>>((ref)
   );
 });
 
-final aiReviewDetailProvider =
-    FutureProvider.autoDispose.family<AiReviewItem, String>((ref, id) {
+final aiReviewDetailProvider = FutureProvider.autoDispose
+    .family<AiReviewItem, String>((ref, id) {
       return ref.watch(aiReviewsRepositoryProvider).fetchReview(id);
     });
 

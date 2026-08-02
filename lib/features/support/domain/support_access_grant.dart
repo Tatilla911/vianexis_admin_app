@@ -1,13 +1,7 @@
 import 'support_access_grant_status.dart';
 import 'support_access_scope_type.dart';
 
-enum SupportAccessGrantListFilter {
-  all,
-  pending,
-  active,
-  expired,
-  revoked,
-}
+enum SupportAccessGrantListFilter { all, pending, active, expired, revoked }
 
 extension SupportAccessGrantListFilterX on SupportAccessGrantListFilter {
   String localizationKey() {
@@ -65,21 +59,22 @@ class SupportAccessGrant {
   bool matchesSearch(String query) {
     final normalized = query.trim().toLowerCase();
     if (normalized.isEmpty) return true;
-    return [
-      companyName,
-      scopeId,
-      requestedByName,
-      reason,
-    ].whereType<String>().any((value) => value.toLowerCase().contains(normalized));
+    return [companyName, scopeId, requestedByName, reason]
+        .whereType<String>()
+        .any((value) => value.toLowerCase().contains(normalized));
   }
 
   bool matchesFilter(SupportAccessGrantListFilter filter) {
     return switch (filter) {
       SupportAccessGrantListFilter.all => true,
-      SupportAccessGrantListFilter.pending => status == SupportAccessGrantStatus.pending,
-      SupportAccessGrantListFilter.active => status == SupportAccessGrantStatus.active,
-      SupportAccessGrantListFilter.expired => status == SupportAccessGrantStatus.expired,
-      SupportAccessGrantListFilter.revoked => status == SupportAccessGrantStatus.revoked,
+      SupportAccessGrantListFilter.pending =>
+        status == SupportAccessGrantStatus.pending,
+      SupportAccessGrantListFilter.active =>
+        status == SupportAccessGrantStatus.active,
+      SupportAccessGrantListFilter.expired =>
+        status == SupportAccessGrantStatus.expired,
+      SupportAccessGrantListFilter.revoked =>
+        status == SupportAccessGrantStatus.revoked,
     };
   }
 
@@ -106,7 +101,8 @@ class SupportAccessGrant {
       companyName: json['companyName']?.toString(),
       requestedByUserId: json['requestedByUserId']?.toString(),
       requestedByName: json['requestedByName']?.toString(),
-      approvedByUserId: (json['approvedByUserId'] ?? json['grantedByUserId'])?.toString(),
+      approvedByUserId: (json['approvedByUserId'] ?? json['grantedByUserId'])
+          ?.toString(),
       approvedByName: json['approvedByName']?.toString(),
       scopeType: scopeType,
       scopeId: (json['scopeId'] ?? metadata['scopeId'])?.toString(),
@@ -120,9 +116,12 @@ class SupportAccessGrant {
       allowedDataCategories: scopeList.isNotEmpty
           ? scopeList
           : (json['allowedDataCategories'] is List
-              ? (json['allowedDataCategories'] as List).map((e) => e.toString()).toList()
-              : const []),
-      excludesSensitiveDocuments: json['excludesSensitiveDocuments'] != false &&
+                ? (json['allowedDataCategories'] as List)
+                      .map((e) => e.toString())
+                      .toList()
+                : const []),
+      excludesSensitiveDocuments:
+          json['excludesSensitiveDocuments'] != false &&
           json['documentsAllowed'] != true,
       createdAt: _parseDate(json['createdAt']),
       expiresAt: expiresAt,
@@ -162,11 +161,15 @@ class SupportAccessGrant {
     if (scopes.contains('trip_groups')) {
       return SupportAccessScopeType.specificTrip;
     }
-    if (scopes.contains('audit')) return SupportAccessScopeType.systemHealthIssue;
+    if (scopes.contains('audit')) {
+      return SupportAccessScopeType.systemHealthIssue;
+    }
     if (scopes.contains('company_settings')) {
       return SupportAccessScopeType.billingIssue;
     }
-    if (scopes.contains('workshop')) return SupportAccessScopeType.uploadQueueIssue;
+    if (scopes.contains('workshop')) {
+      return SupportAccessScopeType.uploadQueueIssue;
+    }
     if (scopes.contains('organization')) {
       return SupportAccessScopeType.integrationIssue;
     }

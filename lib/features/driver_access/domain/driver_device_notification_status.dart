@@ -41,8 +41,8 @@ class DriverDeviceNotificationStatus {
       lastSeenAt: DateTime.tryParse(json['lastSeenAt']?.toString() ?? ''),
       tokenLast4: json['tokenLast4']?.toString(),
       deliveryEnabled: json['deliveryEnabled'],
-      notificationPermissionStatus:
-          json['notificationPermissionStatus']?.toString(),
+      notificationPermissionStatus: json['notificationPermissionStatus']
+          ?.toString(),
     );
   }
 }

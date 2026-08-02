@@ -37,12 +37,9 @@ class _GenerateEvidencePackageDialogState
       return;
     }
 
-    Navigator.of(context).pop(
-      EvidencePackageRequest(
-        packageType: _packageType,
-        reason: reason,
-      ),
-    );
+    Navigator.of(
+      context,
+    ).pop(EvidencePackageRequest(packageType: _packageType, reason: reason));
   }
 
   @override
@@ -74,22 +71,25 @@ class _GenerateEvidencePackageDialogState
                   'customerCommunicationPackageTypeLabel',
                 ),
               ),
-              items: [
-                CustomerEvidencePackageType.communicationEvidence,
-                CustomerEvidencePackageType.subscriptionDispute,
-                CustomerEvidencePackageType.registrationEvidence,
-                CustomerEvidencePackageType.pricingEvidence,
-              ].map((type) {
-                return DropdownMenuItem(
-                  value: type,
-                  child: Text(
-                    resolveCustomerCommunicationsKey(
-                      context,
-                      type.localizationKey(),
-                    ),
-                  ),
-                );
-              }).toList(growable: false),
+              items:
+                  [
+                        CustomerEvidencePackageType.communicationEvidence,
+                        CustomerEvidencePackageType.subscriptionDispute,
+                        CustomerEvidencePackageType.registrationEvidence,
+                        CustomerEvidencePackageType.pricingEvidence,
+                      ]
+                      .map((type) {
+                        return DropdownMenuItem(
+                          value: type,
+                          child: Text(
+                            resolveCustomerCommunicationsKey(
+                              context,
+                              type.localizationKey(),
+                            ),
+                          ),
+                        );
+                      })
+                      .toList(growable: false),
               onChanged: (value) {
                 if (value == null) return;
                 setState(() => _packageType = value);

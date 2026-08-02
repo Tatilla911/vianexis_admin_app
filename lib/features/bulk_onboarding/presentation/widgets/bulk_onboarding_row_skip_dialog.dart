@@ -20,7 +20,8 @@ class _BulkOnboardingRowSkipDialog extends StatefulWidget {
       _BulkOnboardingRowSkipDialogState();
 }
 
-class _BulkOnboardingRowSkipDialogState extends State<_BulkOnboardingRowSkipDialog> {
+class _BulkOnboardingRowSkipDialogState
+    extends State<_BulkOnboardingRowSkipDialog> {
   final _formKey = GlobalKey<FormState>();
   final _reasonController = TextEditingController();
 
@@ -32,11 +33,15 @@ class _BulkOnboardingRowSkipDialogState extends State<_BulkOnboardingRowSkipDial
 
   void _submit() {
     if (!_formKey.currentState!.validate()) return;
-    final request = BulkOnboardingRowSkipRequest(reason: _reasonController.text);
+    final request = BulkOnboardingRowSkipRequest(
+      reason: _reasonController.text,
+    );
     final validationError = request.validate();
     if (validationError != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveBulkOnboardingKey(context, validationError))),
+        SnackBar(
+          content: Text(resolveBulkOnboardingKey(context, validationError)),
+        ),
       );
       return;
     }
@@ -46,7 +51,9 @@ class _BulkOnboardingRowSkipDialogState extends State<_BulkOnboardingRowSkipDial
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingRowSkipTitle')),
+      title: Text(
+        resolveBulkOnboardingKey(context, 'bulkOnboardingRowSkipTitle'),
+      ),
       content: Form(
         key: _formKey,
         child: Column(
@@ -79,7 +86,10 @@ class _BulkOnboardingRowSkipDialogState extends State<_BulkOnboardingRowSkipDial
             ),
             const SizedBox(height: 8),
             Text(
-              resolveBulkOnboardingKey(context, 'bulkOnboardingRowActionAuditNotice'),
+              resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingRowActionAuditNotice',
+              ),
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
@@ -88,11 +98,15 @@ class _BulkOnboardingRowSkipDialogState extends State<_BulkOnboardingRowSkipDial
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingActionDismiss')),
+          child: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingActionDismiss'),
+          ),
         ),
         FilledButton(
           onPressed: _submit,
-          child: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingRowSkipConfirm')),
+          child: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingRowSkipConfirm'),
+          ),
         ),
       ],
     );

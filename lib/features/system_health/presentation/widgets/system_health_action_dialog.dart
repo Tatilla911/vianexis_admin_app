@@ -32,14 +32,16 @@ class _SystemHealthActionDialogState extends State<_SystemHealthActionDialog> {
 
   String _titleKey() {
     return switch (widget.type) {
-      SystemHealthActionType.acknowledge => 'systemHealthActionAcknowledgeTitle',
+      SystemHealthActionType.acknowledge =>
+        'systemHealthActionAcknowledgeTitle',
       SystemHealthActionType.escalate => 'systemHealthActionEscalateTitle',
     };
   }
 
   String _confirmKey() {
     return switch (widget.type) {
-      SystemHealthActionType.acknowledge => 'systemHealthActionAcknowledgeConfirm',
+      SystemHealthActionType.acknowledge =>
+        'systemHealthActionAcknowledgeConfirm',
       SystemHealthActionType.escalate => 'systemHealthActionEscalateConfirm',
     };
   }
@@ -72,7 +74,9 @@ class _SystemHealthActionDialogState extends State<_SystemHealthActionDialog> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(resolveSystemHealthKey(context, 'systemHealthActionAuditNotice')),
+            Text(
+              resolveSystemHealthKey(context, 'systemHealthActionAuditNotice'),
+            ),
             Text(
               resolveSystemHealthKey(context, 'systemHealthActionNoAutoRepair'),
               style: Theme.of(context).textTheme.bodySmall,
@@ -101,7 +105,12 @@ class _SystemHealthActionDialogState extends State<_SystemHealthActionDialog> {
               ),
             ] else ...[
               const SizedBox(height: 12),
-              Text(resolveSystemHealthKey(context, 'systemHealthActionAcknowledgeBody')),
+              Text(
+                resolveSystemHealthKey(
+                  context,
+                  'systemHealthActionAcknowledgeBody',
+                ),
+              ),
             ],
           ],
         ),

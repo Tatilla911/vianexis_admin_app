@@ -40,27 +40,32 @@ class _NotificationPreferencesFormState
           children: [
             SwitchListTile(
               value: _value.systemHealth,
-              onChanged: (v) => setState(() => _value = _value.copyWith(systemHealth: v)),
+              onChanged: (v) =>
+                  setState(() => _value = _value.copyWith(systemHealth: v)),
               title: Text(l10n.notificationsPrefSystemHealth),
             ),
             SwitchListTile(
               value: _value.security,
-              onChanged: (v) => setState(() => _value = _value.copyWith(security: v)),
+              onChanged: (v) =>
+                  setState(() => _value = _value.copyWith(security: v)),
               title: Text(l10n.notificationsPrefSecurity),
             ),
             SwitchListTile(
               value: _value.support,
-              onChanged: (v) => setState(() => _value = _value.copyWith(support: v)),
+              onChanged: (v) =>
+                  setState(() => _value = _value.copyWith(support: v)),
               title: Text(l10n.notificationsPrefSupport),
             ),
             SwitchListTile(
               value: _value.billing,
-              onChanged: (v) => setState(() => _value = _value.copyWith(billing: v)),
+              onChanged: (v) =>
+                  setState(() => _value = _value.copyWith(billing: v)),
               title: Text(l10n.notificationsPrefBilling),
             ),
             SwitchListTile(
               value: _value.release,
-              onChanged: (v) => setState(() => _value = _value.copyWith(release: v)),
+              onChanged: (v) =>
+                  setState(() => _value = _value.copyWith(release: v)),
               title: Text(l10n.notificationsPrefRelease),
             ),
             if (_error != null)

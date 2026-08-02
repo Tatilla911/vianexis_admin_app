@@ -227,10 +227,7 @@ void main() {
                 DioException(
                   requestOptions: options,
                   type: DioExceptionType.badResponse,
-                  response: Response(
-                    requestOptions: options,
-                    statusCode: 404,
-                  ),
+                  response: Response(requestOptions: options, statusCode: 404),
                 ),
               );
             },

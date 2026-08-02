@@ -1,8 +1,5 @@
 class AdminActionResult {
-  const AdminActionResult({
-    required this.success,
-    this.messageKey,
-  });
+  const AdminActionResult({required this.success, this.messageKey});
 
   const AdminActionResult.success({this.messageKey}) : success = true;
 

@@ -4,10 +4,7 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/system_health_severity.dart';
 
 class SystemHealthSeverityBadge extends StatelessWidget {
-  const SystemHealthSeverityBadge({
-    super.key,
-    required this.severity,
-  });
+  const SystemHealthSeverityBadge({super.key, required this.severity});
 
   final SystemHealthSeverity severity;
 

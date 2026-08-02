@@ -93,10 +93,7 @@ void main() {
       );
 
       expect(request.toJson()['reason'], 'Customer dispute review');
-      expect(
-        request.toJson()['packageType'],
-        'communication_evidence',
-      );
+      expect(request.toJson()['packageType'], 'communication_evidence');
     });
   });
 

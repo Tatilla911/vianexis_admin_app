@@ -24,6 +24,15 @@ class _FakePendingRepository implements DriverRegistrationRequestsRepository {
   Future<DriverRegistrationRequestsPage> listPending() async => page;
 
   @override
+  Future<DriverRegistrationRequestsPage> listRejected() async {
+    return const DriverRegistrationRequestsPage(
+      items: [],
+      total: 0,
+      listEndpointReady: true,
+    );
+  }
+
+  @override
   Future<void> approve(String requestId, {int? companyId}) async {
     approveCalls++;
   }
@@ -57,8 +66,7 @@ class _EmptyDriversRepository implements DriverAccessRepository {
   @override
   Future<DriverDeviceNotificationStatus?> fetchDeviceNotificationStatus(
     String driverId,
-  ) async =>
-      null;
+  ) async => null;
 }
 
 Widget _driverAccessTestApp({
@@ -66,8 +74,12 @@ Widget _driverAccessTestApp({
 }) {
   return ProviderScope(
     overrides: [
-      driverRegistrationRequestsRepositoryProvider.overrideWith((ref) => pendingRepo),
-      driverAccessRepositoryProvider.overrideWith((ref) => _EmptyDriversRepository()),
+      driverRegistrationRequestsRepositoryProvider.overrideWith(
+        (ref) => pendingRepo,
+      ),
+      driverAccessRepositoryProvider.overrideWith(
+        (ref) => _EmptyDriversRepository(),
+      ),
     ],
     child: MaterialApp(
       localizationsDelegates: const [
@@ -87,7 +99,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('Pending driver registrations', () {
-    testWidgets('renders pending list with approve and reject actions', (tester) async {
+    testWidgets('renders pending list with approve and reject actions', (
+      tester,
+    ) async {
       final repo = _FakePendingRepository(
         page: DriverRegistrationRequestsPage(
           listEndpointReady: true,
@@ -116,7 +130,9 @@ void main() {
       expect(find.text('Reject'), findsOneWidget);
     });
 
-    testWidgets('shows empty state when no pending registrations', (tester) async {
+    testWidgets('shows empty state when no pending registrations', (
+      tester,
+    ) async {
       final repo = _FakePendingRepository(
         page: const DriverRegistrationRequestsPage(
           listEndpointReady: true,
@@ -131,7 +147,9 @@ void main() {
       expect(find.text('No pending driver registrations.'), findsOneWidget);
     });
 
-    testWidgets('approve calls repository and shows success snackbar', (tester) async {
+    testWidgets('approve calls repository and shows success snackbar', (
+      tester,
+    ) async {
       final repo = _FakePendingRepository(
         page: DriverRegistrationRequestsPage(
           listEndpointReady: true,
@@ -189,7 +207,9 @@ void main() {
       expect(find.text('Driver registration rejected.'), findsOneWidget);
     });
 
-    testWidgets('narrow layout has no overflow with pending cards', (tester) async {
+    testWidgets('narrow layout has no overflow with pending cards', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(360, 800);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);

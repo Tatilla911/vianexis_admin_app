@@ -18,7 +18,8 @@ class ReleaseCenterScreen extends ConsumerStatefulWidget {
   const ReleaseCenterScreen({super.key});
 
   @override
-  ConsumerState<ReleaseCenterScreen> createState() => _ReleaseCenterScreenState();
+  ConsumerState<ReleaseCenterScreen> createState() =>
+      _ReleaseCenterScreenState();
 }
 
 class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
@@ -52,7 +53,9 @@ class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
         title: Text(l10n.releaseCenterTitle),
         actions: [
           if (usesMock)
-            MockDataBadge(label: resolveReleaseCenterKey(context, 'releaseMockDataBadge')),
+            MockDataBadge(
+              label: resolveReleaseCenterKey(context, 'releaseMockDataBadge'),
+            ),
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: Center(
@@ -67,8 +70,12 @@ class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
           controller: _tabController,
           tabs: [
             Tab(text: resolveReleaseCenterKey(context, 'releaseTabOverview')),
-            Tab(text: resolveReleaseCenterKey(context, 'releaseTabAppVersions')),
-            Tab(text: resolveReleaseCenterKey(context, 'releaseTabEnvironment')),
+            Tab(
+              text: resolveReleaseCenterKey(context, 'releaseTabAppVersions'),
+            ),
+            Tab(
+              text: resolveReleaseCenterKey(context, 'releaseTabEnvironment'),
+            ),
           ],
         ),
       ),
@@ -83,8 +90,12 @@ class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
                   error: (error, _) => VianexisErrorView.fromError(
                     context,
                     error,
-                    fallbackMessage: resolveReleaseCenterKey(context, 'releaseLoadError'),
-                    onRetry: () => ref.read(releaseOverviewProvider.notifier).refresh(),
+                    fallbackMessage: resolveReleaseCenterKey(
+                      context,
+                      'releaseLoadError',
+                    ),
+                    onRetry: () =>
+                        ref.read(releaseOverviewProvider.notifier).refresh(),
                   ),
                   data: (overview) => RefreshIndicator(
                     onRefresh: () => refreshReleaseCenter(ref),
@@ -96,13 +107,15 @@ class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
                         emailDeliveryAsync.when(
                           loading: () => const LinearProgressIndicator(),
                           error: (error, stackTrace) => const SizedBox.shrink(),
-                          data: (status) => EmailDeliveryStatusCard(status: status),
+                          data: (status) =>
+                              EmailDeliveryStatusCard(status: status),
                         ),
                         const SizedBox(height: 16),
                         observabilityAsync.when(
                           loading: () => const LinearProgressIndicator(),
                           error: (error, stackTrace) => const SizedBox.shrink(),
-                          data: (status) => ObservabilityStatusCard(status: status),
+                          data: (status) =>
+                              ObservabilityStatusCard(status: status),
                         ),
                       ],
                     ),
@@ -113,7 +126,10 @@ class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
                   error: (error, _) => VianexisErrorView.fromError(
                     context,
                     error,
-                    fallbackMessage: resolveReleaseCenterKey(context, 'releaseLoadError'),
+                    fallbackMessage: resolveReleaseCenterKey(
+                      context,
+                      'releaseLoadError',
+                    ),
                     onRetry: () => ref.invalidate(releaseAppVersionsProvider),
                   ),
                   data: (versions) => ListView(
@@ -126,7 +142,10 @@ class _ReleaseCenterScreenState extends ConsumerState<ReleaseCenterScreen>
                   error: (error, _) => VianexisErrorView.fromError(
                     context,
                     error,
-                    fallbackMessage: resolveReleaseCenterKey(context, 'releaseLoadError'),
+                    fallbackMessage: resolveReleaseCenterKey(
+                      context,
+                      'releaseLoadError',
+                    ),
                     onRetry: () => ref.invalidate(releaseEnvironmentProvider),
                   ),
                   data: (environment) => ListView(

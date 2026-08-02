@@ -80,7 +80,10 @@ class _AiReviewSummaryScreenState extends ConsumerState<AiReviewSummaryScreen> {
               error: (error, _) => VianexisErrorView.fromError(
                 context,
                 error,
-                fallbackMessage: resolveAiReviewKey(context, 'aiReviewLoadError'),
+                fallbackMessage: resolveAiReviewKey(
+                  context,
+                  'aiReviewLoadError',
+                ),
                 onRetry: () => ref.read(aiReviewsProvider.notifier).refresh(),
               ),
               data: (items) {
@@ -97,7 +100,8 @@ class _AiReviewSummaryScreenState extends ConsumerState<AiReviewSummaryScreen> {
                 }
 
                 return RefreshIndicator(
-                  onRefresh: () => ref.read(aiReviewsProvider.notifier).refresh(),
+                  onRefresh: () =>
+                      ref.read(aiReviewsProvider.notifier).refresh(),
                   child: ListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                     itemCount: items.length + 1,
@@ -106,7 +110,10 @@ class _AiReviewSummaryScreenState extends ConsumerState<AiReviewSummaryScreen> {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 12),
                           child: Text(
-                            resolveAiReviewKey(context, 'aiReviewAdvisoryNotice'),
+                            resolveAiReviewKey(
+                              context,
+                              'aiReviewAdvisoryNotice',
+                            ),
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         );

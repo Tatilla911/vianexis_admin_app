@@ -22,7 +22,8 @@ class BulkOnboardingUploadScreen extends ConsumerStatefulWidget {
       _BulkOnboardingUploadScreenState();
 }
 
-class _BulkOnboardingUploadScreenState extends ConsumerState<BulkOnboardingUploadScreen> {
+class _BulkOnboardingUploadScreenState
+    extends ConsumerState<BulkOnboardingUploadScreen> {
   final _companyIdController = TextEditingController();
   final _companyNameController = TextEditingController();
   final _noteController = TextEditingController();
@@ -64,7 +65,10 @@ class _BulkOnboardingUploadScreenState extends ConsumerState<BulkOnboardingUploa
     final bytes = picked.bytes;
     if (bytes == null || bytes.isEmpty) {
       setState(() {
-        _fileError = resolveBulkOnboardingKey(context, 'bulkOnboardingEmptyFile');
+        _fileError = resolveBulkOnboardingKey(
+          context,
+          'bulkOnboardingEmptyFile',
+        );
       });
       return;
     }
@@ -96,7 +100,9 @@ class _BulkOnboardingUploadScreenState extends ConsumerState<BulkOnboardingUploa
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingUploadFailed')),
+          content: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingUploadFailed'),
+          ),
         ),
       );
     } finally {
@@ -108,7 +114,10 @@ class _BulkOnboardingUploadScreenState extends ConsumerState<BulkOnboardingUploa
     final l10n = AppLocalizations.of(context);
     if (_fileBytes == null || _fileName == null) {
       setState(() {
-        _fileError = resolveBulkOnboardingKey(context, 'bulkOnboardingFileRequired');
+        _fileError = resolveBulkOnboardingKey(
+          context,
+          'bulkOnboardingFileRequired',
+        );
       });
       return;
     }
@@ -136,27 +145,33 @@ class _BulkOnboardingUploadScreenState extends ConsumerState<BulkOnboardingUploa
     });
 
     try {
-      final result = await ref.read(bulkOnboardingRepositoryProvider).uploadCsv(
-        bytes: _fileBytes!,
-        fileName: _fileName!,
-        type: _selectedType,
-        companyId: companyId,
-        companyName: _companyNameController.text.trim().isEmpty
-            ? null
-            : _companyNameController.text.trim(),
-        note: _noteController.text.trim().isEmpty ? null : _noteController.text.trim(),
-        onProgress: (sent, total) {
-          if (!mounted || total <= 0) return;
-          setState(() => _uploadProgress = sent / total);
-        },
-      );
+      final result = await ref
+          .read(bulkOnboardingRepositoryProvider)
+          .uploadCsv(
+            bytes: _fileBytes!,
+            fileName: _fileName!,
+            type: _selectedType,
+            companyId: companyId,
+            companyName: _companyNameController.text.trim().isEmpty
+                ? null
+                : _companyNameController.text.trim(),
+            note: _noteController.text.trim().isEmpty
+                ? null
+                : _noteController.text.trim(),
+            onProgress: (sent, total) {
+              if (!mounted || total <= 0) return;
+              setState(() => _uploadProgress = sent / total);
+            },
+          );
 
       ref.invalidate(bulkOnboardingJobsProvider);
       ref.invalidate(bulkOnboardingSummaryProvider);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingUploadSuccessful')),
+          content: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingUploadSuccessful'),
+          ),
         ),
       );
       context.go(AdminRoutes.bulkOnboardingJobDetail(result.job.id));
@@ -164,7 +179,9 @@ class _BulkOnboardingUploadScreenState extends ConsumerState<BulkOnboardingUploa
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingUploadFailed')),
+          content: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingUploadFailed'),
+          ),
         ),
       );
     } finally {
@@ -181,13 +198,17 @@ class _BulkOnboardingUploadScreenState extends ConsumerState<BulkOnboardingUploa
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final usesMock = ref.watch(bulkOnboardingRepositoryProvider).usesMockData;
-    final canUpload = ref.watch(adminAuthProvider).user?.role.canUploadBulkOnboarding ?? false;
+    final canUpload =
+        ref.watch(adminAuthProvider).user?.role.canUploadBulkOnboarding ??
+        false;
 
     if (!canUpload) {
       return Scaffold(
         appBar: AppBar(title: Text(l10n.bulkOnboardingUploadCsv)),
         body: Center(
-          child: Text(resolveBulkOnboardingKey(context, 'bulkOnboardingUploadForbidden')),
+          child: Text(
+            resolveBulkOnboardingKey(context, 'bulkOnboardingUploadForbidden'),
+          ),
         ),
       );
     }
@@ -198,7 +219,10 @@ class _BulkOnboardingUploadScreenState extends ConsumerState<BulkOnboardingUploa
         actions: [
           if (usesMock)
             MockDataBadge(
-              label: resolveBulkOnboardingKey(context, 'bulkOnboardingMockUploadBadge'),
+              label: resolveBulkOnboardingKey(
+                context,
+                'bulkOnboardingMockUploadBadge',
+              ),
             ),
         ],
       ),

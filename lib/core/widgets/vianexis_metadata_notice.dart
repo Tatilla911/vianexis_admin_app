@@ -25,7 +25,11 @@ class VianexisMetadataNotice extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.shield_outlined, size: 20, color: VianexisBrand.goldAccent),
+          Icon(
+            Icons.shield_outlined,
+            size: 20,
+            color: VianexisBrand.goldAccent,
+          ),
           const SizedBox(width: VianexisBrand.spaceMd),
           Expanded(
             child: Column(

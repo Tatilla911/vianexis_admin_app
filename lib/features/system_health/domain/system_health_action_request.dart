@@ -1,13 +1,7 @@
-enum SystemHealthActionType {
-  acknowledge,
-  escalate,
-}
+enum SystemHealthActionType { acknowledge, escalate }
 
 class SystemHealthActionRequest {
-  const SystemHealthActionRequest({
-    required this.type,
-    this.note,
-  });
+  const SystemHealthActionRequest({required this.type, this.note});
 
   final SystemHealthActionType type;
   final String? note;
@@ -17,9 +11,7 @@ class SystemHealthActionRequest {
       SystemHealthActionType.acknowledge => {
         if (note != null && note!.trim().isNotEmpty) 'note': note!.trim(),
       },
-      SystemHealthActionType.escalate => {
-        'note': note!.trim(),
-      },
+      SystemHealthActionType.escalate => {'note': note!.trim()},
     };
   }
 

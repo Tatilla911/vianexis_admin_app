@@ -14,10 +14,7 @@ import 'widgets/audit_log_severity_badge.dart';
 import 'widgets/audit_metadata_card.dart';
 
 class AuditLogDetailScreen extends ConsumerWidget {
-  const AuditLogDetailScreen({
-    super.key,
-    required this.logId,
-  });
+  const AuditLogDetailScreen({super.key, required this.logId});
 
   final String logId;
 
@@ -48,9 +45,9 @@ class _DetailBody extends StatelessWidget {
   final PlatformAuditLog log;
 
   String _formatDate(BuildContext context, DateTime value) {
-    return DateFormat.yMMMd(Localizations.localeOf(context).toString())
-        .add_Hm()
-        .format(value.toLocal());
+    return DateFormat.yMMMd(
+      Localizations.localeOf(context).toString(),
+    ).add_Hm().format(value.toLocal());
   }
 
   @override
@@ -59,7 +56,8 @@ class _DetailBody extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       children: [
         Text(
-          log.targetLabel ?? resolveAuditLogKey(context, log.actionType.localizationKey()),
+          log.targetLabel ??
+              resolveAuditLogKey(context, log.actionType.localizationKey()),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         const SizedBox(height: 12),
@@ -136,17 +134,26 @@ class _DetailBody extends StatelessWidget {
           ),
         if (log.registrationApplicationId != null)
           _InfoRow(
-            label: resolveAuditLogKey(context, 'auditLogFieldRegistrationApplicationId'),
+            label: resolveAuditLogKey(
+              context,
+              'auditLogFieldRegistrationApplicationId',
+            ),
             value: log.registrationApplicationId!,
           ),
         if (log.supportAccessGrantId != null)
           _InfoRow(
-            label: resolveAuditLogKey(context, 'auditLogFieldSupportAccessGrantId'),
+            label: resolveAuditLogKey(
+              context,
+              'auditLogFieldSupportAccessGrantId',
+            ),
             value: log.supportAccessGrantId!,
           ),
         if (log.systemHealthEventId != null)
           _InfoRow(
-            label: resolveAuditLogKey(context, 'auditLogFieldSystemHealthEventId'),
+            label: resolveAuditLogKey(
+              context,
+              'auditLogFieldSystemHealthEventId',
+            ),
             value: log.systemHealthEventId!,
           ),
         const SizedBox(height: 16),

@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/app_theme.dart';
 
-enum VianexisStatusTone {
-  healthy,
-  degraded,
-  unknown,
-}
+enum VianexisStatusTone { healthy, degraded, unknown }
 
 class VianexisStatusBadge extends StatelessWidget {
   const VianexisStatusBadge({

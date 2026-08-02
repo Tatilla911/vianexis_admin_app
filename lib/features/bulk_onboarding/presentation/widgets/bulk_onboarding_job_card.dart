@@ -49,7 +49,10 @@ class BulkOnboardingJobCard extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 sourceFileName ??
-                    resolveBulkOnboardingKey(context, 'bulkOnboardingNoSourceFile'),
+                    resolveBulkOnboardingKey(
+                      context,
+                      'bulkOnboardingNoSourceFile',
+                    ),
               ),
               const SizedBox(height: 8),
               Wrap(

@@ -52,18 +52,23 @@ class PlatformCompany {
       country: json['country']?.toString(),
       vatNumber: json['vatNumber']?.toString(),
       registrationNumber: json['registrationNumber']?.toString(),
-      status: PlatformCompanyStatus.fromBackendValue(json['status']?.toString()),
+      status: PlatformCompanyStatus.fromBackendValue(
+        json['status']?.toString(),
+      ),
       planName: json['planName']?.toString(),
       subscriptionStatus: json['subscriptionStatus']?.toString(),
       createdAt: _parseDate(json['createdAt']),
       updatedAt: _parseDate(json['updatedAt']),
-      activeUsersCount: _parseInt(json['activeUsersCount'] ?? json['userCount']),
+      activeUsersCount: _parseInt(
+        json['activeUsersCount'] ?? json['userCount'],
+      ),
       driversCount: _parseInt(json['driversCount']),
       vehiclesCount: _parseInt(json['vehiclesCount'] ?? json['truckCount']),
       trailersCount: _parseInt(json['trailersCount'] ?? json['trailerCount']),
       openSupportTicketsCount: _parseInt(json['openSupportTicketsCount']),
       activeSupportAccessGrantsCount: _parseInt(
-        json['activeSupportAccessGrantsCount'] ?? json['activeSupportGrantCount'],
+        json['activeSupportAccessGrantsCount'] ??
+            json['activeSupportGrantCount'],
       ),
       pendingRegistrationApplicationsCount: _parseInt(
         json['pendingRegistrationApplicationsCount'],
@@ -127,9 +132,9 @@ class PlatformCompaniesPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(PlatformCompany.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(PlatformCompany.fromJson)
+              .toList(growable: false)
         : const <PlatformCompany>[];
     return PlatformCompaniesPage(
       items: items,

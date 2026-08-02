@@ -34,19 +34,23 @@ class PublicIntakeListQuery {
   }
 }
 
-bool publicIntakeMatchesFilter(PublicIntake intake, PublicIntakeListFilter filter) {
+bool publicIntakeMatchesFilter(
+  PublicIntake intake,
+  PublicIntakeListFilter filter,
+) {
   return switch (filter) {
     PublicIntakeListFilter.all => true,
-    PublicIntakeListFilter.newStatus => intake.status == PublicIntakeStatus.newStatus,
+    PublicIntakeListFilter.newStatus =>
+      intake.status == PublicIntakeStatus.newStatus,
     PublicIntakeListFilter.reviewing =>
       intake.status == PublicIntakeStatus.reviewing,
     PublicIntakeListFilter.quoteDemo => intake.type.isHighPriority,
     PublicIntakeListFilter.contacted =>
       intake.status == PublicIntakeStatus.contacted ||
-      intake.status == PublicIntakeStatus.quoted,
+          intake.status == PublicIntakeStatus.quoted,
     PublicIntakeListFilter.closed =>
       intake.status == PublicIntakeStatus.rejected ||
-      intake.status == PublicIntakeStatus.closed ||
-      intake.status == PublicIntakeStatus.converted,
+          intake.status == PublicIntakeStatus.closed ||
+          intake.status == PublicIntakeStatus.converted,
   };
 }

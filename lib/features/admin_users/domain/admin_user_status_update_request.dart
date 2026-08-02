@@ -3,10 +3,7 @@ import 'platform_admin_user_role.dart';
 import 'platform_admin_user_status.dart';
 
 class AdminUserStatusUpdateRequest {
-  const AdminUserStatusUpdateRequest({
-    required this.status,
-    this.reason,
-  });
+  const AdminUserStatusUpdateRequest({required this.status, this.reason});
 
   final PlatformAdminUserStatus status;
   final String? reason;

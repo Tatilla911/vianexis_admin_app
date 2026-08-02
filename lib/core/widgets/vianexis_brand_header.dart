@@ -10,10 +10,7 @@ import 'vianexis_metallic_text.dart';
 
 /// Branded header for dashboard and module landing areas.
 class VianexisBrandHeader extends StatelessWidget {
-  const VianexisBrandHeader({
-    super.key,
-    this.showEnvironment = true,
-  });
+  const VianexisBrandHeader({super.key, this.showEnvironment = true});
 
   final bool showEnvironment;
 
@@ -24,7 +21,7 @@ class VianexisBrandHeader extends StatelessWidget {
     final envLabel = resolveAppConfigKey(context, config.displayLabelKey);
     final apiLabel = config.isApiConfigured
         ? (config.safeApiHostDisplay ??
-            resolveAppConfigKey(context, 'appConfigApiConfigured'))
+              resolveAppConfigKey(context, 'appConfigApiConfigured'))
         : l10n.brandApiNotConfigured;
 
     return VianexisAdminCard(
@@ -85,11 +82,7 @@ class VianexisBrandHeader extends StatelessWidget {
 }
 
 class _EnvChip extends StatelessWidget {
-  const _EnvChip({
-    required this.icon,
-    required this.label,
-    this.tone,
-  });
+  const _EnvChip({required this.icon, required this.label, this.tone});
 
   final IconData icon;
   final String label;
@@ -115,7 +108,9 @@ class _EnvChip extends StatelessWidget {
           const SizedBox(width: VianexisBrand.spaceSm),
           Text(
             label,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(color: color),
+            style: Theme.of(
+              context,
+            ).textTheme.labelMedium?.copyWith(color: color),
           ),
         ],
       ),

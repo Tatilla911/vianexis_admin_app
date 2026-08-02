@@ -23,16 +23,13 @@ class EvidencePdfShareService {
     }
 
     if (kIsWeb) {
-      await Share.shareXFiles(
-        [
-          XFile.fromData(
-            Uint8List.fromList(bytes),
-            mimeType: 'application/pdf',
-            name: EvidencePdfBytes.safeFileName(packageId),
-          ),
-        ],
-        subject: shareSubject,
-      );
+      await Share.shareXFiles([
+        XFile.fromData(
+          Uint8List.fromList(bytes),
+          mimeType: 'application/pdf',
+          name: EvidencePdfBytes.safeFileName(packageId),
+        ),
+      ], subject: shareSubject);
       return;
     }
 
@@ -42,10 +39,9 @@ class EvidencePdfShareService {
     );
     await file.writeAsBytes(bytes, flush: true);
 
-    final result = await Share.shareXFiles(
-      [XFile(file.path, mimeType: 'application/pdf')],
-      subject: shareSubject,
-    );
+    final result = await Share.shareXFiles([
+      XFile(file.path, mimeType: 'application/pdf'),
+    ], subject: shareSubject);
 
     if (result.status == ShareResultStatus.unavailable) {
       throw EvidencePdfShareFailure.shareUnavailable;

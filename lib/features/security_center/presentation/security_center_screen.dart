@@ -19,7 +19,8 @@ class SecurityCenterScreen extends ConsumerStatefulWidget {
   const SecurityCenterScreen({super.key});
 
   @override
-  ConsumerState<SecurityCenterScreen> createState() => _SecurityCenterScreenState();
+  ConsumerState<SecurityCenterScreen> createState() =>
+      _SecurityCenterScreenState();
 }
 
 class _SecurityCenterScreenState extends ConsumerState<SecurityCenterScreen> {
@@ -44,7 +45,9 @@ class _SecurityCenterScreenState extends ConsumerState<SecurityCenterScreen> {
         title: Text(l10n.securityCenterTitle),
         actions: [
           if (usesMock)
-            MockDataBadge(label: resolveSecurityKey(context, 'securityMockDataBadge')),
+            MockDataBadge(
+              label: resolveSecurityKey(context, 'securityMockDataBadge'),
+            ),
         ],
       ),
       body: Column(
@@ -53,8 +56,10 @@ class _SecurityCenterScreenState extends ConsumerState<SecurityCenterScreen> {
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: overviewAsync.when(
               loading: () => const LinearProgressIndicator(),
-              error: (_, _) => Text(resolveSecurityKey(context, 'securityLoadError')),
-              data: (overview) => SecurityOverviewCard(overview: overview, compact: true),
+              error: (_, _) =>
+                  Text(resolveSecurityKey(context, 'securityLoadError')),
+              data: (overview) =>
+                  SecurityOverviewCard(overview: overview, compact: true),
             ),
           ),
           Padding(
@@ -63,27 +68,36 @@ class _SecurityCenterScreenState extends ConsumerState<SecurityCenterScreen> {
               controller: _searchController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                hintText: resolveSecurityKey(context, 'securityEventSearchHint'),
+                hintText: resolveSecurityKey(
+                  context,
+                  'securityEventSearchHint',
+                ),
               ),
-              onChanged: (value) =>
-                  ref.read(securityEventListQueryProvider.notifier).setSearch(value),
+              onChanged: (value) => ref
+                  .read(securityEventListQueryProvider.notifier)
+                  .setSearch(value),
             ),
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
-              children: SecurityEventFilter.values.map((filter) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: FilterChip(
-                    label: Text(resolveSecurityKey(context, filter.localizationKey())),
-                    selected: query.filter == filter,
-                    onSelected: (_) =>
-                        ref.read(securityEventListQueryProvider.notifier).setFilter(filter),
-                  ),
-                );
-              }).toList(growable: false),
+              children: SecurityEventFilter.values
+                  .map((filter) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: FilterChip(
+                        label: Text(
+                          resolveSecurityKey(context, filter.localizationKey()),
+                        ),
+                        selected: query.filter == filter,
+                        onSelected: (_) => ref
+                            .read(securityEventListQueryProvider.notifier)
+                            .setFilter(filter),
+                      ),
+                    );
+                  })
+                  .toList(growable: false),
             ),
           ),
           const SizedBox(height: 8),
@@ -93,13 +107,18 @@ class _SecurityCenterScreenState extends ConsumerState<SecurityCenterScreen> {
               error: (error, _) => VianexisErrorView.fromError(
                 context,
                 error,
-                fallbackMessage: resolveSecurityKey(context, 'securityLoadError'),
+                fallbackMessage: resolveSecurityKey(
+                  context,
+                  'securityLoadError',
+                ),
                 onRetry: () => refreshSecurityCenter(ref),
               ),
               data: (items) {
                 if (items.isEmpty) {
                   return Center(
-                    child: Text(resolveSecurityKey(context, 'securityEventListEmpty')),
+                    child: Text(
+                      resolveSecurityKey(context, 'securityEventListEmpty'),
+                    ),
                   );
                 }
                 return RefreshIndicator(

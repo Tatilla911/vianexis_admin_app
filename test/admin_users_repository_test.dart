@@ -166,10 +166,10 @@ void main() {
           role: PlatformAdminUserRole.onboardingReviewer,
         ),
       );
-      expect(invited.status, PlatformAdminUserStatus.invited);
+      expect(invited.user.status, 'invited');
 
       final updated = await repo.updateAdminUserStatus(
-        id: invited.id,
+        id: invited.user.id,
         request: const AdminUserStatusUpdateRequest(
           status: PlatformAdminUserStatus.suspended,
           reason: 'Pending review',
