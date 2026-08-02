@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -9,7 +10,10 @@ import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/auth/admin_auth_state.dart';
 import '../../../core/widgets/vianexis_admin_scaffold.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../registrations/domain/registration_approval_outcome.dart';
 import '../../registrations/presentation/registration_providers.dart';
+import '../../driver_access/data/driver_access_repository.dart';
+import '../../driver_access/data/driver_registration_requests_repository.dart';
 import '../data/public_applications_api.dart';
 
 final applicationsListProvider = FutureProvider.autoDispose
@@ -184,6 +188,7 @@ class ApplicationDetailScreen extends ConsumerStatefulWidget {
 class _ApplicationDetailScreenState
     extends ConsumerState<ApplicationDetailScreen> {
   Map<String, dynamic>? _detail;
+  RegistrationApprovalOutcome? _approvalOutcome;
   bool _loading = true;
   bool _acting = false;
   String? _error;
@@ -203,7 +208,27 @@ class _ApplicationDetailScreenState
       final api = ref.read(publicApplicationsApiProvider);
       final data = await api.getApplication(int.parse(widget.id));
       if (!mounted) return;
-      setState(() => _detail = data);
+      RegistrationApprovalOutcome? fromDetail;
+      final invite = data['activationInvite'];
+      if (invite is Map) {
+        fromDetail = RegistrationApprovalOutcome.fromJson({
+          ...Map<String, dynamic>.from(invite),
+          'companyId':
+              invite['companyId'] ??
+              data['application']?['companyId'] ??
+              (data['application'] is Map
+                  ? (data['application'] as Map)['companyId']
+                  : null),
+        });
+      }
+      setState(() {
+        _detail = data;
+        if (fromDetail != null &&
+            (fromDetail.inviteTokenId != null ||
+                fromDetail.inviteDeliveryStatus != 'not_requested')) {
+          _approvalOutcome ??= fromDetail;
+        }
+      });
     } catch (e) {
       if (!mounted) return;
       setState(() => _error = e.toString());
@@ -216,6 +241,11 @@ class _ApplicationDetailScreenState
     ref.invalidate(applicationsListProvider((type: null, status: null)));
     ref.invalidate(applicationsListProvider((type: 'company', status: null)));
     ref.invalidate(applicationsListProvider((type: 'company', status: 'new')));
+    ref.invalidate(applicationsListProvider((type: 'driver', status: null)));
+    ref.invalidate(applicationsListProvider((type: 'driver', status: 'new')));
+    ref.invalidate(driverRegistrationRequestsProvider);
+    ref.invalidate(rejectedDriverRegistrationRequestsProvider);
+    ref.invalidate(driverAccessListProvider);
     try {
       await ref.read(registrationApplicationsProvider.notifier).refresh();
     } catch (_) {
@@ -232,36 +262,23 @@ class _ApplicationDetailScreenState
       await _invalidateRelated();
       await _load();
       if (!mounted) return;
-      final conversion = result['conversion'] as Map<String, dynamic>?;
-      final companyId = conversion?['companyId']?.toString();
-      final delivery =
-          conversion?['emailInviteDeliveryStatus']?.toString() ?? '';
+      final outcome = RegistrationApprovalOutcome.fromJson(result);
+      setState(() => _approvalOutcome = outcome);
       final l10n = AppLocalizations.of(context);
-      final deliveryNote = switch (delivery) {
-        'sent' || 'accepted_by_provider' => '',
-        'provider_not_configured' ||
-        'provider_disabled' ||
-        'skipped' => ' · ${l10n.emailProviderDisabled}',
-        'blocked_by_staging_allowlist' ||
-        'staging_allowlist_missing' => ' · ${l10n.emailRecipientNotAllowed}',
-        'failed' => ' · ${l10n.emailSendFailed}',
-        _ when delivery.isNotEmpty => ' · $delivery',
-        _ => '',
-      };
+      final deliveryNote = _deliverySnackNote(l10n, outcome.inviteDeliveryStatus);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            companyId == null || companyId.isEmpty
+            outcome.companyId == null || outcome.companyId!.isEmpty
                 ? '${l10n.registrationDecisionSuccess}$deliveryNote'
-                : '${l10n.registrationDecisionSuccess} · ${l10n.registrationFieldCompanyId}: $companyId$deliveryNote',
+                : '${l10n.registrationDecisionSuccess} · ${l10n.registrationFieldCompanyId}: ${outcome.companyId}$deliveryNote',
           ),
         ),
       );
     } on ApiException catch (error) {
+      logApiExceptionDiagnostics(error, applicationId: widget.id);
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(apiExceptionMessage(context, error))),
-      );
+      showApiExceptionSnackBar(context, error);
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
@@ -270,6 +287,67 @@ class _ApplicationDetailScreenState
     } finally {
       if (mounted) setState(() => _acting = false);
     }
+  }
+
+  String _deliverySnackNote(AppLocalizations l10n, String delivery) {
+    return switch (delivery) {
+      'sent' ||
+      'accepted_by_provider' ||
+      'queued' ||
+      'console' ||
+      'not_requested' ||
+      'generated' => '',
+      'provider_disabled' ||
+      'skipped' => ' · ${l10n.registrationInviteDeliveryProviderDisabled}',
+      'provider_not_configured' =>
+        ' · ${l10n.registrationInviteDeliveryProviderNotConfigured}',
+      'blocked_by_staging_allowlist' ||
+      'staging_allowlist_missing' =>
+        ' · ${l10n.registrationInviteDeliveryAllowlistBlocked}',
+      'failed' ||
+      'pending_or_failed' => ' · ${l10n.registrationInviteDeliveryFailed}',
+      _ when delivery.isNotEmpty => ' · $delivery',
+      _ => '',
+    };
+  }
+
+  Future<void> _resendActivationInvite() async {
+    if (_acting) return;
+    setState(() => _acting = true);
+    try {
+      final api = ref.read(publicApplicationsApiProvider);
+      final result = await api.resendActivationInvite(int.parse(widget.id));
+      if (!mounted) return;
+      final outcome = RegistrationApprovalOutcome.fromJson(result);
+      setState(() => _approvalOutcome = outcome);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context).registrationInviteResendSuccess,
+          ),
+        ),
+      );
+    } on ApiException catch (error) {
+      if (!mounted) return;
+      showApiExceptionSnackBar(context, error);
+    } finally {
+      if (mounted) setState(() => _acting = false);
+    }
+  }
+
+  Future<void> _copyActivationLink(String? url) async {
+    final l10n = AppLocalizations.of(context);
+    if (url == null || url.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.registrationInviteNoLink)),
+      );
+      return;
+    }
+    await Clipboard.setData(ClipboardData(text: url));
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.registrationInviteLinkCopied)),
+    );
   }
 
   Future<void> _reject() async {
@@ -467,6 +545,59 @@ class _ApplicationDetailScreenState
                         child: Text(l10n.applicationsOpenCompany),
                       ),
                     ],
+                    if (isCompany && _approvalOutcome != null) ...[
+                      const SizedBox(height: 16),
+                      Text(
+                        l10n.applicationActivationInviteTitle,
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      const SizedBox(height: 8),
+                      if (_approvalOutcome!.userCreated == true)
+                        Text(l10n.applicationActivationUserCreated),
+                      if (_approvalOutcome!.userResolved == true)
+                        Text(l10n.applicationActivationUserResolved),
+                      if (_approvalOutcome!.inviteTokenId != null)
+                        Text(
+                          '${l10n.applicationActivationInviteCreated} (#${_approvalOutcome!.inviteTokenId})',
+                        ),
+                      Text(
+                        '${l10n.applicationActivationEmailStatus}: ${_activationDeliveryLabel(l10n, _approvalOutcome!.inviteDeliveryStatus)}',
+                      ),
+                      if ((_approvalOutcome!.recipientEmailMasked ??
+                              _approvalOutcome!.adminEmail) !=
+                          null)
+                        Text(
+                          '${l10n.applicationActivationRecipient}: ${_approvalOutcome!.recipientEmailMasked ?? _approvalOutcome!.adminEmail}',
+                        ),
+                      if (_approvalOutcome!.activationUrlHost != null)
+                        Text(
+                          '${l10n.registrationFieldInviteStatus}: ${_approvalOutcome!.activationUrlHost}',
+                        ),
+                      const SizedBox(height: 8),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          OutlinedButton(
+                            onPressed: _acting
+                                ? null
+                                : () => _copyActivationLink(
+                                      _approvalOutcome!.activationUrl,
+                                    ),
+                            child: Text(l10n.registrationInviteCopyLink),
+                          ),
+                          if (canDecide &&
+                              _approvalOutcome!.retryAllowed) ...[
+                            OutlinedButton(
+                              onPressed: _acting
+                                  ? null
+                                  : _resendActivationInvite,
+                              child: Text(l10n.applicationActivationResend),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ],
                     if (isRejected || reviewNotes.trim().isNotEmpty) ...[
                       const SizedBox(height: 16),
                       Text(
@@ -538,5 +669,24 @@ class _ApplicationDetailScreenState
               ),
       ),
     );
+  }
+
+  String _activationDeliveryLabel(AppLocalizations l10n, String status) {
+    return switch (status) {
+      'sent' || 'accepted_by_provider' || 'queued' =>
+        l10n.registrationInviteDeliverySent,
+      'provider_disabled' || 'skipped' =>
+        l10n.registrationInviteDeliveryProviderDisabled,
+      'provider_not_configured' =>
+        l10n.registrationInviteDeliveryProviderNotConfigured,
+      'blocked_by_staging_allowlist' || 'staging_allowlist_missing' =>
+        l10n.registrationInviteDeliveryAllowlistBlocked,
+      'failed' || 'pending_or_failed' =>
+        l10n.registrationInviteDeliveryFailed,
+      'expired' => l10n.registrationInviteDeliveryExpired,
+      'revoked' => l10n.registrationInviteDeliveryRevoked,
+      'accepted' || 'consumed' => l10n.registrationInviteDeliveryAccepted,
+      _ => status,
+    };
   }
 }

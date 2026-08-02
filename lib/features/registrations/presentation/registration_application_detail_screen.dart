@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -629,6 +630,19 @@ class _ApprovalOutcomeCard extends StatelessWidget {
         context,
         'registrationInviteDeliveryPending',
       ),
+      'provider_disabled' || 'skipped' => AppLocalizations.of(
+        context,
+      ).registrationInviteDeliveryProviderDisabled,
+      'provider_not_configured' => AppLocalizations.of(
+        context,
+      ).registrationInviteDeliveryProviderNotConfigured,
+      'blocked_by_staging_allowlist' ||
+      'staging_allowlist_missing' => AppLocalizations.of(
+        context,
+      ).registrationInviteDeliveryAllowlistBlocked,
+      'failed' => AppLocalizations.of(
+        context,
+      ).registrationInviteDeliveryFailed,
       'accepted' => resolveRegistrationKey(
         context,
         'registrationInviteDeliveryAccepted',
@@ -687,6 +701,38 @@ class _ApprovalOutcomeCard extends StatelessWidget {
             ),
             value: outcome.inviteTokenId!,
           ),
+        if (outcome.recipientEmailMasked != null)
+          _InfoRow(
+            label: AppLocalizations.of(context).applicationActivationRecipient,
+            value: outcome.recipientEmailMasked!,
+          ),
+        if (outcome.activationUrlHost != null)
+          _InfoRow(
+            label: 'URL host',
+            value: outcome.activationUrlHost!,
+          ),
+        if (outcome.activationUrl != null &&
+            outcome.activationUrl!.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          OutlinedButton(
+            onPressed: () async {
+              await Clipboard.setData(
+                ClipboardData(text: outcome.activationUrl!),
+              );
+              if (!context.mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    AppLocalizations.of(context).registrationInviteLinkCopied,
+                  ),
+                ),
+              );
+            },
+            child: Text(
+              AppLocalizations.of(context).registrationInviteCopyLink,
+            ),
+          ),
+        ],
         if (outcome.companyId != null) ...[
           const SizedBox(height: 8),
           OutlinedButton(

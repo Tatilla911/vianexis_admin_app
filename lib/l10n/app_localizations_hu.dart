@@ -882,6 +882,54 @@ class AppLocalizationsHu extends AppLocalizations {
   String get registrationInviteDeliveryRevoked => 'Visszavonva';
 
   @override
+  String get registrationInviteDeliveryProviderDisabled =>
+      'Az aktiváló meghívó létrejött, de az e-mail-küldés nincs engedélyezve ezen a környezeten.';
+
+  @override
+  String get registrationInviteDeliveryProviderNotConfigured =>
+      'Az aktiváló meghívó létrejött, de az e-mail szolgáltató nincs konfigurálva.';
+
+  @override
+  String get registrationInviteDeliveryAllowlistBlocked =>
+      'Az aktiváló meghívó létrejött, de a staging környezetben ez a címzett nincs engedélyezve.';
+
+  @override
+  String get registrationInviteDeliveryFailed =>
+      'Az aktiváló meghívó létrejött, de az e-mail-küldés sikertelen.';
+
+  @override
+  String get registrationInviteCopyLink => 'Aktiváló link másolása';
+
+  @override
+  String get registrationInviteLinkCopied => 'Aktiváló link másolva';
+
+  @override
+  String get registrationInviteNoLink =>
+      'Nincs aktiváló link — újraküldéssel generálható újra.';
+
+  @override
+  String get applicationActivationInviteTitle => 'Aktiváló meghívó';
+
+  @override
+  String get applicationActivationUserCreated => 'Felhasználó létrehozva';
+
+  @override
+  String get applicationActivationUserResolved =>
+      'Meglévő felhasználó hozzákapcsolva';
+
+  @override
+  String get applicationActivationInviteCreated => 'Aktiváló meghívó létrejött';
+
+  @override
+  String get applicationActivationEmailStatus => 'E-mail-küldés állapota';
+
+  @override
+  String get applicationActivationRecipient => 'Címzett';
+
+  @override
+  String get applicationActivationResend => 'Aktiváló meghívó újraküldése';
+
+  @override
   String get registrationInviteResend => 'Meghívó újraküldése';
 
   @override

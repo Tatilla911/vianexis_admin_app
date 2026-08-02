@@ -1682,6 +1682,90 @@ abstract class AppLocalizations {
   /// **'Revoked'**
   String get registrationInviteDeliveryRevoked;
 
+  /// No description provided for @registrationInviteDeliveryProviderDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Activation invite created, but email delivery is disabled in this environment.'**
+  String get registrationInviteDeliveryProviderDisabled;
+
+  /// No description provided for @registrationInviteDeliveryProviderNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Activation invite created, but the email provider is not configured.'**
+  String get registrationInviteDeliveryProviderNotConfigured;
+
+  /// No description provided for @registrationInviteDeliveryAllowlistBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Activation invite created, but this recipient is not allowlisted for staging.'**
+  String get registrationInviteDeliveryAllowlistBlocked;
+
+  /// No description provided for @registrationInviteDeliveryFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Activation invite created, but email delivery failed.'**
+  String get registrationInviteDeliveryFailed;
+
+  /// No description provided for @registrationInviteCopyLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy activation link'**
+  String get registrationInviteCopyLink;
+
+  /// No description provided for @registrationInviteLinkCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Activation link copied'**
+  String get registrationInviteLinkCopied;
+
+  /// No description provided for @registrationInviteNoLink.
+  ///
+  /// In en, this message translates to:
+  /// **'No activation link available — use resend to regenerate.'**
+  String get registrationInviteNoLink;
+
+  /// No description provided for @applicationActivationInviteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Activation invite'**
+  String get applicationActivationInviteTitle;
+
+  /// No description provided for @applicationActivationUserCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'User created'**
+  String get applicationActivationUserCreated;
+
+  /// No description provided for @applicationActivationUserResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Existing user linked'**
+  String get applicationActivationUserResolved;
+
+  /// No description provided for @applicationActivationInviteCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Activation invite created'**
+  String get applicationActivationInviteCreated;
+
+  /// No description provided for @applicationActivationEmailStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Email delivery status'**
+  String get applicationActivationEmailStatus;
+
+  /// No description provided for @applicationActivationRecipient.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient'**
+  String get applicationActivationRecipient;
+
+  /// No description provided for @applicationActivationResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend activation invite'**
+  String get applicationActivationResend;
+
   /// No description provided for @registrationInviteResend.
   ///
   /// In en, this message translates to:

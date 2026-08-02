@@ -874,6 +874,53 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registrationInviteDeliveryRevoked => 'Revoked';
 
   @override
+  String get registrationInviteDeliveryProviderDisabled =>
+      'Activation invite created, but email delivery is disabled in this environment.';
+
+  @override
+  String get registrationInviteDeliveryProviderNotConfigured =>
+      'Activation invite created, but the email provider is not configured.';
+
+  @override
+  String get registrationInviteDeliveryAllowlistBlocked =>
+      'Activation invite created, but this recipient is not allowlisted for staging.';
+
+  @override
+  String get registrationInviteDeliveryFailed =>
+      'Activation invite created, but email delivery failed.';
+
+  @override
+  String get registrationInviteCopyLink => 'Copy activation link';
+
+  @override
+  String get registrationInviteLinkCopied => 'Activation link copied';
+
+  @override
+  String get registrationInviteNoLink =>
+      'No activation link available — use resend to regenerate.';
+
+  @override
+  String get applicationActivationInviteTitle => 'Activation invite';
+
+  @override
+  String get applicationActivationUserCreated => 'User created';
+
+  @override
+  String get applicationActivationUserResolved => 'Existing user linked';
+
+  @override
+  String get applicationActivationInviteCreated => 'Activation invite created';
+
+  @override
+  String get applicationActivationEmailStatus => 'Email delivery status';
+
+  @override
+  String get applicationActivationRecipient => 'Recipient';
+
+  @override
+  String get applicationActivationResend => 'Resend activation invite';
+
+  @override
   String get registrationInviteResend => 'Resend invite';
 
   @override

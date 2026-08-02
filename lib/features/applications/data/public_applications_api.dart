@@ -68,6 +68,21 @@ class PublicApplicationsApi {
     );
     return response.data ?? {};
   }
+
+  Future<Map<String, dynamic>> getActivationInvite(int id) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/applications/$id/activation-invite',
+    );
+    return response.data ?? {};
+  }
+
+  Future<Map<String, dynamic>> resendActivationInvite(int id) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/applications/$id/resend-activation-invite',
+      data: const {},
+    );
+    return response.data ?? {};
+  }
 }
 
 final publicApplicationsApiProvider = Provider<PublicApplicationsApi>(
