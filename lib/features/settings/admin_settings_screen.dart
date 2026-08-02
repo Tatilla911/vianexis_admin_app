@@ -124,6 +124,8 @@ class AdminSettingsScreen extends ConsumerWidget {
             ),
           ],
           const SizedBox(height: 20),
+          const AdminAppearanceSettingsSection(),
+          const SizedBox(height: 20),
           const AdminLanguageSettingsSection(),
           const SizedBox(height: 20),
           const AdminPinSettingsSection(),
@@ -140,6 +142,11 @@ class AdminSettingsScreen extends ConsumerWidget {
                   onPressed: () =>
                       context.push(AdminRoutes.notificationPreferences),
                   child: Text(l10n.settingsOpenNotificationPreferences),
+                ),
+                const SizedBox(height: 12),
+                OutlinedButton(
+                  onPressed: () => context.push(AdminRoutes.soundSettings),
+                  child: Text(l10n.settingsOpenSoundSettings),
                 ),
               ],
             ),

@@ -42,22 +42,23 @@ class _RegistrationApplicationDetailScreenState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final detailAsync =
-        ref.watch(registrationApplicationDetailProvider(widget.applicationId));
+    final detailAsync = ref.watch(
+      registrationApplicationDetailProvider(widget.applicationId),
+    );
     final user = ref.watch(adminAuthProvider).user;
     final canDecide = user?.role.canDecideCompanyRegistrations ?? false;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.registrationDetailTitle),
-      ),
+      appBar: AppBar(title: Text(l10n.registrationDetailTitle)),
       body: detailAsync.when(
         loading: () => const VianexisLoadingView(),
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage:
-              resolveRegistrationKey(context, 'registrationDetailError'),
+          fallbackMessage: resolveRegistrationKey(
+            context,
+            'registrationDetailError',
+          ),
           onRetry: () =>
               refreshRegistrationApplicationDetail(ref, widget.applicationId),
         ),
@@ -68,12 +69,8 @@ class _RegistrationApplicationDetailScreenState
           decisionLoading: _decisionLoading,
           approvalOutcome: _approvalOutcome,
           onDecision: (type) => _handleDecision(context, type),
-          onResendInvite: canDecide
-              ? () => _handleResend(context)
-              : null,
-          onRevokeInvite: canDecide
-              ? () => _handleRevoke(context)
-              : null,
+          onResendInvite: canDecide ? () => _handleResend(context) : null,
+          onRevokeInvite: canDecide ? () => _handleRevoke(context) : null,
         ),
       ),
     );
@@ -223,9 +220,8 @@ class _DetailBody extends StatelessWidget {
     final locale = Localizations.localeOf(context).toString();
     final submitted = application.submittedAt;
     final reviewed = application.reviewedAt;
-    final showActions = canDecide &&
-        !application.status.isTerminal &&
-        approvalOutcome == null;
+    final showActions =
+        canDecide && !application.status.isTerminal && approvalOutcome == null;
 
     return ListView(
       padding: const EdgeInsets.all(20),
@@ -264,15 +260,24 @@ class _DetailBody extends StatelessWidget {
               value: 'REG-$applicationId',
             ),
             _InfoRow(
-              label: resolveRegistrationKey(context, 'registrationFieldCompanyName'),
+              label: resolveRegistrationKey(
+                context,
+                'registrationFieldCompanyName',
+              ),
               value: application.companyName,
             ),
             _InfoRow(
-              label: resolveRegistrationKey(context, 'registrationFieldCountry'),
+              label: resolveRegistrationKey(
+                context,
+                'registrationFieldCountry',
+              ),
               value: application.country ?? '—',
             ),
             _InfoRow(
-              label: resolveRegistrationKey(context, 'registrationFieldVatNumber'),
+              label: resolveRegistrationKey(
+                context,
+                'registrationFieldVatNumber',
+              ),
               value: application.vatNumber ?? '—',
             ),
             _InfoRow(
@@ -288,11 +293,17 @@ class _DetailBody extends StatelessWidget {
           title: resolveRegistrationKey(context, 'registrationSectionContact'),
           children: [
             _InfoRow(
-              label: resolveRegistrationKey(context, 'registrationFieldContactName'),
+              label: resolveRegistrationKey(
+                context,
+                'registrationFieldContactName',
+              ),
               value: application.contactName ?? '—',
             ),
             _InfoRow(
-              label: resolveRegistrationKey(context, 'registrationFieldContactEmail'),
+              label: resolveRegistrationKey(
+                context,
+                'registrationFieldContactEmail',
+              ),
               value: application.contactEmail,
             ),
           ],
@@ -316,23 +327,62 @@ class _DetailBody extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             _InfoRow(
-              label: resolveRegistrationKey(context, 'registrationFieldSubmittedAt'),
+              label: resolveRegistrationKey(
+                context,
+                'registrationFieldSubmittedAt',
+              ),
               value: submitted != null
                   ? DateFormat.yMMMd(locale).add_Hm().format(submitted)
                   : '—',
             ),
             if (reviewed != null)
               _InfoRow(
-                label: resolveRegistrationKey(context, 'registrationFieldReviewedAt'),
+                label: resolveRegistrationKey(
+                  context,
+                  'registrationFieldReviewedAt',
+                ),
                 value: DateFormat.yMMMd(locale).add_Hm().format(reviewed),
               ),
             if (application.reviewedBy != null)
               _InfoRow(
-                label: resolveRegistrationKey(context, 'registrationFieldReviewedBy'),
+                label: resolveRegistrationKey(
+                  context,
+                  'registrationFieldReviewedBy',
+                ),
                 value: application.reviewedBy!,
               ),
           ],
         ),
+        if (application.status.isRejected ||
+            (application.reviewNotes != null &&
+                application.reviewNotes!.trim().isNotEmpty))
+          _SectionCard(
+            title: resolveRegistrationKey(
+              context,
+              application.status.isRejected
+                  ? 'registrationRejectionReasonTitle'
+                  : 'registrationSectionDecision',
+            ),
+            children: [
+              if (reviewed != null)
+                _InfoRow(
+                  label: resolveRegistrationKey(
+                    context,
+                    'registrationFieldReviewedAt',
+                  ),
+                  value: DateFormat.yMMMd(locale).add_Hm().format(reviewed),
+                ),
+              _InfoRow(
+                label: resolveRegistrationKey(
+                  context,
+                  'registrationFieldReviewNotes',
+                ),
+                value: (application.reviewNotes?.trim().isNotEmpty ?? false)
+                    ? application.reviewNotes!.trim()
+                    : '—',
+              ),
+            ],
+          ),
         _SectionCard(
           title: resolveRegistrationKey(context, 'registrationSectionAiReview'),
           children: [
@@ -344,7 +394,10 @@ class _DetailBody extends StatelessWidget {
               value: application.aiRecommendation ?? '—',
             ),
             _InfoRow(
-              label: resolveRegistrationKey(context, 'registrationFieldAiSummary'),
+              label: resolveRegistrationKey(
+                context,
+                'registrationFieldAiSummary',
+              ),
               value: application.aiSummary ?? '—',
             ),
             if ((application.aiSummary ?? '').trim().isNotEmpty) ...[
@@ -362,7 +415,10 @@ class _DetailBody extends StatelessWidget {
                 'registrationFieldMissingInformation',
               ),
               items: application.missingInformation,
-              emptyLabel: resolveRegistrationKey(context, 'registrationNoneReported'),
+              emptyLabel: resolveRegistrationKey(
+                context,
+                'registrationNoneReported',
+              ),
             ),
             _BulletList(
               title: resolveRegistrationKey(
@@ -370,24 +426,43 @@ class _DetailBody extends StatelessWidget {
                 'registrationFieldDuplicateWarnings',
               ),
               items: application.duplicateWarnings,
-              emptyLabel: resolveRegistrationKey(context, 'registrationNoneReported'),
+              emptyLabel: resolveRegistrationKey(
+                context,
+                'registrationNoneReported',
+              ),
             ),
             _BulletList(
-              title: resolveRegistrationKey(context, 'registrationFieldRiskFlags'),
+              title: resolveRegistrationKey(
+                context,
+                'registrationFieldRiskFlags',
+              ),
               items: application.riskFlags.entries
                   .map((entry) => '${entry.key}: ${entry.value}')
                   .toList(growable: false),
-              emptyLabel: resolveRegistrationKey(context, 'registrationNoneReported'),
+              emptyLabel: resolveRegistrationKey(
+                context,
+                'registrationNoneReported',
+              ),
             ),
           ],
         ),
         _SectionCard(
-          title: resolveRegistrationKey(context, 'registrationSectionDocuments'),
+          title: resolveRegistrationKey(
+            context,
+            'registrationSectionDocuments',
+          ),
           children: [
-            Text(resolveRegistrationKey(context, 'registrationDocumentsMetadataOnly')),
+            Text(
+              resolveRegistrationKey(
+                context,
+                'registrationDocumentsMetadataOnly',
+              ),
+            ),
             const SizedBox(height: 12),
             if (application.documentMetadataOnly.isEmpty)
-              Text(resolveRegistrationKey(context, 'registrationDocumentsEmpty'))
+              Text(
+                resolveRegistrationKey(context, 'registrationDocumentsEmpty'),
+              )
             else
               for (final doc in application.documentMetadataOnly)
                 ListTile(
@@ -422,7 +497,10 @@ class _DetailBody extends StatelessWidget {
             OutlinedButton(
               onPressed: () => onDecision(RegistrationDecisionType.requestInfo),
               child: Text(
-                resolveRegistrationKey(context, 'registrationActionRequestInfo'),
+                resolveRegistrationKey(
+                  context,
+                  'registrationActionRequestInfo',
+                ),
               ),
             ),
             const SizedBox(height: 8),
@@ -458,23 +536,26 @@ class _ApprovalOutcomeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).toString();
     final deliveryLabel = switch (outcome.inviteDeliveryStatus) {
-      'sent' => resolveRegistrationKey(context, 'registrationInviteDeliverySent'),
+      'sent' => resolveRegistrationKey(
+        context,
+        'registrationInviteDeliverySent',
+      ),
       'pending_or_failed' => resolveRegistrationKey(
-          context,
-          'registrationInviteDeliveryPending',
-        ),
+        context,
+        'registrationInviteDeliveryPending',
+      ),
       'accepted' => resolveRegistrationKey(
-          context,
-          'registrationInviteDeliveryAccepted',
-        ),
+        context,
+        'registrationInviteDeliveryAccepted',
+      ),
       'expired' => resolveRegistrationKey(
-          context,
-          'registrationInviteDeliveryExpired',
-        ),
+        context,
+        'registrationInviteDeliveryExpired',
+      ),
       'revoked' => resolveRegistrationKey(
-          context,
-          'registrationInviteDeliveryRevoked',
-        ),
+        context,
+        'registrationInviteDeliveryRevoked',
+      ),
       _ => outcome.inviteDeliveryStatus,
     };
 
@@ -486,7 +567,10 @@ class _ApprovalOutcomeCard extends StatelessWidget {
           value: outcome.companyId ?? '—',
         ),
         _InfoRow(
-          label: resolveRegistrationKey(context, 'registrationFieldCompanyName'),
+          label: resolveRegistrationKey(
+            context,
+            'registrationFieldCompanyName',
+          ),
           value: outcome.companyName ?? '—',
         ),
         _InfoRow(
@@ -494,7 +578,10 @@ class _ApprovalOutcomeCard extends StatelessWidget {
           value: outcome.adminEmail ?? '—',
         ),
         _InfoRow(
-          label: resolveRegistrationKey(context, 'registrationFieldInviteStatus'),
+          label: resolveRegistrationKey(
+            context,
+            'registrationFieldInviteStatus',
+          ),
           value: deliveryLabel,
         ),
         if (outcome.inviteExpiresAt != null)
@@ -503,13 +590,16 @@ class _ApprovalOutcomeCard extends StatelessWidget {
               context,
               'registrationFieldInviteExpiresAt',
             ),
-            value: DateFormat.yMMMd(locale)
-                .add_Hm()
-                .format(outcome.inviteExpiresAt!.toLocal()),
+            value: DateFormat.yMMMd(
+              locale,
+            ).add_Hm().format(outcome.inviteExpiresAt!.toLocal()),
           ),
         if (outcome.inviteTokenId != null)
           _InfoRow(
-            label: resolveRegistrationKey(context, 'registrationFieldInviteTokenId'),
+            label: resolveRegistrationKey(
+              context,
+              'registrationFieldInviteTokenId',
+            ),
             value: outcome.inviteTokenId!,
           ),
         if (outcome.companyId != null) ...[
@@ -549,10 +639,7 @@ class _ApprovalOutcomeCard extends StatelessWidget {
 }
 
 class _SectionCard extends StatelessWidget {
-  const _SectionCard({
-    required this.title,
-    required this.children,
-  });
+  const _SectionCard({required this.title, required this.children});
 
   final String title;
   final List<Widget> children;

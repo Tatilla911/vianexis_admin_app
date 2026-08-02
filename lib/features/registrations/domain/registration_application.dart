@@ -22,7 +22,8 @@ enum RegistrationApplicationType {
     return switch (this) {
       RegistrationApplicationType.company => 'registrationTypeCompany',
       RegistrationApplicationType.user => 'registrationTypeUser',
-      RegistrationApplicationType.bulkOnboarding => 'registrationTypeBulkOnboarding',
+      RegistrationApplicationType.bulkOnboarding =>
+        'registrationTypeBulkOnboarding',
     };
   }
 }
@@ -44,7 +45,8 @@ class RegistrationDocumentMetadata {
     return RegistrationDocumentMetadata(
       label: json['label']?.toString() ?? json['name']?.toString() ?? '—',
       fileName: json['fileName']?.toString(),
-      documentType: json['documentType']?.toString() ?? json['type']?.toString(),
+      documentType:
+          json['documentType']?.toString() ?? json['type']?.toString(),
       uploadedAt: RegistrationApplication.parseDate(json['uploadedAt']),
     );
   }
@@ -69,6 +71,7 @@ class RegistrationApplication {
     this.submittedAt,
     this.reviewedAt,
     this.reviewedBy,
+    this.reviewNotes,
     this.documentMetadataOnly = const [],
     this.needsHumanReview = true,
     this.completenessScore,
@@ -92,6 +95,7 @@ class RegistrationApplication {
   final DateTime? submittedAt;
   final DateTime? reviewedAt;
   final String? reviewedBy;
+  final String? reviewNotes;
   final List<RegistrationDocumentMetadata> documentMetadataOnly;
   final bool needsHumanReview;
   final double? completenessScore;
@@ -146,7 +150,9 @@ class RegistrationApplication {
 
     return RegistrationApplication(
       id: json['id']?.toString() ?? '',
-      type: RegistrationApplicationType.fromBackendValue(json['type']?.toString()),
+      type: RegistrationApplicationType.fromBackendValue(
+        json['type']?.toString(),
+      ),
       companyName: json['companyName']?.toString() ?? '—',
       country: json['country']?.toString(),
       vatNumber: json['vatNumber']?.toString(),
@@ -167,6 +173,7 @@ class RegistrationApplication {
       submittedAt: parseDate(json['createdAt'] ?? json['submittedAt']),
       reviewedAt: parseDate(json['reviewedAt']),
       reviewedBy: json['reviewedByUserId']?.toString(),
+      reviewNotes: _optionalTrimmed(json['reviewNotes']),
       documentMetadataOnly: _parseDocumentMetadata(json),
       needsHumanReview: json['needsHumanReview'] == true,
       completenessScore: _asDouble(json['completenessScore']),
@@ -261,9 +268,11 @@ class RegistrationApplication {
     if (raw is! List) return const [];
     return raw
         .whereType<Map>()
-        .map((item) => RegistrationDocumentMetadata.fromJson(
-              Map<String, dynamic>.from(item),
-            ))
+        .map(
+          (item) => RegistrationDocumentMetadata.fromJson(
+            Map<String, dynamic>.from(item),
+          ),
+        )
         .toList(growable: false);
   }
 
@@ -279,6 +288,12 @@ class RegistrationApplication {
       return double.tryParse(raw);
     }
     return null;
+  }
+
+  static String? _optionalTrimmed(Object? raw) {
+    final value = raw?.toString().trim();
+    if (value == null || value.isEmpty) return null;
+    return value;
   }
 
   static DateTime? parseDate(Object? raw) {
@@ -303,13 +318,13 @@ class RegistrationApplicationsPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map>()
-            .map(
-              (item) => RegistrationApplication.fromListItemJson(
-                Map<String, dynamic>.from(item),
-              ),
-            )
-            .toList(growable: false)
+              .whereType<Map>()
+              .map(
+                (item) => RegistrationApplication.fromListItemJson(
+                  Map<String, dynamic>.from(item),
+                ),
+              )
+              .toList(growable: false)
         : <RegistrationApplication>[];
 
     return RegistrationApplicationsPage(

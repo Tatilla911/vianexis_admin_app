@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../../../app/app_router.dart';
 import '../../../core/auth/admin_auth_state.dart';
@@ -82,6 +83,12 @@ class _ApplicationsInboxScreenState
                   selected: _status == 'new',
                   onSelected: (v) => setState(() => _status = v ? 'new' : null),
                 ),
+                FilterChip(
+                  label: Text(l10n.applicationsFilterRejected),
+                  selected: _status == 'rejected',
+                  onSelected: (v) =>
+                      setState(() => _status = v ? 'rejected' : null),
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -99,10 +106,11 @@ class _ApplicationsInboxScreenState
                       final item = items[index] as Map<String, dynamic>;
                       final id = item['id']?.toString() ?? '';
                       final type = item['applicationType']?.toString();
+                      final status = item['status']?.toString() ?? '';
                       return ListTile(
                         title: Text(item['displayName']?.toString() ?? '—'),
                         subtitle: Text(
-                          '${item['applicationType']} · ${item['status']} · ${item['email']}',
+                          '${item['applicationType']} · $status · ${item['email']}',
                         ),
                         onTap: () {
                           if (type == 'company') {
@@ -172,11 +180,42 @@ class _ApplicationDetailScreenState
   }
 
   Future<void> _reject() async {
-    final api = ref.read(publicApplicationsApiProvider);
-    await api.reject(
-      int.parse(widget.id),
-      reviewNotes: 'Rejected from admin app',
+    final l10n = AppLocalizations.of(context);
+    final controller = TextEditingController();
+    final reason = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text(l10n.applicationRejectReasonTitle),
+          content: TextField(
+            controller: controller,
+            maxLines: 4,
+            decoration: InputDecoration(
+              hintText: l10n.applicationRejectReasonHint,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text(MaterialLocalizations.of(dialogContext).cancelButtonLabel),
+            ),
+            FilledButton(
+              onPressed: () {
+                final text = controller.text.trim();
+                if (text.isEmpty) return;
+                Navigator.of(dialogContext).pop(text);
+              },
+              child: Text(l10n.applicationRejectConfirm),
+            ),
+          ],
+        );
+      },
     );
+    controller.dispose();
+    if (reason == null || !mounted) return;
+
+    final api = ref.read(publicApplicationsApiProvider);
+    await api.reject(int.parse(widget.id), reviewNotes: reason);
     await _load();
   }
 
@@ -184,11 +223,25 @@ class _ApplicationDetailScreenState
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final app = _detail?['application'] as Map<String, dynamic>?;
+    final source = app?['source'] as Map<String, dynamic>?;
     final type = app?['applicationType']?.toString();
+    final status = app?['status']?.toString() ?? '';
     final isCompany = type == 'company';
+    final isRejected = status.toLowerCase() == 'rejected';
+    final reviewNotes =
+        source?['reviewNotes']?.toString() ??
+        app?['reviewNotes']?.toString() ??
+        '';
+    final reviewedAtRaw =
+        source?['reviewedAt']?.toString() ??
+        app?['updatedAt']?.toString();
+    final reviewedAt = reviewedAtRaw != null
+        ? DateTime.tryParse(reviewedAtRaw)
+        : null;
     final canDecide =
         ref.watch(adminAuthProvider).user?.role.canDecideCompanyRegistrations ??
-            false;
+        false;
+    final locale = Localizations.localeOf(context).toString();
 
     return VianexisAdminScaffold(
       title: l10n.applicationDetailTitle(widget.id),
@@ -203,6 +256,28 @@ class _ApplicationDetailScreenState
                 children: [
                   Text('${app?['applicationType']} · ${app?['status']}'),
                   Text(app?['email']?.toString() ?? ''),
+                  if (app?['displayName'] != null) ...[
+                    const SizedBox(height: 8),
+                    Text(app!['displayName'].toString()),
+                  ],
+                  if (isRejected || reviewNotes.trim().isNotEmpty) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      l10n.applicationFieldReviewNotes,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      reviewNotes.trim().isNotEmpty ? reviewNotes.trim() : '—',
+                    ),
+                    if (reviewedAt != null) ...[
+                      const SizedBox(height: 8),
+                      Text(
+                        '${l10n.applicationFieldReviewedAt}: '
+                        '${DateFormat.yMMMd(locale).add_Hm().format(reviewedAt.toLocal())}',
+                      ),
+                    ],
+                  ],
                   const SizedBox(height: 16),
                   if (isCompany) ...[
                     Text(l10n.applicationsCompanyUseRegistrations),
@@ -211,7 +286,7 @@ class _ApplicationDetailScreenState
                       onPressed: () => context.go(AdminRoutes.registrations),
                       child: Text(l10n.applicationsOpenRegistrations),
                     ),
-                  ] else if (canDecide)
+                  ] else if (canDecide && !isRejected)
                     Wrap(
                       spacing: 8,
                       children: [

@@ -38,6 +38,18 @@ class NotificationsApi {
     );
   }
 
+  Future<void> deleteNotification(String id) async {
+    await _apiClient.delete<Map<String, dynamic>>(
+      '/platform-admin/notifications/$id',
+    );
+  }
+
+  Future<void> deleteAllNotifications() async {
+    await _apiClient.delete<Map<String, dynamic>>(
+      '/platform-admin/notifications',
+    );
+  }
+
   Future<NotificationPreferences> getPreferences() async {
     final response = await _apiClient.get<Map<String, dynamic>>(
       '/platform-admin/notification-preferences',
@@ -52,7 +64,9 @@ class NotificationsApi {
       '/platform-admin/notification-preferences',
       data: preferences.toJson(),
     );
-    return NotificationPreferences.fromJson(response.data ?? preferences.toJson());
+    return NotificationPreferences.fromJson(
+      response.data ?? preferences.toJson(),
+    );
   }
 
   Future<void> registerDevice(AdminDeviceRegistration registration) async {

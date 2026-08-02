@@ -20,12 +20,16 @@ class SystemHealthApi {
     );
     final data = response.data;
     if (data == null) {
-      throw const ApiException(messageKey: LocalizationKeys.systemHealthLoadError);
+      throw const ApiException(
+        messageKey: LocalizationKeys.systemHealthLoadError,
+      );
     }
     return SystemHealthMapper.fromHealthResponse(data);
   }
 
-  Future<SystemHealthSnapshot> fetchEventsSnapshot(SystemHealthSnapshot base) async {
+  Future<SystemHealthSnapshot> fetchEventsSnapshot(
+    SystemHealthSnapshot base,
+  ) async {
     try {
       final response = await _apiClient.get<Map<String, dynamic>>(
         '/platform-admin/system-health/events',
@@ -49,7 +53,9 @@ class SystemHealthApi {
     );
     final data = response.data;
     if (data == null) {
-      throw const ApiException(messageKey: LocalizationKeys.systemHealthLoadError);
+      throw const ApiException(
+        messageKey: LocalizationKeys.systemHealthLoadError,
+      );
     }
 
     final eventJson = data['event'] ?? data;
@@ -59,7 +65,9 @@ class SystemHealthApi {
     if (eventJson is Map) {
       return SystemHealthEvent.fromJson(Map<String, dynamic>.from(eventJson));
     }
-    throw const ApiException(messageKey: LocalizationKeys.systemHealthLoadError);
+    throw const ApiException(
+      messageKey: LocalizationKeys.systemHealthLoadError,
+    );
   }
 
   Future<void> submitAction({
@@ -70,10 +78,19 @@ class SystemHealthApi {
         '/platform-admin/system-health/events/$eventId/${request.endpointSuffix()}';
 
     if (request.httpMethod() == 'PATCH') {
-      await _apiClient.patch<Map<String, dynamic>>(path, data: request.toJson());
+      await _apiClient.patch<Map<String, dynamic>>(
+        path,
+        data: request.toJson(),
+      );
     } else {
       await _apiClient.post<Map<String, dynamic>>(path, data: request.toJson());
     }
+  }
+
+  Future<void> notifyCompany(String eventId) async {
+    await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/system-health/events/$eventId/notify-company',
+    );
   }
 }
 

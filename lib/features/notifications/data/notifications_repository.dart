@@ -18,8 +18,12 @@ abstract class NotificationsRepository {
   Future<List<AdminNotification>> listNotifications();
   Future<void> markRead(String id);
   Future<void> markAllRead();
+  Future<void> deleteNotification(String id);
+  Future<void> deleteAllNotifications();
   Future<NotificationPreferences> getPreferences();
-  Future<NotificationPreferences> updatePreferences(NotificationPreferences value);
+  Future<NotificationPreferences> updatePreferences(
+    NotificationPreferences value,
+  );
   Future<void> registerCurrentDevice();
   Future<PushProviderStatus> fetchProviderStatus();
   Future<NotificationEventsResult> fetchNotificationEvents();
@@ -39,7 +43,8 @@ class LiveNotificationsRepository implements NotificationsRepository {
   bool get inAppOnly => true;
 
   @override
-  Future<List<AdminNotification>> listNotifications() => _api.listNotifications();
+  Future<List<AdminNotification>> listNotifications() =>
+      _api.listNotifications();
 
   @override
   Future<void> markRead(String id) => _api.markRead(id);
@@ -48,10 +53,18 @@ class LiveNotificationsRepository implements NotificationsRepository {
   Future<void> markAllRead() => _api.markAllRead();
 
   @override
+  Future<void> deleteNotification(String id) => _api.deleteNotification(id);
+
+  @override
+  Future<void> deleteAllNotifications() => _api.deleteAllNotifications();
+
+  @override
   Future<NotificationPreferences> getPreferences() => _api.getPreferences();
 
   @override
-  Future<NotificationPreferences> updatePreferences(NotificationPreferences value) {
+  Future<NotificationPreferences> updatePreferences(
+    NotificationPreferences value,
+  ) {
     return _api.updatePreferences(value.copyWith(inAppOnly: true));
   }
 
@@ -86,7 +99,8 @@ class MockNotificationsRepository implements NotificationsRepository {
     AdminNotification(
       id: 'n-1001',
       title: 'Security alert acknowledged',
-      body: 'Permission-denied spikes normalized for tenant metadata endpoints.',
+      body:
+          'Permission-denied spikes normalized for tenant metadata endpoints.',
       type: NotificationType.security,
       severity: NotificationSeverity.warning,
       createdAt: DateTime.utc(2026, 6, 20, 8, 15),
@@ -131,10 +145,22 @@ class MockNotificationsRepository implements NotificationsRepository {
   }
 
   @override
+  Future<void> deleteNotification(String id) async {
+    _items.removeWhere((item) => item.id == id);
+  }
+
+  @override
+  Future<void> deleteAllNotifications() async {
+    _items.clear();
+  }
+
+  @override
   Future<NotificationPreferences> getPreferences() async => _preferences;
 
   @override
-  Future<NotificationPreferences> updatePreferences(NotificationPreferences value) async {
+  Future<NotificationPreferences> updatePreferences(
+    NotificationPreferences value,
+  ) async {
     _preferences = value.copyWith(inAppOnly: true);
     return _preferences;
   }
@@ -174,7 +200,9 @@ class MockNotificationsRepository implements NotificationsRepository {
   }
 }
 
-final notificationsRepositoryProvider = Provider<NotificationsRepository>((ref) {
+final notificationsRepositoryProvider = Provider<NotificationsRepository>((
+  ref,
+) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveNotificationsRepository(ref.watch(notificationsApiProvider));
   }
@@ -209,12 +237,23 @@ class NotificationsNotifier extends AsyncNotifier<List<AdminNotification>> {
     await ref.read(notificationsRepositoryProvider).markAllRead();
     await refresh();
   }
+
+  Future<void> deleteNotification(String id) async {
+    await ref.read(notificationsRepositoryProvider).deleteNotification(id);
+    await refresh();
+  }
+
+  Future<void> deleteAllNotifications() async {
+    await ref.read(notificationsRepositoryProvider).deleteAllNotifications();
+    await refresh();
+  }
 }
 
 final notificationPreferencesProvider =
-    AsyncNotifierProvider<NotificationPreferencesNotifier, NotificationPreferences>(
-      NotificationPreferencesNotifier.new,
-    );
+    AsyncNotifierProvider<
+      NotificationPreferencesNotifier,
+      NotificationPreferences
+    >(NotificationPreferencesNotifier.new);
 
 class NotificationPreferencesNotifier
     extends AsyncNotifier<NotificationPreferences> {
@@ -229,7 +268,9 @@ class NotificationPreferencesNotifier
       throw StateError(error);
     }
     state = await AsyncValue.guard(
-      () => ref.read(notificationsRepositoryProvider).updatePreferences(preferences),
+      () => ref
+          .read(notificationsRepositoryProvider)
+          .updatePreferences(preferences),
     );
   }
 }
@@ -249,7 +290,9 @@ final pushProviderStatusProvider =
 
 final notificationEventsProvider =
     FutureProvider.autoDispose<NotificationEventsResult>((ref) {
-      return ref.watch(notificationsRepositoryProvider).fetchNotificationEvents();
+      return ref
+          .watch(notificationsRepositoryProvider)
+          .fetchNotificationEvents();
     });
 
 String get _deviceId => _cachedDeviceId ??= _generateDeviceId();
@@ -257,8 +300,9 @@ String? _cachedDeviceId;
 
 String _generateDeviceId() {
   final random = Random();
-  final value = List<int>.generate(20, (_) => random.nextInt(16))
-      .map((v) => v.toRadixString(16))
-      .join();
+  final value = List<int>.generate(
+    20,
+    (_) => random.nextInt(16),
+  ).map((v) => v.toRadixString(16)).join();
   return 'admin-$value';
 }

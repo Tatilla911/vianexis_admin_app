@@ -1592,6 +1592,28 @@
   "settingsLanguageBody": "Válaszd ki az admin app megjelenítési nyelvét.",
   "settingsLanguageHu": "Magyar",
   "settingsLanguageEn": "Angol",
+  "settingsAppearanceSection": "Megjelenés",
+  "settingsAppearanceBody": "Válassz nappali (világos), éjszakai (sötét) vagy rendszer szerinti üzemmódot.",
+  "settingsAppearanceSystem": "Rendszer",
+  "settingsAppearanceDay": "Nappali",
+  "settingsAppearanceNight": "Éjszakai",
+  "settingsSoundEventCustomSound": "Hang ehhez az eseményhez",
+  "settingsSoundEventUseCategoryDefault": "Kategória alapértelmezett",
+  "registrationFieldReviewNotes": "Ellenőrzési megjegyzés",
+  "registrationSectionDecision": "Döntés",
+  "registrationRejectionReasonTitle": "Elutasítás részletei",
+  "applicationsFilterRejected": "Elutasítottak",
+  "applicationRejectReasonTitle": "Jelentkezés elutasítása",
+  "applicationRejectReasonHint": "Az indok az érintettnek is elküldhető, és a rekordon megmarad",
+  "applicationRejectConfirm": "Elutasítás",
+  "applicationFieldReviewedAt": "Ellenőrizve",
+  "applicationFieldReviewNotes": "Indok",
+  "driverAccessRejectedTitle": "Elutasított sofőr jelentkezések",
+  "driverAccessRejectedEmpty": "Nincs elutasított sofőr jelentkezés.",
+  "driverAccessRejectedLoadFailed": "Nem sikerült betölteni az elutasított sofőr jelentkezéseket.",
+  "driverAccessStatusRejected": "Elutasítva",
+  "driverAccessRejectedAt": "Elutasítva ekkor",
+  "driverAccessRejectedReason": "Indok",
   "devicePinSectionTitle": "Eszköz PIN",
   "devicePinSectionBody": "Opcionális helyi PIN ehhez az eszközhöz. Nem helyettesíti a backend bejelentkezést.",
   "devicePinSetAction": "PIN beállítása",
@@ -1929,5 +1951,63 @@
   "systemMonitoringActionChangeStatus": "Állapot módosítása",
   "systemMonitoringActionSuccess": "Felügyeleti művelet mentve.",
   "systemMonitoringActionError": "A felügyeleti művelet mentése sikertelen.",
-  "systemMonitoringActionAuditNotice": "Ez a művelet rögzítésre kerül a platform audit naplójában."
+  "systemMonitoringActionAuditNotice": "Ez a művelet rögzítésre kerül a platform audit naplójában.",
+"eventLogPdfArchiveTitle": "Eseménynapló PDF archívum",
+  "eventLogPdfArchiveBody": "A szűrt eseménynapló pillanatképeket ViaNexis stílusú PDF-ként tárolhatod. Megnyitáskor nagyítható, letölthető és megosztható. Az ékezetes betűk Unicode betűtípussal jelennek meg.",
+  "eventLogPdfArchiveEmpty": "Még nincs tárolt eseménynapló PDF.",
+  "eventLogPdfArchiveLoadFailed": "Nem sikerült betölteni a PDF archívumot.",
+  "eventLogPdfTitle": "ViaNexis eseménynapló",
+  "eventLogPdfSubtitle": "Platform audit és működési tevékenység pillanatkép",
+  "eventLogPdfGeneratedAt": "Generálva: {when}",
+  "@eventLogPdfGeneratedAt": {
+    "placeholders": {
+      "when": { "type": "String" }
+    }
+  },
+  "eventLogPdfEmpty": "Nincs a jelenlegi szűrőknek megfelelő esemény.",
+  "eventLogPdfGenerate": "Jelenlegi szűrő mentése PDF-ként",
+  "eventLogPdfSaved": "Az eseménynapló PDF elmentve az archívumba.",
+  "eventLogPdfSaveFailed": "Nem sikerült elmenteni az eseménynapló PDF-et.",
+  "eventLogPdfShare": "PDF megosztása",
+  "eventLogPdfShareFailed": "Nem sikerült megosztani a PDF-et.",
+  "eventLogPdfDownload": "PDF letöltése / exportálása",
+  "eventLogPdfDeleteTitle": "PDF törlése",
+  "eventLogPdfDeleteBody": "Töröljük a(z) {fileName} fájlt az archívumból?",
+  "@eventLogPdfDeleteBody": {
+    "placeholders": {
+      "fileName": { "type": "String" }
+    }
+  },
+  "eventLogPdfDeleteAllTitle": "Tevékenység-PDF-ek törlése",
+  "eventLogPdfDeleteAllBody": "Töröljük az összes tárolt eseménynapló tevékenység-PDF-et erről az eszközről?",
+  "eventLogPdfDeleteConfirm": "Törlés",
+  "eventLogPdfDeleted": "Törölve.",
+  "eventLogPdfEntryCount": "{count} esemény",
+  "@eventLogPdfEntryCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "notificationsDeleteMenu": "Értesítések / tevékenységek törlése",
+  "notificationsDeleteTitle": "Értesítés törlése",
+  "notificationsDeleteBody": "Véglegesen töröljük ezt az értesítést?",
+  "notificationsDeleteAllTitle": "Összes értesítés törlése",
+  "notificationsDeleteAllBody": "Töröljük az összes értesítést a postaládából?",
+  "notificationsDeleteBothTitle": "Értesítések és tevékenység-PDF-ek törlése",
+  "notificationsDeleteBothBody": "Töröljük az összes értesítést és az összes tárolt tevékenység-PDF-et?",
+  "notificationsDeleteConfirm": "Törlés",
+  "notificationsDeleted": "Értesítés(ek) törölve.",
+  "notificationsDeletedBoth": "Értesítések és tevékenység-PDF-ek törölve.",
+  "systemHealthFieldAffectedUser": "Érintett felhasználó",
+  "systemHealthNotifyCompanyTitle": "Cég értesítése",
+  "systemHealthNotifyCompanyBody": "Küldjünk autómatikus visszajelzést a(z) {company} cégnek (felhasználó: {user}), hogy észleltük a hibát, utánanézünk, amint lehet javítjuk, és értesítjük, amint változás állt be?",
+  "@systemHealthNotifyCompanyBody": {
+    "placeholders": {
+      "company": { "type": "String" },
+      "user": { "type": "String" }
+    }
+  },
+  "systemHealthNotifyCompanyConfirm": "Visszajelzés küldése",
+  "systemHealthNotifyCompanySuccess": "A visszajelző e-mail elküldve.",
+  "systemHealthNotifyCompanyFailed": "Nem sikerült elküldeni a visszajelző e-mailt."
 }

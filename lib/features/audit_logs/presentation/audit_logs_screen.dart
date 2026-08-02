@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/app_router.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/localization/localization_resolver.dart';
@@ -37,7 +39,11 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
     if (!repository.exportAvailable) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveAuditLogKey(context, 'auditLogExportUnavailable'))),
+        SnackBar(
+          content: Text(
+            resolveAuditLogKey(context, 'auditLogExportUnavailable'),
+          ),
+        ),
       );
       return;
     }
@@ -49,7 +55,9 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
       await Clipboard.setData(ClipboardData(text: csv));
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveAuditLogKey(context, 'auditLogExportCopied'))),
+        SnackBar(
+          content: Text(resolveAuditLogKey(context, 'auditLogExportCopied')),
+        ),
       );
     } on ApiException catch (error) {
       if (!mounted) return;
@@ -57,7 +65,9 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveAuditLogKey(context, 'auditLogExportFailed'))),
+        SnackBar(
+          content: Text(resolveAuditLogKey(context, 'auditLogExportFailed')),
+        ),
       );
     } finally {
       if (mounted) setState(() => _isExporting = false);
@@ -69,7 +79,9 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
     final l10n = AppLocalizations.of(context);
     final query = ref.watch(platformAuditLogListQueryProvider);
     final logsAsync = ref.watch(filteredPlatformAuditLogsProvider);
-    final usesMock = ref.watch(platformAuditLogsRepositoryProvider).usesMockData;
+    final usesMock = ref
+        .watch(platformAuditLogsRepositoryProvider)
+        .usesMockData;
     final exportAvailable = ref.watch(platformAuditLogsExportAvailableProvider);
 
     return Scaffold(
@@ -80,6 +92,11 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
             MockDataBadge(
               label: resolveAuditLogKey(context, 'auditLogMockDataBadge'),
             ),
+          IconButton(
+            tooltip: l10n.eventLogPdfArchiveTitle,
+            onPressed: () => context.push(AdminRoutes.auditLogPdfArchive),
+            icon: const Icon(Icons.picture_as_pdf_outlined),
+          ),
           IconButton(
             tooltip: resolveAuditLogKey(context, 'auditLogExportCsv'),
             onPressed: exportAvailable && !_isExporting ? _exportCsv : null,
@@ -103,8 +120,9 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
                 prefixIcon: const Icon(Icons.search),
                 hintText: resolveAuditLogKey(context, 'auditLogSearchHint'),
               ),
-              onChanged: (value) =>
-                  ref.read(platformAuditLogListQueryProvider.notifier).setSearch(value),
+              onChanged: (value) => ref
+                  .read(platformAuditLogListQueryProvider.notifier)
+                  .setSearch(value),
             ),
           ),
           Padding(
@@ -114,8 +132,9 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
               onChanged: (from, to) => ref
                   .read(platformAuditLogListQueryProvider.notifier)
                   .setDateRange(from, to),
-              onClear: () =>
-                  ref.read(platformAuditLogListQueryProvider.notifier).clearDateRange(),
+              onClear: () => ref
+                  .read(platformAuditLogListQueryProvider.notifier)
+                  .clearDateRange(),
             ),
           ),
           Padding(
@@ -127,7 +146,9 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
           ),
           AuditLogFilterBar(
             selected: query.filter,
-            onSelected: ref.read(platformAuditLogListQueryProvider.notifier).setFilter,
+            onSelected: ref
+                .read(platformAuditLogListQueryProvider.notifier)
+                .setFilter,
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -136,8 +157,12 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
               error: (error, _) => VianexisErrorView.fromError(
                 context,
                 error,
-                fallbackMessage: resolveAuditLogKey(context, 'auditLogLoadError'),
-                onRetry: () => ref.read(platformAuditLogsProvider.notifier).refresh(),
+                fallbackMessage: resolveAuditLogKey(
+                  context,
+                  'auditLogLoadError',
+                ),
+                onRetry: () =>
+                    ref.read(platformAuditLogsProvider.notifier).refresh(),
               ),
               data: (items) {
                 if (items.isEmpty) {
@@ -153,11 +178,13 @@ class _AuditLogsScreenState extends ConsumerState<AuditLogsScreen> {
                 }
 
                 return RefreshIndicator(
-                  onRefresh: () => ref.read(platformAuditLogsProvider.notifier).refresh(),
+                  onRefresh: () =>
+                      ref.read(platformAuditLogsProvider.notifier).refresh(),
                   child: ListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                     itemCount: items.length,
-                    itemBuilder: (context, index) => AuditLogCard(log: items[index]),
+                    itemBuilder: (context, index) =>
+                        AuditLogCard(log: items[index]),
                   ),
                 );
               },

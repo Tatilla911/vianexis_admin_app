@@ -5069,6 +5069,77 @@ class AppLocalizationsHu extends AppLocalizations {
   String get settingsLanguageEn => 'Angol';
 
   @override
+  String get settingsAppearanceSection => 'Megjelenés';
+
+  @override
+  String get settingsAppearanceBody =>
+      'Válassz nappali (világos), éjszakai (sötét) vagy rendszer szerinti üzemmódot.';
+
+  @override
+  String get settingsAppearanceSystem => 'Rendszer';
+
+  @override
+  String get settingsAppearanceDay => 'Nappali';
+
+  @override
+  String get settingsAppearanceNight => 'Éjszakai';
+
+  @override
+  String get settingsSoundEventCustomSound => 'Hang ehhez az eseményhez';
+
+  @override
+  String get settingsSoundEventUseCategoryDefault =>
+      'Kategória alapértelmezett';
+
+  @override
+  String get registrationFieldReviewNotes => 'Ellenőrzési megjegyzés';
+
+  @override
+  String get registrationSectionDecision => 'Döntés';
+
+  @override
+  String get registrationRejectionReasonTitle => 'Elutasítás részletei';
+
+  @override
+  String get applicationsFilterRejected => 'Elutasítottak';
+
+  @override
+  String get applicationRejectReasonTitle => 'Jelentkezés elutasítása';
+
+  @override
+  String get applicationRejectReasonHint =>
+      'Az indok az érintettnek is elküldhető, és a rekordon megmarad';
+
+  @override
+  String get applicationRejectConfirm => 'Elutasítás';
+
+  @override
+  String get applicationFieldReviewedAt => 'Ellenőrizve';
+
+  @override
+  String get applicationFieldReviewNotes => 'Indok';
+
+  @override
+  String get driverAccessRejectedTitle => 'Elutasított sofőr jelentkezések';
+
+  @override
+  String get driverAccessRejectedEmpty =>
+      'Nincs elutasított sofőr jelentkezés.';
+
+  @override
+  String get driverAccessRejectedLoadFailed =>
+      'Nem sikerült betölteni az elutasított sofőr jelentkezéseket.';
+
+  @override
+  String get driverAccessStatusRejected => 'Elutasítva';
+
+  @override
+  String get driverAccessRejectedAt => 'Elutasítva ekkor';
+
+  @override
+  String get driverAccessRejectedReason => 'Indok';
+
+  @override
   String get devicePinSectionTitle => 'Eszköz PIN';
 
   @override
@@ -5939,4 +6010,136 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get systemMonitoringActionAuditNotice =>
       'Ez a művelet rögzítésre kerül a platform audit naplójában.';
+
+  @override
+  String get eventLogPdfArchiveTitle => 'Eseménynapló PDF archívum';
+
+  @override
+  String get eventLogPdfArchiveBody =>
+      'A szűrt eseménynapló pillanatképeket ViaNexis stílusú PDF-ként tárolhatod. Megnyitáskor nagyítható, letölthető és megosztható. Az ékezetes betűk Unicode betűtípussal jelennek meg.';
+
+  @override
+  String get eventLogPdfArchiveEmpty => 'Még nincs tárolt eseménynapló PDF.';
+
+  @override
+  String get eventLogPdfArchiveLoadFailed =>
+      'Nem sikerült betölteni a PDF archívumot.';
+
+  @override
+  String get eventLogPdfTitle => 'ViaNexis eseménynapló';
+
+  @override
+  String get eventLogPdfSubtitle =>
+      'Platform audit és működési tevékenység pillanatkép';
+
+  @override
+  String eventLogPdfGeneratedAt(String when) {
+    return 'Generálva: $when';
+  }
+
+  @override
+  String get eventLogPdfEmpty =>
+      'Nincs a jelenlegi szűrőknek megfelelő esemény.';
+
+  @override
+  String get eventLogPdfGenerate => 'Jelenlegi szűrő mentése PDF-ként';
+
+  @override
+  String get eventLogPdfSaved => 'Az eseménynapló PDF elmentve az archívumba.';
+
+  @override
+  String get eventLogPdfSaveFailed =>
+      'Nem sikerült elmenteni az eseménynapló PDF-et.';
+
+  @override
+  String get eventLogPdfShare => 'PDF megosztása';
+
+  @override
+  String get eventLogPdfShareFailed => 'Nem sikerült megosztani a PDF-et.';
+
+  @override
+  String get eventLogPdfDownload => 'PDF letöltése / exportálása';
+
+  @override
+  String get eventLogPdfDeleteTitle => 'PDF törlése';
+
+  @override
+  String eventLogPdfDeleteBody(String fileName) {
+    return 'Töröljük a(z) $fileName fájlt az archívumból?';
+  }
+
+  @override
+  String get eventLogPdfDeleteAllTitle => 'Tevékenység-PDF-ek törlése';
+
+  @override
+  String get eventLogPdfDeleteAllBody =>
+      'Töröljük az összes tárolt eseménynapló tevékenység-PDF-et erről az eszközről?';
+
+  @override
+  String get eventLogPdfDeleteConfirm => 'Törlés';
+
+  @override
+  String get eventLogPdfDeleted => 'Törölve.';
+
+  @override
+  String eventLogPdfEntryCount(int count) {
+    return '$count esemény';
+  }
+
+  @override
+  String get notificationsDeleteMenu => 'Értesítések / tevékenységek törlése';
+
+  @override
+  String get notificationsDeleteTitle => 'Értesítés törlése';
+
+  @override
+  String get notificationsDeleteBody =>
+      'Véglegesen töröljük ezt az értesítést?';
+
+  @override
+  String get notificationsDeleteAllTitle => 'Összes értesítés törlése';
+
+  @override
+  String get notificationsDeleteAllBody =>
+      'Töröljük az összes értesítést a postaládából?';
+
+  @override
+  String get notificationsDeleteBothTitle =>
+      'Értesítések és tevékenység-PDF-ek törlése';
+
+  @override
+  String get notificationsDeleteBothBody =>
+      'Töröljük az összes értesítést és az összes tárolt tevékenység-PDF-et?';
+
+  @override
+  String get notificationsDeleteConfirm => 'Törlés';
+
+  @override
+  String get notificationsDeleted => 'Értesítés(ek) törölve.';
+
+  @override
+  String get notificationsDeletedBoth =>
+      'Értesítések és tevékenység-PDF-ek törölve.';
+
+  @override
+  String get systemHealthFieldAffectedUser => 'Érintett felhasználó';
+
+  @override
+  String get systemHealthNotifyCompanyTitle => 'Cég értesítése';
+
+  @override
+  String systemHealthNotifyCompanyBody(String company, String user) {
+    return 'Küldjünk autómatikus visszajelzést a(z) $company cégnek (felhasználó: $user), hogy észleltük a hibát, utánanézünk, amint lehet javítjuk, és értesítjük, amint változás állt be?';
+  }
+
+  @override
+  String get systemHealthNotifyCompanyConfirm => 'Visszajelzés küldése';
+
+  @override
+  String get systemHealthNotifyCompanySuccess =>
+      'A visszajelző e-mail elküldve.';
+
+  @override
+  String get systemHealthNotifyCompanyFailed =>
+      'Nem sikerült elküldeni a visszajelző e-mailt.';
 }

@@ -7,11 +7,13 @@ import '../../../app/app_router.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/localization/localization_resolver.dart';
+import '../../../core/widgets/vianexis_confirm_dialog.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../support/data/support_tickets_repository.dart';
 import '../../support/presentation/support_providers.dart';
+import '../data/system_health_repository.dart';
 import '../domain/system_health_action_request.dart';
 import '../domain/system_health_event.dart';
 import 'system_health_providers.dart';
@@ -20,10 +22,7 @@ import 'widgets/system_health_action_dialog.dart';
 import 'widgets/system_health_severity_badge.dart';
 
 class SystemHealthEventDetailScreen extends ConsumerWidget {
-  const SystemHealthEventDetailScreen({
-    super.key,
-    required this.eventId,
-  });
+  const SystemHealthEventDetailScreen({super.key, required this.eventId});
 
   final String eventId;
 
@@ -33,15 +32,16 @@ class SystemHealthEventDetailScreen extends ConsumerWidget {
     final eventAsync = ref.watch(systemHealthEventDetailProvider(eventId));
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.systemHealthEventDetailTitle),
-      ),
+      appBar: AppBar(title: Text(l10n.systemHealthEventDetailTitle)),
       body: eventAsync.when(
         loading: () => const VianexisLoadingView(),
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage: resolveSystemHealthKey(context, 'systemHealthLoadError'),
+          fallbackMessage: resolveSystemHealthKey(
+            context,
+            'systemHealthLoadError',
+          ),
           onRetry: () => refreshSystemHealthEventDetail(ref, eventId),
         ),
         data: (event) => _DetailBody(
@@ -49,10 +49,51 @@ class SystemHealthEventDetailScreen extends ConsumerWidget {
           eventId: eventId,
           onAction: (type) => _handleAction(context, ref, type),
           onCreateTicket: () => _handleCreateTicket(context, ref, event),
-          canCreateTicket: ref.watch(supportTicketsRepositoryProvider).canCreateTicketFromSystemHealth,
+          onNotifyCompany: event.affectedCompanyId == null
+              ? null
+              : () => _handleNotifyCompany(context, ref, event),
+          canCreateTicket: ref
+              .watch(supportTicketsRepositoryProvider)
+              .canCreateTicketFromSystemHealth,
         ),
       ),
     );
+  }
+
+  Future<void> _handleNotifyCompany(
+    BuildContext context,
+    WidgetRef ref,
+    SystemHealthEvent event,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    final confirmed = await showVianexisConfirmDialog(
+      context: context,
+      title: l10n.systemHealthNotifyCompanyTitle,
+      body: l10n.systemHealthNotifyCompanyBody(
+        event.affectedCompanyName ?? event.affectedCompanyId ?? '—',
+        event.affectedUserName ?? event.affectedUserEmail ?? '—',
+      ),
+      confirmLabel: l10n.systemHealthNotifyCompanyConfirm,
+    );
+    if (confirmed != true || !context.mounted) return;
+
+    try {
+      await ref
+          .read(systemHealthRepositoryProvider)
+          .notifyCompany(event.id);
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.systemHealthNotifyCompanySuccess)),
+      );
+    } on ApiException catch (error) {
+      if (!context.mounted) return;
+      showApiExceptionSnackBar(context, error);
+    } catch (_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.systemHealthNotifyCompanyFailed)),
+      );
+    }
   }
 
   Future<void> _handleAction(
@@ -60,7 +101,10 @@ class SystemHealthEventDetailScreen extends ConsumerWidget {
     WidgetRef ref,
     SystemHealthActionType type,
   ) async {
-    final request = await showSystemHealthActionDialog(context: context, type: type);
+    final request = await showSystemHealthActionDialog(
+      context: context,
+      type: type,
+    );
     if (request == null || !context.mounted) return;
 
     try {
@@ -72,7 +116,9 @@ class SystemHealthEventDetailScreen extends ConsumerWidget {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(resolveSystemHealthKey(context, 'systemHealthActionSuccess')),
+          content: Text(
+            resolveSystemHealthKey(context, 'systemHealthActionSuccess'),
+          ),
         ),
       );
     } on ApiException catch (error) {
@@ -82,7 +128,9 @@ class SystemHealthEventDetailScreen extends ConsumerWidget {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(resolveSystemHealthKey(context, 'systemHealthActionError')),
+          content: Text(
+            resolveSystemHealthKey(context, 'systemHealthActionError'),
+          ),
         ),
       );
     }
@@ -105,13 +153,17 @@ class SystemHealthEventDetailScreen extends ConsumerWidget {
     if (ticket == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(resolveSystemHealthKey(context, 'systemHealthCreateTicketDisabled')),
+          content: Text(
+            resolveSystemHealthKey(context, 'systemHealthCreateTicketDisabled'),
+          ),
         ),
       );
       return;
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(resolveSupportKey(context, 'supportTicketCreateSuccess'))),
+      SnackBar(
+        content: Text(resolveSupportKey(context, 'supportTicketCreateSuccess')),
+      ),
     );
     context.push(AdminRoutes.supportTicketDetail(ticket.id));
   }
@@ -124,6 +176,7 @@ class _DetailBody extends StatelessWidget {
     required this.onAction,
     required this.onCreateTicket,
     required this.canCreateTicket,
+    this.onNotifyCompany,
   });
 
   final SystemHealthEvent event;
@@ -131,12 +184,14 @@ class _DetailBody extends StatelessWidget {
   final ValueChanged<SystemHealthActionType> onAction;
   final VoidCallback onCreateTicket;
   final bool canCreateTicket;
+  final VoidCallback? onNotifyCompany;
 
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).toString();
-    String formatDate(DateTime? value) =>
-        value == null ? '—' : DateFormat.yMMMd(locale).add_Hm().format(value.toLocal());
+    String formatDate(DateTime? value) => value == null
+        ? '—'
+        : DateFormat.yMMMd(locale).add_Hm().format(value.toLocal());
 
     final canAct = event.status != SystemHealthEventStatus.resolved;
 
@@ -151,23 +206,80 @@ class _DetailBody extends StatelessWidget {
           children: [
             SystemHealthSeverityBadge(severity: event.severity),
             Chip(
-              label: Text(resolveSystemHealthKey(context, event.status.localizationKey())),
+              label: Text(
+                resolveSystemHealthKey(context, event.status.localizationKey()),
+              ),
             ),
           ],
         ),
         const SizedBox(height: 16),
         _InfoRow(
-          label: resolveSystemHealthKey(context, 'systemHealthFieldServiceName'),
+          label: resolveSystemHealthKey(
+            context,
+            'systemHealthFieldServiceName',
+          ),
           value: event.serviceName,
         ),
         _InfoRow(
-          label: resolveSystemHealthKey(context, 'systemHealthFieldTenantImpact'),
-          value: resolveSystemHealthKey(context, event.tenantImpactLevel.localizationKey()),
+          label: resolveSystemHealthKey(
+            context,
+            'systemHealthFieldTenantImpact',
+          ),
+          value: resolveSystemHealthKey(
+            context,
+            event.tenantImpactLevel.localizationKey(),
+          ),
         ),
-        if (event.affectedCompanyName != null)
+        if (event.affectedCompanyName != null ||
+            event.affectedCompanyId != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: Text(
+                    resolveSystemHealthKey(
+                      context,
+                      'systemHealthFieldAffectedCompany',
+                    ),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+                Expanded(
+                  child: onNotifyCompany == null
+                      ? Text(
+                          event.affectedCompanyName ??
+                              event.affectedCompanyId ??
+                              '—',
+                        )
+                      : InkWell(
+                          onTap: onNotifyCompany,
+                          child: Text(
+                            event.affectedCompanyName ??
+                                event.affectedCompanyId ??
+                                '—',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                ),
+              ],
+            ),
+          ),
+        if (event.affectedUserName != null || event.affectedUserEmail != null)
           _InfoRow(
-            label: resolveSystemHealthKey(context, 'systemHealthFieldAffectedCompany'),
-            value: event.affectedCompanyName!,
+            label: resolveSystemHealthKey(
+              context,
+              'systemHealthFieldAffectedUser',
+            ),
+            value: [
+              if (event.affectedUserName != null) event.affectedUserName!,
+              if (event.affectedUserEmail != null) event.affectedUserEmail!,
+            ].join(' · '),
           ),
         _InfoRow(
           label: resolveSystemHealthKey(context, 'systemHealthFieldStartedAt'),
@@ -179,7 +291,10 @@ class _DetailBody extends StatelessWidget {
         ),
         if (event.resolvedAt != null)
           _InfoRow(
-            label: resolveSystemHealthKey(context, 'systemHealthFieldResolvedAt'),
+            label: resolveSystemHealthKey(
+              context,
+              'systemHealthFieldResolvedAt',
+            ),
             value: formatDate(event.resolvedAt),
           ),
         _InfoRow(
@@ -188,12 +303,16 @@ class _DetailBody extends StatelessWidget {
         ),
         if (event.correlationId != null)
           _InfoRow(
-            label: resolveSystemHealthKey(context, 'systemHealthFieldCorrelationId'),
+            label: resolveSystemHealthKey(
+              context,
+              'systemHealthFieldCorrelationId',
+            ),
             value: event.correlationId!,
           ),
         const SizedBox(height: 8),
         Text(event.summary),
-        if (event.aiDiagnosticSummary != null && event.aiDiagnosticSummary!.isNotEmpty) ...[
+        if (event.aiDiagnosticSummary != null &&
+            event.aiDiagnosticSummary!.isNotEmpty) ...[
           const SizedBox(height: 16),
           AiDiagnosticSummaryCard(
             summary: event.aiDiagnosticSummary!,
@@ -210,7 +329,12 @@ class _DetailBody extends StatelessWidget {
                 const Icon(Icons.shield_outlined, size: 20),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(resolveSystemHealthKey(context, 'systemHealthPrivacyNotice')),
+                  child: Text(
+                    resolveSystemHealthKey(
+                      context,
+                      'systemHealthPrivacyNotice',
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -220,15 +344,28 @@ class _DetailBody extends StatelessWidget {
           const SizedBox(height: 16),
           FilledButton(
             onPressed: () => onAction(SystemHealthActionType.acknowledge),
-            child: Text(resolveSystemHealthKey(context, 'systemHealthActionAcknowledge')),
+            child: Text(
+              resolveSystemHealthKey(context, 'systemHealthActionAcknowledge'),
+            ),
           ),
           const SizedBox(height: 8),
           OutlinedButton(
             onPressed: () => onAction(SystemHealthActionType.escalate),
-            child: Text(resolveSystemHealthKey(context, 'systemHealthActionEscalate')),
+            child: Text(
+              resolveSystemHealthKey(context, 'systemHealthActionEscalate'),
+            ),
           ),
         ],
         const SizedBox(height: 8),
+        if (onNotifyCompany != null) ...[
+          FilledButton.tonal(
+            onPressed: onNotifyCompany,
+            child: Text(
+              AppLocalizations.of(context).systemHealthNotifyCompanyConfirm,
+            ),
+          ),
+          const SizedBox(height: 8),
+        ],
         OutlinedButton(
           onPressed: canCreateTicket ? onCreateTicket : null,
           child: Text(

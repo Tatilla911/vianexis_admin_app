@@ -52,10 +52,7 @@ class LiveRegistrationApplicationsRepository
     required String applicationId,
     required RegistrationDecisionRequest request,
   }) {
-    return _api.submitDecision(
-      applicationId: applicationId,
-      request: request,
-    );
+    return _api.submitDecision(applicationId: applicationId, request: request);
   }
 
   @override
@@ -153,7 +150,8 @@ class MockRegistrationApplicationsRepository
 
     final current = _items[index];
     final updatedStatus = switch (request.type) {
-      RegistrationDecisionType.approve => RegistrationApplicationStatus.approved,
+      RegistrationDecisionType.approve =>
+        RegistrationApplicationStatus.approved,
       RegistrationDecisionType.reject => RegistrationApplicationStatus.rejected,
       RegistrationDecisionType.requestInfo =>
         RegistrationApplicationStatus.needsMoreInfo,
@@ -177,6 +175,9 @@ class MockRegistrationApplicationsRepository
       submittedAt: current.submittedAt,
       reviewedAt: DateTime.now().toUtc(),
       reviewedBy: 'mock-reviewer',
+      reviewNotes: request.reviewNotes?.trim().isNotEmpty == true
+          ? request.reviewNotes!.trim()
+          : current.reviewNotes,
       documentMetadataOnly: current.documentMetadataOnly,
       needsHumanReview: false,
       completenessScore: current.completenessScore,

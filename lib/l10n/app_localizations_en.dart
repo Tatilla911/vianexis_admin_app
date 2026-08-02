@@ -5004,6 +5004,75 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageEn => 'English';
 
   @override
+  String get settingsAppearanceSection => 'Appearance';
+
+  @override
+  String get settingsAppearanceBody =>
+      'Choose day (light), night (dark), or follow the system setting.';
+
+  @override
+  String get settingsAppearanceSystem => 'System';
+
+  @override
+  String get settingsAppearanceDay => 'Day';
+
+  @override
+  String get settingsAppearanceNight => 'Night';
+
+  @override
+  String get settingsSoundEventCustomSound => 'Sound for this event';
+
+  @override
+  String get settingsSoundEventUseCategoryDefault => 'Category default';
+
+  @override
+  String get registrationFieldReviewNotes => 'Review notes';
+
+  @override
+  String get registrationSectionDecision => 'Decision';
+
+  @override
+  String get registrationRejectionReasonTitle => 'Rejection details';
+
+  @override
+  String get applicationsFilterRejected => 'Rejected';
+
+  @override
+  String get applicationRejectReasonTitle => 'Reject application';
+
+  @override
+  String get applicationRejectReasonHint =>
+      'Reason shown to the applicant and stored on the record';
+
+  @override
+  String get applicationRejectConfirm => 'Reject';
+
+  @override
+  String get applicationFieldReviewedAt => 'Reviewed';
+
+  @override
+  String get applicationFieldReviewNotes => 'Reason';
+
+  @override
+  String get driverAccessRejectedTitle => 'Rejected driver applications';
+
+  @override
+  String get driverAccessRejectedEmpty => 'No rejected driver applications.';
+
+  @override
+  String get driverAccessRejectedLoadFailed =>
+      'Could not load rejected driver applications.';
+
+  @override
+  String get driverAccessStatusRejected => 'Rejected';
+
+  @override
+  String get driverAccessRejectedAt => 'Rejected at';
+
+  @override
+  String get driverAccessRejectedReason => 'Reason';
+
+  @override
   String get devicePinSectionTitle => 'Device PIN';
 
   @override
@@ -5863,4 +5932,131 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get systemMonitoringActionAuditNotice =>
       'This action will be recorded in the platform audit log.';
+
+  @override
+  String get eventLogPdfArchiveTitle => 'Event log PDF archive';
+
+  @override
+  String get eventLogPdfArchiveBody =>
+      'Store filtered event-log snapshots as ViaNexis-styled PDFs. Open to zoom, download, or share. Accented characters use Unicode fonts.';
+
+  @override
+  String get eventLogPdfArchiveEmpty => 'No stored event-log PDFs yet.';
+
+  @override
+  String get eventLogPdfArchiveLoadFailed => 'Could not load the PDF archive.';
+
+  @override
+  String get eventLogPdfTitle => 'ViaNexis event log';
+
+  @override
+  String get eventLogPdfSubtitle =>
+      'Platform audit and operational activity snapshot';
+
+  @override
+  String eventLogPdfGeneratedAt(String when) {
+    return 'Generated: $when';
+  }
+
+  @override
+  String get eventLogPdfEmpty => 'No events matched the current filters.';
+
+  @override
+  String get eventLogPdfGenerate => 'Save current filter as PDF';
+
+  @override
+  String get eventLogPdfSaved => 'Event-log PDF saved to the archive.';
+
+  @override
+  String get eventLogPdfSaveFailed => 'Could not save the event-log PDF.';
+
+  @override
+  String get eventLogPdfShare => 'Share PDF';
+
+  @override
+  String get eventLogPdfShareFailed => 'Could not share the PDF.';
+
+  @override
+  String get eventLogPdfDownload => 'Download / export PDF';
+
+  @override
+  String get eventLogPdfDeleteTitle => 'Delete PDF';
+
+  @override
+  String eventLogPdfDeleteBody(String fileName) {
+    return 'Delete $fileName from the archive?';
+  }
+
+  @override
+  String get eventLogPdfDeleteAllTitle => 'Delete activity PDFs';
+
+  @override
+  String get eventLogPdfDeleteAllBody =>
+      'Delete all stored event-log activity PDFs from this device?';
+
+  @override
+  String get eventLogPdfDeleteConfirm => 'Delete';
+
+  @override
+  String get eventLogPdfDeleted => 'Deleted.';
+
+  @override
+  String eventLogPdfEntryCount(int count) {
+    return '$count events';
+  }
+
+  @override
+  String get notificationsDeleteMenu => 'Delete notifications / activities';
+
+  @override
+  String get notificationsDeleteTitle => 'Delete notification';
+
+  @override
+  String get notificationsDeleteBody => 'Delete this notification permanently?';
+
+  @override
+  String get notificationsDeleteAllTitle => 'Delete all notifications';
+
+  @override
+  String get notificationsDeleteAllBody =>
+      'Delete every notification in your inbox?';
+
+  @override
+  String get notificationsDeleteBothTitle =>
+      'Delete notifications and activity PDFs';
+
+  @override
+  String get notificationsDeleteBothBody =>
+      'Delete all inbox notifications and all stored activity PDFs?';
+
+  @override
+  String get notificationsDeleteConfirm => 'Delete';
+
+  @override
+  String get notificationsDeleted => 'Notification(s) deleted.';
+
+  @override
+  String get notificationsDeletedBoth =>
+      'Notifications and activity PDFs deleted.';
+
+  @override
+  String get systemHealthFieldAffectedUser => 'Affected user';
+
+  @override
+  String get systemHealthNotifyCompanyTitle => 'Notify company';
+
+  @override
+  String systemHealthNotifyCompanyBody(String company, String user) {
+    return 'Send an automatic acknowledgement to $company (user: $user) that we detected the issue, are investigating, will fix it ASAP, and will notify them when status changes?';
+  }
+
+  @override
+  String get systemHealthNotifyCompanyConfirm => 'Send acknowledgement';
+
+  @override
+  String get systemHealthNotifyCompanySuccess => 'Acknowledgement email sent.';
+
+  @override
+  String get systemHealthNotifyCompanyFailed =>
+      'Could not send the acknowledgement email.';
 }

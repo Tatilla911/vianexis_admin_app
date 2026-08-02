@@ -12,10 +12,25 @@ class DriverRegistrationRequestsApi {
     int limit = 100,
     int offset = 0,
   }) async {
+    return list(status: 'pending', limit: limit, offset: offset);
+  }
+
+  Future<DriverRegistrationRequestsPage> listRejected({
+    int limit = 100,
+    int offset = 0,
+  }) async {
+    return list(status: 'rejected', limit: limit, offset: offset);
+  }
+
+  Future<DriverRegistrationRequestsPage> list({
+    required String status,
+    int limit = 100,
+    int offset = 0,
+  }) async {
     final response = await _apiClient.get<Map<String, dynamic>>(
       '/platform-admin/driver-registration-requests',
       queryParameters: {
-        'status': 'pending',
+        'status': status,
         'limit': limit,
         'offset': offset,
       },
@@ -51,5 +66,5 @@ class DriverRegistrationRequestsApi {
 
 final driverRegistrationRequestsApiProvider =
     Provider<DriverRegistrationRequestsApi>((ref) {
-  return DriverRegistrationRequestsApi(ref.watch(apiClientProvider));
-});
+      return DriverRegistrationRequestsApi(ref.watch(apiClientProvider));
+    });

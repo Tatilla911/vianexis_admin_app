@@ -10,11 +10,13 @@ class NotificationCard extends StatelessWidget {
     required this.item,
     required this.onTap,
     required this.onMarkRead,
+    this.onDelete,
   });
 
   final AdminNotification item;
   final VoidCallback onTap;
   final VoidCallback onMarkRead;
+  final VoidCallback? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +44,23 @@ class NotificationCard extends StatelessWidget {
             ),
           ],
         ),
-        trailing: item.isRead
-            ? const Icon(Icons.drafts_outlined)
-            : IconButton(
+        trailing: Wrap(
+          spacing: 0,
+          children: [
+            if (!item.isRead)
+              IconButton(
                 onPressed: onMarkRead,
                 icon: const Icon(Icons.mark_email_read_outlined),
+              )
+            else
+              const Icon(Icons.drafts_outlined),
+            if (onDelete != null)
+              IconButton(
+                onPressed: onDelete,
+                icon: const Icon(Icons.delete_outline),
               ),
+          ],
+        ),
       ),
     );
   }

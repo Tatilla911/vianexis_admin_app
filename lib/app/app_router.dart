@@ -12,6 +12,7 @@ import '../features/admin_users/presentation/admin_users_screen.dart';
 import '../features/ai_reviews/presentation/ai_review_summary_screen.dart';
 import '../features/audit_logs/presentation/audit_log_detail_screen.dart';
 import '../features/audit_logs/presentation/audit_logs_screen.dart';
+import '../features/audit_logs/presentation/event_log_pdf_archive_screen.dart';
 import '../features/ai_reviews/presentation/ai_review_detail_screen.dart';
 import '../features/release_center/presentation/release_center_screen.dart';
 import '../features/security_center/presentation/security_event_detail_screen.dart';
@@ -49,6 +50,7 @@ import '../features/applications/presentation/applications_inbox_screen.dart';
 import '../features/registrations/presentation/registration_application_detail_screen.dart';
 import '../features/registrations/presentation/registration_applications_screen.dart';
 import '../features/settings/admin_settings_screen.dart';
+import '../features/settings/sound_settings_screen.dart';
 import '../features/support/presentation/support_access_grant_detail_screen.dart';
 import '../features/support/presentation/support_access_grants_screen.dart';
 import '../features/support/presentation/support_ticket_detail_screen.dart';
@@ -379,6 +381,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 const NoTransitionPage(child: AuditLogsScreen()),
             routes: [
               GoRoute(
+                path: 'pdf-archive',
+                builder: (context, state) => const EventLogPdfArchiveScreen(),
+              ),
+              GoRoute(
                 path: ':id',
                 builder: (context, state) => AuditLogDetailScreen(
                   logId: state.pathParameters['id'] ?? '',
@@ -480,6 +486,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: AdminRoutes.settings,
             pageBuilder: (context, state) =>
                 const NoTransitionPage(child: AdminSettingsScreen()),
+            routes: [
+              GoRoute(
+                path: 'sounds',
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: SoundSettingsScreen()),
+              ),
+            ],
           ),
           GoRoute(
             path: AdminRoutes.accessDenied,
@@ -515,6 +528,7 @@ abstract final class AdminRoutes {
   static const systemMonitoring = '/system-monitoring';
   static const systemMonitoringIncidents = '/system-monitoring/incidents';
   static const auditLogs = '/audit-logs';
+  static const auditLogPdfArchive = '/audit-logs/pdf-archive';
   static const notifications = '/notifications';
   static const notificationPreferences = '/notifications/preferences';
   static const securityCenter = '/security';
@@ -526,6 +540,7 @@ abstract final class AdminRoutes {
   static const exchangeRecords = '/exchange-records';
   static const notificationStatus = '/notification-status';
   static const settings = '/settings';
+  static const soundSettings = '/settings/sounds';
   static const modulesHub = '/modules';
   static const accessDenied = '/access-denied';
 

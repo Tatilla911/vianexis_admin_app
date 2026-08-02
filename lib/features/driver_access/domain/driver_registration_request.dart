@@ -13,6 +13,8 @@ class DriverRegistrationRequestItem {
     this.preferredLanguage,
     this.vehicleHint,
     this.createdAt,
+    this.updatedAt,
+    this.reviewNotes,
   });
 
   final String id;
@@ -28,8 +30,11 @@ class DriverRegistrationRequestItem {
   final String? preferredLanguage;
   final String? vehicleHint;
   final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final String? reviewNotes;
 
   bool get isPending => status.toLowerCase() == 'pending';
+  bool get isRejected => status.toLowerCase() == 'rejected';
 
   factory DriverRegistrationRequestItem.fromJson(Map<String, dynamic> json) {
     return DriverRegistrationRequestItem(
@@ -46,6 +51,12 @@ class DriverRegistrationRequestItem {
       preferredLanguage: json['preferredLanguage']?.toString(),
       vehicleHint: json['vehicleHint']?.toString(),
       createdAt: DateTime.tryParse(json['createdAt']?.toString() ?? ''),
+      updatedAt: DateTime.tryParse(json['updatedAt']?.toString() ?? ''),
+      reviewNotes: () {
+        final notes = json['reviewNotes']?.toString().trim();
+        if (notes == null || notes.isEmpty) return null;
+        return notes;
+      }(),
     );
   }
 }
@@ -72,9 +83,9 @@ class DriverRegistrationRequestsPage {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-            .whereType<Map<String, dynamic>>()
-            .map(DriverRegistrationRequestItem.fromJson)
-            .toList(growable: false)
+              .whereType<Map<String, dynamic>>()
+              .map(DriverRegistrationRequestItem.fromJson)
+              .toList(growable: false)
         : const <DriverRegistrationRequestItem>[];
     return DriverRegistrationRequestsPage(
       items: items,

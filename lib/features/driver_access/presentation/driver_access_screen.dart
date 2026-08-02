@@ -21,6 +21,7 @@ class DriverAccessScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final listAsync = ref.watch(driverAccessListProvider);
     final pendingAsync = ref.watch(driverRegistrationRequestsProvider);
+    final rejectedAsync = ref.watch(rejectedDriverRegistrationRequestsProvider);
     final usesMock = ref.watch(driverAccessRepositoryProvider).usesMockData;
 
     return Scaffold(
@@ -28,15 +29,21 @@ class DriverAccessScreen extends ConsumerWidget {
         title: Text(resolveDriverAccessKey(context, 'driverAccessTitle')),
         actions: [
           if (usesMock)
-            MockDataBadge(label: resolveDriverAccessKey(context, 'driverAccessMockBadge')),
+            MockDataBadge(
+              label: resolveDriverAccessKey(context, 'driverAccessMockBadge'),
+            ),
         ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           _PendingDriverRegistrationsSection(pendingAsync: pendingAsync),
+          _RejectedDriverRegistrationsSection(rejectedAsync: rejectedAsync),
           VianexisMetadataNotice(
-            message: resolveDriverAccessKey(context, 'driverAccessPrivacyNotice'),
+            message: resolveDriverAccessKey(
+              context,
+              'driverAccessPrivacyNotice',
+            ),
           ),
           const SizedBox(height: 12),
           listAsync.when(
@@ -47,20 +54,32 @@ class DriverAccessScreen extends ConsumerWidget {
             error: (error, _) => VianexisErrorView.fromError(
               context,
               error,
-              fallbackMessage: resolveDriverAccessKey(context, 'driverAccessLoadFailed'),
+              fallbackMessage: resolveDriverAccessKey(
+                context,
+                'driverAccessLoadFailed',
+              ),
               onRetry: () => ref.invalidate(driverAccessListProvider),
             ),
             data: (result) {
               if (!result.listEndpointReady) {
                 return BackendDependencyCard(
-                  title: resolveDriverAccessKey(context, 'driverAccessBackendTitle'),
-                  message: resolveDriverAccessKey(context, 'driverAccessBackendMessage'),
+                  title: resolveDriverAccessKey(
+                    context,
+                    'driverAccessBackendTitle',
+                  ),
+                  message: resolveDriverAccessKey(
+                    context,
+                    'driverAccessBackendMessage',
+                  ),
                   endpointHint: 'GET /platform-admin/drivers',
                 );
               }
               if (result.items.isEmpty) {
                 return Text(
-                  resolveDriverAccessKey(context, 'driverAccessNoActiveDrivers'),
+                  resolveDriverAccessKey(
+                    context,
+                    'driverAccessNoActiveDrivers',
+                  ),
                 );
               }
               return Column(
@@ -74,7 +93,9 @@ class DriverAccessScreen extends ConsumerWidget {
                           '${resolveDriverAccessKey(context, driver.registrationStatus.localizationKey)}',
                         ),
                         trailing: const Icon(Icons.chevron_right),
-                        onTap: () => context.push(AdminRoutes.driverAccessDetail(driver.id)),
+                        onTap: () => context.push(
+                          AdminRoutes.driverAccessDetail(driver.id),
+                        ),
                       ),
                     ),
                 ],
@@ -103,7 +124,10 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
         padding: const EdgeInsets.only(bottom: 12),
         child: BackendDependencyCard(
           title: resolveDriverAccessKey(context, 'driverAccessPendingTitle'),
-          message: resolveDriverAccessKey(context, 'driverAccessPendingLoadFailed'),
+          message: resolveDriverAccessKey(
+            context,
+            'driverAccessPendingLoadFailed',
+          ),
           endpointHint: 'GET /platform-admin/driver-registration-requests',
         ),
       ),
@@ -112,8 +136,14 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.only(bottom: 12),
             child: BackendDependencyCard(
-              title: resolveDriverAccessKey(context, 'driverAccessPendingTitle'),
-              message: resolveDriverAccessKey(context, 'driverAccessPendingBackendMessage'),
+              title: resolveDriverAccessKey(
+                context,
+                'driverAccessPendingTitle',
+              ),
+              message: resolveDriverAccessKey(
+                context,
+                'driverAccessPendingBackendMessage',
+              ),
               endpointHint: 'GET /platform-admin/driver-registration-requests',
             ),
           );
@@ -161,7 +191,10 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       Text(
-                        resolveDriverAccessKey(context, 'driverAccessStatusPending'),
+                        resolveDriverAccessKey(
+                          context,
+                          'driverAccessStatusPending',
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Wrap(
@@ -212,12 +245,16 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
           .read(driverRegistrationRequestsRepositoryProvider)
           .approve(request.id, companyId: companyId);
       ref.invalidate(driverRegistrationRequestsProvider);
+      ref.invalidate(rejectedDriverRegistrationRequestsProvider);
       ref.invalidate(driverAccessListProvider);
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            resolveDriverAccessKey(context, 'driverAccessPendingApproveSuccess'),
+            resolveDriverAccessKey(
+              context,
+              'driverAccessPendingApproveSuccess',
+            ),
           ),
         ),
       );
@@ -244,7 +281,10 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
         final controller = TextEditingController();
         return AlertDialog(
           title: Text(
-            resolveDriverAccessKey(dialogContext, 'driverAccessPendingRejectTitle'),
+            resolveDriverAccessKey(
+              dialogContext,
+              'driverAccessPendingRejectTitle',
+            ),
           ),
           content: TextField(
             controller: controller,
@@ -260,13 +300,20 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
               child: Text(
-                resolveDriverAccessKey(dialogContext, 'driverAccessPendingRejectCancel'),
+                resolveDriverAccessKey(
+                  dialogContext,
+                  'driverAccessPendingRejectCancel',
+                ),
               ),
             ),
             FilledButton(
-              onPressed: () => Navigator.of(dialogContext).pop(controller.text.trim()),
+              onPressed: () =>
+                  Navigator.of(dialogContext).pop(controller.text.trim()),
               child: Text(
-                resolveDriverAccessKey(dialogContext, 'driverAccessPendingRejectConfirm'),
+                resolveDriverAccessKey(
+                  dialogContext,
+                  'driverAccessPendingRejectConfirm',
+                ),
               ),
             ),
           ],
@@ -280,6 +327,7 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
           .read(driverRegistrationRequestsRepositoryProvider)
           .reject(request.id, reviewNotes: reason);
       ref.invalidate(driverRegistrationRequestsProvider);
+      ref.invalidate(rejectedDriverRegistrationRequestsProvider);
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -301,6 +349,81 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
   }
 }
 
+class _RejectedDriverRegistrationsSection extends ConsumerWidget {
+  const _RejectedDriverRegistrationsSection({required this.rejectedAsync});
+
+  final AsyncValue<DriverRegistrationRequestsPage> rejectedAsync;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return rejectedAsync.when(
+      loading: () => const Padding(
+        padding: EdgeInsets.only(bottom: 12),
+        child: LinearProgressIndicator(),
+      ),
+      error: (_, __) => Padding(
+        padding: const EdgeInsets.only(bottom: 12),
+        child: Text(
+          resolveDriverAccessKey(context, 'driverAccessRejectedLoadFailed'),
+        ),
+      ),
+      data: (page) {
+        if (!page.listEndpointReady) {
+          return const SizedBox.shrink();
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              resolveDriverAccessKey(context, 'driverAccessRejectedTitle'),
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            if (page.items.isEmpty)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Text(
+                  resolveDriverAccessKey(context, 'driverAccessRejectedEmpty'),
+                ),
+              )
+            else
+              for (final request in page.items)
+                Card(
+                  child: ExpansionTile(
+                    title: Text(request.fullName),
+                    subtitle: Text(
+                      '${request.email} · ${resolveDriverAccessKey(context, 'driverAccessStatusRejected')}',
+                    ),
+                    childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+                    children: [
+                      if (request.updatedAt != null ||
+                          request.createdAt != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            '${resolveDriverAccessKey(context, 'driverAccessRejectedAt')}: '
+                            '${(request.updatedAt ?? request.createdAt)!.toLocal()}',
+                          ),
+                        ),
+                      const SizedBox(height: 8),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          '${resolveDriverAccessKey(context, 'driverAccessRejectedReason')}: '
+                          '${(request.reviewNotes?.trim().isNotEmpty ?? false) ? request.reviewNotes!.trim() : '—'}',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            const SizedBox(height: 12),
+          ],
+        );
+      },
+    );
+  }
+}
+
 class DriverAccessDetailScreen extends ConsumerStatefulWidget {
   const DriverAccessDetailScreen({super.key, required this.driverId});
 
@@ -319,7 +442,9 @@ class _DriverAccessDetailScreenState
     if (_statusChangeInProgress) return;
     setState(() => _statusChangeInProgress = true);
     try {
-      await ref.read(driverAccessRepositoryProvider).patchDriverStatus(
+      await ref
+          .read(driverAccessRepositoryProvider)
+          .patchDriverStatus(
             driver.id,
             status: status,
             reason: 'Admin app status change',
@@ -363,26 +488,35 @@ class _DriverAccessDetailScreenState
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage: resolveDriverAccessKey(context, 'driverAccessLoadFailed'),
+          fallbackMessage: resolveDriverAccessKey(
+            context,
+            'driverAccessLoadFailed',
+          ),
           onRetry: () => ref.invalidate(driverAccessListProvider),
         ),
         data: (result) {
           final driver = result.items.cast<DriverAccessProfile?>().firstWhere(
-                (item) => item?.id == widget.driverId,
-                orElse: () => null,
-              );
+            (item) => item?.id == widget.driverId,
+            orElse: () => null,
+          );
           if (driver == null) {
             return Center(
-              child: Text(resolveDriverAccessKey(context, 'driverAccessNotFound')),
+              child: Text(
+                resolveDriverAccessKey(context, 'driverAccessNotFound'),
+              ),
             );
           }
-          final canChangeStatus = result.listEndpointReady &&
+          final canChangeStatus =
+              result.listEndpointReady &&
               !ref.watch(driverAccessRepositoryProvider).usesMockData;
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
               VianexisMetadataNotice(
-                message: resolveDriverAccessKey(context, 'driverAccessPrivacyNotice'),
+                message: resolveDriverAccessKey(
+                  context,
+                  'driverAccessPrivacyNotice',
+                ),
               ),
               const SizedBox(height: 12),
               _field(context, 'driverAccessFieldName', driver.displayName),
@@ -390,7 +524,10 @@ class _DriverAccessDetailScreenState
               _field(
                 context,
                 'driverAccessRegistrationStatus',
-                resolveDriverAccessKey(context, driver.registrationStatus.localizationKey),
+                resolveDriverAccessKey(
+                  context,
+                  driver.registrationStatus.localizationKey,
+                ),
               ),
               _field(
                 context,
@@ -469,7 +606,8 @@ class _DriverAccessDetailScreenState
               ),
               const SizedBox(height: 12),
               if (canChangeStatus) ...[
-                if (driver.registrationStatus != DriverRegistrationStatus.active)
+                if (driver.registrationStatus !=
+                    DriverRegistrationStatus.active)
                   FilledButton.icon(
                     onPressed: _statusChangeInProgress
                         ? null
@@ -479,7 +617,8 @@ class _DriverAccessDetailScreenState
                       resolveDriverAccessKey(context, 'driverAccessEnable'),
                     ),
                   ),
-                if (driver.registrationStatus != DriverRegistrationStatus.disabled) ...[
+                if (driver.registrationStatus !=
+                    DriverRegistrationStatus.disabled) ...[
                   const SizedBox(height: 8),
                   OutlinedButton.icon(
                     onPressed: _statusChangeInProgress

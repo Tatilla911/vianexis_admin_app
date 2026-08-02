@@ -30,10 +30,22 @@ void main() {
 
   group('RegistrationRiskLevel', () {
     test('maps risk score thresholds', () {
-      expect(RegistrationRiskLevel.fromRiskScore(0.2), RegistrationRiskLevel.low);
-      expect(RegistrationRiskLevel.fromRiskScore(0.5), RegistrationRiskLevel.medium);
-      expect(RegistrationRiskLevel.fromRiskScore(0.9), RegistrationRiskLevel.high);
-      expect(RegistrationRiskLevel.fromRiskScore(null), RegistrationRiskLevel.unknown);
+      expect(
+        RegistrationRiskLevel.fromRiskScore(0.2),
+        RegistrationRiskLevel.low,
+      );
+      expect(
+        RegistrationRiskLevel.fromRiskScore(0.5),
+        RegistrationRiskLevel.medium,
+      );
+      expect(
+        RegistrationRiskLevel.fromRiskScore(0.9),
+        RegistrationRiskLevel.high,
+      );
+      expect(
+        RegistrationRiskLevel.fromRiskScore(null),
+        RegistrationRiskLevel.unknown,
+      );
     });
   });
 
@@ -87,6 +99,23 @@ void main() {
       expect(application.duplicateWarnings, contains('possible_duplicate'));
     });
 
+    test('parses rejection review notes', () {
+      final application = RegistrationApplication.fromJson({
+        'id': 9,
+        'companyName': 'Rejected Co',
+        'contactEmail': 'ops@rejected.example',
+        'status': 'rejected',
+        'reviewNotes': '  Incomplete VAT evidence  ',
+        'reviewedAt': '2026-06-20T12:00:00.000Z',
+        'reviewedByUserId': '42',
+      });
+
+      expect(application.status, RegistrationApplicationStatus.rejected);
+      expect(application.reviewNotes, 'Incomplete VAT evidence');
+      expect(application.reviewedBy, '42');
+      expect(application.reviewedAt, isNotNull);
+    });
+
     test('matches search and filters', () {
       const application = RegistrationApplication(
         id: '1',
@@ -103,8 +132,14 @@ void main() {
 
       expect(application.matchesSearch('DE123'), isTrue);
       expect(application.matchesFilter(RegistrationListFilter.pending), isTrue);
-      expect(application.matchesFilter(RegistrationListFilter.highRisk), isTrue);
-      expect(application.matchesFilter(RegistrationListFilter.approved), isFalse);
+      expect(
+        application.matchesFilter(RegistrationListFilter.highRisk),
+        isTrue,
+      );
+      expect(
+        application.matchesFilter(RegistrationListFilter.approved),
+        isFalse,
+      );
     });
   });
 
@@ -113,8 +148,18 @@ void main() {
       final page = RegistrationApplicationsPage.fromJson({
         'total': 2,
         'items': [
-          {'id': 1, 'companyName': 'A', 'contactEmail': 'a@example.com', 'status': 'pending'},
-          {'id': 2, 'companyName': 'B', 'contactEmail': 'b@example.com', 'status': 'approved'},
+          {
+            'id': 1,
+            'companyName': 'A',
+            'contactEmail': 'a@example.com',
+            'status': 'pending',
+          },
+          {
+            'id': 2,
+            'companyName': 'B',
+            'contactEmail': 'b@example.com',
+            'status': 'approved',
+          },
         ],
       });
 

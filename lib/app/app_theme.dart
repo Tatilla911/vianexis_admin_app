@@ -23,13 +23,21 @@ abstract final class AppTheme {
   static ThemeData dark() => _buildTheme(Brightness.dark);
 
   static ThemeData _buildTheme(Brightness brightness) {
+    final isDark = brightness == Brightness.dark;
+    final scaffold = VianexisBrand.scaffoldOf(brightness);
+    final panel = VianexisBrand.panelOf(brightness);
+    final surface = VianexisBrand.surfaceOf(brightness);
+    final onSurface = VianexisBrand.textPrimaryOf(brightness);
+    final muted = VianexisBrand.textSecondaryOf(brightness);
+    final border = VianexisBrand.borderOf(brightness);
+
     final colorScheme = ColorScheme.fromSeed(
       seedColor: VianexisBrand.viaNexisBlue,
       brightness: brightness,
-      surface: VianexisBrand.panelNavy,
+      surface: panel,
       primary: VianexisBrand.accentBlue,
-      onPrimary: VianexisBrand.brandInkOnGold,
-      onSurface: VianexisBrand.textPrimary,
+      onPrimary: isDark ? VianexisBrand.brandInkOnGold : Colors.white,
+      onSurface: onSurface,
       error: VianexisBrand.danger,
       tertiary: VianexisBrand.goldAccent,
     );
@@ -41,27 +49,28 @@ abstract final class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
-      scaffoldBackgroundColor: VianexisBrand.backgroundNavy,
+      scaffoldBackgroundColor: scaffold,
       colorScheme: colorScheme,
       fontFamily: VianexisBrand.displayFontFamily,
       appBarTheme: AppBarTheme(
-        backgroundColor: VianexisBrand.backgroundNavy,
-        foregroundColor: VianexisBrand.textPrimary,
+        backgroundColor: scaffold,
+        foregroundColor: onSurface,
         elevation: 0,
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
         titleTextStyle: VianexisBrand.displayStyle(
           fontSize: 20,
           fontWeight: FontWeight.w600,
+          color: onSurface,
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: VianexisBrand.panelNavy,
+        backgroundColor: panel,
         indicatorColor: VianexisBrand.accentBlue.withValues(alpha: 0.24),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
           return GoogleFonts.playfairDisplay(
-            color: selected ? VianexisBrand.goldAccent : VianexisBrand.textSecondary,
+            color: selected ? VianexisBrand.goldAccent : muted,
             fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
             fontSize: 12,
           );
@@ -69,48 +78,49 @@ abstract final class AppTheme {
         iconTheme: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
           return IconThemeData(
-            color: selected ? VianexisBrand.goldAccent : VianexisBrand.textSecondary,
+            color: selected ? VianexisBrand.goldAccent : muted,
           );
         }),
       ),
       navigationRailTheme: NavigationRailThemeData(
-        backgroundColor: VianexisBrand.panelNavy,
+        backgroundColor: panel,
         indicatorColor: const Color(0x3D4DA3FF),
         selectedIconTheme: const IconThemeData(color: VianexisBrand.goldAccent),
-        unselectedIconTheme: const IconThemeData(color: VianexisBrand.textSecondary),
+        unselectedIconTheme: IconThemeData(color: muted),
         selectedLabelTextStyle: GoogleFonts.playfairDisplay(
           color: VianexisBrand.goldAccent,
           fontWeight: FontWeight.w600,
         ),
-        unselectedLabelTextStyle: GoogleFonts.playfairDisplay(
-          color: VianexisBrand.textSecondary,
-        ),
+        unselectedLabelTextStyle: GoogleFonts.playfairDisplay(color: muted),
       ),
       cardTheme: CardThemeData(
-        color: VianexisBrand.surfaceElevated,
+        color: surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(VianexisBrand.radiusMd),
-          side: const BorderSide(color: VianexisBrand.borderSubtle),
+          side: BorderSide(color: border),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: VianexisBrand.surfaceElevated,
+        fillColor: surface,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(VianexisBrand.radiusMd),
-          borderSide: const BorderSide(color: VianexisBrand.borderSubtle),
+          borderSide: BorderSide(color: border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(VianexisBrand.radiusMd),
-          borderSide: const BorderSide(color: VianexisBrand.borderSubtle),
+          borderSide: BorderSide(color: border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(VianexisBrand.radiusMd),
-          borderSide: const BorderSide(color: VianexisBrand.accentBlue, width: 1.5),
+          borderSide: const BorderSide(
+            color: VianexisBrand.accentBlue,
+            width: 1.5,
+          ),
         ),
-        labelStyle: GoogleFonts.playfairDisplay(color: VianexisBrand.textSecondary),
-        hintStyle: GoogleFonts.playfairDisplay(color: VianexisBrand.textSecondary),
+        labelStyle: GoogleFonts.playfairDisplay(color: muted),
+        hintStyle: GoogleFonts.playfairDisplay(color: muted),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
@@ -125,7 +135,7 @@ abstract final class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: VianexisBrand.brandInkSoft,
+          foregroundColor: isDark ? VianexisBrand.brandInkSoft : onSurface,
           textStyle: GoogleFonts.playfairDisplay(fontWeight: FontWeight.w600),
           side: const BorderSide(color: VianexisBrand.goldAccent, width: 1.5),
           shape: RoundedRectangleBorder(
@@ -137,30 +147,38 @@ abstract final class AppTheme {
         headlineSmall: VianexisBrand.displayStyle(
           fontSize: 24,
           fontWeight: FontWeight.w600,
+          color: onSurface,
         ),
         titleLarge: VianexisBrand.displayStyle(
           fontSize: 22,
           fontWeight: FontWeight.w700,
+          color: onSurface,
         ),
         titleMedium: VianexisBrand.displayStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
+          color: onSurface,
         ),
-        bodyMedium: GoogleFonts.playfairDisplay(
-          color: VianexisBrand.textSecondary,
-          fontSize: 14,
-        ),
-        bodySmall: GoogleFonts.playfairDisplay(
-          color: VianexisBrand.textSecondary,
-          fontSize: 12,
-        ),
+        bodyLarge: GoogleFonts.playfairDisplay(color: onSurface, fontSize: 16),
+        bodyMedium: GoogleFonts.playfairDisplay(color: muted, fontSize: 14),
+        bodySmall: GoogleFonts.playfairDisplay(color: muted, fontSize: 12),
         labelLarge: GoogleFonts.playfairDisplay(
-          color: VianexisBrand.textPrimary,
+          color: onSurface,
           fontWeight: FontWeight.w600,
         ),
       ),
-      dividerTheme: DividerThemeData(
-        color: VianexisBrand.textSecondary.withValues(alpha: 0.24),
+      dividerTheme: DividerThemeData(color: muted.withValues(alpha: 0.24)),
+      listTileTheme: ListTileThemeData(
+        iconColor: muted,
+        textColor: onSurface,
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return VianexisBrand.goldAccent;
+          }
+          return muted;
+        }),
       ),
     );
   }

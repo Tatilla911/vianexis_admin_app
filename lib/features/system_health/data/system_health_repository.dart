@@ -20,6 +20,8 @@ abstract class SystemHealthRepository {
     required SystemHealthActionRequest request,
   });
 
+  Future<void> notifyCompany(String eventId);
+
   bool get usesMockData;
 }
 
@@ -85,6 +87,21 @@ class LiveSystemHealthRepository implements SystemHealthRepository {
         lastSeenAt: DateTime.now().toUtc(),
       ),
     };
+  }
+
+  @override
+  Future<void> notifyCompany(String eventId) async {
+    try {
+      await _api.notifyCompany(eventId);
+    } on ApiException catch (error) {
+      if (error.kind == ApiExceptionKind.notFound) {
+        throw const ApiException(
+          messageKey: LocalizationKeys.systemHealthActionUnavailable,
+          kind: ApiExceptionKind.notFound,
+        );
+      }
+      rethrow;
+    }
   }
 }
 
@@ -154,6 +171,12 @@ class MockSystemHealthRepository implements SystemHealthRepository {
     return updated;
   }
 
+  @override
+  Future<void> notifyCompany(String eventId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 150));
+    await fetchEvent(eventId);
+  }
+
   static SystemHealthSnapshot _buildSnapshot() {
     final services = [
       const SystemHealthServiceStatus(
@@ -215,7 +238,8 @@ class MockSystemHealthRepository implements SystemHealthRepository {
         serviceName: 'queue',
         status: SystemHealthEventStatus.open,
         title: 'Redis queue unavailable',
-        summary: 'Background job dispatch delayed. No tenant document content exposed.',
+        summary:
+            'Background job dispatch delayed. No tenant document content exposed.',
         tenantImpactLevel: SystemHealthTenantImpactLevel.platformWide,
         startedAt: DateTime.utc(2026, 6, 18, 8, 0),
         lastSeenAt: DateTime.utc(2026, 6, 18, 9, 15),
@@ -225,7 +249,10 @@ class MockSystemHealthRepository implements SystemHealthRepository {
         recommendedAction:
             'Escalate to platform support. Do not trigger automatic repair.',
         correlationId: 'health-501-redis',
-        metadataOnly: const {'component': 'worker', 'queue': 'message_escalation'},
+        metadataOnly: const {
+          'component': 'worker',
+          'queue': 'message_escalation',
+        },
       ),
       SystemHealthEvent(
         id: '502',
@@ -242,7 +269,8 @@ class MockSystemHealthRepository implements SystemHealthRepository {
         failedJobsCount: 2,
         aiDiagnosticSummary:
             'Advisory: storage probe warning for one tenant bucket policy. Metadata only.',
-        recommendedAction: 'Acknowledge and monitor. Escalate if persists > 1 hour.',
+        recommendedAction:
+            'Acknowledge and monitor. Escalate if persists > 1 hour.',
         correlationId: 'health-502-storage',
       ),
     ];
@@ -260,7 +288,6 @@ class MockSystemHealthRepository implements SystemHealthRepository {
 }
 
 final systemHealthRepositoryProvider = Provider<SystemHealthRepository>((ref) {
-
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveSystemHealthRepository(ref.watch(systemHealthApiProvider));
   }

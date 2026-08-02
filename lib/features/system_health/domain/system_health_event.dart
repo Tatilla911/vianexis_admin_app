@@ -21,8 +21,10 @@ enum SystemHealthEventStatus {
   String localizationKey() {
     return switch (this) {
       SystemHealthEventStatus.open => 'systemHealthEventStatusOpen',
-      SystemHealthEventStatus.acknowledged => 'systemHealthEventStatusAcknowledged',
-      SystemHealthEventStatus.investigating => 'systemHealthEventStatusInvestigating',
+      SystemHealthEventStatus.acknowledged =>
+        'systemHealthEventStatusAcknowledged',
+      SystemHealthEventStatus.investigating =>
+        'systemHealthEventStatusInvestigating',
       SystemHealthEventStatus.resolved => 'systemHealthEventStatusResolved',
       SystemHealthEventStatus.unknown => 'systemHealthEventStatusUnknown',
     };
@@ -50,17 +52,18 @@ enum SystemHealthTenantImpactLevel {
   String localizationKey() {
     return switch (this) {
       SystemHealthTenantImpactLevel.none => 'systemHealthImpactNone',
-      SystemHealthTenantImpactLevel.singleTenant => 'systemHealthImpactSingleTenant',
-      SystemHealthTenantImpactLevel.multipleTenants => 'systemHealthImpactMultipleTenants',
-      SystemHealthTenantImpactLevel.platformWide => 'systemHealthImpactPlatformWide',
+      SystemHealthTenantImpactLevel.singleTenant =>
+        'systemHealthImpactSingleTenant',
+      SystemHealthTenantImpactLevel.multipleTenants =>
+        'systemHealthImpactMultipleTenants',
+      SystemHealthTenantImpactLevel.platformWide =>
+        'systemHealthImpactPlatformWide',
       SystemHealthTenantImpactLevel.unknown => 'systemHealthImpactUnknown',
     };
   }
 
   bool get isTenantImpacting =>
-      this == singleTenant ||
-      this == multipleTenants ||
-      this == platformWide;
+      this == singleTenant || this == multipleTenants || this == platformWide;
 }
 
 enum SystemHealthEventFilter {
@@ -82,7 +85,8 @@ extension SystemHealthEventFilterX on SystemHealthEventFilter {
       SystemHealthEventFilter.open => 'systemHealthFilterOpen',
       SystemHealthEventFilter.acknowledged => 'systemHealthFilterAcknowledged',
       SystemHealthEventFilter.resolved => 'systemHealthFilterResolved',
-      SystemHealthEventFilter.tenantImpacting => 'systemHealthFilterTenantImpacting',
+      SystemHealthEventFilter.tenantImpacting =>
+        'systemHealthFilterTenantImpacting',
     };
   }
 }
@@ -98,6 +102,8 @@ class SystemHealthEvent {
     required this.tenantImpactLevel,
     this.affectedCompanyName,
     this.affectedCompanyId,
+    this.affectedUserName,
+    this.affectedUserEmail,
     this.startedAt,
     this.lastSeenAt,
     this.resolvedAt,
@@ -117,6 +123,8 @@ class SystemHealthEvent {
   final SystemHealthTenantImpactLevel tenantImpactLevel;
   final String? affectedCompanyName;
   final String? affectedCompanyId;
+  final String? affectedUserName;
+  final String? affectedUserEmail;
   final DateTime? startedAt;
   final DateTime? lastSeenAt;
   final DateTime? resolvedAt;
@@ -129,34 +137,54 @@ class SystemHealthEvent {
   bool matchesFilter(SystemHealthEventFilter filter) {
     return switch (filter) {
       SystemHealthEventFilter.all => true,
-      SystemHealthEventFilter.critical => severity == SystemHealthSeverity.critical,
-      SystemHealthEventFilter.warning => severity == SystemHealthSeverity.warning,
+      SystemHealthEventFilter.critical =>
+        severity == SystemHealthSeverity.critical,
+      SystemHealthEventFilter.warning =>
+        severity == SystemHealthSeverity.warning,
       SystemHealthEventFilter.open => status == SystemHealthEventStatus.open,
       SystemHealthEventFilter.acknowledged =>
         status == SystemHealthEventStatus.acknowledged,
-      SystemHealthEventFilter.resolved => status == SystemHealthEventStatus.resolved,
-      SystemHealthEventFilter.tenantImpacting => tenantImpactLevel.isTenantImpacting,
+      SystemHealthEventFilter.resolved =>
+        status == SystemHealthEventStatus.resolved,
+      SystemHealthEventFilter.tenantImpacting =>
+        tenantImpactLevel.isTenantImpacting,
     };
   }
 
   factory SystemHealthEvent.fromJson(Map<String, dynamic> json) {
-    final component = json['component']?.toString() ?? json['serviceName']?.toString();
+    final component =
+        json['component']?.toString() ?? json['serviceName']?.toString();
     final metrics = _asMap(json['metrics'] ?? json['metadataOnly']);
 
     return SystemHealthEvent(
       id: json['id']?.toString() ?? '',
-      severity: SystemHealthSeverity.fromBackendValue(json['severity']?.toString()),
+      severity: SystemHealthSeverity.fromBackendValue(
+        json['severity']?.toString(),
+      ),
       serviceName: component ?? 'platform',
-      status: SystemHealthEventStatus.fromBackendValue(json['status']?.toString()),
-      title: json['title']?.toString() ?? json['messageKey']?.toString() ?? component ?? '—',
-      summary: json['summary']?.toString() ?? json['detailSummary']?.toString() ?? '—',
+      status: SystemHealthEventStatus.fromBackendValue(
+        json['status']?.toString(),
+      ),
+      title:
+          json['title']?.toString() ??
+          json['messageKey']?.toString() ??
+          component ??
+          '—',
+      summary:
+          json['summary']?.toString() ??
+          json['detailSummary']?.toString() ??
+          '—',
       tenantImpactLevel: SystemHealthTenantImpactLevel.fromBackendValue(
         json['tenantImpactLevel']?.toString(),
       ),
       affectedCompanyName: json['affectedCompanyName']?.toString(),
       affectedCompanyId: json['affectedCompanyId']?.toString(),
+      affectedUserName: json['affectedUserName']?.toString(),
+      affectedUserEmail: json['affectedUserEmail']?.toString(),
       startedAt: parseDate(json['startedAt'] ?? json['createdAt']),
-      lastSeenAt: parseDate(json['lastSeenAt'] ?? json['updatedAt'] ?? json['createdAt']),
+      lastSeenAt: parseDate(
+        json['lastSeenAt'] ?? json['updatedAt'] ?? json['createdAt'],
+      ),
       resolvedAt: parseDate(json['resolvedAt']),
       failedJobsCount: _asInt(json['failedJobsCount']) ?? 0,
       aiDiagnosticSummary: json['aiDiagnosticSummary']?.toString(),
@@ -181,6 +209,8 @@ class SystemHealthEvent {
       tenantImpactLevel: tenantImpactLevel,
       affectedCompanyName: affectedCompanyName,
       affectedCompanyId: affectedCompanyId,
+      affectedUserName: affectedUserName,
+      affectedUserEmail: affectedUserEmail,
       startedAt: startedAt,
       lastSeenAt: lastSeenAt ?? this.lastSeenAt,
       resolvedAt: resolvedAt ?? this.resolvedAt,

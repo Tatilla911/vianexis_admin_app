@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/app_router.dart';
+import '../../../core/appearance/app_theme_mode_provider.dart';
 import '../../../core/auth/admin_auth_state.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/locale/app_locale_provider.dart';
@@ -16,7 +17,10 @@ class AdminAccountPasswordSection extends ConsumerWidget {
 
   static const int minPasswordLength = 16;
 
-  Future<void> _showChangePasswordDialog(BuildContext context, WidgetRef ref) async {
+  Future<void> _showChangePasswordDialog(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
     final l10n = AppLocalizations.of(context);
     final currentController = TextEditingController();
     final newController = TextEditingController();
@@ -52,7 +56,9 @@ class AdminAccountPasswordSection extends ConsumerWidget {
                           suffixIcon: IconButton(
                             onPressed: submitting
                                 ? null
-                                : () => setState(() => obscureCurrent = !obscureCurrent),
+                                : () => setState(
+                                    () => obscureCurrent = !obscureCurrent,
+                                  ),
                             icon: Icon(
                               obscureCurrent
                                   ? Icons.visibility_outlined
@@ -60,8 +66,9 @@ class AdminAccountPasswordSection extends ConsumerWidget {
                             ),
                           ),
                         ),
-                        validator: (value) =>
-                            (value == null || value.isEmpty) ? l10n.authRequiredField : null,
+                        validator: (value) => (value == null || value.isEmpty)
+                            ? l10n.authRequiredField
+                            : null,
                       ),
                       const SizedBox(height: 12),
                       TextFormField(
@@ -73,7 +80,8 @@ class AdminAccountPasswordSection extends ConsumerWidget {
                           suffixIcon: IconButton(
                             onPressed: submitting
                                 ? null
-                                : () => setState(() => obscureNew = !obscureNew),
+                                : () =>
+                                      setState(() => obscureNew = !obscureNew),
                             icon: Icon(
                               obscureNew
                                   ? Icons.visibility_outlined
@@ -101,7 +109,9 @@ class AdminAccountPasswordSection extends ConsumerWidget {
                           suffixIcon: IconButton(
                             onPressed: submitting
                                 ? null
-                                : () => setState(() => obscureConfirm = !obscureConfirm),
+                                : () => setState(
+                                    () => obscureConfirm = !obscureConfirm,
+                                  ),
                             icon: Icon(
                               obscureConfirm
                                   ? Icons.visibility_outlined
@@ -125,8 +135,12 @@ class AdminAccountPasswordSection extends ConsumerWidget {
               ),
               actions: [
                 TextButton(
-                  onPressed: submitting ? null : () => Navigator.of(dialogContext).pop(false),
-                  child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+                  onPressed: submitting
+                      ? null
+                      : () => Navigator.of(dialogContext).pop(false),
+                  child: Text(
+                    MaterialLocalizations.of(context).cancelButtonLabel,
+                  ),
                 ),
                 FilledButton(
                   onPressed: submitting
@@ -145,13 +159,17 @@ class AdminAccountPasswordSection extends ConsumerWidget {
                             Navigator.of(dialogContext).pop(true);
                           } else {
                             setState(() => submitting = false);
-                            final errorKey =
-                                ref.read(adminAuthProvider).errorMessageKey;
+                            final errorKey = ref
+                                .read(adminAuthProvider)
+                                .errorMessageKey;
                             if (errorKey != null) {
                               ScaffoldMessenger.of(dialogContext).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    resolveLocalizationKey(dialogContext, errorKey),
+                                    resolveLocalizationKey(
+                                      dialogContext,
+                                      errorKey,
+                                    ),
                                   ),
                                 ),
                               );
@@ -220,7 +238,8 @@ class AdminPinSettingsSection extends ConsumerStatefulWidget {
       _AdminPinSettingsSectionState();
 }
 
-class _AdminPinSettingsSectionState extends ConsumerState<AdminPinSettingsSection> {
+class _AdminPinSettingsSectionState
+    extends ConsumerState<AdminPinSettingsSection> {
   bool _hasPin = false;
   bool _loading = true;
 
@@ -337,12 +356,15 @@ class _AdminPinSettingsSectionState extends ConsumerState<AdminPinSettingsSectio
     } on AdminDevicePinException catch (error) {
       if (!mounted) return;
       final message = switch (error) {
-        AdminDevicePinException.invalidCurrentPin => l10n.devicePinInvalidCurrent,
+        AdminDevicePinException.invalidCurrentPin =>
+          l10n.devicePinInvalidCurrent,
         AdminDevicePinException.invalidLength => l10n.devicePinInvalidLength,
         AdminDevicePinException.nonNumeric => l10n.devicePinNonNumeric,
         AdminDevicePinException.mismatch => l10n.devicePinMismatch,
       };
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     }
   }
 
@@ -469,9 +491,59 @@ class AdminLanguageSettingsSection extends ConsumerWidget {
                 selected: {selected},
                 onSelectionChanged: (values) {
                   final code = values.first;
+                  ref.read(appLocaleProvider.notifier).setLocale(Locale(code));
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class AdminAppearanceSettingsSection extends ConsumerWidget {
+  const AdminAppearanceSettingsSection({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final themeMode = ref.watch(appThemeModeProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        VianexisSectionHeader(title: l10n.settingsAppearanceSection),
+        const SizedBox(height: 12),
+        VianexisAdminCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(l10n.settingsAppearanceBody),
+              const SizedBox(height: 12),
+              SegmentedButton<ThemeMode>(
+                segments: [
+                  ButtonSegment(
+                    value: ThemeMode.system,
+                    label: Text(l10n.settingsAppearanceSystem),
+                    icon: const Icon(Icons.brightness_auto_outlined),
+                  ),
+                  ButtonSegment(
+                    value: ThemeMode.light,
+                    label: Text(l10n.settingsAppearanceDay),
+                    icon: const Icon(Icons.light_mode_outlined),
+                  ),
+                  ButtonSegment(
+                    value: ThemeMode.dark,
+                    label: Text(l10n.settingsAppearanceNight),
+                    icon: const Icon(Icons.dark_mode_outlined),
+                  ),
+                ],
+                selected: {themeMode},
+                onSelectionChanged: (values) {
                   ref
-                      .read(appLocaleProvider.notifier)
-                      .setLocale(Locale(code));
+                      .read(appThemeModeProvider.notifier)
+                      .setThemeMode(values.first);
                 },
               ),
             ],

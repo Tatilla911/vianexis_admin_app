@@ -120,6 +120,9 @@ String resolveRegistrationKey(
     'registrationFieldSubmittedAt' => l10n.registrationFieldSubmittedAt,
     'registrationFieldReviewedAt' => l10n.registrationFieldReviewedAt,
     'registrationFieldReviewedBy' => l10n.registrationFieldReviewedBy,
+    'registrationFieldReviewNotes' => l10n.registrationFieldReviewNotes,
+    'registrationSectionDecision' => l10n.registrationSectionDecision,
+    'registrationRejectionReasonTitle' => l10n.registrationRejectionReasonTitle,
     'registrationFieldAiRecommendation' =>
       l10n.registrationFieldAiRecommendation,
     'registrationFieldAiSummary' => l10n.registrationFieldAiSummary,
@@ -2178,6 +2181,12 @@ String resolveDriverAccessKey(BuildContext context, String key) {
     'driverAccessPendingRejectFailed' => l10n.driverAccessPendingRejectFailed,
     'driverAccessPendingCompanyCode' => l10n.driverAccessPendingCompanyCode,
     'driverAccessPendingCreatedAt' => l10n.driverAccessPendingCreatedAt,
+    'driverAccessRejectedTitle' => l10n.driverAccessRejectedTitle,
+    'driverAccessRejectedEmpty' => l10n.driverAccessRejectedEmpty,
+    'driverAccessRejectedLoadFailed' => l10n.driverAccessRejectedLoadFailed,
+    'driverAccessStatusRejected' => l10n.driverAccessStatusRejected,
+    'driverAccessRejectedAt' => l10n.driverAccessRejectedAt,
+    'driverAccessRejectedReason' => l10n.driverAccessRejectedReason,
     'driverAccessNoActiveDrivers' => l10n.driverAccessNoActiveDrivers,
     _ => l10n.errorGenericBody,
   };

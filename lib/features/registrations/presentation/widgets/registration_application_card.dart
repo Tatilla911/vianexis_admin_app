@@ -10,10 +10,7 @@ import '../../domain/registration_application_status.dart';
 import 'ai_risk_badge.dart';
 
 class RegistrationApplicationCard extends StatelessWidget {
-  const RegistrationApplicationCard({
-    super.key,
-    required this.application,
-  });
+  const RegistrationApplicationCard({super.key, required this.application});
 
   final RegistrationApplication application;
 
@@ -21,14 +18,17 @@ class RegistrationApplicationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final submitted = application.submittedAt;
     final dateLabel = submitted != null
-        ? DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(submitted)
+        ? DateFormat.yMMMd(
+            Localizations.localeOf(context).toString(),
+          ).format(submitted)
         : '—';
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () => context.push(AdminRoutes.registrationDetail(application.id)),
+        onTap: () =>
+            context.push(AdminRoutes.registrationDetail(application.id)),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -76,6 +76,16 @@ class RegistrationApplicationCard extends StatelessWidget {
                   ),
                 ],
               ),
+              if (application.status.isRejected &&
+                  (application.reviewNotes?.trim().isNotEmpty ?? false)) ...[
+                const SizedBox(height: 8),
+                Text(
+                  application.reviewNotes!.trim(),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
             ],
           ),
         ),

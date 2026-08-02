@@ -23,25 +23,39 @@ enum PlatformAuditActionType {
     if (raw == null || raw.trim().isEmpty) return unknown;
     final value = raw.trim().toLowerCase();
     return switch (value) {
-      'login' => login,
-      'logout' => logout,
-      'login_failed' => loginFailed,
-      'registration_approved' || 'platform.registration.approved' =>
-        registrationApproved,
-      'registration_rejected' || 'platform.registration.rejected' =>
-        registrationRejected,
-      'registration_info_requested' || 'platform.registration.request_info' =>
-        registrationInfoRequested,
+      'login' ||
+      'auth_login' => login,
+      'logout' ||
+      'auth_logout' => logout,
+      'login_failed' ||
+      'auth_login_failed' => loginFailed,
+      'registration_approved' ||
+      'platform.registration.approved' ||
+      'company_registration_approved' ||
+      'driver_registration_approved' ||
+      'public_application_approved' => registrationApproved,
+      'registration_rejected' ||
+      'platform.registration.rejected' ||
+      'company_registration_rejected' ||
+      'driver_registration_rejected' ||
+      'public_application_rejected' => registrationRejected,
+      'registration_info_requested' ||
+      'platform.registration.request_info' => registrationInfoRequested,
       'support_ticket_acknowledged' => supportTicketAcknowledged,
       'support_ticket_closed' => supportTicketClosed,
-      'support_access_granted' || 'platform.support_grant.created' =>
-        supportAccessGranted,
+      'support_access_granted' ||
+      'platform.support_grant.created' => supportAccessGranted,
       'support_access_revoked' => supportAccessRevoked,
-      'system_health_acknowledged' || 'platform.system_health.viewed' =>
-        systemHealthAcknowledged,
-      'system_health_escalated' => systemHealthEscalated,
-      'billing_updated' => billingUpdated,
-      'role_changed' => roleChanged,
+      'system_health_acknowledged' ||
+      'platform.system_health.viewed' => systemHealthAcknowledged,
+      'system_health_escalated' ||
+      'system_health_support_ticket_created' => systemHealthEscalated,
+      'billing_updated' ||
+      'subscription_status_changed' ||
+      'pricing_intake_status_changed' => billingUpdated,
+      'role_changed' ||
+      'platform_admin_status_changed' ||
+      'driver_status_changed' => roleChanged,
       'permission_denied' => permissionDenied,
       'export_requested' => exportRequested,
       'api_key_created' => apiKeyCreated,
@@ -55,23 +69,30 @@ enum PlatformAuditActionType {
       PlatformAuditActionType.login => 'auditLogActionLogin',
       PlatformAuditActionType.logout => 'auditLogActionLogout',
       PlatformAuditActionType.loginFailed => 'auditLogActionLoginFailed',
-      PlatformAuditActionType.registrationApproved => 'auditLogActionRegistrationApproved',
-      PlatformAuditActionType.registrationRejected => 'auditLogActionRegistrationRejected',
+      PlatformAuditActionType.registrationApproved =>
+        'auditLogActionRegistrationApproved',
+      PlatformAuditActionType.registrationRejected =>
+        'auditLogActionRegistrationRejected',
       PlatformAuditActionType.registrationInfoRequested =>
         'auditLogActionRegistrationInfoRequested',
       PlatformAuditActionType.supportTicketAcknowledged =>
         'auditLogActionSupportTicketAcknowledged',
-      PlatformAuditActionType.supportTicketClosed => 'auditLogActionSupportTicketClosed',
-      PlatformAuditActionType.supportAccessGranted => 'auditLogActionSupportAccessGranted',
-      PlatformAuditActionType.supportAccessRevoked => 'auditLogActionSupportAccessRevoked',
+      PlatformAuditActionType.supportTicketClosed =>
+        'auditLogActionSupportTicketClosed',
+      PlatformAuditActionType.supportAccessGranted =>
+        'auditLogActionSupportAccessGranted',
+      PlatformAuditActionType.supportAccessRevoked =>
+        'auditLogActionSupportAccessRevoked',
       PlatformAuditActionType.systemHealthAcknowledged =>
         'auditLogActionSystemHealthAcknowledged',
       PlatformAuditActionType.systemHealthEscalated =>
         'auditLogActionSystemHealthEscalated',
       PlatformAuditActionType.billingUpdated => 'auditLogActionBillingUpdated',
       PlatformAuditActionType.roleChanged => 'auditLogActionRoleChanged',
-      PlatformAuditActionType.permissionDenied => 'auditLogActionPermissionDenied',
-      PlatformAuditActionType.exportRequested => 'auditLogActionExportRequested',
+      PlatformAuditActionType.permissionDenied =>
+        'auditLogActionPermissionDenied',
+      PlatformAuditActionType.exportRequested =>
+        'auditLogActionExportRequested',
       PlatformAuditActionType.apiKeyCreated => 'auditLogActionApiKeyCreated',
       PlatformAuditActionType.apiKeyRevoked => 'auditLogActionApiKeyRevoked',
       PlatformAuditActionType.unknown => 'auditLogActionUnknown',

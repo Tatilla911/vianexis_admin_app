@@ -2307,6 +2307,28 @@
   "settingsLanguageBody": "Choose the admin app display language.",
   "settingsLanguageHu": "Hungarian",
   "settingsLanguageEn": "English",
+  "settingsAppearanceSection": "Appearance",
+  "settingsAppearanceBody": "Choose day (light), night (dark), or follow the system setting.",
+  "settingsAppearanceSystem": "System",
+  "settingsAppearanceDay": "Day",
+  "settingsAppearanceNight": "Night",
+  "settingsSoundEventCustomSound": "Sound for this event",
+  "settingsSoundEventUseCategoryDefault": "Category default",
+  "registrationFieldReviewNotes": "Review notes",
+  "registrationSectionDecision": "Decision",
+  "registrationRejectionReasonTitle": "Rejection details",
+  "applicationsFilterRejected": "Rejected",
+  "applicationRejectReasonTitle": "Reject application",
+  "applicationRejectReasonHint": "Reason shown to the applicant and stored on the record",
+  "applicationRejectConfirm": "Reject",
+  "applicationFieldReviewedAt": "Reviewed",
+  "applicationFieldReviewNotes": "Reason",
+  "driverAccessRejectedTitle": "Rejected driver applications",
+  "driverAccessRejectedEmpty": "No rejected driver applications.",
+  "driverAccessRejectedLoadFailed": "Could not load rejected driver applications.",
+  "driverAccessStatusRejected": "Rejected",
+  "driverAccessRejectedAt": "Rejected at",
+  "driverAccessRejectedReason": "Reason",
   "devicePinSectionTitle": "Device PIN",
   "devicePinSectionBody": "Optional local PIN for this device. Does not replace backend sign-in.",
   "devicePinSetAction": "Set PIN",
@@ -2644,5 +2666,63 @@
   "systemMonitoringActionChangeStatus": "Change status",
   "systemMonitoringActionSuccess": "Monitoring action saved.",
   "systemMonitoringActionError": "Could not save monitoring action.",
-  "systemMonitoringActionAuditNotice": "This action will be recorded in the platform audit log."
+  "systemMonitoringActionAuditNotice": "This action will be recorded in the platform audit log.",
+"eventLogPdfArchiveTitle": "Event log PDF archive",
+  "eventLogPdfArchiveBody": "Store filtered event-log snapshots as ViaNexis-styled PDFs. Open to zoom, download, or share. Accented characters use Unicode fonts.",
+  "eventLogPdfArchiveEmpty": "No stored event-log PDFs yet.",
+  "eventLogPdfArchiveLoadFailed": "Could not load the PDF archive.",
+  "eventLogPdfTitle": "ViaNexis event log",
+  "eventLogPdfSubtitle": "Platform audit and operational activity snapshot",
+  "eventLogPdfGeneratedAt": "Generated: {when}",
+  "@eventLogPdfGeneratedAt": {
+    "placeholders": {
+      "when": { "type": "String" }
+    }
+  },
+  "eventLogPdfEmpty": "No events matched the current filters.",
+  "eventLogPdfGenerate": "Save current filter as PDF",
+  "eventLogPdfSaved": "Event-log PDF saved to the archive.",
+  "eventLogPdfSaveFailed": "Could not save the event-log PDF.",
+  "eventLogPdfShare": "Share PDF",
+  "eventLogPdfShareFailed": "Could not share the PDF.",
+  "eventLogPdfDownload": "Download / export PDF",
+  "eventLogPdfDeleteTitle": "Delete PDF",
+  "eventLogPdfDeleteBody": "Delete {fileName} from the archive?",
+  "@eventLogPdfDeleteBody": {
+    "placeholders": {
+      "fileName": { "type": "String" }
+    }
+  },
+  "eventLogPdfDeleteAllTitle": "Delete activity PDFs",
+  "eventLogPdfDeleteAllBody": "Delete all stored event-log activity PDFs from this device?",
+  "eventLogPdfDeleteConfirm": "Delete",
+  "eventLogPdfDeleted": "Deleted.",
+  "eventLogPdfEntryCount": "{count} events",
+  "@eventLogPdfEntryCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "notificationsDeleteMenu": "Delete notifications / activities",
+  "notificationsDeleteTitle": "Delete notification",
+  "notificationsDeleteBody": "Delete this notification permanently?",
+  "notificationsDeleteAllTitle": "Delete all notifications",
+  "notificationsDeleteAllBody": "Delete every notification in your inbox?",
+  "notificationsDeleteBothTitle": "Delete notifications and activity PDFs",
+  "notificationsDeleteBothBody": "Delete all inbox notifications and all stored activity PDFs?",
+  "notificationsDeleteConfirm": "Delete",
+  "notificationsDeleted": "Notification(s) deleted.",
+  "notificationsDeletedBoth": "Notifications and activity PDFs deleted.",
+  "systemHealthFieldAffectedUser": "Affected user",
+  "systemHealthNotifyCompanyTitle": "Notify company",
+  "systemHealthNotifyCompanyBody": "Send an automatic acknowledgement to {company} (user: {user}) that we detected the issue, are investigating, will fix it ASAP, and will notify them when status changes?",
+  "@systemHealthNotifyCompanyBody": {
+    "placeholders": {
+      "company": { "type": "String" },
+      "user": { "type": "String" }
+    }
+  },
+  "systemHealthNotifyCompanyConfirm": "Send acknowledgement",
+  "systemHealthNotifyCompanySuccess": "Acknowledgement email sent.",
+  "systemHealthNotifyCompanyFailed": "Could not send the acknowledgement email."
 }

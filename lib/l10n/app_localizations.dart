@@ -9162,6 +9162,138 @@ abstract class AppLocalizations {
   /// **'English'**
   String get settingsLanguageEn;
 
+  /// No description provided for @settingsAppearanceSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsAppearanceSection;
+
+  /// No description provided for @settingsAppearanceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose day (light), night (dark), or follow the system setting.'**
+  String get settingsAppearanceBody;
+
+  /// No description provided for @settingsAppearanceSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsAppearanceSystem;
+
+  /// No description provided for @settingsAppearanceDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get settingsAppearanceDay;
+
+  /// No description provided for @settingsAppearanceNight.
+  ///
+  /// In en, this message translates to:
+  /// **'Night'**
+  String get settingsAppearanceNight;
+
+  /// No description provided for @settingsSoundEventCustomSound.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound for this event'**
+  String get settingsSoundEventCustomSound;
+
+  /// No description provided for @settingsSoundEventUseCategoryDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Category default'**
+  String get settingsSoundEventUseCategoryDefault;
+
+  /// No description provided for @registrationFieldReviewNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Review notes'**
+  String get registrationFieldReviewNotes;
+
+  /// No description provided for @registrationSectionDecision.
+  ///
+  /// In en, this message translates to:
+  /// **'Decision'**
+  String get registrationSectionDecision;
+
+  /// No description provided for @registrationRejectionReasonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejection details'**
+  String get registrationRejectionReasonTitle;
+
+  /// No description provided for @applicationsFilterRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get applicationsFilterRejected;
+
+  /// No description provided for @applicationRejectReasonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject application'**
+  String get applicationRejectReasonTitle;
+
+  /// No description provided for @applicationRejectReasonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason shown to the applicant and stored on the record'**
+  String get applicationRejectReasonHint;
+
+  /// No description provided for @applicationRejectConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get applicationRejectConfirm;
+
+  /// No description provided for @applicationFieldReviewedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewed'**
+  String get applicationFieldReviewedAt;
+
+  /// No description provided for @applicationFieldReviewNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get applicationFieldReviewNotes;
+
+  /// No description provided for @driverAccessRejectedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected driver applications'**
+  String get driverAccessRejectedTitle;
+
+  /// No description provided for @driverAccessRejectedEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No rejected driver applications.'**
+  String get driverAccessRejectedEmpty;
+
+  /// No description provided for @driverAccessRejectedLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load rejected driver applications.'**
+  String get driverAccessRejectedLoadFailed;
+
+  /// No description provided for @driverAccessStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get driverAccessStatusRejected;
+
+  /// No description provided for @driverAccessRejectedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected at'**
+  String get driverAccessRejectedAt;
+
+  /// No description provided for @driverAccessRejectedReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get driverAccessRejectedReason;
+
   /// No description provided for @devicePinSectionTitle.
   ///
   /// In en, this message translates to:
@@ -10733,6 +10865,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This action will be recorded in the platform audit log.'**
   String get systemMonitoringActionAuditNotice;
+
+  /// No description provided for @eventLogPdfArchiveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Event log PDF archive'**
+  String get eventLogPdfArchiveTitle;
+
+  /// No description provided for @eventLogPdfArchiveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Store filtered event-log snapshots as ViaNexis-styled PDFs. Open to zoom, download, or share. Accented characters use Unicode fonts.'**
+  String get eventLogPdfArchiveBody;
+
+  /// No description provided for @eventLogPdfArchiveEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No stored event-log PDFs yet.'**
+  String get eventLogPdfArchiveEmpty;
+
+  /// No description provided for @eventLogPdfArchiveLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the PDF archive.'**
+  String get eventLogPdfArchiveLoadFailed;
+
+  /// No description provided for @eventLogPdfTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'ViaNexis event log'**
+  String get eventLogPdfTitle;
+
+  /// No description provided for @eventLogPdfSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform audit and operational activity snapshot'**
+  String get eventLogPdfSubtitle;
+
+  /// No description provided for @eventLogPdfGeneratedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Generated: {when}'**
+  String eventLogPdfGeneratedAt(String when);
+
+  /// No description provided for @eventLogPdfEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No events matched the current filters.'**
+  String get eventLogPdfEmpty;
+
+  /// No description provided for @eventLogPdfGenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Save current filter as PDF'**
+  String get eventLogPdfGenerate;
+
+  /// No description provided for @eventLogPdfSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Event-log PDF saved to the archive.'**
+  String get eventLogPdfSaved;
+
+  /// No description provided for @eventLogPdfSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save the event-log PDF.'**
+  String get eventLogPdfSaveFailed;
+
+  /// No description provided for @eventLogPdfShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share PDF'**
+  String get eventLogPdfShare;
+
+  /// No description provided for @eventLogPdfShareFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not share the PDF.'**
+  String get eventLogPdfShareFailed;
+
+  /// No description provided for @eventLogPdfDownload.
+  ///
+  /// In en, this message translates to:
+  /// **'Download / export PDF'**
+  String get eventLogPdfDownload;
+
+  /// No description provided for @eventLogPdfDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete PDF'**
+  String get eventLogPdfDeleteTitle;
+
+  /// No description provided for @eventLogPdfDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {fileName} from the archive?'**
+  String eventLogPdfDeleteBody(String fileName);
+
+  /// No description provided for @eventLogPdfDeleteAllTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete activity PDFs'**
+  String get eventLogPdfDeleteAllTitle;
+
+  /// No description provided for @eventLogPdfDeleteAllBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all stored event-log activity PDFs from this device?'**
+  String get eventLogPdfDeleteAllBody;
+
+  /// No description provided for @eventLogPdfDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get eventLogPdfDeleteConfirm;
+
+  /// No description provided for @eventLogPdfDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted.'**
+  String get eventLogPdfDeleted;
+
+  /// No description provided for @eventLogPdfEntryCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} events'**
+  String eventLogPdfEntryCount(int count);
+
+  /// No description provided for @notificationsDeleteMenu.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete notifications / activities'**
+  String get notificationsDeleteMenu;
+
+  /// No description provided for @notificationsDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete notification'**
+  String get notificationsDeleteTitle;
+
+  /// No description provided for @notificationsDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this notification permanently?'**
+  String get notificationsDeleteBody;
+
+  /// No description provided for @notificationsDeleteAllTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all notifications'**
+  String get notificationsDeleteAllTitle;
+
+  /// No description provided for @notificationsDeleteAllBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete every notification in your inbox?'**
+  String get notificationsDeleteAllBody;
+
+  /// No description provided for @notificationsDeleteBothTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete notifications and activity PDFs'**
+  String get notificationsDeleteBothTitle;
+
+  /// No description provided for @notificationsDeleteBothBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all inbox notifications and all stored activity PDFs?'**
+  String get notificationsDeleteBothBody;
+
+  /// No description provided for @notificationsDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get notificationsDeleteConfirm;
+
+  /// No description provided for @notificationsDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification(s) deleted.'**
+  String get notificationsDeleted;
+
+  /// No description provided for @notificationsDeletedBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications and activity PDFs deleted.'**
+  String get notificationsDeletedBoth;
+
+  /// No description provided for @systemHealthFieldAffectedUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Affected user'**
+  String get systemHealthFieldAffectedUser;
+
+  /// No description provided for @systemHealthNotifyCompanyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notify company'**
+  String get systemHealthNotifyCompanyTitle;
+
+  /// No description provided for @systemHealthNotifyCompanyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Send an automatic acknowledgement to {company} (user: {user}) that we detected the issue, are investigating, will fix it ASAP, and will notify them when status changes?'**
+  String systemHealthNotifyCompanyBody(String company, String user);
+
+  /// No description provided for @systemHealthNotifyCompanyConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Send acknowledgement'**
+  String get systemHealthNotifyCompanyConfirm;
+
+  /// No description provided for @systemHealthNotifyCompanySuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledgement email sent.'**
+  String get systemHealthNotifyCompanySuccess;
+
+  /// No description provided for @systemHealthNotifyCompanyFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not send the acknowledgement email.'**
+  String get systemHealthNotifyCompanyFailed;
 }
 
 class _AppLocalizationsDelegate
