@@ -299,7 +299,7 @@ abstract class AppLocalizations {
   /// No description provided for @authPasswordChangeWeakPassword.
   ///
   /// In en, this message translates to:
-  /// **'The new password must be at least 16 characters.'**
+  /// **'The new password must be at least 10 characters, with upper and lower case and a number.'**
   String get authPasswordChangeWeakPassword;
 
   /// No description provided for @authPasswordChangeUnchanged.
@@ -359,7 +359,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsPasswordMinLengthValidation.
   ///
   /// In en, this message translates to:
-  /// **'Password must be at least 16 characters.'**
+  /// **'Password must be at least 10 characters, with upper and lower case and a number.'**
   String get settingsPasswordMinLengthValidation;
 
   /// No description provided for @settingsPasswordMismatchValidation.
@@ -4849,6 +4849,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Companies'**
   String get navCompanies;
+
+  /// No description provided for @navDrivers.
+  ///
+  /// In en, this message translates to:
+  /// **'Drivers'**
+  String get navDrivers;
 
   /// No description provided for @platformCompaniesTitle.
   ///

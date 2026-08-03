@@ -15,7 +15,7 @@ import '../../../l10n/app_localizations.dart';
 class AdminAccountPasswordSection extends ConsumerWidget {
   const AdminAccountPasswordSection({super.key});
 
-  static const int minPasswordLength = 16;
+  static const int minPasswordLength = 8;
 
   Future<void> _showChangePasswordDialog(
     BuildContext context,
@@ -94,6 +94,14 @@ class AdminAccountPasswordSection extends ConsumerWidget {
                             return l10n.authRequiredField;
                           }
                           if (value.length < minPasswordLength) {
+                            return l10n.settingsPasswordMinLengthValidation;
+                          }
+                          final hasLower = value.contains(RegExp(r'[a-z]'));
+                          final hasUpper = value.contains(RegExp(r'[A-Z]'));
+                          final hasSpecial = value.contains(
+                            RegExp(r'[!@#$%^&*()_+\-=.,?:;]|[^A-Za-z0-9\s]'),
+                          );
+                          if (!hasLower || !hasUpper || !hasSpecial) {
                             return l10n.settingsPasswordMinLengthValidation;
                           }
                           return null;

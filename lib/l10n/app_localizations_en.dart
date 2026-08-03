@@ -117,7 +117,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authPasswordChangeWeakPassword =>
-      'The new password must be at least 16 characters.';
+      'The new password must be at least 8 characters, with lower case, upper case, and a special character.';
 
   @override
   String get authPasswordChangeUnchanged =>
@@ -151,7 +151,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsPasswordMinLengthValidation =>
-      'Password must be at least 16 characters.';
+      'Password must be at least 8 characters, with lower case, upper case, and a special character.';
 
   @override
   String get settingsPasswordMismatchValidation => 'Passwords do not match.';
@@ -2598,6 +2598,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navCompanies => 'Companies';
+
+  @override
+  String get navDrivers => 'Drivers';
 
   @override
   String get platformCompaniesTitle => 'Companies';

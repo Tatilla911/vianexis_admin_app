@@ -450,6 +450,19 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 const NoTransitionPage(child: OperationsScreen()),
           ),
           GoRoute(
+            path: AdminRoutes.drivers,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: DriverAccessScreen()),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => DriverAccessDetailScreen(
+                  driverId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
             path: AdminRoutes.driverAccess,
             pageBuilder: (context, state) =>
                 const NoTransitionPage(child: DriverAccessScreen()),
@@ -516,6 +529,7 @@ abstract final class AdminRoutes {
   static const registrations = '/registrations';
   static const applications = '/applications';
   static const companies = '/companies';
+  static const drivers = '/drivers';
   static const billing = '/billing';
   static const bulkOnboarding = '/bulk-onboarding';
   static const bulkOnboardingUpload = '/bulk-onboarding/upload';
@@ -599,7 +613,7 @@ abstract final class AdminRoutes {
 
   static String notificationDetail(String id) => '$notifications/$id';
 
-  static String driverAccessDetail(String id) => '$driverAccess/$id';
+  static String driverAccessDetail(String id) => '$drivers/$id';
 
   static String securityEventDetail(String id) =>
       '$securityCenter/events/${Uri.encodeComponent(id)}';
@@ -609,11 +623,13 @@ abstract final class AdminRoutes {
       return AdminDestination.settings;
     }
     if (location.startsWith(operations) ||
-        location.startsWith(driverAccess) ||
         location.startsWith(tripsOverview) ||
         location.startsWith(exchangeRecords) ||
         location.startsWith(notificationStatus)) {
       return AdminDestination.operations;
+    }
+    if (location.startsWith(drivers) || location.startsWith(driverAccess)) {
+      return AdminDestination.drivers;
     }
     if (location.startsWith(actionCenter)) {
       return AdminDestination.actionCenter;
@@ -680,7 +696,8 @@ abstract final class AdminRoutes {
       adminUsers => AdminDestination.adminUsers,
       releaseCenter => AdminDestination.releaseCenter,
       operations => AdminDestination.operations,
-      driverAccess => AdminDestination.operations,
+      drivers => AdminDestination.drivers,
+      driverAccess => AdminDestination.drivers,
       tripsOverview => AdminDestination.operations,
       exchangeRecords => AdminDestination.operations,
       notificationStatus => AdminDestination.operations,

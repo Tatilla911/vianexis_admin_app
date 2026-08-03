@@ -50,6 +50,7 @@ enum AdminDestination {
   registrations,
   bulkOnboarding,
   companies,
+  drivers,
   billing,
   aiReviews,
   supportTickets,
@@ -75,6 +76,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.dashboard ||
         AdminDestination.actionCenter ||
         AdminDestination.companies ||
+        AdminDestination.drivers ||
         AdminDestination.billing ||
         AdminDestination.aiReviews ||
         AdminDestination.supportTickets ||
@@ -95,6 +97,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.dashboard ||
         AdminDestination.actionCenter ||
         AdminDestination.companies ||
+        AdminDestination.drivers ||
         AdminDestination.registrations ||
         AdminDestination.bulkOnboarding ||
         AdminDestination.aiReviews ||
@@ -108,6 +111,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.dashboard ||
         AdminDestination.actionCenter ||
         AdminDestination.companies ||
+        AdminDestination.drivers ||
         AdminDestination.billing ||
         AdminDestination.customerCommunications ||
         AdminDestination.publicIntakes ||

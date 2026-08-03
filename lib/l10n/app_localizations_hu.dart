@@ -117,7 +117,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get authPasswordChangeWeakPassword =>
-      'Az új jelszónak legalább 16 karakter hosszúnak kell lennie.';
+      'Az új jelszónak legalább 8 karakter hosszúnak kell lennie, kisbetűvel, nagybetűvel és speciális karakterrel.';
 
   @override
   String get authPasswordChangeUnchanged =>
@@ -151,7 +151,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get settingsPasswordMinLengthValidation =>
-      'A jelszónak legalább 16 karakter hosszúnak kell lennie.';
+      'A jelszónak legalább 8 karakter hosszúnak kell lennie, kisbetűvel, nagybetűvel és speciális karakterrel.';
 
   @override
   String get settingsPasswordMismatchValidation => 'A jelszavak nem egyeznek.';
@@ -2636,6 +2636,9 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get navCompanies => 'Cégek';
+
+  @override
+  String get navDrivers => 'Sofőrök';
 
   @override
   String get platformCompaniesTitle => 'Cégek';

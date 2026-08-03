@@ -2,11 +2,12 @@ import '../auth/admin_user.dart';
 import '../../app/app_router.dart';
 
 /// Primary bottom-nav destinations on phones (max four before "More").
+/// Operational hubs: Overview, Companies, Drivers, Notifications + More.
 const mobilePrimaryDestinations = <AdminDestination>[
   AdminDestination.dashboard,
-  AdminDestination.actionCenter,
-  AdminDestination.registrations,
-  AdminDestination.customerCommunications,
+  AdminDestination.companies,
+  AdminDestination.drivers,
+  AdminDestination.notifications,
 ];
 
 const mobileBottomNavMaxItems = 5;
