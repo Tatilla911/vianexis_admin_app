@@ -7045,4 +7045,84 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get qrCodesSendSkipped =>
       'Meghívó létrehozva. Az e-mail nem lett elküldve (kihagyva).';
+
+  @override
+  String get platformCompanyMembersSection => 'Felhasználók';
+
+  @override
+  String get platformCompanyMembersEmpty =>
+      'Nincs a szűrőnek megfelelő felhasználó.';
+
+  @override
+  String get platformCompanyMembersLoadError =>
+      'A cég felhasználói nem tölthetők be.';
+
+  @override
+  String get platformCompanyMembersFilterAll => 'Összes';
+
+  @override
+  String get platformCompanyMembersFilterOwners => 'Tulajdonosok';
+
+  @override
+  String get platformCompanyMembersFilterDispatchers => 'Diszpécserek';
+
+  @override
+  String get platformCompanyMembersFilterDrivers => 'Sofőrök';
+
+  @override
+  String get platformCompanyMembersFilterWorkshop => 'Műhely';
+
+  @override
+  String get platformCompanyMembersFilterDocumentation => 'Dokumentáció';
+
+  @override
+  String get platformCompanyMembersFilterOther => 'Egyéb';
+
+  @override
+  String get platformCompanyRoleCompanyOwner => 'Cégtulajdonos';
+
+  @override
+  String get platformCompanyRoleCompanyAdmin => 'Cégadminisztrátor';
+
+  @override
+  String get platformCompanyRoleDispatcher => 'Diszpécser';
+
+  @override
+  String get platformCompanyRoleDriver => 'Sofőr';
+
+  @override
+  String get platformCompanyRoleWorkshop => 'Műhely';
+
+  @override
+  String get platformCompanyRoleDocumentation => 'Dokumentáció';
+
+  @override
+  String get platformCompanyRoleClaimsInsurance => 'Kárügy / biztosítás';
+
+  @override
+  String get platformCompanyRoleFinance => 'Pénzügy';
+
+  @override
+  String get platformCompanyRoleCompanySupport => 'Céges support';
+
+  @override
+  String get platformCompanyRoleSubcontractorManager => 'Alvállalkozó-kezelő';
+
+  @override
+  String get platformCompanyRoleUnknown => 'Ismeretlen szerepkör';
+
+  @override
+  String platformCompanyMemberStatus(String status) {
+    return 'Státusz: $status';
+  }
+
+  @override
+  String platformCompanyMemberInvitationStatus(String status) {
+    return 'Meghívó: $status';
+  }
+
+  @override
+  String platformCompanyMemberLastLogin(String date) {
+    return 'Utolsó bejelentkezés: $date';
+  }
 }

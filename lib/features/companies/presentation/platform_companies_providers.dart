@@ -4,6 +4,7 @@ import '../../../core/auth/admin_user.dart';
 import '../data/platform_companies_repository.dart';
 import '../domain/company_data_amendment.dart';
 import '../domain/platform_company.dart';
+import '../domain/platform_company_member.dart';
 import '../domain/platform_company_status.dart';
 import '../domain/platform_company_status_request.dart';
 import '../domain/platform_company_summary.dart';
@@ -122,6 +123,36 @@ final platformCompanyUsersSummaryProvider = FutureProvider.autoDispose
       return ref
           .watch(platformCompaniesRepositoryProvider)
           .fetchUsersSummary(id);
+    });
+
+
+final platformCompanyMembersProvider = FutureProvider.autoDispose
+    .family<PlatformCompanyMembersPage, PlatformCompanyMembersQuery>((
+      ref,
+      query,
+    ) async {
+      final page = await ref
+          .watch(platformCompaniesRepositoryProvider)
+          .listCompanyUsers(
+            id: query.companyId,
+            role: query.roleFilter.apiRole,
+            limit: 200,
+          );
+      if (query.roleFilter == PlatformCompanyMemberRoleFilter.all ||
+          query.roleFilter.apiRole != null) {
+        return page;
+      }
+      final filtered = page.items
+          .where(query.roleFilter.matches)
+          .toList(growable: false);
+      return PlatformCompanyMembersPage(
+        companyId: page.companyId,
+        items: filtered,
+        total: filtered.length,
+        limit: page.limit,
+        offset: page.offset,
+        metadataOnly: page.metadataOnly,
+      );
     });
 
 final platformCompanySystemSummaryProvider = FutureProvider.autoDispose

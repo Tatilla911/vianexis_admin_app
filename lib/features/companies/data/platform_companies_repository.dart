@@ -7,6 +7,7 @@ import '../domain/company_data_amendment.dart';
 import '../domain/platform_company.dart';
 import '../domain/platform_company_status.dart';
 import '../domain/platform_company_status_request.dart';
+import '../domain/platform_company_member.dart';
 import '../domain/platform_company_summary.dart';
 import 'platform_companies_api.dart';
 
@@ -19,6 +20,15 @@ abstract class PlatformCompaniesRepository {
   Future<PlatformCompany> fetchCompany(String id);
 
   Future<PlatformCompanyUsersSummary> fetchUsersSummary(String id);
+
+  Future<PlatformCompanyMembersPage> listCompanyUsers({
+    required String id,
+    String? role,
+    String? status,
+    String? q,
+    int limit = 100,
+    int offset = 0,
+  });
 
   Future<PlatformCompanySystemSummary> fetchSystemSummary(String id);
 
@@ -89,6 +99,25 @@ class LivePlatformCompaniesRepository implements PlatformCompaniesRepository {
   @override
   Future<PlatformCompanyUsersSummary> fetchUsersSummary(String id) {
     return _api.getUsersSummary(id);
+  }
+
+  @override
+  Future<PlatformCompanyMembersPage> listCompanyUsers({
+    required String id,
+    String? role,
+    String? status,
+    String? q,
+    int limit = 100,
+    int offset = 0,
+  }) {
+    return _api.listCompanyUsers(
+      id: id,
+      role: role,
+      status: status,
+      q: q,
+      limit: limit,
+      offset: offset,
+    );
   }
 
   @override
@@ -276,6 +305,66 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
       driversCount: company.driversCount,
       usersByRole: const {'company_admin': 1, 'driver': 8},
       usersByStatus: const {'active': 12, 'invited': 1},
+    );
+  }
+
+  @override
+  Future<PlatformCompanyMembersPage> listCompanyUsers({
+    required String id,
+    String? role,
+    String? status,
+    String? q,
+    int limit = 100,
+    int offset = 0,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    final all = <PlatformCompanyMember>[
+      PlatformCompanyMember(
+        membershipId: '101',
+        userId: '101',
+        companyId: id,
+        displayName: 'Demo Owner',
+        email: 'owner@example.com',
+        primaryRole: 'company_owner',
+        status: 'active',
+        invitationStatus: 'none',
+        joinedAt: DateTime.utc(2025, 1, 12),
+        lastLoginAt: DateTime.utc(2026, 8, 1),
+        createdAt: DateTime.utc(2025, 1, 12),
+        updatedAt: DateTime.utc(2026, 8, 1),
+      ),
+      PlatformCompanyMember(
+        membershipId: '102',
+        userId: '102',
+        companyId: id,
+        displayName: null,
+        email: 'dispatcher@example.com',
+        primaryRole: 'dispatcher',
+        status: 'invited',
+        invitationStatus: 'sent',
+        joinedAt: DateTime.utc(2025, 2, 1),
+        createdAt: DateTime.utc(2025, 2, 1),
+        updatedAt: DateTime.utc(2025, 2, 1),
+      ),
+    ];
+    final filtered = [
+      for (final member in all)
+        if ((role == null || role.isEmpty || member.primaryRole == role) &&
+            (status == null || status.isEmpty || member.status == status) &&
+            (q == null ||
+                q.trim().isEmpty ||
+                '${member.listDisplayName} ${member.email ?? ''}'
+                    .toLowerCase()
+                    .contains(q.trim().toLowerCase())))
+          member
+    ];
+    final slice = filtered.skip(offset).take(limit).toList(growable: false);
+    return PlatformCompanyMembersPage(
+      companyId: id,
+      items: slice,
+      total: filtered.length,
+      limit: limit,
+      offset: offset,
     );
   }
 

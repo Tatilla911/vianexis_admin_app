@@ -2390,5 +2390,50 @@
   "qrCodesInviteeName": "Meghívott neve (opcionális)",
   "qrCodesActivationLink": "Aktiváló link",
   "qrCodesSendSuccess": "Meghívó e-mail sikeresen elküldve.",
-  "qrCodesSendSkipped": "Meghívó létrehozva. Az e-mail nem lett elküldve (kihagyva)."
+  "qrCodesSendSkipped": "Meghívó létrehozva. Az e-mail nem lett elküldve (kihagyva).",
+  "platformCompanyMembersSection": "Felhasználók",
+  "platformCompanyMembersEmpty": "Nincs a szűrőnek megfelelő felhasználó.",
+  "platformCompanyMembersLoadError": "A cég felhasználói nem tölthetők be.",
+  "platformCompanyMembersFilterAll": "Összes",
+  "platformCompanyMembersFilterOwners": "Tulajdonosok",
+  "platformCompanyMembersFilterDispatchers": "Diszpécserek",
+  "platformCompanyMembersFilterDrivers": "Sofőrök",
+  "platformCompanyMembersFilterWorkshop": "Műhely",
+  "platformCompanyMembersFilterDocumentation": "Dokumentáció",
+  "platformCompanyMembersFilterOther": "Egyéb",
+  "platformCompanyRoleCompanyOwner": "Cégtulajdonos",
+  "platformCompanyRoleCompanyAdmin": "Cégadminisztrátor",
+  "platformCompanyRoleDispatcher": "Diszpécser",
+  "platformCompanyRoleDriver": "Sofőr",
+  "platformCompanyRoleWorkshop": "Műhely",
+  "platformCompanyRoleDocumentation": "Dokumentáció",
+  "platformCompanyRoleClaimsInsurance": "Kárügy / biztosítás",
+  "platformCompanyRoleFinance": "Pénzügy",
+  "platformCompanyRoleCompanySupport": "Céges support",
+  "platformCompanyRoleSubcontractorManager": "Alvállalkozó-kezelő",
+  "platformCompanyRoleUnknown": "Ismeretlen szerepkör",
+  "platformCompanyMemberStatus": "Státusz: {status}",
+  "@platformCompanyMemberStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMemberInvitationStatus": "Meghívó: {status}",
+  "@platformCompanyMemberInvitationStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMemberLastLogin": "Utolsó bejelentkezés: {date}",
+  "@platformCompanyMemberLastLogin": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }

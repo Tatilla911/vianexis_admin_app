@@ -6948,4 +6948,83 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get qrCodesSendSkipped =>
       'Invite created. Email was not sent (delivery skipped).';
+
+  @override
+  String get platformCompanyMembersSection => 'Users';
+
+  @override
+  String get platformCompanyMembersEmpty => 'No members match this filter.';
+
+  @override
+  String get platformCompanyMembersLoadError =>
+      'Could not load company members.';
+
+  @override
+  String get platformCompanyMembersFilterAll => 'All';
+
+  @override
+  String get platformCompanyMembersFilterOwners => 'Owners';
+
+  @override
+  String get platformCompanyMembersFilterDispatchers => 'Dispatchers';
+
+  @override
+  String get platformCompanyMembersFilterDrivers => 'Drivers';
+
+  @override
+  String get platformCompanyMembersFilterWorkshop => 'Workshop';
+
+  @override
+  String get platformCompanyMembersFilterDocumentation => 'Documentation';
+
+  @override
+  String get platformCompanyMembersFilterOther => 'Other';
+
+  @override
+  String get platformCompanyRoleCompanyOwner => 'Company owner';
+
+  @override
+  String get platformCompanyRoleCompanyAdmin => 'Company administrator';
+
+  @override
+  String get platformCompanyRoleDispatcher => 'Dispatcher';
+
+  @override
+  String get platformCompanyRoleDriver => 'Driver';
+
+  @override
+  String get platformCompanyRoleWorkshop => 'Workshop';
+
+  @override
+  String get platformCompanyRoleDocumentation => 'Documentation';
+
+  @override
+  String get platformCompanyRoleClaimsInsurance => 'Claims / insurance';
+
+  @override
+  String get platformCompanyRoleFinance => 'Finance';
+
+  @override
+  String get platformCompanyRoleCompanySupport => 'Company support';
+
+  @override
+  String get platformCompanyRoleSubcontractorManager => 'Subcontractor manager';
+
+  @override
+  String get platformCompanyRoleUnknown => 'Unknown role';
+
+  @override
+  String platformCompanyMemberStatus(String status) {
+    return 'Status: $status';
+  }
+
+  @override
+  String platformCompanyMemberInvitationStatus(String status) {
+    return 'Invitation: $status';
+  }
+
+  @override
+  String platformCompanyMemberLastLogin(String date) {
+    return 'Last login: $date';
+  }
 }

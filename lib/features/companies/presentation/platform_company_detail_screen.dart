@@ -15,6 +15,7 @@ import '../domain/authorization_method_l10n.dart';
 import '../domain/platform_company_status.dart';
 import 'platform_companies_providers.dart';
 import 'widgets/company_data_amendment_dialog.dart';
+import 'widgets/company_members_section.dart';
 import 'widgets/platform_company_status_badge.dart';
 import 'widgets/platform_company_status_dialog.dart';
 
@@ -424,14 +425,30 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                 ),
               const SizedBox(height: 12),
               usersAsync.when(
-                loading: () => const LinearProgressIndicator(),
-                error: (error, stackTrace) => Text(
-                  resolvePlatformCompanyKey(
-                    context,
-                    'platformCompanySummaryError',
-                  ),
+                loading: () => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const LinearProgressIndicator(),
+                    const SizedBox(height: 12),
+                    CompanyMembersSection(companyId: companyId),
+                  ],
                 ),
-                data: (summary) =>
+                error: (error, stackTrace) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      resolvePlatformCompanyKey(
+                        context,
+                        'platformCompanySummaryError',
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    CompanyMembersSection(companyId: companyId),
+                  ],
+                ),
+                data: (summary) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     _summaryCard(context, 'platformCompanySectionUsers', [
                       resolvePlatformCompanyKey(
                         context,
@@ -449,6 +466,13 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                         params: {'count': '${summary.totalUsersCount}'},
                       ),
                     ]),
+                    const SizedBox(height: 12),
+                    CompanyMembersSection(
+                      companyId: companyId,
+                      usersSummary: summary,
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 12),
               systemAsync.when(

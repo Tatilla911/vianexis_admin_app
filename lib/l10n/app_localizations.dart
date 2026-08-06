@@ -299,7 +299,7 @@ abstract class AppLocalizations {
   /// No description provided for @authPasswordChangeWeakPassword.
   ///
   /// In en, this message translates to:
-  /// **'The new password must be at least 10 characters, with upper and lower case and a number.'**
+  /// **'The new password must be at least 8 characters, with lower case, upper case, and a special character.'**
   String get authPasswordChangeWeakPassword;
 
   /// No description provided for @authPasswordChangeUnchanged.
@@ -359,7 +359,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsPasswordMinLengthValidation.
   ///
   /// In en, this message translates to:
-  /// **'Password must be at least 10 characters, with upper and lower case and a number.'**
+  /// **'Password must be at least 8 characters, with lower case, upper case, and a special character.'**
   String get settingsPasswordMinLengthValidation;
 
   /// No description provided for @settingsPasswordMismatchValidation.
@@ -12683,6 +12683,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite created. Email was not sent (delivery skipped).'**
   String get qrCodesSendSkipped;
+
+  /// No description provided for @platformCompanyMembersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get platformCompanyMembersSection;
+
+  /// No description provided for @platformCompanyMembersEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No members match this filter.'**
+  String get platformCompanyMembersEmpty;
+
+  /// No description provided for @platformCompanyMembersLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load company members.'**
+  String get platformCompanyMembersLoadError;
+
+  /// No description provided for @platformCompanyMembersFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get platformCompanyMembersFilterAll;
+
+  /// No description provided for @platformCompanyMembersFilterOwners.
+  ///
+  /// In en, this message translates to:
+  /// **'Owners'**
+  String get platformCompanyMembersFilterOwners;
+
+  /// No description provided for @platformCompanyMembersFilterDispatchers.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispatchers'**
+  String get platformCompanyMembersFilterDispatchers;
+
+  /// No description provided for @platformCompanyMembersFilterDrivers.
+  ///
+  /// In en, this message translates to:
+  /// **'Drivers'**
+  String get platformCompanyMembersFilterDrivers;
+
+  /// No description provided for @platformCompanyMembersFilterWorkshop.
+  ///
+  /// In en, this message translates to:
+  /// **'Workshop'**
+  String get platformCompanyMembersFilterWorkshop;
+
+  /// No description provided for @platformCompanyMembersFilterDocumentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Documentation'**
+  String get platformCompanyMembersFilterDocumentation;
+
+  /// No description provided for @platformCompanyMembersFilterOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get platformCompanyMembersFilterOther;
+
+  /// No description provided for @platformCompanyRoleCompanyOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Company owner'**
+  String get platformCompanyRoleCompanyOwner;
+
+  /// No description provided for @platformCompanyRoleCompanyAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Company administrator'**
+  String get platformCompanyRoleCompanyAdmin;
+
+  /// No description provided for @platformCompanyRoleDispatcher.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispatcher'**
+  String get platformCompanyRoleDispatcher;
+
+  /// No description provided for @platformCompanyRoleDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get platformCompanyRoleDriver;
+
+  /// No description provided for @platformCompanyRoleWorkshop.
+  ///
+  /// In en, this message translates to:
+  /// **'Workshop'**
+  String get platformCompanyRoleWorkshop;
+
+  /// No description provided for @platformCompanyRoleDocumentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Documentation'**
+  String get platformCompanyRoleDocumentation;
+
+  /// No description provided for @platformCompanyRoleClaimsInsurance.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims / insurance'**
+  String get platformCompanyRoleClaimsInsurance;
+
+  /// No description provided for @platformCompanyRoleFinance.
+  ///
+  /// In en, this message translates to:
+  /// **'Finance'**
+  String get platformCompanyRoleFinance;
+
+  /// No description provided for @platformCompanyRoleCompanySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Company support'**
+  String get platformCompanyRoleCompanySupport;
+
+  /// No description provided for @platformCompanyRoleSubcontractorManager.
+  ///
+  /// In en, this message translates to:
+  /// **'Subcontractor manager'**
+  String get platformCompanyRoleSubcontractorManager;
+
+  /// No description provided for @platformCompanyRoleUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown role'**
+  String get platformCompanyRoleUnknown;
+
+  /// No description provided for @platformCompanyMemberStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status: {status}'**
+  String platformCompanyMemberStatus(String status);
+
+  /// No description provided for @platformCompanyMemberInvitationStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation: {status}'**
+  String platformCompanyMemberInvitationStatus(String status);
+
+  /// No description provided for @platformCompanyMemberLastLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Last login: {date}'**
+  String platformCompanyMemberLastLogin(String date);
 }
 
 class _AppLocalizationsDelegate

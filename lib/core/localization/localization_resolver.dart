@@ -1299,6 +1299,45 @@ String resolvePlatformCompanyKey(
     'platformCompanyMetricPackages' =>
       l10n.platformCompanyMetricPackages(params['count'] ?? '0'),
         'platformCompanySectionUsers' => l10n.platformCompanySectionUsers,
+    'platformCompanyMembersSection' => l10n.platformCompanyMembersSection,
+    'platformCompanyMembersEmpty' => l10n.platformCompanyMembersEmpty,
+    'platformCompanyMembersLoadError' => l10n.platformCompanyMembersLoadError,
+    'platformCompanyMembersFilterAll' => l10n.platformCompanyMembersFilterAll,
+    'platformCompanyMembersFilterOwners' =>
+      l10n.platformCompanyMembersFilterOwners,
+    'platformCompanyMembersFilterDispatchers' =>
+      l10n.platformCompanyMembersFilterDispatchers,
+    'platformCompanyMembersFilterDrivers' =>
+      l10n.platformCompanyMembersFilterDrivers,
+    'platformCompanyMembersFilterWorkshop' =>
+      l10n.platformCompanyMembersFilterWorkshop,
+    'platformCompanyMembersFilterDocumentation' =>
+      l10n.platformCompanyMembersFilterDocumentation,
+    'platformCompanyMembersFilterOther' =>
+      l10n.platformCompanyMembersFilterOther,
+    'platformCompanyRoleCompanyOwner' => l10n.platformCompanyRoleCompanyOwner,
+    'platformCompanyRoleCompanyAdmin' => l10n.platformCompanyRoleCompanyAdmin,
+    'platformCompanyRoleDispatcher' => l10n.platformCompanyRoleDispatcher,
+    'platformCompanyRoleDriver' => l10n.platformCompanyRoleDriver,
+    'platformCompanyRoleWorkshop' => l10n.platformCompanyRoleWorkshop,
+    'platformCompanyRoleDocumentation' =>
+      l10n.platformCompanyRoleDocumentation,
+    'platformCompanyRoleClaimsInsurance' =>
+      l10n.platformCompanyRoleClaimsInsurance,
+    'platformCompanyRoleFinance' => l10n.platformCompanyRoleFinance,
+    'platformCompanyRoleCompanySupport' =>
+      l10n.platformCompanyRoleCompanySupport,
+    'platformCompanyRoleSubcontractorManager' =>
+      l10n.platformCompanyRoleSubcontractorManager,
+    'platformCompanyRoleUnknown' => l10n.platformCompanyRoleUnknown,
+    'platformCompanyMemberStatus' => l10n.platformCompanyMemberStatus(
+      params['status'] ?? '—',
+    ),
+    'platformCompanyMemberInvitationStatus' =>
+      l10n.platformCompanyMemberInvitationStatus(params['status'] ?? '—'),
+    'platformCompanyMemberLastLogin' => l10n.platformCompanyMemberLastLogin(
+      params['date'] ?? '—',
+    ),
     'platformCompanySectionSupport' => l10n.platformCompanySectionSupport,
     'platformCompanySectionOnboarding' => l10n.platformCompanySectionOnboarding,
     'platformCompanyFieldCountry' => l10n.platformCompanyFieldCountry,

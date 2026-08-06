@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/api/api_client.dart';
 import '../domain/company_data_amendment.dart';
 import '../domain/platform_company.dart';
+import '../domain/platform_company_member.dart';
 import '../domain/platform_company_status.dart';
 import '../domain/platform_company_status_request.dart';
 import '../domain/platform_company_summary.dart';
@@ -55,6 +56,38 @@ class PlatformCompaniesApi {
       throw StateError('Empty platform company users summary response');
     }
     return PlatformCompanyUsersSummary.fromJson(data);
+  }
+
+
+  Future<PlatformCompanyMembersPage> listCompanyUsers({
+    required String id,
+    String? role,
+    String? status,
+    String? q,
+    int limit = 100,
+    int offset = 0,
+  }) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      '/platform-admin/companies/$id/users',
+      queryParameters: {
+        if (role != null && role.trim().isNotEmpty) 'role': role.trim(),
+        if (status != null && status.trim().isNotEmpty) 'status': status.trim(),
+        if (q != null && q.trim().isNotEmpty) 'q': q.trim(),
+        'limit': limit,
+        'offset': offset,
+      },
+    );
+    final data = response.data;
+    if (data == null) {
+      return PlatformCompanyMembersPage(
+        companyId: id,
+        items: const [],
+        total: 0,
+        limit: limit,
+        offset: offset,
+      );
+    }
+    return PlatformCompanyMembersPage.fromJson(data);
   }
 
   Future<PlatformCompanySystemSummary> getSystemSummary(String id) async {

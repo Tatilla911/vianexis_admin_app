@@ -3105,5 +3105,50 @@
   "qrCodesInviteeName": "Invitee name (optional)",
   "qrCodesActivationLink": "Activation link",
   "qrCodesSendSuccess": "Invite email sent successfully.",
-  "qrCodesSendSkipped": "Invite created. Email was not sent (delivery skipped)."
+  "qrCodesSendSkipped": "Invite created. Email was not sent (delivery skipped).",
+  "platformCompanyMembersSection": "Users",
+  "platformCompanyMembersEmpty": "No members match this filter.",
+  "platformCompanyMembersLoadError": "Could not load company members.",
+  "platformCompanyMembersFilterAll": "All",
+  "platformCompanyMembersFilterOwners": "Owners",
+  "platformCompanyMembersFilterDispatchers": "Dispatchers",
+  "platformCompanyMembersFilterDrivers": "Drivers",
+  "platformCompanyMembersFilterWorkshop": "Workshop",
+  "platformCompanyMembersFilterDocumentation": "Documentation",
+  "platformCompanyMembersFilterOther": "Other",
+  "platformCompanyRoleCompanyOwner": "Company owner",
+  "platformCompanyRoleCompanyAdmin": "Company administrator",
+  "platformCompanyRoleDispatcher": "Dispatcher",
+  "platformCompanyRoleDriver": "Driver",
+  "platformCompanyRoleWorkshop": "Workshop",
+  "platformCompanyRoleDocumentation": "Documentation",
+  "platformCompanyRoleClaimsInsurance": "Claims / insurance",
+  "platformCompanyRoleFinance": "Finance",
+  "platformCompanyRoleCompanySupport": "Company support",
+  "platformCompanyRoleSubcontractorManager": "Subcontractor manager",
+  "platformCompanyRoleUnknown": "Unknown role",
+  "platformCompanyMemberStatus": "Status: {status}",
+  "@platformCompanyMemberStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMemberInvitationStatus": "Invitation: {status}",
+  "@platformCompanyMemberInvitationStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMemberLastLogin": "Last login: {date}",
+  "@platformCompanyMemberLastLogin": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }
