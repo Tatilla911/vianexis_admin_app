@@ -1493,7 +1493,7 @@ String resolvePlatformCompanyKey(
       l10n.platformCompanyAmendFieldBillingContact,
     'platformCompanyAmendNewValueJsonHint' =>
       l10n.platformCompanyAmendNewValueJsonHint,
-'platformCompanyOpsSection' =>
+    'platformCompanyOpsSection' =>
       Localizations.localeOf(context).languageCode == 'hu'
           ? 'Műveletek'
           : 'Operations',
@@ -1543,8 +1543,8 @@ String resolvePlatformCompanyKey(
           : 'You do not have permission for this action.',
     'platformCompanyOpsEndpointMissing' =>
       Localizations.localeOf(context).languageCode == 'hu'
-          ? 'Ez a művelet a csatlakoztatott szerveren még nem érhető el. Telepíteni kell a backend frissítést.'
-          : 'This action is not available on the connected server yet. Deploy the backend update.',
+          ? 'Ez a művelet jelenleg nem elérhető a csatlakoztatott szerveren. Telepíteni kell a backend frissítést, vagy használd a Regisztrációk meghívó újraküldését.'
+          : 'This action is not available on the connected server. Deploy the backend update, or use Registrations invite resend.',
     _ => l10n.errorGenericBody,
   };
 }
@@ -2490,6 +2490,14 @@ String resolveDriverAccessKey(BuildContext context, String key) {
     'driverAccessRejectedAt' => l10n.driverAccessRejectedAt,
     'driverAccessRejectedReason' => l10n.driverAccessRejectedReason,
     'driverAccessNoActiveDrivers' => l10n.driverAccessNoActiveDrivers,
+    'driverAccessOpsFailed' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'A művelet nem sikerült.'
+          : 'The operation failed.',
+    'driverAccessOpsEndpointMissing' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Ez a sofőr meghívó / jelszó / archiválás művelet jelenleg nem elérhető a csatlakoztatott szerveren. Telepíteni kell a backend frissítést.'
+          : 'This driver invite / password / archive action is not available on the connected server. Deploy the backend update.',
     _ => l10n.errorGenericBody,
   };
 }
