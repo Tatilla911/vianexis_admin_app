@@ -5,9 +5,9 @@ import '../../../core/api/api_exception.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../domain/company_data_amendment.dart';
 import '../domain/platform_company.dart';
+import '../domain/platform_company_member.dart';
 import '../domain/platform_company_status.dart';
 import '../domain/platform_company_status_request.dart';
-import '../domain/platform_company_member.dart';
 import '../domain/platform_company_summary.dart';
 import 'platform_companies_api.dart';
 
@@ -67,6 +67,15 @@ abstract class PlatformCompaniesRepository {
     required String companyId,
     required String amendmentId,
     int? expectedDataVersion,
+  });
+
+  Future<Map<String, dynamic>> resendInvite(String id);
+
+  Future<Map<String, dynamic>> sendPasswordSetup(String id);
+
+  Future<Map<String, dynamic>> softDelete({
+    required String id,
+    required String reason,
   });
 
   bool get usesMockData;
@@ -202,6 +211,24 @@ class LivePlatformCompaniesRepository implements PlatformCompaniesRepository {
       expectedDataVersion: expectedDataVersion,
     );
   }
+
+  @override
+  Future<Map<String, dynamic>> resendInvite(String id) {
+    return _api.resendInvite(id);
+  }
+
+  @override
+  Future<Map<String, dynamic>> sendPasswordSetup(String id) {
+    return _api.sendPasswordSetup(id);
+  }
+
+  @override
+  Future<Map<String, dynamic>> softDelete({
+    required String id,
+    required String reason,
+  }) {
+    return _api.softDelete(id: id, reason: reason);
+  }
 }
 
 class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
@@ -303,7 +330,15 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
       suspendedUsersCount: 0,
       totalUsersCount: company.activeUsersCount + 1,
       driversCount: company.driversCount,
-      usersByRole: const {'company_admin': 1, 'driver': 8},
+      usersByRole: const {
+        'company_owner': 1,
+        'company_admin': 1,
+        'dispatcher': 2,
+        'driver': 8,
+        'workshop': 1,
+        'documentation': 1,
+        'finance': 1,
+      },
       usersByStatus: const {'active': 12, 'invited': 1},
     );
   }
@@ -317,19 +352,20 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
     int limit = 100,
     int offset = 0,
   }) async {
+    await fetchCompany(id);
     await Future<void>.delayed(const Duration(milliseconds: 100));
     final all = <PlatformCompanyMember>[
       PlatformCompanyMember(
         membershipId: '101',
         userId: '101',
         companyId: id,
-        displayName: 'Demo Owner',
-        email: 'owner@example.com',
+        displayName: 'Kovács Anna',
+        email: 'anna.kovacs@nordtrans.example',
         primaryRole: 'company_owner',
         status: 'active',
         invitationStatus: 'none',
         joinedAt: DateTime.utc(2025, 1, 12),
-        lastLoginAt: DateTime.utc(2026, 8, 1),
+        lastLoginAt: DateTime.utc(2026, 8, 1, 9, 30),
         createdAt: DateTime.utc(2025, 1, 12),
         updatedAt: DateTime.utc(2026, 8, 1),
       ),
@@ -337,34 +373,98 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
         membershipId: '102',
         userId: '102',
         companyId: id,
+        displayName: 'Nagy Péter',
+        email: 'peter.nagy@nordtrans.example',
+        primaryRole: 'company_admin',
+        status: 'active',
+        invitationStatus: 'none',
+        lastLoginAt: DateTime.utc(2026, 7, 28, 14, 0),
+        createdAt: DateTime.utc(2025, 2, 1),
+      ),
+      PlatformCompanyMember(
+        membershipId: '103',
+        userId: '103',
+        companyId: id,
         displayName: null,
-        email: 'dispatcher@example.com',
+        email: 'dispatcher@nordtrans.example',
         primaryRole: 'dispatcher',
         status: 'invited',
-        invitationStatus: 'sent',
-        joinedAt: DateTime.utc(2025, 2, 1),
-        createdAt: DateTime.utc(2025, 2, 1),
-        updatedAt: DateTime.utc(2025, 2, 1),
+        invitationStatus: 'pending',
+        emailDeliveryStatus: 'sent',
+        createdAt: DateTime.utc(2026, 7, 1),
+      ),
+      PlatformCompanyMember(
+        membershipId: '104',
+        userId: '104',
+        companyId: id,
+        displayName: 'Sofőr János',
+        email: 'janos.driver@nordtrans.example',
+        primaryRole: 'driver',
+        status: 'active',
+        invitationStatus: 'none',
+        driverProfileId: '501',
+        lastLoginAt: DateTime.utc(2026, 8, 5, 6, 15),
+        createdAt: DateTime.utc(2025, 3, 10),
+      ),
+      PlatformCompanyMember(
+        membershipId: '105',
+        userId: '105',
+        companyId: id,
+        email: 'docs@nordtrans.example',
+        primaryRole: 'documentation',
+        status: 'active',
+        invitationStatus: 'none',
+        createdAt: DateTime.utc(2025, 6, 1),
+      ),
+      PlatformCompanyMember(
+        membershipId: '106',
+        userId: '106',
+        companyId: id,
+        displayName: 'Pénzügy',
+        email: 'finance@nordtrans.example',
+        primaryRole: 'finance',
+        status: 'active',
+        invitationStatus: 'none',
+        createdAt: DateTime.utc(2025, 8, 1),
       ),
     ];
-    final filtered = [
-      for (final member in all)
-        if ((role == null || role.isEmpty || member.primaryRole == role) &&
-            (status == null || status.isEmpty || member.status == status) &&
-            (q == null ||
-                q.trim().isEmpty ||
-                '${member.listDisplayName} ${member.email ?? ''}'
-                    .toLowerCase()
-                    .contains(q.trim().toLowerCase())))
-          member
-    ];
-    final slice = filtered.skip(offset).take(limit).toList(growable: false);
+
+    var filtered = all;
+    final roleFilter = role?.trim().toLowerCase();
+    if (roleFilter != null && roleFilter.isNotEmpty) {
+      filtered = filtered
+          .where((m) => (m.primaryRole ?? '').toLowerCase() == roleFilter)
+          .toList(growable: false);
+    }
+    final statusFilter = status?.trim().toLowerCase();
+    if (statusFilter != null && statusFilter.isNotEmpty) {
+      filtered = filtered
+          .where((m) => (m.status ?? '').toLowerCase() == statusFilter)
+          .toList(growable: false);
+    }
+    final query = q?.trim().toLowerCase();
+    if (query != null && query.isNotEmpty) {
+      filtered = filtered
+          .where((m) {
+            final haystack = [
+              m.displayName,
+              m.email,
+              m.phone,
+            ].whereType<String>().join(' ').toLowerCase();
+            return haystack.contains(query);
+          })
+          .toList(growable: false);
+    }
+
+    final total = filtered.length;
+    final page = filtered.skip(offset).take(limit).toList(growable: false);
     return PlatformCompanyMembersPage(
       companyId: id,
-      items: slice,
-      total: filtered.length,
+      items: page,
+      total: total,
       limit: limit,
       offset: offset,
+      metadataOnly: false,
     );
   }
 
@@ -584,6 +684,45 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
       messageKey: LocalizationKeys.errorGenericBody,
       kind: ApiExceptionKind.forbidden,
     );
+  }
+
+  @override
+  Future<Map<String, dynamic>> resendInvite(String id) async {
+    return {
+      'companyId': int.tryParse(id),
+      'mode': 'invite',
+      'emailSent': false,
+      'deliveryStatus': 'provider_disabled',
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> sendPasswordSetup(String id) async {
+    return {
+      'companyId': int.tryParse(id),
+      'mode': 'password_reset',
+      'emailSent': false,
+      'deliveryStatus': 'provider_disabled',
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> softDelete({
+    required String id,
+    required String reason,
+  }) async {
+    await updateStatus(
+      id: id,
+      request: PlatformCompanyStatusRequest(
+        status: PlatformCompanyStatus.archived,
+        reason: reason,
+      ),
+    );
+    return {
+      'companyId': int.tryParse(id),
+      'deleted': true,
+      'status': 'archived',
+    };
   }
 }
 

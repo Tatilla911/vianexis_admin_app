@@ -12,6 +12,16 @@ import '../domain/platform_company_summary.dart';
 extension AdminRolePlatformCompanyDecisions on AdminRole {
   bool get canChangePlatformCompanyStatus => this == AdminRole.superAdmin;
 
+  /// Invite / password-setup for company primary admin (platform staff).
+  bool get canManageCompanyInviteOps =>
+      this == AdminRole.superAdmin ||
+      this == AdminRole.onboardingReviewer ||
+      this == AdminRole.supportAdmin ||
+      this == AdminRole.billingAdmin;
+
+  /// Soft-delete / archive company (super_admin only).
+  bool get canArchivePlatformCompany => this == AdminRole.superAdmin;
+
   bool get canInitiateCompanyDataAmendment =>
       this == AdminRole.superAdmin ||
       this == AdminRole.onboardingReviewer ||
@@ -125,7 +135,6 @@ final platformCompanyUsersSummaryProvider = FutureProvider.autoDispose
           .fetchUsersSummary(id);
     });
 
-
 final platformCompanyMembersProvider = FutureProvider.autoDispose
     .family<PlatformCompanyMembersPage, PlatformCompanyMembersQuery>((
       ref,
@@ -225,6 +234,16 @@ Future<PlatformCompany> submitPlatformCompanyStatusChange(
   ref.invalidate(platformCompanyUsersSummaryProvider(companyId));
   ref.invalidate(platformCompanySystemSummaryProvider(companyId));
   ref.invalidate(platformCompanyOnboardingSummaryProvider(companyId));
+  for (final filter in PlatformCompanyMemberRoleFilter.values) {
+    ref.invalidate(
+      platformCompanyMembersProvider(
+        PlatformCompanyMembersQuery(
+          companyId: companyId,
+          roleFilter: filter,
+        ),
+      ),
+    );
+  }
   await ref.read(platformCompaniesProvider.notifier).refresh();
   await ref.read(platformCompanyDashboardSummaryProvider.notifier).refresh();
   return updated;

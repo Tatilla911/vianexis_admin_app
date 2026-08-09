@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/api/api_client.dart';
+import '../../../core/api/api_exception.dart';
 import '../domain/company_data_amendment.dart';
 import '../domain/platform_company.dart';
 import '../domain/platform_company_member.dart';
@@ -57,7 +58,6 @@ class PlatformCompaniesApi {
     }
     return PlatformCompanyUsersSummary.fromJson(data);
   }
-
 
   Future<PlatformCompanyMembersPage> listCompanyUsers({
     required String id,
@@ -249,6 +249,54 @@ class PlatformCompaniesApi {
       throw StateError('Empty apply amendment response');
     }
     return CompanyDataAmendment.fromJson(data);
+  }
+
+  Future<Map<String, dynamic>> resendInvite(String id) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/companies/$id/resend-invite',
+    );
+    return response.data ?? const <String, dynamic>{};
+  }
+
+  Future<Map<String, dynamic>> sendPasswordSetup(String id) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/companies/$id/send-password-setup',
+    );
+    return response.data ?? const <String, dynamic>{};
+  }
+
+  Future<Map<String, dynamic>> softDelete({
+    required String id,
+    required String reason,
+  }) async {
+    try {
+      final response = await _apiClient.post<Map<String, dynamic>>(
+        '/platform-admin/companies/$id/archive',
+        data: {'reason': reason},
+      );
+      return response.data ?? const <String, dynamic>{};
+    } on ApiException catch (error) {
+      final message = (error.backendMessage ?? '').toLowerCase();
+      final nestRouteMissing =
+          (error.statusCode == 404 || error.statusCode == 501) &&
+          message.contains('cannot ');
+      if (!nestRouteMissing) rethrow;
+      // Staging/deploy lag: status PATCH to archived exists on older backends.
+      await updateStatus(
+        id: id,
+        request: PlatformCompanyStatusRequest(
+          status: PlatformCompanyStatus.archived,
+          reason: reason,
+        ),
+      );
+      return {
+        'companyId': int.tryParse(id),
+        'deleted': true,
+        'archived': true,
+        'fallback': 'status_patch',
+        'status': 'archived',
+      };
+    }
   }
 }
 

@@ -1493,6 +1493,58 @@ String resolvePlatformCompanyKey(
       l10n.platformCompanyAmendFieldBillingContact,
     'platformCompanyAmendNewValueJsonHint' =>
       l10n.platformCompanyAmendNewValueJsonHint,
+'platformCompanyOpsSection' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Műveletek'
+          : 'Operations',
+    'platformCompanyResendInviteAction' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Meghívó újraküldése'
+          : 'Resend invite',
+    'platformCompanySendPasswordSetupAction' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Jelszóbeállítás küldése'
+          : 'Send password setup',
+    'platformCompanyDeleteAction' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Cég archiválása'
+          : 'Archive company',
+    'platformCompanyDeleteConfirmTitle' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Cég archiválása'
+          : 'Archive company',
+    'platformCompanyDeleteConfirmBody' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'A cég archiválásra kerül, a felhasználók felfüggesztésre, és az azonosító adatok megőrződnek a későbbi egyezés jelzéséhez. Fizikai törlés nem történik. Ez a lépés naplózott.'
+          : 'The company will be archived, users suspended, and identity signals retained to flag future matches. No physical delete. This step is audited.',
+    'platformCompanyDeleteReasonLabel' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Archiválás indoka'
+          : 'Archive reason',
+    'platformCompanyDeleteSuccess' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'A cég archiválva lett.'
+          : 'Company archived.',
+    'platformCompanyInviteResendSuccess' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Meghívó elküldve.'
+          : 'Invitation sent.',
+    'platformCompanyPasswordSetupSuccess' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Jelszóbeállító link elküldve.'
+          : 'Password setup link sent.',
+    'platformCompanyOpsFailed' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'A művelet most nem sikerült. Próbáld újra később.'
+          : 'The operation could not be completed. Please try again later.',
+    'platformCompanyOpsPermissionDenied' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Nincs jogosultság ehhez a művelethez.'
+          : 'You do not have permission for this action.',
+    'platformCompanyOpsEndpointMissing' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Ez a művelet a csatlakoztatott szerveren még nem érhető el. Telepíteni kell a backend frissítést.'
+          : 'This action is not available on the connected server yet. Deploy the backend update.',
     _ => l10n.errorGenericBody,
   };
 }

@@ -15,6 +15,7 @@ import '../domain/authorization_method_l10n.dart';
 import '../domain/platform_company_status.dart';
 import 'platform_companies_providers.dart';
 import 'widgets/company_data_amendment_dialog.dart';
+import 'widgets/company_dossier_ops_section.dart';
 import 'widgets/company_members_section.dart';
 import 'widgets/platform_company_status_badge.dart';
 import 'widgets/platform_company_status_dialog.dart';
@@ -45,6 +46,8 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
             .canChangePlatformCompanyStatus ??
         false;
     final role = ref.watch(adminAuthProvider).user?.role;
+    final canInviteOps = role?.canManageCompanyInviteOps ?? false;
+    final canArchiveCompany = role?.canArchivePlatformCompany ?? false;
     final canAmend = role?.canInitiateCompanyDataAmendment ?? false;
     final canApproveAmend = role?.canApproveCompanyDataAmendment ?? false;
     final canApplyAmend = role?.canApplyCompanyDataAmendment ?? false;
@@ -126,6 +129,11 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                 ),
               ],
               const SizedBox(height: 16),
+              CompanyDossierOpsSection(
+                companyId: companyId,
+                canInviteOps: canInviteOps,
+                canArchive: canArchiveCompany,
+              ),
               _sectionTitle(context, 'platformCompanySectionBasics'),
               _field(
                 context,
