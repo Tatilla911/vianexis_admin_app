@@ -85,10 +85,65 @@ String apiExceptionMessageKeyForStatus({
   if (isAmendmentPath && looksLikeMissingRelation) {
     return LocalizationKeys.platformCompanyAmendErrorMigrationMissing;
   }
+  if (
+    isAmendmentPath &&
+    (errorCode == 'COMPANY_DATA_AMENDMENT_TABLE_MISSING' ||
+        statusCode == 503)
+  ) {
+    return LocalizationKeys.platformCompanyAmendErrorMigrationMissing;
+  }
 
   if (backendMessage.contains('already exists with this email') ||
       backendMessage.contains('account already exists')) {
     return LocalizationKeys.driverApprovalAlreadyRegistered;
+  }
+
+  if (errorCode == 'COMPANY_INVITE_NOT_FOUND' ||
+      errorCode == 'COMPANY_INVITE_RESEND_NOT_SUPPORTED') {
+    // Company dossier maps RESEND_NOT_SUPPORTED to a dedicated already-active snackbar.
+    return LocalizationKeys.errorActionUnavailable;
+  }
+  if (errorCode == 'COMPANY_PASSWORD_SETUP_NOT_AVAILABLE') {
+    return LocalizationKeys.errorActionUnavailable;
+  }
+  if (errorCode == 'COMPANY_ARCHIVE_NOT_ALLOWED' ||
+      errorCode == 'COMPANY_ARCHIVE_ACTIVE_TRIPS' ||
+      errorCode == 'COMPANY_PERMISSION_DENIED') {
+    return LocalizationKeys.authForbiddenRole;
+  }
+  if (errorCode == 'COMPANY_AMENDMENT_INVALID' ||
+      errorCode == 'COMPANY_AMENDMENT_PERSIST_FAILED') {
+    return LocalizationKeys.platformCompanyAmendErrorValidation;
+  }
+  if (errorCode == 'COMPANY_AMENDMENT_CONFLICT') {
+    return LocalizationKeys.platformCompanyAmendErrorConflict;
+  }
+  if (errorCode == 'COMPANY_NOT_FOUND') {
+    return LocalizationKeys.platformCompanyAmendErrorNotFound;
+  }
+  if (errorCode == 'COMPANY_INVITE_DELIVERY_DISABLED') {
+    return LocalizationKeys.emailSendFailed;
+  }
+
+  if (errorCode == 'ADMIN_RESOURCE_NOT_AVAILABLE' ||
+      errorCode == 'ADMIN_ACTION_NOT_SUPPORTED') {
+    return LocalizationKeys.errorActionUnavailable;
+  }
+  if (errorCode == 'ADMIN_PERMISSION_DENIED' ||
+      errorCode == 'ADMIN_DELETE_NOT_ALLOWED') {
+    return LocalizationKeys.authForbiddenRole;
+  }
+  if (errorCode == 'ADMIN_TARGET_NOT_FOUND' ||
+      errorCode == 'ADMIN_INVITE_NOT_FOUND') {
+    return LocalizationKeys.errorActionUnavailable;
+  }
+  if (errorCode == 'ADMIN_EMAIL_DELIVERY_DISABLED' ||
+      errorCode == 'ADMIN_EMAIL_SEND_FAILED') {
+    return LocalizationKeys.emailSendFailed;
+  }
+  if (errorCode == 'ADMIN_STATE_CONFLICT' ||
+      errorCode == 'ADMIN_PASSWORD_SETUP_UNAVAILABLE') {
+    return LocalizationKeys.driverApprovalConflict;
   }
 
   if (statusCode == 401) {

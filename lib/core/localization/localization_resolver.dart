@@ -1529,6 +1529,10 @@ String resolvePlatformCompanyKey(
       Localizations.localeOf(context).languageCode == 'hu'
           ? 'Meghívó elküldve.'
           : 'Invitation sent.',
+    'platformCompanyInviteResendAlreadyActive' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'A cég adminisztrátori fiókja már aktív. Szükség esetén küldj jelszóbeállító linket.'
+          : 'The company administrator account is already active. Send a password setup link if needed.',
     'platformCompanyPasswordSetupSuccess' =>
       Localizations.localeOf(context).languageCode == 'hu'
           ? 'Jelszóbeállító link elküldve.'

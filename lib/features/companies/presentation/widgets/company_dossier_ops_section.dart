@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/api/admin_ops_feedback.dart';
+import '../../../../core/api/api_exception.dart';
 import '../../../../core/email/email_delivery_feedback.dart';
 import '../../../../core/localization/localization_resolver.dart';
 import '../../data/platform_companies_repository.dart';
@@ -52,6 +53,21 @@ class _CompanyDossierOpsSectionState
       ref.invalidate(platformCompanyDetailProvider(widget.companyId));
     } catch (error) {
       if (!mounted) return;
+      // Known business state: invite resend is only valid while admin is INVITED.
+      if (error is ApiException &&
+          error.errorCode == 'COMPANY_INVITE_RESEND_NOT_SUPPORTED') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              resolvePlatformCompanyKey(
+                context,
+                'platformCompanyInviteResendAlreadyActive',
+              ),
+            ),
+          ),
+        );
+        return;
+      }
       showAdminOpsFailureSnackBar(
         context,
         error,
