@@ -9,6 +9,7 @@ import '../../../core/api/api_exception.dart';
 import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/auth/admin_auth_state.dart';
 import '../../../core/widgets/vianexis_admin_scaffold.dart';
+import '../../../core/widgets/vianexis_error_view.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../registrations/domain/registration_approval_outcome.dart';
 import '../../registrations/presentation/registration_providers.dart';
@@ -99,6 +100,8 @@ class _ApplicationsInboxScreenState
             const SizedBox(height: 16),
             Expanded(
               child: listAsync.when(
+                skipLoadingOnReload: true,
+                skipLoadingOnRefresh: true,
                 data: (data) {
                   final items = (data['items'] as List<dynamic>? ?? []);
                   if (items.isEmpty) {
@@ -139,9 +142,15 @@ class _ApplicationsInboxScreenState
                             item['companyName']?.toString() ??
                             '—';
                         return ListTile(
-                          title: Text(displayName),
+                          title: Text(
+                            displayName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                           subtitle: Text(
                             '$reference · ${item['applicationType']} · $status · ${item['email']}',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           onTap: () {
                             context.push('${AdminRoutes.applications}/$id');
@@ -152,19 +161,12 @@ class _ApplicationsInboxScreenState
                   );
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (e, _) => Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(l10n.applicationsLoadError('$e')),
-                      const SizedBox(height: 12),
-                      FilledButton(
-                        onPressed: () =>
-                            ref.invalidate(applicationsListProvider(query)),
-                        child: Text(l10n.platformCompanyAmendRetry),
-                      ),
-                    ],
-                  ),
+                error: (error, _) => VianexisErrorView.fromError(
+                  context,
+                  error,
+                  fallbackMessage: l10n.errorGenericBody,
+                  onRetry: () =>
+                      ref.invalidate(applicationsListProvider(query)),
                 ),
               ),
             ),

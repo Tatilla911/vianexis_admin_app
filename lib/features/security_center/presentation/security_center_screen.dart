@@ -103,6 +103,8 @@ class _SecurityCenterScreenState extends ConsumerState<SecurityCenterScreen> {
           const SizedBox(height: 8),
           Expanded(
             child: eventsAsync.when(
+              skipLoadingOnReload: true,
+              skipLoadingOnRefresh: true,
               loading: () => const VianexisLoadingView(),
               error: (error, _) => VianexisErrorView.fromError(
                 context,

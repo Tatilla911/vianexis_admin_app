@@ -22,6 +22,8 @@ class PlatformCompanyCard extends StatelessWidget {
             children: [
               Text(
                 company.name,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 4),
@@ -30,6 +32,8 @@ class PlatformCompanyCard extends StatelessWidget {
                   if (company.country != null) company.country,
                   if (company.vatNumber != null) company.vatNumber,
                 ].join(' · '),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
               Wrap(

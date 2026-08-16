@@ -94,6 +94,8 @@ class _PlatformCompaniesScreenState
             const SizedBox(height: 8),
             Expanded(
               child: companiesAsync.when(
+                skipLoadingOnReload: true,
+                skipLoadingOnRefresh: true,
                 loading: () => const VianexisLoadingView(),
                 error: (error, _) => VianexisErrorView.fromError(
                   context,

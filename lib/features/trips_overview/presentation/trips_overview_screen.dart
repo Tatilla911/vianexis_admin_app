@@ -30,6 +30,8 @@ class TripsOverviewScreen extends ConsumerWidget {
         ],
       ),
       body: snapshotAsync.when(
+        skipLoadingOnReload: true,
+        skipLoadingOnRefresh: true,
         loading: () => const VianexisLoadingView(),
         error: (error, _) => VianexisErrorView.fromError(
           context,
@@ -44,6 +46,8 @@ class TripsOverviewScreen extends ConsumerWidget {
           },
         ),
         data: (snapshot) => tripsAsync.when(
+          skipLoadingOnReload: true,
+          skipLoadingOnRefresh: true,
           loading: () => const VianexisLoadingView(),
           error: (error, _) => VianexisErrorView.fromError(
             context,
@@ -105,13 +109,19 @@ class TripsOverviewScreen extends ConsumerWidget {
                   for (final trip in result.items)
                     Card(
                       child: ListTile(
-                        title: Text(trip.reference),
+                        title: Text(
+                          trip.reference,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                         subtitle: Text(
                           '${trip.companyName} · ${trip.driverName}\n'
                           '${resolveTripsOverviewKey(context, trip.status.localizationKey)}'
                           '${trip.hasExchangeRecords ? ' · ${resolveTripsOverviewKey(context, 'tripsOverviewExchangeIndicator')}' : ''}'
                           '${trip.hasExchangeAttention ? ' · ${resolveTripsOverviewKey(context, 'tripsOverviewExchangeAttention')}' : ''}'
                           '${trip.pendingSyncWarning ? ' · ${resolveTripsOverviewKey(context, 'tripsOverviewPendingSync')}' : ''}',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         isThreeLine: true,
                       ),

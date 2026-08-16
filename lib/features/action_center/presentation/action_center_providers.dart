@@ -18,7 +18,6 @@ class ActionCenterNotifier extends AsyncNotifier<ActionCenterSnapshot> {
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading<ActionCenterSnapshot>();
     state = await AsyncValue.guard(_load);
   }
 }

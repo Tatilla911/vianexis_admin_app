@@ -45,34 +45,51 @@ class AdminModulesHubScreen extends ConsumerWidget {
             physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
-            childAspectRatio: 1.15,
+            childAspectRatio: MediaQuery.sizeOf(context).width >= 600
+                ? 1.15
+                : 0.92,
             children: [
               for (final module in modules)
                 VianexisAdminCard(
+                  padding: const EdgeInsets.all(12),
                   onTap: () => context.push(module.route),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(module.icon, size: 28),
-                      const SizedBox(height: 10),
-                      Text(
-                        module.label(context),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      if (module.description(context) != null) ...[
-                        const SizedBox(height: 6),
-                        Text(
-                          module.description(context)!,
-                          textAlign: TextAlign.center,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodySmall,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final description = module.description(context);
+                      return FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.center,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: constraints.maxWidth,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(module.icon, size: 28),
+                              const SizedBox(height: 8),
+                              Text(
+                                module.label(context),
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                              if (description != null) ...[
+                                const SizedBox(height: 4),
+                                Text(
+                                  description,
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ],
+                            ],
+                          ),
                         ),
-                      ],
-                    ],
+                      );
+                    },
                   ),
                 ),
             ],

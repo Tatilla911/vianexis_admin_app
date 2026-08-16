@@ -99,7 +99,6 @@ class PlatformCompaniesNotifier extends AsyncNotifier<List<PlatformCompany>> {
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading<List<PlatformCompany>>();
     state = await AsyncValue.guard(_load);
   }
 }

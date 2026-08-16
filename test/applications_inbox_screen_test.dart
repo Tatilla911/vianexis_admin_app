@@ -8,6 +8,23 @@ import 'package:vianexis_admin_app/features/applications/data/public_application
 import 'package:vianexis_admin_app/features/applications/presentation/applications_inbox_screen.dart';
 import 'package:vianexis_admin_app/l10n/app_localizations.dart';
 
+class _FailingPublicApplicationsApi extends PublicApplicationsApi {
+  _FailingPublicApplicationsApi()
+    : super(
+        ApiClient(tokenStorage: AuthTokenStorage(), enableDebugLogging: false),
+      );
+
+  @override
+  Future<Map<String, dynamic>> listApplications({
+    String? type,
+    String? status,
+    int limit = 100,
+    int offset = 0,
+  }) async {
+    throw Exception('DioException: status=403 raw dump');
+  }
+}
+
 class _FakePublicApplicationsApi extends PublicApplicationsApi {
   _FakePublicApplicationsApi()
     : super(
@@ -99,6 +116,37 @@ void main() {
     expect(find.text('Acme Logistics'), findsOneWidget);
     expect(find.byType(AppBar), findsOneWidget);
   });
+
+  testWidgets(
+    'applications list error is distinct from empty and hides raw dumps',
+    (tester) async {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            publicApplicationsApiProvider.overrideWithValue(
+              _FailingPublicApplicationsApi(),
+            ),
+          ],
+          child: MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: const Locale('en'),
+            home: const ApplicationsInboxScreen(),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('No applications'), findsNothing);
+      expect(find.textContaining('DioException'), findsNothing);
+      expect(find.textContaining('status=403'), findsNothing);
+      expect(
+        find.text('An unexpected error occurred. Try again.'),
+        findsOneWidget,
+      );
+      expect(find.text('Retry'), findsOneWidget);
+    },
+  );
 
   testWidgets('ApplicationDetailScreen loads with localized title', (
     tester,

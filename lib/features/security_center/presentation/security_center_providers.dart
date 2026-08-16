@@ -20,7 +20,6 @@ class SecurityOverviewNotifier extends AsyncNotifier<SecurityOverview> {
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading<SecurityOverview>();
     state = await AsyncValue.guard(_load);
   }
 }
@@ -57,7 +56,6 @@ class SecurityEventsNotifier extends AsyncNotifier<List<SecurityEvent>> {
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading<List<SecurityEvent>>();
     state = await AsyncValue.guard(_load);
   }
 }

@@ -56,6 +56,8 @@ class _ActionCenterScreenState extends ConsumerState<ActionCenterScreen> {
         ],
       ),
       body: itemsAsync.when(
+        skipLoadingOnReload: true,
+        skipLoadingOnRefresh: true,
         loading: () => const VianexisLoadingView(),
         error: (error, _) => VianexisErrorView.fromError(
           context,
