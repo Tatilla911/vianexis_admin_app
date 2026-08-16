@@ -24,6 +24,7 @@ class _LongNameTripsRepository implements TripsOverviewRepository {
               'Nemzetközi Szállítmányozási és Logisztikai Szolgáltató Kft.',
           driverName: 'Nagyon Hosszú Sofőrnév András Péter István',
           status: TripOverviewStatus.active,
+          canonicalStatus: 'active',
           hasExchangeRecords: true,
           hasExchangeAttention: true,
           hasPackage: false,

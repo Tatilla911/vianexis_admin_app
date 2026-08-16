@@ -9,6 +9,7 @@ import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../core/widgets/vianexis_metadata_notice.dart';
 import '../../operations/data/operations_repository.dart';
 import '../data/trips_overview_repository.dart';
+import '../domain/trip_overview_item.dart';
 
 class TripsOverviewScreen extends ConsumerWidget {
   const TripsOverviewScreen({super.key});
@@ -98,7 +99,7 @@ class TripsOverviewScreen extends ConsumerWidget {
                       context,
                       'tripsOverviewBackendMessage',
                     ),
-                    endpointHint: 'GET /platform-admin/trips (planned)',
+                    endpointHint: 'GET /platform-admin/trips',
                   )
                 else ...[
                   Text(
@@ -116,7 +117,12 @@ class TripsOverviewScreen extends ConsumerWidget {
                         ),
                         subtitle: Text(
                           '${trip.companyName} · ${trip.driverName}\n'
-                          '${resolveTripsOverviewKey(context, trip.status.localizationKey)}'
+                          '${tripOverviewDiagnosticStatusLabel(
+                            status: trip.status,
+                            canonicalStatus: trip.canonicalStatus,
+                            resolve: (key) =>
+                                resolveTripsOverviewKey(context, key),
+                          )}'
                           '${trip.hasExchangeRecords ? ' · ${resolveTripsOverviewKey(context, 'tripsOverviewExchangeIndicator')}' : ''}'
                           '${trip.hasExchangeAttention ? ' · ${resolveTripsOverviewKey(context, 'tripsOverviewExchangeAttention')}' : ''}'
                           '${trip.pendingSyncWarning ? ' · ${resolveTripsOverviewKey(context, 'tripsOverviewPendingSync')}' : ''}',
