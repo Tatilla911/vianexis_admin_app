@@ -127,6 +127,7 @@ class AdminUserDetailScreen extends ConsumerWidget {
                     subtitle: user.email,
                     titleKey: 'qrCodesUserTitle',
                     allowedPurposes: const [
+                      QrPurpose.userIdentity,
                       QrPurpose.userInvite,
                       QrPurpose.userActivation,
                       QrPurpose.passwordSetup,

@@ -26,6 +26,15 @@ void main() {
     expect(QrPurpose.tryParse(code.purpose), QrPurpose.userInvite);
   });
 
+  test('canonical identity purposes parse separately from invite QR', () {
+    expect(QrPurpose.tryParse('company_identity'), QrPurpose.companyIdentity);
+    expect(QrPurpose.tryParse('user_identity'), QrPurpose.userIdentity);
+    expect(QrPurpose.tryParse('driver_identity'), QrPurpose.driverIdentity);
+    expect(QrPurpose.companyIdentity.isCanonicalIdentity, isTrue);
+    expect(QrPurpose.companyInvite.isCanonicalIdentity, isFalse);
+    expect(QrPurpose.userInvite.isCanonicalIdentity, isFalse);
+  });
+
   test('CreatePlatformQrRequest serializes purpose fields', () {
     final body = const CreatePlatformQrRequest(
       entityType: 'company',

@@ -1,4 +1,7 @@
 enum QrPurpose {
+  companyIdentity('company_identity'),
+  userIdentity('user_identity'),
+  driverIdentity('driver_identity'),
   userInvite('user_invite'),
   userActivation('user_activation'),
   passwordSetup('password_setup'),
@@ -16,6 +19,11 @@ enum QrPurpose {
   const QrPurpose(this.apiValue);
   final String apiValue;
 
+  bool get isCanonicalIdentity =>
+      this == QrPurpose.companyIdentity ||
+      this == QrPurpose.userIdentity ||
+      this == QrPurpose.driverIdentity;
+
   static QrPurpose? tryParse(String? raw) {
     if (raw == null || raw.isEmpty) return null;
     for (final value in QrPurpose.values) {
@@ -25,6 +33,9 @@ enum QrPurpose {
   }
 
   String get l10nKey => switch (this) {
+    QrPurpose.companyIdentity => 'qrCodesPurposeCompanyIdentity',
+    QrPurpose.userIdentity => 'qrCodesPurposeUserIdentity',
+    QrPurpose.driverIdentity => 'qrCodesPurposeDriverIdentity',
     QrPurpose.userInvite => 'qrCodesPurposeUserInvite',
     QrPurpose.userActivation => 'qrCodesPurposeUserActivation',
     QrPurpose.passwordSetup => 'qrCodesPurposePasswordSetup',

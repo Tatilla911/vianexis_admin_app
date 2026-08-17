@@ -6728,6 +6728,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get qrCodesPurposeLabel => 'Purpose';
 
   @override
+  String get qrCodesPurposeCompanyIdentity => 'Identity QR (company)';
+
+  @override
+  String get qrCodesPurposeUserIdentity => 'Identity QR (user)';
+
+  @override
+  String get qrCodesPurposeDriverIdentity => 'Identity QR (driver)';
+
+  @override
+  String get qrCodesIdentityHint =>
+      'Stable identity QR. Not an invite, activation, or login link.';
+
+  @override
+  String get qrCodesInviteHint =>
+      'Invite / activation QR. Time-limited and not the canonical identity.';
+
+  @override
   String get qrCodesPurposeUserInvite => 'Invite QR';
 
   @override

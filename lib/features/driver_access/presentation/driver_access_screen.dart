@@ -620,6 +620,7 @@ class _DriverAccessDetailScreenState
                   displayName: driver.displayName,
                   titleKey: 'qrCodesDriverTitle',
                   allowedPurposes: const [
+                    QrPurpose.driverIdentity,
                     QrPurpose.driverAppLink,
                     QrPurpose.driverProfile,
                     QrPurpose.publicDriverId,
