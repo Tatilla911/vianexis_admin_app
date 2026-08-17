@@ -6824,6 +6824,23 @@ class AppLocalizationsHu extends AppLocalizations {
   String get qrCodesPurposeLabel => 'Cél';
 
   @override
+  String get qrCodesPurposeCompanyIdentity => 'Azonosító QR (cég)';
+
+  @override
+  String get qrCodesPurposeUserIdentity => 'Azonosító QR (felhasználó)';
+
+  @override
+  String get qrCodesPurposeDriverIdentity => 'Azonosító QR (sofőr)';
+
+  @override
+  String get qrCodesIdentityHint =>
+      'Stabil azonosító QR. Nem meghívó, nem aktiváló és nem belépési link.';
+
+  @override
+  String get qrCodesInviteHint =>
+      'Meghívó / aktiváló QR. Időkorlátos, nem a kanonikus azonosító.';
+
+  @override
   String get qrCodesPurposeUserInvite => 'Meghívó QR';
 
   @override

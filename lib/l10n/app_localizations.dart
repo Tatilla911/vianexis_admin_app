@@ -12246,6 +12246,21 @@ abstract class AppLocalizations {
   /// **'Purpose'**
   String get qrCodesPurposeLabel;
 
+  /// No description provided for @qrCodesPurposeCompanyIdentity.
+  String get qrCodesPurposeCompanyIdentity;
+
+  /// No description provided for @qrCodesPurposeUserIdentity.
+  String get qrCodesPurposeUserIdentity;
+
+  /// No description provided for @qrCodesPurposeDriverIdentity.
+  String get qrCodesPurposeDriverIdentity;
+
+  /// No description provided for @qrCodesIdentityHint.
+  String get qrCodesIdentityHint;
+
+  /// No description provided for @qrCodesInviteHint.
+  String get qrCodesInviteHint;
+
   /// No description provided for @qrCodesPurposeUserInvite.
   ///
   /// In en, this message translates to:

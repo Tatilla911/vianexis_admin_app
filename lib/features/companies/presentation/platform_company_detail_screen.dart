@@ -783,6 +783,7 @@ class PlatformCompanyDetailScreen extends ConsumerWidget {
                     companyId: entityId,
                     titleKey: 'qrCodesCompanyTitle',
                     allowedPurposes: const [
+                      QrPurpose.companyIdentity,
                       QrPurpose.companyInvite,
                       QrPurpose.companyOnboarding,
                       QrPurpose.companyProfile,

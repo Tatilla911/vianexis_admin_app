@@ -512,31 +512,43 @@ class _QrCodesManagementDialogState
                           if (value != null) setState(() => _purpose = value);
                         },
                 ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _inviteeNameController,
-                  enabled: !_busy,
-                  decoration: InputDecoration(
-                    labelText: resolveQrCodesKey(
-                      context,
-                      'qrCodesInviteeName',
-                    ),
-                    isDense: true,
+                const SizedBox(height: 8),
+                Text(
+                  resolveQrCodesKey(
+                    context,
+                    _purpose.isCanonicalIdentity
+                        ? 'qrCodesIdentityHint'
+                        : 'qrCodesInviteHint',
                   ),
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _recipientEmailController,
-                  enabled: !_busy,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: resolveQrCodesKey(
-                      context,
-                      'qrCodesRecipientEmail',
+                if (!_purpose.isCanonicalIdentity) ...[
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _inviteeNameController,
+                    enabled: !_busy,
+                    decoration: InputDecoration(
+                      labelText: resolveQrCodesKey(
+                        context,
+                        'qrCodesInviteeName',
+                      ),
+                      isDense: true,
                     ),
-                    isDense: true,
                   ),
-                ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _recipientEmailController,
+                    enabled: !_busy,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: resolveQrCodesKey(
+                        context,
+                        'qrCodesRecipientEmail',
+                      ),
+                      isDense: true,
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 12),
                 FilledButton(
                   onPressed: _busy ? null : _create,
@@ -635,13 +647,15 @@ class _QrCodesManagementDialogState
                     runSpacing: 8,
                     alignment: WrapAlignment.center,
                     children: [
-                      FilledButton.tonalIcon(
-                        onPressed: _busy ? null : () => _sendEmail(preview),
-                        icon: const Icon(Icons.email_outlined),
-                        label: Text(
-                          resolveQrCodesKey(context, 'qrCodesSendEmail'),
+                      if (!(QrPurpose.tryParse(preview.purpose)?.isCanonicalIdentity ??
+                          _purpose.isCanonicalIdentity))
+                        FilledButton.tonalIcon(
+                          onPressed: _busy ? null : () => _sendEmail(preview),
+                          icon: const Icon(Icons.email_outlined),
+                          label: Text(
+                            resolveQrCodesKey(context, 'qrCodesSendEmail'),
+                          ),
                         ),
-                      ),
                       OutlinedButton(
                         onPressed: _busy ? null : () => _copyLink(preview),
                         child: Text(
