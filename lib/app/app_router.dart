@@ -26,6 +26,8 @@ import '../features/billing/presentation/billing_screen.dart';
 import '../features/billing/presentation/pricing_intake_detail_screen.dart';
 import '../features/billing/presentation/quote_request_detail_screen.dart';
 import '../features/billing/presentation/subscription_detail_screen.dart';
+import '../features/pricing_quotes/presentation/pricing_quote_detail_screen.dart';
+import '../features/pricing_quotes/presentation/pricing_quotes_list_screen.dart';
 import '../features/customer_communications/presentation/customer_communication_detail_screen.dart';
 import '../features/customer_communications/presentation/customer_communications_screen.dart';
 import '../features/customer_communications/presentation/evidence_package_detail_screen.dart';
@@ -250,6 +252,19 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 path: 'quote-request/:id',
                 builder: (context, state) => QuoteRequestDetailScreen(
                   quoteRequestId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AdminRoutes.pricingQuotes,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: PricingQuotesListScreen()),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => PricingQuoteDetailScreen(
+                  quoteId: state.pathParameters['id'] ?? '',
                 ),
               ),
             ],
@@ -531,6 +546,7 @@ abstract final class AdminRoutes {
   static const companies = '/companies';
   static const drivers = '/drivers';
   static const billing = '/billing';
+  static const pricingQuotes = '/pricing-quotes';
   static const bulkOnboarding = '/bulk-onboarding';
   static const bulkOnboardingUpload = '/bulk-onboarding/upload';
   static const aiReviews = '/ai-reviews';
@@ -582,6 +598,8 @@ abstract final class AdminRoutes {
 
   static String billingQuoteRequestDetail(String id) =>
       '$billing/quote-request/$id';
+
+  static String pricingQuoteDetail(String id) => '$pricingQuotes/$id';
 
   static String bulkOnboardingJobDetail(String id) => '$bulkOnboarding/$id';
 
@@ -645,6 +663,9 @@ abstract final class AdminRoutes {
     }
     if (location.startsWith(billing)) {
       return AdminDestination.billing;
+    }
+    if (location.startsWith(pricingQuotes)) {
+      return AdminDestination.pricingQuotes;
     }
     if (location.startsWith(bulkOnboarding)) {
       return AdminDestination.bulkOnboarding;

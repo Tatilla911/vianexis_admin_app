@@ -7142,4 +7142,299 @@ class AppLocalizationsHu extends AppLocalizations {
   String platformCompanyMemberLastLogin(String date) {
     return 'Utolsó bejelentkezés: $date';
   }
+
+  @override
+  String get navPricingQuotes => 'Árajánlatok';
+
+  @override
+  String get pricingQuotesModuleDescription => 'Belső ajánlatellenőrzés';
+
+  @override
+  String get pricingQuotesOpenModule => 'Árajánlatok megnyitása';
+
+  @override
+  String get pricingQuotesEmpty => 'Még nincs árajánlat.';
+
+  @override
+  String get pricingQuotesLoadError => 'Az árajánlatok betöltése nem sikerült.';
+
+  @override
+  String get pricingQuotesDetailError =>
+      'Az árajánlat részletei nem tölthetők be.';
+
+  @override
+  String get pricingQuotesCreateFromIntake => 'Ajánlat készítése megkeresésből';
+
+  @override
+  String get pricingQuotesSelectIntake => 'Publikus megkeresés';
+
+  @override
+  String get pricingQuotesCreateReason => 'Indok (opcionális)';
+
+  @override
+  String get pricingQuotesCreateAction => 'Ajánlat létrehozása';
+
+  @override
+  String get pricingQuotesCreateError =>
+      'Az árajánlat létrehozása nem sikerült.';
+
+  @override
+  String get pricingQuotesIntakeLoadError =>
+      'A publikus megkeresések nem tölthetők be az ajánlatkészítéshez.';
+
+  @override
+  String get pricingQuotesNoEligibleIntakes =>
+      'Nincs alkalmas árajánlat-kérő megkeresés.';
+
+  @override
+  String get pricingQuotesRecalculate => 'Újraszámítás';
+
+  @override
+  String get pricingQuotesAddAdjustment => 'Korrekció hozzáadása';
+
+  @override
+  String get pricingQuotesApprove => 'Ajánlat jóváhagyása';
+
+  @override
+  String get pricingQuotesApproveBlocked =>
+      'A jóváhagyás zárolva van, amíg a háttérrendszer ellenőrzési jelzői meg nem oldódnak.';
+
+  @override
+  String get pricingQuotesChangeStatus => 'Állapot módosítása';
+
+  @override
+  String get pricingQuotesActionError =>
+      'Az árajánlat művelet nem hajtható végre.';
+
+  @override
+  String get pricingQuotesReason => 'Indok';
+
+  @override
+  String get pricingQuotesCancel => 'Mégse';
+
+  @override
+  String get pricingQuotesConfirm => 'Megerősítés';
+
+  @override
+  String get pricingQuotesType => 'Típus';
+
+  @override
+  String get pricingQuotesPercent => 'Százalék';
+
+  @override
+  String get pricingQuotesAmount => 'Összeg (nettó)';
+
+  @override
+  String pricingQuotesDashboardReviewRequired(String count) {
+    return 'Ellenőrzés szükséges: $count';
+  }
+
+  @override
+  String pricingQuotesDashboardNew(String count) {
+    return 'Új / számított: $count';
+  }
+
+  @override
+  String get pricingQuoteValueUnavailable => '—';
+
+  @override
+  String get pricingQuoteUnknownParty => 'Nincs hozzárendelt cég';
+
+  @override
+  String pricingQuoteCompanyId(String id) {
+    return 'Cég #$id';
+  }
+
+  @override
+  String pricingQuoteIntakeId(String id) {
+    return 'Megkeresés #$id';
+  }
+
+  @override
+  String get pricingQuoteRecurringShort => 'Ismétlődő';
+
+  @override
+  String get pricingQuoteSetupShort => 'Beállítás';
+
+  @override
+  String get pricingQuoteConfidenceShort => 'Megbízhatóság';
+
+  @override
+  String pricingQuoteRevisionLabel(String number) {
+    return '$number. revízió';
+  }
+
+  @override
+  String get pricingQuoteRevisionReadOnly => 'Csak olvasható';
+
+  @override
+  String get pricingQuoteSectionIdentity => 'Ajánlat azonosító';
+
+  @override
+  String get pricingQuoteFieldCompany => 'Cég / ügyfél';
+
+  @override
+  String get pricingQuoteFieldContact => 'Kapcsolattartó';
+
+  @override
+  String get pricingQuoteFieldCreated => 'Létrehozva';
+
+  @override
+  String get pricingQuoteFieldQuestionnaireVersion => 'Kérdőív verzió';
+
+  @override
+  String get pricingQuoteFieldPricingConfigVersion =>
+      'Árazási konfiguráció verzió';
+
+  @override
+  String get pricingQuoteFieldRollout => 'Bevezetés / licencalap';
+
+  @override
+  String get pricingQuoteFieldLicences => 'Üzemi licencek';
+
+  @override
+  String get pricingQuoteFieldModules => 'Kiválasztott modulok';
+
+  @override
+  String get pricingQuoteSectionNormalizedInputs =>
+      'Normalizált árazási bemenetek';
+
+  @override
+  String get pricingQuoteFieldLicenseBasis => 'Licencalap';
+
+  @override
+  String get pricingQuoteFieldUsageItems => 'Használati tételek';
+
+  @override
+  String get pricingQuoteSectionRecurring => 'Ismétlődő bontás';
+
+  @override
+  String get pricingQuoteFieldRecurringTotal => 'Ismétlődő célösszeg';
+
+  @override
+  String get pricingQuoteSectionSetup => 'Egyszeri beállítás bontása';
+
+  @override
+  String get pricingQuoteFieldSetupTotal => 'Egyszeri beállítás célösszege';
+
+  @override
+  String get pricingQuoteSectionDirectCosts => 'Közvetlen költségek és fedezet';
+
+  @override
+  String get pricingQuoteFieldDirectCost => 'Közvetlen költségek';
+
+  @override
+  String get pricingQuoteFieldDirectContribution => 'Közvetlen fedezet';
+
+  @override
+  String get pricingQuoteFieldConfidence => 'Megbízhatóság';
+
+  @override
+  String get pricingQuoteSectionFlags => 'Ellenőrzési jelzők';
+
+  @override
+  String get pricingQuoteNoFlags => 'Nincs ellenőrzési jelző.';
+
+  @override
+  String get pricingQuoteSectionRevisions => 'Revízióelőzmények';
+
+  @override
+  String get pricingQuoteNoRevisions => 'Még nincs revízió.';
+
+  @override
+  String get pricingQuoteSectionAdjustments => 'Korrekciók';
+
+  @override
+  String get pricingQuoteNoAdjustments => 'Nincs korrekció.';
+
+  @override
+  String pricingQuoteAdjustmentPercent(String percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get pricingQuoteStatusDraft => 'Piszkozat';
+
+  @override
+  String get pricingQuoteStatusCalculated => 'Számított';
+
+  @override
+  String get pricingQuoteStatusReviewRequired => 'Ellenőrzés szükséges';
+
+  @override
+  String get pricingQuoteStatusApproved => 'Jóváhagyott';
+
+  @override
+  String get pricingQuoteStatusSent => 'Elküldött';
+
+  @override
+  String get pricingQuoteStatusAccepted => 'Elfogadott';
+
+  @override
+  String get pricingQuoteStatusRejected => 'Elutasított';
+
+  @override
+  String get pricingQuoteStatusExpired => 'Lejárt';
+
+  @override
+  String get pricingQuoteStatusUnknown => 'Ismeretlen állapot';
+
+  @override
+  String get pricingQuoteFlagProviderValidationPending =>
+      'Szolgáltatói költségek ellenőrzése szükséges';
+
+  @override
+  String get pricingQuoteFlagMarginReviewRequired =>
+      'Árrés ellenőrzése szükséges';
+
+  @override
+  String get pricingQuoteFlagUsageRateBelowFloor =>
+      'A használati díj a közvetlen költségküszöb alatt van';
+
+  @override
+  String get pricingQuoteFlagEnterpriseVolumeReview =>
+      'Vállalati volumen ellenőrzése';
+
+  @override
+  String get pricingQuoteFlagOwnerReviewEnterprise =>
+      'Tulajdonosi ellenőrzés a vállalati pozicionáláshoz';
+
+  @override
+  String get pricingQuoteFlagManualDiscountApproval =>
+      'Manuális kedvezmény jóváhagyása szükséges';
+
+  @override
+  String get pricingQuoteFlagAutomaticDiscountCap =>
+      'Automatikus kedvezményplafon túllépve';
+
+  @override
+  String get pricingQuoteFlagIntegrationDiscovery =>
+      'Integrációs felmérés szükséges';
+
+  @override
+  String get pricingQuoteFlagCustomRequirements => 'Egyedi igények';
+
+  @override
+  String get pricingQuoteAdjustmentDiscount => 'Kedvezmény';
+
+  @override
+  String get pricingQuoteAdjustmentSurcharge => 'Felár';
+
+  @override
+  String get pricingQuoteAdjustmentPilotCredit => 'Pilot kredit';
+
+  @override
+  String get pricingQuoteAdjustmentNegotiatedEnterprise => 'Tárgyalt vállalati';
+
+  @override
+  String get pricingQuoteAdjustmentOther => 'Egyéb';
+
+  @override
+  String get pricingQuoteConfidenceHigh => 'Magas';
+
+  @override
+  String get pricingQuoteConfidenceMedium => 'Közepes';
+
+  @override
+  String get pricingQuoteConfidenceLow => 'Alacsony';
 }

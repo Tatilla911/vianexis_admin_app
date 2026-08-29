@@ -14,6 +14,8 @@ import '../../features/action_center/presentation/action_center_providers.dart';
 import '../../features/action_center/presentation/widgets/action_center_item_card.dart';
 import '../../features/billing/presentation/billing_providers.dart';
 import '../../features/billing/presentation/widgets/billing_overview_card.dart';
+import '../../features/pricing_quotes/presentation/pricing_quotes_providers.dart';
+import '../../features/pricing_quotes/presentation/widgets/pricing_quotes_dashboard_card.dart';
 import '../../features/companies/presentation/platform_companies_providers.dart';
 import '../../features/companies/presentation/widgets/platform_company_summary_card.dart';
 import '../../features/customer_communications/presentation/customer_communications_providers.dart';
@@ -60,6 +62,8 @@ class AdminDashboardScreen extends ConsumerWidget {
         user?.canAccess(AdminDestination.bulkOnboarding) ?? false;
     final showCompanies = user?.canAccess(AdminDestination.companies) ?? false;
     final showBilling = user?.canAccess(AdminDestination.billing) ?? false;
+    final showPricingQuotes =
+        user?.canAccess(AdminDestination.pricingQuotes) ?? false;
     final showAiReviews = user?.canAccess(AdminDestination.aiReviews) ?? false;
     final showRegistrations =
         user?.canAccess(AdminDestination.registrations) ?? false;
@@ -78,6 +82,9 @@ class AdminDashboardScreen extends ConsumerWidget {
 
     final publicIntakesAsync =
         showPublicIntakes ? ref.watch(publicIntakeSummaryProvider) : null;
+    final pricingQuotesAsync = showPricingQuotes
+        ? ref.watch(pricingQuotesDashboardSummaryProvider)
+        : null;
 
     final pendingRegistrations = showRegistrations
         ? registrationsAsync.maybeWhen(
@@ -367,6 +374,28 @@ class AdminDashboardScreen extends ConsumerWidget {
               ),
             ),
           if (showBilling) const SizedBox(height: 16),
+          if (showPricingQuotes && pricingQuotesAsync != null)
+            pricingQuotesAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => DashboardSummaryErrorCard(
+                error: error,
+                fallbackMessage: l10n.pricingQuotesLoadError,
+                onRetry: () =>
+                    ref.read(pricingQuotesProvider.notifier).refresh(),
+              ),
+              data: (summary) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  PricingQuotesDashboardCard(summary: summary),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: () => context.push(AdminRoutes.pricingQuotes),
+                    child: Text(l10n.pricingQuotesOpenModule),
+                  ),
+                ],
+              ),
+            ),
+          if (showPricingQuotes) const SizedBox(height: 16),
           if (showSecurityCenter)
             securityAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),

@@ -52,6 +52,7 @@ enum AdminDestination {
   companies,
   drivers,
   billing,
+  pricingQuotes,
   aiReviews,
   supportTickets,
   supportGrants,
@@ -78,6 +79,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.companies ||
         AdminDestination.drivers ||
         AdminDestination.billing ||
+        AdminDestination.pricingQuotes ||
         AdminDestination.aiReviews ||
         AdminDestination.supportTickets ||
         AdminDestination.supportGrants ||
@@ -113,6 +115,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.companies ||
         AdminDestination.drivers ||
         AdminDestination.billing ||
+        AdminDestination.pricingQuotes ||
         AdminDestination.customerCommunications ||
         AdminDestination.publicIntakes ||
         AdminDestination.registrations ||

@@ -151,6 +151,14 @@ List<_ModuleTile> get _allModules => [
     labelKey: (c) => AppLocalizations.of(c).navBilling,
   ),
   _ModuleTile(
+    destination: AdminDestination.pricingQuotes,
+    route: AdminRoutes.pricingQuotes,
+    icon: Icons.request_quote_outlined,
+    labelKey: (c) => AppLocalizations.of(c).navPricingQuotes,
+    descriptionKey: (c) =>
+        AppLocalizations.of(c).pricingQuotesModuleDescription,
+  ),
+  _ModuleTile(
     destination: AdminDestination.bulkOnboarding,
     route: AdminRoutes.bulkOnboarding,
     icon: Icons.upload_file_outlined,

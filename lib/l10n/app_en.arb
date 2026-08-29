@@ -3155,5 +3155,136 @@
         "type": "String"
       }
     }
-  }
+  },
+  "navPricingQuotes": "Pricing Quotes",
+  "pricingQuotesModuleDescription": "Internal quote review",
+  "pricingQuotesOpenModule": "Open pricing quotes",
+  "pricingQuotesEmpty": "No pricing quotes yet.",
+  "pricingQuotesLoadError": "Could not load pricing quotes.",
+  "pricingQuotesDetailError": "Could not load pricing quote detail.",
+  "pricingQuotesCreateFromIntake": "Create quote from intake",
+  "pricingQuotesSelectIntake": "Public intake",
+  "pricingQuotesCreateReason": "Reason (optional)",
+  "pricingQuotesCreateAction": "Create quote",
+  "pricingQuotesCreateError": "Could not create pricing quote.",
+  "pricingQuotesIntakeLoadError": "Could not load public intakes for quote creation.",
+  "pricingQuotesNoEligibleIntakes": "No eligible quote-request intakes are available.",
+  "pricingQuotesRecalculate": "Recalculate",
+  "pricingQuotesAddAdjustment": "Add adjustment",
+  "pricingQuotesApprove": "Approve quote",
+  "pricingQuotesApproveBlocked": "Approval is blocked until backend review flags are resolved.",
+  "pricingQuotesChangeStatus": "Change status",
+  "pricingQuotesActionError": "The pricing quote action could not be completed.",
+  "pricingQuotesReason": "Reason",
+  "pricingQuotesCancel": "Cancel",
+  "pricingQuotesConfirm": "Confirm",
+  "pricingQuotesType": "Type",
+  "pricingQuotesPercent": "Percent",
+  "pricingQuotesAmount": "Amount (net)",
+  "pricingQuotesDashboardReviewRequired": "Review required: {count}",
+  "@pricingQuotesDashboardReviewRequired": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuotesDashboardNew": "New / calculated: {count}",
+  "@pricingQuotesDashboardNew": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteValueUnavailable": "—",
+  "pricingQuoteUnknownParty": "Company not linked",
+  "pricingQuoteCompanyId": "Company #{id}",
+  "@pricingQuoteCompanyId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteIntakeId": "Intake #{id}",
+  "@pricingQuoteIntakeId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteRecurringShort": "Recurring",
+  "pricingQuoteSetupShort": "Setup",
+  "pricingQuoteConfidenceShort": "Confidence",
+  "pricingQuoteRevisionLabel": "Revision {number}",
+  "@pricingQuoteRevisionLabel": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteRevisionReadOnly": "Read-only",
+  "pricingQuoteSectionIdentity": "Quote identity",
+  "pricingQuoteFieldCompany": "Company / customer",
+  "pricingQuoteFieldContact": "Contact",
+  "pricingQuoteFieldCreated": "Created",
+  "pricingQuoteFieldQuestionnaireVersion": "Questionnaire version",
+  "pricingQuoteFieldPricingConfigVersion": "Pricing config version",
+  "pricingQuoteFieldRollout": "Rollout / licence basis",
+  "pricingQuoteFieldLicences": "Operational licences",
+  "pricingQuoteFieldModules": "Selected modules",
+  "pricingQuoteSectionNormalizedInputs": "Normalized pricing inputs",
+  "pricingQuoteFieldLicenseBasis": "Licence basis",
+  "pricingQuoteFieldUsageItems": "Usage line items",
+  "pricingQuoteSectionRecurring": "Recurring breakdown",
+  "pricingQuoteFieldRecurringTotal": "Recurring target",
+  "pricingQuoteSectionSetup": "One-time setup breakdown",
+  "pricingQuoteFieldSetupTotal": "One-time setup target",
+  "pricingQuoteSectionDirectCosts": "Direct costs and contribution",
+  "pricingQuoteFieldDirectCost": "Direct costs",
+  "pricingQuoteFieldDirectContribution": "Direct contribution",
+  "pricingQuoteFieldConfidence": "Confidence",
+  "pricingQuoteSectionFlags": "Review flags",
+  "pricingQuoteNoFlags": "No review flags.",
+  "pricingQuoteSectionRevisions": "Revision history",
+  "pricingQuoteNoRevisions": "No revisions yet.",
+  "pricingQuoteSectionAdjustments": "Adjustments",
+  "pricingQuoteNoAdjustments": "No adjustments.",
+  "pricingQuoteAdjustmentPercent": "{percent}%",
+  "@pricingQuoteAdjustmentPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteStatusDraft": "Draft",
+  "pricingQuoteStatusCalculated": "Calculated",
+  "pricingQuoteStatusReviewRequired": "Review required",
+  "pricingQuoteStatusApproved": "Approved",
+  "pricingQuoteStatusSent": "Sent",
+  "pricingQuoteStatusAccepted": "Accepted",
+  "pricingQuoteStatusRejected": "Rejected",
+  "pricingQuoteStatusExpired": "Expired",
+  "pricingQuoteStatusUnknown": "Unknown status",
+  "pricingQuoteFlagProviderValidationPending": "Provider cost validation required",
+  "pricingQuoteFlagMarginReviewRequired": "Margin review required",
+  "pricingQuoteFlagUsageRateBelowFloor": "Usage rate below direct cost floor",
+  "pricingQuoteFlagEnterpriseVolumeReview": "Enterprise volume review",
+  "pricingQuoteFlagOwnerReviewEnterprise": "Owner review for enterprise positioning",
+  "pricingQuoteFlagManualDiscountApproval": "Manual discount approval required",
+  "pricingQuoteFlagAutomaticDiscountCap": "Automatic discount cap exceeded",
+  "pricingQuoteFlagIntegrationDiscovery": "Integration discovery required",
+  "pricingQuoteFlagCustomRequirements": "Custom requirements",
+  "pricingQuoteAdjustmentDiscount": "Discount",
+  "pricingQuoteAdjustmentSurcharge": "Surcharge",
+  "pricingQuoteAdjustmentPilotCredit": "Pilot credit",
+  "pricingQuoteAdjustmentNegotiatedEnterprise": "Negotiated enterprise",
+  "pricingQuoteAdjustmentOther": "Other",
+  "pricingQuoteConfidenceHigh": "High",
+  "pricingQuoteConfidenceMedium": "Medium",
+  "pricingQuoteConfidenceLow": "Low"
 }

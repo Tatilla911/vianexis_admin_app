@@ -12247,18 +12247,33 @@ abstract class AppLocalizations {
   String get qrCodesPurposeLabel;
 
   /// No description provided for @qrCodesPurposeCompanyIdentity.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity QR (company)'**
   String get qrCodesPurposeCompanyIdentity;
 
   /// No description provided for @qrCodesPurposeUserIdentity.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity QR (user)'**
   String get qrCodesPurposeUserIdentity;
 
   /// No description provided for @qrCodesPurposeDriverIdentity.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity QR (driver)'**
   String get qrCodesPurposeDriverIdentity;
 
   /// No description provided for @qrCodesIdentityHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Stable identity QR. Not an invite, activation, or login link.'**
   String get qrCodesIdentityHint;
 
   /// No description provided for @qrCodesInviteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite / activation QR. Time-limited and not the canonical identity.'**
   String get qrCodesInviteHint;
 
   /// No description provided for @qrCodesPurposeUserInvite.
@@ -12842,6 +12857,540 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last login: {date}'**
   String platformCompanyMemberLastLogin(String date);
+
+  /// No description provided for @navPricingQuotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing Quotes'**
+  String get navPricingQuotes;
+
+  /// No description provided for @pricingQuotesModuleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal quote review'**
+  String get pricingQuotesModuleDescription;
+
+  /// No description provided for @pricingQuotesOpenModule.
+  ///
+  /// In en, this message translates to:
+  /// **'Open pricing quotes'**
+  String get pricingQuotesOpenModule;
+
+  /// No description provided for @pricingQuotesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No pricing quotes yet.'**
+  String get pricingQuotesEmpty;
+
+  /// No description provided for @pricingQuotesLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load pricing quotes.'**
+  String get pricingQuotesLoadError;
+
+  /// No description provided for @pricingQuotesDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load pricing quote detail.'**
+  String get pricingQuotesDetailError;
+
+  /// No description provided for @pricingQuotesCreateFromIntake.
+  ///
+  /// In en, this message translates to:
+  /// **'Create quote from intake'**
+  String get pricingQuotesCreateFromIntake;
+
+  /// No description provided for @pricingQuotesSelectIntake.
+  ///
+  /// In en, this message translates to:
+  /// **'Public intake'**
+  String get pricingQuotesSelectIntake;
+
+  /// No description provided for @pricingQuotesCreateReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason (optional)'**
+  String get pricingQuotesCreateReason;
+
+  /// No description provided for @pricingQuotesCreateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Create quote'**
+  String get pricingQuotesCreateAction;
+
+  /// No description provided for @pricingQuotesCreateError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create pricing quote.'**
+  String get pricingQuotesCreateError;
+
+  /// No description provided for @pricingQuotesIntakeLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load public intakes for quote creation.'**
+  String get pricingQuotesIntakeLoadError;
+
+  /// No description provided for @pricingQuotesNoEligibleIntakes.
+  ///
+  /// In en, this message translates to:
+  /// **'No eligible quote-request intakes are available.'**
+  String get pricingQuotesNoEligibleIntakes;
+
+  /// No description provided for @pricingQuotesRecalculate.
+  ///
+  /// In en, this message translates to:
+  /// **'Recalculate'**
+  String get pricingQuotesRecalculate;
+
+  /// No description provided for @pricingQuotesAddAdjustment.
+  ///
+  /// In en, this message translates to:
+  /// **'Add adjustment'**
+  String get pricingQuotesAddAdjustment;
+
+  /// No description provided for @pricingQuotesApprove.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve quote'**
+  String get pricingQuotesApprove;
+
+  /// No description provided for @pricingQuotesApproveBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Approval is blocked until backend review flags are resolved.'**
+  String get pricingQuotesApproveBlocked;
+
+  /// No description provided for @pricingQuotesChangeStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Change status'**
+  String get pricingQuotesChangeStatus;
+
+  /// No description provided for @pricingQuotesActionError.
+  ///
+  /// In en, this message translates to:
+  /// **'The pricing quote action could not be completed.'**
+  String get pricingQuotesActionError;
+
+  /// No description provided for @pricingQuotesReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get pricingQuotesReason;
+
+  /// No description provided for @pricingQuotesCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get pricingQuotesCancel;
+
+  /// No description provided for @pricingQuotesConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get pricingQuotesConfirm;
+
+  /// No description provided for @pricingQuotesType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get pricingQuotesType;
+
+  /// No description provided for @pricingQuotesPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'Percent'**
+  String get pricingQuotesPercent;
+
+  /// No description provided for @pricingQuotesAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (net)'**
+  String get pricingQuotesAmount;
+
+  /// No description provided for @pricingQuotesDashboardReviewRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Review required: {count}'**
+  String pricingQuotesDashboardReviewRequired(String count);
+
+  /// No description provided for @pricingQuotesDashboardNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New / calculated: {count}'**
+  String pricingQuotesDashboardNew(String count);
+
+  /// No description provided for @pricingQuoteValueUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'—'**
+  String get pricingQuoteValueUnavailable;
+
+  /// No description provided for @pricingQuoteUnknownParty.
+  ///
+  /// In en, this message translates to:
+  /// **'Company not linked'**
+  String get pricingQuoteUnknownParty;
+
+  /// No description provided for @pricingQuoteCompanyId.
+  ///
+  /// In en, this message translates to:
+  /// **'Company #{id}'**
+  String pricingQuoteCompanyId(String id);
+
+  /// No description provided for @pricingQuoteIntakeId.
+  ///
+  /// In en, this message translates to:
+  /// **'Intake #{id}'**
+  String pricingQuoteIntakeId(String id);
+
+  /// No description provided for @pricingQuoteRecurringShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Recurring'**
+  String get pricingQuoteRecurringShort;
+
+  /// No description provided for @pricingQuoteSetupShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup'**
+  String get pricingQuoteSetupShort;
+
+  /// No description provided for @pricingQuoteConfidenceShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence'**
+  String get pricingQuoteConfidenceShort;
+
+  /// No description provided for @pricingQuoteRevisionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Revision {number}'**
+  String pricingQuoteRevisionLabel(String number);
+
+  /// No description provided for @pricingQuoteRevisionReadOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Read-only'**
+  String get pricingQuoteRevisionReadOnly;
+
+  /// No description provided for @pricingQuoteSectionIdentity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote identity'**
+  String get pricingQuoteSectionIdentity;
+
+  /// No description provided for @pricingQuoteFieldCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company / customer'**
+  String get pricingQuoteFieldCompany;
+
+  /// No description provided for @pricingQuoteFieldContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get pricingQuoteFieldContact;
+
+  /// No description provided for @pricingQuoteFieldCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get pricingQuoteFieldCreated;
+
+  /// No description provided for @pricingQuoteFieldQuestionnaireVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Questionnaire version'**
+  String get pricingQuoteFieldQuestionnaireVersion;
+
+  /// No description provided for @pricingQuoteFieldPricingConfigVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing config version'**
+  String get pricingQuoteFieldPricingConfigVersion;
+
+  /// No description provided for @pricingQuoteFieldRollout.
+  ///
+  /// In en, this message translates to:
+  /// **'Rollout / licence basis'**
+  String get pricingQuoteFieldRollout;
+
+  /// No description provided for @pricingQuoteFieldLicences.
+  ///
+  /// In en, this message translates to:
+  /// **'Operational licences'**
+  String get pricingQuoteFieldLicences;
+
+  /// No description provided for @pricingQuoteFieldModules.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected modules'**
+  String get pricingQuoteFieldModules;
+
+  /// No description provided for @pricingQuoteSectionNormalizedInputs.
+  ///
+  /// In en, this message translates to:
+  /// **'Normalized pricing inputs'**
+  String get pricingQuoteSectionNormalizedInputs;
+
+  /// No description provided for @pricingQuoteFieldLicenseBasis.
+  ///
+  /// In en, this message translates to:
+  /// **'Licence basis'**
+  String get pricingQuoteFieldLicenseBasis;
+
+  /// No description provided for @pricingQuoteFieldUsageItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage line items'**
+  String get pricingQuoteFieldUsageItems;
+
+  /// No description provided for @pricingQuoteSectionRecurring.
+  ///
+  /// In en, this message translates to:
+  /// **'Recurring breakdown'**
+  String get pricingQuoteSectionRecurring;
+
+  /// No description provided for @pricingQuoteFieldRecurringTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Recurring target'**
+  String get pricingQuoteFieldRecurringTotal;
+
+  /// No description provided for @pricingQuoteSectionSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'One-time setup breakdown'**
+  String get pricingQuoteSectionSetup;
+
+  /// No description provided for @pricingQuoteFieldSetupTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'One-time setup target'**
+  String get pricingQuoteFieldSetupTotal;
+
+  /// No description provided for @pricingQuoteSectionDirectCosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Direct costs and contribution'**
+  String get pricingQuoteSectionDirectCosts;
+
+  /// No description provided for @pricingQuoteFieldDirectCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Direct costs'**
+  String get pricingQuoteFieldDirectCost;
+
+  /// No description provided for @pricingQuoteFieldDirectContribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Direct contribution'**
+  String get pricingQuoteFieldDirectContribution;
+
+  /// No description provided for @pricingQuoteFieldConfidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence'**
+  String get pricingQuoteFieldConfidence;
+
+  /// No description provided for @pricingQuoteSectionFlags.
+  ///
+  /// In en, this message translates to:
+  /// **'Review flags'**
+  String get pricingQuoteSectionFlags;
+
+  /// No description provided for @pricingQuoteNoFlags.
+  ///
+  /// In en, this message translates to:
+  /// **'No review flags.'**
+  String get pricingQuoteNoFlags;
+
+  /// No description provided for @pricingQuoteSectionRevisions.
+  ///
+  /// In en, this message translates to:
+  /// **'Revision history'**
+  String get pricingQuoteSectionRevisions;
+
+  /// No description provided for @pricingQuoteNoRevisions.
+  ///
+  /// In en, this message translates to:
+  /// **'No revisions yet.'**
+  String get pricingQuoteNoRevisions;
+
+  /// No description provided for @pricingQuoteSectionAdjustments.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjustments'**
+  String get pricingQuoteSectionAdjustments;
+
+  /// No description provided for @pricingQuoteNoAdjustments.
+  ///
+  /// In en, this message translates to:
+  /// **'No adjustments.'**
+  String get pricingQuoteNoAdjustments;
+
+  /// No description provided for @pricingQuoteAdjustmentPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}%'**
+  String pricingQuoteAdjustmentPercent(String percent);
+
+  /// No description provided for @pricingQuoteStatusDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get pricingQuoteStatusDraft;
+
+  /// No description provided for @pricingQuoteStatusCalculated.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculated'**
+  String get pricingQuoteStatusCalculated;
+
+  /// No description provided for @pricingQuoteStatusReviewRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Review required'**
+  String get pricingQuoteStatusReviewRequired;
+
+  /// No description provided for @pricingQuoteStatusApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get pricingQuoteStatusApproved;
+
+  /// No description provided for @pricingQuoteStatusSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get pricingQuoteStatusSent;
+
+  /// No description provided for @pricingQuoteStatusAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get pricingQuoteStatusAccepted;
+
+  /// No description provided for @pricingQuoteStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get pricingQuoteStatusRejected;
+
+  /// No description provided for @pricingQuoteStatusExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get pricingQuoteStatusExpired;
+
+  /// No description provided for @pricingQuoteStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown status'**
+  String get pricingQuoteStatusUnknown;
+
+  /// No description provided for @pricingQuoteFlagProviderValidationPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider cost validation required'**
+  String get pricingQuoteFlagProviderValidationPending;
+
+  /// No description provided for @pricingQuoteFlagMarginReviewRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin review required'**
+  String get pricingQuoteFlagMarginReviewRequired;
+
+  /// No description provided for @pricingQuoteFlagUsageRateBelowFloor.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage rate below direct cost floor'**
+  String get pricingQuoteFlagUsageRateBelowFloor;
+
+  /// No description provided for @pricingQuoteFlagEnterpriseVolumeReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Enterprise volume review'**
+  String get pricingQuoteFlagEnterpriseVolumeReview;
+
+  /// No description provided for @pricingQuoteFlagOwnerReviewEnterprise.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner review for enterprise positioning'**
+  String get pricingQuoteFlagOwnerReviewEnterprise;
+
+  /// No description provided for @pricingQuoteFlagManualDiscountApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual discount approval required'**
+  String get pricingQuoteFlagManualDiscountApproval;
+
+  /// No description provided for @pricingQuoteFlagAutomaticDiscountCap.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic discount cap exceeded'**
+  String get pricingQuoteFlagAutomaticDiscountCap;
+
+  /// No description provided for @pricingQuoteFlagIntegrationDiscovery.
+  ///
+  /// In en, this message translates to:
+  /// **'Integration discovery required'**
+  String get pricingQuoteFlagIntegrationDiscovery;
+
+  /// No description provided for @pricingQuoteFlagCustomRequirements.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom requirements'**
+  String get pricingQuoteFlagCustomRequirements;
+
+  /// No description provided for @pricingQuoteAdjustmentDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get pricingQuoteAdjustmentDiscount;
+
+  /// No description provided for @pricingQuoteAdjustmentSurcharge.
+  ///
+  /// In en, this message translates to:
+  /// **'Surcharge'**
+  String get pricingQuoteAdjustmentSurcharge;
+
+  /// No description provided for @pricingQuoteAdjustmentPilotCredit.
+  ///
+  /// In en, this message translates to:
+  /// **'Pilot credit'**
+  String get pricingQuoteAdjustmentPilotCredit;
+
+  /// No description provided for @pricingQuoteAdjustmentNegotiatedEnterprise.
+  ///
+  /// In en, this message translates to:
+  /// **'Negotiated enterprise'**
+  String get pricingQuoteAdjustmentNegotiatedEnterprise;
+
+  /// No description provided for @pricingQuoteAdjustmentOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get pricingQuoteAdjustmentOther;
+
+  /// No description provided for @pricingQuoteConfidenceHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get pricingQuoteConfidenceHigh;
+
+  /// No description provided for @pricingQuoteConfidenceMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get pricingQuoteConfidenceMedium;
+
+  /// No description provided for @pricingQuoteConfidenceLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get pricingQuoteConfidenceLow;
 }
 
 class _AppLocalizationsDelegate

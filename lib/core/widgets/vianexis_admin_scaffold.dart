@@ -213,6 +213,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
       AdminDestination.companies => l10n.navCompanies,
       AdminDestination.drivers => l10n.navDrivers,
       AdminDestination.billing => l10n.navBilling,
+      AdminDestination.pricingQuotes => l10n.navPricingQuotes,
       AdminDestination.bulkOnboarding => l10n.navBulkOnboarding,
       AdminDestination.aiReviews => l10n.navAiReviews,
       AdminDestination.supportTickets => l10n.supportTicketsTitle,

@@ -2440,5 +2440,136 @@
         "type": "String"
       }
     }
-  }
+  },
+  "navPricingQuotes": "Árajánlatok",
+  "pricingQuotesModuleDescription": "Belső ajánlatellenőrzés",
+  "pricingQuotesOpenModule": "Árajánlatok megnyitása",
+  "pricingQuotesEmpty": "Még nincs árajánlat.",
+  "pricingQuotesLoadError": "Az árajánlatok betöltése nem sikerült.",
+  "pricingQuotesDetailError": "Az árajánlat részletei nem tölthetők be.",
+  "pricingQuotesCreateFromIntake": "Ajánlat készítése megkeresésből",
+  "pricingQuotesSelectIntake": "Publikus megkeresés",
+  "pricingQuotesCreateReason": "Indok (opcionális)",
+  "pricingQuotesCreateAction": "Ajánlat létrehozása",
+  "pricingQuotesCreateError": "Az árajánlat létrehozása nem sikerült.",
+  "pricingQuotesIntakeLoadError": "A publikus megkeresések nem tölthetők be az ajánlatkészítéshez.",
+  "pricingQuotesNoEligibleIntakes": "Nincs alkalmas árajánlat-kérő megkeresés.",
+  "pricingQuotesRecalculate": "Újraszámítás",
+  "pricingQuotesAddAdjustment": "Korrekció hozzáadása",
+  "pricingQuotesApprove": "Ajánlat jóváhagyása",
+  "pricingQuotesApproveBlocked": "A jóváhagyás zárolva van, amíg a háttérrendszer ellenőrzési jelzői meg nem oldódnak.",
+  "pricingQuotesChangeStatus": "Állapot módosítása",
+  "pricingQuotesActionError": "Az árajánlat művelet nem hajtható végre.",
+  "pricingQuotesReason": "Indok",
+  "pricingQuotesCancel": "Mégse",
+  "pricingQuotesConfirm": "Megerősítés",
+  "pricingQuotesType": "Típus",
+  "pricingQuotesPercent": "Százalék",
+  "pricingQuotesAmount": "Összeg (nettó)",
+  "pricingQuotesDashboardReviewRequired": "Ellenőrzés szükséges: {count}",
+  "@pricingQuotesDashboardReviewRequired": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuotesDashboardNew": "Új / számított: {count}",
+  "@pricingQuotesDashboardNew": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteValueUnavailable": "—",
+  "pricingQuoteUnknownParty": "Nincs hozzárendelt cég",
+  "pricingQuoteCompanyId": "Cég #{id}",
+  "@pricingQuoteCompanyId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteIntakeId": "Megkeresés #{id}",
+  "@pricingQuoteIntakeId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteRecurringShort": "Ismétlődő",
+  "pricingQuoteSetupShort": "Beállítás",
+  "pricingQuoteConfidenceShort": "Megbízhatóság",
+  "pricingQuoteRevisionLabel": "{number}. revízió",
+  "@pricingQuoteRevisionLabel": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteRevisionReadOnly": "Csak olvasható",
+  "pricingQuoteSectionIdentity": "Ajánlat azonosító",
+  "pricingQuoteFieldCompany": "Cég / ügyfél",
+  "pricingQuoteFieldContact": "Kapcsolattartó",
+  "pricingQuoteFieldCreated": "Létrehozva",
+  "pricingQuoteFieldQuestionnaireVersion": "Kérdőív verzió",
+  "pricingQuoteFieldPricingConfigVersion": "Árazási konfiguráció verzió",
+  "pricingQuoteFieldRollout": "Bevezetés / licencalap",
+  "pricingQuoteFieldLicences": "Üzemi licencek",
+  "pricingQuoteFieldModules": "Kiválasztott modulok",
+  "pricingQuoteSectionNormalizedInputs": "Normalizált árazási bemenetek",
+  "pricingQuoteFieldLicenseBasis": "Licencalap",
+  "pricingQuoteFieldUsageItems": "Használati tételek",
+  "pricingQuoteSectionRecurring": "Ismétlődő bontás",
+  "pricingQuoteFieldRecurringTotal": "Ismétlődő célösszeg",
+  "pricingQuoteSectionSetup": "Egyszeri beállítás bontása",
+  "pricingQuoteFieldSetupTotal": "Egyszeri beállítás célösszege",
+  "pricingQuoteSectionDirectCosts": "Közvetlen költségek és fedezet",
+  "pricingQuoteFieldDirectCost": "Közvetlen költségek",
+  "pricingQuoteFieldDirectContribution": "Közvetlen fedezet",
+  "pricingQuoteFieldConfidence": "Megbízhatóság",
+  "pricingQuoteSectionFlags": "Ellenőrzési jelzők",
+  "pricingQuoteNoFlags": "Nincs ellenőrzési jelző.",
+  "pricingQuoteSectionRevisions": "Revízióelőzmények",
+  "pricingQuoteNoRevisions": "Még nincs revízió.",
+  "pricingQuoteSectionAdjustments": "Korrekciók",
+  "pricingQuoteNoAdjustments": "Nincs korrekció.",
+  "pricingQuoteAdjustmentPercent": "{percent}%",
+  "@pricingQuoteAdjustmentPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "pricingQuoteStatusDraft": "Piszkozat",
+  "pricingQuoteStatusCalculated": "Számított",
+  "pricingQuoteStatusReviewRequired": "Ellenőrzés szükséges",
+  "pricingQuoteStatusApproved": "Jóváhagyott",
+  "pricingQuoteStatusSent": "Elküldött",
+  "pricingQuoteStatusAccepted": "Elfogadott",
+  "pricingQuoteStatusRejected": "Elutasított",
+  "pricingQuoteStatusExpired": "Lejárt",
+  "pricingQuoteStatusUnknown": "Ismeretlen állapot",
+  "pricingQuoteFlagProviderValidationPending": "Szolgáltatói költségek ellenőrzése szükséges",
+  "pricingQuoteFlagMarginReviewRequired": "Árrés ellenőrzése szükséges",
+  "pricingQuoteFlagUsageRateBelowFloor": "A használati díj a közvetlen költségküszöb alatt van",
+  "pricingQuoteFlagEnterpriseVolumeReview": "Vállalati volumen ellenőrzése",
+  "pricingQuoteFlagOwnerReviewEnterprise": "Tulajdonosi ellenőrzés a vállalati pozicionáláshoz",
+  "pricingQuoteFlagManualDiscountApproval": "Manuális kedvezmény jóváhagyása szükséges",
+  "pricingQuoteFlagAutomaticDiscountCap": "Automatikus kedvezményplafon túllépve",
+  "pricingQuoteFlagIntegrationDiscovery": "Integrációs felmérés szükséges",
+  "pricingQuoteFlagCustomRequirements": "Egyedi igények",
+  "pricingQuoteAdjustmentDiscount": "Kedvezmény",
+  "pricingQuoteAdjustmentSurcharge": "Felár",
+  "pricingQuoteAdjustmentPilotCredit": "Pilot kredit",
+  "pricingQuoteAdjustmentNegotiatedEnterprise": "Tárgyalt vállalati",
+  "pricingQuoteAdjustmentOther": "Egyéb",
+  "pricingQuoteConfidenceHigh": "Magas",
+  "pricingQuoteConfidenceMedium": "Közepes",
+  "pricingQuoteConfidenceLow": "Alacsony"
 }

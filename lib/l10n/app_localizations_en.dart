@@ -7044,4 +7044,295 @@ class AppLocalizationsEn extends AppLocalizations {
   String platformCompanyMemberLastLogin(String date) {
     return 'Last login: $date';
   }
+
+  @override
+  String get navPricingQuotes => 'Pricing Quotes';
+
+  @override
+  String get pricingQuotesModuleDescription => 'Internal quote review';
+
+  @override
+  String get pricingQuotesOpenModule => 'Open pricing quotes';
+
+  @override
+  String get pricingQuotesEmpty => 'No pricing quotes yet.';
+
+  @override
+  String get pricingQuotesLoadError => 'Could not load pricing quotes.';
+
+  @override
+  String get pricingQuotesDetailError => 'Could not load pricing quote detail.';
+
+  @override
+  String get pricingQuotesCreateFromIntake => 'Create quote from intake';
+
+  @override
+  String get pricingQuotesSelectIntake => 'Public intake';
+
+  @override
+  String get pricingQuotesCreateReason => 'Reason (optional)';
+
+  @override
+  String get pricingQuotesCreateAction => 'Create quote';
+
+  @override
+  String get pricingQuotesCreateError => 'Could not create pricing quote.';
+
+  @override
+  String get pricingQuotesIntakeLoadError =>
+      'Could not load public intakes for quote creation.';
+
+  @override
+  String get pricingQuotesNoEligibleIntakes =>
+      'No eligible quote-request intakes are available.';
+
+  @override
+  String get pricingQuotesRecalculate => 'Recalculate';
+
+  @override
+  String get pricingQuotesAddAdjustment => 'Add adjustment';
+
+  @override
+  String get pricingQuotesApprove => 'Approve quote';
+
+  @override
+  String get pricingQuotesApproveBlocked =>
+      'Approval is blocked until backend review flags are resolved.';
+
+  @override
+  String get pricingQuotesChangeStatus => 'Change status';
+
+  @override
+  String get pricingQuotesActionError =>
+      'The pricing quote action could not be completed.';
+
+  @override
+  String get pricingQuotesReason => 'Reason';
+
+  @override
+  String get pricingQuotesCancel => 'Cancel';
+
+  @override
+  String get pricingQuotesConfirm => 'Confirm';
+
+  @override
+  String get pricingQuotesType => 'Type';
+
+  @override
+  String get pricingQuotesPercent => 'Percent';
+
+  @override
+  String get pricingQuotesAmount => 'Amount (net)';
+
+  @override
+  String pricingQuotesDashboardReviewRequired(String count) {
+    return 'Review required: $count';
+  }
+
+  @override
+  String pricingQuotesDashboardNew(String count) {
+    return 'New / calculated: $count';
+  }
+
+  @override
+  String get pricingQuoteValueUnavailable => '—';
+
+  @override
+  String get pricingQuoteUnknownParty => 'Company not linked';
+
+  @override
+  String pricingQuoteCompanyId(String id) {
+    return 'Company #$id';
+  }
+
+  @override
+  String pricingQuoteIntakeId(String id) {
+    return 'Intake #$id';
+  }
+
+  @override
+  String get pricingQuoteRecurringShort => 'Recurring';
+
+  @override
+  String get pricingQuoteSetupShort => 'Setup';
+
+  @override
+  String get pricingQuoteConfidenceShort => 'Confidence';
+
+  @override
+  String pricingQuoteRevisionLabel(String number) {
+    return 'Revision $number';
+  }
+
+  @override
+  String get pricingQuoteRevisionReadOnly => 'Read-only';
+
+  @override
+  String get pricingQuoteSectionIdentity => 'Quote identity';
+
+  @override
+  String get pricingQuoteFieldCompany => 'Company / customer';
+
+  @override
+  String get pricingQuoteFieldContact => 'Contact';
+
+  @override
+  String get pricingQuoteFieldCreated => 'Created';
+
+  @override
+  String get pricingQuoteFieldQuestionnaireVersion => 'Questionnaire version';
+
+  @override
+  String get pricingQuoteFieldPricingConfigVersion => 'Pricing config version';
+
+  @override
+  String get pricingQuoteFieldRollout => 'Rollout / licence basis';
+
+  @override
+  String get pricingQuoteFieldLicences => 'Operational licences';
+
+  @override
+  String get pricingQuoteFieldModules => 'Selected modules';
+
+  @override
+  String get pricingQuoteSectionNormalizedInputs => 'Normalized pricing inputs';
+
+  @override
+  String get pricingQuoteFieldLicenseBasis => 'Licence basis';
+
+  @override
+  String get pricingQuoteFieldUsageItems => 'Usage line items';
+
+  @override
+  String get pricingQuoteSectionRecurring => 'Recurring breakdown';
+
+  @override
+  String get pricingQuoteFieldRecurringTotal => 'Recurring target';
+
+  @override
+  String get pricingQuoteSectionSetup => 'One-time setup breakdown';
+
+  @override
+  String get pricingQuoteFieldSetupTotal => 'One-time setup target';
+
+  @override
+  String get pricingQuoteSectionDirectCosts => 'Direct costs and contribution';
+
+  @override
+  String get pricingQuoteFieldDirectCost => 'Direct costs';
+
+  @override
+  String get pricingQuoteFieldDirectContribution => 'Direct contribution';
+
+  @override
+  String get pricingQuoteFieldConfidence => 'Confidence';
+
+  @override
+  String get pricingQuoteSectionFlags => 'Review flags';
+
+  @override
+  String get pricingQuoteNoFlags => 'No review flags.';
+
+  @override
+  String get pricingQuoteSectionRevisions => 'Revision history';
+
+  @override
+  String get pricingQuoteNoRevisions => 'No revisions yet.';
+
+  @override
+  String get pricingQuoteSectionAdjustments => 'Adjustments';
+
+  @override
+  String get pricingQuoteNoAdjustments => 'No adjustments.';
+
+  @override
+  String pricingQuoteAdjustmentPercent(String percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get pricingQuoteStatusDraft => 'Draft';
+
+  @override
+  String get pricingQuoteStatusCalculated => 'Calculated';
+
+  @override
+  String get pricingQuoteStatusReviewRequired => 'Review required';
+
+  @override
+  String get pricingQuoteStatusApproved => 'Approved';
+
+  @override
+  String get pricingQuoteStatusSent => 'Sent';
+
+  @override
+  String get pricingQuoteStatusAccepted => 'Accepted';
+
+  @override
+  String get pricingQuoteStatusRejected => 'Rejected';
+
+  @override
+  String get pricingQuoteStatusExpired => 'Expired';
+
+  @override
+  String get pricingQuoteStatusUnknown => 'Unknown status';
+
+  @override
+  String get pricingQuoteFlagProviderValidationPending =>
+      'Provider cost validation required';
+
+  @override
+  String get pricingQuoteFlagMarginReviewRequired => 'Margin review required';
+
+  @override
+  String get pricingQuoteFlagUsageRateBelowFloor =>
+      'Usage rate below direct cost floor';
+
+  @override
+  String get pricingQuoteFlagEnterpriseVolumeReview =>
+      'Enterprise volume review';
+
+  @override
+  String get pricingQuoteFlagOwnerReviewEnterprise =>
+      'Owner review for enterprise positioning';
+
+  @override
+  String get pricingQuoteFlagManualDiscountApproval =>
+      'Manual discount approval required';
+
+  @override
+  String get pricingQuoteFlagAutomaticDiscountCap =>
+      'Automatic discount cap exceeded';
+
+  @override
+  String get pricingQuoteFlagIntegrationDiscovery =>
+      'Integration discovery required';
+
+  @override
+  String get pricingQuoteFlagCustomRequirements => 'Custom requirements';
+
+  @override
+  String get pricingQuoteAdjustmentDiscount => 'Discount';
+
+  @override
+  String get pricingQuoteAdjustmentSurcharge => 'Surcharge';
+
+  @override
+  String get pricingQuoteAdjustmentPilotCredit => 'Pilot credit';
+
+  @override
+  String get pricingQuoteAdjustmentNegotiatedEnterprise =>
+      'Negotiated enterprise';
+
+  @override
+  String get pricingQuoteAdjustmentOther => 'Other';
+
+  @override
+  String get pricingQuoteConfidenceHigh => 'High';
+
+  @override
+  String get pricingQuoteConfidenceMedium => 'Medium';
+
+  @override
+  String get pricingQuoteConfidenceLow => 'Low';
 }
