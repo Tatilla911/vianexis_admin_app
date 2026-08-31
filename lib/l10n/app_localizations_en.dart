@@ -976,11 +976,73 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get applicationsCompanyPendingNoAmendment =>
-      'No Company record yet. Company data amendments are available only after approval creates a company.';
+      'No Company record yet. Company data amendments are available only after activation creates a company.';
 
   @override
   String get applicationsCompanyDecisionHint =>
-      'Decide this public application here, or open Registrations for the synced registration record.';
+      'Start review here. Prepare and send the commercial offer in Admin Web. Activation is available only after offer acceptance and commercial clearance.';
+
+  @override
+  String get applicationActionStartReview => 'Start review';
+
+  @override
+  String get applicationActionResumeReview => 'Resume review';
+
+  @override
+  String get applicationActionActivateCompany => 'Activate company';
+
+  @override
+  String get applicationOfferPrepareOnWeb =>
+      'Prepare and send the offer in Admin Web.';
+
+  @override
+  String get applicationLifecycleStatus => 'Status';
+
+  @override
+  String get applicationStatusSubmitted => 'Submitted';
+
+  @override
+  String get applicationStatusInReview => 'Under review';
+
+  @override
+  String get applicationStatusMoreInfoRequested => 'Information requested';
+
+  @override
+  String get applicationStatusOfferDraft => 'Offer in draft';
+
+  @override
+  String get applicationStatusOfferSent => 'Offer sent';
+
+  @override
+  String get applicationStatusOfferAccepted => 'Offer accepted';
+
+  @override
+  String get applicationStatusCommercialPending => 'Commercial terms pending';
+
+  @override
+  String get applicationStatusReadyForActivation => 'Ready for activation';
+
+  @override
+  String get applicationStatusActive => 'Active';
+
+  @override
+  String get applicationStatusRejected => 'Rejected';
+
+  @override
+  String get applicationStatusWithdrawn => 'Withdrawn';
+
+  @override
+  String get applicationStatusExpired => 'Expired';
+
+  @override
+  String get applicationActionSuccess => 'Application updated.';
+
+  @override
+  String get applicationRecordAcceptance => 'Record offer acceptance';
+
+  @override
+  String get registrationCompanyCommercialHint =>
+      'Company activation is not available from Registrations. Use Applications to start review; prepare the offer in Admin Web.';
 
   @override
   String get applicationsOpenCompany => 'Open company (amendments)';

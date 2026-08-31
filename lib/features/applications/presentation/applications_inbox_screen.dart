@@ -17,6 +17,27 @@ import '../../driver_access/data/driver_access_repository.dart';
 import '../../driver_access/data/driver_registration_requests_repository.dart';
 import '../data/public_applications_api.dart';
 
+String applicationLifecycleStatusLabel(
+  AppLocalizations l10n,
+  String status,
+) {
+  return switch (status) {
+    'new' => l10n.applicationStatusSubmitted,
+    'in_review' => l10n.applicationStatusInReview,
+    'more_info_requested' => l10n.applicationStatusMoreInfoRequested,
+    'offer_draft' => l10n.applicationStatusOfferDraft,
+    'offer_sent' => l10n.applicationStatusOfferSent,
+    'offer_accepted' => l10n.applicationStatusOfferAccepted,
+    'commercial_pending' => l10n.applicationStatusCommercialPending,
+    'ready_for_activation' => l10n.applicationStatusReadyForActivation,
+    'converted' || 'approved' => l10n.applicationStatusActive,
+    'rejected' => l10n.applicationStatusRejected,
+    'withdrawn' => l10n.applicationStatusWithdrawn,
+    'expired' => l10n.applicationStatusExpired,
+    _ => status,
+  };
+}
+
 final applicationsListProvider = FutureProvider.autoDispose
     .family<Map<String, dynamic>, ({String? type, String? status})>((
       ref,
@@ -148,7 +169,7 @@ class _ApplicationsInboxScreenState
                             overflow: TextOverflow.ellipsis,
                           ),
                           subtitle: Text(
-                            '$reference · ${item['applicationType']} · $status · ${item['email']}',
+                            '$reference · ${item['applicationType']} · ${applicationLifecycleStatusLabel(l10n, status)} · ${item['email']}',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -319,6 +340,89 @@ class _ApplicationDetailScreenState
     } finally {
       if (mounted) setState(() => _acting = false);
     }
+  }
+
+  Future<void> _runCompanyAction(
+    Future<Map<String, dynamic>> Function(PublicApplicationsApi api) run,
+  ) async {
+    if (_acting) return;
+    setState(() => _acting = true);
+    try {
+      final api = ref.read(publicApplicationsApiProvider);
+      await run(api);
+      await _invalidateRelated();
+      await _load();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).applicationActionSuccess)),
+      );
+    } on ApiException catch (error) {
+      logApiExceptionDiagnostics(error, applicationId: widget.id);
+      if (!mounted) return;
+      showApiExceptionSnackBar(context, error);
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    } finally {
+      if (mounted) setState(() => _acting = false);
+    }
+  }
+
+  Future<void> _startReview() =>
+      _runCompanyAction((api) => api.startReview(int.parse(widget.id)));
+
+  Future<void> _resumeReview() =>
+      _runCompanyAction((api) => api.resumeReview(int.parse(widget.id)));
+
+  Future<void> _activateCompany() =>
+      _runCompanyAction((api) => api.activateCompany(int.parse(widget.id)));
+
+  Future<void> _recordAcceptance() => _runCompanyAction(
+    (api) => api.recordOfferAcceptance(int.parse(widget.id)),
+  );
+
+  Future<void> _requestMoreInfo() async {
+    if (_acting) return;
+    final l10n = AppLocalizations.of(context);
+    final controller = TextEditingController();
+    final reason = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text(l10n.registrationActionRequestInfo),
+          content: TextField(
+            controller: controller,
+            maxLines: 4,
+            decoration: InputDecoration(
+              hintText: l10n.applicationRejectReasonHint,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text(
+                MaterialLocalizations.of(dialogContext).cancelButtonLabel,
+              ),
+            ),
+            FilledButton(
+              onPressed: () {
+                final text = controller.text.trim();
+                if (text.isEmpty) return;
+                Navigator.of(dialogContext).pop(text);
+              },
+              child: Text(l10n.registrationDecisionRequestInfoConfirm),
+            ),
+          ],
+        );
+      },
+    );
+    controller.dispose();
+    if (reason == null || !mounted) return;
+    await _runCompanyAction(
+      (api) => api.requestMoreInfo(int.parse(widget.id), reviewNotes: reason),
+    );
   }
 
   String _deliverySnackNote(AppLocalizations l10n, String delivery) {
@@ -514,6 +618,13 @@ class _ApplicationDetailScreenState
     final companyApprovalBlocked = isCompany && !approvalReady;
     final canActOnApplication = canDecide && !isRejected && !isConverted;
     final canApproveOther = canActOnApplication && !isCompany;
+    final commercial = _detail?['commercial'] as Map<String, dynamic>?;
+    final allowedActions = <String>[
+      ...((commercial?['allowedActions'] as List?) ??
+          (app?['allowedActions'] as List?) ??
+          const []),
+    ].map((e) => e.toString()).toList();
+    bool canCompany(String action) => allowedActions.contains(action);
 
     return VianexisAdminScaffold(
       title: l10n.applicationDetailTitle(widget.id),
@@ -545,7 +656,9 @@ class _ApplicationDetailScreenState
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 4),
-                    Text('${app?['applicationType']} · ${app?['status']}'),
+                    Text(
+                      '${app?['applicationType']} · ${applicationLifecycleStatusLabel(l10n, status)}',
+                    ),
                     Text(contactEmail),
                     if (companyName.isNotEmpty) ...[
                       const SizedBox(height: 12),
@@ -685,21 +798,44 @@ class _ApplicationDetailScreenState
                           spacing: 8,
                           runSpacing: 8,
                           children: [
-                            FilledButton(
-                              onPressed: (_acting || companyApprovalBlocked)
-                                  ? null
-                                  : _approve,
-                              child: Text(l10n.registrationActionApprove),
-                            ),
-                            OutlinedButton(
-                              onPressed: _acting ? null : _reject,
-                              child: Text(l10n.registrationActionReject),
-                            ),
-                            TextButton(
-                              onPressed: () =>
-                                  context.go(AdminRoutes.registrations),
-                              child: Text(l10n.applicationsOpenRegistrations),
-                            ),
+                            if (canCompany('start_review'))
+                              FilledButton(
+                                onPressed: _acting ? null : _startReview,
+                                child: Text(l10n.applicationActionStartReview),
+                              ),
+                            if (canCompany('resume_review'))
+                              FilledButton(
+                                onPressed: _acting ? null : _resumeReview,
+                                child: Text(l10n.applicationActionResumeReview),
+                              ),
+                            if (canCompany('request_more_info'))
+                              OutlinedButton(
+                                onPressed: _acting ? null : _requestMoreInfo,
+                                child: Text(l10n.registrationActionRequestInfo),
+                              ),
+                            if (canCompany('record_acceptance'))
+                              FilledButton(
+                                onPressed: _acting ? null : _recordAcceptance,
+                                child: Text(l10n.applicationRecordAcceptance),
+                              ),
+                            if (canCompany('activate'))
+                              FilledButton(
+                                onPressed: _acting ? null : _activateCompany,
+                                child: Text(l10n.applicationActionActivateCompany),
+                              ),
+                            if (canCompany('reject'))
+                              OutlinedButton(
+                                onPressed: _acting ? null : _reject,
+                                child: Text(l10n.registrationActionReject),
+                              ),
+                            if (canCompany('prepare_offer') ||
+                                canCompany('update_offer') ||
+                                canCompany('send_offer') ||
+                                canCompany('set_commercial_clearance'))
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Text(l10n.applicationOfferPrepareOnWeb),
+                              ),
                           ],
                         )
                       else

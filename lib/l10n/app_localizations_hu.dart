@@ -985,11 +985,74 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get applicationsCompanyPendingNoAmendment =>
-      'Még nincs Company rekord. A cégadatok módosítása csak jóváhagyás után érhető el.';
+      'Még nincs Company rekord. A cégadatok módosítása csak aktiválás után érhető el.';
 
   @override
   String get applicationsCompanyDecisionHint =>
-      'Dönts erről a public jelentkezésről itt, vagy nyisd meg a Regisztrációkat a szinkronizált rekordhoz.';
+      'A felülvizsgálatot itt indíthatod. Az ajánlat részletes szerkesztése az Admin Weben történik. Aktiválás csak elfogadás és kereskedelmi clearance után.';
+
+  @override
+  String get applicationActionStartReview => 'Felülvizsgálat megkezdése';
+
+  @override
+  String get applicationActionResumeReview => 'Felülvizsgálat folytatása';
+
+  @override
+  String get applicationActionActivateCompany => 'Cég aktiválása';
+
+  @override
+  String get applicationOfferPrepareOnWeb =>
+      'Az ajánlatot az Admin Weben készítsd el és küldd el.';
+
+  @override
+  String get applicationLifecycleStatus => 'Státusz';
+
+  @override
+  String get applicationStatusSubmitted => 'Beérkezett';
+
+  @override
+  String get applicationStatusInReview => 'Felülvizsgálat alatt';
+
+  @override
+  String get applicationStatusMoreInfoRequested => 'Információra vár';
+
+  @override
+  String get applicationStatusOfferDraft => 'Ajánlat készül';
+
+  @override
+  String get applicationStatusOfferSent => 'Ajánlat elküldve';
+
+  @override
+  String get applicationStatusOfferAccepted => 'Ajánlat elfogadva';
+
+  @override
+  String get applicationStatusCommercialPending =>
+      'Kereskedelmi feltételek rendezése';
+
+  @override
+  String get applicationStatusReadyForActivation => 'Aktiválásra kész';
+
+  @override
+  String get applicationStatusActive => 'Aktív';
+
+  @override
+  String get applicationStatusRejected => 'Elutasítva';
+
+  @override
+  String get applicationStatusWithdrawn => 'Visszavonva';
+
+  @override
+  String get applicationStatusExpired => 'Lejárt';
+
+  @override
+  String get applicationActionSuccess => 'A jelentkezés frissítve.';
+
+  @override
+  String get applicationRecordAcceptance => 'Ajánlat elfogadásának rögzítése';
+
+  @override
+  String get registrationCompanyCommercialHint =>
+      'A cég aktiválása a Regisztrációkból nem elérhető. A felülvizsgálatot a Jelentkezéseknél indítsd; az ajánlat az Admin Weben készül.';
 
   @override
   String get applicationsOpenCompany => 'Cég megnyitása (módosítások)';

@@ -49,6 +49,38 @@ class PublicApplicationsApi {
     return response.data ?? {};
   }
 
+  Future<Map<String, dynamic>> startReview(int id) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/applications/$id/start-review',
+      data: const <String, dynamic>{},
+    );
+    return response.data ?? {};
+  }
+
+  Future<Map<String, dynamic>> resumeReview(int id) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/applications/$id/resume-review',
+      data: const <String, dynamic>{},
+    );
+    return response.data ?? {};
+  }
+
+  Future<Map<String, dynamic>> activateCompany(int id) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/applications/$id/activate',
+      data: const <String, dynamic>{},
+    );
+    return response.data ?? {};
+  }
+
+  Future<Map<String, dynamic>> recordOfferAcceptance(int id) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/applications/$id/record-offer-acceptance',
+      data: const {'source': 'admin_confirmed'},
+    );
+    return response.data ?? {};
+  }
+
   Future<Map<String, dynamic>> reject(
     int id, {
     required String reviewNotes,

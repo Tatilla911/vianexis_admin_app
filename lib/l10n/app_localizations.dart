@@ -1859,14 +1859,134 @@ abstract class AppLocalizations {
   /// No description provided for @applicationsCompanyPendingNoAmendment.
   ///
   /// In en, this message translates to:
-  /// **'No Company record yet. Company data amendments are available only after approval creates a company.'**
+  /// **'No Company record yet. Company data amendments are available only after activation creates a company.'**
   String get applicationsCompanyPendingNoAmendment;
 
   /// No description provided for @applicationsCompanyDecisionHint.
   ///
   /// In en, this message translates to:
-  /// **'Decide this public application here, or open Registrations for the synced registration record.'**
+  /// **'Start review here. Prepare and send the commercial offer in Admin Web. Activation is available only after offer acceptance and commercial clearance.'**
   String get applicationsCompanyDecisionHint;
+
+  /// No description provided for @applicationActionStartReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Start review'**
+  String get applicationActionStartReview;
+
+  /// No description provided for @applicationActionResumeReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume review'**
+  String get applicationActionResumeReview;
+
+  /// No description provided for @applicationActionActivateCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate company'**
+  String get applicationActionActivateCompany;
+
+  /// No description provided for @applicationOfferPrepareOnWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare and send the offer in Admin Web.'**
+  String get applicationOfferPrepareOnWeb;
+
+  /// No description provided for @applicationLifecycleStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get applicationLifecycleStatus;
+
+  /// No description provided for @applicationStatusSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get applicationStatusSubmitted;
+
+  /// No description provided for @applicationStatusInReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Under review'**
+  String get applicationStatusInReview;
+
+  /// No description provided for @applicationStatusMoreInfoRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Information requested'**
+  String get applicationStatusMoreInfoRequested;
+
+  /// No description provided for @applicationStatusOfferDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer in draft'**
+  String get applicationStatusOfferDraft;
+
+  /// No description provided for @applicationStatusOfferSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer sent'**
+  String get applicationStatusOfferSent;
+
+  /// No description provided for @applicationStatusOfferAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer accepted'**
+  String get applicationStatusOfferAccepted;
+
+  /// No description provided for @applicationStatusCommercialPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial terms pending'**
+  String get applicationStatusCommercialPending;
+
+  /// No description provided for @applicationStatusReadyForActivation.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready for activation'**
+  String get applicationStatusReadyForActivation;
+
+  /// No description provided for @applicationStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get applicationStatusActive;
+
+  /// No description provided for @applicationStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get applicationStatusRejected;
+
+  /// No description provided for @applicationStatusWithdrawn.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdrawn'**
+  String get applicationStatusWithdrawn;
+
+  /// No description provided for @applicationStatusExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get applicationStatusExpired;
+
+  /// No description provided for @applicationActionSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Application updated.'**
+  String get applicationActionSuccess;
+
+  /// No description provided for @applicationRecordAcceptance.
+  ///
+  /// In en, this message translates to:
+  /// **'Record offer acceptance'**
+  String get applicationRecordAcceptance;
+
+  /// No description provided for @registrationCompanyCommercialHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Company activation is not available from Registrations. Use Applications to start review; prepare the offer in Admin Web.'**
+  String get registrationCompanyCommercialHint;
 
   /// No description provided for @applicationsOpenCompany.
   ///

@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vianexis_admin_app/core/api/api_client.dart';
 import 'package:vianexis_admin_app/core/api/auth_token_storage.dart';
+import 'package:vianexis_admin_app/core/auth/admin_auth_state.dart';
+import 'package:vianexis_admin_app/core/auth/admin_user.dart';
 import 'package:vianexis_admin_app/features/applications/data/public_applications_api.dart';
 import 'package:vianexis_admin_app/features/applications/presentation/applications_inbox_screen.dart';
 import 'package:vianexis_admin_app/l10n/app_localizations.dart';
@@ -68,6 +70,13 @@ class _FakePublicApplicationsApi extends PublicApplicationsApi {
           'contactName': 'Ops Lead',
           'contactEmail': 'ops@acme.example',
         },
+        'allowedActions': ['start_review', 'request_more_info', 'reject'],
+      },
+      'commercial': {
+        'status': 'new',
+        'allowedActions': ['start_review', 'request_more_info', 'reject'],
+        'commercialClearance': null,
+        'offer': null,
       },
       'assessment': {
         'id': 9,
@@ -80,12 +89,27 @@ class _FakePublicApplicationsApi extends PublicApplicationsApi {
   }
 }
 
+class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
+  @override
+  AdminAuthState build() {
+    ref.watch(adminAuthRepositoryProvider);
+    return const AdminAuthState(
+      user: AdminUser(
+        id: '1',
+        email: 'admin@vianexis.hu',
+        role: AdminRole.superAdmin,
+      ),
+    );
+  }
+}
+
 Widget _buildApp({required Widget home, GoRouter? router}) {
   return ProviderScope(
     overrides: [
       publicApplicationsApiProvider.overrideWithValue(
         _FakePublicApplicationsApi(),
       ),
+      adminAuthProvider.overrideWith(_AuthenticatedAdminAuthNotifier.new),
     ],
     child: router != null
         ? MaterialApp.router(
@@ -157,7 +181,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Application #42'), findsOneWidget);
-    expect(find.text('company · new'), findsOneWidget);
+    expect(find.text('company · Submitted'), findsOneWidget);
     expect(find.byType(AppBar), findsOneWidget);
   });
 
@@ -202,6 +226,9 @@ void main() {
       find.textContaining('only be approved after the detailed intake'),
       findsOneWidget,
     );
+    expect(find.text('Start review'), findsOneWidget);
+    expect(find.text('Approve'), findsNothing);
+    expect(find.text('Activate company'), findsNothing);
   });
 
   testWidgets('application detail back navigation returns to inbox', (

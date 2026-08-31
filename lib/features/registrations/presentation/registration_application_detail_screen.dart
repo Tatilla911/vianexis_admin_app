@@ -8,6 +8,7 @@ import '../../../app/app_router.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/auth/admin_auth_state.dart';
+import '../../../core/email/email_delivery_feedback.dart';
 import '../../../core/localization/localization_keys.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
@@ -99,25 +100,17 @@ class _RegistrationApplicationDetailScreenState
       setState(() => _approvalOutcome = outcome);
       await refreshRegistrationApplicationDetail(ref, widget.applicationId);
       if (!context.mounted) return;
-      final delivery = outcome.inviteDeliveryStatus;
-      final message = switch (delivery) {
-        'sent' || 'accepted_by_provider' || 'queued' =>
-          resolveRegistrationKey(context, 'registrationInviteResendSuccess'),
-        'provider_disabled' || 'skipped' => AppLocalizations.of(
+      final message = emailDeliveryUserMessage(
+        context,
+        {
+          'emailSent': outcome.emailInviteSent,
+          'deliveryStatus': outcome.inviteDeliveryStatus,
+        },
+        successFallback: resolveRegistrationKey(
           context,
-        ).registrationInviteDeliveryProviderDisabled,
-        'provider_not_configured' => AppLocalizations.of(
-          context,
-        ).registrationInviteDeliveryProviderNotConfigured,
-        'blocked_by_staging_allowlist' || 'staging_allowlist_missing' =>
-          AppLocalizations.of(
-            context,
-          ).registrationInviteDeliveryAllowlistBlocked,
-        'failed' || 'pending_or_failed' => AppLocalizations.of(
-          context,
-        ).registrationInviteDeliveryFailed,
-        _ => resolveRegistrationKey(context, 'registrationInviteResendSuccess'),
-      };
+          'registrationInviteResendSuccess',
+        ),
+      );
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(message)));
@@ -174,26 +167,14 @@ class _RegistrationApplicationDetailScreenState
       });
       await refreshRegistrationApplicationDetail(ref, widget.applicationId);
       if (!context.mounted) return;
-      final message = switch (delivery) {
-        'sent' || 'accepted_by_provider' || 'queued' =>
-          resolveRegistrationKey(context, 'registrationPasswordSetupSent'),
-        'provider_disabled' || 'skipped' => AppLocalizations.of(
+      final message = emailDeliveryUserMessage(
+        context,
+        result,
+        successFallback: resolveRegistrationKey(
           context,
-        ).registrationInviteDeliveryProviderDisabled,
-        'provider_not_configured' => AppLocalizations.of(
-          context,
-        ).registrationInviteDeliveryProviderNotConfigured,
-        'blocked_by_staging_allowlist' || 'staging_allowlist_missing' =>
-          AppLocalizations.of(
-            context,
-          ).registrationInviteDeliveryAllowlistBlocked,
-        'failed' || 'pending_or_failed' => AppLocalizations.of(
-          context,
-        ).registrationInviteDeliveryFailed,
-        _ when sent =>
-          resolveRegistrationKey(context, 'registrationPasswordSetupSent'),
-        _ => resolveRegistrationKey(context, 'registrationPasswordSetupQueued'),
-      };
+          'registrationPasswordSetupSent',
+        ),
+      );
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(message)));
@@ -641,7 +622,28 @@ class _DetailBody extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 16),
               child: Center(child: CircularProgressIndicator()),
             )
-          else ...[
+          else if (application.type == RegistrationApplicationType.company) ...[
+            Text(
+              AppLocalizations.of(context).registrationCompanyCommercialHint,
+            ),
+            const SizedBox(height: 12),
+            OutlinedButton(
+              onPressed: () => onDecision(RegistrationDecisionType.requestInfo),
+              child: Text(
+                resolveRegistrationKey(
+                  context,
+                  'registrationActionRequestInfo',
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () => onDecision(RegistrationDecisionType.reject),
+              child: Text(
+                resolveRegistrationKey(context, 'registrationActionReject'),
+              ),
+            ),
+          ] else ...[
             FilledButton(
               onPressed: () => onDecision(RegistrationDecisionType.approve),
               child: Text(
