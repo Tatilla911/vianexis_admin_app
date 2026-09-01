@@ -3695,6 +3695,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminUserAccessAuthMethod => 'Authorization method';
 
   @override
+  String get adminUserAccessAuthMethodCustomerEmail => 'Customer email';
+
+  @override
+  String get adminUserAccessAuthMethodInternalApproval => 'Internal approval';
+
+  @override
+  String get adminUserAccessAuthMethodContract => 'Contract';
+
+  @override
+  String get adminUserAccessAuthMethodOther => 'Other';
+
+  @override
+  String get adminUserAccessNoChangesSelected => 'No changes selected.';
+
+  @override
+  String get adminUserAccessRequiredFields =>
+      'Reason, requested by and authorized by are required.';
+
+  @override
   String get adminUserAccessAuthReference => 'Authorization reference';
 
   @override

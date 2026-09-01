@@ -80,15 +80,16 @@ class _UserAccessChangeDialogState extends ConsumerState<_UserAccessChangeDialog
   }
 
   Future<void> _submit() async {
+    final l10n = AppLocalizations.of(context);
     final deltas = _deltas;
     if (deltas.isEmpty) {
-      setState(() => _error = 'No changes selected.');
+      setState(() => _error = l10n.adminUserAccessNoChangesSelected);
       return;
     }
     if (_reason.text.trim().length < 3 ||
         _requestedBy.text.trim().isEmpty ||
         _authorizedBy.text.trim().isEmpty) {
-      setState(() => _error = 'Reason, requestedBy and authorizedBy are required.');
+      setState(() => _error = l10n.adminUserAccessRequiredFields);
       return;
     }
     setState(() {
@@ -190,20 +191,23 @@ class _UserAccessChangeDialogState extends ConsumerState<_UserAccessChangeDialog
                 decoration: InputDecoration(
                   labelText: l10n.adminUserAccessAuthMethod,
                 ),
-                items: const [
+                items: [
                   DropdownMenuItem(
                     value: 'customer_email',
-                    child: Text('Customer email'),
+                    child: Text(l10n.adminUserAccessAuthMethodCustomerEmail),
                   ),
                   DropdownMenuItem(
                     value: 'internal_approval',
-                    child: Text('Internal approval'),
+                    child: Text(l10n.adminUserAccessAuthMethodInternalApproval),
                   ),
                   DropdownMenuItem(
                     value: 'contract',
-                    child: Text('Contract'),
+                    child: Text(l10n.adminUserAccessAuthMethodContract),
                   ),
-                  DropdownMenuItem(value: 'other', child: Text('Other')),
+                  DropdownMenuItem(
+                    value: 'other',
+                    child: Text(l10n.adminUserAccessAuthMethodOther),
+                  ),
                 ],
                 onChanged: (value) {
                   if (value != null) setState(() => _authMethod = value);

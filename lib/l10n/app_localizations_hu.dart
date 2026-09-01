@@ -3748,6 +3748,26 @@ class AppLocalizationsHu extends AppLocalizations {
   String get adminUserAccessAuthMethod => 'Jóváhagyás módja';
 
   @override
+  String get adminUserAccessAuthMethodCustomerEmail => 'Ügyfél e-mail';
+
+  @override
+  String get adminUserAccessAuthMethodInternalApproval => 'Belső jóváhagyás';
+
+  @override
+  String get adminUserAccessAuthMethodContract => 'Szerződés';
+
+  @override
+  String get adminUserAccessAuthMethodOther => 'Egyéb';
+
+  @override
+  String get adminUserAccessNoChangesSelected =>
+      'Nincs kiválasztott módosítás.';
+
+  @override
+  String get adminUserAccessRequiredFields =>
+      'Az indok, a kérelmező és a jóváhagyó megadása kötelező.';
+
+  @override
   String get adminUserAccessAuthReference => 'Kapcsolódó hivatkozás';
 
   @override

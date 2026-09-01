@@ -6770,6 +6770,42 @@ abstract class AppLocalizations {
   /// **'Authorization method'**
   String get adminUserAccessAuthMethod;
 
+  /// No description provided for @adminUserAccessAuthMethodCustomerEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer email'**
+  String get adminUserAccessAuthMethodCustomerEmail;
+
+  /// No description provided for @adminUserAccessAuthMethodInternalApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal approval'**
+  String get adminUserAccessAuthMethodInternalApproval;
+
+  /// No description provided for @adminUserAccessAuthMethodContract.
+  ///
+  /// In en, this message translates to:
+  /// **'Contract'**
+  String get adminUserAccessAuthMethodContract;
+
+  /// No description provided for @adminUserAccessAuthMethodOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get adminUserAccessAuthMethodOther;
+
+  /// No description provided for @adminUserAccessNoChangesSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes selected.'**
+  String get adminUserAccessNoChangesSelected;
+
+  /// No description provided for @adminUserAccessRequiredFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason, requested by and authorized by are required.'**
+  String get adminUserAccessRequiredFields;
+
   /// No description provided for @adminUserAccessAuthReference.
   ///
   /// In en, this message translates to:
