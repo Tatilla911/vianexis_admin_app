@@ -74,8 +74,7 @@ String resolveLocalizationKey(BuildContext context, String key) {
           ? 'Ezt a jelentkezést már feldolgozták. Frissíts, és nézd meg az aktuális állapotot.'
           : 'This application was already processed. Refresh to see the current status.',
     LocalizationKeys.emailProviderDisabled => l10n.emailProviderDisabled,
-    LocalizationKeys.emailRecipientNotAllowed =>
-      l10n.emailRecipientNotAllowed,
+    LocalizationKeys.emailRecipientNotAllowed => l10n.emailRecipientNotAllowed,
     LocalizationKeys.emailSendFailed => l10n.emailSendFailed,
     LocalizationKeys.driverApprovalInvalidRequest =>
       l10n.driverApprovalInvalidRequest,
@@ -1277,36 +1276,47 @@ String resolvePlatformCompanyKey(
     'platformCompanyAssessmentEmpty' => l10n.platformCompanyAssessmentEmpty,
     'platformCompanyPricingEmpty' => l10n.platformCompanyPricingEmpty,
     'platformCompanyPricingNotFinal' => l10n.platformCompanyPricingNotFinal,
-    'platformCompanyPricingHasOverride' => l10n.platformCompanyPricingHasOverride,
-    'platformCompanyAssessmentStatus' =>
-      l10n.platformCompanyAssessmentStatus(params['status'] ?? '—'),
-    'platformCompanyAssessmentVersion' =>
-      l10n.platformCompanyAssessmentVersion(params['version'] ?? '—'),
+    'platformCompanyPricingHasOverride' =>
+      l10n.platformCompanyPricingHasOverride,
+    'platformCompanyAssessmentStatus' => l10n.platformCompanyAssessmentStatus(
+      params['status'] ?? '—',
+    ),
+    'platformCompanyAssessmentVersion' => l10n.platformCompanyAssessmentVersion(
+      params['version'] ?? '—',
+    ),
     'platformCompanyAssessmentLastSaved' =>
       l10n.platformCompanyAssessmentLastSaved(params['value'] ?? '—'),
     'platformCompanyAssessmentSubmittedAt' =>
       l10n.platformCompanyAssessmentSubmittedAt(params['value'] ?? '—'),
-    'platformCompanyAssessmentDrivers' =>
-      l10n.platformCompanyAssessmentDrivers(params['count'] ?? '0'),
+    'platformCompanyAssessmentDrivers' => l10n.platformCompanyAssessmentDrivers(
+      params['count'] ?? '0',
+    ),
     'platformCompanyAssessmentMonthlyTrips' =>
       l10n.platformCompanyAssessmentMonthlyTrips(params['count'] ?? '0'),
-    'platformCompanyAssessmentModules' =>
-      l10n.platformCompanyAssessmentModules(params['value'] ?? '—'),
+    'platformCompanyAssessmentModules' => l10n.platformCompanyAssessmentModules(
+      params['value'] ?? '—',
+    ),
     'platformCompanyPricingSuggestedPackage' =>
       l10n.platformCompanyPricingSuggestedPackage(params['value'] ?? '—'),
-    'platformCompanyPricingMonthlyNet' =>
-      l10n.platformCompanyPricingMonthlyNet(params['value'] ?? '—'),
-    'platformCompanyPricingOneTimeNet' =>
-      l10n.platformCompanyPricingOneTimeNet(params['value'] ?? '—'),
-    'platformCompanyMetricContacts' =>
-      l10n.platformCompanyMetricContacts(params['count'] ?? '0'),
-    'platformCompanyMetricDepartments' =>
-      l10n.platformCompanyMetricDepartments(params['count'] ?? '0'),
-    'platformCompanyMetricDocuments' =>
-      l10n.platformCompanyMetricDocuments(params['count'] ?? '0'),
-    'platformCompanyMetricPackages' =>
-      l10n.platformCompanyMetricPackages(params['count'] ?? '0'),
-        'platformCompanySectionUsers' => l10n.platformCompanySectionUsers,
+    'platformCompanyPricingMonthlyNet' => l10n.platformCompanyPricingMonthlyNet(
+      params['value'] ?? '—',
+    ),
+    'platformCompanyPricingOneTimeNet' => l10n.platformCompanyPricingOneTimeNet(
+      params['value'] ?? '—',
+    ),
+    'platformCompanyMetricContacts' => l10n.platformCompanyMetricContacts(
+      params['count'] ?? '0',
+    ),
+    'platformCompanyMetricDepartments' => l10n.platformCompanyMetricDepartments(
+      params['count'] ?? '0',
+    ),
+    'platformCompanyMetricDocuments' => l10n.platformCompanyMetricDocuments(
+      params['count'] ?? '0',
+    ),
+    'platformCompanyMetricPackages' => l10n.platformCompanyMetricPackages(
+      params['count'] ?? '0',
+    ),
+    'platformCompanySectionUsers' => l10n.platformCompanySectionUsers,
     'platformCompanyMembersSection' => l10n.platformCompanyMembersSection,
     'platformCompanyMembersEmpty' => l10n.platformCompanyMembersEmpty,
     'platformCompanyMembersLoadError' => l10n.platformCompanyMembersLoadError,
@@ -1328,8 +1338,7 @@ String resolvePlatformCompanyKey(
     'platformCompanyRoleDispatcher' => l10n.platformCompanyRoleDispatcher,
     'platformCompanyRoleDriver' => l10n.platformCompanyRoleDriver,
     'platformCompanyRoleWorkshop' => l10n.platformCompanyRoleWorkshop,
-    'platformCompanyRoleDocumentation' =>
-      l10n.platformCompanyRoleDocumentation,
+    'platformCompanyRoleDocumentation' => l10n.platformCompanyRoleDocumentation,
     'platformCompanyRoleClaimsInsurance' =>
       l10n.platformCompanyRoleClaimsInsurance,
     'platformCompanyRoleFinance' => l10n.platformCompanyRoleFinance,
@@ -1814,7 +1823,7 @@ String resolveAdminUserKey(
     'adminUserInviteConsoleOnly' => l10n.adminUserInviteConsoleOnly,
     'adminUserInviteProviderMissing' => l10n.adminUserInviteProviderMissing,
     'adminUserInviteAllowlistBlocked' => l10n.adminUserInviteAllowlistBlocked,
-        'adminUserFilterAll' => l10n.adminUserFilterAll,
+    'adminUserFilterAll' => l10n.adminUserFilterAll,
     'adminUserFilterActive' => l10n.adminUserFilterActive,
     'adminUserFilterInvited' => l10n.adminUserFilterInvited,
     'adminUserFilterSuspended' => l10n.adminUserFilterSuspended,
@@ -2522,6 +2531,46 @@ String resolveDriverAccessKey(BuildContext context, String key) {
     'driverAccessRejectedAt' => l10n.driverAccessRejectedAt,
     'driverAccessRejectedReason' => l10n.driverAccessRejectedReason,
     'driverAccessNoActiveDrivers' => l10n.driverAccessNoActiveDrivers,
+    'driverAccessOpsSection' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Sofőr műveletek'
+          : 'Driver operations',
+    'driverAccessResendInviteAction' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Meghívó újraküldése'
+          : 'Resend invite',
+    'driverAccessSendPasswordSetupAction' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Jelszóbeállítás küldése'
+          : 'Send password setup',
+    'driverAccessInviteResendSuccess' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Meghívó elküldve.'
+          : 'Invitation sent.',
+    'driverAccessPasswordSetupSuccess' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Jelszóbeállító link elküldve.'
+          : 'Password setup link sent.',
+    'driverAccessDeleteAction' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Sofőr archiválása'
+          : 'Archive driver',
+    'driverAccessDeleteConfirmTitle' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Sofőr archiválása'
+          : 'Archive driver',
+    'driverAccessDeleteConfirmBody' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'A sofőr fiókja archiválásra kerül. Fizikai törlés nem történik. Ez a lépés naplózott.'
+          : 'The driver account will be archived. No physical delete. This step is audited.',
+    'driverAccessDeleteReasonLabel' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Archiválás indoka'
+          : 'Archive reason',
+    'driverAccessDeleteSuccess' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'A sofőr archiválva lett.'
+          : 'Driver archived.',
     'driverAccessOpsFailed' =>
       Localizations.localeOf(context).languageCode == 'hu'
           ? 'A művelet nem sikerült.'
@@ -2594,18 +2643,21 @@ String resolveGlobalSearchKey(BuildContext context, String key) {
     'globalSearchHint' =>
       hu ? 'Keresés (min. 2 karakter)…' : 'Search (min. 2 characters)…',
     'globalSearchEmpty' => hu ? 'Nincs találat.' : 'No results.',
-    'globalSearchMinLength' => hu
-        ? 'Írjon be legalább 2 karaktert (vagy egy azonosítót).'
-        : 'Enter at least 2 characters (or a numeric ID).',
+    'globalSearchMinLength' =>
+      hu
+          ? 'Írjon be legalább 2 karaktert (vagy egy azonosítót).'
+          : 'Enter at least 2 characters (or a numeric ID).',
     'globalSearchError' => hu ? 'A keresés sikertelen.' : 'Search failed.',
-    'globalSearchPartialError' => hu
-        ? 'Néhány találati csoport nem töltődött be.'
-        : 'Some result groups failed to load.',
+    'globalSearchPartialError' =>
+      hu
+          ? 'Néhány találati csoport nem töltődött be.'
+          : 'Some result groups failed to load.',
     'globalSearchClear' => hu ? 'Törlés' : 'Clear',
     'globalSearchShowMore' => hu ? 'Több megjelenítése' : 'Show more',
-    'globalSearchDocumentFallback' => hu
-        ? 'Nincs dokumentum részletező; fuvarok megnyitva.'
-        : 'No document detail screen; opened trips overview.',
+    'globalSearchDocumentFallback' =>
+      hu
+          ? 'Nincs dokumentum részletező; fuvarok megnyitva.'
+          : 'No document detail screen; opened trips overview.',
     'globalSearchGroupCompanies' => hu ? 'Cégek' : 'Companies',
     'globalSearchGroupRegistrations' => hu ? 'Regisztrációk' : 'Registrations',
     'globalSearchGroupDrivers' => hu ? 'Sofőrök' : 'Drivers',

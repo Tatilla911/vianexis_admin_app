@@ -11,10 +11,21 @@ import '../domain/driver_operational_health_detail.dart';
 abstract class DriverAccessRepository {
   Future<DriverAccessListResult> listDrivers();
 
+  Future<DriverAccessProfile?> fetchDriver(String driverProfileId);
+
   Future<void> patchDriverStatus(
     String driverProfileId, {
     required String status,
     String? reason,
+  });
+
+  Future<Map<String, dynamic>> resendInvite(String driverProfileId);
+
+  Future<Map<String, dynamic>> sendPasswordSetup(String driverProfileId);
+
+  Future<Map<String, dynamic>> softDelete({
+    required String driverProfileId,
+    required String reason,
   });
 
   Future<DriverDeviceNotificationStatus?> fetchDeviceNotificationStatus(
@@ -79,6 +90,32 @@ class LiveDriverAccessRepository implements DriverAccessRepository {
   }
 
   @override
+  Future<DriverAccessProfile?> fetchDriver(String driverProfileId) async {
+    final apiClient = _apiClient;
+    if (apiClient == null) return null;
+    try {
+      final response = await apiClient.get<Map<String, dynamic>>(
+        '/platform-admin/drivers/$driverProfileId',
+      );
+      final data = response.data;
+      if (data == null) return null;
+      return DriverAccessProfile.fromJson(data);
+    } on ApiException catch (error) {
+      // Detail endpoint may not be deployed yet — fall back to list.
+      if (error.kind == ApiExceptionKind.notFound ||
+          error.statusCode == 404 ||
+          error.statusCode == 501) {
+        return null;
+      }
+      rethrow;
+    } on DioException catch (error) {
+      final status = error.response?.statusCode;
+      if (status == 404 || status == 501) return null;
+      rethrow;
+    }
+  }
+
+  @override
   Future<void> patchDriverStatus(
     String driverProfileId, {
     required String status,
@@ -95,6 +132,46 @@ class LiveDriverAccessRepository implements DriverAccessRepository {
         if (reason != null && reason.trim().isNotEmpty) 'reason': reason.trim(),
       },
     );
+  }
+
+  @override
+  Future<Map<String, dynamic>> resendInvite(String driverProfileId) async {
+    final apiClient = _apiClient;
+    if (apiClient == null) {
+      throw StateError('Driver invite endpoint unavailable');
+    }
+    final response = await apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/drivers/$driverProfileId/resend-invite',
+    );
+    return response.data ?? const <String, dynamic>{};
+  }
+
+  @override
+  Future<Map<String, dynamic>> sendPasswordSetup(String driverProfileId) async {
+    final apiClient = _apiClient;
+    if (apiClient == null) {
+      throw StateError('Driver password-setup endpoint unavailable');
+    }
+    final response = await apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/drivers/$driverProfileId/send-password-setup',
+    );
+    return response.data ?? const <String, dynamic>{};
+  }
+
+  @override
+  Future<Map<String, dynamic>> softDelete({
+    required String driverProfileId,
+    required String reason,
+  }) async {
+    final apiClient = _apiClient;
+    if (apiClient == null) {
+      throw StateError('Driver delete endpoint unavailable');
+    }
+    final response = await apiClient.post<Map<String, dynamic>>(
+      '/platform-admin/drivers/$driverProfileId/delete',
+      data: {'reason': reason},
+    );
+    return response.data ?? const <String, dynamic>{};
   }
 
   @override
@@ -178,11 +255,51 @@ class MockDriverAccessRepository implements DriverAccessRepository {
   }
 
   @override
+  Future<DriverAccessProfile?> fetchDriver(String driverProfileId) async {
+    final list = await listDrivers();
+    return list.items.cast<DriverAccessProfile?>().firstWhere(
+      (item) => item?.id == driverProfileId,
+      orElse: () => null,
+    );
+  }
+
+  @override
   Future<void> patchDriverStatus(
     String driverProfileId, {
     required String status,
     String? reason,
   }) async {}
+
+  @override
+  Future<Map<String, dynamic>> resendInvite(String driverProfileId) async {
+    return {
+      'driverProfileId': driverProfileId,
+      'emailSent': false,
+      'deliveryStatus': 'provider_disabled',
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> sendPasswordSetup(String driverProfileId) async {
+    return {
+      'driverProfileId': driverProfileId,
+      'mode': 'password_reset',
+      'emailSent': false,
+      'deliveryStatus': 'provider_disabled',
+    };
+  }
+
+  @override
+  Future<Map<String, dynamic>> softDelete({
+    required String driverProfileId,
+    required String reason,
+  }) async {
+    return {
+      'driverProfileId': driverProfileId,
+      'deleted': true,
+      'reason': reason,
+    };
+  }
 
   @override
   Future<DriverDeviceNotificationStatus?> fetchDeviceNotificationStatus(
@@ -240,6 +357,23 @@ final driverAccessRepositoryProvider = Provider<DriverAccessRepository>((ref) {
 final driverAccessListProvider =
     FutureProvider.autoDispose<DriverAccessListResult>((ref) {
       return ref.watch(driverAccessRepositoryProvider).listDrivers();
+    });
+
+final driverAccessDetailProvider = FutureProvider.autoDispose
+    .family<DriverAccessProfile?, String>((ref, driverId) async {
+      final repo = ref.watch(driverAccessRepositoryProvider);
+
+      // Prefer the list (already loaded when navigating from /drivers).
+      try {
+        final list = await ref.watch(driverAccessListProvider.future);
+        for (final item in list.items) {
+          if (item.id == driverId) return item;
+        }
+      } catch (_) {
+        // List unavailable — try dedicated detail endpoint below.
+      }
+
+      return repo.fetchDriver(driverId);
     });
 
 final driverDeviceNotificationStatusProvider = FutureProvider.autoDispose

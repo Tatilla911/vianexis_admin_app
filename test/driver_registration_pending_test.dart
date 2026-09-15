@@ -6,22 +6,31 @@ import 'package:vianexis_admin_app/features/driver_access/data/driver_access_rep
 import 'package:vianexis_admin_app/features/driver_access/data/driver_registration_requests_repository.dart';
 import 'package:vianexis_admin_app/features/driver_access/domain/driver_access_profile.dart';
 import 'package:vianexis_admin_app/features/driver_access/domain/driver_device_notification_status.dart';
+import 'package:vianexis_admin_app/features/driver_access/domain/driver_operational_health_detail.dart';
 import 'package:vianexis_admin_app/features/driver_access/domain/driver_registration_request.dart';
 import 'package:vianexis_admin_app/features/driver_access/presentation/driver_access_screen.dart';
 import 'package:vianexis_admin_app/l10n/app_localizations.dart';
 
 class _FakePendingRepository implements DriverRegistrationRequestsRepository {
-  _FakePendingRepository({required this.page});
+  _FakePendingRepository({
+    required this.page,
+    this.approveDelay = Duration.zero,
+  });
 
   final DriverRegistrationRequestsPage page;
+  final Duration approveDelay;
   int approveCalls = 0;
   int rejectCalls = 0;
+  int listPendingCalls = 0;
 
   @override
   bool get usesMockData => false;
 
   @override
-  Future<DriverRegistrationRequestsPage> listPending() async => page;
+  Future<DriverRegistrationRequestsPage> listPending() async {
+    listPendingCalls++;
+    return page;
+  }
 
   @override
   Future<DriverRegistrationRequestsPage> listRejected() async {
@@ -38,6 +47,9 @@ class _FakePendingRepository implements DriverRegistrationRequestsRepository {
     int? companyId,
     String? reviewNotes,
   }) async {
+    if (approveDelay > Duration.zero) {
+      await Future<void>.delayed(approveDelay);
+    }
     approveCalls++;
     return const DriverRegistrationDecisionResult(
       notificationEmailStatus: 'sent',
@@ -70,6 +82,10 @@ class _EmptyDriversRepository implements DriverAccessRepository {
   }
 
   @override
+  Future<DriverAccessProfile?> fetchDriver(String driverProfileId) async =>
+      null;
+
+  @override
   Future<void> patchDriverStatus(
     String driverId, {
     required String status,
@@ -77,7 +93,27 @@ class _EmptyDriversRepository implements DriverAccessRepository {
   }) async {}
 
   @override
+  Future<Map<String, dynamic>> resendInvite(String driverProfileId) async =>
+      const <String, dynamic>{};
+
+  @override
+  Future<Map<String, dynamic>> sendPasswordSetup(
+    String driverProfileId,
+  ) async => const <String, dynamic>{};
+
+  @override
+  Future<Map<String, dynamic>> softDelete({
+    required String driverProfileId,
+    required String reason,
+  }) async => const <String, dynamic>{};
+
+  @override
   Future<DriverDeviceNotificationStatus?> fetchDeviceNotificationStatus(
+    String driverId,
+  ) async => null;
+
+  @override
+  Future<DriverOperationalHealthDetail?> fetchOperationalHealth(
     String driverId,
   ) async => null;
 }
@@ -226,6 +262,71 @@ void main() {
         findsOneWidget,
       );
       expect(find.textContaining('Email sent'), findsOneWidget);
+    });
+
+    testWidgets('double approve tap only submits once', (tester) async {
+      final repo = _FakePendingRepository(
+        page: DriverRegistrationRequestsPage(
+          listEndpointReady: true,
+          total: 1,
+          items: [
+            DriverRegistrationRequestItem(
+              id: 'req-double',
+              fullName: 'Double Approve',
+              email: 'double@example.test',
+              status: 'pending',
+              createdAt: DateTime.now(),
+            ),
+          ],
+        ),
+        approveDelay: const Duration(milliseconds: 200),
+      );
+
+      await tester.pumpWidget(_driverAccessTestApp(pendingRepo: repo));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Approve'));
+      await tester.pump();
+      await tester.tap(find.text('Approve'), warnIfMissed: false);
+      await tester.pump(const Duration(milliseconds: 250));
+      await tester.pumpAndSettle();
+
+      expect(repo.approveCalls, 1);
+      expect(
+        find.textContaining('Driver registration approved.'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('approve invalidates pending queue after success', (
+      tester,
+    ) async {
+      final repo = _FakePendingRepository(
+        page: DriverRegistrationRequestsPage(
+          listEndpointReady: true,
+          total: 1,
+          items: [
+            DriverRegistrationRequestItem(
+              id: 'req-invalidate',
+              fullName: 'Invalidate Me',
+              email: 'invalidate@example.test',
+              status: 'pending',
+              createdAt: DateTime.now(),
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(_driverAccessTestApp(pendingRepo: repo));
+      await tester.pumpAndSettle();
+      expect(repo.listPendingCalls, greaterThanOrEqualTo(1));
+      final before = repo.listPendingCalls;
+
+      await tester.tap(find.text('Approve'));
+      await tester.pumpAndSettle();
+
+      expect(repo.approveCalls, 1);
+      expect(repo.listPendingCalls, greaterThan(before));
     });
 
     testWidgets('narrow layout has no overflow with pending cards', (

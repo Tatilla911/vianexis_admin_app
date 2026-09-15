@@ -4,8 +4,12 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/app_router.dart';
 import '../../../app/vianexis_brand.dart';
+import '../../../core/api/admin_ops_feedback.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/api/api_exception_feedback.dart';
+import '../../../core/auth/admin_auth_state.dart';
+import '../../../core/auth/admin_user.dart';
+import '../../../core/email/email_delivery_feedback.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../core/widgets/backend_dependency_card.dart';
 import '../../../core/widgets/mock_data_badge.dart';
@@ -14,12 +18,36 @@ import '../../../core/widgets/vianexis_loading_view.dart';
 import '../../../core/widgets/vianexis_metadata_notice.dart';
 import '../../qr_codes/domain/platform_qr_code.dart';
 import '../../qr_codes/presentation/widgets/qr_codes_management_dialog.dart';
+import '../../applications/presentation/applications_inbox_screen.dart';
 import '../data/driver_registration_requests_repository.dart';
 import '../data/driver_access_repository.dart';
 import '../domain/driver_access_profile.dart';
 import '../domain/driver_operational_health_detail.dart';
 import '../domain/driver_registration_email_status.dart';
 import '../domain/driver_registration_request.dart';
+
+class _DriverApprovalInFlightIds extends Notifier<Set<String>> {
+  @override
+  Set<String> build() => <String>{};
+
+  bool tryAdd(String id) {
+    if (state.contains(id)) return false;
+    state = {...state, id};
+    return true;
+  }
+
+  void removeId(String id) {
+    state = {
+      for (final existing in state)
+        if (existing != id) existing,
+    };
+  }
+}
+
+final _driverApprovalInFlightIdsProvider =
+    NotifierProvider<_DriverApprovalInFlightIds, Set<String>>(
+      _DriverApprovalInFlightIds.new,
+    );
 
 String _driverHealthListLabel(
   BuildContext context,
@@ -193,6 +221,7 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final inFlightIds = ref.watch(_driverApprovalInFlightIdsProvider);
     return pendingAsync.when(
       loading: () => const Padding(
         padding: EdgeInsets.only(bottom: 12),
@@ -280,7 +309,9 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
                         runSpacing: 8,
                         children: [
                           FilledButton(
-                            onPressed: () => _approve(context, ref, request),
+                            onPressed: inFlightIds.contains(request.id)
+                                ? null
+                                : () => _approve(context, ref, request),
                             child: Text(
                               resolveDriverAccessKey(
                                 context,
@@ -289,7 +320,9 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
                             ),
                           ),
                           OutlinedButton(
-                            onPressed: () => _reject(context, ref, request),
+                            onPressed: inFlightIds.contains(request.id)
+                                ? null
+                                : () => _reject(context, ref, request),
                             child: Text(
                               resolveDriverAccessKey(
                                 context,
@@ -315,6 +348,11 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
     WidgetRef ref,
     DriverRegistrationRequestItem request,
   ) async {
+    if (!ref
+        .read(_driverApprovalInFlightIdsProvider.notifier)
+        .tryAdd(request.id)) {
+      return;
+    }
     try {
       final companyId = int.tryParse(
         request.companyId ?? request.matchedCompanyId ?? '',
@@ -325,6 +363,8 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
       ref.invalidate(driverRegistrationRequestsProvider);
       ref.invalidate(rejectedDriverRegistrationRequestsProvider);
       ref.invalidate(driverAccessListProvider);
+      ref.invalidate(applicationsListProvider((type: null, status: null)));
+      ref.invalidate(applicationsListProvider((type: 'driver', status: null)));
       if (!context.mounted) return;
       final emailStatus = resolveDriverRegistrationEmailStatus(
         context,
@@ -344,6 +384,7 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
         ),
       );
     } on ApiException catch (error) {
+      logApiExceptionDiagnostics(error, applicationId: request.id);
       if (!context.mounted) return;
       showApiExceptionSnackBar(context, error);
     } catch (_) {
@@ -355,6 +396,10 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
           ),
         ),
       );
+    } finally {
+      ref
+          .read(_driverApprovalInFlightIdsProvider.notifier)
+          .removeId(request.id);
     }
   }
 
@@ -410,12 +455,20 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
     );
     if (reason == null || reason.isEmpty) return;
 
+    if (!ref
+        .read(_driverApprovalInFlightIdsProvider.notifier)
+        .tryAdd(request.id)) {
+      return;
+    }
     try {
       final decision = await ref
           .read(driverRegistrationRequestsRepositoryProvider)
           .reject(request.id, reviewNotes: reason);
       ref.invalidate(driverRegistrationRequestsProvider);
       ref.invalidate(rejectedDriverRegistrationRequestsProvider);
+      ref.invalidate(driverAccessListProvider);
+      ref.invalidate(applicationsListProvider((type: null, status: null)));
+      ref.invalidate(applicationsListProvider((type: 'driver', status: null)));
       if (!context.mounted) return;
       final emailStatus = resolveDriverRegistrationEmailStatus(
         context,
@@ -443,6 +496,10 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
           ),
         ),
       );
+    } finally {
+      ref
+          .read(_driverApprovalInFlightIdsProvider.notifier)
+          .removeId(request.id);
     }
   }
 }
@@ -561,6 +618,7 @@ class _DriverAccessDetailScreenState
             reason: 'Admin app status change',
           );
       ref.invalidate(driverAccessListProvider);
+      ref.invalidate(driverAccessDetailProvider(widget.driverId));
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -583,8 +641,119 @@ class _DriverAccessDetailScreenState
     }
   }
 
+  bool _opsBusy = false;
+
+  Future<void> _runOps(
+    Future<Map<String, dynamic>> Function() action, {
+    required String successKey,
+    bool expectEmailDelivery = false,
+  }) async {
+    if (_opsBusy) return;
+    setState(() => _opsBusy = true);
+    try {
+      final result = await action();
+      if (!mounted) return;
+      final successText = resolveDriverAccessKey(context, successKey);
+      final message = expectEmailDelivery
+          ? emailDeliveryUserMessage(
+              context,
+              result,
+              successFallback: successText,
+            )
+          : successText;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
+      ref.invalidate(driverAccessListProvider);
+      ref.invalidate(driverAccessDetailProvider(widget.driverId));
+    } catch (error) {
+      if (!mounted) return;
+      showAdminOpsFailureSnackBar(
+        context,
+        error,
+        resolveKey: resolveDriverAccessKey,
+        fallbackKey: 'driverAccessOpsFailed',
+        endpointMissingKey: 'driverAccessOpsEndpointMissing',
+        actionLabel: resolveDriverAccessKey(context, successKey),
+      );
+    } finally {
+      if (mounted) setState(() => _opsBusy = false);
+    }
+  }
+
+  Future<void> _confirmDelete(DriverAccessProfile driver) async {
+    final reasonController = TextEditingController();
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text(
+            resolveDriverAccessKey(
+              dialogContext,
+              'driverAccessDeleteConfirmTitle',
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                resolveDriverAccessKey(
+                  dialogContext,
+                  'driverAccessDeleteConfirmBody',
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: reasonController,
+                decoration: InputDecoration(
+                  labelText: resolveDriverAccessKey(
+                    dialogContext,
+                    'driverAccessDeleteReasonLabel',
+                  ),
+                ),
+                minLines: 2,
+                maxLines: 4,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: Text(
+                MaterialLocalizations.of(dialogContext).cancelButtonLabel,
+              ),
+            ),
+            FilledButton(
+              onPressed: () {
+                if (reasonController.text.trim().length < 3) return;
+                Navigator.of(dialogContext).pop(true);
+              },
+              child: Text(
+                resolveDriverAccessKey(
+                  dialogContext,
+                  'driverAccessDeleteAction',
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+    final reason = reasonController.text.trim();
+    reasonController.dispose();
+    if (confirmed != true || reason.length < 3) return;
+    await _runOps(
+      () => ref
+          .read(driverAccessRepositoryProvider)
+          .softDelete(driverProfileId: driver.id, reason: reason),
+      successKey: 'driverAccessDeleteSuccess',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final detailAsync = ref.watch(driverAccessDetailProvider(widget.driverId));
     final listAsync = ref.watch(driverAccessListProvider);
     final deviceStatusAsync = ref.watch(
       driverDeviceNotificationStatusProvider(widget.driverId),
@@ -592,12 +761,13 @@ class _DriverAccessDetailScreenState
     final healthAsync = ref.watch(
       driverOperationalHealthProvider(widget.driverId),
     );
+    final usesMock = ref.watch(driverAccessRepositoryProvider).usesMockData;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(resolveDriverAccessKey(context, 'driverAccessDetailTitle')),
       ),
-      body: listAsync.when(
+      body: detailAsync.when(
         loading: () => const VianexisLoadingView(),
         error: (error, _) => VianexisErrorView.fromError(
           context,
@@ -606,13 +776,12 @@ class _DriverAccessDetailScreenState
             context,
             'driverAccessLoadFailed',
           ),
-          onRetry: () => ref.invalidate(driverAccessListProvider),
+          onRetry: () {
+            ref.invalidate(driverAccessDetailProvider(widget.driverId));
+            ref.invalidate(driverAccessListProvider);
+          },
         ),
-        data: (result) {
-          final driver = result.items.cast<DriverAccessProfile?>().firstWhere(
-            (item) => item?.id == widget.driverId,
-            orElse: () => null,
-          );
+        data: (driver) {
           if (driver == null) {
             return Center(
               child: Text(
@@ -620,9 +789,16 @@ class _DriverAccessDetailScreenState
               ),
             );
           }
-          final canChangeStatus =
-              result.listEndpointReady &&
-              !ref.watch(driverAccessRepositoryProvider).usesMockData;
+          final listReady =
+              listAsync.asData?.value.listEndpointReady ?? !usesMock;
+          final canChangeStatus = listReady && !usesMock;
+          final canManageOps = usesMock || listReady;
+          final canResendInvite =
+              canManageOps &&
+              driver.registrationStatus == DriverRegistrationStatus.invited;
+          final isSuperAdmin =
+              ref.watch(adminAuthProvider).user?.role == AdminRole.superAdmin;
+          final canArchiveDriver = canManageOps && (usesMock || isSuperAdmin);
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
@@ -666,34 +842,72 @@ class _DriverAccessDetailScreenState
                 healthAsync: healthAsync,
               ),
               const SizedBox(height: 12),
+              Text(
+                resolveDriverAccessKey(context, 'driverAccessOpsSection'),
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: (!canResendInvite || _opsBusy)
+                        ? null
+                        : () => _runOps(
+                            () => ref
+                                .read(driverAccessRepositoryProvider)
+                                .resendInvite(driver.id),
+                            successKey: 'driverAccessInviteResendSuccess',
+                            expectEmailDelivery: true,
+                          ),
+                    icon: const Icon(Icons.mail_outline),
+                    label: Text(
+                      resolveDriverAccessKey(
+                        context,
+                        'driverAccessResendInviteAction',
+                      ),
+                    ),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: (!canManageOps || _opsBusy)
+                        ? null
+                        : () => _runOps(
+                            () => ref
+                                .read(driverAccessRepositoryProvider)
+                                .sendPasswordSetup(driver.id),
+                            successKey: 'driverAccessPasswordSetupSuccess',
+                            expectEmailDelivery: true,
+                          ),
+                    icon: const Icon(Icons.lock_reset_outlined),
+                    label: Text(
+                      resolveDriverAccessKey(
+                        context,
+                        'driverAccessSendPasswordSetupAction',
+                      ),
+                    ),
+                  ),
+                  if (canArchiveDriver)
+                    OutlinedButton.icon(
+                      onPressed: _opsBusy ? null : () => _confirmDelete(driver),
+                      icon: const Icon(Icons.archive_outlined),
+                      label: Text(
+                        resolveDriverAccessKey(
+                          context,
+                          'driverAccessDeleteAction',
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 12),
               deviceStatusAsync.when(
                 loading: () => const SizedBox.shrink(),
-                error: (_, _) => BackendDependencyCard(
-                  title: resolveDriverAccessKey(
-                    context,
-                    'driverAccessDeviceNotificationTitle',
-                  ),
-                  message: resolveDriverAccessKey(
-                    context,
-                    'driverAccessDeviceNotificationUnavailable',
-                  ),
-                  endpointHint:
-                      'GET /platform-admin/drivers/:id/device-notification-status',
-                ),
+                error: (_, _) => const SizedBox.shrink(),
                 data: (status) {
                   if (status == null) return const SizedBox.shrink();
                   if (status.sourceUnavailable) {
-                    return BackendDependencyCard(
-                      title: resolveDriverAccessKey(
-                        context,
-                        'driverAccessDeviceNotificationTitle',
-                      ),
-                      message: resolveDriverAccessKey(
-                        context,
-                        'driverAccessDeviceNotificationUnavailable',
-                      ),
-                      endpointHint: 'sourceUnavailable: true',
-                    );
+                    return const SizedBox.shrink();
                   }
                   return Card(
                     child: ListTile(
@@ -746,7 +960,11 @@ class _DriverAccessDetailScreenState
                 ),
               ),
               const SizedBox(height: 12),
-              if (canChangeStatus) ...[
+              if (canChangeStatus &&
+                  driver.registrationStatus !=
+                      DriverRegistrationStatus.invited &&
+                  driver.registrationStatus !=
+                      DriverRegistrationStatus.pending) ...[
                 if (driver.registrationStatus !=
                     DriverRegistrationStatus.active)
                   FilledButton.icon(
@@ -771,7 +989,7 @@ class _DriverAccessDetailScreenState
                     ),
                   ),
                 ],
-              ] else
+              ] else if (!canChangeStatus)
                 BackendDependencyCard(
                   title: resolveDriverAccessKey(
                     context,

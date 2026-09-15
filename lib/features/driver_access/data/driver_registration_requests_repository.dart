@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
+import '../../../core/api/api_exception.dart';
+import '../../../core/localization/localization_keys.dart';
 import '../domain/driver_registration_request.dart';
 import 'driver_registration_requests_api.dart';
 
@@ -135,6 +138,17 @@ class MockDriverRegistrationRequestsRepository
     int? companyId,
     String? reviewNotes,
   }) async {
+    if (AppConfig.instance.environment.isStaging ||
+        AppConfig.instance.environment.isProduction ||
+        !kDebugMode) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.authBackendNotConfigured,
+        kind: ApiExceptionKind.notConfigured,
+        errorCode: 'MOCK_DRIVER_APPROVE_FORBIDDEN',
+        backendMessage:
+            'Mock driver registration repository cannot approve drivers.',
+      );
+    }
     return const DriverRegistrationDecisionResult(
       notificationEmailStatus: 'sent',
     );
@@ -145,6 +159,17 @@ class MockDriverRegistrationRequestsRepository
     String requestId, {
     required String reviewNotes,
   }) async {
+    if (AppConfig.instance.environment.isStaging ||
+        AppConfig.instance.environment.isProduction ||
+        !kDebugMode) {
+      throw const ApiException(
+        messageKey: LocalizationKeys.authBackendNotConfigured,
+        kind: ApiExceptionKind.notConfigured,
+        errorCode: 'MOCK_DRIVER_APPROVE_FORBIDDEN',
+        backendMessage:
+            'Mock driver registration repository cannot reject drivers.',
+      );
+    }
     return const DriverRegistrationDecisionResult(
       notificationEmailStatus: 'sent',
     );
@@ -153,7 +178,13 @@ class MockDriverRegistrationRequestsRepository
 
 final driverRegistrationRequestsRepositoryProvider =
     Provider<DriverRegistrationRequestsRepository>((ref) {
-      if (AppConfig.instance.shouldUseLiveRepositories) {
+      final config = AppConfig.instance;
+      // Staging/production must never silently mock-approve drivers.
+      final forceLive =
+          config.environment.isStaging ||
+          config.environment.isProduction ||
+          config.shouldUseLiveRepositories;
+      if (forceLive) {
         return LiveDriverRegistrationRequestsRepository(
           ref.watch(driverRegistrationRequestsApiProvider),
         );
