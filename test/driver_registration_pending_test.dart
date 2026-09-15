@@ -33,17 +33,26 @@ class _FakePendingRepository implements DriverRegistrationRequestsRepository {
   }
 
   @override
-  Future<void> approve(
+  Future<DriverRegistrationDecisionResult> approve(
     String requestId, {
     int? companyId,
     String? reviewNotes,
   }) async {
     approveCalls++;
+    return const DriverRegistrationDecisionResult(
+      notificationEmailStatus: 'sent',
+    );
   }
 
   @override
-  Future<void> reject(String requestId, {required String reviewNotes}) async {
+  Future<DriverRegistrationDecisionResult> reject(
+    String requestId, {
+    required String reviewNotes,
+  }) async {
     rejectCalls++;
+    return const DriverRegistrationDecisionResult(
+      notificationEmailStatus: 'sent',
+    );
   }
 }
 
@@ -177,7 +186,11 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(repo.approveCalls, 1);
-      expect(find.text('Driver registration approved.'), findsOneWidget);
+      expect(
+        find.textContaining('Driver registration approved.'),
+        findsOneWidget,
+      );
+      expect(find.textContaining('Email sent'), findsOneWidget);
     });
 
     testWidgets('reject dialog calls repository with reason', (tester) async {
@@ -208,7 +221,11 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(repo.rejectCalls, 1);
-      expect(find.text('Driver registration rejected.'), findsOneWidget);
+      expect(
+        find.textContaining('Driver registration rejected.'),
+        findsOneWidget,
+      );
+      expect(find.textContaining('Email sent'), findsOneWidget);
     });
 
     testWidgets('narrow layout has no overflow with pending cards', (

@@ -16,6 +16,7 @@ import '../../qr_codes/presentation/widgets/qr_codes_management_dialog.dart';
 import '../data/driver_registration_requests_repository.dart';
 import '../data/driver_access_repository.dart';
 import '../domain/driver_access_profile.dart';
+import '../domain/driver_registration_email_status.dart';
 import '../domain/driver_registration_request.dart';
 
 class DriverAccessScreen extends ConsumerWidget {
@@ -245,20 +246,27 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
       final companyId = int.tryParse(
         request.companyId ?? request.matchedCompanyId ?? '',
       );
-      await ref
+      final decision = await ref
           .read(driverRegistrationRequestsRepositoryProvider)
           .approve(request.id, companyId: companyId);
       ref.invalidate(driverRegistrationRequestsProvider);
       ref.invalidate(rejectedDriverRegistrationRequestsProvider);
       ref.invalidate(driverAccessListProvider);
       if (!context.mounted) return;
+      final emailStatus = resolveDriverRegistrationEmailStatus(
+        context,
+        decision.notificationEmailStatus,
+      );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            resolveDriverAccessKey(
-              context,
-              'driverAccessPendingApproveSuccess',
-            ),
+            [
+              resolveDriverAccessKey(
+                context,
+                'driverAccessPendingApproveSuccess',
+              ),
+              if (emailStatus.isNotEmpty) emailStatus,
+            ].join(' · '),
           ),
         ),
       );
@@ -330,16 +338,23 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
     if (reason == null || reason.isEmpty) return;
 
     try {
-      await ref
+      final decision = await ref
           .read(driverRegistrationRequestsRepositoryProvider)
           .reject(request.id, reviewNotes: reason);
       ref.invalidate(driverRegistrationRequestsProvider);
       ref.invalidate(rejectedDriverRegistrationRequestsProvider);
       if (!context.mounted) return;
+      final emailStatus = resolveDriverRegistrationEmailStatus(
+        context,
+        decision.notificationEmailStatus,
+      );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            resolveDriverAccessKey(context, 'driverAccessPendingRejectSuccess'),
+            [
+              resolveDriverAccessKey(context, 'driverAccessPendingRejectSuccess'),
+              if (emailStatus.isNotEmpty) emailStatus,
+            ].join(' · '),
           ),
         ),
       );
@@ -420,6 +435,17 @@ class _RejectedDriverRegistrationsSection extends ConsumerWidget {
                           '${(request.reviewNotes?.trim().isNotEmpty ?? false) ? request.reviewNotes!.trim() : '—'}',
                         ),
                       ),
+                      if (request.notificationEmailStatus != null &&
+                          request.notificationEmailStatus!.trim().isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            '${driverRegistrationNotificationEmailLabel(context)}: '
+                            '${resolveDriverRegistrationEmailStatus(context, request.notificationEmailStatus)}',
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),

@@ -8,12 +8,15 @@ import 'driver_registration_requests_api.dart';
 abstract class DriverRegistrationRequestsRepository {
   Future<DriverRegistrationRequestsPage> listPending();
   Future<DriverRegistrationRequestsPage> listRejected();
-  Future<void> approve(
+  Future<DriverRegistrationDecisionResult> approve(
     String requestId, {
     int? companyId,
     String? reviewNotes,
   });
-  Future<void> reject(String requestId, {required String reviewNotes});
+  Future<DriverRegistrationDecisionResult> reject(
+    String requestId, {
+    required String reviewNotes,
+  });
   bool get usesMockData;
 }
 
@@ -61,7 +64,11 @@ class LiveDriverRegistrationRequestsRepository
   }
 
   @override
-  Future<void> approve(String requestId, {int? companyId, String? reviewNotes}) {
+  Future<DriverRegistrationDecisionResult> approve(
+    String requestId, {
+    int? companyId,
+    String? reviewNotes,
+  }) {
     return _api.approve(
       requestId: requestId,
       companyId: companyId,
@@ -72,7 +79,10 @@ class LiveDriverRegistrationRequestsRepository
   }
 
   @override
-  Future<void> reject(String requestId, {required String reviewNotes}) {
+  Future<DriverRegistrationDecisionResult> reject(
+    String requestId, {
+    required String reviewNotes,
+  }) {
     return _api.reject(requestId: requestId, reviewNotes: reviewNotes);
   }
 }
@@ -113,20 +123,32 @@ class MockDriverRegistrationRequestsRepository
           createdAt: DateTime.now().subtract(const Duration(days: 2)),
           updatedAt: DateTime.now().subtract(const Duration(days: 1)),
           reviewNotes: 'Incomplete documentation',
+          notificationEmailStatus: 'sent',
         ),
       ],
     );
   }
 
   @override
-  Future<void> approve(
+  Future<DriverRegistrationDecisionResult> approve(
     String requestId, {
     int? companyId,
     String? reviewNotes,
-  }) async {}
+  }) async {
+    return const DriverRegistrationDecisionResult(
+      notificationEmailStatus: 'sent',
+    );
+  }
 
   @override
-  Future<void> reject(String requestId, {required String reviewNotes}) async {}
+  Future<DriverRegistrationDecisionResult> reject(
+    String requestId, {
+    required String reviewNotes,
+  }) async {
+    return const DriverRegistrationDecisionResult(
+      notificationEmailStatus: 'sent',
+    );
+  }
 }
 
 final driverRegistrationRequestsRepositoryProvider =

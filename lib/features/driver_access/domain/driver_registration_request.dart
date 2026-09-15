@@ -1,3 +1,29 @@
+class DriverRegistrationDecisionResult {
+  const DriverRegistrationDecisionResult({
+    this.notificationEmailStatus,
+  });
+
+  final String? notificationEmailStatus;
+
+  factory DriverRegistrationDecisionResult.fromJson(
+    Map<String, dynamic>? json,
+  ) {
+    if (json == null) {
+      return const DriverRegistrationDecisionResult();
+    }
+    final nested = json['request'];
+    final nestedStatus = nested is Map<String, dynamic>
+        ? nested['notificationEmailStatus']?.toString()
+        : null;
+    return DriverRegistrationDecisionResult(
+      notificationEmailStatus:
+          json['notificationEmailStatus']?.toString() ??
+          json['deliveryStatus']?.toString() ??
+          nestedStatus,
+    );
+  }
+}
+
 class DriverRegistrationRequestItem {
   const DriverRegistrationRequestItem({
     required this.id,
@@ -15,6 +41,8 @@ class DriverRegistrationRequestItem {
     this.createdAt,
     this.updatedAt,
     this.reviewNotes,
+    this.notificationEmailStatus,
+    this.notificationEmailAt,
   });
 
   final String id;
@@ -32,6 +60,8 @@ class DriverRegistrationRequestItem {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final String? reviewNotes;
+  final String? notificationEmailStatus;
+  final DateTime? notificationEmailAt;
 
   bool get isPending => status.toLowerCase() == 'pending';
   bool get isRejected => status.toLowerCase() == 'rejected';
@@ -57,6 +87,10 @@ class DriverRegistrationRequestItem {
         if (notes == null || notes.isEmpty) return null;
         return notes;
       }(),
+      notificationEmailStatus: json['notificationEmailStatus']?.toString(),
+      notificationEmailAt: DateTime.tryParse(
+        json['notificationEmailAt']?.toString() ?? '',
+      ),
     );
   }
 }

@@ -38,12 +38,12 @@ class DriverRegistrationRequestsApi {
     return DriverRegistrationRequestsPage.fromJson(response.data);
   }
 
-  Future<void> approve({
+  Future<DriverRegistrationDecisionResult> approve({
     required String requestId,
     int? companyId,
     String? reviewNotes,
   }) async {
-    await _apiClient.post<Map<String, dynamic>>(
+    final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/driver-registration-requests/$requestId/approve',
       data: {
         'companyId': ?companyId,
@@ -51,16 +51,22 @@ class DriverRegistrationRequestsApi {
           'reviewNotes': reviewNotes.trim(),
       },
     );
+    return DriverRegistrationDecisionResult.fromJson(response.data);
   }
 
-  Future<void> reject({
+  Future<DriverRegistrationDecisionResult> reject({
     required String requestId,
     required String reviewNotes,
   }) async {
-    await _apiClient.post<Map<String, dynamic>>(
+    final trimmed = reviewNotes.trim();
+    final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/driver-registration-requests/$requestId/reject',
-      data: {'reviewNotes': reviewNotes.trim()},
+      data: {
+        'reviewNotes': trimmed,
+        'applicantMessage': trimmed,
+      },
     );
+    return DriverRegistrationDecisionResult.fromJson(response.data);
   }
 }
 
