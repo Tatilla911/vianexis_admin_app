@@ -65,6 +65,14 @@ String resolveLocalizationKey(BuildContext context, String key) {
       l10n.platformCompanyAmendErrorMigrationMissing,
     LocalizationKeys.applicationDetailedIntakeRequired =>
       l10n.applicationDetailedIntakeRequired,
+    LocalizationKeys.registrationMembershipAlreadyExists =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Ez az admin e-mail már egy meglévő céghez tartozik. A jóváhagyás nem hozhat létre duplikált tagságot.'
+          : 'This admin email already belongs to an existing company. Approval cannot create a duplicate membership.',
+    LocalizationKeys.registrationAlreadyProcessed =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Ezt a jelentkezést már feldolgozták. Frissíts, és nézd meg az aktuális állapotot.'
+          : 'This application was already processed. Refresh to see the current status.',
     LocalizationKeys.emailProviderDisabled => l10n.emailProviderDisabled,
     LocalizationKeys.emailRecipientNotAllowed =>
       l10n.emailRecipientNotAllowed,

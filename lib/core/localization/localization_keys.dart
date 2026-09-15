@@ -56,6 +56,9 @@ abstract final class LocalizationKeys {
       'platformCompanyAmendErrorMigrationMissing';
   static const applicationDetailedIntakeRequired =
       'applicationDetailedIntakeRequired';
+  static const registrationMembershipAlreadyExists =
+      'registrationMembershipAlreadyExists';
+  static const registrationAlreadyProcessed = 'registrationAlreadyProcessed';
   static const emailProviderDisabled = 'emailProviderDisabled';
   static const emailRecipientNotAllowed = 'emailRecipientNotAllowed';
   static const emailSendFailed = 'emailSendFailed';

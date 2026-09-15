@@ -40,7 +40,13 @@ String apiExceptionMessageKeyForStatus({
     return LocalizationKeys.driverApprovalConflict;
   }
   if (errorCode == 'MEMBERSHIP_ALREADY_EXISTS') {
-    return LocalizationKeys.driverApprovalConflict;
+    return isRegistrationApplicationPath(path)
+        ? LocalizationKeys.registrationMembershipAlreadyExists
+        : LocalizationKeys.driverApprovalConflict;
+  }
+  if (errorCode == 'REGISTRATION_ALREADY_PROCESSED' ||
+      errorCode == 'registration.alreadyProcessed') {
+    return LocalizationKeys.registrationAlreadyProcessed;
   }
   if (errorCode == 'invalid_company_id' ||
       errorCode == 'invalid_registration_status') {

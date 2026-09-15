@@ -1,5 +1,6 @@
 import 'registration_application_status.dart';
 import 'registration_risk_level.dart';
+import 'registration_review_context.dart';
 
 enum RegistrationApplicationType {
   company('company'),
@@ -76,6 +77,10 @@ class RegistrationApplication {
     this.needsHumanReview = true,
     this.completenessScore,
     this.riskFlags = const {},
+    this.assessment,
+    this.commercialReview,
+    this.riskResolution,
+    this.approvalEligibility,
   });
 
   final String id;
@@ -100,12 +105,19 @@ class RegistrationApplication {
   final bool needsHumanReview;
   final double? completenessScore;
   final Map<String, dynamic> riskFlags;
+  final RegistrationAssessmentSummary? assessment;
+  final RegistrationCommercialReview? commercialReview;
+  final RegistrationRiskResolution? riskResolution;
+  final RegistrationApprovalEligibility? approvalEligibility;
 
   bool get hasAiReview =>
       (aiRecommendation != null && aiRecommendation!.isNotEmpty) ||
       (aiSummary != null && aiSummary!.isNotEmpty);
 
   bool get isHighRisk => riskLevel == RegistrationRiskLevel.high;
+
+  bool get canApproveFromServer =>
+      approvalEligibility?.canApprove ?? status.isPending;
 
   bool matchesSearch(String query) {
     if (query.trim().isEmpty) return true;
@@ -140,6 +152,10 @@ class RegistrationApplication {
   factory RegistrationApplication.fromJson(
     Map<String, dynamic> json, {
     List<dynamic>? aiReviews,
+    Map<String, dynamic>? assessment,
+    Map<String, dynamic>? commercialReview,
+    Map<String, dynamic>? riskResolution,
+    Map<String, dynamic>? approvalEligibility,
   }) {
     final latestAi = _latestAiReview(aiReviews);
     final riskFlags = _asStringKeyedMap(json['riskFlags']);
@@ -178,6 +194,18 @@ class RegistrationApplication {
       needsHumanReview: json['needsHumanReview'] == true,
       completenessScore: _asDouble(json['completenessScore']),
       riskFlags: riskFlags,
+      assessment: assessment == null
+          ? null
+          : RegistrationAssessmentSummary.fromJson(assessment),
+      commercialReview: commercialReview == null
+          ? null
+          : RegistrationCommercialReview.fromJson(commercialReview),
+      riskResolution: riskResolution == null
+          ? null
+          : RegistrationRiskResolution.fromJson(riskResolution),
+      approvalEligibility: approvalEligibility == null
+          ? null
+          : RegistrationApprovalEligibility.fromJson(approvalEligibility),
     );
   }
 
@@ -186,19 +214,34 @@ class RegistrationApplication {
   ) {
     final application = json['application'];
     final aiReviews = json['aiReviews'];
-    if (application is Map<String, dynamic>) {
-      return RegistrationApplication.fromJson(
-        application,
-        aiReviews: aiReviews is List ? aiReviews : null,
-      );
+    final assessment = json['assessment'];
+    final commercialReview = json['commercialReview'];
+    final riskResolution = json['riskResolution'];
+    final approvalEligibility = json['approvalEligibility'];
+
+    Map<String, dynamic>? asMap(Object? raw) {
+      if (raw is Map<String, dynamic>) return raw;
+      if (raw is Map) return Map<String, dynamic>.from(raw);
+      return null;
     }
+
     if (application is Map) {
       return RegistrationApplication.fromJson(
         Map<String, dynamic>.from(application),
         aiReviews: aiReviews is List ? aiReviews : null,
+        assessment: asMap(assessment),
+        commercialReview: asMap(commercialReview),
+        riskResolution: asMap(riskResolution),
+        approvalEligibility: asMap(approvalEligibility),
       );
     }
-    return RegistrationApplication.fromJson(json);
+    return RegistrationApplication.fromJson(
+      json,
+      assessment: asMap(assessment),
+      commercialReview: asMap(commercialReview),
+      riskResolution: asMap(riskResolution),
+      approvalEligibility: asMap(approvalEligibility),
+    );
   }
 
   static Map<String, dynamic>? _latestAiReview(List<dynamic>? aiReviews) {

@@ -49,6 +49,13 @@ bool isPublicApplicationApprovePath(String path) {
   );
 }
 
+bool isRegistrationApplicationPath(String path) {
+  final normalized = resolveApiRequestPath(
+    RequestOptions(path: path),
+  ).trim().toLowerCase();
+  return normalized.contains('/registration-applications');
+}
+
 bool isDriverApprovalRelatedPath(String path) {
   return isDriverRegistrationApprovePath(path) ||
       isPublicApplicationApprovePath(path);
