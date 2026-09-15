@@ -113,9 +113,9 @@ void main() {
     });
 
     test('fetches companies metadata list', () async {
-      final companies = await repo.fetchCompanies();
-      expect(companies, hasLength(1));
-      expect(companies.first.metadataOnly, isTrue);
+      final page = await repo.fetchCompanies();
+      expect(page.items, hasLength(1));
+      expect(page.items.first.metadataOnly, isTrue);
       expect(repo.usesMockData, isFalse);
     });
 
@@ -140,9 +140,9 @@ void main() {
   group('MockPlatformCompaniesRepository', () {
     test('returns mock companies and supports status update', () async {
       final repo = MockPlatformCompaniesRepository();
-      final companies = await repo.fetchCompanies();
+      final page = await repo.fetchCompanies();
       expect(repo.usesMockData, isTrue);
-      expect(companies.length, greaterThanOrEqualTo(2));
+      expect(page.items.length, greaterThanOrEqualTo(2));
 
       final updated = await repo.updateStatus(
         id: '1',
@@ -157,8 +157,8 @@ void main() {
     test('mock search filters companies', () async {
       final repo = MockPlatformCompaniesRepository();
       final filtered = await repo.fetchCompanies(search: 'Alpine');
-      expect(filtered, hasLength(1));
-      expect(filtered.first.name, contains('Alpine'));
+      expect(filtered.items, hasLength(1));
+      expect(filtered.items.first.name, contains('Alpine'));
     });
   });
 }

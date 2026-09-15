@@ -56,6 +56,10 @@ class PlatformCompanyFilterBar extends StatelessWidget {
         context,
         'platformCompanyFilterDisabled',
       ),
+      PlatformCompanyListFilter.archived => resolvePlatformCompanyKey(
+        context,
+        'platformCompanyFilterArchived',
+      ),
     };
   }
 }

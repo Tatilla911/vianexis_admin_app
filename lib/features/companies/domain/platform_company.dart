@@ -120,6 +120,8 @@ class PlatformCompany {
       PlatformCompanyListFilter.disabled =>
         status == PlatformCompanyStatus.disabled ||
             status == PlatformCompanyStatus.inactive,
+      PlatformCompanyListFilter.archived =>
+        status == PlatformCompanyStatus.archived,
     };
   }
 }
@@ -130,17 +132,22 @@ enum PlatformCompanyListFilter {
   pendingReview,
   suspended,
   disabled,
+  archived,
 }
 
 class PlatformCompaniesPage {
   const PlatformCompaniesPage({
     required this.items,
     required this.total,
+    this.limit,
+    this.offset,
     this.metadataOnly = true,
   });
 
   final List<PlatformCompany> items;
   final int total;
+  final int? limit;
+  final int? offset;
   final bool metadataOnly;
 
   factory PlatformCompaniesPage.fromJson(Map<String, dynamic> json) {
@@ -154,6 +161,8 @@ class PlatformCompaniesPage {
     return PlatformCompaniesPage(
       items: items,
       total: _parseInt(json['total']),
+      limit: json['limit'] == null ? null : _parseInt(json['limit']),
+      offset: json['offset'] == null ? null : _parseInt(json['offset']),
       metadataOnly: json['metadataOnly'] != false,
     );
   }

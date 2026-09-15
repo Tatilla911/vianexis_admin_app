@@ -12,9 +12,11 @@ import '../domain/platform_company_summary.dart';
 import 'platform_companies_api.dart';
 
 abstract class PlatformCompaniesRepository {
-  Future<List<PlatformCompany>> fetchCompanies({
+  Future<PlatformCompaniesPage> fetchCompanies({
     PlatformCompanyStatus? status,
     String? search,
+    int limit = 50,
+    int offset = 0,
   });
 
   Future<PlatformCompany> fetchCompany(String id);
@@ -90,16 +92,18 @@ class LivePlatformCompaniesRepository implements PlatformCompaniesRepository {
   bool get usesMockData => false;
 
   @override
-  Future<List<PlatformCompany>> fetchCompanies({
+  Future<PlatformCompaniesPage> fetchCompanies({
     PlatformCompanyStatus? status,
     String? search,
-  }) async {
-    final page = await _api.listCompanies(
+    int limit = 50,
+    int offset = 0,
+  }) {
+    return _api.listCompanies(
       status: status,
       search: search,
-      limit: 200,
+      limit: limit,
+      offset: offset,
     );
-    return page.items;
   }
 
   @override
@@ -297,15 +301,26 @@ class MockPlatformCompaniesRepository implements PlatformCompaniesRepository {
   bool get usesMockData => true;
 
   @override
-  Future<List<PlatformCompany>> fetchCompanies({
+  Future<PlatformCompaniesPage> fetchCompanies({
     PlatformCompanyStatus? status,
     String? search,
+    int limit = 50,
+    int offset = 0,
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 200));
-    return _companies
+    final filtered = _companies
         .where((company) => status == null || company.status == status)
         .where((company) => search == null || company.matchesSearch(search))
         .toList(growable: false);
+    final total = filtered.length;
+    final start = offset.clamp(0, total);
+    final end = (start + limit).clamp(0, total);
+    return PlatformCompaniesPage(
+      items: filtered.sublist(start, end),
+      total: total,
+      limit: limit,
+      offset: offset,
+    );
   }
 
   @override

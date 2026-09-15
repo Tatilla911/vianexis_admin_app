@@ -61,6 +61,7 @@ class PlatformCompanyListQuery {
         PlatformCompanyStatus.pendingReview,
       PlatformCompanyListFilter.suspended => PlatformCompanyStatus.suspended,
       PlatformCompanyListFilter.disabled => PlatformCompanyStatus.disabled,
+      PlatformCompanyListFilter.archived => PlatformCompanyStatus.archived,
     };
   }
 }
@@ -85,21 +86,117 @@ class PlatformCompanyListQueryNotifier
   }
 }
 
-final platformCompaniesProvider =
-    AsyncNotifierProvider<PlatformCompaniesNotifier, List<PlatformCompany>>(
-      PlatformCompaniesNotifier.new,
+class PlatformCompaniesListState {
+  const PlatformCompaniesListState({
+    required this.items,
+    required this.total,
+    this.loadingMore = false,
+    this.loadMoreError,
+  });
+
+  final List<PlatformCompany> items;
+  final int total;
+  final bool loadingMore;
+  final Object? loadMoreError;
+
+  bool get hasMore => items.length < total;
+
+  PlatformCompaniesListState copyWith({
+    List<PlatformCompany>? items,
+    int? total,
+    bool? loadingMore,
+    Object? loadMoreError = _sentinel,
+  }) {
+    return PlatformCompaniesListState(
+      items: items ?? this.items,
+      total: total ?? this.total,
+      loadingMore: loadingMore ?? this.loadingMore,
+      loadMoreError: identical(loadMoreError, _sentinel)
+          ? this.loadMoreError
+          : loadMoreError,
     );
+  }
+}
 
-class PlatformCompaniesNotifier extends AsyncNotifier<List<PlatformCompany>> {
+const Object _sentinel = Object();
+
+const int kPlatformCompaniesPageSize = 50;
+
+final platformCompaniesProvider =
+    AsyncNotifierProvider<
+      PlatformCompaniesNotifier,
+      PlatformCompaniesListState
+    >(PlatformCompaniesNotifier.new);
+
+class PlatformCompaniesNotifier
+    extends AsyncNotifier<PlatformCompaniesListState> {
   @override
-  Future<List<PlatformCompany>> build() => _load();
+  Future<PlatformCompaniesListState> build() {
+    ref.watch(platformCompanyListQueryProvider);
+    return _loadFirstPage();
+  }
 
-  Future<List<PlatformCompany>> _load() {
-    return ref.read(platformCompaniesRepositoryProvider).fetchCompanies();
+  Future<PlatformCompaniesListState> _loadFirstPage() async {
+    final query = ref.read(platformCompanyListQueryProvider);
+    final search = query.search.trim();
+    final page = await ref
+        .read(platformCompaniesRepositoryProvider)
+        .fetchCompanies(
+          status: query.statusForApi(),
+          search: search.isEmpty ? null : search,
+          limit: kPlatformCompaniesPageSize,
+          offset: 0,
+        );
+    return PlatformCompaniesListState(items: page.items, total: page.total);
   }
 
   Future<void> refresh() async {
-    state = await AsyncValue.guard(_load);
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(_loadFirstPage);
+  }
+
+  Future<void> loadMore() async {
+    final current = state.asData?.value;
+    if (current == null || current.loadingMore || !current.hasMore) {
+      return;
+    }
+
+    state = AsyncData(current.copyWith(loadingMore: true, loadMoreError: null));
+    final queryAtStart = ref.read(platformCompanyListQueryProvider);
+    try {
+      final search = queryAtStart.search.trim();
+      final page = await ref
+          .read(platformCompaniesRepositoryProvider)
+          .fetchCompanies(
+            status: queryAtStart.statusForApi(),
+            search: search.isEmpty ? null : search,
+            limit: kPlatformCompaniesPageSize,
+            offset: current.items.length,
+          );
+      final queryNow = ref.read(platformCompanyListQueryProvider);
+      if (queryNow.search != queryAtStart.search ||
+          queryNow.filter != queryAtStart.filter) {
+        return;
+      }
+      final seen = {for (final item in current.items) item.id};
+      final merged = [
+        ...current.items,
+        for (final item in page.items)
+          if (!seen.contains(item.id)) item,
+      ];
+      state = AsyncData(
+        PlatformCompaniesListState(items: merged, total: page.total),
+      );
+    } catch (error) {
+      final queryNow = ref.read(platformCompanyListQueryProvider);
+      if (queryNow.search != queryAtStart.search ||
+          queryNow.filter != queryAtStart.filter) {
+        return;
+      }
+      state = AsyncData(
+        current.copyWith(loadingMore: false, loadMoreError: error),
+      );
+    }
   }
 }
 
@@ -113,13 +210,12 @@ List<PlatformCompany> filteredPlatformCompanies({
       .toList(growable: false);
 }
 
+/// Exposes list items from the paged notifier (filters already applied server-side).
 final filteredPlatformCompaniesProvider =
     Provider<AsyncValue<List<PlatformCompany>>>((ref) {
-      final query = ref.watch(platformCompanyListQueryProvider);
-      final companies = ref.watch(platformCompaniesProvider);
-      return companies.whenData(
-        (items) => filteredPlatformCompanies(items: items, query: query),
-      );
+      return ref
+          .watch(platformCompaniesProvider)
+          .whenData((state) => state.items);
     });
 
 final platformCompanyDetailProvider = FutureProvider.autoDispose
@@ -186,9 +282,7 @@ final platformCompanyRegistrationSnapshotProvider = FutureProvider.autoDispose
 
 final platformCompanyAmendmentsProvider = FutureProvider.autoDispose
     .family<List<CompanyDataAmendment>, String>((ref, id) {
-      return ref
-          .watch(platformCompaniesRepositoryProvider)
-          .fetchAmendments(id);
+      return ref.watch(platformCompaniesRepositoryProvider).fetchAmendments(id);
     });
 
 final platformCompanyAmendmentFieldsProvider = FutureProvider.autoDispose
@@ -236,10 +330,7 @@ Future<PlatformCompany> submitPlatformCompanyStatusChange(
   for (final filter in PlatformCompanyMemberRoleFilter.values) {
     ref.invalidate(
       platformCompanyMembersProvider(
-        PlatformCompanyMembersQuery(
-          companyId: companyId,
-          roleFilter: filter,
-        ),
+        PlatformCompanyMembersQuery(companyId: companyId, roleFilter: filter),
       ),
     );
   }

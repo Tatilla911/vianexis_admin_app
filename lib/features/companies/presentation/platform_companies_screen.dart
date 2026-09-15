@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -24,18 +26,45 @@ class PlatformCompaniesScreen extends ConsumerStatefulWidget {
 class _PlatformCompaniesScreenState
     extends ConsumerState<PlatformCompaniesScreen> {
   final _searchController = TextEditingController();
+  final _scrollController = ScrollController();
+  Timer? _searchDebounce;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
 
   @override
   void dispose() {
+    _searchDebounce?.cancel();
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
     _searchController.dispose();
     super.dispose();
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+    final position = _scrollController.position;
+    if (position.pixels >= position.maxScrollExtent - 240) {
+      ref.read(platformCompaniesProvider.notifier).loadMore();
+    }
+  }
+
+  void _onSearchChanged(String value) {
+    _searchDebounce?.cancel();
+    _searchDebounce = Timer(const Duration(milliseconds: 300), () {
+      if (!mounted) return;
+      ref.read(platformCompanyListQueryProvider.notifier).setSearch(value);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final query = ref.watch(platformCompanyListQueryProvider);
-    final companiesAsync = ref.watch(filteredPlatformCompaniesProvider);
+    final companiesAsync = ref.watch(platformCompaniesProvider);
     final usesMock = ref
         .watch(platformCompaniesRepositoryProvider)
         .usesMockData;
@@ -80,9 +109,7 @@ class _PlatformCompaniesScreenState
                     'platformCompanySearchHint',
                   ),
                 ),
-                onChanged: (value) => ref
-                    .read(platformCompanyListQueryProvider.notifier)
-                    .setSearch(value),
+                onChanged: _onSearchChanged,
               ),
             ),
             PlatformCompanyFilterBar(
@@ -107,7 +134,8 @@ class _PlatformCompaniesScreenState
                   onRetry: () =>
                       ref.read(platformCompaniesProvider.notifier).refresh(),
                 ),
-                data: (companies) {
+                data: (listState) {
+                  final companies = listState.items;
                   if (companies.isEmpty) {
                     return ListView(
                       physics: const AlwaysScrollableScrollPhysics(),
@@ -127,10 +155,14 @@ class _PlatformCompaniesScreenState
                     );
                   }
                   return ListView.builder(
+                    controller: _scrollController,
                     physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-                    itemCount: companies.length,
+                    itemCount: companies.length + 1,
                     itemBuilder: (context, index) {
+                      if (index >= companies.length) {
+                        return _CompaniesListFooter(listState: listState);
+                      }
                       final company = companies[index];
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 12),
@@ -150,5 +182,68 @@ class _PlatformCompaniesScreenState
         ),
       ),
     );
+  }
+}
+
+class _CompaniesListFooter extends ConsumerWidget {
+  const _CompaniesListFooter({required this.listState});
+
+  final PlatformCompaniesListState listState;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (listState.loadMoreError != null) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Column(
+          children: [
+            Text(
+              resolvePlatformCompanyKey(context, 'platformCompanyListError'),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () =>
+                  ref.read(platformCompaniesProvider.notifier).loadMore(),
+              child: Text(
+                resolvePlatformCompanyKey(
+                  context,
+                  'platformCompanyLoadMoreRetry',
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    if (listState.loadingMore) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Column(
+          children: [
+            const SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              resolvePlatformCompanyKey(context, 'platformCompanyLoadingMore'),
+            ),
+          ],
+        ),
+      );
+    }
+    if (!listState.hasMore) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Center(
+          child: Text(
+            resolvePlatformCompanyKey(context, 'platformCompanyEndOfList'),
+          ),
+        ),
+      );
+    }
+    return const SizedBox(height: 8);
   }
 }
