@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'app_environment.dart';
+import 'canonical_api_hosts.dart';
 
 /// Central compile-time configuration for the admin app.
 class AppConfig {
@@ -19,10 +20,28 @@ class AppConfig {
       AppEnvironmentConfig.allowMockFallbackDefine,
     );
 
+    final environment = AppEnvironment.fromDefine(envRaw);
     return AppConfig._(
-      environment: AppEnvironment.fromDefine(envRaw),
-      apiBaseUrl: apiRaw.trim(),
+      environment: environment,
+      apiBaseUrl: resolveApiBaseUrl(
+        environment: environment,
+        explicitApiBaseUrl: apiRaw,
+      ),
       allowMockFallbackOverride: _parseBool(mockRaw),
+    );
+  }
+
+  /// Test / tooling constructor — does not read dart-defines.
+  @visibleForTesting
+  factory AppConfig.forTest({
+    required AppEnvironment environment,
+    required String apiBaseUrl,
+    bool allowMockFallbackOverride = false,
+  }) {
+    return AppConfig._(
+      environment: environment,
+      apiBaseUrl: apiBaseUrl.trim(),
+      allowMockFallbackOverride: allowMockFallbackOverride,
     );
   }
 
@@ -72,6 +91,38 @@ class AppConfig {
       // Fall through.
     }
     return 'configured';
+  }
+
+  /// Canonical API base URL resolution.
+  ///
+  /// Priority:
+  /// 1. explicit `--dart-define=API_BASE_URL`
+  /// 2. production → [CanonicalApiHosts.production]
+  /// 3. staging → [CanonicalApiHosts.staging]
+  /// 4. local/dev → empty (preserves mock fallback unless a URL is defined)
+  static String resolveApiBaseUrl({
+    required AppEnvironment environment,
+    required String explicitApiBaseUrl,
+  }) {
+    final explicit = explicitApiBaseUrl.trim();
+    if (explicit.isNotEmpty) {
+      return normalizeApiBaseUrl(explicit);
+    }
+    if (environment.isProduction) {
+      return CanonicalApiHosts.production;
+    }
+    if (environment.isStaging) {
+      return CanonicalApiHosts.staging;
+    }
+    return '';
+  }
+
+  static String normalizeApiBaseUrl(String raw) {
+    var url = raw.trim();
+    while (url.endsWith('/')) {
+      url = url.substring(0, url.length - 1);
+    }
+    return url;
   }
 
   static bool _parseBool(String raw) {
