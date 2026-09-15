@@ -18,6 +18,7 @@ class DashboardOperationalOverview extends StatelessWidget {
     this.aiHighRiskReviews,
     this.supportOpenIssues,
     this.auditFailedDenied,
+    this.onPendingRegistrationsTap,
   });
 
   final SystemHealthOverview? systemOverview;
@@ -27,6 +28,7 @@ class DashboardOperationalOverview extends StatelessWidget {
   final int? aiHighRiskReviews;
   final int? supportOpenIssues;
   final int? auditFailedDenied;
+  final VoidCallback? onPendingRegistrationsTap;
 
   @override
   Widget build(BuildContext context) {
@@ -51,42 +53,49 @@ class DashboardOperationalOverview extends StatelessWidget {
             ? VianexisMetricTone.success
             : VianexisMetricTone.warning,
         Icons.monitor_heart_outlined,
+        null,
       ),
       (
         resolveDashboardKey(context, 'dashboardMetricPendingRegistrations'),
         _formatCount(pendingRegistrations),
         VianexisMetricTone.info,
         Icons.apartment_outlined,
+        onPendingRegistrationsTap,
       ),
       (
         resolveDashboardKey(context, 'dashboardMetricCompaniesAttention'),
         _formatCount(companiesNeedingAttention),
         VianexisMetricTone.warning,
         Icons.business_outlined,
+        null,
       ),
       (
         resolveDashboardKey(context, 'dashboardMetricBulkOnboardingReview'),
         _formatCount(bulkOnboardingWaiting),
         VianexisMetricTone.info,
         Icons.upload_file_outlined,
+        null,
       ),
       (
         resolveDashboardKey(context, 'dashboardMetricAiHighRisk'),
         _formatCount(aiHighRiskReviews),
         VianexisMetricTone.danger,
         Icons.auto_awesome_outlined,
+        null,
       ),
       (
         resolveDashboardKey(context, 'dashboardMetricSupportIssues'),
         _formatCount(supportOpenIssues),
         VianexisMetricTone.warning,
         Icons.support_agent_outlined,
+        null,
       ),
       (
         resolveDashboardKey(context, 'dashboardMetricAuditRisks'),
         _formatCount(auditFailedDenied),
         VianexisMetricTone.danger,
         Icons.receipt_long_outlined,
+        null,
       ),
     ];
 
@@ -113,16 +122,22 @@ class DashboardOperationalOverview extends StatelessWidget {
                 spacing: VianexisBrand.spaceMd,
                 runSpacing: VianexisBrand.spaceMd,
                 children: [
-                  for (final (label, value, tone, icon) in metrics)
+                  for (final (label, value, tone, icon, onTap) in metrics)
                     SizedBox(
                       width: isWide
                           ? (constraints.maxWidth - VianexisBrand.spaceMd) / 2
                           : double.infinity,
-                      child: VianexisMetricTile(
-                        label: label,
-                        value: value,
-                        tone: tone,
-                        icon: icon,
+                      child: _maybeTappable(
+                        onTap: onTap,
+                        child: VianexisMetricTile(
+                          key: onTap == null
+                              ? null
+                              : const Key('dashboard-pending-registrations'),
+                          label: label,
+                          value: value,
+                          tone: tone,
+                          icon: icon,
+                        ),
                       ),
                     ),
                 ],
@@ -135,4 +150,15 @@ class DashboardOperationalOverview extends StatelessWidget {
   }
 
   String _formatCount(int? value) => value?.toString() ?? '—';
+}
+
+Widget _maybeTappable({
+  required Widget child,
+  VoidCallback? onTap,
+}) {
+  if (onTap == null) return child;
+  return Material(
+    color: Colors.transparent,
+    child: InkWell(onTap: onTap, child: child),
+  );
 }

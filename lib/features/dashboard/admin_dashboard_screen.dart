@@ -146,6 +146,9 @@ class AdminDashboardScreen extends ConsumerWidget {
                 showAiReviews ? aiReviewsAsync.asData?.value.highRiskCount : null,
             supportOpenIssues: supportAsync.asData?.value.openTicketsCount,
             auditFailedDenied: auditAsync.asData?.value.failedDeniedCount,
+            onPendingRegistrationsTap: showRegistrations
+                ? () => context.push(AdminRoutes.registrations)
+                : null,
           ),
           if (showOperations) ...[
             const SizedBox(height: 12),
