@@ -5,6 +5,8 @@ import '../../app/app_router.dart';
 import '../../features/notifications/data/notifications_repository.dart';
 import '../../features/notifications/domain/admin_notification.dart';
 import '../../features/notifications/domain/admin_notification_routing.dart';
+import 'admin_fcm_payload.dart';
+import 'admin_fcm_tap_coordinator.dart';
 import 'admin_local_notification_service.dart';
 import 'admin_notification_watcher.dart';
 
@@ -25,8 +27,10 @@ class _AdminAlertHostState extends ConsumerState<AdminAlertHost>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     AdminLocalNotificationService.instance.onNotificationTap = _handleTap;
+    AdminFcmTapCoordinator.instance.onPayloadTap = _handleFcmTap;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _consumePendingTap();
+      _consumePendingFcmTap();
     });
   }
 
@@ -36,6 +40,9 @@ class _AdminAlertHostState extends ConsumerState<AdminAlertHost>
     if (AdminLocalNotificationService.instance.onNotificationTap ==
         _handleTap) {
       AdminLocalNotificationService.instance.onNotificationTap = null;
+    }
+    if (AdminFcmTapCoordinator.instance.onPayloadTap == _handleFcmTap) {
+      AdminFcmTapCoordinator.instance.onPayloadTap = null;
     }
     super.dispose();
   }
@@ -48,6 +55,7 @@ class _AdminAlertHostState extends ConsumerState<AdminAlertHost>
         unawaitedRefresh(watcher);
       }
       _consumePendingTap();
+      _consumePendingFcmTap();
     }
   }
 
@@ -55,6 +63,23 @@ class _AdminAlertHostState extends ConsumerState<AdminAlertHost>
     watcher.refreshNow().then((_) {
       return ref.read(notificationsProvider.notifier).refresh();
     });
+  }
+
+  void _handleFcmTap(AdminFcmPayload payload) {
+    if (!mounted) {
+      AdminFcmTapCoordinator.instance.stagePendingPayload(payload);
+      return;
+    }
+    final router = ref.read(appRouterProvider);
+    router.go(
+      resolveAdminNotificationDestination(payload.toAdminNotification()),
+    );
+  }
+
+  void _consumePendingFcmTap() {
+    final payload = AdminFcmTapCoordinator.instance.consumePendingPayload();
+    if (payload == null) return;
+    _handleFcmTap(payload);
   }
 
   void _handleTap(String notificationId) {

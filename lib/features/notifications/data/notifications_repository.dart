@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../app/app_config.dart';
+import '../../../core/device/admin_device_identity_service.dart';
+import '../../../services/alerts/admin_fcm_service.dart';
 import '../domain/admin_device_registration.dart';
 import '../domain/admin_notification.dart';
 import '../domain/notification_severity.dart';
@@ -32,9 +34,13 @@ abstract class NotificationsRepository {
 }
 
 class LiveNotificationsRepository implements NotificationsRepository {
-  LiveNotificationsRepository(this._api);
+  LiveNotificationsRepository(
+    this._api, {
+    AdminDeviceIdentityService? deviceIdentity,
+  }) : _deviceIdentity = deviceIdentity ?? AdminDeviceIdentityService();
 
   final NotificationsApi _api;
+  final AdminDeviceIdentityService _deviceIdentity;
 
   @override
   bool get usesMockData => false;
@@ -71,15 +77,17 @@ class LiveNotificationsRepository implements NotificationsRepository {
   @override
   Future<void> registerCurrentDevice() async {
     final info = await PackageInfo.fromPlatform();
-    await _api.registerDevice(
-      AdminDeviceRegistration(
-        deviceId: _deviceId,
-        platform: Platform.operatingSystem,
-        environment: AppConfig.instance.environmentName,
-        appVersion: info.version,
-        appBuild: info.buildNumber,
-      ),
+    AdminFcmService.configure(
+      deviceIdentity: _deviceIdentity,
+      notificationsApi: _api,
     );
+    await AdminFcmService.instance.syncOnSessionReady(
+      appVersion: info.version,
+      appBuild: info.buildNumber,
+      environment: AppConfig.instance.environmentName,
+    );
+    // Canonical backend registerDevice requires pushToken. Skip tokenless
+    // registration when Firebase is not configured for this install.
   }
 
   @override
@@ -204,7 +212,10 @@ final notificationsRepositoryProvider = Provider<NotificationsRepository>((
   ref,
 ) {
   if (AppConfig.instance.shouldUseLiveRepositories) {
-    return LiveNotificationsRepository(ref.watch(notificationsApiProvider));
+    return LiveNotificationsRepository(
+      ref.watch(notificationsApiProvider),
+      deviceIdentity: ref.watch(adminDeviceIdentityServiceProvider),
+    );
   }
   return MockNotificationsRepository();
 });
@@ -294,9 +305,6 @@ final notificationEventsProvider =
           .watch(notificationsRepositoryProvider)
           .fetchNotificationEvents();
     });
-
-String get _deviceId => _cachedDeviceId ??= _generateDeviceId();
-String? _cachedDeviceId;
 
 String _generateDeviceId() {
   final random = Random();

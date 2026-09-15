@@ -31,7 +31,7 @@ class AdminDeviceIdentityService {
   }
 
   String resolvePlatform() {
-    if (kIsWeb) return 'unknown';
+    if (kIsWeb) return 'web';
     if (Platform.isAndroid) return 'android';
     if (Platform.isIOS) return 'ios';
     if (Platform.isMacOS) return 'desktop';

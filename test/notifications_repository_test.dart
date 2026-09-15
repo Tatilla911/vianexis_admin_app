@@ -59,7 +59,26 @@ void main() {
     final json = registration.toJson();
     expect(json.containsKey('token'), isFalse);
     expect(json.containsKey('fcmToken'), isFalse);
+    expect(json.containsKey('pushToken'), isFalse);
     expect(json['inAppOnly'], isTrue);
+  });
+
+  test('device registration includes pushToken only when provided', () {
+    const registration = AdminDeviceRegistration(
+      deviceId: 'device-1',
+      platform: 'android',
+      environment: 'staging',
+      appVersion: '1.0.0',
+      appBuild: '100',
+      pushProvider: 'fcm',
+      pushToken: 'fcm-token-value',
+      inAppOnly: false,
+    );
+    final json = registration.toJson();
+    expect(json['pushProvider'], 'fcm');
+    expect(json['pushToken'], 'fcm-token-value');
+    expect(json.containsKey('token'), isFalse);
+    expect(json.containsKey('fcmToken'), isFalse);
   });
 
   group('LiveNotificationsRepository', () {

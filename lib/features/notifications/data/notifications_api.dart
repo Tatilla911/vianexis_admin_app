@@ -69,10 +69,21 @@ class NotificationsApi {
     );
   }
 
-  Future<void> registerDevice(AdminDeviceRegistration registration) async {
-    await _apiClient.post<Map<String, dynamic>>(
+  Future<int?> registerDevice(AdminDeviceRegistration registration) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
       '/platform-admin/devices/register',
       data: registration.toJson(),
+    );
+    final device = response.data?['device'];
+    if (device is Map && device['id'] != null) {
+      return int.tryParse(device['id'].toString());
+    }
+    return null;
+  }
+
+  Future<void> disableDevice(int backendDeviceId) async {
+    await _apiClient.patch<Map<String, dynamic>>(
+      '/platform-admin/devices/$backendDeviceId/disable',
     );
   }
 

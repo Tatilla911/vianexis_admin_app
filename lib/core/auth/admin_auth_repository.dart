@@ -3,6 +3,7 @@ import '../api/api_exception.dart';
 import '../api/auth_token_storage.dart';
 import '../device/admin_device_identity_service.dart';
 import '../localization/localization_keys.dart';
+import '../../services/alerts/admin_fcm_service.dart';
 import 'admin_auth_api.dart';
 import 'admin_auth_session.dart';
 import 'admin_user.dart';
@@ -139,6 +140,7 @@ class AdminAuthRepository {
         // Local sign-out must still succeed if remote logout fails.
       }
     }
+    await AdminFcmService.revokeOnLogoutIfConfigured();
     await _tokenStorage.clearSessionSecrets();
   }
 

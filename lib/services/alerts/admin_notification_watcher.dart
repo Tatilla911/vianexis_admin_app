@@ -7,6 +7,7 @@ import '../../core/auth/admin_auth_state.dart';
 import '../../features/notifications/data/notifications_repository.dart';
 import '../../features/notifications/domain/admin_notification.dart';
 import 'admin_local_notification_service.dart';
+import 'admin_push_dedupe.dart';
 
 /// Polls platform-admin notifications and raises audible + on-screen alerts.
 class AdminNotificationWatcher {
@@ -74,12 +75,17 @@ class AdminNotificationWatcher {
       final fresh = <AdminNotification>[];
       for (final item in items) {
         if (_knownIds.contains(item.id)) continue;
+        if (AdminPushDedupe.instance.wasSeen(item.id)) {
+          _knownIds.add(item.id);
+          continue;
+        }
         if (item.isRead) {
           _knownIds.add(item.id);
           continue;
         }
         fresh.add(item);
         _knownIds.add(item.id);
+        AdminPushDedupe.instance.markSeen(item.id);
       }
 
       // Newest first for audible priority.
@@ -135,6 +141,7 @@ final adminAlertBootstrapProvider = Provider<void>((ref) {
       unawaited(ref.read(notificationsProvider.notifier).refresh());
     } else if (previous?.isAuthenticated == true && !next.isAuthenticated) {
       unawaited(watcher.stop());
+      AdminPushDedupe.instance.clear();
     }
   });
 });

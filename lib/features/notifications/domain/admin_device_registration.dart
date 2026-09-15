@@ -5,6 +5,8 @@ class AdminDeviceRegistration {
     required this.environment,
     required this.appVersion,
     required this.appBuild,
+    this.pushProvider,
+    this.pushToken,
     this.inAppOnly = true,
   });
 
@@ -13,6 +15,8 @@ class AdminDeviceRegistration {
   final String environment;
   final String appVersion;
   final String appBuild;
+  final String? pushProvider;
+  final String? pushToken;
   final bool inAppOnly;
 
   Map<String, dynamic> toJson() {
@@ -22,6 +26,9 @@ class AdminDeviceRegistration {
       'environment': environment,
       'appVersion': appVersion,
       'appBuild': appBuild,
+      if (pushProvider != null && pushProvider!.isNotEmpty)
+        'pushProvider': pushProvider,
+      if (pushToken != null && pushToken!.isNotEmpty) 'pushToken': pushToken,
       'inAppOnly': inAppOnly,
     };
   }

@@ -1,6 +1,5 @@
 import '../../../app/app_router.dart';
 import 'admin_notification.dart';
-import 'notification_type.dart';
 
 /// Backend public-application locators (`/applications/:id`) open the canonical
 /// applications review screen. Router authz still applies after tap.
