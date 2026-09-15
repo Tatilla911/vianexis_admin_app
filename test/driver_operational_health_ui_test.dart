@@ -61,7 +61,12 @@ class _HealthDriversRepository implements DriverAccessRepository {
   bool get usesMockData => false;
 
   @override
-  Future<DriverAccessListResult> listDrivers() async {
+  Future<DriverAccessListResult> listDrivers({
+    String? status,
+    String? q,
+    int limit = 50,
+    int offset = 0,
+  }) async {
     return DriverAccessListResult(
       items: drivers,
       listEndpointReady: true,

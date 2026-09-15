@@ -20,7 +20,12 @@ class _DriversRepo implements DriverAccessRepository {
   bool get usesMockData => true;
 
   @override
-  Future<DriverAccessListResult> listDrivers() async {
+  Future<DriverAccessListResult> listDrivers({
+    String? status,
+    String? q,
+    int limit = 50,
+    int offset = 0,
+  }) async {
     return DriverAccessListResult(
       items: items,
       listEndpointReady: true,
@@ -66,10 +71,7 @@ class _DriversRepo implements DriverAccessRepository {
 }
 
 class _RegistrationRepo implements DriverRegistrationRequestsRepository {
-  _RegistrationRepo({
-    this.pending = const [],
-    this.rejected = const [],
-  });
+  _RegistrationRepo({this.pending = const [], this.rejected = const []});
 
   final List<DriverRegistrationRequestItem> pending;
   final List<DriverRegistrationRequestItem> rejected;
@@ -209,26 +211,25 @@ void main() {
     },
   );
 
-  testWidgets(
-    'rejected application does NOT appear as a DriverProfile row',
-    (tester) async {
-      await _pumpScreen(
-        tester,
-        drivers: _DriversRepo([activeDriver]),
-        registrations: _RegistrationRepo(rejected: [rejectedApp]),
-      );
+  testWidgets('rejected application does NOT appear as a DriverProfile row', (
+    tester,
+  ) async {
+    await _pumpScreen(
+      tester,
+      drivers: _DriversRepo([activeDriver]),
+      registrations: _RegistrationRepo(rejected: [rejectedApp]),
+    );
 
-      expect(
-        find.descendant(
-          of: find.byType(ExpansionTile),
-          matching: find.text('Rejected Applicant'),
-        ),
-        findsOneWidget,
-      );
-      expect(find.widgetWithText(ListTile, 'Active Driver'), findsOneWidget);
-      expect(find.byType(ExpansionTile), findsOneWidget);
-    },
-  );
+    expect(
+      find.descendant(
+        of: find.byType(ExpansionTile),
+        matching: find.text('Rejected Applicant'),
+      ),
+      findsOneWidget,
+    );
+    expect(find.widgetWithText(ListTile, 'Active Driver'), findsOneWidget);
+    expect(find.byType(ExpansionTile), findsOneWidget);
+  });
 
   testWidgets('active DriverProfile remains in Driver list', (tester) async {
     await _pumpScreen(
@@ -315,7 +316,10 @@ void main() {
       locale: const Locale('hu'),
     );
 
-    expect(find.textContaining('Elutasított sofőr jelentkezések'), findsOneWidget);
+    expect(
+      find.textContaining('Elutasított sofőr jelentkezések'),
+      findsOneWidget,
+    );
     expect(find.textContaining('Elutasítva'), findsWidgets);
   });
 }

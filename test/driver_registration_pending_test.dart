@@ -73,7 +73,12 @@ class _EmptyDriversRepository implements DriverAccessRepository {
   bool get usesMockData => false;
 
   @override
-  Future<DriverAccessListResult> listDrivers() async {
+  Future<DriverAccessListResult> listDrivers({
+    String? status,
+    String? q,
+    int limit = 50,
+    int offset = 0,
+  }) async {
     return DriverAccessListResult(
       items: const [],
       listEndpointReady: true,
@@ -252,7 +257,13 @@ void main() {
       await tester.tap(find.text('Reject'));
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byType(TextField), 'Not eligible for UAT');
+      await tester.enterText(
+        find.descendant(
+          of: find.byType(AlertDialog),
+          matching: find.byType(TextField),
+        ),
+        'Not eligible for UAT',
+      );
       await tester.tap(find.text('Reject registration'));
       await tester.pumpAndSettle();
 

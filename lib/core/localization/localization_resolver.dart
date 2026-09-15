@@ -1233,6 +1233,10 @@ String resolvePlatformCompanyKey(
       l10n.platformCompanyFilterPendingReview,
     'platformCompanyFilterSuspended' => l10n.platformCompanyFilterSuspended,
     'platformCompanyFilterDisabled' => l10n.platformCompanyFilterDisabled,
+    'platformCompanyFilterArchived' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Archivált'
+          : 'Archived',
     'platformCompanyStatusActive' => l10n.platformCompanyStatusActive,
     'platformCompanyStatusPendingReview' =>
       l10n.platformCompanyStatusPendingReview,
@@ -1566,6 +1570,18 @@ String resolvePlatformCompanyKey(
       Localizations.localeOf(context).languageCode == 'hu'
           ? 'Ez a művelet jelenleg nem elérhető a csatlakoztatott szerveren. Telepíteni kell a backend frissítést, vagy használd a Regisztrációk meghívó újraküldését.'
           : 'This action is not available on the connected server. Deploy the backend update, or use Registrations invite resend.',
+    'platformCompanyLoadingMore' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'További betöltése…'
+          : 'Loading more…',
+    'platformCompanyEndOfList' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Nincs több találat.'
+          : 'End of list.',
+    'platformCompanyLoadMoreRetry' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Újrapróbálás'
+          : 'Retry',
     _ => l10n.errorGenericBody,
   };
 }
@@ -2531,6 +2547,42 @@ String resolveDriverAccessKey(BuildContext context, String key) {
     'driverAccessRejectedAt' => l10n.driverAccessRejectedAt,
     'driverAccessRejectedReason' => l10n.driverAccessRejectedReason,
     'driverAccessNoActiveDrivers' => l10n.driverAccessNoActiveDrivers,
+    'driverAccessSearchHint' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Keresés név, cég vagy azonosító alapján…'
+          : 'Search by name, company, or ID…',
+    'driverAccessFilterOperational' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Aktuális'
+          : 'Current',
+    'driverAccessFilterAll' =>
+      Localizations.localeOf(context).languageCode == 'hu' ? 'Összes' : 'All',
+    'driverAccessFilterActive' =>
+      Localizations.localeOf(context).languageCode == 'hu' ? 'Aktív' : 'Active',
+    'driverAccessFilterPending' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Függőben'
+          : 'Pending',
+    'driverAccessFilterDisabled' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Letiltott'
+          : 'Disabled',
+    'driverAccessFilterInvited' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Meghívott'
+          : 'Invited',
+    'driverAccessLoadingMore' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'További betöltése…'
+          : 'Loading more…',
+    'driverAccessEndOfList' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Nincs több találat.'
+          : 'End of list.',
+    'driverAccessLoadMoreRetry' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Újrapróbálás'
+          : 'Retry',
     'driverAccessOpsSection' =>
       Localizations.localeOf(context).languageCode == 'hu'
           ? 'Sofőr műveletek'

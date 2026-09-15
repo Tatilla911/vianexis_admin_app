@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -94,15 +96,67 @@ Color _driverHealthColor(DriverOperationalHealthLevel level) {
   };
 }
 
-class DriverAccessScreen extends ConsumerWidget {
+String _driverFilterLabel(
+  BuildContext context,
+  DriverAccessListFilter filter,
+  DriverAccessStatusCounts? counts,
+) {
+  final label = resolveDriverAccessKey(context, filter.localizationKey);
+  if (counts == null) return label;
+  return '$label · ${counts.forFilter(filter)}';
+}
+
+class DriverAccessScreen extends ConsumerStatefulWidget {
   const DriverAccessScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DriverAccessScreen> createState() => _DriverAccessScreenState();
+}
+
+class _DriverAccessScreenState extends ConsumerState<DriverAccessScreen> {
+  final _searchController = TextEditingController();
+  final _scrollController = ScrollController();
+  Timer? _debounce;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+    final position = _scrollController.position;
+    if (position.pixels >= position.maxScrollExtent - 240) {
+      ref.read(driverAccessListProvider.notifier).loadMore();
+    }
+  }
+
+  void _onSearchChanged(String value) {
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 300), () {
+      if (!mounted) return;
+      ref.read(driverAccessListQueryProvider.notifier).setSearch(value);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final listAsync = ref.watch(driverAccessListProvider);
+    final query = ref.watch(driverAccessListQueryProvider);
     final pendingAsync = ref.watch(driverRegistrationRequestsProvider);
     final rejectedAsync = ref.watch(rejectedDriverRegistrationRequestsProvider);
     final usesMock = ref.watch(driverAccessRepositoryProvider).usesMockData;
+    final statusCounts = listAsync.asData?.value.statusCounts;
 
     return Scaffold(
       appBar: AppBar(
@@ -114,103 +168,243 @@ class DriverAccessScreen extends ConsumerWidget {
             ),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          _PendingDriverRegistrationsSection(pendingAsync: pendingAsync),
-          _RejectedDriverRegistrationsSection(rejectedAsync: rejectedAsync),
-          VianexisMetadataNotice(
-            message: resolveDriverAccessKey(
-              context,
-              'driverAccessPrivacyNotice',
-            ),
-          ),
-          const SizedBox(height: 12),
-          listAsync.when(
-            loading: () => const Padding(
-              padding: EdgeInsets.symmetric(vertical: 24),
-              child: Center(child: CircularProgressIndicator()),
-            ),
-            error: (error, _) => VianexisErrorView.fromError(
-              context,
-              error,
-              fallbackMessage: resolveDriverAccessKey(
-                context,
-                'driverAccessLoadFailed',
-              ),
-              onRetry: () => ref.invalidate(driverAccessListProvider),
-            ),
-            data: (result) {
-              if (!result.listEndpointReady) {
-                return BackendDependencyCard(
-                  title: resolveDriverAccessKey(
-                    context,
-                    'driverAccessBackendTitle',
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future.wait([
+            ref.read(driverAccessListProvider.notifier).refresh(),
+            ref.refresh(driverRegistrationRequestsProvider.future),
+            ref.refresh(rejectedDriverRegistrationRequestsProvider.future),
+          ]);
+        },
+        child: CustomScrollView(
+          controller: _scrollController,
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate([
+                  _PendingDriverRegistrationsSection(
+                    pendingAsync: pendingAsync,
                   ),
-                  message: resolveDriverAccessKey(
-                    context,
-                    'driverAccessBackendMessage',
+                  _RejectedDriverRegistrationsSection(
+                    rejectedAsync: rejectedAsync,
                   ),
-                  endpointHint: 'GET /platform-admin/drivers',
-                );
-              }
-              if (result.items.isEmpty) {
-                return Text(
-                  resolveDriverAccessKey(
-                    context,
-                    'driverAccessNoActiveDrivers',
+                  VianexisMetadataNotice(
+                    message: resolveDriverAccessKey(
+                      context,
+                      'driverAccessPrivacyNotice',
+                    ),
                   ),
-                );
-              }
-              return Column(
-                children: [
-                  for (final driver in result.items)
-                    Card(
-                      child: ListTile(
-                        title: Text(driver.displayName),
-                        subtitle: Text(
-                          '${driver.companyName} · '
-                          '${resolveDriverAccessKey(context, driver.registrationStatus.localizationKey)}',
-                        ),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (driver.operationalHealth != null)
-                              Tooltip(
-                                message: _driverHealthListLabel(
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      hintText: resolveDriverAccessKey(
+                        context,
+                        'driverAccessSearchHint',
+                      ),
+                    ),
+                    onChanged: _onSearchChanged,
+                  ),
+                  const SizedBox(height: 8),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        for (final filter in DriverAccessListFilter.values)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: FilterChip(
+                              selected: query.filter == filter,
+                              label: Text(
+                                _driverFilterLabel(
                                   context,
-                                  driver.operationalHealth!,
-                                ),
-                                child: Semantics(
-                                  label: _driverHealthListLabel(
-                                    context,
-                                    driver.operationalHealth!,
-                                  ),
-                                  child: Icon(
-                                    _driverHealthIcon(
-                                      driver.operationalHealth!.level,
-                                    ),
-                                    color: _driverHealthColor(
-                                      driver.operationalHealth!.level,
-                                    ),
-                                  ),
+                                  filter,
+                                  statusCounts,
                                 ),
                               ),
-                            const Icon(Icons.chevron_right),
-                          ],
-                        ),
-                        onTap: () => context.push(
-                          AdminRoutes.driverAccessDetail(driver.id),
+                              onSelected: (_) => ref
+                                  .read(driverAccessListQueryProvider.notifier)
+                                  .setFilter(filter),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                ]),
+              ),
+            ),
+            ...listAsync.when(
+              loading: () => [
+                const SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+              ],
+              error: (error, _) => [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: VianexisErrorView.fromError(
+                      context,
+                      error,
+                      fallbackMessage: resolveDriverAccessKey(
+                        context,
+                        'driverAccessLoadFailed',
+                      ),
+                      onRetry: () =>
+                          ref.read(driverAccessListProvider.notifier).refresh(),
+                    ),
+                  ),
+                ),
+              ],
+              data: (result) {
+                if (!result.listEndpointReady) {
+                  return [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: BackendDependencyCard(
+                          title: resolveDriverAccessKey(
+                            context,
+                            'driverAccessBackendTitle',
+                          ),
+                          message: resolveDriverAccessKey(
+                            context,
+                            'driverAccessBackendMessage',
+                          ),
+                          endpointHint: 'GET /platform-admin/drivers',
                         ),
                       ),
                     ),
-                ],
-              );
-            },
-          ),
-        ],
+                  ];
+                }
+                if (result.items.isEmpty) {
+                  return [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          resolveDriverAccessKey(
+                            context,
+                            'driverAccessNoActiveDrivers',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ];
+                }
+                return [
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final driver = result.items[index];
+                        return Card(
+                          child: ListTile(
+                            title: Text(driver.displayName),
+                            subtitle: Text(
+                              '${driver.companyName} · '
+                              '${resolveDriverAccessKey(context, driver.registrationStatus.localizationKey)}',
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (driver.operationalHealth != null)
+                                  Tooltip(
+                                    message: _driverHealthListLabel(
+                                      context,
+                                      driver.operationalHealth!,
+                                    ),
+                                    child: Semantics(
+                                      label: _driverHealthListLabel(
+                                        context,
+                                        driver.operationalHealth!,
+                                      ),
+                                      child: Icon(
+                                        _driverHealthIcon(
+                                          driver.operationalHealth!.level,
+                                        ),
+                                        color: _driverHealthColor(
+                                          driver.operationalHealth!.level,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                const Icon(Icons.chevron_right),
+                              ],
+                            ),
+                            onTap: () => context.push(
+                              AdminRoutes.driverAccessDetail(driver.id),
+                            ),
+                          ),
+                        );
+                      }, childCount: result.items.length),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                      child: _DriverAccessListFooter(listState: result),
+                    ),
+                  ),
+                ];
+              },
+            ),
+          ],
+        ),
       ),
     );
+  }
+}
+
+class _DriverAccessListFooter extends ConsumerWidget {
+  const _DriverAccessListFooter({required this.listState});
+
+  final DriverAccessListState listState;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (listState.loadMoreError != null) {
+      return Column(
+        children: [
+          Text(
+            resolveDriverAccessKey(context, 'driverAccessLoadFailed'),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          TextButton(
+            onPressed: () =>
+                ref.read(driverAccessListProvider.notifier).loadMore(),
+            child: Text(
+              resolveDriverAccessKey(context, 'driverAccessLoadMoreRetry'),
+            ),
+          ),
+        ],
+      );
+    }
+    if (listState.loadingMore) {
+      return Column(
+        children: [
+          const SizedBox(
+            width: 24,
+            height: 24,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+          const SizedBox(height: 8),
+          Text(resolveDriverAccessKey(context, 'driverAccessLoadingMore')),
+        ],
+      );
+    }
+    if (!listState.hasMore) {
+      return Center(
+        child: Text(resolveDriverAccessKey(context, 'driverAccessEndOfList')),
+      );
+    }
+    return const SizedBox(height: 8);
   }
 }
 

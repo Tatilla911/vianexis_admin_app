@@ -64,7 +64,12 @@ class _OpsDriversRepository implements DriverAccessRepository {
   bool get usesMockData => true;
 
   @override
-  Future<DriverAccessListResult> listDrivers() async {
+  Future<DriverAccessListResult> listDrivers({
+    String? status,
+    String? q,
+    int limit = 50,
+    int offset = 0,
+  }) async {
     return DriverAccessListResult(
       items: [driver],
       listEndpointReady: true,

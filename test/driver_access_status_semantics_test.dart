@@ -23,7 +23,9 @@ void main() {
       isNot(DriverRegistrationStatus.disabled),
     );
     expect(
-      DriverRegistrationStatus.values.contains(DriverRegistrationStatus.disabled),
+      DriverRegistrationStatus.values.contains(
+        DriverRegistrationStatus.disabled,
+      ),
       isTrue,
     );
   });
@@ -57,6 +59,30 @@ void main() {
         'status': 'rejected',
       }).registrationStatus,
       isNot(equals(DriverRegistrationStatus.disabled)),
+    );
+  });
+
+  test('fromJson prefers browsingStatus over userStatus', () {
+    final profile = DriverAccessProfile.fromJson({
+      'id': '3',
+      'displayName': 'C',
+      'companyName': 'C',
+      'companyId': '9',
+      'status': 'active',
+      'userStatus': 'invited',
+      'browsingStatus': 'disabled',
+    });
+    expect(profile.registrationStatus, DriverRegistrationStatus.disabled);
+  });
+
+  test('fromBackend maps operational and invite_pending browsing statuses', () {
+    expect(
+      DriverRegistrationStatus.fromBackend('operational'),
+      DriverRegistrationStatus.active,
+    );
+    expect(
+      DriverRegistrationStatus.fromBackend('invite_pending'),
+      DriverRegistrationStatus.invited,
     );
   });
 }
