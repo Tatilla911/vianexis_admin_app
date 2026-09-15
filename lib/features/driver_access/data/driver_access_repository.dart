@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
 import '../../../core/api/api_client.dart';
+import '../../../core/api/api_exception.dart';
 import '../domain/driver_access_profile.dart';
 import '../domain/driver_device_notification_status.dart';
+import '../domain/driver_operational_health_detail.dart';
 
 abstract class DriverAccessRepository {
   Future<DriverAccessListResult> listDrivers();
@@ -18,6 +20,10 @@ abstract class DriverAccessRepository {
   Future<DriverDeviceNotificationStatus?> fetchDeviceNotificationStatus(
     String driverProfileId,
   );
+
+  Future<DriverOperationalHealthDetail?> fetchOperationalHealth(
+    String driverProfileId,
+  ) async => null;
 
   bool get usesMockData;
 }
@@ -104,6 +110,33 @@ class LiveDriverAccessRepository implements DriverAccessRepository {
     if (data == null) return null;
     return DriverDeviceNotificationStatus.fromJson(data);
   }
+
+  @override
+  Future<DriverOperationalHealthDetail?> fetchOperationalHealth(
+    String driverProfileId,
+  ) async {
+    final apiClient = _apiClient;
+    if (apiClient == null) return null;
+    try {
+      final response = await apiClient.get<Map<String, dynamic>>(
+        '/platform-admin/drivers/$driverProfileId/operational-health',
+      );
+      final data = response.data;
+      if (data == null) return null;
+      return DriverOperationalHealthDetail.fromJson(data);
+    } on ApiException catch (error) {
+      if (error.kind == ApiExceptionKind.notFound ||
+          error.statusCode == 404 ||
+          error.statusCode == 501) {
+        return null;
+      }
+      rethrow;
+    } on DioException catch (error) {
+      final status = error.response?.statusCode;
+      if (status == 404 || status == 501) return null;
+      rethrow;
+    }
+  }
 }
 
 class MockDriverAccessRepository implements DriverAccessRepository {
@@ -125,6 +158,11 @@ class MockDriverAccessRepository implements DriverAccessRepository {
           lastActivityAt: DateTime.now().subtract(const Duration(hours: 2)),
           deviceLabel: 'Samsung Galaxy A54',
           activeSessionCount: 1,
+          operationalHealth: const DriverOperationalHealthSummary(
+            level: DriverOperationalHealthLevel.yellow,
+            activeIssueCount: 1,
+            labelKey: 'driverHealthWarning',
+          ),
         ),
         DriverAccessProfile(
           id: 'd-102',
@@ -162,6 +200,34 @@ class MockDriverAccessRepository implements DriverAccessRepository {
       notificationPermissionStatus: 'granted',
     );
   }
+
+  @override
+  Future<DriverOperationalHealthDetail?> fetchOperationalHealth(
+    String driverProfileId,
+  ) async {
+    if (driverProfileId == 'd-101') {
+      return DriverOperationalHealthDetail(
+        overallLevel: DriverOperationalHealthLevel.yellow,
+        activeIssueCount: 1,
+        issues: [
+          DriverOperationalHealthIssueView(
+            id: '1',
+            category: 'profile_sync',
+            code: 'sync.profile.failed',
+            severity: 'yellow',
+            status: 'active',
+            attemptCount: 1,
+            lastAttemptedAt: DateTime.now().subtract(
+              const Duration(minutes: 12),
+            ),
+            safeErrorCode: 'network',
+            source: 'driver_app_sync',
+          ),
+        ],
+      );
+    }
+    return null;
+  }
 }
 
 final driverAccessRepositoryProvider = Provider<DriverAccessRepository>((ref) {
@@ -181,4 +247,11 @@ final driverDeviceNotificationStatusProvider = FutureProvider.autoDispose
       return ref
           .watch(driverAccessRepositoryProvider)
           .fetchDeviceNotificationStatus(driverId);
+    });
+
+final driverOperationalHealthProvider = FutureProvider.autoDispose
+    .family<DriverOperationalHealthDetail?, String>((ref, driverId) {
+      return ref
+          .watch(driverAccessRepositoryProvider)
+          .fetchOperationalHealth(driverId);
     });

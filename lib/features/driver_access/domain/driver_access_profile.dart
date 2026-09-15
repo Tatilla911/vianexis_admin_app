@@ -1,3 +1,50 @@
+enum DriverOperationalHealthLevel {
+  green,
+  yellow,
+  red;
+
+  static DriverOperationalHealthLevel fromBackend(String? raw) {
+    return switch (raw?.toLowerCase()) {
+      'yellow' => DriverOperationalHealthLevel.yellow,
+      'red' => DriverOperationalHealthLevel.red,
+      'green' => DriverOperationalHealthLevel.green,
+      _ => DriverOperationalHealthLevel.green,
+    };
+  }
+
+  String get localizationKey => switch (this) {
+    DriverOperationalHealthLevel.green => 'driverHealthOk',
+    DriverOperationalHealthLevel.yellow => 'driverHealthWarning',
+    DriverOperationalHealthLevel.red => 'driverHealthActionRequired',
+  };
+}
+
+class DriverOperationalHealthSummary {
+  const DriverOperationalHealthSummary({
+    required this.level,
+    required this.activeIssueCount,
+    this.labelKey,
+  });
+
+  final DriverOperationalHealthLevel level;
+  final int activeIssueCount;
+  final String? labelKey;
+
+  /// Returns null when the list payload omitted operational health so the UI
+  /// does not invent a healthy status.
+  static DriverOperationalHealthSummary? fromJson(Map<String, dynamic>? json) {
+    if (json == null) return null;
+    final rawLevel = json['level']?.toString().trim();
+    if (rawLevel == null || rawLevel.isEmpty) return null;
+    return DriverOperationalHealthSummary(
+      level: DriverOperationalHealthLevel.fromBackend(rawLevel),
+      activeIssueCount:
+          int.tryParse(json['activeIssueCount']?.toString() ?? '') ?? 0,
+      labelKey: json['labelKey']?.toString(),
+    );
+  }
+}
+
 enum DriverRegistrationStatus {
   pending,
   active,
@@ -35,6 +82,7 @@ class DriverAccessProfile {
     this.deviceLabel,
     this.activeSessionCount = 0,
     this.metadataOnly = true,
+    this.operationalHealth,
   });
 
   final String id;
@@ -46,8 +94,10 @@ class DriverAccessProfile {
   final String? deviceLabel;
   final int activeSessionCount;
   final bool metadataOnly;
+  final DriverOperationalHealthSummary? operationalHealth;
 
   factory DriverAccessProfile.fromJson(Map<String, dynamic> json) {
+    final healthRaw = json['operationalHealth'];
     return DriverAccessProfile(
       id: json['id']?.toString() ?? '',
       displayName:
@@ -70,6 +120,11 @@ class DriverAccessProfile {
           int.tryParse(json['activeSessionCount']?.toString() ?? '') ??
           (json['deviceRegistered'] == true ? 1 : 0),
       metadataOnly: json['metadataOnly'] != false,
+      operationalHealth: DriverOperationalHealthSummary.fromJson(
+        healthRaw is Map<String, dynamic>
+            ? healthRaw
+            : (healthRaw is Map ? Map<String, dynamic>.from(healthRaw) : null),
+      ),
     );
   }
 }

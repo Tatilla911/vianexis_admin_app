@@ -2510,6 +2510,58 @@ String resolveDriverAccessKey(BuildContext context, String key) {
       Localizations.localeOf(context).languageCode == 'hu'
           ? 'Ez a sofőr meghívó / jelszó / archiválás művelet jelenleg nem elérhető a csatlakoztatott szerveren. Telepíteni kell a backend frissítést.'
           : 'This driver invite / password / archive action is not available on the connected server. Deploy the backend update.',
+    'driverHealthOk' =>
+      Localizations.localeOf(context).languageCode == 'hu' ? 'Rendben' : 'OK',
+    'driverHealthWarning' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? '1 figyelmeztetés'
+          : '1 warning',
+    'driverHealthActionRequired' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Beavatkozás szükséges'
+          : 'Action required',
+    'driverHealthSectionTitle' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Operatív rendszerállapot'
+          : 'Operational system health',
+    'driverHealthOverall' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Összesen'
+          : 'Overall',
+    'driverHealthNoIssues' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Nincs aktív operatív probléma.'
+          : 'No active operational issues.',
+    'driverHealthRetryOnDevice' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Újrapróbálás a sofőr készülékén szükséges.'
+          : 'Retry is required on the driver device.',
+    'driverHealthCategoryProfileSync' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Profil szinkron'
+          : 'Profile sync',
+    'driverHealthStatusFailed' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Sikertelen'
+          : 'Failed',
+    'driverHealthAttemptCount' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Újrapróbálások'
+          : 'Retry count',
+    'driverHealthLastAttempt' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Utolsó kísérlet'
+          : 'Last attempt',
+    'driverHealthSafeReason' =>
+      Localizations.localeOf(context).languageCode == 'hu' ? 'Ok' : 'Reason',
+    'driverHealthWarningsCount' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? '{count} figyelmeztetés'
+          : '{count} warning(s)',
+    'driverHealthUnavailable' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Az operatív rendszerállapot jelenleg nem elérhető.'
+          : 'Operational system health is currently unavailable.',
     _ => l10n.errorGenericBody,
   };
 }

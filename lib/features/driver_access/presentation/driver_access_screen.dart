@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/app_router.dart';
+import '../../../app/vianexis_brand.dart';
 import '../../../core/api/api_exception.dart';
 import '../../../core/api/api_exception_feedback.dart';
 import '../../../core/localization/localization_resolver.dart';
@@ -16,8 +17,54 @@ import '../../qr_codes/presentation/widgets/qr_codes_management_dialog.dart';
 import '../data/driver_registration_requests_repository.dart';
 import '../data/driver_access_repository.dart';
 import '../domain/driver_access_profile.dart';
+import '../domain/driver_operational_health_detail.dart';
 import '../domain/driver_registration_email_status.dart';
 import '../domain/driver_registration_request.dart';
+
+String _driverHealthListLabel(
+  BuildContext context,
+  DriverOperationalHealthSummary health,
+) {
+  if (health.level == DriverOperationalHealthLevel.green) {
+    return resolveDriverAccessKey(context, 'driverHealthOk');
+  }
+  if (health.level == DriverOperationalHealthLevel.red) {
+    return resolveDriverAccessKey(context, 'driverHealthActionRequired');
+  }
+  if (health.activeIssueCount <= 1) {
+    return resolveDriverAccessKey(context, 'driverHealthWarning');
+  }
+  return resolveDriverAccessKey(
+    context,
+    'driverHealthWarningsCount',
+  ).replaceAll('{count}', '${health.activeIssueCount}');
+}
+
+String _driverHealthCategoryLabel(BuildContext context, String category) {
+  return switch (category) {
+    'profile_sync' => resolveDriverAccessKey(
+      context,
+      'driverHealthCategoryProfileSync',
+    ),
+    _ => category,
+  };
+}
+
+IconData _driverHealthIcon(DriverOperationalHealthLevel level) {
+  return switch (level) {
+    DriverOperationalHealthLevel.green => Icons.check_circle_outline,
+    DriverOperationalHealthLevel.yellow => Icons.warning_amber_outlined,
+    DriverOperationalHealthLevel.red => Icons.error_outline,
+  };
+}
+
+Color _driverHealthColor(DriverOperationalHealthLevel level) {
+  return switch (level) {
+    DriverOperationalHealthLevel.green => VianexisBrand.success,
+    DriverOperationalHealthLevel.yellow => VianexisBrand.warning,
+    DriverOperationalHealthLevel.red => VianexisBrand.danger,
+  };
+}
 
 class DriverAccessScreen extends ConsumerWidget {
   const DriverAccessScreen({super.key});
@@ -97,7 +144,33 @@ class DriverAccessScreen extends ConsumerWidget {
                           '${driver.companyName} · '
                           '${resolveDriverAccessKey(context, driver.registrationStatus.localizationKey)}',
                         ),
-                        trailing: const Icon(Icons.chevron_right),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (driver.operationalHealth != null)
+                              Tooltip(
+                                message: _driverHealthListLabel(
+                                  context,
+                                  driver.operationalHealth!,
+                                ),
+                                child: Semantics(
+                                  label: _driverHealthListLabel(
+                                    context,
+                                    driver.operationalHealth!,
+                                  ),
+                                  child: Icon(
+                                    _driverHealthIcon(
+                                      driver.operationalHealth!.level,
+                                    ),
+                                    color: _driverHealthColor(
+                                      driver.operationalHealth!.level,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            const Icon(Icons.chevron_right),
+                          ],
+                        ),
                         onTap: () => context.push(
                           AdminRoutes.driverAccessDetail(driver.id),
                         ),
@@ -352,7 +425,10 @@ class _PendingDriverRegistrationsSection extends ConsumerWidget {
         SnackBar(
           content: Text(
             [
-              resolveDriverAccessKey(context, 'driverAccessPendingRejectSuccess'),
+              resolveDriverAccessKey(
+                context,
+                'driverAccessPendingRejectSuccess',
+              ),
               if (emailStatus.isNotEmpty) emailStatus,
             ].join(' · '),
           ),
@@ -436,7 +512,9 @@ class _RejectedDriverRegistrationsSection extends ConsumerWidget {
                         ),
                       ),
                       if (request.notificationEmailStatus != null &&
-                          request.notificationEmailStatus!.trim().isNotEmpty) ...[
+                          request.notificationEmailStatus!
+                              .trim()
+                              .isNotEmpty) ...[
                         const SizedBox(height: 8),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -511,6 +589,9 @@ class _DriverAccessDetailScreenState
     final deviceStatusAsync = ref.watch(
       driverDeviceNotificationStatusProvider(widget.driverId),
     );
+    final healthAsync = ref.watch(
+      driverOperationalHealthProvider(widget.driverId),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -578,6 +659,11 @@ class _DriverAccessDetailScreenState
                 driver.lastActivityAt != null
                     ? driver.lastActivityAt!.toLocal().toString()
                     : '—',
+              ),
+              const SizedBox(height: 12),
+              _DriverOperationalHealthSection(
+                listHealth: driver.operationalHealth,
+                healthAsync: healthAsync,
               ),
               const SizedBox(height: 12),
               deviceStatusAsync.when(
@@ -655,7 +741,9 @@ class _DriverAccessDetailScreenState
                   ],
                 ),
                 icon: const Icon(Icons.qr_code_2),
-                label: Text(resolveQrCodesKey(context, 'qrCodesGenerateAction')),
+                label: Text(
+                  resolveQrCodesKey(context, 'qrCodesGenerateAction'),
+                ),
               ),
               const SizedBox(height: 12),
               if (canChangeStatus) ...[
@@ -707,6 +795,158 @@ class _DriverAccessDetailScreenState
       contentPadding: EdgeInsets.zero,
       title: Text(resolveDriverAccessKey(context, labelKey)),
       subtitle: Text(value),
+    );
+  }
+}
+
+class _DriverOperationalHealthSection extends StatelessWidget {
+  const _DriverOperationalHealthSection({
+    required this.listHealth,
+    required this.healthAsync,
+  });
+
+  final DriverOperationalHealthSummary? listHealth;
+  final AsyncValue<DriverOperationalHealthDetail?> healthAsync;
+
+  @override
+  Widget build(BuildContext context) {
+    return healthAsync.when(
+      loading: () => _healthCard(
+        context,
+        level: listHealth?.level,
+        label: listHealth == null
+            ? null
+            : _driverHealthListLabel(context, listHealth!),
+        showProgress: true,
+      ),
+      error: (_, _) => BackendDependencyCard(
+        title: resolveDriverAccessKey(context, 'driverHealthSectionTitle'),
+        message: resolveDriverAccessKey(context, 'driverHealthUnavailable'),
+        endpointHint: 'GET /platform-admin/drivers/:id/operational-health',
+      ),
+      data: (detail) {
+        if (detail == null) {
+          if (listHealth == null) {
+            return BackendDependencyCard(
+              title: resolveDriverAccessKey(
+                context,
+                'driverHealthSectionTitle',
+              ),
+              message: resolveDriverAccessKey(
+                context,
+                'driverHealthUnavailable',
+              ),
+              endpointHint:
+                  'GET /platform-admin/drivers/:id/operational-health',
+            );
+          }
+          return _healthCard(
+            context,
+            level: listHealth!.level,
+            label: _driverHealthListLabel(context, listHealth!),
+            issues: const [],
+            showNoIssues: false,
+          );
+        }
+
+        final summary = DriverOperationalHealthSummary(
+          level: detail.overallLevel,
+          activeIssueCount: detail.activeIssueCount,
+        );
+        return _healthCard(
+          context,
+          level: detail.overallLevel,
+          label: _driverHealthListLabel(context, summary),
+          issues: detail.issues,
+          retryHintKey: detail.remoteRetryHintKey,
+          showNoIssues:
+              detail.issues.isEmpty &&
+              detail.overallLevel == DriverOperationalHealthLevel.green,
+        );
+      },
+    );
+  }
+
+  Widget _healthCard(
+    BuildContext context, {
+    required DriverOperationalHealthLevel? level,
+    required String? label,
+    List<DriverOperationalHealthIssueView> issues = const [],
+    String? retryHintKey,
+    bool showProgress = false,
+    bool showNoIssues = false,
+  }) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                if (level != null) ...[
+                  Icon(
+                    _driverHealthIcon(level),
+                    color: _driverHealthColor(level),
+                  ),
+                  const SizedBox(width: 8),
+                ],
+                Expanded(
+                  child: Text(
+                    resolveDriverAccessKey(context, 'driverHealthSectionTitle'),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+              ],
+            ),
+            if (label != null) ...[
+              const SizedBox(height: 8),
+              Text(
+                '${resolveDriverAccessKey(context, 'driverHealthOverall')}: $label',
+              ),
+            ],
+            if (showProgress) ...[
+              const SizedBox(height: 8),
+              const LinearProgressIndicator(minHeight: 2),
+            ],
+            if (showNoIssues) ...[
+              const SizedBox(height: 8),
+              Text(resolveDriverAccessKey(context, 'driverHealthNoIssues')),
+            ],
+            for (final issue in issues) ...[
+              const Divider(height: 20),
+              Text(
+                _driverHealthCategoryLabel(context, issue.category),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              Text(resolveDriverAccessKey(context, 'driverHealthStatusFailed')),
+              Text(
+                '${resolveDriverAccessKey(context, 'driverHealthLastAttempt')}: '
+                '${issue.lastAttemptedAt?.toLocal().toString() ?? '—'}',
+              ),
+              Text(
+                '${resolveDriverAccessKey(context, 'driverHealthAttemptCount')}: '
+                '${issue.attemptCount}',
+              ),
+              Text(
+                '${resolveDriverAccessKey(context, 'driverHealthSafeReason')}: '
+                '${issue.safeErrorCode ?? issue.code}',
+              ),
+            ],
+            if (level != null &&
+                level != DriverOperationalHealthLevel.green) ...[
+              const SizedBox(height: 8),
+              Text(
+                resolveDriverAccessKey(
+                  context,
+                  retryHintKey ?? 'driverHealthRetryOnDevice',
+                ),
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ],
+        ),
+      ),
     );
   }
 }
