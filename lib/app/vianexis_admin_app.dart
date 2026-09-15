@@ -21,6 +21,7 @@ class VianexisAdminApp extends ConsumerWidget {
     return AdminAlertHost(
       child: MaterialApp.router(
         onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+        debugShowCheckedModeBanner: false,
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
         themeMode: themeMode,
