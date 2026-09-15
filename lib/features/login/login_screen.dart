@@ -339,6 +339,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       VianexisMetadataNotice(
                         message: l10n.brandAdminOnlyAccess,
                         badgeLabel: l10n.brandMetadataOnlyPlatformView,
+                        forceHighContrastOnDark: true,
                       ),
                     ],
                   ),

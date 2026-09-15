@@ -23,9 +23,9 @@ class VianexisAdminCard extends StatelessWidget {
     final content = Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: VianexisBrand.surfaceElevated,
+        color: VianexisBrand.surfaceOf(brightness),
         borderRadius: BorderRadius.circular(VianexisBrand.radiusMd),
-        border: Border.all(color: VianexisBrand.borderSubtle),
+        border: Border.all(color: VianexisBrand.borderOf(brightness)),
         boxShadow: [VianexisBrand.cardShadow(brightness)],
       ),
       child: Padding(

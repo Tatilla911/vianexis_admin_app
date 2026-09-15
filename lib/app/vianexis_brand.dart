@@ -9,14 +9,14 @@ abstract final class VianexisBrand {
   static const Color surfaceElevated = Color(0xFF243A58);
   static const Color surfaceMuted = Color(0xFF2C4564);
 
-  // Light (day) palette
+  // Light (day) palette — high-contrast navy ink on ivory surfaces
   static const Color backgroundLight = Color(0xFFF3F6FA);
   static const Color panelLight = Color(0xFFFFFFFF);
   static const Color surfaceElevatedLight = Color(0xFFFFFFFF);
-  static const Color surfaceMutedLight = Color(0xFFE8EEF5);
-  static const Color textPrimaryLight = Color(0xFF152536);
-  static const Color textSecondaryLight = Color(0xFF4A5D73);
-  static const Color borderSubtleLight = Color(0xFFCDD7E4);
+  static const Color surfaceMutedLight = Color(0xFFE4EBF4);
+  static const Color textPrimaryLight = Color(0xFF101B28);
+  static const Color textSecondaryLight = Color(0xFF3A4D63);
+  static const Color borderSubtleLight = Color(0xFFB8C5D6);
 
   static const Color viaNexisBlue = Color(0xFF4FA3E3);
   static const Color accentBlue = Color(0xFF4DA3FF);

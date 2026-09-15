@@ -18,11 +18,13 @@ class VianexisBrandHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final config = AppConfig.instance;
+    final brightness = Theme.of(context).brightness;
     final envLabel = resolveAppConfigKey(context, config.displayLabelKey);
     final apiLabel = config.isApiConfigured
         ? (config.safeApiHostDisplay ??
               resolveAppConfigKey(context, 'appConfigApiConfigured'))
         : l10n.brandApiNotConfigured;
+    final bodyColor = VianexisBrand.textSecondaryOf(brightness);
 
     return VianexisAdminCard(
       padding: const EdgeInsets.all(VianexisBrand.spaceXl),
@@ -31,14 +33,22 @@ class VianexisBrandHeader extends StatelessWidget {
         children: [
           const VianexisLogoMark(compact: true, size: 56),
           const SizedBox(height: VianexisBrand.spaceLg),
-          VianexisMetallicText(
-            l10n.brandOperationalControlCenter,
-            style: VianexisBrand.sectionTitleStyle(context),
-          ),
+          brightness == Brightness.dark
+              ? VianexisMetallicText(
+                  l10n.brandOperationalControlCenter,
+                  style: VianexisBrand.sectionTitleStyle(context),
+                )
+              : Text(
+                  l10n.brandOperationalControlCenter,
+                  style: VianexisBrand.sectionTitleStyle(context),
+                ),
           const SizedBox(height: VianexisBrand.spaceSm),
           Text(
             l10n.brandPlatformControlCenterBody,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: bodyColor,
+                  height: 1.4,
+                ),
           ),
           if (showEnvironment) ...[
             const SizedBox(height: VianexisBrand.spaceMd),
@@ -52,7 +62,9 @@ class VianexisBrandHeader extends StatelessWidget {
                       '${resolveAppConfigKey(context, 'appConfigEnvironmentLabel')}: $envLabel',
                   tone: config.isProduction
                       ? VianexisBrand.warning
-                      : VianexisBrand.accentMuted,
+                      : (brightness == Brightness.dark
+                          ? VianexisBrand.accentMuted
+                          : VianexisBrand.viaNexisBlue),
                 ),
                 _EnvChip(
                   icon: config.isApiConfigured
@@ -70,7 +82,7 @@ class VianexisBrandHeader extends StatelessWidget {
                       context,
                       'appConfigMockFallbackActive',
                     ),
-                    tone: VianexisBrand.accentMuted,
+                    tone: VianexisBrand.warning,
                   ),
               ],
             ),
@@ -90,16 +102,22 @@ class _EnvChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = tone ?? VianexisBrand.accentMuted;
+    final brightness = Theme.of(context).brightness;
+    final color = tone ?? VianexisBrand.textSecondaryOf(brightness);
+    final chipBg = brightness == Brightness.dark
+        ? VianexisBrand.surfaceMuted.withValues(alpha: 0.55)
+        : VianexisBrand.surfaceMutedLight;
+    final chipBorder = VianexisBrand.borderOf(brightness);
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: VianexisBrand.spaceMd,
         vertical: VianexisBrand.spaceSm,
       ),
       decoration: BoxDecoration(
-        color: VianexisBrand.surfaceMuted.withValues(alpha: 0.55),
+        color: chipBg,
         borderRadius: BorderRadius.circular(VianexisBrand.radiusSm),
-        border: Border.all(color: VianexisBrand.borderSubtle),
+        border: Border.all(color: chipBorder),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -108,9 +126,10 @@ class _EnvChip extends StatelessWidget {
           const SizedBox(width: VianexisBrand.spaceSm),
           Text(
             label,
-            style: Theme.of(
-              context,
-            ).textTheme.labelMedium?.copyWith(color: color),
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: VianexisBrand.textPrimaryOf(brightness),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ],
       ),

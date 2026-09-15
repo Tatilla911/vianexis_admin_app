@@ -27,7 +27,15 @@ class VianexisSectionHeader extends StatelessWidget {
               Text(title, style: VianexisBrand.sectionTitleStyle(context)),
               if (subtitle case final text?) ...[
                 const SizedBox(height: VianexisBrand.spaceXs),
-                Text(text, style: Theme.of(context).textTheme.bodySmall),
+                Text(
+                  text,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: VianexisBrand.textSecondaryOf(
+                          Theme.of(context).brightness,
+                        ),
+                        height: 1.35,
+                      ),
+                ),
               ],
             ],
           ),

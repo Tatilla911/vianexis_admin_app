@@ -21,13 +21,21 @@ class VianexisMetricTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+    final isDark = brightness == Brightness.dark;
     final accent = switch (tone) {
       VianexisMetricTone.success => VianexisBrand.success,
       VianexisMetricTone.warning => VianexisBrand.warning,
       VianexisMetricTone.danger => VianexisBrand.danger,
       VianexisMetricTone.info => VianexisBrand.info,
-      VianexisMetricTone.neutral => VianexisBrand.goldAccent,
+      VianexisMetricTone.neutral =>
+        isDark ? VianexisBrand.goldAccent : VianexisBrand.accentBlue,
     };
+    final panel = isDark
+        ? VianexisBrand.panelNavy.withValues(alpha: 0.72)
+        : VianexisBrand.panelLight;
+    final labelColor = VianexisBrand.textSecondaryOf(brightness);
+    final valueColor = VianexisBrand.textPrimaryOf(brightness);
 
     return Container(
       constraints: const BoxConstraints(minWidth: 148),
@@ -36,9 +44,12 @@ class VianexisMetricTile extends StatelessWidget {
         vertical: VianexisBrand.spaceMd,
       ),
       decoration: BoxDecoration(
-        color: VianexisBrand.panelNavy.withValues(alpha: 0.72),
+        color: panel,
         borderRadius: BorderRadius.circular(VianexisBrand.radiusMd),
         border: Border.all(color: accent.withValues(alpha: 0.35)),
+        boxShadow: isDark
+            ? null
+            : [VianexisBrand.cardShadow(brightness)],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,14 +64,23 @@ class VianexisMetricTile extends StatelessWidget {
                 child: Text(
                   label,
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: VianexisBrand.textSecondary,
+                    color: labelColor,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: VianexisBrand.spaceSm),
-          Text(value, style: VianexisBrand.metricValueStyle(context)),
+          Text(
+            value,
+            style: VianexisBrand.displayStyle(
+              fontSize:
+                  Theme.of(context).textTheme.titleLarge?.fontSize ?? 22,
+              fontWeight: FontWeight.w700,
+              color: valueColor,
+            ),
+          ),
         ],
       ),
     );

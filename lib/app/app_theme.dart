@@ -70,7 +70,7 @@ abstract final class AppTheme {
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
           return GoogleFonts.playfairDisplay(
-            color: selected ? VianexisBrand.goldAccent : muted,
+            color: selected ? VianexisBrand.goldAccent : onSurface,
             fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
             fontSize: 12,
           );
@@ -78,7 +78,7 @@ abstract final class AppTheme {
         iconTheme: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
           return IconThemeData(
-            color: selected ? VianexisBrand.goldAccent : muted,
+            color: selected ? VianexisBrand.goldAccent : onSurface,
           );
         }),
       ),
@@ -86,12 +86,12 @@ abstract final class AppTheme {
         backgroundColor: panel,
         indicatorColor: const Color(0x3D4DA3FF),
         selectedIconTheme: const IconThemeData(color: VianexisBrand.goldAccent),
-        unselectedIconTheme: IconThemeData(color: muted),
+        unselectedIconTheme: IconThemeData(color: onSurface),
         selectedLabelTextStyle: GoogleFonts.playfairDisplay(
           color: VianexisBrand.goldAccent,
           fontWeight: FontWeight.w600,
         ),
-        unselectedLabelTextStyle: GoogleFonts.playfairDisplay(color: muted),
+        unselectedLabelTextStyle: GoogleFonts.playfairDisplay(color: onSurface),
       ),
       cardTheme: CardThemeData(
         color: surface,
