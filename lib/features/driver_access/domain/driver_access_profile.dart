@@ -62,11 +62,29 @@ enum DriverRegistrationStatus {
     return switch (raw?.toLowerCase()) {
       'pending' => DriverRegistrationStatus.pending,
       'active' => DriverRegistrationStatus.active,
-      'disabled' => DriverRegistrationStatus.disabled,
-      'suspended' => DriverRegistrationStatus.disabled,
+      'disabled' ||
+      'suspended' ||
+      'inactive' => DriverRegistrationStatus.disabled,
       'invited' => DriverRegistrationStatus.invited,
       _ => DriverRegistrationStatus.pending,
     };
+  }
+
+  /// Prefer account lifecycle when present so invite/password UI matches server.
+  static DriverRegistrationStatus resolve({
+    String? profileStatus,
+    String? userStatus,
+  }) {
+    final user = userStatus?.trim().toLowerCase();
+    if (user == 'invited') return DriverRegistrationStatus.invited;
+    if (user == 'pending') return DriverRegistrationStatus.pending;
+    if (user == 'suspended' || user == 'disabled' || user == 'inactive') {
+      return DriverRegistrationStatus.disabled;
+    }
+    if (user == 'active') {
+      return fromBackend(profileStatus);
+    }
+    return fromBackend(profileStatus);
   }
 }
 
@@ -104,8 +122,11 @@ class DriverAccessProfile {
           json['displayName']?.toString() ?? json['name']?.toString() ?? '—',
       companyName: json['companyName']?.toString() ?? '—',
       companyId: json['companyId']?.toString() ?? '',
-      registrationStatus: DriverRegistrationStatus.fromBackend(
-        json['status']?.toString() ?? json['registrationStatus']?.toString(),
+      registrationStatus: DriverRegistrationStatus.resolve(
+        profileStatus:
+            json['status']?.toString() ??
+            json['registrationStatus']?.toString(),
+        userStatus: json['userStatus']?.toString(),
       ),
       lastActivityAt: DateTime.tryParse(
         json['lastActivityAt']?.toString() ??
