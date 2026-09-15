@@ -5,6 +5,7 @@ import '../../../../core/api/api_exception.dart';
 import '../../../../core/api/api_exception_feedback.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../data/user_access_api.dart';
+import 'user_access_change_l10n.dart';
 
 Future<bool> showUserAccessChangeDialog({
   required BuildContext context,
@@ -82,13 +83,13 @@ class _UserAccessChangeDialogState extends ConsumerState<_UserAccessChangeDialog
   Future<void> _submit() async {
     final deltas = _deltas;
     if (deltas.isEmpty) {
-      setState(() => _error = 'No changes selected.');
+      setState(() => _error = userAccessChangeNoChangesSelected(context));
       return;
     }
     if (_reason.text.trim().length < 3 ||
         _requestedBy.text.trim().isEmpty ||
         _authorizedBy.text.trim().isEmpty) {
-      setState(() => _error = 'Reason, requestedBy and authorizedBy are required.');
+      setState(() => _error = userAccessChangeRequiredFields(context));
       return;
     }
     setState(() {
@@ -190,20 +191,23 @@ class _UserAccessChangeDialogState extends ConsumerState<_UserAccessChangeDialog
                 decoration: InputDecoration(
                   labelText: l10n.adminUserAccessAuthMethod,
                 ),
-                items: const [
+                items: [
                   DropdownMenuItem(
                     value: 'customer_email',
-                    child: Text('Customer email'),
+                    child: Text(l10n.platformCompanyAmendAuthCustomerEmail),
                   ),
                   DropdownMenuItem(
                     value: 'internal_approval',
-                    child: Text('Internal approval'),
+                    child: Text(l10n.platformCompanyAmendAuthInternalApproval),
                   ),
                   DropdownMenuItem(
                     value: 'contract',
-                    child: Text('Contract'),
+                    child: Text(l10n.platformCompanyAmendAuthContract),
                   ),
-                  DropdownMenuItem(value: 'other', child: Text('Other')),
+                  DropdownMenuItem(
+                    value: 'other',
+                    child: Text(l10n.platformCompanyAmendAuthOther),
+                  ),
                 ],
                 onChanged: (value) {
                   if (value != null) setState(() => _authMethod = value);
