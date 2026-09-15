@@ -631,6 +631,8 @@ abstract final class AdminRoutes {
 
   static String notificationDetail(String id) => '$notifications/$id';
 
+  static String applicationDetail(String id) => '$applications/$id';
+
   static String driverAccessDetail(String id) => '$drivers/$id';
 
   static String securityEventDetail(String id) =>

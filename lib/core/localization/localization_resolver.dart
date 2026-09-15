@@ -2388,6 +2388,26 @@ String resolveNotificationsKey(
     'notificationsPushProviderApns' => l10n.notificationsPushProviderApns,
     'notificationsYes' => l10n.notificationsYes,
     'notificationsNo' => l10n.notificationsNo,
+    'notificationDriverRegistrationTitle' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Új sofőrregisztráció'
+          : 'New driver registration',
+    'notificationDriverRegistrationBody' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Új sofőrregisztráció érkezett. Elbírálás szükséges.'
+          : 'A new driver registration was received and is waiting for review.',
+    'notificationCompanyApplicationTitle' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Új cégregisztráció'
+          : 'New company registration',
+    'notificationCompanyApplicationBody' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Új cégregisztráció érkezett. Elbírálás szükséges.'
+          : 'A new company registration was received and is waiting for review.',
+    'notificationOpenRegistration' =>
+      Localizations.localeOf(context).languageCode == 'hu'
+          ? 'Regisztráció megnyitása'
+          : 'Open registration',
     _ => l10n.errorGenericBody,
   };
 }
