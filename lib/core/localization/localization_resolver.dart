@@ -2506,6 +2506,39 @@ String resolveDriverAccessKey(BuildContext context, String key) {
   };
 }
 
+String resolveGlobalSearchKey(BuildContext context, String key) {
+  final l10n = AppLocalizations.of(context);
+  final hu = Localizations.localeOf(context).languageCode == 'hu';
+  return switch (key) {
+    'globalSearchTitle' => hu ? 'Keresés' : 'Search',
+    'globalSearchHint' =>
+      hu ? 'Keresés (min. 2 karakter)…' : 'Search (min. 2 characters)…',
+    'globalSearchEmpty' => hu ? 'Nincs találat.' : 'No results.',
+    'globalSearchMinLength' => hu
+        ? 'Írjon be legalább 2 karaktert (vagy egy azonosítót).'
+        : 'Enter at least 2 characters (or a numeric ID).',
+    'globalSearchError' => hu ? 'A keresés sikertelen.' : 'Search failed.',
+    'globalSearchPartialError' => hu
+        ? 'Néhány találati csoport nem töltődött be.'
+        : 'Some result groups failed to load.',
+    'globalSearchClear' => hu ? 'Törlés' : 'Clear',
+    'globalSearchShowMore' => hu ? 'Több megjelenítése' : 'Show more',
+    'globalSearchDocumentFallback' => hu
+        ? 'Nincs dokumentum részletező; fuvarok megnyitva.'
+        : 'No document detail screen; opened trips overview.',
+    'globalSearchGroupCompanies' => hu ? 'Cégek' : 'Companies',
+    'globalSearchGroupRegistrations' => hu ? 'Regisztrációk' : 'Registrations',
+    'globalSearchGroupDrivers' => hu ? 'Sofőrök' : 'Drivers',
+    'globalSearchGroupTrips' => hu ? 'Fuvarok' : 'Trips',
+    'globalSearchGroupDocuments' => hu ? 'Dokumentumok' : 'Documents',
+    'globalSearchGroupVehicles' => hu ? 'Járművek' : 'Vehicles',
+    'globalSearchGroupTrailers' => hu ? 'Pótkocsik' : 'Trailers',
+    'globalSearchGroupSites' => hu ? 'Telephelyek' : 'Sites',
+    'globalSearchGroupEvents' => hu ? 'Események' : 'Events',
+    _ => l10n.errorGenericBody,
+  };
+}
+
 String resolveTripsOverviewKey(BuildContext context, String key) {
   final l10n = AppLocalizations.of(context);
   return switch (key) {

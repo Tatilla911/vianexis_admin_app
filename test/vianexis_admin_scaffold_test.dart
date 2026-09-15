@@ -90,7 +90,8 @@ void main() {
 
     expect(find.text('shell-child'), findsOneWidget);
     expect(find.byType(NavigationBar), findsOneWidget);
-    expect(find.byType(AppBar), findsNothing);
+    expect(find.byType(AppBar), findsOneWidget);
+    expect(find.byIcon(Icons.search), findsOneWidget);
   });
 
   testWidgets('titled scaffold supports back navigation via GoRouter', (

@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/app_router.dart';
 import '../../app/app_theme.dart';
+import '../../features/global_search/presentation/global_search_sheet.dart';
 import '../../l10n/app_localizations.dart';
 import '../api/api_unauthorized_binding.dart';
 import '../auth/admin_auth_state.dart';
 import '../auth/admin_user.dart';
 import '../connectivity/connectivity_status_provider.dart';
+import '../localization/localization_resolver.dart';
 import '../navigation/admin_back_navigation.dart';
 import '../navigation/admin_shell_navigation.dart';
 import 'admin_screen_app_bar.dart';
@@ -76,6 +78,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
       return _shellBackScope(
         context,
         child: Scaffold(
+          appBar: _shellSearchAppBar(context),
           body: Row(
             children: [
               NavigationRail(
@@ -107,6 +110,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
     return _shellBackScope(
       context,
       child: Scaffold(
+        appBar: _shellSearchAppBar(context),
         body: content,
         bottomNavigationBar: NavigationBar(
           selectedIndex: selectedIndex,
@@ -123,6 +127,19 @@ class VianexisAdminScaffold extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+
+  PreferredSizeWidget _shellSearchAppBar(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      actions: [
+        IconButton(
+          tooltip: resolveGlobalSearchKey(context, 'globalSearchTitle'),
+          icon: const Icon(Icons.search),
+          onPressed: () => showGlobalSearchSheet(context),
+        ),
+      ],
     );
   }
 
