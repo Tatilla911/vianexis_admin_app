@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
+import 'package:vianexis_admin_app/app/app_config.dart';
 import 'package:vianexis_admin_app/core/api/api_exception.dart';
 import 'package:vianexis_admin_app/core/api/api_exception_feedback.dart';
 import 'package:vianexis_admin_app/core/localization/localization_resolver.dart';
@@ -461,7 +462,8 @@ class _QrCodesManagementDialogState
   Widget build(BuildContext context) {
     final preview = _preview;
     final payload = preview?.displayPayload;
-    final isStaging = preview?.environment == 'staging';
+    // Badge is driven only by APP_ENV / build profile — never by hardcoding.
+    final isStaging = AppConfig.instance.environment.isStaging;
     final purposeLabel = resolveQrCodesKey(
       context,
       preview?.purpose != null
