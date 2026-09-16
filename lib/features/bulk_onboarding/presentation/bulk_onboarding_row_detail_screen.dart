@@ -29,7 +29,9 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
     final rowAsync = ref.watch(
       bulkOnboardingRowDetailProvider((jobId: jobId, rowId: rowId)),
     );
-    final canDecide = ref.watch(adminAuthProvider).user?.role.canDecideBulkOnboarding ?? false;
+    final canDecide =
+        ref.watch(adminAuthProvider).user?.role.canDecideBulkOnboarding ??
+        false;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.bulkOnboardingRowDetailTitle)),
@@ -38,8 +40,10 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
         error: (error, _) => VianexisErrorView.fromError(
           context,
           error,
-          fallbackMessage:
-              resolveBulkOnboardingKey(context, 'bulkOnboardingRowDetailError'),
+          fallbackMessage: resolveBulkOnboardingKey(
+            context,
+            'bulkOnboardingRowDetailError',
+          ),
           onRetry: () => ref.invalidate(
             bulkOnboardingRowDetailProvider((jobId: jobId, rowId: rowId)),
           ),
@@ -49,10 +53,7 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             children: [
               Text(
-                row.displayLabel ??
-                    row.name ??
-                    row.email ??
-                    '#${row.rowIndex}',
+                row.displayLabel ?? row.name ?? row.email ?? '#${row.rowIndex}',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 8),
@@ -65,7 +66,9 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
                   resolveBulkOnboardingKey(
                     context,
                     'bulkOnboardingRowLastValidatedAt',
-                    params: {'date': _formatDate(context, row.lastValidatedAt!)},
+                    params: {
+                      'date': _formatDate(context, row.lastValidatedAt!),
+                    },
                   ),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
@@ -75,19 +78,24 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
                 titleKey: 'bulkOnboardingRowOriginalValuesTitle',
                 values: row.originalValues ?? _currentValuesMap(row),
               ),
-              if (row.correctedValues != null && row.correctedValues!.isNotEmpty) ...[
+              if (row.correctedValues != null &&
+                  row.correctedValues!.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 _ValuesCard(
                   titleKey: 'bulkOnboardingRowCorrectedValuesTitle',
                   values: row.correctedValues!,
                 ),
               ],
-              if (row.correctionNote != null && row.correctionNote!.isNotEmpty) ...[
+              if (row.correctionNote != null &&
+                  row.correctionNote!.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 Card(
                   child: ListTile(
                     title: Text(
-                      resolveBulkOnboardingKey(context, 'bulkOnboardingRowCorrectionNoteLabel'),
+                      resolveBulkOnboardingKey(
+                        context,
+                        'bulkOnboardingRowCorrectionNoteLabel',
+                      ),
                     ),
                     subtitle: Text(row.correctionNote!),
                   ),
@@ -98,7 +106,10 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
                 Card(
                   child: ListTile(
                     title: Text(
-                      resolveBulkOnboardingKey(context, 'bulkOnboardingRowSkipReasonLabel'),
+                      resolveBulkOnboardingKey(
+                        context,
+                        'bulkOnboardingRowSkipReasonLabel',
+                      ),
                     ),
                     subtitle: Text(row.skipReason!),
                   ),
@@ -122,10 +133,14 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
               ],
               const SizedBox(height: 12),
               Text(
-                resolveBulkOnboardingKey(context, 'bulkOnboardingPrivacyNotice'),
+                resolveBulkOnboardingKey(
+                  context,
+                  'bulkOnboardingPrivacyNotice',
+                ),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              if (canDecide && row.status != BulkOnboardingRowStatus.skipped) ...[
+              if (canDecide &&
+                  row.status != BulkOnboardingRowStatus.skipped) ...[
                 const SizedBox(height: 20),
                 Wrap(
                   spacing: 8,
@@ -134,19 +149,28 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
                     OutlinedButton(
                       onPressed: () => _correctRow(context, ref, row),
                       child: Text(
-                        resolveBulkOnboardingKey(context, 'bulkOnboardingRowCorrectionAction'),
+                        resolveBulkOnboardingKey(
+                          context,
+                          'bulkOnboardingRowCorrectionAction',
+                        ),
                       ),
                     ),
                     OutlinedButton(
                       onPressed: () => _skipRow(context, ref),
                       child: Text(
-                        resolveBulkOnboardingKey(context, 'bulkOnboardingRowSkipAction'),
+                        resolveBulkOnboardingKey(
+                          context,
+                          'bulkOnboardingRowSkipAction',
+                        ),
                       ),
                     ),
                     OutlinedButton(
                       onPressed: () => _revalidateRow(context, ref),
                       child: Text(
-                        resolveBulkOnboardingKey(context, 'bulkOnboardingRowRevalidateAction'),
+                        resolveBulkOnboardingKey(
+                          context,
+                          'bulkOnboardingRowRevalidateAction',
+                        ),
                       ),
                     ),
                   ],
@@ -172,9 +196,9 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
   }
 
   String _formatDate(BuildContext context, DateTime value) {
-    return DateFormat.yMMMd(Localizations.localeOf(context).toString())
-        .add_Hm()
-        .format(value.toLocal());
+    return DateFormat.yMMMd(
+      Localizations.localeOf(context).toString(),
+    ).add_Hm().format(value.toLocal());
   }
 
   Future<void> _correctRow(
@@ -208,7 +232,10 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            resolveBulkOnboardingKey(context, 'bulkOnboardingRowActionUnavailable'),
+            resolveBulkOnboardingKey(
+              context,
+              'bulkOnboardingRowActionUnavailable',
+            ),
           ),
         ),
       );
@@ -239,7 +266,10 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            resolveBulkOnboardingKey(context, 'bulkOnboardingRowActionUnavailable'),
+            resolveBulkOnboardingKey(
+              context,
+              'bulkOnboardingRowActionUnavailable',
+            ),
           ),
         ),
       );
@@ -248,11 +278,7 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
 
   Future<void> _revalidateRow(BuildContext context, WidgetRef ref) async {
     try {
-      await submitBulkOnboardingRowRevalidate(
-        ref,
-        jobId: jobId,
-        rowId: rowId,
-      );
+      await submitBulkOnboardingRowRevalidate(ref, jobId: jobId, rowId: rowId);
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -266,7 +292,10 @@ class BulkOnboardingRowDetailScreen extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            resolveBulkOnboardingKey(context, 'bulkOnboardingRowActionUnavailable'),
+            resolveBulkOnboardingKey(
+              context,
+              'bulkOnboardingRowActionUnavailable',
+            ),
           ),
         ),
       );

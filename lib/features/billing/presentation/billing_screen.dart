@@ -87,17 +87,19 @@ class _BillingScreenState extends ConsumerState<BillingScreen>
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: overviewAsync.when(
               loading: () => const LinearProgressIndicator(),
-              error: (error, _) => Text(
-                resolveBillingKey(context, 'billingLoadError'),
-              ),
-              data: (overview) => BillingOverviewCard(overview: overview, compact: true),
+              error: (error, _) =>
+                  Text(resolveBillingKey(context, 'billingLoadError')),
+              data: (overview) =>
+                  BillingOverviewCard(overview: overview, compact: true),
             ),
           ),
           Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
-                _SubscriptionsTab(searchController: _subscriptionSearchController),
+                _SubscriptionsTab(
+                  searchController: _subscriptionSearchController,
+                ),
                 _PricingIntakesTab(searchController: _pricingSearchController),
                 _QuoteRequestsTab(searchController: _quoteSearchController),
               ],
@@ -133,15 +135,21 @@ class _SubscriptionsTab extends ConsumerWidget {
             controller: searchController,
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.search),
-              hintText: resolveBillingKey(context, 'billingSubscriptionSearchHint'),
+              hintText: resolveBillingKey(
+                context,
+                'billingSubscriptionSearchHint',
+              ),
             ),
-            onChanged: (value) =>
-                ref.read(subscriptionListQueryProvider.notifier).setSearch(value),
+            onChanged: (value) => ref
+                .read(subscriptionListQueryProvider.notifier)
+                .setSearch(value),
           ),
         ),
         _SubscriptionFilterBar(
           selected: query.filter,
-          onSelected: ref.read(subscriptionListQueryProvider.notifier).setFilter,
+          onSelected: ref
+              .read(subscriptionListQueryProvider.notifier)
+              .setFilter,
         ),
         const SizedBox(height: 8),
         Expanded(
@@ -156,11 +164,14 @@ class _SubscriptionsTab extends ConsumerWidget {
             data: (items) {
               if (items.isEmpty) {
                 return Center(
-                  child: Text(resolveBillingKey(context, 'billingSubscriptionListEmpty')),
+                  child: Text(
+                    resolveBillingKey(context, 'billingSubscriptionListEmpty'),
+                  ),
                 );
               }
               return RefreshIndicator(
-                onRefresh: () => ref.read(subscriptionsProvider.notifier).refresh(),
+                onRefresh: () =>
+                    ref.read(subscriptionsProvider.notifier).refresh(),
                 child: ListView.builder(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                   itemCount: items.length,
@@ -171,7 +182,9 @@ class _SubscriptionsTab extends ConsumerWidget {
                       child: SubscriptionCard(
                         subscription: subscription,
                         onTap: () => context.push(
-                          AdminRoutes.billingSubscriptionDetail(subscription.id),
+                          AdminRoutes.billingSubscriptionDetail(
+                            subscription.id,
+                          ),
                         ),
                       ),
                     );
@@ -201,24 +214,31 @@ class _SubscriptionFilterBar extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
-        children: SubscriptionListFilter.values.map((filter) {
-          final key = switch (filter) {
-            SubscriptionListFilter.all => 'billingSubscriptionFilterAll',
-            SubscriptionListFilter.active => 'billingSubscriptionFilterActive',
-            SubscriptionListFilter.trial => 'billingSubscriptionFilterTrial',
-            SubscriptionListFilter.pastDue => 'billingSubscriptionFilterPastDue',
-            SubscriptionListFilter.suspended => 'billingSubscriptionFilterSuspended',
-            SubscriptionListFilter.cancelled => 'billingSubscriptionFilterCancelled',
-          };
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: FilterChip(
-              label: Text(resolveBillingKey(context, key)),
-              selected: selected == filter,
-              onSelected: (_) => onSelected(filter),
-            ),
-          );
-        }).toList(growable: false),
+        children: SubscriptionListFilter.values
+            .map((filter) {
+              final key = switch (filter) {
+                SubscriptionListFilter.all => 'billingSubscriptionFilterAll',
+                SubscriptionListFilter.active =>
+                  'billingSubscriptionFilterActive',
+                SubscriptionListFilter.trial =>
+                  'billingSubscriptionFilterTrial',
+                SubscriptionListFilter.pastDue =>
+                  'billingSubscriptionFilterPastDue',
+                SubscriptionListFilter.suspended =>
+                  'billingSubscriptionFilterSuspended',
+                SubscriptionListFilter.cancelled =>
+                  'billingSubscriptionFilterCancelled',
+              };
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: FilterChip(
+                  label: Text(resolveBillingKey(context, key)),
+                  selected: selected == filter,
+                  onSelected: (_) => onSelected(filter),
+                ),
+              );
+            })
+            .toList(growable: false),
       ),
     );
   }
@@ -242,15 +262,21 @@ class _PricingIntakesTab extends ConsumerWidget {
             controller: searchController,
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.search),
-              hintText: resolveBillingKey(context, 'billingPricingIntakeSearchHint'),
+              hintText: resolveBillingKey(
+                context,
+                'billingPricingIntakeSearchHint',
+              ),
             ),
-            onChanged: (value) =>
-                ref.read(pricingIntakeListQueryProvider.notifier).setSearch(value),
+            onChanged: (value) => ref
+                .read(pricingIntakeListQueryProvider.notifier)
+                .setSearch(value),
           ),
         ),
         _PricingIntakeFilterBar(
           selected: query.filter,
-          onSelected: ref.read(pricingIntakeListQueryProvider.notifier).setFilter,
+          onSelected: ref
+              .read(pricingIntakeListQueryProvider.notifier)
+              .setFilter,
         ),
         const SizedBox(height: 8),
         Expanded(
@@ -260,16 +286,20 @@ class _PricingIntakesTab extends ConsumerWidget {
               context,
               error,
               fallbackMessage: resolveBillingKey(context, 'billingLoadError'),
-              onRetry: () => ref.read(pricingIntakesProvider.notifier).refresh(),
+              onRetry: () =>
+                  ref.read(pricingIntakesProvider.notifier).refresh(),
             ),
             data: (items) {
               if (items.isEmpty) {
                 return Center(
-                  child: Text(resolveBillingKey(context, 'billingPricingIntakeListEmpty')),
+                  child: Text(
+                    resolveBillingKey(context, 'billingPricingIntakeListEmpty'),
+                  ),
                 );
               }
               return RefreshIndicator(
-                onRefresh: () => ref.read(pricingIntakesProvider.notifier).refresh(),
+                onRefresh: () =>
+                    ref.read(pricingIntakesProvider.notifier).refresh(),
                 child: ListView.builder(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                   itemCount: items.length,
@@ -310,24 +340,31 @@ class _PricingIntakeFilterBar extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
-        children: PricingIntakeListFilter.values.map((filter) {
-          final key = switch (filter) {
-            PricingIntakeListFilter.all => 'billingPricingIntakeFilterAll',
-            PricingIntakeListFilter.newIntake => 'billingPricingIntakeFilterNew',
-            PricingIntakeListFilter.reviewing => 'billingPricingIntakeFilterReviewing',
-            PricingIntakeListFilter.quoted => 'billingPricingIntakeFilterQuoted',
-            PricingIntakeListFilter.accepted => 'billingPricingIntakeFilterAccepted',
-            PricingIntakeListFilter.rejected => 'billingPricingIntakeFilterRejected',
-          };
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: FilterChip(
-              label: Text(resolveBillingKey(context, key)),
-              selected: selected == filter,
-              onSelected: (_) => onSelected(filter),
-            ),
-          );
-        }).toList(growable: false),
+        children: PricingIntakeListFilter.values
+            .map((filter) {
+              final key = switch (filter) {
+                PricingIntakeListFilter.all => 'billingPricingIntakeFilterAll',
+                PricingIntakeListFilter.newIntake =>
+                  'billingPricingIntakeFilterNew',
+                PricingIntakeListFilter.reviewing =>
+                  'billingPricingIntakeFilterReviewing',
+                PricingIntakeListFilter.quoted =>
+                  'billingPricingIntakeFilterQuoted',
+                PricingIntakeListFilter.accepted =>
+                  'billingPricingIntakeFilterAccepted',
+                PricingIntakeListFilter.rejected =>
+                  'billingPricingIntakeFilterRejected',
+              };
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: FilterChip(
+                  label: Text(resolveBillingKey(context, key)),
+                  selected: selected == filter,
+                  onSelected: (_) => onSelected(filter),
+                ),
+              );
+            })
+            .toList(growable: false),
       ),
     );
   }
@@ -351,15 +388,21 @@ class _QuoteRequestsTab extends ConsumerWidget {
             controller: searchController,
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.search),
-              hintText: resolveBillingKey(context, 'billingQuoteRequestSearchHint'),
+              hintText: resolveBillingKey(
+                context,
+                'billingQuoteRequestSearchHint',
+              ),
             ),
-            onChanged: (value) =>
-                ref.read(quoteRequestListQueryProvider.notifier).setSearch(value),
+            onChanged: (value) => ref
+                .read(quoteRequestListQueryProvider.notifier)
+                .setSearch(value),
           ),
         ),
         _QuoteRequestFilterBar(
           selected: query.filter,
-          onSelected: ref.read(quoteRequestListQueryProvider.notifier).setFilter,
+          onSelected: ref
+              .read(quoteRequestListQueryProvider.notifier)
+              .setFilter,
         ),
         const SizedBox(height: 8),
         Expanded(
@@ -374,11 +417,14 @@ class _QuoteRequestsTab extends ConsumerWidget {
             data: (items) {
               if (items.isEmpty) {
                 return Center(
-                  child: Text(resolveBillingKey(context, 'billingQuoteRequestListEmpty')),
+                  child: Text(
+                    resolveBillingKey(context, 'billingQuoteRequestListEmpty'),
+                  ),
                 );
               }
               return RefreshIndicator(
-                onRefresh: () => ref.read(quoteRequestsProvider.notifier).refresh(),
+                onRefresh: () =>
+                    ref.read(quoteRequestsProvider.notifier).refresh(),
                 child: ListView.builder(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                   itemCount: items.length,
@@ -419,24 +465,31 @@ class _QuoteRequestFilterBar extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
-        children: QuoteRequestListFilter.values.map((filter) {
-          final key = switch (filter) {
-            QuoteRequestListFilter.all => 'billingQuoteRequestFilterAll',
-            QuoteRequestListFilter.submitted => 'billingQuoteRequestFilterSubmitted',
-            QuoteRequestListFilter.underReview => 'billingQuoteRequestFilterUnderReview',
-            QuoteRequestListFilter.quoted => 'billingQuoteRequestFilterQuoted',
-            QuoteRequestListFilter.accepted => 'billingQuoteRequestFilterAccepted',
-            QuoteRequestListFilter.rejected => 'billingQuoteRequestFilterRejected',
-          };
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: FilterChip(
-              label: Text(resolveBillingKey(context, key)),
-              selected: selected == filter,
-              onSelected: (_) => onSelected(filter),
-            ),
-          );
-        }).toList(growable: false),
+        children: QuoteRequestListFilter.values
+            .map((filter) {
+              final key = switch (filter) {
+                QuoteRequestListFilter.all => 'billingQuoteRequestFilterAll',
+                QuoteRequestListFilter.submitted =>
+                  'billingQuoteRequestFilterSubmitted',
+                QuoteRequestListFilter.underReview =>
+                  'billingQuoteRequestFilterUnderReview',
+                QuoteRequestListFilter.quoted =>
+                  'billingQuoteRequestFilterQuoted',
+                QuoteRequestListFilter.accepted =>
+                  'billingQuoteRequestFilterAccepted',
+                QuoteRequestListFilter.rejected =>
+                  'billingQuoteRequestFilterRejected',
+              };
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: FilterChip(
+                  label: Text(resolveBillingKey(context, key)),
+                  selected: selected == filter,
+                  onSelected: (_) => onSelected(filter),
+                ),
+              );
+            })
+            .toList(growable: false),
       ),
     );
   }

@@ -7,24 +7,20 @@ import '../../domain/pricing_intake_status.dart';
 import '../../domain/quote_request_status.dart';
 import '../../domain/subscription_status.dart';
 
-enum BillingActionTarget {
-  subscription,
-  pricingIntake,
-  quoteRequest,
-}
+enum BillingActionTarget { subscription, pricingIntake, quoteRequest }
 
 class BillingActionDialogResult {
   const BillingActionDialogResult.subscription(this.subscriptionRequest)
-      : pricingIntakeRequest = null,
-        quoteRequestRequest = null;
+    : pricingIntakeRequest = null,
+      quoteRequestRequest = null;
 
   const BillingActionDialogResult.pricingIntake(this.pricingIntakeRequest)
-      : subscriptionRequest = null,
-        quoteRequestRequest = null;
+    : subscriptionRequest = null,
+      quoteRequestRequest = null;
 
   const BillingActionDialogResult.quoteRequest(this.quoteRequestRequest)
-      : subscriptionRequest = null,
-        pricingIntakeRequest = null;
+    : subscriptionRequest = null,
+      pricingIntakeRequest = null;
 
   final BillingSubscriptionStatusRequest? subscriptionRequest;
   final BillingPricingIntakeStatusRequest? pricingIntakeRequest;
@@ -109,25 +105,28 @@ class _BillingActionDialogState extends State<_BillingActionDialog> {
         : _noteController.text.trim();
 
     final result = switch (widget.target) {
-      BillingActionTarget.subscription => BillingActionDialogResult.subscription(
-        BillingSubscriptionStatusRequest(
-          status: _subscriptionStatus ?? SubscriptionStatus.unknown,
-          reason: reason,
-          note: note,
+      BillingActionTarget.subscription =>
+        BillingActionDialogResult.subscription(
+          BillingSubscriptionStatusRequest(
+            status: _subscriptionStatus ?? SubscriptionStatus.unknown,
+            reason: reason,
+            note: note,
+          ),
         ),
-      ),
-      BillingActionTarget.pricingIntake => BillingActionDialogResult.pricingIntake(
-        BillingPricingIntakeStatusRequest(
-          status: _pricingIntakeStatus ?? PricingIntakeStatus.unknown,
-          reason: reason,
+      BillingActionTarget.pricingIntake =>
+        BillingActionDialogResult.pricingIntake(
+          BillingPricingIntakeStatusRequest(
+            status: _pricingIntakeStatus ?? PricingIntakeStatus.unknown,
+            reason: reason,
+          ),
         ),
-      ),
-      BillingActionTarget.quoteRequest => BillingActionDialogResult.quoteRequest(
-        BillingQuoteRequestStatusRequest(
-          status: _quoteRequestStatus ?? QuoteRequestStatus.unknown,
-          reason: reason,
+      BillingActionTarget.quoteRequest =>
+        BillingActionDialogResult.quoteRequest(
+          BillingQuoteRequestStatusRequest(
+            status: _quoteRequestStatus ?? QuoteRequestStatus.unknown,
+            reason: reason,
+          ),
         ),
-      ),
     };
 
     Navigator.of(context).pop(result);
@@ -168,12 +167,18 @@ class _BillingActionDialogState extends State<_BillingActionDialog> {
                   controller: _reasonController,
                   maxLines: 3,
                   decoration: InputDecoration(
-                    labelText: resolveBillingKey(context, 'billingActionReasonLabel'),
+                    labelText: resolveBillingKey(
+                      context,
+                      'billingActionReasonLabel',
+                    ),
                   ),
                   validator: (value) {
                     if (!_requiresReason) return null;
                     if (value == null || value.trim().length < 3) {
-                      return resolveBillingKey(context, 'billingActionReasonRequired');
+                      return resolveBillingKey(
+                        context,
+                        'billingActionReasonRequired',
+                      );
                     }
                     return null;
                   },
@@ -185,7 +190,10 @@ class _BillingActionDialogState extends State<_BillingActionDialog> {
                   controller: _noteController,
                   maxLines: 2,
                   decoration: InputDecoration(
-                    labelText: resolveBillingKey(context, 'billingActionNoteLabel'),
+                    labelText: resolveBillingKey(
+                      context,
+                      'billingActionNoteLabel',
+                    ),
                   ),
                 ),
               ],
@@ -208,60 +216,72 @@ class _BillingActionDialogState extends State<_BillingActionDialog> {
 
   Widget _statusField(BuildContext context) {
     return switch (widget.target) {
-      BillingActionTarget.subscription => DropdownButtonFormField<SubscriptionStatus>(
-        initialValue: _subscriptionStatus,
-        decoration: InputDecoration(
-          labelText: resolveBillingKey(context, 'billingActionStatusLabel'),
+      BillingActionTarget.subscription =>
+        DropdownButtonFormField<SubscriptionStatus>(
+          initialValue: _subscriptionStatus,
+          decoration: InputDecoration(
+            labelText: resolveBillingKey(context, 'billingActionStatusLabel'),
+          ),
+          items: SubscriptionStatus.values
+              .where((status) => status != SubscriptionStatus.unknown)
+              .map(
+                (status) => DropdownMenuItem(
+                  value: status,
+                  child: Text(
+                    resolveBillingKey(context, status.localizationKey()),
+                  ),
+                ),
+              )
+              .toList(growable: false),
+          onChanged: (value) => setState(() => _subscriptionStatus = value),
+          validator: (value) => value == null
+              ? resolveBillingKey(context, 'billingActionStatusRequired')
+              : null,
         ),
-        items: SubscriptionStatus.values
-            .where((status) => status != SubscriptionStatus.unknown)
-            .map(
-              (status) => DropdownMenuItem(
-                value: status,
-                child: Text(resolveBillingKey(context, status.localizationKey())),
-              ),
-            )
-            .toList(growable: false),
-        onChanged: (value) => setState(() => _subscriptionStatus = value),
-        validator: (value) =>
-            value == null ? resolveBillingKey(context, 'billingActionStatusRequired') : null,
-      ),
-      BillingActionTarget.pricingIntake => DropdownButtonFormField<PricingIntakeStatus>(
-        initialValue: _pricingIntakeStatus,
-        decoration: InputDecoration(
-          labelText: resolveBillingKey(context, 'billingActionStatusLabel'),
+      BillingActionTarget.pricingIntake =>
+        DropdownButtonFormField<PricingIntakeStatus>(
+          initialValue: _pricingIntakeStatus,
+          decoration: InputDecoration(
+            labelText: resolveBillingKey(context, 'billingActionStatusLabel'),
+          ),
+          items: PricingIntakeStatus.values
+              .where((status) => status != PricingIntakeStatus.unknown)
+              .map(
+                (status) => DropdownMenuItem(
+                  value: status,
+                  child: Text(
+                    resolveBillingKey(context, status.localizationKey()),
+                  ),
+                ),
+              )
+              .toList(growable: false),
+          onChanged: (value) => setState(() => _pricingIntakeStatus = value),
+          validator: (value) => value == null
+              ? resolveBillingKey(context, 'billingActionStatusRequired')
+              : null,
         ),
-        items: PricingIntakeStatus.values
-            .where((status) => status != PricingIntakeStatus.unknown)
-            .map(
-              (status) => DropdownMenuItem(
-                value: status,
-                child: Text(resolveBillingKey(context, status.localizationKey())),
-              ),
-            )
-            .toList(growable: false),
-        onChanged: (value) => setState(() => _pricingIntakeStatus = value),
-        validator: (value) =>
-            value == null ? resolveBillingKey(context, 'billingActionStatusRequired') : null,
-      ),
-      BillingActionTarget.quoteRequest => DropdownButtonFormField<QuoteRequestStatus>(
-        initialValue: _quoteRequestStatus,
-        decoration: InputDecoration(
-          labelText: resolveBillingKey(context, 'billingActionStatusLabel'),
+      BillingActionTarget.quoteRequest =>
+        DropdownButtonFormField<QuoteRequestStatus>(
+          initialValue: _quoteRequestStatus,
+          decoration: InputDecoration(
+            labelText: resolveBillingKey(context, 'billingActionStatusLabel'),
+          ),
+          items: QuoteRequestStatus.values
+              .where((status) => status != QuoteRequestStatus.unknown)
+              .map(
+                (status) => DropdownMenuItem(
+                  value: status,
+                  child: Text(
+                    resolveBillingKey(context, status.localizationKey()),
+                  ),
+                ),
+              )
+              .toList(growable: false),
+          onChanged: (value) => setState(() => _quoteRequestStatus = value),
+          validator: (value) => value == null
+              ? resolveBillingKey(context, 'billingActionStatusRequired')
+              : null,
         ),
-        items: QuoteRequestStatus.values
-            .where((status) => status != QuoteRequestStatus.unknown)
-            .map(
-              (status) => DropdownMenuItem(
-                value: status,
-                child: Text(resolveBillingKey(context, status.localizationKey())),
-              ),
-            )
-            .toList(growable: false),
-        onChanged: (value) => setState(() => _quoteRequestStatus = value),
-        validator: (value) =>
-            value == null ? resolveBillingKey(context, 'billingActionStatusRequired') : null,
-      ),
     };
   }
 }
