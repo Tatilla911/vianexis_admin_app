@@ -7,6 +7,8 @@ import 'package:vianexis_admin_app/app/vianexis_admin_app.dart';
 import 'package:vianexis_admin_app/core/auth/admin_auth_state.dart';
 import 'package:vianexis_admin_app/core/auth/admin_user.dart';
 import 'package:vianexis_admin_app/core/locale/app_locale_provider.dart';
+import 'package:vianexis_admin_app/features/action_center/presentation/action_center_screen.dart';
+import 'package:vianexis_admin_app/l10n/app_localizations.dart';
 
 class _AuthenticatedAdminAuthNotifier extends AdminAuthNotifier {
   _AuthenticatedAdminAuthNotifier(this.initialUser);
@@ -99,11 +101,24 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
-    await tester.pumpWidget(_authenticatedApp());
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 500));
-
-    await tester.tap(find.byIcon(Icons.inbox_outlined));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          adminAuthProvider.overrideWith(
+            () => _AuthenticatedAdminAuthNotifier(_superAdmin),
+          ),
+          appLocaleProvider.overrideWith(
+            () => _FixedLocaleNotifier(const Locale('hu')),
+          ),
+        ],
+        child: MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale('hu'),
+          home: const ActionCenterScreen(),
+        ),
+      ),
+    );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
 

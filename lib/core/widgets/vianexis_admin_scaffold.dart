@@ -81,20 +81,34 @@ class VianexisAdminScaffold extends ConsumerWidget {
           appBar: _shellSearchAppBar(context),
           body: Row(
             children: [
-              NavigationRail(
-                extended: MediaQuery.sizeOf(context).width >= 900,
-                selectedIndex: selectedIndex,
-                onDestinationSelected: (index) =>
-                    _goToDestination(context, allVisible[index]),
-                labelType: NavigationRailLabelType.none,
-                destinations: [
-                  for (final item in allVisible)
-                    NavigationRailDestination(
-                      icon: Icon(item.icon),
-                      selectedIcon: Icon(item.selectedIcon),
-                      label: Text(_label(context, item.destination)),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final extended = MediaQuery.sizeOf(context).width >= 900;
+                  return SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: IntrinsicHeight(
+                        child: NavigationRail(
+                          extended: extended,
+                          selectedIndex: selectedIndex,
+                          onDestinationSelected: (index) =>
+                              _goToDestination(context, allVisible[index]),
+                          labelType: NavigationRailLabelType.none,
+                          destinations: [
+                            for (final item in allVisible)
+                              NavigationRailDestination(
+                                icon: Icon(item.icon),
+                                selectedIcon: Icon(item.selectedIcon),
+                                label: Text(_label(context, item.destination)),
+                              ),
+                          ],
+                        ),
+                      ),
                     ),
-                ],
+                  );
+                },
               ),
               const VerticalDivider(width: 1),
               Expanded(child: content),
