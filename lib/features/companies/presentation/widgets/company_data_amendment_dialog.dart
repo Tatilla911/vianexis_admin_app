@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -149,7 +151,10 @@ class _CompanyDataAmendmentDialogState
                               setState(() {
                                 _field = value;
                                 _enumNewValue = null;
-                                _newValueController.clear();
+                                _newValueController.text = _editableNewValue(
+                                  value,
+                                  currentMap,
+                                );
                               });
                             },
                     ),
@@ -290,7 +295,7 @@ class _CompanyDataAmendmentDialogState
         TextButton(
           onPressed: _submitting
               ? null
-              : () => Navigator.of(context).pop(false),
+              : () => Navigator.of(context).pop(),
           child: Text(
             resolvePlatformCompanyKey(context, 'platformCompanyStatusDismiss'),
           ),
@@ -395,7 +400,20 @@ class _CompanyDataAmendmentDialogState
       return;
     }
 
-    final newValue = _resolveNewValue(field);
+    final Object? newValue;
+    try {
+      newValue = _resolveNewValue(field);
+    } on FormatException {
+      setState(
+        () => _errorText = resolvePlatformCompanyKey(
+          context,
+          field.valueType.toLowerCase() == 'json'
+              ? 'platformCompanyAmendNewValueJsonHint'
+              : 'platformCompanyAmendNewValue',
+        ),
+      );
+      return;
+    }
 
     setState(() {
       _submitting = true;
@@ -479,28 +497,63 @@ class _CompanyDataAmendmentDialogState
     if (requestId != null && requestId.isNotEmpty) {
       parts.add(l10n.platformCompanyAmendRequestId(requestId));
     }
-    assert(() {
-      final details = [
-        if (error.statusCode != null) 'HTTP ${error.statusCode}',
-        if (error.errorCode != null && error.errorCode!.isNotEmpty)
-          error.errorCode!,
-        if (error.endpoint != null && error.endpoint!.isNotEmpty)
-          error.endpoint!,
-      ].join(' · ');
-      if (details.isNotEmpty) {
-        parts.add('${l10n.platformCompanyAmendDevDetails}: $details');
-      }
-      return true;
-    }());
+    final details = [
+      if (error.statusCode != null) 'HTTP ${error.statusCode}',
+      if (error.errorCode != null && error.errorCode!.isNotEmpty)
+        error.errorCode!,
+      if (error.messageKeyFromApi != null &&
+          error.messageKeyFromApi!.trim().isNotEmpty)
+        error.messageKeyFromApi!,
+      if (error.backendMessage != null &&
+          error.backendMessage!.trim().isNotEmpty &&
+          error.backendMessage != base)
+        error.backendMessage!,
+    ].join(' · ');
+    if (details.isNotEmpty) {
+      parts.add('${l10n.platformCompanyAmendDevDetails}: $details');
+    }
     return parts.join('\n');
+  }
+
+  String _editableNewValue(
+    CompanyAmendmentFieldOption? field,
+    Map<String, dynamic> currentMap,
+  ) {
+    if (field == null) return '';
+    final current = _currentValueForField(currentMap, field.fieldPath);
+    if (current == null) return '';
+    if (field.valueType.toLowerCase() == 'json') {
+      if (current is Map) {
+        return const JsonEncoder.withIndent('  ').convert(current);
+      }
+      if (current is String && current.trim().isNotEmpty) {
+        try {
+          final decoded = jsonDecode(current);
+          if (decoded is Map) {
+            return const JsonEncoder.withIndent('  ').convert(decoded);
+          }
+        } catch (_) {
+          return current;
+        }
+      }
+      return '';
+    }
+    return current.toString();
   }
 
   Object? _resolveNewValue(CompanyAmendmentFieldOption field) {
     final raw = _newValueController.text.trim();
-    if (field.valueType.toLowerCase() == 'json' && raw.isNotEmpty) {
+    if (raw.isEmpty) {
+      throw const FormatException('New value is required');
+    }
+    if (field.valueType.toLowerCase() != 'json') {
       return raw;
     }
-    return raw;
+    final decoded = jsonDecode(raw);
+    if (decoded is! Map) {
+      throw const FormatException('Contact JSON must be an object');
+    }
+    return Map<String, dynamic>.from(decoded);
   }
 
   Object? _currentValueForField(Map<String, dynamic> current, String path) {
@@ -510,7 +563,13 @@ class _CompanyDataAmendmentDialogState
 
   String _formatValue(Object? value) {
     if (value == null) return '—';
-    if (value is Map || value is List) return value.toString();
+    if (value is Map || value is List) {
+      try {
+        return const JsonEncoder.withIndent('  ').convert(value);
+      } catch (_) {
+        return value.toString();
+      }
+    }
     final text = value.toString().trim();
     return text.isEmpty ? '—' : text;
   }
