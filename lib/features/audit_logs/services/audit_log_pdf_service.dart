@@ -7,7 +7,10 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
+import '../domain/platform_audit_action_type.dart';
 import '../domain/platform_audit_log.dart';
+import '../domain/platform_audit_result.dart';
+import '../domain/platform_audit_severity.dart';
 
 /// ViaNexis-styled audit / event-log PDF generator (Unicode / ékezet-safe fonts).
 class AuditLogPdfService {
@@ -25,6 +28,8 @@ class AuditLogPdfService {
     required String generatedLabel,
     required String emptyLabel,
     String? subtitle,
+    String? generatedByLabel,
+    String? periodLabel,
   }) async {
     // Noto Sans covers Hungarian / Latin Extended accents (no tofu boxes).
     final regular = await PdfGoogleFonts.notoSansRegular();
@@ -38,6 +43,8 @@ class AuditLogPdfService {
 
     final sorted = [...logs]
       ..sort((a, b) => b.timestamp.compareTo(a.timestamp));
+
+    final chapters = _groupIntoChapters(sorted);
 
     doc.addPage(
       pw.MultiPage(
@@ -84,6 +91,16 @@ class AuditLogPdfService {
                 subtitle,
                 style: pw.TextStyle(font: regular, fontSize: 10, color: _muted),
               ),
+            if (periodLabel != null && periodLabel.trim().isNotEmpty)
+              pw.Text(
+                periodLabel,
+                style: pw.TextStyle(font: regular, fontSize: 9, color: _muted),
+              ),
+            if (generatedByLabel != null && generatedByLabel.trim().isNotEmpty)
+              pw.Text(
+                generatedByLabel,
+                style: pw.TextStyle(font: regular, fontSize: 9, color: _muted),
+              ),
             pw.Text(
               generatedLabel,
               style: pw.TextStyle(font: regular, fontSize: 9, color: _muted),
@@ -115,64 +132,78 @@ class AuditLogPdfService {
               ),
             ];
           }
-          return [
-            for (final log in sorted)
-              pw.Container(
-                margin: const pw.EdgeInsets.only(bottom: 10),
-                padding: const pw.EdgeInsets.all(10),
-                decoration: pw.BoxDecoration(
-                  color: _panel,
-                  borderRadius: pw.BorderRadius.circular(6),
-                  border: pw.Border.all(
-                    color: const PdfColor.fromInt(0xFFCDD7E4),
+
+          final widgets = <pw.Widget>[
+            pw.Text(
+              'Összesítés / Summary',
+              style: pw.TextStyle(font: bold, fontSize: 14, color: _navy),
+            ),
+            pw.SizedBox(height: 6),
+            pw.Text(
+              'Összes esemény: ${sorted.length}',
+              style: pw.TextStyle(font: regular, fontSize: 10, color: _ink),
+            ),
+            for (final chapter in chapters)
+              if (chapter.logs.isNotEmpty)
+                pw.Padding(
+                  padding: const pw.EdgeInsets.only(top: 2),
+                  child: pw.Text(
+                    '${chapter.title}: ${chapter.logs.length}',
+                    style: pw.TextStyle(
+                      font: regular,
+                      fontSize: 9,
+                      color: _muted,
+                    ),
                   ),
                 ),
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: [
-                    pw.Text(
-                      log.timestamp.toUtc().toIso8601String(),
-                      style: pw.TextStyle(
-                        font: bold,
-                        fontSize: 9,
-                        color: _navy,
-                      ),
-                    ),
-                    pw.SizedBox(height: 4),
-                    pw.Text(
-                      _actionLabel(log),
-                      style: pw.TextStyle(
-                        font: bold,
-                        fontSize: 11,
-                        color: _ink,
-                      ),
-                    ),
-                    pw.SizedBox(height: 4),
-                    pw.Text(
-                      [
-                        if (log.actorName != null || log.actorEmail != null)
-                          'Actor: ${log.actorName ?? log.actorEmail}',
-                        if (log.companyName != null)
-                          'Company: ${log.companyName}',
-                        if (log.targetLabel != null || log.targetId != null)
-                          'Target: ${log.targetLabel ?? log.targetId}',
-                        'Result: ${log.result.name} · Severity: ${log.severity.name}',
-                        if (log.reason != null && log.reason!.trim().isNotEmpty)
-                          'Reason: ${log.reason}',
-                        if (log.note != null && log.note!.trim().isNotEmpty)
-                          'Note: ${log.note}',
-                      ].join('\n'),
-                      style: pw.TextStyle(
-                        font: regular,
-                        fontSize: 9,
-                        color: _muted,
-                        lineSpacing: 2,
-                      ),
-                    ),
-                  ],
+            pw.SizedBox(height: 14),
+          ];
+
+          for (final chapter in chapters) {
+            if (chapter.logs.isEmpty) continue;
+            widgets.add(
+              pw.Padding(
+                padding: const pw.EdgeInsets.only(bottom: 8, top: 6),
+                child: pw.Text(
+                  chapter.title,
+                  style: pw.TextStyle(font: bold, fontSize: 13, color: _navy),
                 ),
               ),
-          ];
+            );
+            for (final log in chapter.logs) {
+              widgets.add(_logCard(log, regular: regular, bold: bold));
+            }
+          }
+
+          // Appendix: request / correlation ids
+          final appendixIds = sorted
+              .map((e) => e.correlationId?.trim())
+              .whereType<String>()
+              .where((id) => id.isNotEmpty)
+              .toSet()
+              .toList()
+            ..sort();
+          if (appendixIds.isNotEmpty) {
+            widgets.add(
+              pw.Padding(
+                padding: const pw.EdgeInsets.only(top: 12, bottom: 6),
+                child: pw.Text(
+                  'Függelék / requestId-k',
+                  style: pw.TextStyle(font: bold, fontSize: 13, color: _navy),
+                ),
+              ),
+            );
+            for (final id in appendixIds.take(200)) {
+              widgets.add(
+                pw.Text(
+                  id,
+                  style: pw.TextStyle(font: regular, fontSize: 8, color: _muted),
+                ),
+              );
+            }
+          }
+
+          return widgets;
         },
       ),
     );
@@ -180,10 +211,212 @@ class AuditLogPdfService {
     return doc.save();
   }
 
+  pw.Widget _logCard(
+    PlatformAuditLog log, {
+    required pw.Font regular,
+    required pw.Font bold,
+  }) {
+    return pw.Container(
+      margin: const pw.EdgeInsets.only(bottom: 10),
+      padding: const pw.EdgeInsets.all(10),
+      decoration: pw.BoxDecoration(
+        color: _panel,
+        borderRadius: pw.BorderRadius.circular(6),
+        border: pw.Border.all(color: const PdfColor.fromInt(0xFFCDD7E4)),
+      ),
+      child: pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Text(
+            log.timestamp.toUtc().toIso8601String(),
+            style: pw.TextStyle(font: bold, fontSize: 9, color: _navy),
+          ),
+          pw.SizedBox(height: 4),
+          pw.Text(
+            _actionLabel(log),
+            style: pw.TextStyle(font: bold, fontSize: 11, color: _ink),
+          ),
+          pw.SizedBox(height: 4),
+          pw.Text(
+            [
+              if (log.actorName != null || log.actorEmail != null)
+                'Actor: ${log.actorName ?? log.actorEmail}',
+              if (log.companyName != null) 'Company: ${log.companyName}',
+              if (log.targetLabel != null || log.targetId != null)
+                'Target: ${log.targetLabel ?? log.targetId}',
+              'Result: ${log.result.name} · Severity: ${log.severity.name}',
+              if (log.reason != null && log.reason!.trim().isNotEmpty)
+                'Reason: ${log.reason}',
+              if (log.note != null && log.note!.trim().isNotEmpty)
+                'Note: ${log.note}',
+              if (log.correlationId != null &&
+                  log.correlationId!.trim().isNotEmpty)
+                'requestId: ${log.correlationId}',
+            ].join('\n'),
+            style: pw.TextStyle(
+              font: regular,
+              fontSize: 9,
+              color: _muted,
+              lineSpacing: 2,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Chapter order for the unified audit PDF package (PHASE 1 foundation).
+  List<_AuditPdfChapter> _groupIntoChapters(List<PlatformAuditLog> logs) {
+    final buckets = <AuditPdfChapterId, List<PlatformAuditLog>>{
+      for (final id in AuditPdfChapterId.values) id: <PlatformAuditLog>[],
+    };
+    for (final log in logs) {
+      buckets[classifyAuditPdfChapter(log)]!.add(log);
+    }
+    return [
+      for (final id in AuditPdfChapterId.values)
+        _AuditPdfChapter(title: id.titleHuEn, logs: buckets[id]!),
+    ];
+  }
+
   String _actionLabel(PlatformAuditLog log) {
     final raw = log.actionType.name;
     return raw.replaceAllMapped(RegExp(r'([A-Z])'), (m) => ' ${m[1]}').trim();
   }
+}
+
+enum AuditPdfChapterId {
+  critical,
+  warnings,
+  systemHealth,
+  security,
+  access,
+  support,
+  companyRegistration,
+  driverRegistration,
+  approvals,
+  failedDenied,
+  dataChanges,
+  invitesEmail,
+  qrEvents,
+  archiveDelete,
+  systemErrors,
+  other;
+
+  String get titleHuEn => switch (this) {
+    critical => '3. Kritikus események',
+    warnings => '4. Figyelmeztetések',
+    systemHealth => '5. Rendszerállapot',
+    security => '6. Biztonsági események',
+    access => '7. Hozzáférések és jogosultságok',
+    support => '8. Támogatási hozzáférések',
+    companyRegistration => '9. Céges regisztrációk',
+    driverRegistration => '10. Sofőrregisztrációk',
+    approvals => '11. Jóváhagyások és elutasítások',
+    failedDenied => '12. Sikertelen és megtagadott műveletek',
+    dataChanges => '13. Adatmódosítások',
+    invitesEmail => '14. Meghívók és e-mail-kézbesítés',
+    qrEvents => '15. QR-események',
+    archiveDelete => '16. Archiválás/törlés/anonymizálás',
+    systemErrors => '17. Rendszerhibák',
+    other => '18. Egyéb audit események',
+  };
+}
+
+AuditPdfChapterId classifyAuditPdfChapter(PlatformAuditLog log) {
+  final action = log.actionType;
+  final hay =
+      '${action.name} ${log.targetType ?? ''} ${log.note ?? ''} ${log.reason ?? ''}'
+          .toLowerCase();
+
+  if (log.severity == PlatformAuditSeverity.critical) {
+    return AuditPdfChapterId.critical;
+  }
+  if (log.severity == PlatformAuditSeverity.warning &&
+      log.result != PlatformAuditResult.failure &&
+      log.result != PlatformAuditResult.denied) {
+    return AuditPdfChapterId.warnings;
+  }
+  if (action == PlatformAuditActionType.systemHealthAcknowledged ||
+      action == PlatformAuditActionType.systemHealthEscalated ||
+      hay.contains('system_health') ||
+      hay.contains('health')) {
+    return AuditPdfChapterId.systemHealth;
+  }
+  if (action == PlatformAuditActionType.login ||
+      action == PlatformAuditActionType.logout ||
+      action == PlatformAuditActionType.loginFailed ||
+      action == PlatformAuditActionType.apiKeyCreated ||
+      action == PlatformAuditActionType.apiKeyRevoked ||
+      hay.contains('security')) {
+    return AuditPdfChapterId.security;
+  }
+  if (action == PlatformAuditActionType.roleChanged ||
+      action == PlatformAuditActionType.permissionDenied ||
+      hay.contains('permission') ||
+      hay.contains('role')) {
+    return AuditPdfChapterId.access;
+  }
+  if (action == PlatformAuditActionType.supportAccessGranted ||
+      action == PlatformAuditActionType.supportAccessRevoked ||
+      action == PlatformAuditActionType.supportTicketAcknowledged ||
+      action == PlatformAuditActionType.supportTicketClosed ||
+      hay.contains('support')) {
+    return AuditPdfChapterId.support;
+  }
+  if (hay.contains('company') &&
+      (hay.contains('registration') ||
+          action == PlatformAuditActionType.registrationApproved ||
+          action == PlatformAuditActionType.registrationRejected)) {
+    return AuditPdfChapterId.companyRegistration;
+  }
+  if (hay.contains('driver') &&
+      (hay.contains('registration') ||
+          action == PlatformAuditActionType.registrationApproved ||
+          action == PlatformAuditActionType.registrationRejected)) {
+    return AuditPdfChapterId.driverRegistration;
+  }
+  if (action == PlatformAuditActionType.registrationApproved ||
+      action == PlatformAuditActionType.registrationRejected ||
+      action == PlatformAuditActionType.registrationInfoRequested) {
+    return AuditPdfChapterId.approvals;
+  }
+  if (log.result == PlatformAuditResult.failure ||
+      log.result == PlatformAuditResult.denied ||
+      action == PlatformAuditActionType.permissionDenied) {
+    return AuditPdfChapterId.failedDenied;
+  }
+  if (hay.contains('amendment') ||
+      hay.contains('data_change') ||
+      hay.contains('billing')) {
+    return AuditPdfChapterId.dataChanges;
+  }
+  if (hay.contains('invite') ||
+      hay.contains('email') ||
+      hay.contains('password_setup') ||
+      hay.contains('password-setup')) {
+    return AuditPdfChapterId.invitesEmail;
+  }
+  if (hay.contains('qr')) {
+    return AuditPdfChapterId.qrEvents;
+  }
+  if (hay.contains('archive') ||
+      hay.contains('delete') ||
+      hay.contains('anonym') ||
+      hay.contains('tombstone')) {
+    return AuditPdfChapterId.archiveDelete;
+  }
+  if (hay.contains('error') || hay.contains('exception')) {
+    return AuditPdfChapterId.systemErrors;
+  }
+  return AuditPdfChapterId.other;
+}
+
+class _AuditPdfChapter {
+  const _AuditPdfChapter({required this.title, required this.logs});
+
+  final String title;
+  final List<PlatformAuditLog> logs;
 }
 
 class EventLogPdfArchiveEntry {
