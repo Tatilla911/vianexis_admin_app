@@ -41,15 +41,30 @@ class _AdminUsersScreenState extends ConsumerState<AdminUsersScreen> {
     if (request == null || !mounted) return;
 
     try {
-      await submitAdminUserInvite(ref, request: request);
+      final result = await submitAdminUserInvite(ref, request: request);
       if (!mounted) return;
+      final status = result.emailDeliveryStatus ??
+          (result.emailSent ? 'sent' : 'pending_or_failed');
+      final message = switch (status) {
+        'sent' => resolveAdminUserKey(context, 'adminUserInviteSuccess'),
+        'console' => resolveAdminUserKey(context, 'adminUserInviteConsoleOnly'),
+        'provider_not_configured' =>
+          resolveAdminUserKey(context, 'adminUserInviteProviderMissing'),
+        'blocked_by_staging_allowlist' =>
+          resolveAdminUserKey(context, 'adminUserInviteAllowlistBlocked'),
+        'failed' => resolveAdminUserKey(context, 'adminUserInviteEmailFailed'),
+        'skipped' => resolveAdminUserKey(context, 'adminUserInviteEmailSkipped'),
+        _ => resolveAdminUserKey(context, 'adminUserInviteEmailPending'),
+      };
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveAdminUserKey(context, 'adminUserInviteSuccess'))),
+        SnackBar(content: Text(message)),
       );
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(resolveAdminUserKey(context, 'adminUserActionError'))),
+        SnackBar(
+          content: Text(resolveAdminUserKey(context, 'adminUserActionError')),
+        ),
       );
     }
   }
@@ -68,7 +83,9 @@ class _AdminUsersScreenState extends ConsumerState<AdminUsersScreen> {
         title: Text(l10n.adminUsersTitle),
         actions: [
           if (usesMock)
-            MockDataBadge(label: resolveAdminUserKey(context, 'adminUserMockDataBadge')),
+            MockDataBadge(
+              label: resolveAdminUserKey(context, 'adminUserMockDataBadge'),
+            ),
           if (canManage)
             IconButton(
               tooltip: resolveAdminUserKey(context, 'adminUserInviteAction'),
@@ -96,32 +113,37 @@ class _AdminUsersScreenState extends ConsumerState<AdminUsersScreen> {
                 prefixIcon: const Icon(Icons.search),
                 hintText: resolveAdminUserKey(context, 'adminUserSearchHint'),
               ),
-              onChanged: (value) =>
-                  ref.read(adminUserListQueryProvider.notifier).setSearch(value),
+              onChanged: (value) => ref
+                  .read(adminUserListQueryProvider.notifier)
+                  .setSearch(value),
             ),
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
-              children: AdminUserListFilter.values.map((filter) {
-                final key = switch (filter) {
-                  AdminUserListFilter.all => 'adminUserFilterAll',
-                  AdminUserListFilter.active => 'adminUserFilterActive',
-                  AdminUserListFilter.invited => 'adminUserFilterInvited',
-                  AdminUserListFilter.suspended => 'adminUserFilterSuspended',
-                  AdminUserListFilter.disabled => 'adminUserFilterDisabled',
-                };
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: FilterChip(
-                    label: Text(resolveAdminUserKey(context, key)),
-                    selected: query.filter == filter,
-                    onSelected: (_) =>
-                        ref.read(adminUserListQueryProvider.notifier).setFilter(filter),
-                  ),
-                );
-              }).toList(growable: false),
+              children: AdminUserListFilter.values
+                  .map((filter) {
+                    final key = switch (filter) {
+                      AdminUserListFilter.all => 'adminUserFilterAll',
+                      AdminUserListFilter.active => 'adminUserFilterActive',
+                      AdminUserListFilter.invited => 'adminUserFilterInvited',
+                      AdminUserListFilter.suspended =>
+                        'adminUserFilterSuspended',
+                      AdminUserListFilter.disabled => 'adminUserFilterDisabled',
+                    };
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: FilterChip(
+                        label: Text(resolveAdminUserKey(context, key)),
+                        selected: query.filter == filter,
+                        onSelected: (_) => ref
+                            .read(adminUserListQueryProvider.notifier)
+                            .setFilter(filter),
+                      ),
+                    );
+                  })
+                  .toList(growable: false),
             ),
           ),
           const SizedBox(height: 8),
@@ -131,17 +153,23 @@ class _AdminUsersScreenState extends ConsumerState<AdminUsersScreen> {
               error: (error, _) => VianexisErrorView.fromError(
                 context,
                 error,
-                fallbackMessage: resolveAdminUserKey(context, 'adminUserLoadError'),
+                fallbackMessage: resolveAdminUserKey(
+                  context,
+                  'adminUserLoadError',
+                ),
                 onRetry: () => ref.read(adminUsersProvider.notifier).refresh(),
               ),
               data: (items) {
                 if (items.isEmpty) {
                   return Center(
-                    child: Text(resolveAdminUserKey(context, 'adminUserListEmpty')),
+                    child: Text(
+                      resolveAdminUserKey(context, 'adminUserListEmpty'),
+                    ),
                   );
                 }
                 return RefreshIndicator(
-                  onRefresh: () => ref.read(adminUsersProvider.notifier).refresh(),
+                  onRefresh: () =>
+                      ref.read(adminUsersProvider.notifier).refresh(),
                   child: ListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                     itemCount: items.length,
@@ -151,7 +179,9 @@ class _AdminUsersScreenState extends ConsumerState<AdminUsersScreen> {
                         padding: const EdgeInsets.only(bottom: 12),
                         child: AdminUserCard(
                           user: user,
-                          onTap: () => context.push(AdminRoutes.adminUserDetail(user.id)),
+                          onTap: () => context.push(
+                            AdminRoutes.adminUserDetail(user.id),
+                          ),
                         ),
                       );
                     },

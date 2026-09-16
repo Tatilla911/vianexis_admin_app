@@ -16,7 +16,9 @@ abstract class AdminUsersRepository {
 
   Future<PlatformAdminUser> fetchAdminUser(String id);
 
-  Future<PlatformAdminUser> inviteAdminUser(AdminUserInviteRequest request);
+  Future<AdminUserInviteResponse> inviteAdminUser(
+    AdminUserInviteRequest request,
+  );
 
   Future<PlatformAdminUser> updateAdminUserRole({
     required String id,
@@ -49,9 +51,10 @@ class LiveAdminUsersRepository implements AdminUsersRepository {
   Future<PlatformAdminUser> fetchAdminUser(String id) => _api.getAdminUser(id);
 
   @override
-  Future<PlatformAdminUser> inviteAdminUser(AdminUserInviteRequest request) async {
-    final response = await _api.inviteAdminUser(request);
-    return fetchAdminUser(response.user.id);
+  Future<AdminUserInviteResponse> inviteAdminUser(
+    AdminUserInviteRequest request,
+  ) {
+    return _api.inviteAdminUser(request);
   }
 
   @override
@@ -155,7 +158,9 @@ class MockAdminUsersRepository implements AdminUsersRepository {
   }
 
   @override
-  Future<PlatformAdminUser> inviteAdminUser(AdminUserInviteRequest request) async {
+  Future<AdminUserInviteResponse> inviteAdminUser(
+    AdminUserInviteRequest request,
+  ) async {
     await Future<void>.delayed(const Duration(milliseconds: 180));
     final id = '${_users.length + 1}';
     final created = PlatformAdminUser(
@@ -168,7 +173,16 @@ class MockAdminUsersRepository implements AdminUsersRepository {
       updatedAt: DateTime.now().toUtc(),
     );
     _users.insert(0, created);
-    return created;
+    return AdminUserInviteResponse(
+      user: PlatformAdminUserInviteResult(
+        id: created.id,
+        email: created.email,
+        status: 'invited',
+      ),
+      inviteDeliveryPending: true,
+      emailDeliveryStatus: 'provider_not_configured',
+      emailSent: false,
+    );
   }
 
   @override
@@ -233,7 +247,6 @@ class MockAdminUsersRepository implements AdminUsersRepository {
 }
 
 final adminUsersRepositoryProvider = Provider<AdminUsersRepository>((ref) {
-
   if (AppConfig.instance.shouldUseLiveRepositories) {
     return LiveAdminUsersRepository(ref.watch(adminUsersApiProvider));
   }

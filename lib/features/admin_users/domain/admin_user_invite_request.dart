@@ -27,11 +27,15 @@ class AdminUserInviteResponse {
   const AdminUserInviteResponse({
     required this.user,
     this.inviteDeliveryPending = false,
+    this.emailDeliveryStatus,
+    this.emailSent = false,
     this.metadataOnly = true,
   });
 
   final PlatformAdminUserInviteResult user;
   final bool inviteDeliveryPending;
+  final String? emailDeliveryStatus;
+  final bool emailSent;
   final bool metadataOnly;
 
   factory AdminUserInviteResponse.fromJson(Map<String, dynamic> json) {
@@ -39,8 +43,14 @@ class AdminUserInviteResponse {
     return AdminUserInviteResponse(
       user: userJson is Map<String, dynamic>
           ? PlatformAdminUserInviteResult.fromJson(userJson)
-          : const PlatformAdminUserInviteResult(id: '', email: '', status: 'invited'),
+          : const PlatformAdminUserInviteResult(
+              id: '',
+              email: '',
+              status: 'invited',
+            ),
       inviteDeliveryPending: json['inviteDeliveryPending'] == true,
+      emailDeliveryStatus: json['emailDeliveryStatus']?.toString(),
+      emailSent: json['emailSent'] == true,
       metadataOnly: json['metadataOnly'] != false,
     );
   }
