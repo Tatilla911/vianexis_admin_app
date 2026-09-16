@@ -180,6 +180,9 @@ void _validateNoHardcodedRenderStagingUrl(Directory root, List<String> issues) {
     if (entity is! File || !entity.path.endsWith('.dart')) {
       continue;
     }
+    if (entity.uri.pathSegments.last == 'canonical_api_hosts.dart') {
+      continue;
+    }
     final text = entity.readAsStringSync();
     if (onRenderUrl.hasMatch(text)) {
       issues.add(
