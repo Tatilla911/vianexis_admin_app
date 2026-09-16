@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 
 import '../../../app/app_router.dart';
 import '../../../core/localization/localization_resolver.dart';
-import '../../../core/widgets/backend_dependency_card.dart';
 import '../../../core/widgets/mock_data_badge.dart';
 import '../../../core/widgets/vianexis_admin_card.dart';
 import '../../../core/widgets/vianexis_error_view.dart';
@@ -65,17 +64,7 @@ class OperationsScreen extends ConsumerWidget {
               const SizedBox(height: 16),
               metricsAsync.when(
                 loading: () => const SizedBox.shrink(),
-                error: (_, _) => BackendDependencyCard(
-                  title: resolveOperationsKey(
-                    context,
-                    'operationsPendingSyncTitle',
-                  ),
-                  message: resolveOperationsKey(
-                    context,
-                    'operationsPendingSyncDependency',
-                  ),
-                  endpointHint: 'GET /platform-admin/operational-metrics',
-                ),
+                error: (_, _) => const SizedBox.shrink(),
                 data: (metrics) {
                   if (metrics == null) {
                     return const SizedBox.shrink();
@@ -105,17 +94,7 @@ class OperationsScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 12),
                       if (metrics.pendingSyncSourceUnavailable)
-                        BackendDependencyCard(
-                          title: resolveOperationsKey(
-                            context,
-                            'operationsPendingSyncTitle',
-                          ),
-                          message: resolveOperationsKey(
-                            context,
-                            'operationsPendingSyncUnavailable',
-                          ),
-                          endpointHint: 'pendingSync.sourceUnavailable',
-                        )
+                        const SizedBox.shrink()
                       else
                         Card(
                           child: ListTile(

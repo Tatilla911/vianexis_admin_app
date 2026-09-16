@@ -22,7 +22,11 @@ class TripsOverviewScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(resolveTripsOverviewKey(context, 'tripsOverviewTitle')),
+        title: Text(
+          resolveTripsOverviewKey(context, 'tripsOverviewTitle'),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         actions: [
           if (usesMock)
             MockDataBadge(
@@ -144,7 +148,7 @@ class TripsOverviewScreen extends ConsumerWidget {
   Widget _summaryRow(BuildContext context, String label, String value) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      title: Text(label),
+      title: Text(label, maxLines: 2, overflow: TextOverflow.ellipsis),
       trailing: Text(value, style: Theme.of(context).textTheme.titleMedium),
     );
   }

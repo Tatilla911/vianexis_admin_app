@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vianexis_admin_app/core/widgets/backend_dependency_card.dart';
 import 'package:vianexis_admin_app/features/driver_access/data/driver_access_repository.dart';
+import 'package:vianexis_admin_app/features/driver_access/data/driver_registration_requests_repository.dart';
 import 'package:vianexis_admin_app/features/driver_access/presentation/driver_access_screen.dart';
 import 'package:vianexis_admin_app/features/exchange_records/data/exchange_records_repository.dart';
 import 'package:vianexis_admin_app/features/exchange_records/presentation/exchange_records_screen.dart';
@@ -84,9 +85,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('Operations readiness', () {
-    testWidgets('operations dashboard renders metrics and dependency cards', (
-      tester,
-    ) async {
+    testWidgets('operations dashboard renders metrics', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
@@ -110,20 +109,28 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.text('Operations overview'), findsOneWidget);
-      expect(find.text('Active trips'), findsOneWidget);
+      expect(find.text('Platform operations health'), findsOneWidget);
+      expect(find.text('Trips in active system state'), findsOneWidget);
       expect(find.text('Driver access'), findsOneWidget);
-      expect(find.text('Operations modules'), findsOneWidget);
+      expect(find.text('Platform inspection modules'), findsOneWidget);
     });
 
     testWidgets('driver access live mode shows backend dependency', (
       tester,
     ) async {
+      tester.view.physicalSize = const Size(800, 1600);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
             driverAccessRepositoryProvider.overrideWith(
               (ref) => LiveDriverAccessRepository(),
+            ),
+            driverRegistrationRequestsRepositoryProvider.overrideWith(
+              (ref) => MockDriverRegistrationRequestsRepository(),
             ),
           ],
           child: MaterialApp(
@@ -150,7 +157,34 @@ void main() {
     testWidgets('driver access mock mode renders list without raw tokens', (
       tester,
     ) async {
-      await tester.pumpWidget(_app(const DriverAccessScreen()));
+      tester.view.physicalSize = const Size(800, 1600);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            driverAccessRepositoryProvider.overrideWith(
+              (ref) => MockDriverAccessRepository(),
+            ),
+            driverRegistrationRequestsRepositoryProvider.overrideWith(
+              (ref) => MockDriverRegistrationRequestsRepository(),
+            ),
+          ],
+          child: MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: const Locale('en'),
+            home: const DriverAccessScreen(),
+          ),
+        ),
+      );
 
       await tester.pumpAndSettle();
 
@@ -163,7 +197,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.text('Trips overview'), findsOneWidget);
+      expect(find.text('Trip state inspection'), findsOneWidget);
       expect(find.text('TR-42'), findsOneWidget);
       expect(find.textContaining('Exchange attention'), findsOneWidget);
     });
