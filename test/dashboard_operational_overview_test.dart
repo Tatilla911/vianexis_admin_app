@@ -26,7 +26,7 @@ void main() {
       ),
     );
 
-    expect(find.text('Operational overview'), findsOneWidget);
+    expect(find.text('System review snapshot'), findsOneWidget);
     expect(
       find.text('Operational summaries and platform metrics will appear here.'),
       findsNothing,

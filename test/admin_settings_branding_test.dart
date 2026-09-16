@@ -68,7 +68,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('admin@vianexis.hu'), findsOneWidget);
-    expect(find.text('Operational Control Center'), findsOneWidget);
+    expect(find.text('Platform Control Center'), findsOneWidget);
     expect(find.text('Signed-in account'), findsOneWidget);
   });
 }

@@ -15,10 +15,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get brandAppName => 'ViaNexis Admin';
 
   @override
-  String get brandControlCenterSubtitle => 'Operational control center';
+  String get brandControlCenterSubtitle => 'Platform control center';
 
   @override
-  String get brandOperationalControlCenter => 'Operational Control Center';
+  String get brandOperationalControlCenter => 'Platform Control Center';
 
   @override
   String get brandPlatformControlCenterBody =>
@@ -186,7 +186,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboardTitle => 'Control center';
 
   @override
-  String get dashboardOperationalOverviewTitle => 'Operational overview';
+  String get dashboardOperationalOverviewTitle => 'System review snapshot';
 
   @override
   String get dashboardOperationalOverviewBody =>
@@ -222,7 +222,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dashboardPlaceholderBody =>
-      'Operational summaries and platform metrics will appear here.';
+      'Platform health summaries and review-queue metrics will appear here.';
 
   @override
   String get registrationsTitle => 'Registration applications';
@@ -2916,7 +2916,87 @@ class AppLocalizationsEn extends AppLocalizations {
   String get platformCompanySectionUsers => 'Users summary';
 
   @override
-  String get platformCompanySectionSupport => 'Support & fleet summary';
+  String get platformCompanyMembersSection => 'Users';
+
+  @override
+  String get platformCompanyMembersEmpty => 'No members match this filter.';
+
+  @override
+  String get platformCompanyMembersLoadError =>
+      'Could not load company members.';
+
+  @override
+  String get platformCompanyMembersFilterAll => 'All';
+
+  @override
+  String get platformCompanyMembersFilterOwners => 'Owners';
+
+  @override
+  String get platformCompanyMembersFilterDispatchers => 'Dispatchers';
+
+  @override
+  String get platformCompanyMembersFilterDrivers => 'Drivers';
+
+  @override
+  String get platformCompanyMembersFilterWorkshop => 'Workshop';
+
+  @override
+  String get platformCompanyMembersFilterDocumentation => 'Documentation';
+
+  @override
+  String get platformCompanyMembersFilterOther => 'Other';
+
+  @override
+  String get platformCompanyRoleCompanyOwner => 'Company owner';
+
+  @override
+  String get platformCompanyRoleCompanyAdmin => 'Company administrator';
+
+  @override
+  String get platformCompanyRoleDispatcher => 'Dispatcher';
+
+  @override
+  String get platformCompanyRoleDriver => 'Driver';
+
+  @override
+  String get platformCompanyRoleWorkshop => 'Workshop';
+
+  @override
+  String get platformCompanyRoleDocumentation => 'Documentation';
+
+  @override
+  String get platformCompanyRoleClaimsInsurance => 'Claims / insurance';
+
+  @override
+  String get platformCompanyRoleFinance => 'Finance';
+
+  @override
+  String get platformCompanyRoleCompanySupport => 'Company support';
+
+  @override
+  String get platformCompanyRoleSubcontractorManager => 'Subcontractor manager';
+
+  @override
+  String get platformCompanyRoleUnknown => 'Unknown role';
+
+  @override
+  String platformCompanyMemberStatus(String status) {
+    return 'Status: $status';
+  }
+
+  @override
+  String platformCompanyMemberInvitationStatus(String status) {
+    return 'Invitation: $status';
+  }
+
+  @override
+  String platformCompanyMemberLastLogin(String date) {
+    return 'Last login: $date';
+  }
+
+  @override
+  String get platformCompanySectionSupport =>
+      'Support and registered asset counts';
 
   @override
   String get platformCompanySectionOnboarding => 'Onboarding summary';
@@ -2944,7 +3024,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get platformCompanyOverviewHint =>
-      'Current company identity and operational status.';
+      'Current company identity and platform tenant status.';
 
   @override
   String get platformCompanySectionRegistration =>
@@ -5192,6 +5272,27 @@ class AppLocalizationsEn extends AppLocalizations {
       'Translated replies are not sent automatically. Review and confirm before sending.';
 
   @override
+  String get customerCommunicationAutoTranslatedBadge => 'Auto-translated';
+
+  @override
+  String get customerCommunicationAutoTranslatingBadge => 'Translating…';
+
+  @override
+  String customerCommunicationReplyLanguageHint(
+    String draft,
+    String recipient,
+  ) {
+    return 'You write in $draft. The email is sent in the customer\'s language ($recipient).';
+  }
+
+  @override
+  String get customerCommunicationSendInCustomerLanguageLabel =>
+      'Send reply in the customer\'s language';
+
+  @override
+  String get customerCommunicationReplyTranslating => 'Translating…';
+
+  @override
   String get customerCommunicationDeliveryProviderDisabledNotice =>
       'Delivery provider disabled; reply will be logged but not externally sent.';
 
@@ -5706,7 +5807,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageSection => 'Language';
 
   @override
-  String get settingsLanguageBody => 'Choose the admin app display language.';
+  String get settingsLanguageBody =>
+      'Choose the admin app display language. Customer messages are auto-translated to Hungarian by default; switch to English here to translate inbound mail to English instead. Outbound replies still go out in the customer\'s language.';
 
   @override
   String get settingsLanguageHu => 'Hungarian';
@@ -5830,23 +5932,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get devicePinNonNumeric => 'PIN must contain digits only.';
 
   @override
-  String get navOperations => 'Operations overview';
+  String get navOperations => 'Platform operations health';
 
   @override
-  String get operationsTitle => 'Operations overview';
+  String get operationsTitle => 'Platform operations health';
 
   @override
   String get operationsModuleDescription =>
-      'Platform metrics, trips, drivers, and backend dependencies.';
+      'Platform metrics, trip-state counts, drivers, and backend dependencies.';
 
   @override
-  String get operationsOpenModule => 'Open operations overview';
+  String get operationsOpenModule => 'Open platform operations health';
 
   @override
   String get operationsMockBadge => 'Mock data';
 
   @override
-  String get operationsLoadFailed => 'Failed to load operations overview.';
+  String get operationsLoadFailed =>
+      'Failed to load platform operations health.';
 
   @override
   String get operationsPrivacyNotice =>
@@ -5886,7 +5989,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get operationsActiveDrivers => 'Active drivers (estimate)';
 
   @override
-  String get operationsActiveTrips => 'Active trips';
+  String get operationsActiveTrips => 'Trips in active system state';
 
   @override
   String get operationsCompletedTrips => 'Completed trips';
@@ -5904,13 +6007,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get operationsPackagesGenerated => 'Generated packages';
 
   @override
-  String get operationsModulesTitle => 'Operations modules';
+  String get operationsModulesTitle => 'Platform inspection modules';
 
   @override
   String get operationsLinkDriverAccess => 'Driver access';
 
   @override
-  String get operationsLinkTrips => 'Trips overview';
+  String get operationsLinkTrips => 'Trip state inspection';
 
   @override
   String get operationsLinkExchangeRecords => 'Exchange records';
@@ -6073,7 +6176,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'No active driver profiles in the list.';
 
   @override
-  String get tripsOverviewTitle => 'Trips overview';
+  String get tripsOverviewTitle => 'Trip state inspection';
 
   @override
   String get tripsOverviewMockBadge => 'Mock data';
@@ -6086,7 +6189,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Trip metadata only: reference, status, exchange indicators. No document or message content.';
 
   @override
-  String get tripsOverviewActiveCount => 'Active trips';
+  String get tripsOverviewActiveCount => 'Trips in active system state';
 
   @override
   String get tripsOverviewCompletedCount => 'Completed trips';
@@ -6099,7 +6202,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tripsOverviewBackendMessage =>
-      'Platform trip list endpoint is not available yet. Summary counts come from the dashboard API.';
+      'The trip list could not be loaded in this session. Summary counts still come from the dashboard API.';
 
   @override
   String get tripsOverviewListTitle => 'Trips';
@@ -7027,85 +7130,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get qrCodesSendSkipped =>
       'Invite created. Email was not sent (delivery skipped).';
-
-  @override
-  String get platformCompanyMembersSection => 'Users';
-
-  @override
-  String get platformCompanyMembersEmpty => 'No members match this filter.';
-
-  @override
-  String get platformCompanyMembersLoadError =>
-      'Could not load company members.';
-
-  @override
-  String get platformCompanyMembersFilterAll => 'All';
-
-  @override
-  String get platformCompanyMembersFilterOwners => 'Owners';
-
-  @override
-  String get platformCompanyMembersFilterDispatchers => 'Dispatchers';
-
-  @override
-  String get platformCompanyMembersFilterDrivers => 'Drivers';
-
-  @override
-  String get platformCompanyMembersFilterWorkshop => 'Workshop';
-
-  @override
-  String get platformCompanyMembersFilterDocumentation => 'Documentation';
-
-  @override
-  String get platformCompanyMembersFilterOther => 'Other';
-
-  @override
-  String get platformCompanyRoleCompanyOwner => 'Company owner';
-
-  @override
-  String get platformCompanyRoleCompanyAdmin => 'Company administrator';
-
-  @override
-  String get platformCompanyRoleDispatcher => 'Dispatcher';
-
-  @override
-  String get platformCompanyRoleDriver => 'Driver';
-
-  @override
-  String get platformCompanyRoleWorkshop => 'Workshop';
-
-  @override
-  String get platformCompanyRoleDocumentation => 'Documentation';
-
-  @override
-  String get platformCompanyRoleClaimsInsurance => 'Claims / insurance';
-
-  @override
-  String get platformCompanyRoleFinance => 'Finance';
-
-  @override
-  String get platformCompanyRoleCompanySupport => 'Company support';
-
-  @override
-  String get platformCompanyRoleSubcontractorManager => 'Subcontractor manager';
-
-  @override
-  String get platformCompanyRoleUnknown => 'Unknown role';
-
-  @override
-  String platformCompanyMemberStatus(String status) {
-    return 'Status: $status';
-  }
-
-  @override
-  String platformCompanyMemberInvitationStatus(String status) {
-    return 'Invitation: $status';
-  }
-
-  @override
-  String platformCompanyMemberLastLogin(String date) {
-    return 'Last login: $date';
-  }
 
   @override
   String get navPricingQuotes => 'Pricing Quotes';

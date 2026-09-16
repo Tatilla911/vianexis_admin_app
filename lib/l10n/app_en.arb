@@ -2,8 +2,8 @@
   "@@locale": "en",
   "appTitle": "ViaNexis Admin",
   "brandAppName": "ViaNexis Admin",
-  "brandControlCenterSubtitle": "Operational control center",
-  "brandOperationalControlCenter": "Operational Control Center",
+  "brandControlCenterSubtitle": "Platform control center",
+  "brandOperationalControlCenter": "Platform Control Center",
   "brandPlatformControlCenterBody": "Platform control center for metadata-only administration, review queues, and audit visibility.",
   "brandAdminOnlyAccess": "Platform admin access only. Tenant driver and dispatcher accounts cannot sign in here.",
   "brandMetadataOnlyPlatformView": "Metadata-only platform view — no operational trip, document, or message content.",
@@ -54,7 +54,7 @@
   "loginSignInButton": "Sign in",
   "loginBackendNotConfigured": "Backend connection is not configured yet.",
   "dashboardTitle": "Control center",
-  "dashboardOperationalOverviewTitle": "Operational overview",
+  "dashboardOperationalOverviewTitle": "System review snapshot",
   "dashboardOperationalOverviewBody": "Metadata-only control center snapshot across platform services and human review queues.",
   "dashboardSystemStatusHealthy": "Healthy",
   "dashboardSystemStatusAttention": "Needs attention",
@@ -65,7 +65,7 @@
   "dashboardMetricAiHighRisk": "AI high-risk reviews",
   "dashboardMetricSupportIssues": "Open support issues",
   "dashboardMetricAuditRisks": "Failed / denied audit events",
-  "dashboardPlaceholderBody": "Operational summaries and platform metrics will appear here.",
+  "dashboardPlaceholderBody": "Platform health summaries and review-queue metrics will appear here.",
   "registrationsTitle": "Registration applications",
   "applicationsTitle": "Applications",
   "applicationDetailTitle": "Application #{id}",
@@ -1316,7 +1316,52 @@
     }
   },
     "platformCompanySectionUsers": "Users summary",
-  "platformCompanySectionSupport": "Support & fleet summary",
+  "platformCompanyMembersSection": "Users",
+  "platformCompanyMembersEmpty": "No members match this filter.",
+  "platformCompanyMembersLoadError": "Could not load company members.",
+  "platformCompanyMembersFilterAll": "All",
+  "platformCompanyMembersFilterOwners": "Owners",
+  "platformCompanyMembersFilterDispatchers": "Dispatchers",
+  "platformCompanyMembersFilterDrivers": "Drivers",
+  "platformCompanyMembersFilterWorkshop": "Workshop",
+  "platformCompanyMembersFilterDocumentation": "Documentation",
+  "platformCompanyMembersFilterOther": "Other",
+  "platformCompanyRoleCompanyOwner": "Company owner",
+  "platformCompanyRoleCompanyAdmin": "Company administrator",
+  "platformCompanyRoleDispatcher": "Dispatcher",
+  "platformCompanyRoleDriver": "Driver",
+  "platformCompanyRoleWorkshop": "Workshop",
+  "platformCompanyRoleDocumentation": "Documentation",
+  "platformCompanyRoleClaimsInsurance": "Claims / insurance",
+  "platformCompanyRoleFinance": "Finance",
+  "platformCompanyRoleCompanySupport": "Company support",
+  "platformCompanyRoleSubcontractorManager": "Subcontractor manager",
+  "platformCompanyRoleUnknown": "Unknown role",
+  "platformCompanyMemberStatus": "Status: {status}",
+  "@platformCompanyMemberStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMemberInvitationStatus": "Invitation: {status}",
+  "@platformCompanyMemberInvitationStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMemberLastLogin": "Last login: {date}",
+  "@platformCompanyMemberLastLogin": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanySectionSupport": "Support and registered asset counts",
   "platformCompanySectionOnboarding": "Onboarding summary",
   "platformCompanyFieldCountry": "Country",
   "platformCompanyFieldVat": "VAT number",
@@ -1325,7 +1370,7 @@
   "platformCompanyFieldSubscriptionStatus": "Subscription status",
   "platformCompanyFieldLastAdminActivity": "Last admin activity",
   "platformCompanySectionOverview": "Overview",
-  "platformCompanyOverviewHint": "Current company identity and operational status.",
+  "platformCompanyOverviewHint": "Current company identity and platform tenant status.",
   "platformCompanySectionRegistration": "Registration and original submission",
   "platformCompanyOriginalSubmitted": "Originally submitted data",
   "platformCompanyCurrentValid": "Currently valid data",
@@ -2373,6 +2418,17 @@
   "customerCommunicationHumanConfirmedBadge": "Human confirmed",
   "customerCommunicationTranslationApprovedBadge": "Translation approved",
   "customerCommunicationTranslatedReplyWarning": "Translated replies are not sent automatically. Review and confirm before sending.",
+  "customerCommunicationAutoTranslatedBadge": "Auto-translated",
+  "customerCommunicationAutoTranslatingBadge": "Translating…",
+  "customerCommunicationReplyLanguageHint": "You write in {draft}. The email is sent in the customer's language ({recipient}).",
+  "@customerCommunicationReplyLanguageHint": {
+    "placeholders": {
+      "draft": { "type": "String" },
+      "recipient": { "type": "String" }
+    }
+  },
+  "customerCommunicationSendInCustomerLanguageLabel": "Send reply in the customer's language",
+  "customerCommunicationReplyTranslating": "Translating…",
   "customerCommunicationDeliveryProviderDisabledNotice": "Delivery provider disabled; reply will be logged but not externally sent.",
   "customerCommunicationReplyLoggedSkippedNotice": "Reply logged with skipped delivery (provider disabled).",
   "customerCommunicationReplySentSuccess": "Reply sent successfully.",
@@ -2616,7 +2672,7 @@
   "modulesHubBody": "Additional admin modules and settings.",
   "navReturnToDashboard": "Return to dashboard",
   "settingsLanguageSection": "Language",
-  "settingsLanguageBody": "Choose the admin app display language.",
+  "settingsLanguageBody": "Choose the admin app display language. Customer messages are auto-translated to Hungarian by default; switch to English here to translate inbound mail to English instead. Outbound replies still go out in the customer's language.",
   "settingsLanguageHu": "Hungarian",
   "settingsLanguageEn": "English",
   "settingsAppearanceSection": "Appearance",
@@ -2656,12 +2712,12 @@
   "devicePinInvalidLength": "PIN must be 4–8 digits.",
   "devicePinInvalidCurrent": "Current PIN is incorrect.",
   "devicePinNonNumeric": "PIN must contain digits only.",
-  "navOperations": "Operations overview",
-  "operationsTitle": "Operations overview",
-  "operationsModuleDescription": "Platform metrics, trips, drivers, and backend dependencies.",
-  "operationsOpenModule": "Open operations overview",
+  "navOperations": "Platform operations health",
+  "operationsTitle": "Platform operations health",
+  "operationsModuleDescription": "Platform metrics, trip-state counts, drivers, and backend dependencies.",
+  "operationsOpenModule": "Open platform operations health",
   "operationsMockBadge": "Mock data",
-  "operationsLoadFailed": "Failed to load operations overview.",
+  "operationsLoadFailed": "Failed to load platform operations health.",
   "operationsPrivacyNotice": "Aggregated platform metadata only. No trip, document, or message content.",
   "operationsPendingSyncTitle": "Pending sync issues",
   "operationsPendingSyncDependency": "Platform-wide sync warning list is not wired yet.",
@@ -2684,15 +2740,15 @@
   "operationsExchangeRecordsDependency": "Platform exchange record list endpoint is not available yet.",
   "operationsCompanyCount": "Companies (active/total)",
   "operationsActiveDrivers": "Active drivers (estimate)",
-  "operationsActiveTrips": "Active trips",
+  "operationsActiveTrips": "Trips in active system state",
   "operationsCompletedTrips": "Completed trips",
   "operationsSupportAccess": "Active support access",
   "operationsPublicIntakes": "Pending public intakes",
   "operationsPendingRegistrations": "Pending registrations",
   "operationsPackagesGenerated": "Generated packages",
-  "operationsModulesTitle": "Operations modules",
+  "operationsModulesTitle": "Platform inspection modules",
   "operationsLinkDriverAccess": "Driver access",
-  "operationsLinkTrips": "Trips overview",
+  "operationsLinkTrips": "Trip state inspection",
   "operationsLinkExchangeRecords": "Exchange records",
   "operationsLinkNotificationStatus": "Notification status",
   "operationsLinkSupportAccess": "Support access",
@@ -2742,15 +2798,15 @@
   "driverAccessPendingCompanyCode": "Company code",
   "driverAccessPendingCreatedAt": "Submitted",
   "driverAccessNoActiveDrivers": "No active driver profiles in the list.",
-  "tripsOverviewTitle": "Trips overview",
+  "tripsOverviewTitle": "Trip state inspection",
   "tripsOverviewMockBadge": "Mock data",
   "tripsOverviewLoadFailed": "Failed to load trips overview.",
   "tripsOverviewPrivacyNotice": "Trip metadata only: reference, status, exchange indicators. No document or message content.",
-  "tripsOverviewActiveCount": "Active trips",
+  "tripsOverviewActiveCount": "Trips in active system state",
   "tripsOverviewCompletedCount": "Completed trips",
   "tripsOverviewParkedCount": "Parked trips",
   "tripsOverviewBackendTitle": "Backend dependency",
-  "tripsOverviewBackendMessage": "Platform trip list endpoint is not available yet. Summary counts come from the dashboard API.",
+  "tripsOverviewBackendMessage": "The trip list could not be loaded in this session. Summary counts still come from the dashboard API.",
   "tripsOverviewListTitle": "Trips",
   "tripsOverviewExchangeIndicator": "Has exchange record",
   "tripsOverviewExchangeAttention": "Exchange attention",
@@ -3131,51 +3187,6 @@
   "qrCodesActivationLink": "Activation link",
   "qrCodesSendSuccess": "Invite email sent successfully.",
   "qrCodesSendSkipped": "Invite created. Email was not sent (delivery skipped).",
-  "platformCompanyMembersSection": "Users",
-  "platformCompanyMembersEmpty": "No members match this filter.",
-  "platformCompanyMembersLoadError": "Could not load company members.",
-  "platformCompanyMembersFilterAll": "All",
-  "platformCompanyMembersFilterOwners": "Owners",
-  "platformCompanyMembersFilterDispatchers": "Dispatchers",
-  "platformCompanyMembersFilterDrivers": "Drivers",
-  "platformCompanyMembersFilterWorkshop": "Workshop",
-  "platformCompanyMembersFilterDocumentation": "Documentation",
-  "platformCompanyMembersFilterOther": "Other",
-  "platformCompanyRoleCompanyOwner": "Company owner",
-  "platformCompanyRoleCompanyAdmin": "Company administrator",
-  "platformCompanyRoleDispatcher": "Dispatcher",
-  "platformCompanyRoleDriver": "Driver",
-  "platformCompanyRoleWorkshop": "Workshop",
-  "platformCompanyRoleDocumentation": "Documentation",
-  "platformCompanyRoleClaimsInsurance": "Claims / insurance",
-  "platformCompanyRoleFinance": "Finance",
-  "platformCompanyRoleCompanySupport": "Company support",
-  "platformCompanyRoleSubcontractorManager": "Subcontractor manager",
-  "platformCompanyRoleUnknown": "Unknown role",
-  "platformCompanyMemberStatus": "Status: {status}",
-  "@platformCompanyMemberStatus": {
-    "placeholders": {
-      "status": {
-        "type": "String"
-      }
-    }
-  },
-  "platformCompanyMemberInvitationStatus": "Invitation: {status}",
-  "@platformCompanyMemberInvitationStatus": {
-    "placeholders": {
-      "status": {
-        "type": "String"
-      }
-    }
-  },
-  "platformCompanyMemberLastLogin": "Last login: {date}",
-  "@platformCompanyMemberLastLogin": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
   "navPricingQuotes": "Pricing Quotes",
   "pricingQuotesModuleDescription": "Internal quote review",
   "pricingQuotesOpenModule": "Open pricing quotes",

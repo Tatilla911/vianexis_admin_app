@@ -15,10 +15,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get brandAppName => 'ViaNexis Admin';
 
   @override
-  String get brandControlCenterSubtitle => 'Operatív irányítóközpont';
+  String get brandControlCenterSubtitle => 'Platform irányítóközpont';
 
   @override
-  String get brandOperationalControlCenter => 'Operatív irányítóközpont';
+  String get brandOperationalControlCenter => 'Platform irányítóközpont';
 
   @override
   String get brandPlatformControlCenterBody =>
@@ -186,7 +186,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get dashboardTitle => 'Irányítóközpont';
 
   @override
-  String get dashboardOperationalOverviewTitle => 'Operatív áttekintés';
+  String get dashboardOperationalOverviewTitle =>
+      'Rendszerellenőrzési pillanatkép';
 
   @override
   String get dashboardOperationalOverviewBody =>
@@ -223,7 +224,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get dashboardPlaceholderBody =>
-      'Az operatív összesítések és platform mutatók itt jelennek meg.';
+      'A platformállapot-összesítések és ellenőrzési sorok mutatói itt jelennek meg.';
 
   @override
   String get registrationsTitle => 'Regisztrációs kérelmek';
@@ -2957,7 +2958,88 @@ class AppLocalizationsHu extends AppLocalizations {
   String get platformCompanySectionUsers => 'Felhasználó összegzés';
 
   @override
-  String get platformCompanySectionSupport => 'Support és flotta összegzés';
+  String get platformCompanyMembersSection => 'Felhasználók';
+
+  @override
+  String get platformCompanyMembersEmpty =>
+      'Nincs a szűrőnek megfelelő felhasználó.';
+
+  @override
+  String get platformCompanyMembersLoadError =>
+      'A cég felhasználói nem tölthetők be.';
+
+  @override
+  String get platformCompanyMembersFilterAll => 'Összes';
+
+  @override
+  String get platformCompanyMembersFilterOwners => 'Tulajdonosok';
+
+  @override
+  String get platformCompanyMembersFilterDispatchers => 'Diszpécserek';
+
+  @override
+  String get platformCompanyMembersFilterDrivers => 'Sofőrök';
+
+  @override
+  String get platformCompanyMembersFilterWorkshop => 'Műhely';
+
+  @override
+  String get platformCompanyMembersFilterDocumentation => 'Dokumentáció';
+
+  @override
+  String get platformCompanyMembersFilterOther => 'Egyéb';
+
+  @override
+  String get platformCompanyRoleCompanyOwner => 'Cégtulajdonos';
+
+  @override
+  String get platformCompanyRoleCompanyAdmin => 'Cégadminisztrátor';
+
+  @override
+  String get platformCompanyRoleDispatcher => 'Diszpécser';
+
+  @override
+  String get platformCompanyRoleDriver => 'Sofőr';
+
+  @override
+  String get platformCompanyRoleWorkshop => 'Műhely';
+
+  @override
+  String get platformCompanyRoleDocumentation => 'Dokumentáció';
+
+  @override
+  String get platformCompanyRoleClaimsInsurance => 'Kárügy / biztosítás';
+
+  @override
+  String get platformCompanyRoleFinance => 'Pénzügy';
+
+  @override
+  String get platformCompanyRoleCompanySupport => 'Céges support';
+
+  @override
+  String get platformCompanyRoleSubcontractorManager => 'Alvállalkozó-kezelő';
+
+  @override
+  String get platformCompanyRoleUnknown => 'Ismeretlen szerepkör';
+
+  @override
+  String platformCompanyMemberStatus(String status) {
+    return 'Státusz: $status';
+  }
+
+  @override
+  String platformCompanyMemberInvitationStatus(String status) {
+    return 'Meghívó: $status';
+  }
+
+  @override
+  String platformCompanyMemberLastLogin(String date) {
+    return 'Utolsó bejelentkezés: $date';
+  }
+
+  @override
+  String get platformCompanySectionSupport =>
+      'Support és nyilvántartott eszközszámok';
 
   @override
   String get platformCompanySectionOnboarding => 'Onboarding összegzés';
@@ -2985,7 +3067,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get platformCompanyOverviewHint =>
-      'A cég jelenlegi azonosítója és működési státusza.';
+      'A cég jelenlegi azonosítója és platform bérlőállapota.';
 
   @override
   String get platformCompanySectionRegistration =>
@@ -5262,6 +5344,27 @@ class AppLocalizationsHu extends AppLocalizations {
       'A lefordított válaszok nem kerülnek automatikusan kiküldésre. Ellenőrizd és erősítsd meg küldés előtt.';
 
   @override
+  String get customerCommunicationAutoTranslatedBadge => 'Automatikus fordítás';
+
+  @override
+  String get customerCommunicationAutoTranslatingBadge => 'Fordítás…';
+
+  @override
+  String customerCommunicationReplyLanguageHint(
+    String draft,
+    String recipient,
+  ) {
+    return 'Te $draft nyelven írsz. A levél a feladó nyelvén ($recipient) megy ki.';
+  }
+
+  @override
+  String get customerCommunicationSendInCustomerLanguageLabel =>
+      'Válasz küldése a feladó nyelvén';
+
+  @override
+  String get customerCommunicationReplyTranslating => 'Fordítás…';
+
+  @override
   String get customerCommunicationDeliveryProviderDisabledNotice =>
       'A küldési szolgáltató le van tiltva; a válasz naplózva lesz, de nem megy ki külső csatornára.';
 
@@ -5785,7 +5888,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get settingsLanguageBody =>
-      'Válaszd ki az admin app megjelenítési nyelvét.';
+      'Válaszd ki az admin app megjelenítési nyelvét. Az ügyfélüzenetek alapból magyarra fordítódnak automatikusan; ha itt angolra váltasz, a bejövő levelek angolra fordulnak. A válaszlevelek továbbra is a feladó nyelvén mennek ki.';
 
   @override
   String get settingsLanguageHu => 'Magyar';
@@ -5911,24 +6014,24 @@ class AppLocalizationsHu extends AppLocalizations {
   String get devicePinNonNumeric => 'A PIN csak számjegyeket tartalmazhat.';
 
   @override
-  String get navOperations => 'Műveleti áttekintés';
+  String get navOperations => 'Platform működési állapot';
 
   @override
-  String get operationsTitle => 'Műveleti áttekintés';
+  String get operationsTitle => 'Platform működési állapot';
 
   @override
   String get operationsModuleDescription =>
-      'Platform működési mutatók, fuvarok, sofőrök és függőségek.';
+      'Platform mutatók, fuvarállapot-számok, sofőrök és backend függőségek.';
 
   @override
-  String get operationsOpenModule => 'Műveleti áttekintés megnyitása';
+  String get operationsOpenModule => 'Platform működési állapot megnyitása';
 
   @override
   String get operationsMockBadge => 'Tesztadat';
 
   @override
   String get operationsLoadFailed =>
-      'A műveleti áttekintés betöltése sikertelen.';
+      'A platform működési állapot betöltése sikertelen.';
 
   @override
   String get operationsPrivacyNotice =>
@@ -5968,7 +6071,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get operationsActiveDrivers => 'Aktív sofőrök (becslés)';
 
   @override
-  String get operationsActiveTrips => 'Aktív fuvarok';
+  String get operationsActiveTrips => 'Aktív rendszerállapotú fuvarok';
 
   @override
   String get operationsCompletedTrips => 'Lezárt fuvarok';
@@ -5986,13 +6089,13 @@ class AppLocalizationsHu extends AppLocalizations {
   String get operationsPackagesGenerated => 'Generált csomagok';
 
   @override
-  String get operationsModulesTitle => 'Műveleti modulok';
+  String get operationsModulesTitle => 'Platform vizsgálati modulok';
 
   @override
   String get operationsLinkDriverAccess => 'Sofőr hozzáférés';
 
   @override
-  String get operationsLinkTrips => 'Fuvar áttekintő';
+  String get operationsLinkTrips => 'Fuvarállapot-vizsgálat';
 
   @override
   String get operationsLinkExchangeRecords => 'Exchange rekordok';
@@ -6156,7 +6259,7 @@ class AppLocalizationsHu extends AppLocalizations {
       'Nincs aktív sofőr profil a listában.';
 
   @override
-  String get tripsOverviewTitle => 'Fuvar áttekintő';
+  String get tripsOverviewTitle => 'Fuvarállapot-vizsgálat';
 
   @override
   String get tripsOverviewMockBadge => 'Tesztadat';
@@ -6170,7 +6273,7 @@ class AppLocalizationsHu extends AppLocalizations {
       'Csak fuvar metaadat: azonosító, státusz, exchange jelzők. Dokumentum- és üzenettartalom nem jelenik meg.';
 
   @override
-  String get tripsOverviewActiveCount => 'Aktív fuvarok';
+  String get tripsOverviewActiveCount => 'Aktív rendszerállapotú fuvarok';
 
   @override
   String get tripsOverviewCompletedCount => 'Lezárt fuvarok';
@@ -6183,7 +6286,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get tripsOverviewBackendMessage =>
-      'A platform fuvar lista endpointja még nem érhető el. Összesítő számok a dashboard API-ból jönnek.';
+      'A fuvarlista ebben a munkamenetben nem tölthető be. Az összesítő számok továbbra is a dashboard API-ból jönnek.';
 
   @override
   String get tripsOverviewListTitle => 'Fuvarok';
@@ -7125,86 +7228,6 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get qrCodesSendSkipped =>
       'Meghívó létrehozva. Az e-mail nem lett elküldve (kihagyva).';
-
-  @override
-  String get platformCompanyMembersSection => 'Felhasználók';
-
-  @override
-  String get platformCompanyMembersEmpty =>
-      'Nincs a szűrőnek megfelelő felhasználó.';
-
-  @override
-  String get platformCompanyMembersLoadError =>
-      'A cég felhasználói nem tölthetők be.';
-
-  @override
-  String get platformCompanyMembersFilterAll => 'Összes';
-
-  @override
-  String get platformCompanyMembersFilterOwners => 'Tulajdonosok';
-
-  @override
-  String get platformCompanyMembersFilterDispatchers => 'Diszpécserek';
-
-  @override
-  String get platformCompanyMembersFilterDrivers => 'Sofőrök';
-
-  @override
-  String get platformCompanyMembersFilterWorkshop => 'Műhely';
-
-  @override
-  String get platformCompanyMembersFilterDocumentation => 'Dokumentáció';
-
-  @override
-  String get platformCompanyMembersFilterOther => 'Egyéb';
-
-  @override
-  String get platformCompanyRoleCompanyOwner => 'Cégtulajdonos';
-
-  @override
-  String get platformCompanyRoleCompanyAdmin => 'Cégadminisztrátor';
-
-  @override
-  String get platformCompanyRoleDispatcher => 'Diszpécser';
-
-  @override
-  String get platformCompanyRoleDriver => 'Sofőr';
-
-  @override
-  String get platformCompanyRoleWorkshop => 'Műhely';
-
-  @override
-  String get platformCompanyRoleDocumentation => 'Dokumentáció';
-
-  @override
-  String get platformCompanyRoleClaimsInsurance => 'Kárügy / biztosítás';
-
-  @override
-  String get platformCompanyRoleFinance => 'Pénzügy';
-
-  @override
-  String get platformCompanyRoleCompanySupport => 'Céges support';
-
-  @override
-  String get platformCompanyRoleSubcontractorManager => 'Alvállalkozó-kezelő';
-
-  @override
-  String get platformCompanyRoleUnknown => 'Ismeretlen szerepkör';
-
-  @override
-  String platformCompanyMemberStatus(String status) {
-    return 'Státusz: $status';
-  }
-
-  @override
-  String platformCompanyMemberInvitationStatus(String status) {
-    return 'Meghívó: $status';
-  }
-
-  @override
-  String platformCompanyMemberLastLogin(String date) {
-    return 'Utolsó bejelentkezés: $date';
-  }
 
   @override
   String get navPricingQuotes => 'Árajánlatok';

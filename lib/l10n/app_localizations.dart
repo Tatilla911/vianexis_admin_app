@@ -113,13 +113,13 @@ abstract class AppLocalizations {
   /// No description provided for @brandControlCenterSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Operational control center'**
+  /// **'Platform control center'**
   String get brandControlCenterSubtitle;
 
   /// No description provided for @brandOperationalControlCenter.
   ///
   /// In en, this message translates to:
-  /// **'Operational Control Center'**
+  /// **'Platform Control Center'**
   String get brandOperationalControlCenter;
 
   /// No description provided for @brandPlatformControlCenterBody.
@@ -425,7 +425,7 @@ abstract class AppLocalizations {
   /// No description provided for @dashboardOperationalOverviewTitle.
   ///
   /// In en, this message translates to:
-  /// **'Operational overview'**
+  /// **'System review snapshot'**
   String get dashboardOperationalOverviewTitle;
 
   /// No description provided for @dashboardOperationalOverviewBody.
@@ -491,7 +491,7 @@ abstract class AppLocalizations {
   /// No description provided for @dashboardPlaceholderBody.
   ///
   /// In en, this message translates to:
-  /// **'Operational summaries and platform metrics will appear here.'**
+  /// **'Platform health summaries and review-queue metrics will appear here.'**
   String get dashboardPlaceholderBody;
 
   /// No description provided for @registrationsTitle.
@@ -5360,10 +5360,154 @@ abstract class AppLocalizations {
   /// **'Users summary'**
   String get platformCompanySectionUsers;
 
+  /// No description provided for @platformCompanyMembersSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get platformCompanyMembersSection;
+
+  /// No description provided for @platformCompanyMembersEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No members match this filter.'**
+  String get platformCompanyMembersEmpty;
+
+  /// No description provided for @platformCompanyMembersLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load company members.'**
+  String get platformCompanyMembersLoadError;
+
+  /// No description provided for @platformCompanyMembersFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get platformCompanyMembersFilterAll;
+
+  /// No description provided for @platformCompanyMembersFilterOwners.
+  ///
+  /// In en, this message translates to:
+  /// **'Owners'**
+  String get platformCompanyMembersFilterOwners;
+
+  /// No description provided for @platformCompanyMembersFilterDispatchers.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispatchers'**
+  String get platformCompanyMembersFilterDispatchers;
+
+  /// No description provided for @platformCompanyMembersFilterDrivers.
+  ///
+  /// In en, this message translates to:
+  /// **'Drivers'**
+  String get platformCompanyMembersFilterDrivers;
+
+  /// No description provided for @platformCompanyMembersFilterWorkshop.
+  ///
+  /// In en, this message translates to:
+  /// **'Workshop'**
+  String get platformCompanyMembersFilterWorkshop;
+
+  /// No description provided for @platformCompanyMembersFilterDocumentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Documentation'**
+  String get platformCompanyMembersFilterDocumentation;
+
+  /// No description provided for @platformCompanyMembersFilterOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get platformCompanyMembersFilterOther;
+
+  /// No description provided for @platformCompanyRoleCompanyOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Company owner'**
+  String get platformCompanyRoleCompanyOwner;
+
+  /// No description provided for @platformCompanyRoleCompanyAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Company administrator'**
+  String get platformCompanyRoleCompanyAdmin;
+
+  /// No description provided for @platformCompanyRoleDispatcher.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispatcher'**
+  String get platformCompanyRoleDispatcher;
+
+  /// No description provided for @platformCompanyRoleDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get platformCompanyRoleDriver;
+
+  /// No description provided for @platformCompanyRoleWorkshop.
+  ///
+  /// In en, this message translates to:
+  /// **'Workshop'**
+  String get platformCompanyRoleWorkshop;
+
+  /// No description provided for @platformCompanyRoleDocumentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Documentation'**
+  String get platformCompanyRoleDocumentation;
+
+  /// No description provided for @platformCompanyRoleClaimsInsurance.
+  ///
+  /// In en, this message translates to:
+  /// **'Claims / insurance'**
+  String get platformCompanyRoleClaimsInsurance;
+
+  /// No description provided for @platformCompanyRoleFinance.
+  ///
+  /// In en, this message translates to:
+  /// **'Finance'**
+  String get platformCompanyRoleFinance;
+
+  /// No description provided for @platformCompanyRoleCompanySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Company support'**
+  String get platformCompanyRoleCompanySupport;
+
+  /// No description provided for @platformCompanyRoleSubcontractorManager.
+  ///
+  /// In en, this message translates to:
+  /// **'Subcontractor manager'**
+  String get platformCompanyRoleSubcontractorManager;
+
+  /// No description provided for @platformCompanyRoleUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown role'**
+  String get platformCompanyRoleUnknown;
+
+  /// No description provided for @platformCompanyMemberStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status: {status}'**
+  String platformCompanyMemberStatus(String status);
+
+  /// No description provided for @platformCompanyMemberInvitationStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation: {status}'**
+  String platformCompanyMemberInvitationStatus(String status);
+
+  /// No description provided for @platformCompanyMemberLastLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Last login: {date}'**
+  String platformCompanyMemberLastLogin(String date);
+
   /// No description provided for @platformCompanySectionSupport.
   ///
   /// In en, this message translates to:
-  /// **'Support & fleet summary'**
+  /// **'Support and registered asset counts'**
   String get platformCompanySectionSupport;
 
   /// No description provided for @platformCompanySectionOnboarding.
@@ -5417,7 +5561,7 @@ abstract class AppLocalizations {
   /// No description provided for @platformCompanyOverviewHint.
   ///
   /// In en, this message translates to:
-  /// **'Current company identity and operational status.'**
+  /// **'Current company identity and platform tenant status.'**
   String get platformCompanyOverviewHint;
 
   /// No description provided for @platformCompanySectionRegistration.
@@ -9474,6 +9618,36 @@ abstract class AppLocalizations {
   /// **'Translated replies are not sent automatically. Review and confirm before sending.'**
   String get customerCommunicationTranslatedReplyWarning;
 
+  /// No description provided for @customerCommunicationAutoTranslatedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-translated'**
+  String get customerCommunicationAutoTranslatedBadge;
+
+  /// No description provided for @customerCommunicationAutoTranslatingBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Translating…'**
+  String get customerCommunicationAutoTranslatingBadge;
+
+  /// No description provided for @customerCommunicationReplyLanguageHint.
+  ///
+  /// In en, this message translates to:
+  /// **'You write in {draft}. The email is sent in the customer\'s language ({recipient}).'**
+  String customerCommunicationReplyLanguageHint(String draft, String recipient);
+
+  /// No description provided for @customerCommunicationSendInCustomerLanguageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Send reply in the customer\'s language'**
+  String get customerCommunicationSendInCustomerLanguageLabel;
+
+  /// No description provided for @customerCommunicationReplyTranslating.
+  ///
+  /// In en, this message translates to:
+  /// **'Translating…'**
+  String get customerCommunicationReplyTranslating;
+
   /// No description provided for @customerCommunicationDeliveryProviderDisabledNotice.
   ///
   /// In en, this message translates to:
@@ -10389,7 +10563,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsLanguageBody.
   ///
   /// In en, this message translates to:
-  /// **'Choose the admin app display language.'**
+  /// **'Choose the admin app display language. Customer messages are auto-translated to Hungarian by default; switch to English here to translate inbound mail to English instead. Outbound replies still go out in the customer\'s language.'**
   String get settingsLanguageBody;
 
   /// No description provided for @settingsLanguageHu.
@@ -10629,25 +10803,25 @@ abstract class AppLocalizations {
   /// No description provided for @navOperations.
   ///
   /// In en, this message translates to:
-  /// **'Operations overview'**
+  /// **'Platform operations health'**
   String get navOperations;
 
   /// No description provided for @operationsTitle.
   ///
   /// In en, this message translates to:
-  /// **'Operations overview'**
+  /// **'Platform operations health'**
   String get operationsTitle;
 
   /// No description provided for @operationsModuleDescription.
   ///
   /// In en, this message translates to:
-  /// **'Platform metrics, trips, drivers, and backend dependencies.'**
+  /// **'Platform metrics, trip-state counts, drivers, and backend dependencies.'**
   String get operationsModuleDescription;
 
   /// No description provided for @operationsOpenModule.
   ///
   /// In en, this message translates to:
-  /// **'Open operations overview'**
+  /// **'Open platform operations health'**
   String get operationsOpenModule;
 
   /// No description provided for @operationsMockBadge.
@@ -10659,7 +10833,7 @@ abstract class AppLocalizations {
   /// No description provided for @operationsLoadFailed.
   ///
   /// In en, this message translates to:
-  /// **'Failed to load operations overview.'**
+  /// **'Failed to load platform operations health.'**
   String get operationsLoadFailed;
 
   /// No description provided for @operationsPrivacyNotice.
@@ -10719,7 +10893,7 @@ abstract class AppLocalizations {
   /// No description provided for @operationsActiveTrips.
   ///
   /// In en, this message translates to:
-  /// **'Active trips'**
+  /// **'Trips in active system state'**
   String get operationsActiveTrips;
 
   /// No description provided for @operationsCompletedTrips.
@@ -10755,7 +10929,7 @@ abstract class AppLocalizations {
   /// No description provided for @operationsModulesTitle.
   ///
   /// In en, this message translates to:
-  /// **'Operations modules'**
+  /// **'Platform inspection modules'**
   String get operationsModulesTitle;
 
   /// No description provided for @operationsLinkDriverAccess.
@@ -10767,7 +10941,7 @@ abstract class AppLocalizations {
   /// No description provided for @operationsLinkTrips.
   ///
   /// In en, this message translates to:
-  /// **'Trips overview'**
+  /// **'Trip state inspection'**
   String get operationsLinkTrips;
 
   /// No description provided for @operationsLinkExchangeRecords.
@@ -11067,7 +11241,7 @@ abstract class AppLocalizations {
   /// No description provided for @tripsOverviewTitle.
   ///
   /// In en, this message translates to:
-  /// **'Trips overview'**
+  /// **'Trip state inspection'**
   String get tripsOverviewTitle;
 
   /// No description provided for @tripsOverviewMockBadge.
@@ -11091,7 +11265,7 @@ abstract class AppLocalizations {
   /// No description provided for @tripsOverviewActiveCount.
   ///
   /// In en, this message translates to:
-  /// **'Active trips'**
+  /// **'Trips in active system state'**
   String get tripsOverviewActiveCount;
 
   /// No description provided for @tripsOverviewCompletedCount.
@@ -11115,7 +11289,7 @@ abstract class AppLocalizations {
   /// No description provided for @tripsOverviewBackendMessage.
   ///
   /// In en, this message translates to:
-  /// **'Platform trip list endpoint is not available yet. Summary counts come from the dashboard API.'**
+  /// **'The trip list could not be loaded in this session. Summary counts still come from the dashboard API.'**
   String get tripsOverviewBackendMessage;
 
   /// No description provided for @tripsOverviewListTitle.
@@ -12833,150 +13007,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite created. Email was not sent (delivery skipped).'**
   String get qrCodesSendSkipped;
-
-  /// No description provided for @platformCompanyMembersSection.
-  ///
-  /// In en, this message translates to:
-  /// **'Users'**
-  String get platformCompanyMembersSection;
-
-  /// No description provided for @platformCompanyMembersEmpty.
-  ///
-  /// In en, this message translates to:
-  /// **'No members match this filter.'**
-  String get platformCompanyMembersEmpty;
-
-  /// No description provided for @platformCompanyMembersLoadError.
-  ///
-  /// In en, this message translates to:
-  /// **'Could not load company members.'**
-  String get platformCompanyMembersLoadError;
-
-  /// No description provided for @platformCompanyMembersFilterAll.
-  ///
-  /// In en, this message translates to:
-  /// **'All'**
-  String get platformCompanyMembersFilterAll;
-
-  /// No description provided for @platformCompanyMembersFilterOwners.
-  ///
-  /// In en, this message translates to:
-  /// **'Owners'**
-  String get platformCompanyMembersFilterOwners;
-
-  /// No description provided for @platformCompanyMembersFilterDispatchers.
-  ///
-  /// In en, this message translates to:
-  /// **'Dispatchers'**
-  String get platformCompanyMembersFilterDispatchers;
-
-  /// No description provided for @platformCompanyMembersFilterDrivers.
-  ///
-  /// In en, this message translates to:
-  /// **'Drivers'**
-  String get platformCompanyMembersFilterDrivers;
-
-  /// No description provided for @platformCompanyMembersFilterWorkshop.
-  ///
-  /// In en, this message translates to:
-  /// **'Workshop'**
-  String get platformCompanyMembersFilterWorkshop;
-
-  /// No description provided for @platformCompanyMembersFilterDocumentation.
-  ///
-  /// In en, this message translates to:
-  /// **'Documentation'**
-  String get platformCompanyMembersFilterDocumentation;
-
-  /// No description provided for @platformCompanyMembersFilterOther.
-  ///
-  /// In en, this message translates to:
-  /// **'Other'**
-  String get platformCompanyMembersFilterOther;
-
-  /// No description provided for @platformCompanyRoleCompanyOwner.
-  ///
-  /// In en, this message translates to:
-  /// **'Company owner'**
-  String get platformCompanyRoleCompanyOwner;
-
-  /// No description provided for @platformCompanyRoleCompanyAdmin.
-  ///
-  /// In en, this message translates to:
-  /// **'Company administrator'**
-  String get platformCompanyRoleCompanyAdmin;
-
-  /// No description provided for @platformCompanyRoleDispatcher.
-  ///
-  /// In en, this message translates to:
-  /// **'Dispatcher'**
-  String get platformCompanyRoleDispatcher;
-
-  /// No description provided for @platformCompanyRoleDriver.
-  ///
-  /// In en, this message translates to:
-  /// **'Driver'**
-  String get platformCompanyRoleDriver;
-
-  /// No description provided for @platformCompanyRoleWorkshop.
-  ///
-  /// In en, this message translates to:
-  /// **'Workshop'**
-  String get platformCompanyRoleWorkshop;
-
-  /// No description provided for @platformCompanyRoleDocumentation.
-  ///
-  /// In en, this message translates to:
-  /// **'Documentation'**
-  String get platformCompanyRoleDocumentation;
-
-  /// No description provided for @platformCompanyRoleClaimsInsurance.
-  ///
-  /// In en, this message translates to:
-  /// **'Claims / insurance'**
-  String get platformCompanyRoleClaimsInsurance;
-
-  /// No description provided for @platformCompanyRoleFinance.
-  ///
-  /// In en, this message translates to:
-  /// **'Finance'**
-  String get platformCompanyRoleFinance;
-
-  /// No description provided for @platformCompanyRoleCompanySupport.
-  ///
-  /// In en, this message translates to:
-  /// **'Company support'**
-  String get platformCompanyRoleCompanySupport;
-
-  /// No description provided for @platformCompanyRoleSubcontractorManager.
-  ///
-  /// In en, this message translates to:
-  /// **'Subcontractor manager'**
-  String get platformCompanyRoleSubcontractorManager;
-
-  /// No description provided for @platformCompanyRoleUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown role'**
-  String get platformCompanyRoleUnknown;
-
-  /// No description provided for @platformCompanyMemberStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Status: {status}'**
-  String platformCompanyMemberStatus(String status);
-
-  /// No description provided for @platformCompanyMemberInvitationStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Invitation: {status}'**
-  String platformCompanyMemberInvitationStatus(String status);
-
-  /// No description provided for @platformCompanyMemberLastLogin.
-  ///
-  /// In en, this message translates to:
-  /// **'Last login: {date}'**
-  String platformCompanyMemberLastLogin(String date);
 
   /// No description provided for @navPricingQuotes.
   ///

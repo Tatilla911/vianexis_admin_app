@@ -2,8 +2,8 @@
   "@@locale": "hu",
   "appTitle": "ViaNexis Admin",
   "brandAppName": "ViaNexis Admin",
-  "brandControlCenterSubtitle": "Operatív irányítóközpont",
-  "brandOperationalControlCenter": "Operatív irányítóközpont",
+  "brandControlCenterSubtitle": "Platform irányítóközpont",
+  "brandOperationalControlCenter": "Platform irányítóközpont",
   "brandPlatformControlCenterBody": "Platform irányítóközpont metaadat-alapú adminisztrációhoz, ellenőrzési sorokhoz és audit láthatósághoz.",
   "brandAdminOnlyAccess": "Csak platform admin hozzáférés. Bérlői sofőr és diszpécser fiókok nem léphetnek be.",
   "brandMetadataOnlyPlatformView": "Csak metaadat platform nézet — nincs üzemeltetési fuvar-, dokumentum- vagy üzenettartalom.",
@@ -54,7 +54,7 @@
   "loginSignInButton": "Belépés",
   "loginBackendNotConfigured": "A backend kapcsolat még nincs beállítva.",
   "dashboardTitle": "Irányítóközpont",
-  "dashboardOperationalOverviewTitle": "Operatív áttekintés",
+  "dashboardOperationalOverviewTitle": "Rendszerellenőrzési pillanatkép",
   "dashboardOperationalOverviewBody": "Metaadat-alapú irányítópult pillanatkép a platform szolgáltatásairól és emberi ellenőrzési sorokról.",
   "dashboardSystemStatusHealthy": "Egészséges",
   "dashboardSystemStatusAttention": "Figyelmet igényel",
@@ -65,7 +65,7 @@
   "dashboardMetricAiHighRisk": "Magas kockázatú AI értékelések",
   "dashboardMetricSupportIssues": "Nyitott support ügyek",
   "dashboardMetricAuditRisks": "Sikertelen / elutasított audit események",
-  "dashboardPlaceholderBody": "Az operatív összesítések és platform mutatók itt jelennek meg.",
+  "dashboardPlaceholderBody": "A platformállapot-összesítések és ellenőrzési sorok mutatói itt jelennek meg.",
   "registrationsTitle": "Regisztrációs kérelmek",
   "applicationsTitle": "Jelentkezések",
   "applicationDetailTitle": "Jelentkezés #{id}",
@@ -1015,7 +1015,52 @@
     }
   },
     "platformCompanySectionUsers": "Felhasználó összegzés",
-  "platformCompanySectionSupport": "Support és flotta összegzés",
+  "platformCompanyMembersSection": "Felhasználók",
+  "platformCompanyMembersEmpty": "Nincs a szűrőnek megfelelő felhasználó.",
+  "platformCompanyMembersLoadError": "A cég felhasználói nem tölthetők be.",
+  "platformCompanyMembersFilterAll": "Összes",
+  "platformCompanyMembersFilterOwners": "Tulajdonosok",
+  "platformCompanyMembersFilterDispatchers": "Diszpécserek",
+  "platformCompanyMembersFilterDrivers": "Sofőrök",
+  "platformCompanyMembersFilterWorkshop": "Műhely",
+  "platformCompanyMembersFilterDocumentation": "Dokumentáció",
+  "platformCompanyMembersFilterOther": "Egyéb",
+  "platformCompanyRoleCompanyOwner": "Cégtulajdonos",
+  "platformCompanyRoleCompanyAdmin": "Cégadminisztrátor",
+  "platformCompanyRoleDispatcher": "Diszpécser",
+  "platformCompanyRoleDriver": "Sofőr",
+  "platformCompanyRoleWorkshop": "Műhely",
+  "platformCompanyRoleDocumentation": "Dokumentáció",
+  "platformCompanyRoleClaimsInsurance": "Kárügy / biztosítás",
+  "platformCompanyRoleFinance": "Pénzügy",
+  "platformCompanyRoleCompanySupport": "Céges support",
+  "platformCompanyRoleSubcontractorManager": "Alvállalkozó-kezelő",
+  "platformCompanyRoleUnknown": "Ismeretlen szerepkör",
+  "platformCompanyMemberStatus": "Státusz: {status}",
+  "@platformCompanyMemberStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMemberInvitationStatus": "Meghívó: {status}",
+  "@platformCompanyMemberInvitationStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanyMemberLastLogin": "Utolsó bejelentkezés: {date}",
+  "@platformCompanyMemberLastLogin": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "platformCompanySectionSupport": "Support és nyilvántartott eszközszámok",
   "platformCompanySectionOnboarding": "Onboarding összegzés",
   "platformCompanyFieldCountry": "Ország",
   "platformCompanyFieldVat": "Adószám",
@@ -1024,7 +1069,7 @@
   "platformCompanyFieldSubscriptionStatus": "Előfizetés státusza",
   "platformCompanyFieldLastAdminActivity": "Utolsó admin aktivitás",
   "platformCompanySectionOverview": "Áttekintés",
-  "platformCompanyOverviewHint": "A cég jelenlegi azonosítója és működési státusza.",
+  "platformCompanyOverviewHint": "A cég jelenlegi azonosítója és platform bérlőállapota.",
   "platformCompanySectionRegistration": "Regisztráció és eredeti beadás",
   "platformCompanyOriginalSubmitted": "Eredetileg beadott adat",
   "platformCompanyCurrentValid": "Jelenleg érvényes adat",
@@ -1749,6 +1794,17 @@
   "customerCommunicationHumanConfirmedBadge": "Emberi megerősítés",
   "customerCommunicationTranslationApprovedBadge": "Fordítás jóváhagyva",
   "customerCommunicationTranslatedReplyWarning": "A lefordított válaszok nem kerülnek automatikusan kiküldésre. Ellenőrizd és erősítsd meg küldés előtt.",
+  "customerCommunicationAutoTranslatedBadge": "Automatikus fordítás",
+  "customerCommunicationAutoTranslatingBadge": "Fordítás…",
+  "customerCommunicationReplyLanguageHint": "Te {draft} nyelven írsz. A levél a feladó nyelvén ({recipient}) megy ki.",
+  "@customerCommunicationReplyLanguageHint": {
+    "placeholders": {
+      "draft": { "type": "String" },
+      "recipient": { "type": "String" }
+    }
+  },
+  "customerCommunicationSendInCustomerLanguageLabel": "Válasz küldése a feladó nyelvén",
+  "customerCommunicationReplyTranslating": "Fordítás…",
   "customerCommunicationDeliveryProviderDisabledNotice": "A küldési szolgáltató le van tiltva; a válasz naplózva lesz, de nem megy ki külső csatornára.",
   "customerCommunicationReplyLoggedSkippedNotice": "Válasz naplózva, küldés kihagyva (szolgáltató tiltva).",
   "customerCommunicationReplySentSuccess": "Válasz sikeresen elküldve.",
@@ -1901,7 +1957,7 @@
   "modulesHubBody": "További admin modulok és beállítások.",
   "navReturnToDashboard": "Vissza az irányítópultra",
   "settingsLanguageSection": "Nyelv",
-  "settingsLanguageBody": "Válaszd ki az admin app megjelenítési nyelvét.",
+  "settingsLanguageBody": "Válaszd ki az admin app megjelenítési nyelvét. Az ügyfélüzenetek alapból magyarra fordítódnak automatikusan; ha itt angolra váltasz, a bejövő levelek angolra fordulnak. A válaszlevelek továbbra is a feladó nyelvén mennek ki.",
   "settingsLanguageHu": "Magyar",
   "settingsLanguageEn": "Angol",
   "settingsAppearanceSection": "Megjelenés",
@@ -1941,12 +1997,12 @@
   "devicePinInvalidLength": "A PIN 4–8 számjegy legyen.",
   "devicePinInvalidCurrent": "A jelenlegi PIN helytelen.",
   "devicePinNonNumeric": "A PIN csak számjegyeket tartalmazhat.",
-  "navOperations": "Műveleti áttekintés",
-  "operationsTitle": "Műveleti áttekintés",
-  "operationsModuleDescription": "Platform működési mutatók, fuvarok, sofőrök és függőségek.",
-  "operationsOpenModule": "Műveleti áttekintés megnyitása",
+  "navOperations": "Platform működési állapot",
+  "operationsTitle": "Platform működési állapot",
+  "operationsModuleDescription": "Platform mutatók, fuvarállapot-számok, sofőrök és backend függőségek.",
+  "operationsOpenModule": "Platform működési állapot megnyitása",
   "operationsMockBadge": "Tesztadat",
-  "operationsLoadFailed": "A műveleti áttekintés betöltése sikertelen.",
+  "operationsLoadFailed": "A platform működési állapot betöltése sikertelen.",
   "operationsPrivacyNotice": "Csak aggregált platform metaadat. Fuvar-, dokumentum- és üzenettartalom nem jelenik meg.",
   "operationsPendingSyncTitle": "Függőben lévő szinkron problémák",
   "operationsPendingSyncDependency": "A szinkron figyelmeztetések platform szintű listája még nincs bekötve.",
@@ -1969,15 +2025,15 @@
   "operationsExchangeRecordsDependency": "A platform szintű exchange rekord lista endpointja még nem érhető el.",
   "operationsCompanyCount": "Cégek (aktív/összes)",
   "operationsActiveDrivers": "Aktív sofőrök (becslés)",
-  "operationsActiveTrips": "Aktív fuvarok",
+  "operationsActiveTrips": "Aktív rendszerállapotú fuvarok",
   "operationsCompletedTrips": "Lezárt fuvarok",
   "operationsSupportAccess": "Aktív support hozzáférés",
   "operationsPublicIntakes": "Függő publikus megkeresések",
   "operationsPendingRegistrations": "Függő regisztrációk",
   "operationsPackagesGenerated": "Generált csomagok",
-  "operationsModulesTitle": "Műveleti modulok",
+  "operationsModulesTitle": "Platform vizsgálati modulok",
   "operationsLinkDriverAccess": "Sofőr hozzáférés",
-  "operationsLinkTrips": "Fuvar áttekintő",
+  "operationsLinkTrips": "Fuvarállapot-vizsgálat",
   "operationsLinkExchangeRecords": "Exchange rekordok",
   "operationsLinkNotificationStatus": "Értesítések státusza",
   "operationsLinkSupportAccess": "Support hozzáférés",
@@ -2027,15 +2083,15 @@
   "driverAccessPendingCompanyCode": "Cégkód",
   "driverAccessPendingCreatedAt": "Beküldve",
   "driverAccessNoActiveDrivers": "Nincs aktív sofőr profil a listában.",
-  "tripsOverviewTitle": "Fuvar áttekintő",
+  "tripsOverviewTitle": "Fuvarállapot-vizsgálat",
   "tripsOverviewMockBadge": "Tesztadat",
   "tripsOverviewLoadFailed": "A fuvar áttekintő betöltése sikertelen.",
   "tripsOverviewPrivacyNotice": "Csak fuvar metaadat: azonosító, státusz, exchange jelzők. Dokumentum- és üzenettartalom nem jelenik meg.",
-  "tripsOverviewActiveCount": "Aktív fuvarok",
+  "tripsOverviewActiveCount": "Aktív rendszerállapotú fuvarok",
   "tripsOverviewCompletedCount": "Lezárt fuvarok",
   "tripsOverviewParkedCount": "Parkolt fuvarok",
   "tripsOverviewBackendTitle": "Backend függőség",
-  "tripsOverviewBackendMessage": "A platform fuvar lista endpointja még nem érhető el. Összesítő számok a dashboard API-ból jönnek.",
+  "tripsOverviewBackendMessage": "A fuvarlista ebben a munkamenetben nem tölthető be. Az összesítő számok továbbra is a dashboard API-ból jönnek.",
   "tripsOverviewListTitle": "Fuvarok",
   "tripsOverviewExchangeIndicator": "Van exchange rekord",
   "tripsOverviewExchangeAttention": "Exchange figyelmeztetés",
@@ -2416,51 +2472,6 @@
   "qrCodesActivationLink": "Aktiváló link",
   "qrCodesSendSuccess": "Meghívó e-mail sikeresen elküldve.",
   "qrCodesSendSkipped": "Meghívó létrehozva. Az e-mail nem lett elküldve (kihagyva).",
-  "platformCompanyMembersSection": "Felhasználók",
-  "platformCompanyMembersEmpty": "Nincs a szűrőnek megfelelő felhasználó.",
-  "platformCompanyMembersLoadError": "A cég felhasználói nem tölthetők be.",
-  "platformCompanyMembersFilterAll": "Összes",
-  "platformCompanyMembersFilterOwners": "Tulajdonosok",
-  "platformCompanyMembersFilterDispatchers": "Diszpécserek",
-  "platformCompanyMembersFilterDrivers": "Sofőrök",
-  "platformCompanyMembersFilterWorkshop": "Műhely",
-  "platformCompanyMembersFilterDocumentation": "Dokumentáció",
-  "platformCompanyMembersFilterOther": "Egyéb",
-  "platformCompanyRoleCompanyOwner": "Cégtulajdonos",
-  "platformCompanyRoleCompanyAdmin": "Cégadminisztrátor",
-  "platformCompanyRoleDispatcher": "Diszpécser",
-  "platformCompanyRoleDriver": "Sofőr",
-  "platformCompanyRoleWorkshop": "Műhely",
-  "platformCompanyRoleDocumentation": "Dokumentáció",
-  "platformCompanyRoleClaimsInsurance": "Kárügy / biztosítás",
-  "platformCompanyRoleFinance": "Pénzügy",
-  "platformCompanyRoleCompanySupport": "Céges support",
-  "platformCompanyRoleSubcontractorManager": "Alvállalkozó-kezelő",
-  "platformCompanyRoleUnknown": "Ismeretlen szerepkör",
-  "platformCompanyMemberStatus": "Státusz: {status}",
-  "@platformCompanyMemberStatus": {
-    "placeholders": {
-      "status": {
-        "type": "String"
-      }
-    }
-  },
-  "platformCompanyMemberInvitationStatus": "Meghívó: {status}",
-  "@platformCompanyMemberInvitationStatus": {
-    "placeholders": {
-      "status": {
-        "type": "String"
-      }
-    }
-  },
-  "platformCompanyMemberLastLogin": "Utolsó bejelentkezés: {date}",
-  "@platformCompanyMemberLastLogin": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
   "navPricingQuotes": "Árajánlatok",
   "pricingQuotesModuleDescription": "Belső ajánlatellenőrzés",
   "pricingQuotesOpenModule": "Árajánlatok megnyitása",
