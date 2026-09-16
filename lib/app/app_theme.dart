@@ -38,8 +38,14 @@ abstract final class AppTheme {
       primary: VianexisBrand.accentBlue,
       onPrimary: isDark ? VianexisBrand.brandInkOnGold : Colors.white,
       onSurface: onSurface,
+      onSurfaceVariant: muted,
+      outline: border,
+      outlineVariant: border.withValues(alpha: 0.72),
+      surfaceContainerHighest: surface,
       error: VianexisBrand.danger,
+      onError: Colors.white,
       tertiary: VianexisBrand.goldAccent,
+      onTertiary: VianexisBrand.brandInkOnGold,
     );
 
     final baseText = GoogleFonts.playfairDisplayTextTheme(
@@ -69,26 +75,32 @@ abstract final class AppTheme {
         indicatorColor: VianexisBrand.accentBlue.withValues(alpha: 0.24),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
+          final selectedColor =
+              isDark ? VianexisBrand.goldAccent : VianexisBrand.accentBlue;
           return GoogleFonts.playfairDisplay(
-            color: selected ? VianexisBrand.goldAccent : onSurface,
+            color: selected ? selectedColor : onSurface,
             fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
             fontSize: 12,
           );
         }),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
+          final selectedColor =
+              isDark ? VianexisBrand.goldAccent : VianexisBrand.accentBlue;
           return IconThemeData(
-            color: selected ? VianexisBrand.goldAccent : onSurface,
+            color: selected ? selectedColor : onSurface,
           );
         }),
       ),
       navigationRailTheme: NavigationRailThemeData(
         backgroundColor: panel,
         indicatorColor: const Color(0x3D4DA3FF),
-        selectedIconTheme: const IconThemeData(color: VianexisBrand.goldAccent),
+        selectedIconTheme: IconThemeData(
+          color: isDark ? VianexisBrand.goldAccent : VianexisBrand.accentBlue,
+        ),
         unselectedIconTheme: IconThemeData(color: onSurface),
         selectedLabelTextStyle: GoogleFonts.playfairDisplay(
-          color: VianexisBrand.goldAccent,
+          color: isDark ? VianexisBrand.goldAccent : VianexisBrand.accentBlue,
           fontWeight: FontWeight.w600,
         ),
         unselectedLabelTextStyle: GoogleFonts.playfairDisplay(color: onSurface),
@@ -171,6 +183,47 @@ abstract final class AppTheme {
       listTileTheme: ListTileThemeData(
         iconColor: muted,
         textColor: onSurface,
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: surface,
+        disabledColor: surface.withValues(alpha: 0.7),
+        selectedColor: VianexisBrand.accentBlue.withValues(alpha: 0.28),
+        secondarySelectedColor: VianexisBrand.goldAccent.withValues(alpha: 0.28),
+        labelStyle: GoogleFonts.playfairDisplay(
+          color: onSurface,
+          fontWeight: FontWeight.w600,
+          fontSize: 12,
+        ),
+        secondaryLabelStyle: GoogleFonts.playfairDisplay(
+          color: muted,
+          fontWeight: FontWeight.w500,
+          fontSize: 12,
+        ),
+        side: BorderSide(color: border),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(VianexisBrand.radiusSm),
+        ),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: panel,
+        titleTextStyle: VianexisBrand.displayStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+          color: onSurface,
+        ),
+        contentTextStyle: GoogleFonts.playfairDisplay(
+          color: muted,
+          fontSize: 14,
+        ),
+      ),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: isDark ? VianexisBrand.surfaceElevated : panel,
+        contentTextStyle: GoogleFonts.playfairDisplay(color: onSurface),
+        actionTextColor: VianexisBrand.goldAccent,
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: panel,
+        modalBackgroundColor: panel,
       ),
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith((states) {
