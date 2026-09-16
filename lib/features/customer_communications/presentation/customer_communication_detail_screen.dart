@@ -10,8 +10,11 @@ import '../../../core/widgets/vianexis_metadata_notice.dart';
 import '../../../core/widgets/vianexis_status_badge.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../release_center/presentation/release_center_providers.dart';
+import '../../translation/data/translation_repository.dart';
+import '../domain/customer_message_language.dart';
 import '../domain/evidence_package_request.dart';
 import '../domain/send_reply_request.dart';
+import 'communications_translation_preference.dart';
 import 'customer_communications_providers.dart';
 import 'widgets/agreement_snapshot_card.dart';
 import 'widgets/communication_message_timeline.dart';
@@ -106,6 +109,7 @@ class CustomerCommunicationDetailScreen extends ConsumerWidget {
             CommunicationMessageTimeline(
               messages: detail.messages,
               deliveryCountForMessage: detail.deliveryCountForMessage,
+              companyId: detail.thread.companyId,
             ),
             const SizedBox(height: 16),
             Text(
@@ -207,10 +211,43 @@ class CustomerCommunicationDetailScreen extends ConsumerWidget {
         emailStatus == null ||
         !emailStatus.deliveryEnabled ||
         emailStatus.noopMode;
+
+    final draftLanguage = communicationsAdminDraftLanguageOf(ref, context);
+    final detail = await ref.read(
+      customerCommunicationDetailProvider(threadId).future,
+    );
+    if (!context.mounted) return;
+
+    var recipientLanguage = resolveCustomerSenderLanguage(detail.messages);
+    if (recipientLanguage == null || recipientLanguage.isEmpty) {
+      final inboundText = latestInboundOriginalText(detail.messages);
+      if (inboundText != null) {
+        try {
+          final detected = await ref
+              .read(translationRepositoryProvider)
+              .detectLanguage(inboundText);
+          recipientLanguage = detected.language?.toLowerCase();
+        } catch (_) {
+          recipientLanguage = null;
+        }
+      }
+    }
+    if (!context.mounted) return;
+
+    final resolvedRecipient =
+        (recipientLanguage != null && recipientLanguage.length >= 2)
+            ? recipientLanguage.substring(0, 2)
+            : draftLanguage;
+
     final request = await showDialog<SendCustomerReplyRequest>(
       context: context,
-      builder: (context) =>
-          SendCustomerReplyDialog(providerDisabled: providerDisabled),
+      builder: (context) => SendCustomerReplyDialog(
+        providerDisabled: providerDisabled,
+        threadId: threadId,
+        draftLanguage: draftLanguage,
+        recipientLanguage: resolvedRecipient,
+        companyId: detail.thread.companyId,
+      ),
     );
     if (request == null) return;
 

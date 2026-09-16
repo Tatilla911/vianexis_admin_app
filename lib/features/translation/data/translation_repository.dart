@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_config.dart';
-import '../../../core/api/api_exception.dart';
 import '../domain/reply_translation_preview.dart';
 import '../domain/translation_record.dart';
 import '../domain/translation_request.dart';
@@ -12,6 +11,8 @@ abstract class TranslationRepository {
   Future<TranslationProviderStatus> fetchProviderStatus();
 
   Future<TranslationOperationResult> translate(TranslationRequest request);
+
+  Future<DetectedLanguageResult> detectLanguage(String text);
 
   Future<ReplyTranslationPreview> previewReply({
     required String sourceType,
@@ -65,6 +66,11 @@ class LiveTranslationRepository implements TranslationRepository {
   }
 
   @override
+  Future<DetectedLanguageResult> detectLanguage(String text) {
+    return _api.detectLanguage(text);
+  }
+
+  @override
   Future<ReplyTranslationPreview> previewReply({
     required String sourceType,
     required String sourceId,
@@ -108,7 +114,47 @@ class MockTranslationRepository implements TranslationRepository {
     TranslationRequest request,
   ) async {
     await Future<void>.delayed(const Duration(milliseconds: 120));
-    throw const ApiException(messageKey: 'translationProviderDisabled');
+    final record = TranslationRecord(
+      id: 'mock-translate-1',
+      sourceType: request.sourceType,
+      sourceId: request.sourceId,
+      sourceField: request.sourceField,
+      originalTextHash: 'mock-hash',
+      sourceLanguage: request.sourceLanguage,
+      targetLanguage: request.targetLanguage,
+      translatedText: '[${request.targetLanguage}] ${request.text}',
+      provider: 'mock',
+      status: TranslationStatus.machineTranslated,
+      needsReview: true,
+      metadataOnly: false,
+      humanConfirmationRequired: true,
+      stale: false,
+    );
+    return TranslationOperationResult(
+      enabled: true,
+      provider: 'mock',
+      originalText: request.text,
+      translatedText: record.translatedText,
+      detectedSourceLanguage: request.sourceLanguage,
+      humanConfirmationRequired: true,
+      autoSendAllowed: false,
+      record: record,
+    );
+  }
+
+  @override
+  Future<DetectedLanguageResult> detectLanguage(String text) async {
+    await Future<void>.delayed(const Duration(milliseconds: 40));
+    final lower = text.toLowerCase();
+    final language = lower.contains('the ') || lower.contains(' and ')
+        ? 'en'
+        : 'hu';
+    return DetectedLanguageResult(
+      enabled: true,
+      provider: 'mock',
+      language: language,
+      confidence: 0.9,
+    );
   }
 
   @override

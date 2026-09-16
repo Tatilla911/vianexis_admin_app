@@ -2318,6 +2318,19 @@ String resolveCustomerCommunicationsKey(
     ),
     'customerCommunicationSummaryTotal' =>
       l10n.customerCommunicationSummaryTotal(params['count'] ?? '0'),
+    'customerCommunicationAutoTranslatedBadge' =>
+      l10n.customerCommunicationAutoTranslatedBadge,
+    'customerCommunicationAutoTranslatingBadge' =>
+      l10n.customerCommunicationAutoTranslatingBadge,
+    'customerCommunicationReplyLanguageHint' =>
+      l10n.customerCommunicationReplyLanguageHint(
+        params['draft'] ?? '',
+        params['recipient'] ?? '',
+      ),
+    'customerCommunicationSendInCustomerLanguageLabel' =>
+      l10n.customerCommunicationSendInCustomerLanguageLabel,
+    'customerCommunicationReplyTranslating' =>
+      l10n.customerCommunicationReplyTranslating,
     _ => l10n.errorGenericBody,
   };
 }

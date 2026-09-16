@@ -31,6 +31,16 @@ class TranslationApi {
     return TranslationOperationResult.fromJson(data);
   }
 
+  /// `POST /translations/detect-language`
+  Future<DetectedLanguageResult> detectLanguage(String text) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '/translations/detect-language',
+      data: {'text': text},
+    );
+    final data = response.data ?? const <String, dynamic>{};
+    return DetectedLanguageResult.fromJson(data);
+  }
+
   Future<ReplyTranslationPreview> replyPreview({
     required String sourceType,
     required String sourceId,

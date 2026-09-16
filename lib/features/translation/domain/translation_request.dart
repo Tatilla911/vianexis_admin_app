@@ -29,3 +29,29 @@ class TranslationRequest {
     };
   }
 }
+
+class DetectedLanguageResult {
+  const DetectedLanguageResult({
+    required this.enabled,
+    required this.provider,
+    this.language,
+    this.confidence,
+  });
+
+  final bool enabled;
+  final String provider;
+  final String? language;
+  final double? confidence;
+
+  factory DetectedLanguageResult.fromJson(Map<String, dynamic> json) {
+    final rawConfidence = json['confidence'];
+    return DetectedLanguageResult(
+      enabled: json['enabled'] == true,
+      provider: json['provider']?.toString() ?? 'none',
+      language: json['language']?.toString(),
+      confidence: rawConfidence is num
+          ? rawConfidence.toDouble()
+          : double.tryParse(rawConfidence?.toString() ?? ''),
+    );
+  }
+}
