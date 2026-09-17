@@ -564,6 +564,21 @@ String resolveSystemMonitoringKey(
     'systemMonitoringDependencyUnknown' =>
       l10n.systemMonitoringDependencyUnknown,
     'systemMonitoringFieldCheckedAt' => l10n.systemMonitoringFieldCheckedAt,
+    'systemMonitoringFieldLastChecked' => l10n.systemMonitoringFieldLastChecked,
+    'systemMonitoringFieldIncidentStarted' =>
+      l10n.systemMonitoringFieldIncidentStarted,
+    'systemMonitoringFieldDurationSoFar' =>
+      l10n.systemMonitoringFieldDurationSoFar,
+    'systemMonitoringFieldRecoveredAt' =>
+      l10n.systemMonitoringFieldRecoveredAt,
+    'systemMonitoringFieldDuration' => l10n.systemMonitoringFieldDuration,
+    'systemMonitoringFieldLastIncident' =>
+      l10n.systemMonitoringFieldLastIncident,
+    'systemMonitoringFieldStatus' => l10n.systemMonitoringFieldStatus,
+    'systemMonitoringCurrentHealthTitle' =>
+      l10n.systemMonitoringCurrentHealthTitle,
+    'systemMonitoringIncidentHistoryTitle' =>
+      l10n.systemMonitoringIncidentHistoryTitle,
     'systemMonitoringFieldDependencyType' =>
       l10n.systemMonitoringFieldDependencyType,
     'systemMonitoringFieldResponseTime' =>
@@ -578,6 +593,10 @@ String resolveSystemMonitoringKey(
     'systemMonitoringYes' => l10n.systemMonitoringYes,
     'systemMonitoringNo' => l10n.systemMonitoringNo,
     'systemMonitoringDiagnosticTitle' => l10n.systemMonitoringDiagnosticTitle,
+    'systemMonitoringDiagnosticGenericTitle' =>
+      l10n.systemMonitoringDiagnosticGenericTitle,
+    'systemMonitoringDiagnosticActiveIncidentTitle' =>
+      l10n.systemMonitoringDiagnosticActiveIncidentTitle,
     'systemMonitoringAiDisclaimer' => l10n.systemMonitoringAiDisclaimer,
     'systemMonitoringDiagnosticPossibleCauses' =>
       l10n.systemMonitoringDiagnosticPossibleCauses,
@@ -2427,21 +2446,13 @@ String resolveNotificationsKey(
     'notificationsYes' => l10n.notificationsYes,
     'notificationsNo' => l10n.notificationsNo,
     'notificationDriverRegistrationTitle' =>
-      Localizations.localeOf(context).languageCode == 'hu'
-          ? 'Új sofőrregisztráció'
-          : 'New driver registration',
+      l10n.notificationDriverRegistrationTitle,
     'notificationDriverRegistrationBody' =>
-      Localizations.localeOf(context).languageCode == 'hu'
-          ? 'Új sofőrregisztráció érkezett. Elbírálás szükséges.'
-          : 'A new driver registration was received and is waiting for review.',
+      l10n.notificationDriverRegistrationBody,
     'notificationCompanyApplicationTitle' =>
-      Localizations.localeOf(context).languageCode == 'hu'
-          ? 'Új cégregisztráció'
-          : 'New company registration',
+      l10n.notificationCompanyApplicationTitle,
     'notificationCompanyApplicationBody' =>
-      Localizations.localeOf(context).languageCode == 'hu'
-          ? 'Új cégregisztráció érkezett. Elbírálás szükséges.'
-          : 'A new company registration was received and is waiting for review.',
+      l10n.notificationCompanyApplicationBody,
     'notificationOpenRegistration' =>
       Localizations.localeOf(context).languageCode == 'hu'
           ? 'Regisztráció megnyitása'

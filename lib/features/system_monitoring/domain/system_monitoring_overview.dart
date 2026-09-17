@@ -163,10 +163,15 @@ class SystemComponentDetail {
   const SystemComponentDetail({
     required this.component,
     this.diagnosticSuggestion,
+    this.relatedIncidents = const [],
   });
 
   final SystemComponentStatus component;
   final SystemDiagnosticSuggestion? diagnosticSuggestion;
+
+  /// Incidents for this component (active + recent history), kept separate
+  /// from the current health probe card.
+  final List<SystemMonitoringIncident> relatedIncidents;
 }
 
 class SystemIncidentListPage {

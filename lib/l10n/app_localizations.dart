@@ -12069,8 +12069,62 @@ abstract class AppLocalizations {
   /// No description provided for @systemMonitoringFieldCheckedAt.
   ///
   /// In en, this message translates to:
-  /// **'Checked at'**
+  /// **'Last checked'**
   String get systemMonitoringFieldCheckedAt;
+
+  /// No description provided for @systemMonitoringFieldLastChecked.
+  ///
+  /// In en, this message translates to:
+  /// **'Last checked'**
+  String get systemMonitoringFieldLastChecked;
+
+  /// No description provided for @systemMonitoringFieldIncidentStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Incident started'**
+  String get systemMonitoringFieldIncidentStarted;
+
+  /// No description provided for @systemMonitoringFieldDurationSoFar.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration so far'**
+  String get systemMonitoringFieldDurationSoFar;
+
+  /// No description provided for @systemMonitoringFieldRecoveredAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovered'**
+  String get systemMonitoringFieldRecoveredAt;
+
+  /// No description provided for @systemMonitoringFieldDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get systemMonitoringFieldDuration;
+
+  /// No description provided for @systemMonitoringFieldLastIncident.
+  ///
+  /// In en, this message translates to:
+  /// **'Last incident'**
+  String get systemMonitoringFieldLastIncident;
+
+  /// No description provided for @systemMonitoringFieldStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get systemMonitoringFieldStatus;
+
+  /// No description provided for @systemMonitoringCurrentHealthTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Current health'**
+  String get systemMonitoringCurrentHealthTitle;
+
+  /// No description provided for @systemMonitoringIncidentHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Incident history'**
+  String get systemMonitoringIncidentHistoryTitle;
 
   /// No description provided for @systemMonitoringFieldDependencyType.
   ///
@@ -12131,6 +12185,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Diagnostic suggestion'**
   String get systemMonitoringDiagnosticTitle;
+
+  /// No description provided for @systemMonitoringDiagnosticGenericTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'General diagnostic suggestion'**
+  String get systemMonitoringDiagnosticGenericTitle;
+
+  /// No description provided for @systemMonitoringDiagnosticActiveIncidentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggestion related to the active incident'**
+  String get systemMonitoringDiagnosticActiveIncidentTitle;
 
   /// No description provided for @systemMonitoringAiDisclaimer.
   ///
@@ -12467,6 +12533,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notifications and activity PDFs deleted.'**
   String get notificationsDeletedBoth;
+
+  /// No description provided for @notificationsNoAdditionalContent.
+  ///
+  /// In en, this message translates to:
+  /// **'No additional content'**
+  String get notificationsNoAdditionalContent;
+
+  /// No description provided for @notificationsYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get notificationsYesterday;
+
+  /// No description provided for @notificationsFallbackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notificationsFallbackTitle;
+
+  /// No description provided for @notificationsSeverityInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Info'**
+  String get notificationsSeverityInfo;
+
+  /// No description provided for @notificationsSeverityWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get notificationsSeverityWarning;
+
+  /// No description provided for @notificationsSeverityCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get notificationsSeverityCritical;
+
+  /// No description provided for @notificationsSeverityUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get notificationsSeverityUnknown;
+
+  /// No description provided for @notificationDriverRegistrationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New driver registration'**
+  String get notificationDriverRegistrationTitle;
+
+  /// No description provided for @notificationDriverRegistrationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A new driver registration was received and is waiting for review.'**
+  String get notificationDriverRegistrationBody;
+
+  /// No description provided for @notificationCompanyApplicationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New company registration'**
+  String get notificationCompanyApplicationTitle;
+
+  /// No description provided for @notificationCompanyApplicationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A new company registration was received and is waiting for review.'**
+  String get notificationCompanyApplicationBody;
 
   /// No description provided for @systemHealthFieldAffectedUser.
   ///

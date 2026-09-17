@@ -99,6 +99,10 @@ class SystemComponentStatus {
     this.lastHealthyAt,
     this.lastFailureAt,
     this.consecutiveFailures = 0,
+    this.incidentStartedAt,
+    this.degradedSince,
+    this.failedSince,
+    this.firstFailureAt,
     this.affectedCapabilities = const [],
     this.detailsSanitized = const {},
     this.evidence = const [],
@@ -118,6 +122,14 @@ class SystemComponentStatus {
   final DateTime? lastHealthyAt;
   final DateTime? lastFailureAt;
   final int consecutiveFailures;
+
+  /// Earliest timestamp of the current continuous failing/degraded state.
+  /// Preferred backend field; never fabricate from [checkedAt].
+  final DateTime? incidentStartedAt;
+  final DateTime? degradedSince;
+  final DateTime? failedSince;
+  final DateTime? firstFailureAt;
+
   final List<String> affectedCapabilities;
   final Map<String, dynamic> detailsSanitized;
   final List<String> evidence;

@@ -4,12 +4,23 @@ import '../../../../core/localization/localization_resolver.dart';
 import '../../domain/system_diagnostic_suggestion.dart';
 
 class SystemMonitoringDiagnosticCard extends StatelessWidget {
-  const SystemMonitoringDiagnosticCard({super.key, required this.suggestion});
+  const SystemMonitoringDiagnosticCard({
+    super.key,
+    required this.suggestion,
+    this.tiedToActiveIncident = false,
+  });
 
   final SystemDiagnosticSuggestion suggestion;
 
+  /// When true, title indicates the advice is for the active incident.
+  final bool tiedToActiveIncident;
+
   @override
   Widget build(BuildContext context) {
+    final titleKey = tiedToActiveIncident
+        ? 'systemMonitoringDiagnosticActiveIncidentTitle'
+        : 'systemMonitoringDiagnosticGenericTitle';
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -22,10 +33,7 @@ class SystemMonitoringDiagnosticCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    resolveSystemMonitoringKey(
-                      context,
-                      'systemMonitoringDiagnosticTitle',
-                    ),
+                    resolveSystemMonitoringKey(context, titleKey),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),

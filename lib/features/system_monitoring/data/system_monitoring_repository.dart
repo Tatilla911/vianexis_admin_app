@@ -90,8 +90,31 @@ class LiveSystemMonitoringRepository implements SystemMonitoringRepository {
   }
 
   @override
-  Future<SystemComponentDetail> fetchComponent(String componentKey) {
-    return _api.fetchComponent(componentKey);
+  Future<SystemComponentDetail> fetchComponent(String componentKey) async {
+    final detail = await _api.fetchComponent(componentKey);
+    List<SystemMonitoringIncident> related = detail.relatedIncidents;
+    if (related.isEmpty) {
+      try {
+        final page = await _api.fetchIncidents(
+          componentKey: componentKey,
+          limit: 20,
+        );
+        related = page.items;
+        for (final incident in page.items) {
+          _incidentCache[incident.id] = incident;
+        }
+      } on ApiException {
+        related = _cachedSnapshot?.activeIncidents
+                .where((i) => i.componentKey == componentKey)
+                .toList(growable: false) ??
+            const [];
+      }
+    }
+    return SystemComponentDetail(
+      component: detail.component,
+      diagnosticSuggestion: detail.diagnosticSuggestion,
+      relatedIncidents: related,
+    );
   }
 
   @override
@@ -260,6 +283,9 @@ class MockSystemMonitoringRepository implements SystemMonitoringRepository {
     return SystemComponentDetail(
       component: component,
       diagnosticSuggestion: suggestion,
+      relatedIncidents: _incidents
+          .where((i) => i.componentKey == componentKey)
+          .toList(growable: false),
     );
   }
 
@@ -488,6 +514,9 @@ class MockSystemMonitoringRepository implements SystemMonitoringRepository {
         isConfigured: true,
         isCritical: true,
         consecutiveFailures: 2,
+        lastFailureAt: now,
+        incidentStartedAt: DateTime.utc(2026, 8, 1, 9, 50),
+        firstFailureAt: DateTime.utc(2026, 8, 1, 9, 50),
       ),
       SystemComponentStatus(
         componentKey: 'smtp_email',
@@ -539,6 +568,9 @@ class MockSystemMonitoringRepository implements SystemMonitoringRepository {
         isConfigured: true,
         isCritical: true,
         consecutiveFailures: 3,
+        lastFailureAt: now,
+        incidentStartedAt: DateTime.utc(2026, 8, 1, 10, 15),
+        firstFailureAt: DateTime.utc(2026, 8, 1, 10, 15),
       ),
       SystemComponentStatus(
         componentKey: 'authentication',

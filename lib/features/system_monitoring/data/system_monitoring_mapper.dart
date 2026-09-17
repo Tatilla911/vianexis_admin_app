@@ -76,6 +76,15 @@ abstract final class SystemMonitoringMapper {
       lastHealthyAt: parseDate(json['lastHealthyAt']),
       lastFailureAt: parseDate(json['lastFailureAt']),
       consecutiveFailures: _asInt(json['consecutiveFailures']) ?? 0,
+      incidentStartedAt: parseDate(
+        json['incidentStartedAt'] ??
+            json['degradedSince'] ??
+            json['failedSince'] ??
+            json['firstFailureAt'],
+      ),
+      degradedSince: parseDate(json['degradedSince']),
+      failedSince: parseDate(json['failedSince']),
+      firstFailureAt: parseDate(json['firstFailureAt']),
       affectedCapabilities: _asStringList(json['affectedCapabilities']),
       detailsSanitized: _asMap(json['detailsSanitized']),
       evidence: _asStringList(json['evidence']),
@@ -95,11 +104,19 @@ abstract final class SystemMonitoringMapper {
         json['diagnostic'] ??
         json['suggestion'];
 
+    final relatedRaw =
+        json['relatedIncidents'] ?? json['incidents'] ?? json['history'];
+    final related = _asList(relatedRaw)
+        .whereType<Map>()
+        .map((item) => incidentFromJson(Map<String, dynamic>.from(item)))
+        .toList(growable: false);
+
     return SystemComponentDetail(
       component: componentFromJson(componentJson),
       diagnosticSuggestion: diagnosticRaw is Map
           ? diagnosticFromJson(Map<String, dynamic>.from(diagnosticRaw))
           : null,
+      relatedIncidents: related,
     );
   }
 

@@ -6635,7 +6635,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get systemMonitoringDependencyUnknown => 'Unknown dependency';
 
   @override
-  String get systemMonitoringFieldCheckedAt => 'Checked at';
+  String get systemMonitoringFieldCheckedAt => 'Last checked';
+
+  @override
+  String get systemMonitoringFieldLastChecked => 'Last checked';
+
+  @override
+  String get systemMonitoringFieldIncidentStarted => 'Incident started';
+
+  @override
+  String get systemMonitoringFieldDurationSoFar => 'Duration so far';
+
+  @override
+  String get systemMonitoringFieldRecoveredAt => 'Recovered';
+
+  @override
+  String get systemMonitoringFieldDuration => 'Duration';
+
+  @override
+  String get systemMonitoringFieldLastIncident => 'Last incident';
+
+  @override
+  String get systemMonitoringFieldStatus => 'Status';
+
+  @override
+  String get systemMonitoringCurrentHealthTitle => 'Current health';
+
+  @override
+  String get systemMonitoringIncidentHistoryTitle => 'Incident history';
 
   @override
   String get systemMonitoringFieldDependencyType => 'Dependency type';
@@ -6667,6 +6694,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get systemMonitoringDiagnosticTitle => 'Diagnostic suggestion';
+
+  @override
+  String get systemMonitoringDiagnosticGenericTitle =>
+      'General diagnostic suggestion';
+
+  @override
+  String get systemMonitoringDiagnosticActiveIncidentTitle =>
+      'Suggestion related to the active incident';
 
   @override
   String get systemMonitoringAiDisclaimer =>
@@ -6852,6 +6887,41 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get notificationsDeletedBoth =>
       'Notifications and activity PDFs deleted.';
+
+  @override
+  String get notificationsNoAdditionalContent => 'No additional content';
+
+  @override
+  String get notificationsYesterday => 'Yesterday';
+
+  @override
+  String get notificationsFallbackTitle => 'Notification';
+
+  @override
+  String get notificationsSeverityInfo => 'Info';
+
+  @override
+  String get notificationsSeverityWarning => 'Warning';
+
+  @override
+  String get notificationsSeverityCritical => 'Critical';
+
+  @override
+  String get notificationsSeverityUnknown => 'Unknown';
+
+  @override
+  String get notificationDriverRegistrationTitle => 'New driver registration';
+
+  @override
+  String get notificationDriverRegistrationBody =>
+      'A new driver registration was received and is waiting for review.';
+
+  @override
+  String get notificationCompanyApplicationTitle => 'New company registration';
+
+  @override
+  String get notificationCompanyApplicationBody =>
+      'A new company registration was received and is waiting for review.';
 
   @override
   String get systemHealthFieldAffectedUser => 'Affected user';

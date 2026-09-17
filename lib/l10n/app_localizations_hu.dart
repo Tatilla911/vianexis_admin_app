@@ -6597,10 +6597,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get systemMonitoringStatusHealthy => 'Egészséges';
 
   @override
-  String get systemMonitoringStatusDegraded => 'Romlott';
+  String get systemMonitoringStatusDegraded => 'Figyelmeztetés';
 
   @override
-  String get systemMonitoringStatusUnhealthy => 'Nem egészséges';
+  String get systemMonitoringStatusUnhealthy => 'Hiba';
 
   @override
   String get systemMonitoringStatusUnknown => 'Ismeretlen';
@@ -6723,7 +6723,34 @@ class AppLocalizationsHu extends AppLocalizations {
   String get systemMonitoringDependencyUnknown => 'Ismeretlen függőség';
 
   @override
-  String get systemMonitoringFieldCheckedAt => 'Ellenőrizve';
+  String get systemMonitoringFieldCheckedAt => 'Utoljára ellenőrizve';
+
+  @override
+  String get systemMonitoringFieldLastChecked => 'Utoljára ellenőrizve';
+
+  @override
+  String get systemMonitoringFieldIncidentStarted => 'Hiba kezdete';
+
+  @override
+  String get systemMonitoringFieldDurationSoFar => 'Fennállás';
+
+  @override
+  String get systemMonitoringFieldRecoveredAt => 'Helyreállt';
+
+  @override
+  String get systemMonitoringFieldDuration => 'Időtartam';
+
+  @override
+  String get systemMonitoringFieldLastIncident => 'Legutóbbi hiba';
+
+  @override
+  String get systemMonitoringFieldStatus => 'Állapot';
+
+  @override
+  String get systemMonitoringCurrentHealthTitle => 'Aktuális állapot';
+
+  @override
+  String get systemMonitoringIncidentHistoryTitle => 'Incidenselőzmények';
 
   @override
   String get systemMonitoringFieldDependencyType => 'Függőség típusa';
@@ -6754,6 +6781,14 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get systemMonitoringDiagnosticTitle => 'Diagnosztikai javaslat';
+
+  @override
+  String get systemMonitoringDiagnosticGenericTitle =>
+      'Általános diagnosztikai javaslat';
+
+  @override
+  String get systemMonitoringDiagnosticActiveIncidentTitle =>
+      'Az aktuális hibához kapcsolódó javaslat';
 
   @override
   String get systemMonitoringAiDisclaimer =>
@@ -6948,6 +6983,41 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get notificationsDeletedBoth =>
       'Értesítések és tevékenység-PDF-ek törölve.';
+
+  @override
+  String get notificationsNoAdditionalContent => 'Nincs további tartalom';
+
+  @override
+  String get notificationsYesterday => 'Tegnap';
+
+  @override
+  String get notificationsFallbackTitle => 'Értesítés';
+
+  @override
+  String get notificationsSeverityInfo => 'Tájékoztatás';
+
+  @override
+  String get notificationsSeverityWarning => 'Figyelmeztetés';
+
+  @override
+  String get notificationsSeverityCritical => 'Kritikus';
+
+  @override
+  String get notificationsSeverityUnknown => 'Ismeretlen';
+
+  @override
+  String get notificationDriverRegistrationTitle => 'Új sofőrregisztráció';
+
+  @override
+  String get notificationDriverRegistrationBody =>
+      'Új sofőrregisztráció érkezett. Elbírálás szükséges.';
+
+  @override
+  String get notificationCompanyApplicationTitle => 'Új cégregisztráció';
+
+  @override
+  String get notificationCompanyApplicationBody =>
+      'Új cégregisztráció érkezett. Elbírálás szükséges.';
 
   @override
   String get systemHealthFieldAffectedUser => 'Érintett felhasználó';
