@@ -6,6 +6,7 @@ import '../../app/app_theme.dart';
 import '../../app/vianexis_brand.dart';
 import '../../core/api/api_config.dart';
 import '../../core/auth/admin_auth_state.dart';
+import '../../core/localization/localization_keys.dart';
 import '../../core/localization/localization_resolver.dart';
 import '../../core/widgets/vianexis_admin_background.dart';
 import '../../core/widgets/vianexis_admin_card.dart';
@@ -265,13 +266,40 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(12),
-                                  child: Text(
-                                    resolveLocalizationKey(context, errorKey),
-                                    style: theme.textTheme.bodyMedium?.copyWith(
-                                      color: const Color(0xFFFFC9C9),
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                    ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Text(
+                                        resolveLocalizationKey(
+                                          context,
+                                          errorKey,
+                                        ),
+                                        softWrap: true,
+                                        style: theme.textTheme.bodyMedium
+                                            ?.copyWith(
+                                              color: const Color(0xFFFFC9C9),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14,
+                                            ),
+                                      ),
+                                      if (auth.canRetrySignIn) ...[
+                                        const SizedBox(height: 12),
+                                        OutlinedButton.icon(
+                                          onPressed: canSubmit ? _submit : null,
+                                          icon: const Icon(
+                                            Icons.refresh,
+                                            size: 18,
+                                          ),
+                          label: Text(
+                            resolveLocalizationKey(
+                              context,
+                              LocalizationKeys.authRetryConnection,
+                            ),
+                          ),
+                                        ),
+                                      ],
+                                    ],
                                   ),
                                 ),
                               ),

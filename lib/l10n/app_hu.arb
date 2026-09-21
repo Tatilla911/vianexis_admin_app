@@ -30,6 +30,8 @@
   "authInvalidCredentials": "Hibás e-mail cím vagy jelszó.",
   "authNetworkError": "Hálózati hiba. Ellenőrizd az internetkapcsolatot vagy a staging API elérhetőségét.",
   "authServerError": "Szerverhiba. Próbálja újra később.",
+  "authServerUnreachable": "Nem sikerült kapcsolódni a szerverhez.",
+  "authRetryConnection": "Újrapróbálás",
   "authForbiddenRole": "Ehhez a felülethez nincs megfelelő jogosultságod.",
   "authLoginServiceUnavailable": "A bejelentkezési szolgáltatás nem érhető el ebben a környezetben.",
   "authPasswordChangeInvalidCurrent": "A jelenlegi jelszó helytelen.",
@@ -394,6 +396,14 @@
   "systemHealthServicePushNotificationService": "Push értesítési szolgáltatás",
   "systemHealthServiceQueueSystem": "Várólista rendszer",
   "systemHealthServiceAuthService": "Hitelesítési szolgáltatás",
+  "systemHealthServiceTapDetails": "Részletek megnyitása",
+  "systemHealthDetailService": "Szolgáltatás",
+  "systemHealthDetailCurrentState": "Jelenlegi állapot",
+  "systemHealthDetailLastChecked": "Utolsó ellenőrzés",
+  "systemHealthDetailLastSuccess": "Utolsó sikeres ellenőrzés",
+  "systemHealthDetailLastError": "Utolsó hiba",
+  "systemHealthDetailAffectedPlatform": "Érintett platform",
+  "systemHealthDetailRecommendedAction": "Ajánlott admin művelet",
   "systemHealthAiDiagnosticTitle": "AI diagnosztikai összefoglaló",
   "systemHealthAiAdvisoryOnly": "Csak tanácsadó jellegű — nem automatikus javítási utasítás.",
   "systemHealthRecommendedAction": "Ajánlott teendő",
@@ -1425,6 +1435,20 @@
   "securityEventFieldCompany": "Cég",
   "securityEventFieldCorrelationId": "Korrelációs azonosító",
   "securityEventFieldCreatedAt": "Létrehozva",
+  "securityEventFieldResult": "Eredmény",
+  "securityEventFieldReason": "Ok",
+  "securityEventFieldAccount": "Fiók",
+  "securityEventFieldPlatform": "Platform",
+  "securityEventFieldDevice": "Eszköz",
+  "securityEventFieldIpFingerprint": "IP ujjlenyomat",
+  "securityEventReasonLabel": "Ok: {reason}",
+  "@securityEventReasonLabel": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
   "securityEventFilterAll": "Összes",
   "securityEventFilterFailedLogin": "Sikertelen bejelentkezések",
   "securityEventFilterPermissionDenied": "Elutasított műveletek",
@@ -1445,6 +1469,7 @@
   "securityEventTypeUnknown": "Ismeretlen",
   "securityEventSeverityInfo": "Információ",
   "securityEventSeverityWarning": "Figyelmeztetés",
+  "securityEventSeverityError": "Hiba",
   "securityEventSeverityCritical": "Kritikus",
   "securityEventSeverityUnknown": "Ismeretlen",
   "actionCenterTitle": "Teendők",

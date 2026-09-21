@@ -20,7 +20,8 @@ enum SystemHealthServiceKey {
       'storage' => documentStorage,
       'worker' => backgroundWorkers,
       'email' => emailService,
-      'messaging' => pushNotificationService,
+      // Backend "messaging" is websocket/redis fabric — not FCM/APNs push.
+      'messaging' => queueSystem,
       'integration' => aiOcrWorkers,
       _ => null,
     };
@@ -56,6 +57,12 @@ class SystemHealthServiceStatus {
     this.summary,
     this.messageKey,
     this.lastCheckedAt,
+    this.lastSuccessAt,
+    this.lastError,
+    this.currentState,
+    this.affectedPlatform,
+    this.recommendedAction,
+    this.detailFields = const {},
   });
 
   final SystemHealthServiceKey serviceKey;
@@ -63,8 +70,20 @@ class SystemHealthServiceStatus {
   final String? summary;
   final String? messageKey;
   final DateTime? lastCheckedAt;
+  final DateTime? lastSuccessAt;
+  final String? lastError;
+  final String? currentState;
+  final String? affectedPlatform;
+  final String? recommendedAction;
+  final Map<String, String> detailFields;
 
   bool get isHealthy => severity == SystemHealthSeverity.info;
+
+  bool get hasActionableDetail =>
+      lastError != null ||
+      recommendedAction != null ||
+      detailFields.isNotEmpty ||
+      currentState != null;
 
   factory SystemHealthServiceStatus.fromJson(Map<String, dynamic> json) {
     final component = json['component']?.toString();
@@ -80,6 +99,7 @@ class SystemHealthServiceStatus {
       summary: json['detailSummary']?.toString(),
       messageKey: json['messageKey']?.toString(),
       lastCheckedAt: _parseDate(json['lastEventAt'] ?? json['lastCheckedAt']),
+      currentState: json['severity']?.toString(),
     );
   }
 

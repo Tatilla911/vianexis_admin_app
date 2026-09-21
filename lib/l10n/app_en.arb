@@ -30,6 +30,8 @@
   "authInvalidCredentials": "Invalid email or password.",
   "authNetworkError": "Network error. Check your internet connection or staging API availability.",
   "authServerError": "Server error. Try again later.",
+  "authServerUnreachable": "Could not connect to the server.",
+  "authRetryConnection": "Retry",
   "authForbiddenRole": "You do not have permission to access this interface.",
   "authLoginServiceUnavailable": "The sign-in service is not available in this environment.",
   "authPasswordChangeInvalidCurrent": "The current password is incorrect.",
@@ -464,6 +466,14 @@
   "systemHealthServicePushNotificationService": "Push notification service",
   "systemHealthServiceQueueSystem": "Queue system",
   "systemHealthServiceAuthService": "Auth service",
+  "systemHealthServiceTapDetails": "Open details",
+  "systemHealthDetailService": "Service",
+  "systemHealthDetailCurrentState": "Current state",
+  "systemHealthDetailLastChecked": "Last checked",
+  "systemHealthDetailLastSuccess": "Last successful check",
+  "systemHealthDetailLastError": "Last error",
+  "systemHealthDetailAffectedPlatform": "Affected platform",
+  "systemHealthDetailRecommendedAction": "Recommended admin action",
   "systemHealthAiDiagnosticTitle": "AI diagnostic summary",
   "systemHealthAiAdvisoryOnly": "Advisory only — not an automatic repair instruction.",
   "systemHealthRecommendedAction": "Recommended action",
@@ -1928,6 +1938,20 @@
   "securityEventFieldCompany": "Company",
   "securityEventFieldCorrelationId": "Correlation ID",
   "securityEventFieldCreatedAt": "Created at",
+  "securityEventFieldResult": "Result",
+  "securityEventFieldReason": "Reason",
+  "securityEventFieldAccount": "Account",
+  "securityEventFieldPlatform": "Platform",
+  "securityEventFieldDevice": "Device",
+  "securityEventFieldIpFingerprint": "IP fingerprint",
+  "securityEventReasonLabel": "Reason: {reason}",
+  "@securityEventReasonLabel": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
   "securityEventFilterAll": "All",
   "securityEventFilterFailedLogin": "Failed logins",
   "securityEventFilterPermissionDenied": "Denied actions",
@@ -1948,6 +1972,7 @@
   "securityEventTypeUnknown": "Unknown",
   "securityEventSeverityInfo": "Info",
   "securityEventSeverityWarning": "Warning",
+  "securityEventSeverityError": "Error",
   "securityEventSeverityCritical": "Critical",
   "securityEventSeverityUnknown": "Unknown",
   "actionCenterTitle": "Action center",

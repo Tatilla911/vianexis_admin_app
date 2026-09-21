@@ -104,6 +104,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authServerError => 'Server error. Try again later.';
 
   @override
+  String get authServerUnreachable => 'Could not connect to the server.';
+
+  @override
+  String get authRetryConnection => 'Retry';
+
+  @override
   String get authForbiddenRole =>
       'You do not have permission to access this interface.';
 
@@ -1253,6 +1259,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get systemHealthServiceAuthService => 'Auth service';
+
+  @override
+  String get systemHealthServiceTapDetails => 'Open details';
+
+  @override
+  String get systemHealthDetailService => 'Service';
+
+  @override
+  String get systemHealthDetailCurrentState => 'Current state';
+
+  @override
+  String get systemHealthDetailLastChecked => 'Last checked';
+
+  @override
+  String get systemHealthDetailLastSuccess => 'Last successful check';
+
+  @override
+  String get systemHealthDetailLastError => 'Last error';
+
+  @override
+  String get systemHealthDetailAffectedPlatform => 'Affected platform';
+
+  @override
+  String get systemHealthDetailRecommendedAction => 'Recommended admin action';
 
   @override
   String get systemHealthAiDiagnosticTitle => 'AI diagnostic summary';
@@ -4185,6 +4215,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get securityEventFieldCreatedAt => 'Created at';
 
   @override
+  String get securityEventFieldResult => 'Result';
+
+  @override
+  String get securityEventFieldReason => 'Reason';
+
+  @override
+  String get securityEventFieldAccount => 'Account';
+
+  @override
+  String get securityEventFieldPlatform => 'Platform';
+
+  @override
+  String get securityEventFieldDevice => 'Device';
+
+  @override
+  String get securityEventFieldIpFingerprint => 'IP fingerprint';
+
+  @override
+  String securityEventReasonLabel(String reason) {
+    return 'Reason: $reason';
+  }
+
+  @override
   String get securityEventFilterAll => 'All';
 
   @override
@@ -4243,6 +4296,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get securityEventSeverityWarning => 'Warning';
+
+  @override
+  String get securityEventSeverityError => 'Error';
 
   @override
   String get securityEventSeverityCritical => 'Critical';

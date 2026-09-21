@@ -127,8 +127,19 @@ class _SecurityCenterScreenState extends ConsumerState<SecurityCenterScreen> {
                   onRefresh: () => refreshSecurityCenter(ref),
                   child: ListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-                    itemCount: items.length,
+                    itemCount: items.length + 1,
                     itemBuilder: (context, index) {
+                      if (index == items.length) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: VianexisMetadataNotice(
+                            message: resolveSecurityKey(
+                              context,
+                              'securityPrivacyNotice',
+                            ),
+                          ),
+                        );
+                      }
                       final event = items[index];
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 12),
@@ -143,12 +154,6 @@ class _SecurityCenterScreenState extends ConsumerState<SecurityCenterScreen> {
                   ),
                 );
               },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: VianexisMetadataNotice(
-              message: resolveSecurityKey(context, 'securityPrivacyNotice'),
             ),
           ),
         ],

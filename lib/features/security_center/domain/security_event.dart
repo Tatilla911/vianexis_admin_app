@@ -18,6 +18,12 @@ class SecurityEvent {
     this.correlationId,
     this.createdAt,
     this.metadataOnly = true,
+    this.result,
+    this.reason,
+    this.accountEmailRedacted,
+    this.ipFingerprint,
+    this.deviceSummary,
+    this.platform,
   });
 
   final String id;
@@ -35,6 +41,12 @@ class SecurityEvent {
   final String? correlationId;
   final DateTime? createdAt;
   final bool metadataOnly;
+  final String? result;
+  final String? reason;
+  final String? accountEmailRedacted;
+  final String? ipFingerprint;
+  final String? deviceSummary;
+  final String? platform;
 
   bool matchesSearch(String rawQuery) {
     final query = rawQuery.trim().toLowerCase();
@@ -42,7 +54,9 @@ class SecurityEvent {
     return title.toLowerCase().contains(query) ||
         summary.toLowerCase().contains(query) ||
         (actorEmail ?? '').toLowerCase().contains(query) ||
+        (accountEmailRedacted ?? '').toLowerCase().contains(query) ||
         (companyName ?? '').toLowerCase().contains(query) ||
+        (reason ?? '').toLowerCase().contains(query) ||
         (correlationId ?? '').toLowerCase().contains(query);
   }
 
@@ -65,6 +79,12 @@ class SecurityEvent {
       correlationId: json['correlationId']?.toString(),
       createdAt: _parseDate(json['createdAt']),
       metadataOnly: json['metadataOnly'] != false,
+      result: json['result']?.toString(),
+      reason: json['reason']?.toString(),
+      accountEmailRedacted: json['accountEmailRedacted']?.toString(),
+      ipFingerprint: json['ipFingerprint']?.toString(),
+      deviceSummary: json['deviceSummary']?.toString(),
+      platform: json['platform']?.toString(),
     );
   }
 }

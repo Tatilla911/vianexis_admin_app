@@ -16,6 +16,10 @@ abstract final class SystemHealthMapper {
       final status = SystemHealthServiceStatus.fromJson(
         Map<String, dynamic>.from(item),
       );
+      // Never let websocket/messaging overwrite the push notification card.
+      if (status.serviceKey == SystemHealthServiceKey.pushNotificationService) {
+        continue;
+      }
       serviceMap[status.serviceKey] = status;
     }
 
@@ -85,12 +89,20 @@ abstract final class SystemHealthMapper {
     final redis = _asMap(infra['redis']);
     final worker = _asMap(infra['worker']);
     final escalation = _asMap(worker['messageEscalation']);
+    final push = _asMap(worker['notificationPush']);
+    final queueDepth = _asInt(infra['pushQueueDepth']) ?? 0;
+    final notificationFailures = _asInt(infra['notificationFailures']) ?? 0;
 
     serviceMap[SystemHealthServiceKey.queueSystem] = SystemHealthServiceStatus(
       serviceKey: SystemHealthServiceKey.queueSystem,
       severity: _severityFromConnected(redis['connected'], redis['enabled']),
       summary: 'redis=${redis['status'] ?? 'unknown'}',
       lastCheckedAt: DateTime.now().toUtc(),
+      currentState: redis['status']?.toString(),
+      detailFields: {
+        'redis': '${redis['status'] ?? 'unknown'}',
+        'websocket': '${infra['websocketMode'] ?? 'unknown'}',
+      },
     );
 
     serviceMap[SystemHealthServiceKey.backgroundWorkers] =
@@ -101,16 +113,56 @@ abstract final class SystemHealthMapper {
               : SystemHealthSeverity.info,
           summary: escalation['lastRunAt']?.toString() ?? 'worker idle',
           lastCheckedAt: SystemHealthEvent.parseDate(escalation['lastRunAt']),
+          lastError: escalation['lastError']?.toString(),
+          lastSuccessAt: SystemHealthEvent.parseDate(escalation['lastRunAt']),
+          currentState: escalation['lastError'] != null ? 'degraded' : 'ok',
         );
+
+    final pushEnabled = push['enabled'] != false;
+    final pushLastError = push['lastError']?.toString();
+    final pushLastRun = SystemHealthEvent.parseDate(push['lastRunAt']);
+    final pushSeverity = _pushSeverity(
+      enabled: pushEnabled,
+      lastError: pushLastError,
+      queueDepth: queueDepth,
+      notificationFailures: notificationFailures,
+    );
 
     serviceMap[SystemHealthServiceKey.pushNotificationService] =
         SystemHealthServiceStatus(
           serviceKey: SystemHealthServiceKey.pushNotificationService,
-          severity: infra['websocketEnabled'] == false
-              ? SystemHealthSeverity.warning
-              : SystemHealthSeverity.info,
-          summary: 'ws=${infra['websocketMode'] ?? 'unknown'}',
+          severity: pushSeverity,
+          summary: _pushSummary(
+            enabled: pushEnabled,
+            lastError: pushLastError,
+            queueDepth: queueDepth,
+            lastRunAt: push['lastRunAt']?.toString(),
+          ),
           lastCheckedAt: DateTime.now().toUtc(),
+          lastSuccessAt: pushLastError == null ? pushLastRun : null,
+          lastError: pushLastError,
+          currentState: !pushEnabled
+              ? 'disabled'
+              : pushLastError != null
+              ? 'error'
+              : queueDepth > 50
+              ? 'backlog'
+              : 'ok',
+          affectedPlatform: 'android,ios',
+          recommendedAction: _pushRecommendedAction(
+            enabled: pushEnabled,
+            lastError: pushLastError,
+            queueDepth: queueDepth,
+          ),
+          detailFields: {
+            'service': 'notification_push_worker',
+            'enabled': '$pushEnabled',
+            'queueDepth': '$queueDepth',
+            'notificationFailures': '$notificationFailures',
+            'lastProcessed': '${push['lastProcessed'] ?? 0}',
+            if (push['pendingEstimate'] != null)
+              'pendingEstimate': '${push['pendingEstimate']}',
+          },
         );
 
     serviceMap.putIfAbsent(
@@ -120,6 +172,7 @@ abstract final class SystemHealthMapper {
         severity: SystemHealthSeverity.info,
         summary: 'auth session service reachable',
         lastCheckedAt: DateTime.now().toUtc(),
+        currentState: 'ok',
       ),
     );
 
@@ -130,8 +183,61 @@ abstract final class SystemHealthMapper {
         severity: SystemHealthSeverity.info,
         summary: 'translation pipeline advisory only',
         lastCheckedAt: DateTime.now().toUtc(),
+        currentState: 'ok',
       ),
     );
+  }
+
+  static SystemHealthSeverity _pushSeverity({
+    required bool enabled,
+    required String? lastError,
+    required int queueDepth,
+    required int notificationFailures,
+  }) {
+    if (!enabled) return SystemHealthSeverity.info;
+    if (lastError != null && lastError.isNotEmpty) {
+      return SystemHealthSeverity.critical;
+    }
+    if (queueDepth > 100 || notificationFailures > 25) {
+      return SystemHealthSeverity.critical;
+    }
+    if (queueDepth > 50 || notificationFailures > 0) {
+      return SystemHealthSeverity.warning;
+    }
+    return SystemHealthSeverity.info;
+  }
+
+  static String _pushSummary({
+    required bool enabled,
+    required String? lastError,
+    required int queueDepth,
+    required String? lastRunAt,
+  }) {
+    if (!enabled) return 'push worker disabled';
+    if (lastError != null && lastError.isNotEmpty) {
+      return 'lastError=$lastError';
+    }
+    if (queueDepth > 0) return 'queueDepth=$queueDepth';
+    return lastRunAt != null ? 'lastRun=$lastRunAt' : 'push worker idle';
+  }
+
+  static String? _pushRecommendedAction({
+    required bool enabled,
+    required String? lastError,
+    required int queueDepth,
+  }) {
+    if (!enabled) {
+      return 'Push worker is intentionally disabled in this environment.';
+    }
+    if (lastError != null && lastError.isNotEmpty) {
+      return 'Inspect notification push worker logs and provider credentials '
+          '(FCM/APNs). Do not expose tokens in the admin UI.';
+    }
+    if (queueDepth > 50) {
+      return 'Push queue backlog detected. Verify worker process is running '
+          'and Redis connectivity is healthy.';
+    }
+    return null;
   }
 
   static List<SystemHealthServiceStatus> _ensureAllServices(

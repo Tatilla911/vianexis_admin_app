@@ -104,6 +104,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get authServerError => 'Szerverhiba. Próbálja újra később.';
 
   @override
+  String get authServerUnreachable => 'Nem sikerült kapcsolódni a szerverhez.';
+
+  @override
+  String get authRetryConnection => 'Újrapróbálás';
+
+  @override
   String get authForbiddenRole =>
       'Ehhez a felülethez nincs megfelelő jogosultságod.';
 
@@ -1267,6 +1273,30 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get systemHealthServiceAuthService => 'Hitelesítési szolgáltatás';
+
+  @override
+  String get systemHealthServiceTapDetails => 'Részletek megnyitása';
+
+  @override
+  String get systemHealthDetailService => 'Szolgáltatás';
+
+  @override
+  String get systemHealthDetailCurrentState => 'Jelenlegi állapot';
+
+  @override
+  String get systemHealthDetailLastChecked => 'Utolsó ellenőrzés';
+
+  @override
+  String get systemHealthDetailLastSuccess => 'Utolsó sikeres ellenőrzés';
+
+  @override
+  String get systemHealthDetailLastError => 'Utolsó hiba';
+
+  @override
+  String get systemHealthDetailAffectedPlatform => 'Érintett platform';
+
+  @override
+  String get systemHealthDetailRecommendedAction => 'Ajánlott admin művelet';
 
   @override
   String get systemHealthAiDiagnosticTitle => 'AI diagnosztikai összefoglaló';
@@ -4250,6 +4280,29 @@ class AppLocalizationsHu extends AppLocalizations {
   String get securityEventFieldCreatedAt => 'Létrehozva';
 
   @override
+  String get securityEventFieldResult => 'Eredmény';
+
+  @override
+  String get securityEventFieldReason => 'Ok';
+
+  @override
+  String get securityEventFieldAccount => 'Fiók';
+
+  @override
+  String get securityEventFieldPlatform => 'Platform';
+
+  @override
+  String get securityEventFieldDevice => 'Eszköz';
+
+  @override
+  String get securityEventFieldIpFingerprint => 'IP ujjlenyomat';
+
+  @override
+  String securityEventReasonLabel(String reason) {
+    return 'Ok: $reason';
+  }
+
+  @override
   String get securityEventFilterAll => 'Összes';
 
   @override
@@ -4310,6 +4363,9 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get securityEventSeverityWarning => 'Figyelmeztetés';
+
+  @override
+  String get securityEventSeverityError => 'Hiba';
 
   @override
   String get securityEventSeverityCritical => 'Kritikus';

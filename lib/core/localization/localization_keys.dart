@@ -22,8 +22,10 @@ abstract final class LocalizationKeys {
   static const authLogoutAllOtherDevices = 'authLogoutAllOtherDevices';
   static const authNetworkError = 'authNetworkError';
   static const authServerError = 'authServerError';
+  static const authServerUnreachable = 'authServerUnreachable';
   static const authForbiddenRole = 'authForbiddenRole';
   static const authLoginServiceUnavailable = 'authLoginServiceUnavailable';
+  static const authRetryConnection = 'authRetryConnection';
   static const authBackendNotConfigured = 'authBackendNotConfigured';
   static const errorActionUnavailable = 'errorActionUnavailable';
   static const authRequiredField = 'authRequiredField';

@@ -278,6 +278,18 @@ abstract class AppLocalizations {
   /// **'Server error. Try again later.'**
   String get authServerError;
 
+  /// No description provided for @authServerUnreachable.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not connect to the server.'**
+  String get authServerUnreachable;
+
+  /// No description provided for @authRetryConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get authRetryConnection;
+
   /// No description provided for @authForbiddenRole.
   ///
   /// In en, this message translates to:
@@ -2377,6 +2389,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Auth service'**
   String get systemHealthServiceAuthService;
+
+  /// No description provided for @systemHealthServiceTapDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Open details'**
+  String get systemHealthServiceTapDetails;
+
+  /// No description provided for @systemHealthDetailService.
+  ///
+  /// In en, this message translates to:
+  /// **'Service'**
+  String get systemHealthDetailService;
+
+  /// No description provided for @systemHealthDetailCurrentState.
+  ///
+  /// In en, this message translates to:
+  /// **'Current state'**
+  String get systemHealthDetailCurrentState;
+
+  /// No description provided for @systemHealthDetailLastChecked.
+  ///
+  /// In en, this message translates to:
+  /// **'Last checked'**
+  String get systemHealthDetailLastChecked;
+
+  /// No description provided for @systemHealthDetailLastSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Last successful check'**
+  String get systemHealthDetailLastSuccess;
+
+  /// No description provided for @systemHealthDetailLastError.
+  ///
+  /// In en, this message translates to:
+  /// **'Last error'**
+  String get systemHealthDetailLastError;
+
+  /// No description provided for @systemHealthDetailAffectedPlatform.
+  ///
+  /// In en, this message translates to:
+  /// **'Affected platform'**
+  String get systemHealthDetailAffectedPlatform;
+
+  /// No description provided for @systemHealthDetailRecommendedAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended admin action'**
+  String get systemHealthDetailRecommendedAction;
 
   /// No description provided for @systemHealthAiDiagnosticTitle.
   ///
@@ -7652,6 +7712,48 @@ abstract class AppLocalizations {
   /// **'Created at'**
   String get securityEventFieldCreatedAt;
 
+  /// No description provided for @securityEventFieldResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Result'**
+  String get securityEventFieldResult;
+
+  /// No description provided for @securityEventFieldReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get securityEventFieldReason;
+
+  /// No description provided for @securityEventFieldAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get securityEventFieldAccount;
+
+  /// No description provided for @securityEventFieldPlatform.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform'**
+  String get securityEventFieldPlatform;
+
+  /// No description provided for @securityEventFieldDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Device'**
+  String get securityEventFieldDevice;
+
+  /// No description provided for @securityEventFieldIpFingerprint.
+  ///
+  /// In en, this message translates to:
+  /// **'IP fingerprint'**
+  String get securityEventFieldIpFingerprint;
+
+  /// No description provided for @securityEventReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason: {reason}'**
+  String securityEventReasonLabel(String reason);
+
   /// No description provided for @securityEventFilterAll.
   ///
   /// In en, this message translates to:
@@ -7771,6 +7873,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Warning'**
   String get securityEventSeverityWarning;
+
+  /// No description provided for @securityEventSeverityError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get securityEventSeverityError;
 
   /// No description provided for @securityEventSeverityCritical.
   ///

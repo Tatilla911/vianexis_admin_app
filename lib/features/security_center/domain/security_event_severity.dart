@@ -1,6 +1,7 @@
 enum SecurityEventSeverity {
   info('info'),
   warning('warning'),
+  error('error'),
   critical('critical'),
   unknown('unknown');
 
@@ -20,6 +21,7 @@ enum SecurityEventSeverity {
     return switch (this) {
       info => 'securityEventSeverityInfo',
       warning => 'securityEventSeverityWarning',
+      error => 'securityEventSeverityError',
       critical => 'securityEventSeverityCritical',
       unknown => 'securityEventSeverityUnknown',
     };

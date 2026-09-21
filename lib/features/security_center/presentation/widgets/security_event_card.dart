@@ -19,6 +19,8 @@ class SecurityEventCard extends StatelessWidget {
     final createdLabel = created != null
         ? DateFormat.yMMMd(locale).add_Hm().format(created.toLocal())
         : '—';
+    final account =
+        event.accountEmailRedacted ?? event.actorEmail ?? event.companyName;
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -29,12 +31,29 @@ class SecurityEventCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(event.title, style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                event.title,
+                softWrap: true,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               const SizedBox(height: 4),
               Text(
                 event.summary,
+                softWrap: true,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
+              if (event.reason != null && event.reason!.isNotEmpty) ...[
+                const SizedBox(height: 6),
+                Text(
+                  resolveSecurityKey(
+                    context,
+                    'securityEventReasonLabel',
+                    params: {'reason': event.reason!},
+                  ),
+                  softWrap: true,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
               const SizedBox(height: 12),
               Wrap(
                 spacing: 8,
@@ -44,14 +63,15 @@ class SecurityEventCard extends StatelessWidget {
                   SecurityEventSeverityBadge(severity: event.severity),
                 ],
               ),
-              if (event.companyName != null) ...[
+              if (account != null) ...[
                 const SizedBox(height: 8),
                 Text(
                   resolveSecurityKey(
                     context,
                     'securityEventCompanyLabel',
-                    params: {'name': event.companyName!},
+                    params: {'name': account},
                   ),
+                  softWrap: true,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
@@ -62,6 +82,7 @@ class SecurityEventCard extends StatelessWidget {
                   'securityEventCreatedAt',
                   params: {'date': createdLabel},
                 ),
+                softWrap: true,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],

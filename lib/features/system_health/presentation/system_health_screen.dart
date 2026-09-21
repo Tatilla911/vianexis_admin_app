@@ -99,14 +99,28 @@ class SystemHealthScreen extends ConsumerWidget {
                           : constraints.maxWidth >= 600
                           ? 2
                           : 1;
+                      if (crossAxisCount == 1) {
+                        return Column(
+                          children: [
+                            for (final service in snapshot.services)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: SystemHealthServiceCard(
+                                  service: service,
+                                ),
+                              ),
+                          ],
+                        );
+                      }
                       return GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: crossAxisCount,
                           crossAxisSpacing: 12,
                           mainAxisSpacing: 12,
-                          childAspectRatio: crossAxisCount == 1 ? 2.8 : 1.6,
+                          mainAxisExtent: 148,
                         ),
                         itemCount: snapshot.services.length,
                         itemBuilder: (context, index) =>

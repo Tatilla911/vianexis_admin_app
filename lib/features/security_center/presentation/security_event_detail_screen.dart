@@ -65,34 +65,55 @@ class _SecurityEventDetailBody extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        Text(event.title, style: Theme.of(context).textTheme.headlineSmall),
+        Text(
+          event.title,
+          softWrap: true,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
         const SizedBox(height: 8),
-        Text(event.summary),
+        Text(event.summary, softWrap: true),
         const SizedBox(height: 12),
         Wrap(
           spacing: 8,
+          runSpacing: 8,
           children: [
             SecurityEventTypeBadge(type: event.type),
             SecurityEventSeverityBadge(severity: event.severity),
           ],
         ),
         const SizedBox(height: 20),
-        _field(context, 'securityEventFieldSourceType', event.sourceType),
-        if (event.sourceId != null)
-          _field(context, 'securityEventFieldSourceId', event.sourceId!),
-        if (event.actorEmail != null)
+        _field(context, 'securityEventFieldCreatedAt', createdLabel),
+        if (event.result != null)
+          _field(context, 'securityEventFieldResult', event.result!),
+        if (event.reason != null)
+          _field(context, 'securityEventFieldReason', event.reason!),
+        if (event.accountEmailRedacted != null)
+          _field(
+            context,
+            'securityEventFieldAccount',
+            event.accountEmailRedacted!,
+          )
+        else if (event.actorEmail != null)
           _field(context, 'securityEventFieldActorEmail', event.actorEmail!),
         if (event.actorRole != null)
           _field(context, 'securityEventFieldActorRole', event.actorRole!),
         if (event.companyName != null)
           _field(context, 'securityEventFieldCompany', event.companyName!),
+        if (event.platform != null)
+          _field(context, 'securityEventFieldPlatform', event.platform!),
+        if (event.deviceSummary != null)
+          _field(context, 'securityEventFieldDevice', event.deviceSummary!),
+        if (event.ipFingerprint != null)
+          _field(context, 'securityEventFieldIpFingerprint', event.ipFingerprint!),
+        _field(context, 'securityEventFieldSourceType', event.sourceType),
+        if (event.sourceId != null)
+          _field(context, 'securityEventFieldSourceId', event.sourceId!),
         if (event.correlationId != null)
           _field(
             context,
             'securityEventFieldCorrelationId',
             event.correlationId!,
           ),
-        _field(context, 'securityEventFieldCreatedAt', createdLabel),
         const SizedBox(height: 16),
         VianexisMetadataNotice(
           message: resolveSecurityKey(context, 'securityPrivacyNotice'),
@@ -103,18 +124,16 @@ class _SecurityEventDetailBody extends StatelessWidget {
 
   Widget _field(BuildContext context, String key, String value) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 140,
-            child: Text(
-              resolveSecurityKey(context, key),
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
+          Text(
+            resolveSecurityKey(context, key),
+            style: Theme.of(context).textTheme.labelLarge,
           ),
-          Expanded(child: Text(value)),
+          const SizedBox(height: 2),
+          Text(value, softWrap: true),
         ],
       ),
     );

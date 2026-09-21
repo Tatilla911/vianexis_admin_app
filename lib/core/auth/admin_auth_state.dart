@@ -19,6 +19,7 @@ class AdminAuthState {
     this.isPinLocked = false,
     this.offlineSessionRestorePending = false,
     this.errorMessageKey,
+    this.lastErrorKind,
   });
 
   const AdminAuthState.unauthenticated()
@@ -27,7 +28,8 @@ class AdminAuthState {
       isRestoringSession = false,
       isPinLocked = false,
       offlineSessionRestorePending = false,
-      errorMessageKey = null;
+      errorMessageKey = null,
+      lastErrorKind = null;
 
   final AdminUser? user;
   final bool isLoading;
@@ -35,10 +37,20 @@ class AdminAuthState {
   final bool isPinLocked;
   final bool offlineSessionRestorePending;
   final String? errorMessageKey;
+  final ApiExceptionKind? lastErrorKind;
 
   bool get isAuthenticated => user != null;
 
   bool get requiresPinUnlock => isPinLocked && user != null;
+
+  /// Transient backend/network failures — never treat as invalid password.
+  bool get isConnectionFailure =>
+      lastErrorKind == ApiExceptionKind.network ||
+      lastErrorKind == ApiExceptionKind.timeout ||
+      lastErrorKind == ApiExceptionKind.server ||
+      lastErrorKind == ApiExceptionKind.notConfigured;
+
+  bool get canRetrySignIn => isConnectionFailure && !isLoading;
 
   AdminAuthState copyWith({
     AdminUser? user,
@@ -48,6 +60,7 @@ class AdminAuthState {
     bool? isPinLocked,
     bool? offlineSessionRestorePending,
     String? errorMessageKey,
+    ApiExceptionKind? lastErrorKind,
     bool clearError = false,
   }) {
     return AdminAuthState(
@@ -60,6 +73,7 @@ class AdminAuthState {
       errorMessageKey: clearError
           ? null
           : (errorMessageKey ?? this.errorMessageKey),
+      lastErrorKind: clearError ? null : (lastErrorKind ?? this.lastErrorKind),
     );
   }
 }
@@ -134,13 +148,39 @@ class AdminAuthNotifier extends Notifier<AdminAuthState> {
     } on ApiException catch (error) {
       state = state.copyWith(
         isLoading: false,
-        errorMessageKey: error.messageKey,
+        errorMessageKey: _signInMessageKey(error),
+        lastErrorKind: error.kind,
       );
     } catch (_) {
       state = state.copyWith(
         isLoading: false,
-        errorMessageKey: LocalizationKeys.errorGenericBody,
+        errorMessageKey: LocalizationKeys.authServerUnreachable,
+        lastErrorKind: ApiExceptionKind.unknown,
       );
+    }
+  }
+
+  String _signInMessageKey(ApiException error) {
+    switch (error.kind) {
+      case ApiExceptionKind.network:
+      case ApiExceptionKind.timeout:
+      case ApiExceptionKind.server:
+        return LocalizationKeys.authServerUnreachable;
+      case ApiExceptionKind.notConfigured:
+        return LocalizationKeys.authBackendNotConfigured;
+      case ApiExceptionKind.unauthorized:
+        // Login 401 is invalid credentials; session-expired is for later.
+        return error.messageKey == LocalizationKeys.authSessionExpired
+            ? LocalizationKeys.authInvalidCredentials
+            : error.messageKey;
+      case ApiExceptionKind.forbidden:
+        return LocalizationKeys.authForbiddenRole;
+      case ApiExceptionKind.notFound:
+        return LocalizationKeys.authLoginServiceUnavailable;
+      case ApiExceptionKind.validation:
+      case ApiExceptionKind.conflict:
+      case ApiExceptionKind.unknown:
+        return error.messageKey;
     }
   }
 

@@ -14,6 +14,7 @@ class SecurityEventSeverityBadge extends StatelessWidget {
     final color = switch (severity) {
       SecurityEventSeverity.info => Colors.blue,
       SecurityEventSeverity.warning => Colors.orange,
+      SecurityEventSeverity.error => Colors.deepOrange,
       SecurityEventSeverity.critical => Colors.red,
       SecurityEventSeverity.unknown => AdminStatusColors.muted,
     };

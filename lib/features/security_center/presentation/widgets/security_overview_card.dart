@@ -30,11 +30,12 @@ class SecurityOverviewCard extends StatelessWidget {
           children: [
             Text(
               resolveSecurityKey(context, 'securityOverviewTitle'),
+              softWrap: true,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
             Wrap(
-              spacing: 12,
+              spacing: 8,
               runSpacing: 8,
               children: [
                 _chip(
@@ -84,6 +85,7 @@ class SecurityOverviewCard extends StatelessWidget {
                   'securityOverviewLastCritical',
                   params: {'date': lastCriticalLabel},
                 ),
+                softWrap: true,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
@@ -97,6 +99,7 @@ class SecurityOverviewCard extends StatelessWidget {
     return Chip(
       label: Text(
         resolveSecurityKey(context, key, params: {'count': '$count'}),
+        softWrap: true,
       ),
     );
   }
