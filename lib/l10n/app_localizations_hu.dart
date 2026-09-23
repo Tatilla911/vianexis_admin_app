@@ -4740,6 +4740,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get navNotifications => 'Értesítések';
 
   @override
+  String get navEmergencies => 'Vészhelyzeti riasztások';
+
+  @override
   String get notificationsTitle => 'Értesítések';
 
   @override
@@ -7074,6 +7077,142 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get notificationCompanyApplicationBody =>
       'Új cégregisztráció érkezett. Elbírálás szükséges.';
+
+  @override
+  String get notificationEmergencyAlertTitle =>
+      'Új vészhelyzeti riasztás érkezett.';
+
+  @override
+  String get notificationEmergencyAlertBody =>
+      'Új vészhelyzeti riasztás érkezett.';
+
+  @override
+  String get notificationOpenEmergency => 'Vészhelyzeti riasztás megnyitása';
+
+  @override
+  String get emergenciesTitle => 'Vészhelyzeti riasztások';
+
+  @override
+  String get emergenciesDetailTitle => 'Vészhelyzeti riasztás';
+
+  @override
+  String get emergenciesModuleDescription =>
+      'Sofőr SOS-riasztások platformszintű megfigyelése.';
+
+  @override
+  String get emergenciesLoadError =>
+      'Nem sikerült betölteni a vészhelyzeti riasztásokat.';
+
+  @override
+  String get emergenciesDetailError =>
+      'Nem sikerült betölteni ezt a riasztást.';
+
+  @override
+  String get emergenciesEmpty => 'Nincs nyitott vészhelyzeti riasztás.';
+
+  @override
+  String get emergenciesCriticalBannerTitle => 'Kritikus SOS-riasztások';
+
+  @override
+  String emergenciesCriticalBannerBody(int count) {
+    return '$count aktív, el nem ismert riasztás';
+  }
+
+  @override
+  String get emergenciesCriticalCardBody =>
+      'Kritikus sofőr-vészhelyzet — a helyszín csak bejelentkezés után tekinthető meg.';
+
+  @override
+  String emergenciesDriverFallback(String id) {
+    return 'Sofőr $id';
+  }
+
+  @override
+  String get emergenciesNoVehicle => 'Nincs jármű';
+
+  @override
+  String get emergenciesNoLocality => 'Nincs helység';
+
+  @override
+  String get emergenciesStatusActive => 'Aktív';
+
+  @override
+  String get emergenciesStatusAcknowledged => 'Visszaigazolva';
+
+  @override
+  String get emergenciesStatusResolved => 'Lezárva';
+
+  @override
+  String get emergenciesStatusCancelled => 'Sofőr által visszavonva';
+
+  @override
+  String get emergenciesStatusUnknown => 'Ismeretlen';
+
+  @override
+  String get emergenciesFieldCompany => 'Cég';
+
+  @override
+  String get emergenciesFieldDriver => 'Sofőr';
+
+  @override
+  String get emergenciesFieldVehicle => 'Jármű';
+
+  @override
+  String get emergenciesFieldTriggeredAt => 'Kiváltás ideje';
+
+  @override
+  String get emergenciesFieldCompanyAck => 'Céges visszaigazolás';
+
+  @override
+  String get emergenciesFieldAcknowledgedAt => 'Visszaigazolás ideje';
+
+  @override
+  String get emergenciesFieldCompanyNotification => 'Céges értesítés állapota';
+
+  @override
+  String get emergenciesFieldPlatformNotification =>
+      'Platform értesítés állapota';
+
+  @override
+  String get emergenciesFieldAdminPush => 'Admin push állapota';
+
+  @override
+  String get emergenciesAckPending => 'Függőben';
+
+  @override
+  String get emergenciesAckAcknowledged => 'Visszaigazolva';
+
+  @override
+  String get emergenciesLocationSection => 'Helyszín';
+
+  @override
+  String get emergenciesFieldLocality => 'Helység';
+
+  @override
+  String get emergenciesFieldCoordinates => 'Koordináták';
+
+  @override
+  String get emergenciesFieldAccuracy => 'Pontosság';
+
+  @override
+  String emergenciesAccuracyMeters(int meters) {
+    return '$meters m';
+  }
+
+  @override
+  String get emergenciesFieldLocationCapturedAt => 'Helyszín rögzítve';
+
+  @override
+  String get emergenciesFieldLocationSource => 'Helyszín forrása';
+
+  @override
+  String get emergenciesFieldLocationStatus => 'Helyszín állapota';
+
+  @override
+  String get emergenciesShowOnMap => 'Mutatás a térképen';
+
+  @override
+  String get emergenciesLocationUnavailable => 'Pontos helyszín nem érhető el.';
 
   @override
   String get systemHealthFieldAffectedUser => 'Érintett felhasználó';

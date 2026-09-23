@@ -8564,6 +8564,12 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get navNotifications;
 
+  /// No description provided for @navEmergencies.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency alerts'**
+  String get navEmergencies;
+
   /// No description provided for @notificationsTitle.
   ///
   /// In en, this message translates to:
@@ -12707,6 +12713,252 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A new company registration was received and is waiting for review.'**
   String get notificationCompanyApplicationBody;
+
+  /// No description provided for @notificationEmergencyAlertTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New emergency alert received.'**
+  String get notificationEmergencyAlertTitle;
+
+  /// No description provided for @notificationEmergencyAlertBody.
+  ///
+  /// In en, this message translates to:
+  /// **'New emergency alert received.'**
+  String get notificationEmergencyAlertBody;
+
+  /// No description provided for @notificationOpenEmergency.
+  ///
+  /// In en, this message translates to:
+  /// **'Open emergency alert'**
+  String get notificationOpenEmergency;
+
+  /// No description provided for @emergenciesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency alerts'**
+  String get emergenciesTitle;
+
+  /// No description provided for @emergenciesDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency alert'**
+  String get emergenciesDetailTitle;
+
+  /// No description provided for @emergenciesModuleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor driver SOS alerts for platform support.'**
+  String get emergenciesModuleDescription;
+
+  /// No description provided for @emergenciesLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load emergency alerts.'**
+  String get emergenciesLoadError;
+
+  /// No description provided for @emergenciesDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this emergency alert.'**
+  String get emergenciesDetailError;
+
+  /// No description provided for @emergenciesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No open emergency alerts.'**
+  String get emergenciesEmpty;
+
+  /// No description provided for @emergenciesCriticalBannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical SOS alerts'**
+  String get emergenciesCriticalBannerTitle;
+
+  /// No description provided for @emergenciesCriticalBannerBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} active unacknowledged alerts'**
+  String emergenciesCriticalBannerBody(int count);
+
+  /// No description provided for @emergenciesCriticalCardBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical driver emergency — review location after authentication.'**
+  String get emergenciesCriticalCardBody;
+
+  /// No description provided for @emergenciesDriverFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver {id}'**
+  String emergenciesDriverFallback(String id);
+
+  /// No description provided for @emergenciesNoVehicle.
+  ///
+  /// In en, this message translates to:
+  /// **'No vehicle'**
+  String get emergenciesNoVehicle;
+
+  /// No description provided for @emergenciesNoLocality.
+  ///
+  /// In en, this message translates to:
+  /// **'No locality'**
+  String get emergenciesNoLocality;
+
+  /// No description provided for @emergenciesStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get emergenciesStatusActive;
+
+  /// No description provided for @emergenciesStatusAcknowledged.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged'**
+  String get emergenciesStatusAcknowledged;
+
+  /// No description provided for @emergenciesStatusResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get emergenciesStatusResolved;
+
+  /// No description provided for @emergenciesStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled by driver'**
+  String get emergenciesStatusCancelled;
+
+  /// No description provided for @emergenciesStatusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get emergenciesStatusUnknown;
+
+  /// No description provided for @emergenciesFieldCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get emergenciesFieldCompany;
+
+  /// No description provided for @emergenciesFieldDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get emergenciesFieldDriver;
+
+  /// No description provided for @emergenciesFieldVehicle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle'**
+  String get emergenciesFieldVehicle;
+
+  /// No description provided for @emergenciesFieldTriggeredAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Triggered at'**
+  String get emergenciesFieldTriggeredAt;
+
+  /// No description provided for @emergenciesFieldCompanyAck.
+  ///
+  /// In en, this message translates to:
+  /// **'Company acknowledgement'**
+  String get emergenciesFieldCompanyAck;
+
+  /// No description provided for @emergenciesFieldAcknowledgedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged at'**
+  String get emergenciesFieldAcknowledgedAt;
+
+  /// No description provided for @emergenciesFieldCompanyNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Company notification status'**
+  String get emergenciesFieldCompanyNotification;
+
+  /// No description provided for @emergenciesFieldPlatformNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform notification status'**
+  String get emergenciesFieldPlatformNotification;
+
+  /// No description provided for @emergenciesFieldAdminPush.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin push status'**
+  String get emergenciesFieldAdminPush;
+
+  /// No description provided for @emergenciesAckPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get emergenciesAckPending;
+
+  /// No description provided for @emergenciesAckAcknowledged.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged'**
+  String get emergenciesAckAcknowledged;
+
+  /// No description provided for @emergenciesLocationSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get emergenciesLocationSection;
+
+  /// No description provided for @emergenciesFieldLocality.
+  ///
+  /// In en, this message translates to:
+  /// **'Locality'**
+  String get emergenciesFieldLocality;
+
+  /// No description provided for @emergenciesFieldCoordinates.
+  ///
+  /// In en, this message translates to:
+  /// **'Coordinates'**
+  String get emergenciesFieldCoordinates;
+
+  /// No description provided for @emergenciesFieldAccuracy.
+  ///
+  /// In en, this message translates to:
+  /// **'Accuracy'**
+  String get emergenciesFieldAccuracy;
+
+  /// No description provided for @emergenciesAccuracyMeters.
+  ///
+  /// In en, this message translates to:
+  /// **'{meters} m'**
+  String emergenciesAccuracyMeters(int meters);
+
+  /// No description provided for @emergenciesFieldLocationCapturedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Location captured at'**
+  String get emergenciesFieldLocationCapturedAt;
+
+  /// No description provided for @emergenciesFieldLocationSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Location source'**
+  String get emergenciesFieldLocationSource;
+
+  /// No description provided for @emergenciesFieldLocationStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Location status'**
+  String get emergenciesFieldLocationStatus;
+
+  /// No description provided for @emergenciesShowOnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Show on map'**
+  String get emergenciesShowOnMap;
+
+  /// No description provided for @emergenciesLocationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Precise location is unavailable.'**
+  String get emergenciesLocationUnavailable;
 
   /// No description provided for @systemHealthFieldAffectedUser.
   ///

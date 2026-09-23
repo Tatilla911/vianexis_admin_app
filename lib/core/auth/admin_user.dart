@@ -66,6 +66,7 @@ enum AdminDestination {
   adminUsers,
   releaseCenter,
   operations,
+  emergencies,
   settings,
 }
 
@@ -92,6 +93,7 @@ extension AdminRoleCapabilities on AdminRole {
         AdminDestination.notifications ||
         AdminDestination.releaseCenter ||
         AdminDestination.operations ||
+        AdminDestination.emergencies ||
         AdminDestination.settings => true,
         _ => false,
       },

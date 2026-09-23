@@ -208,6 +208,13 @@ List<_ModuleTile> get _allModules => [
     labelKey: (c) => AppLocalizations.of(c).navSecurityCenter,
   ),
   _ModuleTile(
+    destination: AdminDestination.emergencies,
+    route: AdminRoutes.emergencies,
+    icon: Icons.emergency_outlined,
+    labelKey: (c) => AppLocalizations.of(c).navEmergencies,
+    descriptionKey: (c) => AppLocalizations.of(c).emergenciesModuleDescription,
+  ),
+  _ModuleTile(
     destination: AdminDestination.auditLogs,
     route: AdminRoutes.auditLogs,
     icon: Icons.receipt_long_outlined,

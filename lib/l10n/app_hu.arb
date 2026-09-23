@@ -1591,6 +1591,7 @@
   "backendMockFallbackBanner": "Az éles backend nincs beállítva. A modulok helyi fejlesztéshez mintaadatot használnak.",
   "settingsApiHostLabel": "API host",
   "navNotifications": "Értesítések",
+  "navEmergencies": "Vészhelyzeti riasztások",
   "notificationsTitle": "Értesítések",
   "notificationsPreferences": "Beállítások",
   "notificationsMarkAllRead": "Összes olvasottra",
@@ -2419,6 +2420,68 @@
   "notificationDriverRegistrationBody": "Új sofőrregisztráció érkezett. Elbírálás szükséges.",
   "notificationCompanyApplicationTitle": "Új cégregisztráció",
   "notificationCompanyApplicationBody": "Új cégregisztráció érkezett. Elbírálás szükséges.",
+  "notificationEmergencyAlertTitle": "Új vészhelyzeti riasztás érkezett.",
+  "notificationEmergencyAlertBody": "Új vészhelyzeti riasztás érkezett.",
+  "notificationOpenEmergency": "Vészhelyzeti riasztás megnyitása",
+  "emergenciesTitle": "Vészhelyzeti riasztások",
+  "emergenciesDetailTitle": "Vészhelyzeti riasztás",
+  "emergenciesModuleDescription": "Sofőr SOS-riasztások platformszintű megfigyelése.",
+  "emergenciesLoadError": "Nem sikerült betölteni a vészhelyzeti riasztásokat.",
+  "emergenciesDetailError": "Nem sikerült betölteni ezt a riasztást.",
+  "emergenciesEmpty": "Nincs nyitott vészhelyzeti riasztás.",
+  "emergenciesCriticalBannerTitle": "Kritikus SOS-riasztások",
+  "emergenciesCriticalBannerBody": "{count} aktív, el nem ismert riasztás",
+  "@emergenciesCriticalBannerBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emergenciesCriticalCardBody": "Kritikus sofőr-vészhelyzet — a helyszín csak bejelentkezés után tekinthető meg.",
+  "emergenciesDriverFallback": "Sofőr {id}",
+  "@emergenciesDriverFallback": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "emergenciesNoVehicle": "Nincs jármű",
+  "emergenciesNoLocality": "Nincs helység",
+  "emergenciesStatusActive": "Aktív",
+  "emergenciesStatusAcknowledged": "Visszaigazolva",
+  "emergenciesStatusResolved": "Lezárva",
+  "emergenciesStatusCancelled": "Sofőr által visszavonva",
+  "emergenciesStatusUnknown": "Ismeretlen",
+  "emergenciesFieldCompany": "Cég",
+  "emergenciesFieldDriver": "Sofőr",
+  "emergenciesFieldVehicle": "Jármű",
+  "emergenciesFieldTriggeredAt": "Kiváltás ideje",
+  "emergenciesFieldCompanyAck": "Céges visszaigazolás",
+  "emergenciesFieldAcknowledgedAt": "Visszaigazolás ideje",
+  "emergenciesFieldCompanyNotification": "Céges értesítés állapota",
+  "emergenciesFieldPlatformNotification": "Platform értesítés állapota",
+  "emergenciesFieldAdminPush": "Admin push állapota",
+  "emergenciesAckPending": "Függőben",
+  "emergenciesAckAcknowledged": "Visszaigazolva",
+  "emergenciesLocationSection": "Helyszín",
+  "emergenciesFieldLocality": "Helység",
+  "emergenciesFieldCoordinates": "Koordináták",
+  "emergenciesFieldAccuracy": "Pontosság",
+  "emergenciesAccuracyMeters": "{meters} m",
+  "@emergenciesAccuracyMeters": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "emergenciesFieldLocationCapturedAt": "Helyszín rögzítve",
+  "emergenciesFieldLocationSource": "Helyszín forrása",
+  "emergenciesFieldLocationStatus": "Helyszín állapota",
+  "emergenciesShowOnMap": "Mutatás a térképen",
+  "emergenciesLocationUnavailable": "Pontos helyszín nem érhető el.",
   "systemHealthFieldAffectedUser": "Érintett felhasználó",
   "systemHealthNotifyCompanyTitle": "Cég értesítése",
   "systemHealthNotifyCompanyBody": "Küldjünk autómatikus visszajelzést a(z) {company} cégnek (felhasználó: {user}), hogy észleltük a hibát, utánanézünk, amint lehet javítjuk, és értesítjük, amint változás állt be?",

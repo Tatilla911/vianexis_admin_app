@@ -38,6 +38,7 @@ class AdminAlertMapper {
       NotificationType.driverApplicationSubmitted => 'driver_registration_new',
       NotificationType.companyApplicationSubmitted =>
         'company_registration_new',
+      NotificationType.emergencyAlert => 'system_critical_state',
       NotificationType.general ||
       NotificationType.unknown => _generalEventId(notification),
     };

@@ -2136,6 +2136,7 @@
   "backendMockFallbackBanner": "Live backend is not configured. Modules use mock data for local UI development.",
   "settingsApiHostLabel": "API host",
   "navNotifications": "Notifications",
+  "navEmergencies": "Emergency alerts",
   "notificationsTitle": "Notifications",
   "notificationsPreferences": "Preferences",
   "notificationsMarkAllRead": "Mark all read",
@@ -3134,6 +3135,68 @@
   "notificationDriverRegistrationBody": "A new driver registration was received and is waiting for review.",
   "notificationCompanyApplicationTitle": "New company registration",
   "notificationCompanyApplicationBody": "A new company registration was received and is waiting for review.",
+  "notificationEmergencyAlertTitle": "New emergency alert received.",
+  "notificationEmergencyAlertBody": "New emergency alert received.",
+  "notificationOpenEmergency": "Open emergency alert",
+  "emergenciesTitle": "Emergency alerts",
+  "emergenciesDetailTitle": "Emergency alert",
+  "emergenciesModuleDescription": "Monitor driver SOS alerts for platform support.",
+  "emergenciesLoadError": "Could not load emergency alerts.",
+  "emergenciesDetailError": "Could not load this emergency alert.",
+  "emergenciesEmpty": "No open emergency alerts.",
+  "emergenciesCriticalBannerTitle": "Critical SOS alerts",
+  "emergenciesCriticalBannerBody": "{count} active unacknowledged alerts",
+  "@emergenciesCriticalBannerBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emergenciesCriticalCardBody": "Critical driver emergency — review location after authentication.",
+  "emergenciesDriverFallback": "Driver {id}",
+  "@emergenciesDriverFallback": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "emergenciesNoVehicle": "No vehicle",
+  "emergenciesNoLocality": "No locality",
+  "emergenciesStatusActive": "Active",
+  "emergenciesStatusAcknowledged": "Acknowledged",
+  "emergenciesStatusResolved": "Resolved",
+  "emergenciesStatusCancelled": "Cancelled by driver",
+  "emergenciesStatusUnknown": "Unknown",
+  "emergenciesFieldCompany": "Company",
+  "emergenciesFieldDriver": "Driver",
+  "emergenciesFieldVehicle": "Vehicle",
+  "emergenciesFieldTriggeredAt": "Triggered at",
+  "emergenciesFieldCompanyAck": "Company acknowledgement",
+  "emergenciesFieldAcknowledgedAt": "Acknowledged at",
+  "emergenciesFieldCompanyNotification": "Company notification status",
+  "emergenciesFieldPlatformNotification": "Platform notification status",
+  "emergenciesFieldAdminPush": "Admin push status",
+  "emergenciesAckPending": "Pending",
+  "emergenciesAckAcknowledged": "Acknowledged",
+  "emergenciesLocationSection": "Location",
+  "emergenciesFieldLocality": "Locality",
+  "emergenciesFieldCoordinates": "Coordinates",
+  "emergenciesFieldAccuracy": "Accuracy",
+  "emergenciesAccuracyMeters": "{meters} m",
+  "@emergenciesAccuracyMeters": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "emergenciesFieldLocationCapturedAt": "Location captured at",
+  "emergenciesFieldLocationSource": "Location source",
+  "emergenciesFieldLocationStatus": "Location status",
+  "emergenciesShowOnMap": "Show on map",
+  "emergenciesLocationUnavailable": "Precise location is unavailable.",
   "systemHealthFieldAffectedUser": "Affected user",
   "systemHealthNotifyCompanyTitle": "Notify company",
   "systemHealthNotifyCompanyBody": "Send an automatic acknowledgement to {company} (user: {user}) that we detected the issue, are investigating, will fix it ASAP, and will notify them when status changes?",

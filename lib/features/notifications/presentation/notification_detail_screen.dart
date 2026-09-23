@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/localization/localization_resolver.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/notifications_repository.dart';
+import '../domain/admin_notification_presentation.dart';
 import '../domain/admin_notification_routing.dart';
 import '../domain/notification_type.dart';
 
@@ -31,34 +32,33 @@ class NotificationDetailScreen extends ConsumerWidget {
           }
           final destination = resolveAdminNotificationDestination(item);
           final canOpenReview =
-              item.deepLink != null || item.applicationId != null;
-          final fallbackTitleKey =
-              item.type == NotificationType.companyApplicationSubmitted
-              ? 'notificationCompanyApplicationTitle'
-              : 'notificationDriverRegistrationTitle';
-          final fallbackBodyKey =
-              item.type == NotificationType.companyApplicationSubmitted
-              ? 'notificationCompanyApplicationBody'
-              : 'notificationDriverRegistrationBody';
+              item.deepLink != null ||
+              item.applicationId != null ||
+              item.type == NotificationType.emergencyAlert ||
+              (item.metadata['emergencyEventId']?.trim().isNotEmpty ?? false);
+          final openLabel = item.type == NotificationType.emergencyAlert
+              ? l10n.notificationOpenEmergency
+              : resolveNotificationsKey(
+                  context,
+                  'notificationOpenRegistration',
+                );
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
               Text(
-                item.title.isNotEmpty
-                    ? item.title
-                    : item.type.isRegistrationReview
-                    ? resolveNotificationsKey(context, fallbackTitleKey)
-                    : l10n.notificationsDetailTitle,
+                AdminNotificationPresentation.displayTitle(context, item),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 8),
               Text(
-                item.body.isNotEmpty
-                    ? item.body
-                    : item.type.isRegistrationReview
-                    ? resolveNotificationsKey(context, fallbackBodyKey)
-                    : '',
+                AdminNotificationPresentation.formatTimestamp(
+                  context,
+                  item.createdAt,
+                ),
+                style: Theme.of(context).textTheme.labelMedium,
               ),
+              const SizedBox(height: 12),
+              Text(AdminNotificationPresentation.displayBody(context, item)),
               const SizedBox(height: 12),
               Text(l10n.notificationsTypeLabel(item.type.backendValue)),
               Text(l10n.notificationsSeverityLabel(item.severity.backendValue)),
@@ -71,12 +71,7 @@ class NotificationDetailScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 FilledButton(
                   onPressed: () => context.go(destination),
-                  child: Text(
-                    resolveNotificationsKey(
-                      context,
-                      'notificationOpenRegistration',
-                    ),
-                  ),
+                  child: Text(openLabel),
                 ),
               ],
               const SizedBox(height: 12),

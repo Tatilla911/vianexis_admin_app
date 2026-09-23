@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vianexis_admin_app/app/app_router.dart';
 import 'package:vianexis_admin_app/features/notifications/domain/admin_notification_routing.dart';
+import 'package:vianexis_admin_app/features/notifications/domain/notification_severity.dart';
 import 'package:vianexis_admin_app/features/notifications/domain/notification_type.dart';
 import 'package:vianexis_admin_app/services/alerts/admin_fcm_payload.dart';
 import 'package:vianexis_admin_app/services/alerts/admin_fcm_service.dart';
@@ -35,6 +36,31 @@ void main() {
     expect(
       resolveAdminNotificationDestination(payload.toAdminNotification()),
       AdminRoutes.applicationDetail('900'),
+    );
+  });
+
+  test('parses emergency_alert FCM without coordinates and deep-links', () {
+    final payload = AdminFcmPayload.fromDataMap(
+      {
+        'notificationId': '501',
+        'type': 'emergency_alert',
+        'severity': 'critical',
+        'emergencyEventId': '88',
+        'deepLink': '{"path":"/emergencies/88"}',
+      },
+      titleText: 'New emergency alert received.',
+      bodyText: 'New emergency alert received.',
+    );
+
+    expect(payload, isNotNull);
+    expect(payload!.type, NotificationType.emergencyAlert);
+    expect(payload.severity, NotificationSeverity.critical);
+    expect(payload.deepLink, '/emergencies/88');
+    expect(payload.title, 'New emergency alert received.');
+    expect(payload.body?.contains(RegExp(r'\d+\.\d+')), isFalse);
+    expect(
+      resolveAdminNotificationDestination(payload.toAdminNotification()),
+      AdminRoutes.emergencyDetail('88'),
     );
   });
 

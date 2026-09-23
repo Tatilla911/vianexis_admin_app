@@ -8,6 +8,7 @@ import '../../features/notifications/domain/notification_type.dart';
 
 /// Parsed safe navigation metadata from an admin FCM data payload.
 /// Locators only — never authorization, email, or registration content.
+/// Precise coordinates must never appear in lock-screen copy or FCM body.
 class AdminFcmPayload {
   const AdminFcmPayload({
     required this.notificationId,
@@ -16,6 +17,8 @@ class AdminFcmPayload {
     this.body,
     this.deepLink,
     this.applicationId,
+    this.severity = NotificationSeverity.info,
+    this.emergencyEventId,
   });
 
   final String notificationId;
@@ -24,18 +27,21 @@ class AdminFcmPayload {
   final String? body;
   final String? deepLink;
   final String? applicationId;
+  final NotificationSeverity severity;
+  final String? emergencyEventId;
 
   AdminNotification toAdminNotification() {
     final metadata = <String, String>{
       'deepLink': ?deepLink,
       'applicationId': ?applicationId,
+      'emergencyEventId': ?emergencyEventId,
     };
     return AdminNotification(
       id: notificationId,
       title: title ?? '',
       body: body ?? '',
       type: type,
-      severity: NotificationSeverity.info,
+      severity: severity,
       createdAt: DateTime.now().toUtc(),
       metadata: metadata,
       inAppOnly: false,
@@ -62,6 +68,10 @@ class AdminFcmPayload {
     final deepLink = sanitizeAdminDeepLink(
       _parseDeepLink(data, resourceType, resourceId, applicationId),
     );
+    final severity = NotificationSeverity.fromBackendValue(
+      data['severity']?.toString(),
+    );
+    final emergencyEventId = data['emergencyEventId']?.toString().trim();
 
     return AdminFcmPayload(
       notificationId: notificationId,
@@ -70,6 +80,14 @@ class AdminFcmPayload {
       body: bodyText?.trim().isNotEmpty == true ? bodyText!.trim() : null,
       deepLink: deepLink,
       applicationId: applicationId,
+      severity: severity == NotificationSeverity.unknown
+          ? (type == NotificationType.emergencyAlert
+                ? NotificationSeverity.critical
+                : NotificationSeverity.info)
+          : severity,
+      emergencyEventId: emergencyEventId?.isEmpty == true
+          ? null
+          : emergencyEventId,
     );
   }
 
@@ -105,6 +123,13 @@ class AdminFcmPayload {
           return decoded['path'] as String;
         }
       } catch (_) {}
+    }
+    if (raw is Map && raw['path'] is String) {
+      return raw['path'] as String;
+    }
+    final emergencyEventId = data['emergencyEventId']?.toString().trim();
+    if (emergencyEventId != null && emergencyEventId.isNotEmpty) {
+      return AdminRoutes.emergencyDetail(emergencyEventId);
     }
     final locator = applicationId ?? resourceId;
     if (locator != null && locator.isNotEmpty) {

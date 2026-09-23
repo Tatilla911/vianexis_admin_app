@@ -1,5 +1,6 @@
 import '../../../app/app_router.dart';
 import 'admin_notification.dart';
+import 'notification_type.dart';
 
 /// Backend public-application locators (`/applications/:id`) open the canonical
 /// applications review screen. Router authz still applies after tap.
@@ -9,6 +10,7 @@ const _allowedDeepLinkPrefixes = [
   AdminRoutes.notifications,
   AdminRoutes.drivers,
   AdminRoutes.driverAccess,
+  AdminRoutes.emergencies,
 ];
 
 bool isSafeAdminDeepLink(String path) {
@@ -45,6 +47,14 @@ String resolveAdminNotificationDestination(AdminNotification? notification) {
 
   if (notification.type.isRegistrationReview) {
     return AdminRoutes.applications;
+  }
+
+  if (notification.type == NotificationType.emergencyAlert) {
+    final emergencyId = notification.metadata['emergencyEventId']?.trim();
+    if (emergencyId != null && emergencyId.isNotEmpty) {
+      return AdminRoutes.emergencyDetail(emergencyId);
+    }
+    return AdminRoutes.emergencies;
   }
 
   return AdminRoutes.notificationDetail(notification.id);

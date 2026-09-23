@@ -43,6 +43,8 @@ import '../features/notifications/presentation/notification_status_screen.dart';
 import '../features/operations/presentation/operations_screen.dart';
 import '../features/driver_access/presentation/driver_access_screen.dart';
 import '../features/trips_overview/presentation/trips_overview_screen.dart';
+import '../features/emergencies/presentation/emergencies_list_screen.dart';
+import '../features/emergencies/presentation/emergency_detail_screen.dart';
 import '../features/exchange_records/presentation/exchange_records_screen.dart';
 import '../features/notifications/presentation/notification_preferences_screen.dart';
 import '../features/notifications/presentation/notifications_screen.dart';
@@ -460,6 +462,19 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
           GoRoute(
+            path: AdminRoutes.emergencies,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: EmergenciesListScreen()),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => EmergencyDetailScreen(
+                  emergencyId: state.pathParameters['id'] ?? '',
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
             path: AdminRoutes.operations,
             pageBuilder: (context, state) =>
                 const NoTransitionPage(child: OperationsScreen()),
@@ -561,6 +576,7 @@ abstract final class AdminRoutes {
   static const auditLogPdfArchive = '/audit-logs/pdf-archive';
   static const notifications = '/notifications';
   static const notificationPreferences = '/notifications/preferences';
+  static const emergencies = '/emergencies';
   static const securityCenter = '/security';
   static const adminUsers = '/admin-users';
   static const releaseCenter = '/release-center';
@@ -630,6 +646,8 @@ abstract final class AdminRoutes {
   static String adminUserDetail(String id) => '$adminUsers/$id';
 
   static String notificationDetail(String id) => '$notifications/$id';
+
+  static String emergencyDetail(String id) => '$emergencies/$id';
 
   static String applicationDetail(String id) => '$applications/$id';
 
@@ -702,6 +720,9 @@ abstract final class AdminRoutes {
     if (location.startsWith(notifications)) {
       return AdminDestination.notifications;
     }
+    if (location.startsWith(emergencies)) {
+      return AdminDestination.emergencies;
+    }
     if (location.startsWith(releaseCenter)) {
       return AdminDestination.releaseCenter;
     }
@@ -726,6 +747,7 @@ abstract final class AdminRoutes {
       notificationStatus => AdminDestination.operations,
       auditLogs => AdminDestination.auditLogs,
       notifications => AdminDestination.notifications,
+      emergencies => AdminDestination.emergencies,
       settings => AdminDestination.settings,
       _ => null,
     };

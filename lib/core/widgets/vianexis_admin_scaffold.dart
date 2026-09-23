@@ -257,6 +257,7 @@ class VianexisAdminScaffold extends ConsumerWidget {
       AdminDestination.securityCenter => l10n.navSecurityCenter,
       AdminDestination.auditLogs => l10n.navAuditLogs,
       AdminDestination.notifications => l10n.navNotifications,
+      AdminDestination.emergencies => l10n.navEmergencies,
       AdminDestination.adminUsers => l10n.navAdminUsers,
       AdminDestination.releaseCenter => l10n.navReleaseCenter,
       AdminDestination.operations => l10n.navOperations,
@@ -380,6 +381,12 @@ const _allNavItems = <_NavItem>[
     route: AdminRoutes.securityCenter,
     icon: Icons.security_outlined,
     selectedIcon: Icons.security,
+  ),
+  _NavItem(
+    destination: AdminDestination.emergencies,
+    route: AdminRoutes.emergencies,
+    icon: Icons.emergency_outlined,
+    selectedIcon: Icons.emergency,
   ),
   _NavItem(
     destination: AdminDestination.auditLogs,

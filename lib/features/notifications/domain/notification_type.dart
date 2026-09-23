@@ -7,6 +7,7 @@ enum NotificationType {
   general('general'),
   driverApplicationSubmitted('driver_application_submitted'),
   companyApplicationSubmitted('company_application_submitted'),
+  emergencyAlert('emergency_alert'),
   unknown('unknown');
 
   const NotificationType(this.backendValue);

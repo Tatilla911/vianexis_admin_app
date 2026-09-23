@@ -4671,6 +4671,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navNotifications => 'Notifications';
 
   @override
+  String get navEmergencies => 'Emergency alerts';
+
+  @override
   String get notificationsTitle => 'Notifications';
 
   @override
@@ -6978,6 +6981,140 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get notificationCompanyApplicationBody =>
       'A new company registration was received and is waiting for review.';
+
+  @override
+  String get notificationEmergencyAlertTitle => 'New emergency alert received.';
+
+  @override
+  String get notificationEmergencyAlertBody => 'New emergency alert received.';
+
+  @override
+  String get notificationOpenEmergency => 'Open emergency alert';
+
+  @override
+  String get emergenciesTitle => 'Emergency alerts';
+
+  @override
+  String get emergenciesDetailTitle => 'Emergency alert';
+
+  @override
+  String get emergenciesModuleDescription =>
+      'Monitor driver SOS alerts for platform support.';
+
+  @override
+  String get emergenciesLoadError => 'Could not load emergency alerts.';
+
+  @override
+  String get emergenciesDetailError => 'Could not load this emergency alert.';
+
+  @override
+  String get emergenciesEmpty => 'No open emergency alerts.';
+
+  @override
+  String get emergenciesCriticalBannerTitle => 'Critical SOS alerts';
+
+  @override
+  String emergenciesCriticalBannerBody(int count) {
+    return '$count active unacknowledged alerts';
+  }
+
+  @override
+  String get emergenciesCriticalCardBody =>
+      'Critical driver emergency — review location after authentication.';
+
+  @override
+  String emergenciesDriverFallback(String id) {
+    return 'Driver $id';
+  }
+
+  @override
+  String get emergenciesNoVehicle => 'No vehicle';
+
+  @override
+  String get emergenciesNoLocality => 'No locality';
+
+  @override
+  String get emergenciesStatusActive => 'Active';
+
+  @override
+  String get emergenciesStatusAcknowledged => 'Acknowledged';
+
+  @override
+  String get emergenciesStatusResolved => 'Resolved';
+
+  @override
+  String get emergenciesStatusCancelled => 'Cancelled by driver';
+
+  @override
+  String get emergenciesStatusUnknown => 'Unknown';
+
+  @override
+  String get emergenciesFieldCompany => 'Company';
+
+  @override
+  String get emergenciesFieldDriver => 'Driver';
+
+  @override
+  String get emergenciesFieldVehicle => 'Vehicle';
+
+  @override
+  String get emergenciesFieldTriggeredAt => 'Triggered at';
+
+  @override
+  String get emergenciesFieldCompanyAck => 'Company acknowledgement';
+
+  @override
+  String get emergenciesFieldAcknowledgedAt => 'Acknowledged at';
+
+  @override
+  String get emergenciesFieldCompanyNotification =>
+      'Company notification status';
+
+  @override
+  String get emergenciesFieldPlatformNotification =>
+      'Platform notification status';
+
+  @override
+  String get emergenciesFieldAdminPush => 'Admin push status';
+
+  @override
+  String get emergenciesAckPending => 'Pending';
+
+  @override
+  String get emergenciesAckAcknowledged => 'Acknowledged';
+
+  @override
+  String get emergenciesLocationSection => 'Location';
+
+  @override
+  String get emergenciesFieldLocality => 'Locality';
+
+  @override
+  String get emergenciesFieldCoordinates => 'Coordinates';
+
+  @override
+  String get emergenciesFieldAccuracy => 'Accuracy';
+
+  @override
+  String emergenciesAccuracyMeters(int meters) {
+    return '$meters m';
+  }
+
+  @override
+  String get emergenciesFieldLocationCapturedAt => 'Location captured at';
+
+  @override
+  String get emergenciesFieldLocationSource => 'Location source';
+
+  @override
+  String get emergenciesFieldLocationStatus => 'Location status';
+
+  @override
+  String get emergenciesShowOnMap => 'Show on map';
+
+  @override
+  String get emergenciesLocationUnavailable =>
+      'Precise location is unavailable.';
 
   @override
   String get systemHealthFieldAffectedUser => 'Affected user';
